@@ -77,8 +77,8 @@ Route::get('/', function () {
     return view('index');
 });
  
- Route::get('/test', function () {    return view('index');
-});
+ 
+ 
 // Route::get('/home', function () {
 //     return view('index');
 // })->middleware('auth')->name('home');
