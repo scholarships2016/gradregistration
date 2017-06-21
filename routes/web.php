@@ -78,7 +78,8 @@ Route::get('/', function () {
 });
  Route::get('/nation/','NationController@show');
  Route::get('/nation/{id}','NationController@show');
- 
+ Route::get('/nation/{id}/edit','NationController@update');
+  Route::get('/nation/{id}/delete','NationController@delete');
  
 // Route::get('/home', function () {
 //     return view('index');
