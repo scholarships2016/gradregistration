@@ -76,7 +76,8 @@ Route::get('/', function () {
 
     return view('index');
 });
- 
+ Route::get('/nation/','NationController@show');
+ Route::get('/nation/{id}','NationController@show');
  
  
 // Route::get('/home', function () {

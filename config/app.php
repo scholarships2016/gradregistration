@@ -181,7 +181,7 @@ return [
          * User Service Providers...
          */
         App\Providers\RouteServiceProvider::class,
-
+        Reliese\Coders\CodersServiceProvider::class,
     ],
 
     /*
