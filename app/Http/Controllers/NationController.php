@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Models\TblNation;
+use App\Repositories\NationRepositoryImpl;
 
 class NationController extends Controller {
 
@@ -13,35 +12,41 @@ class NationController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    private $part_doc = "master.nation.";
+    protected $nationRepo;
+    public function __construct(NationRepositoryImpl $nationRepo){
+        $this->nationRepo = $nationRepo;
+    }
+
     public function index() {
-//
         $this->show(null);
     }
 
-    public function create() {
-//
+    public function show(Request $request) {
+        $qserch = ($request != null) ? $request->txtSearhc : null;
+        $nations = $this->nationRepo->searchByCriteria($qserch,TRUE);
+        return view($this->part_doc . 'nation', ['nations' => $nations]);
     }
 
-    public function show($id = null) {
-//        $nations = DB::table('tbl_nation')->get();
+    public function getForm($id = 0) {
+        if ($id != 0) {
+            $nation = $this->nationRepo->getById($id);
+            if (!$nation)
+                return redirect('nation/nation_form');
+        }else {
+            $nation = false;
+        }
+        return view($this->part_doc . 'nation_form', ['nation' => $nation], ['id' => $id]);
+    }
 
-        $nations = TblNation::where(function($query)use($id) {
-                    $query->whereRaw('nation_id = "' . $id . '"or "' . $id . '" = ""');
-                })->paginate(10);
-        return view('nation', ['nations' => $nations]);
+    public function postForm(Request $data) {
+        $this->nationRepo->save($data->all());
+        return redirect('nation');
     }
 
     public function delete($id) {
-        TblNation::where('nation_id', $id)->delete();
-    }
-
-    public function update(Request $request, $id) {
-        $data = ['nation_name' => 'กัมพูชาs',
-            'nation_name_en' => 'Cambodiass'];
-        
-                TblNation::where('nation_id', $id)->update($data);
-                 
-            
+        $this->nationRepo->delete($id);
+        return redirect('nation');
     }
 
 }

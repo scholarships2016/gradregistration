@@ -4,16 +4,15 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
+
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
-    {
-        //
+    public function boot() {
+//
     }
 
     /**
@@ -21,13 +20,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        /* Binding Repository*/
+    public function register() {
+        /* Binding Repository */
 
-        /* Admin Module 
-        $this->app->bind('App\Repositories\Contracts\UserRepository', 'App\Repositories\UserRepositoryImpl');
-        $this->app->bind('App\Repositories\Contracts\RoleRepository', 'App\Repositories\RoleRepositoryImpl’);*/
-
+        /* Admin Module   */
+        $this->app->bind('App\Repositories\Contracts\NationRepository', 'App\Repositories\NationRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\DegreeRepository', 'App\Repositories\DegreeRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\BankRepository', 'App\Repositories\BankRepositoryImpl');
     }
+
 }
