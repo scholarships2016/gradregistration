@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="animated fadeIn">
             {{--{{dd($this->session)}}--}}
-            EGATTTT
+            Gameeee TEsttt
 {{--            {{dd(Session::get('moduleAuths'))}}--}}
         </div>
     </div>
