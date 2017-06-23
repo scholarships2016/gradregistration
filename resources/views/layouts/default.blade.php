@@ -1,82 +1,107 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword"
-          content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,jQuery,CSS,HTML,RWD,Dashboard">
-    <link rel="shortcut icon" href="img/favicon.png">
+<!--[if IE 8]>
+<html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
 
-    <title>EGAT BudgetContrl PowerBy CSR</title>
+@include('includes.head')
 
-    <!-- Icons -->
-    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/simple-line-icons.css')}}" rel="stylesheet">
-
-    <!-- Main styles for this application -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
-
-    @stack('pageCss')
-</head>
-
-<!-- BODY options, add following classes to body to change options
-
-// Header options
-1. '.header-fixed'					- Fixed Header
-
-// Sidebar options
-1. '.sidebar-fixed'					- Fixed Sidebar
-2. '.sidebar-hidden'				- Hidden Sidebar
-3. '.sidebar-off-canvas'		- Off Canvas Sidebar
-4. '.sidebar-compact'				- Compact Sidebar Navigation (Only icons)
-
-// Aside options
-1. '.aside-menu-fixed'			- Fixed Aside Menu
-2. '.aside-menu-hidden'			- Hidden Aside Menu
-3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
-
-// Footer options
-1. '.footer-fixed'						- Fixed footer
-
--->
-
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-@include('includes.header')
-<div class="app-body">
-@include('includes.sidebar')
-<!-- Main content -->
-    <main class="main">
-    <!-- Breadcrumb -->
-        @yield('breadcrumb')
-        @yield('main-content')
-    </main>
-
-    @include('includes.aside')
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
+<div class="page-wrapper">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner ">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="index.html">
+                    <img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default"/> </a>
+                <div class="menu-toggler sidebar-toggler">
+                    <span></span>
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+               data-target=".navbar-collapse">
+                <span></span>
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+        @include('includes.topnavigation')
+        <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"></div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+    @include('includes.sidebar')
+    <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEADER-->
+                <!-- BEGIN PAGE BAR -->
+                @yield('pagebar')
+                <!-- END PAGE BAR -->
+                <!-- BEGIN PAGE TITLE-->
+                @yield('pagetitle')
+                <!-- END PAGE TITLE-->
+                <!-- END PAGE HEADER-->
+                @yield('maincontent')
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+@include('includes.footer')
+<!-- END FOOTER -->
 </div>
 
-@include('includes.footer')
-<script src="{{asset('js/app.js')}}"></script>
-<script type="application/javascript">
 
-    function logout() {
-        //Should we use ajax post method
-        // More Config at Laravel
-        var form = document.createElement("form");
-        form.method = "POST";
-        form.action = "/logout";
-        var tokenInptHidden = document.createElement("input");
-        tokenInptHidden.type = 'hidden';
-        tokenInptHidden.name = '_token';
-        tokenInptHidden.value = '{{csrf_token()}}';
-        form.appendChild(tokenInptHidden);
-        document.body.appendChild(form);
-        form.submit();
-    }
-
+<!--[if lt IE 9]>
+<script src="{{asset('assets/global/plugins/respond.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/excanvas.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/ie8.fix.min.js')}}"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"
+        type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="{{asset('assets/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/layouts/layout/scripts/demo.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/layouts/global/scripts/quick-nav.min.js')}}" type="text/javascript"></script>
+<!-- END THEME LAYOUT SCRIPTS -->
+<script>
+    $(document).ready(function () {
+        $('#clickmewow').click(function () {
+            $('#radio1003').attr('checked', 'checked');
+        });
+    })
 </script>
 @stack('pageJs')
 </body>
+
+
 </html>
