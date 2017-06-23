@@ -393,3 +393,9 @@
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
 @endpush
+
+@push('pageJs')
+<script src="{{asset('assets/pages/scripts/login-4.min.js')}}"></script>
+<script type="application/javascript">
+</script>
+@endpush
