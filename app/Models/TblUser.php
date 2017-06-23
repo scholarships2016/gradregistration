@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 24 Jun 2017 00:11:19 +0700.
+ * Date: Sat, 24 Jun 2017 00:15:59 +0700.
  */
 
 namespace App\Models;
@@ -18,6 +18,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $name
  * @property int $last_login
  * @property string $ipaddress
+ * @property string $creator
+ * @property \Carbon\Carbon $created
+ * @property string $modifier
+ * @property \Carbon\Carbon $modified
  *
  * @package App\Models
  */
@@ -31,6 +35,11 @@ class TblUser extends Eloquent
 		'last_login' => 'int'
 	];
 
+	protected $dates = [
+		'created',
+		'modified'
+	];
+
 	protected $hidden = [
 		'password'
 	];
@@ -40,6 +49,10 @@ class TblUser extends Eloquent
 		'password',
 		'name',
 		'last_login',
-		'ipaddress'
+		'ipaddress',
+		'creator',
+		'created',
+		'modifier',
+		'modified'
 	];
 }
