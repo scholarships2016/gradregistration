@@ -1,29 +1,48 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+@include('includes.head2')
+<!-- END HEAD -->
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
-    <meta name="author" content="Lukasz Holeczek">
-    <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <title>EGAT BudgetContrl PowerBy CSR</title>
-
-    <!-- Icons -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/simple-line-icons.css" rel="stylesheet">
-
-    <!-- Main styles for this application -->
-    <link href="css/app.css" rel="stylesheet">
-
-</head>
-
-<body class="app flex-row align-items-center">
-@yield('content')
-<script src="js/app.js"></script>
+<body class=" login">
+@yield('maincontent')
+<!--[if lt IE 9]>
+<script src="{{asset('assets/global/plugins/respond.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/excanvas.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/ie8.fix.min.js')}}"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="{{asset('assets/global/plugins/jquery.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/js.cookie.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/jquery.blockui.min.js')}}"></script>
+<script src="{{asset('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+@stack('pagelevelplugin')
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="{{asset('assets/global/scripts/app.min.js')}}"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+@stack('pageJs')
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<!-- END THEME LAYOUT SCRIPTS -->
+<script>
+    $(document).ready(function () {
+        $('#clickmewow').click(function () {
+            $('#radio1003').attr('checked', 'checked');
+        });
+    })
+</script>
 </body>
+
 </html>
