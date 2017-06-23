@@ -32,7 +32,7 @@
 <script src="{{asset('assets/global/scripts/app.min.js')}}"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="{{asset('assets/pages/scripts/login-4.min.js')}}"></script>
+@stack('pageJs')
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <!-- END THEME LAYOUT SCRIPTS -->
