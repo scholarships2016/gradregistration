@@ -25,7 +25,7 @@ Route::group(['prefix' => 'profile', 'middleware' => []], function () {
 //loginApplicant
 Route::get('/login', 'LoginApplicantController@showLoginPage')->name('showLoginApplicant');
 Route::post('/login', 'LoginApplicantController@postLogin')->name('postLoginApplicant');
-Route::post('/login/rePass', 'LoginApplicantController@reLogin')->name('rePassLoginApplicant');
+Route::post('/login/repass', 'LoginApplicantController@reLogin')->name('rePassLoginApplicant');
 Route::post('/login/register', 'LoginApplicantController@register')->name('registerApplicant');
 
 
