@@ -6,6 +6,7 @@ use App\Repositories\Contracts\ApplicantRepository;
 use App\Models\Applicant;
 use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
+use App\Models\ApplicatNewsSource;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
 
@@ -248,6 +249,30 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('modifier', $data))
                 $curObj->modifier = $data['modifier'];
 
+
+            $result = $curObj->save();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
+    
+     public function saveApplicatNewsSource($data) {
+        $result = false;
+        try {
+            $id = null;
+
+            if (array_key_exists('app_news_id', $data) || !empty($data['app_news_id']))
+                $id = $data['app_news_id'];
+
+            $chk = ApplicatNewsSource::where('app_news_id', $id)->first();
+            $curObj = $chk ? $chk : new Applicant;
+            if (array_key_exists('applicant_id', $data))
+                $curObj->applicant_id = $data['applicant_id'];
+            if (array_key_exists('id', $data))
+                $curObj->grad_level_id = $data['id'];
+            if (array_key_exists('orther', $data))
+                $curObj->edu_pass_id = $data['orther']; 
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
