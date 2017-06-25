@@ -28,21 +28,21 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 @stack('pagelevelplugin')
 <!-- END PAGE LEVEL PLUGINS -->
+<script src="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.js')}}" type="text/javascript"></script>
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="{{asset('assets/global/scripts/app.min.js')}}"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-@stack('pageJs')
-<!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
     $(document).ready(function () {
-        $('#clickmewow').click(function () {
-            $('#radio1003').attr('checked', 'checked');
-        });
+        //Alert Message
+        @include('includes.toastr')
     })
 </script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+@stack('pageJs')
+<!-- END PAGE LEVEL SCRIPTS -->
 </body>
 
 </html>

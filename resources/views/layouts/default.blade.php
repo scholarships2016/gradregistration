@@ -50,11 +50,11 @@
             <div class="page-content">
                 <!-- BEGIN PAGE HEADER-->
                 <!-- BEGIN PAGE BAR -->
-                @yield('pagebar')
-                <!-- END PAGE BAR -->
+            @yield('pagebar')
+            <!-- END PAGE BAR -->
                 <!-- BEGIN PAGE TITLE-->
-                @yield('pagetitle')
-                <!-- END PAGE TITLE-->
+            @yield('pagetitle')
+            <!-- END PAGE TITLE-->
                 <!-- END PAGE HEADER-->
                 @yield('maincontent')
             </div>
@@ -93,11 +93,11 @@
 <script src="{{asset('assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/layouts/global/scripts/quick-nav.min.js')}}" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
+<script src="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.js')}}" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
-        $('#clickmewow').click(function () {
-            $('#radio1003').attr('checked', 'checked');
-        });
+        //Alert Message
+        @include('includes.toastr')
     })
 </script>
 @stack('pageJs')
