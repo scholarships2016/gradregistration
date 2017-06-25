@@ -23,7 +23,7 @@
                                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                                    <label class="control-label visible-ie8 visible-ie9">E-Mail</label>
                                    <div class="input-icon">
-                                       <i class="fa fa-user"></i>
+                                       <i class="fa fa-envelope"></i>
                                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="E-Mail"
                                               name="stu_email"/></div>
                                </div>
@@ -35,10 +35,7 @@
                                               placeholder="Password" name="stu_password"/></div>
                                </div>
                                <div class="form-actions">
-                                   <label class="rememberme mt-checkbox mt-checkbox-outline">
-                                       <input type="checkbox" name="remember" value="1"/> Remember me
-                                       <span></span>
-                                   </label>
+                                    
                                    <button type="submit" class="btn green pull-right"> Login</button>
                                </div>
                                <div class="forget-password">
@@ -115,6 +112,14 @@
                                        <i class="fa fa-envelope"></i>
                                        <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="stu_email"/></div>
                                </div>
+                               
+                                <div class="form-group">
+                                   <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                   <label class="control-label visible-ie8 visible-ie9">Phone</label>
+                                   <div class="input-icon">
+                                       <i class="fa fa-phone"></i>
+                                       <input class="form-control placeholder-no-fix" type="text" placeholder="Phone" name="stu_phone"/></div>
+                               </div>
 
 
                                
@@ -125,7 +130,7 @@
                                    <div class="input-icon">
                                        <i class="fa fa-lock"></i>
                                        <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                                              id="register_password" placeholder="Password" name="password"/></div>
+                                              id="register_password" placeholder="Password" name="stu_password"/></div>
                                </div>
                                <div class="form-group">
                                    <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
@@ -136,15 +141,7 @@
                                                   placeholder="Re-type Your Password" name="rpassword"/></div>
                                    </div>
                                </div>
-                               <div class="form-group">
-                                   <label class="mt-checkbox mt-checkbox-outline">
-                                       <input type="checkbox" name="tnc"/> I agree to the
-                                       <a href="javascript:;">Terms of Service </a> &
-                                       <a href="javascript:;">Privacy Policy </a>
-                                       <span></span>
-                                   </label>
-                                   <div id="register_tnc_error"></div>
-                               </div>
+                               
                                <div class="form-actions">
                                    <button id="register-back-btn" type="button" class="btn red btn-outline"> Back</button>
                                    <button type="submit" id="register-submit-btn" class="btn green pull-right"> Sign Up</button>

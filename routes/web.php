@@ -15,15 +15,18 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('login', 'LoginController@showLoginPage')->name('showLoginPage');
-Route::post('login', 'LoginController@doLogin')->name('doLogin');
-Route::post('register', 'RegisterController@doRegister')->name('doRegister');
+ 
+
+Route::group(['prefix' => 'profile', 'middleware' => []], function () {
+    Route::get('/', 'ProfileController@showProfilePage')->name('profile.showProfilePage');
+});
+
 
 //loginApplicant
-Route::get('/login_Applicant/', 'LoginApplicantController@showLoginPage')->name('showLoginApplicant');
-Route::post('/login_Applicant/', 'LoginApplicantController@postLogin')->name('postLoginApplicant'); 
-Route::post('/login_Applicant/rePass', 'LoginApplicantController@reLogin')->name('rePassLoginApplicant');
-Route::post('/login_Applicant/register', 'LoginApplicantController@register')->name('registerApplicant');
+Route::get('/login', 'LoginApplicantController@showLoginPage')->name('showLoginApplicant');
+Route::post('/login', 'LoginApplicantController@postLogin')->name('postLoginApplicant');
+Route::post('/login/repass', 'LoginApplicantController@reLogin')->name('rePassLoginApplicant');
+Route::post('/login/register', 'LoginApplicantController@register')->name('registerApplicant');
 
 
 

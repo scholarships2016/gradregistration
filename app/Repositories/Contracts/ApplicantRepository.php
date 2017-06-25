@@ -13,4 +13,6 @@ interface ApplicantRepository {
     public function getWorkApplicant($applicantID);
 
     public function checkLogin($criteria = null);
+    
+    public function saveApplicant($request) ;
 }

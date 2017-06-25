@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 13:09:02 +0700.
+ * Date: Sun, 25 Jun 2017 19:06:36 +0700.
  */
 
 namespace App\Models;
@@ -60,12 +60,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Applicant extends Eloquent
 {
 	protected $table = 'applicant';
-	protected $primaryKey = 'stu_citizen_card';
-	public $incrementing = false;
+	protected $primaryKey = 'applicant_id';
 	public $timestamps = false;
 
 	protected $casts = [
-		'applicant_id' => 'int',
 		'nation_id' => 'int',
 		'stu_addr_dist' => 'int',
 		'stu_addr_prov' => 'int',
@@ -84,7 +82,7 @@ class Applicant extends Eloquent
 	];
 
 	protected $fillable = [
-		'applicant_id',
+		'stu_citizen_card',
 		'name_title_id',
 		'stu_first_name',
 		'stu_last_name',
