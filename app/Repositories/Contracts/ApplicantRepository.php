@@ -11,4 +11,8 @@ interface ApplicantRepository {
     public function getEduApplicant($applicantID);
 
     public function getWorkApplicant($applicantID);
+
+    public function checkLogin($criteria = null);
+    
+    public function saveApplicant($request) ;
 }
