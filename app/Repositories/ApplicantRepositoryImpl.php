@@ -18,10 +18,22 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         parent::setModelClassName(TblApplicant::class);
     }
 
+    public function checkLogin($criteria = null) {
+        $result = null;
+        try {
+            $result = Applicant::where('stu_email', $criteria->stu_email)
+                    ->where('stu_password', $criteria->stu_password)
+                    ->first();            
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
+
     public function getByCitizenOrEmail($citizencard, $email) {
         $result = null;
         try {
-            $result = Applicant::where('stu_citizen_card ', $citizencard)
+            $result = Applicant::where('stu_citizen_card', $citizencard)
                     ->orwhere('stu_email', $email)
                     ->first();
         } catch (\Exception $ex) {
