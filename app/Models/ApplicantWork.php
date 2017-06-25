@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 24 Jun 2017 00:15:58 +0700.
+ * Date: Sun, 25 Jun 2017 13:09:02 +0700.
  */
 
 namespace App\Models;
@@ -13,7 +13,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class ApplicantWork
  * 
  * @property int $work_stu_id
- * @property string $stu_citizen_card
+ * @property int $applicant_id
  * @property string $work_stu_phone
  * @property string $work_status_id
  * @property string $work_stu_detail
@@ -31,11 +31,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ApplicantWork extends Eloquent
 {
 	protected $table = 'applicant_work';
-	public $incrementing = false;
+	protected $primaryKey = 'work_stu_id';
 	public $timestamps = false;
 
 	protected $casts = [
-		'work_stu_id' => 'int'
+		'applicant_id' => 'int'
 	];
 
 	protected $dates = [
@@ -44,8 +44,7 @@ class ApplicantWork extends Eloquent
 	];
 
 	protected $fillable = [
-		'work_stu_id',
-		'stu_citizen_card',
+		'applicant_id',
 		'work_stu_phone',
 		'work_status_id',
 		'work_stu_detail',
