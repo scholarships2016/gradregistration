@@ -31,6 +31,7 @@
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
     <link href="{{asset('favicon.ico')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
 </head>
 
 

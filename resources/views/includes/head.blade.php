@@ -31,6 +31,7 @@
     <link href="{{asset('assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css">
     <!-- END THEME LAYOUT STYLES -->
     <link href="{{asset('favicon.ico')}}" rel="shortcut icon">
+    <link href="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
     @stack('pageCss')
 </head>
 <!-- END HEAD -->
