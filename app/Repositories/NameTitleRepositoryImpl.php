@@ -28,8 +28,7 @@ class NameTitleRepositoryImpl extends AbstractRepositoryImpl implements NameTitl
       public function getAll() {
         $result = null;
         try {
-            $result = TblNameTitle::get()->Order('name_title_id 
-');
+            $result = TblNameTitle::orderBy('name_title_id')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }

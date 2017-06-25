@@ -29,7 +29,7 @@ class LoginApplicantController extends Controller {
             return view('test', ['test' => $result]);
         } else {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
-            return view('loginApplicant');
+              return redirect('login_Applicant');
         }
     }
 
@@ -41,15 +41,23 @@ class LoginApplicantController extends Controller {
                 $message->to('pacusm128@gmail.com', 'John Smith')->subject('Welcome!');
             });
             session()->flash('successMsg', 'ตรวจสอบ e-mail เพื่อทำการ Re-password.');
-            return view('loginApplicant');
+            return redirect('login_Applicant');
         } else {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
-            return view('loginApplicant');
+            return back();
         }
     }
 
     public function register(request $request) {
-        
+
+        $result = $this->loginapplicantRepo->saveApplicant($request->all());
+        if ($result) {
+            session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
+           return redirect('login_Applicant');
+        } else {
+            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
+            return back();
+        }
     }
 
 }
