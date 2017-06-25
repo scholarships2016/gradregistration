@@ -7,6 +7,9 @@ use App\Repositories\Contracts\ApplicantRepository;
 use App\Repositories\Contracts\NameTitleRepository;
 use Illuminate\Support\Facades\Mail;
 
+use Illuminate\Support\Facades\Log;
+
+
 class LoginApplicantController extends Controller {
 
     protected $loginapplicantRepo;
@@ -19,6 +22,7 @@ class LoginApplicantController extends Controller {
 
     public function showLoginPage(Request $request) {
         $titles = $this->nametitleRepo->getAll();
+        Log::info('showLoginPage: iCHOK');
         return view('loginApplicant', ['titles' => $titles]);
     }
 
@@ -49,7 +53,7 @@ class LoginApplicantController extends Controller {
     }
 
     public function register(request $request) {
-        
+
     }
 
 }
