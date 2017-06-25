@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\ApplicantRepository;
 use App\Repositories\Contracts\NameTitleRepository;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Mail; 
+use Illuminate\Support\Facades\Auth;
 
 class LoginApplicantController extends Controller {
 
@@ -26,10 +27,11 @@ class LoginApplicantController extends Controller {
         $result = $this->loginapplicantRepo->checkLogin($request);
         if ($result) {
             session()->flash('successMsg', 'ยินดีต้อนรับเข้าสู่ระบบ');
-            return view('test', ['test' => $result]);
+           
+            return redirect('/');
         } else {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
-              return redirect('login_Applicant');
+              return redirect('login');
         }
     }
 
@@ -41,7 +43,7 @@ class LoginApplicantController extends Controller {
                 $message->to('pacusm128@gmail.com', 'John Smith')->subject('Welcome!');
             });
             session()->flash('successMsg', 'ตรวจสอบ e-mail เพื่อทำการ Re-password.');
-            return redirect('login_Applicant');
+            return redirect('login');
         } else {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
             return back();
@@ -53,7 +55,7 @@ class LoginApplicantController extends Controller {
         $result = $this->loginapplicantRepo->saveApplicant($request->all());
         if ($result) {
             session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
-           return redirect('login_Applicant');
+           return redirect('login');
         } else {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
             return back();
