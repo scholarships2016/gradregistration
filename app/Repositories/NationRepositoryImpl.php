@@ -2,22 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Contracts\NationRepository;
 use App\Models\TblNation;
-use App\Utils\Util;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\Contracts\NationRepository;
 
-class NationRepositoryImpl extends AbstractRepositoryImpl implements NationRepository {
+
+class NationRepositoryImpl extends AbstractRepositoryImpl implements NationRepository
+{
 
     protected $nationRepo;
     private $paging = 10;
 
-    public function __construct( ) {
+    public function __construct()
+    {
         parent::setModelClassName(TblNation::class);
-        
+
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         $result = null;
         try {
             $result = TblNation::where('nation_id', $id)->first();
@@ -27,13 +29,14 @@ class NationRepositoryImpl extends AbstractRepositoryImpl implements NationRepos
         return $result;
     }
 
-    public function searchByCriteria($criteria = null, $paging = false) {
+    public function searchByCriteria($criteria = null, $paging = false)
+    {
         $result = null;
         try {
             $nations = TblNation::where('nation_id', 'like', '%' . $criteria . '%')
-                    ->orwhere('nation_name', 'like', '%' . $criteria . '%')
-                    ->orwhere('nation_name_en', 'like', '%' . $criteria . '%')
-                    ->orderBy('nation_id');
+                ->orwhere('nation_name', 'like', '%' . $criteria . '%')
+                ->orwhere('nation_name_en', 'like', '%' . $criteria . '%')
+                ->orderBy('nation_id');
             $result = ($paging) ? $nations->paginate($this->paging) : $nations;
         } catch (\Exception $ex) {
             throw $ex;
@@ -41,7 +44,8 @@ class NationRepositoryImpl extends AbstractRepositoryImpl implements NationRepos
         return $result;
     }
 
-    public function save(array $data) {
+    public function save(array $data)
+    {
         $result = false;
         try {
             $id = null;
@@ -52,7 +56,7 @@ class NationRepositoryImpl extends AbstractRepositoryImpl implements NationRepos
             $chk = TblNation::where('nation_id', $id)->first();
             $curObj = $chk ? $chk : new TblNation;
 
-             if (array_key_exists('nation_id', $data))
+            if (array_key_exists('nation_id', $data))
                 $curObj->nation_id = $data['nation_id'];
             if (array_key_exists('nation_name', $data))
                 $curObj->nation_name = $data['nation_name'];
@@ -66,7 +70,8 @@ class NationRepositoryImpl extends AbstractRepositoryImpl implements NationRepos
         return $result;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $result = false;
         try {
             $result = TblNation::where('nation_id', $id)->delete();
