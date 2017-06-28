@@ -2,7 +2,10 @@
 
 namespace App\Repositories\Contracts;
 
-interface DistricttRepository {
- 
- 
+interface NewsSourceRepository
+{
+
 }
+ 
+
+ 
