@@ -92,14 +92,17 @@ class LoginApplicantController extends Controller {
 
     public function register(request $request) {
 
-        $result = $this->loginapplicantRepo->saveApplicant($request->all());
-        if ($result) {
-            session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
-            return redirect('login');
-        } else {
-            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
-            return back();
-        }
+        if (count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, $request->stu_email)) == 0) {
+            $result = $this->loginapplicantRepo->saveApplicant($request->all());
+            if ($result) {
+                session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
+                return redirect('login');
+            } else {
+                session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
+                return back();
+            }
+        }else{ session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
+                return back();}
     }
 
 }
