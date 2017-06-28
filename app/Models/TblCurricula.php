@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 00:41:55 +0700.
  */
 
 namespace App\Models;
@@ -12,9 +12,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class TblCurricula
  * 
- * @property int $id
- * @property float $curricula_id
+ * @property int $curricula_id
+ * @property float $curricula_code
  * @property string $curricula_name
+ * @property string $curricula_name_en
  * @property int $department_id
  *
  * @package App\Models
@@ -22,18 +23,20 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class TblCurricula extends Eloquent
 {
 	protected $table = 'tbl_curricula';
+	protected $primaryKey = 'curricula_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'int',
-		'curricula_id' => 'float',
+		'curricula_id' => 'int',
+		'curricula_code' => 'float',
 		'department_id' => 'int'
 	];
 
 	protected $fillable = [
-		'curricula_id',
+		'curricula_code',
 		'curricula_name',
+		'curricula_name_en',
 		'department_id'
 	];
 }

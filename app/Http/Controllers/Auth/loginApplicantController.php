@@ -1,17 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ApplicantRepository;
 use App\Repositories\Contracts\NameTitleRepository;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\App;
-use App\Utils\ChangeLocale;
 
 class LoginApplicantController extends Controller {
+
+    protected $redirectTo = '/seller_home';
+
+    use AuthenticatesUsers;
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
@@ -19,6 +24,23 @@ class LoginApplicantController extends Controller {
     public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
+    }
+
+    //Authen
+    protected function guard() {
+        return Auth::guard('web');
+    }
+
+    public function showLoginForm() {
+        $titles = $this->nametitleRepo->getAll();
+        return view('auth.loginApplicant', ['titles' => $titles]);
+    }
+
+    protected function validator(array $data) {
+        return Validator::make($data, [
+                    'stu_email' => 'required|max:255|unique:users',
+                    'stu_password' => 'required|confirmed|min:6',
+        ]);
     }
 
     public function language(Request $request) {
@@ -33,19 +55,24 @@ class LoginApplicantController extends Controller {
     }
 
     public function postLogin(Request $request) {
-        $result = $this->loginapplicantRepo->checkLogin($request);
-
-        if ($result) {
-
-
-            session()->flash('successMsg', 'ยินดีต้อนรับเข้าสู่ระบบ');
-
-
-            return redirect('/');
+        if (Auth::attempt(['stu_email' => $request->stu_email, 'password' => $request->stu_password])) {
+            $user_data = Auth::user();
+            session()->put('user_id', $user_data->applicant_id);
+            session()->put('first_name', $user_data->stu_first_name);
+            session()->put('last_name', $user_data->stu_last_name);
+            session()->put('email_address', $user_data->stu_email);
+            session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
+            return redirect('/home');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password' . bcrypt($request->stu_password));
+            session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
             return redirect('login');
         }
+    }
+
+    public function getLogout() {
+        Auth::logout();
+        session()->flush();
+        return redirect('/login');
     }
 
     public function reLogin(Request $request) {

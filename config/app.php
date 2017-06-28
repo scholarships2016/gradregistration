@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'th',
+    'languages' =>  ['en','th'],
 
     /*
     |--------------------------------------------------------------------------
@@ -121,7 +122,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'daily'),
+    'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -181,7 +182,6 @@ return [
          * User Service Providers...
          */
         App\Providers\RouteServiceProvider::class,
-        Reliese\Coders\CodersServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
     ],
 

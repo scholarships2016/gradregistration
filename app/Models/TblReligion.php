@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:37 +0700.
+ * Date: Thu, 29 Jun 2017 00:41:55 +0700.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class TblReligion
  * 
- * @property string $religion_id
+ * @property int $religion_id
  * @property string $religion_name
  * @property string $religion_name_en
  *
@@ -24,6 +24,10 @@ class TblReligion extends Eloquent
 	protected $primaryKey = 'religion_id';
 	public $incrementing = false;
 	public $timestamps = false;
+
+	protected $casts = [
+		'religion_id' => 'int'
+	];
 
 	protected $fillable = [
 		'religion_name',

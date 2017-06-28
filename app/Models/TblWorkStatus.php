@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:37 +0700.
+ * Date: Thu, 29 Jun 2017 00:41:55 +0700.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class TblWorkStatus
  * 
- * @property string $work_status_id
+ * @property int $work_status_id
  * @property string $work_status_name
  * @property string $work_status_name_en
  *
@@ -22,7 +22,6 @@ class TblWorkStatus extends Eloquent
 {
 	protected $table = 'tbl_work_status';
 	protected $primaryKey = 'work_status_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $fillable = [

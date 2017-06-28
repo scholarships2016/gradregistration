@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 00:41:55 +0700.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class ApplicantEdu
  * 
- * @property int $edu_id
+ * @property int $app_edu_id
  * @property int $applicant_id
  * @property int $grad_level_id
  * @property string $edu_pass_id
@@ -32,7 +32,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ApplicantEdu extends Eloquent
 {
 	protected $table = 'applicant_edu';
-	protected $primaryKey = 'edu_id';
+	protected $primaryKey = 'app_edu_id';
 	public $timestamps = false;
 
 	protected $casts = [

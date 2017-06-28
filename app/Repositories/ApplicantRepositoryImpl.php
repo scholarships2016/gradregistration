@@ -7,8 +7,7 @@ use App\Models\Applicant;
 use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
-use App\Utils\Util;
-use Illuminate\Support\Facades\DB;
+ 
  
 
 class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
@@ -24,7 +23,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         $result = null;
         try {
             $result = Applicant::where('stu_email', $criteria->stu_email)
-                    ->where('stu_password',  $criteria->stu_password) 
+                    ->where('stu_password', $criteria->stu_password) 
                     ->select('applicant_id', 'stu_first_name','stu_last_name','stu_email')
                     ->first();
         } catch (\Exception $ex) {
@@ -157,7 +156,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('eng_test_score_admin', $data))
                 $curObj->eng_test_score_admin = $data['eng_test_score_admin'];
             if (array_key_exists('stu_password', $data))
-                $curObj->stu_password =  $data['stu_password'] ;
+                $curObj->stu_password = bcrypt($data['stu_password']);
             if (array_key_exists('sys_activate_code', $data))
                 $curObj->sys_activate_code = $data['sys_activate_code'];
 

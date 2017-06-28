@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 00:41:55 +0700.
  */
 
 namespace App\Models;
@@ -14,7 +14,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $grad_level_id
  * @property string $grad_level_abbr
+ * @property string $grad_level_abbr_en
  * @property string $grad_level_name
+ * @property string $grad_level_name_en
  * @property string $remark
  *
  * @package App\Models
@@ -32,7 +34,9 @@ class TblGaduateLevel extends Eloquent
 
 	protected $fillable = [
 		'grad_level_abbr',
+		'grad_level_abbr_en',
 		'grad_level_name',
+		'grad_level_name_en',
 		'remark'
 	];
 }
