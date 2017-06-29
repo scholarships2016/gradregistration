@@ -156,7 +156,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('eng_test_score_admin', $data))
                 $curObj->eng_test_score_admin = $data['eng_test_score_admin'];
             if (array_key_exists('stu_password', $data))
-                $curObj->stu_password = bcrypt($data['stu_password']);
+                $curObj->stu_password = encrypt($data['stu_password']);
             if (array_key_exists('sys_activate_code', $data))
                 $curObj->sys_activate_code = $data['sys_activate_code'];
 

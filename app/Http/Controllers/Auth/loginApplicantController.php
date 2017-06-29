@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use \Illuminate\Support\Facades\Crypt;
 
 class LoginApplicantController extends Controller {
 
@@ -77,10 +78,15 @@ class LoginApplicantController extends Controller {
 
     public function reLogin(Request $request) {
         $result = $this->loginapplicantRepo->getByCitizenOrEmail('', $request->stu_email);
+
         if ($result) {
-            $message = "testssss";
-            Mail::send('test', array('key' => 'value'), function($message) {
-                $message->to('pacusm128@gmail.com', 'John Smith')->subject('Welcome!');
+            $data = [
+                'stu_name' => $result->stu_first_name . ' ' . $result->stu_last_name,
+                'stu_password' => decrypt($result->stu_password),
+                'email' => $result->stu_email
+            ];
+            Mail::send('email.rePassword', $data, function($message)use ($result) {
+                $message->to($result->stu_email, $result->stu_first_name)->subject('Your password!');
             });
             session()->flash('successMsg', 'ตรวจสอบ e-mail เพื่อทำการ Re-password.');
             return redirect('login');
@@ -101,8 +107,10 @@ class LoginApplicantController extends Controller {
                 session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
                 return back();
             }
-        }else{ session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
-                return back();}
+        } else {
+            session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
+            return back();
+        }
     }
 
 }
