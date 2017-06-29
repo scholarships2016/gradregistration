@@ -74,6 +74,7 @@ class LoginApplicantController extends Controller {
         Auth::logout();
         session()->flush();
         return redirect('/login');
+        
     }
 
     public function reLogin(Request $request) {
