@@ -7,8 +7,6 @@ use App\Models\Applicant;
 use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
- 
- 
 
 class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
 
@@ -23,8 +21,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         $result = null;
         try {
             $result = Applicant::where('stu_email', $criteria->stu_email)
-                    ->where('stu_password', $criteria->stu_password) 
-                    ->select('applicant_id', 'stu_first_name','stu_last_name','stu_email')
+                    ->where('stu_password', $criteria->stu_password)
+                    ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
                     ->first();
         } catch (\Exception $ex) {
             throw $ex;
@@ -48,7 +46,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         $result = null;
         try {
             $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')                   
+                    ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
@@ -91,6 +89,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $chk = Applicant::where('applicant_id', $id)->first();
             $curObj = $chk ? $chk : new Applicant;
+
             if (array_key_exists('stu_citizen_card', $data))
                 $curObj->stu_citizen_card = $data['stu_citizen_card'];
             if (array_key_exists('name_title_id', $data))
@@ -156,15 +155,21 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('eng_test_score_admin', $data))
                 $curObj->eng_test_score_admin = $data['eng_test_score_admin'];
             if (array_key_exists('stu_password', $data))
-                $curObj->stu_password = encrypt($data['stu_password']);
+                $curObj->stu_password = bcrypt($data['stu_password']);
             if (array_key_exists('sys_activate_code', $data))
                 $curObj->sys_activate_code = $data['sys_activate_code'];
 
 
-            if (array_key_exists('creator', $data))
-                $curObj->creator = $data['creator'];
+            if (!$chk) {
+                if (array_key_exists('stu_citizen_card', $data))
+                    $curObj->creator = $data['stu_citizen_card'];
+
+                $curObj->created = \Carbon\Carbon::now()->timestamp;
+            }
             if (array_key_exists('modifier', $data))
                 $curObj->modifier = $data['modifier'];
+
+            $curObj->modifier = \Carbon\Carbon::now()->timestamp;
 
 
             $result = $curObj->save();
@@ -256,8 +261,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
         return $result;
     }
-    
-     public function saveApplicatNewsSource($data) {
+
+    public function saveApplicatNewsSource($data) {
         $result = false;
         try {
             $id = null;
@@ -272,7 +277,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('id', $data))
                 $curObj->grad_level_id = $data['id'];
             if (array_key_exists('orther', $data))
-                $curObj->edu_pass_id = $data['orther']; 
+                $curObj->edu_pass_id = $data['orther'];
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
