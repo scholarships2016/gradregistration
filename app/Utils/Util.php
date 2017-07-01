@@ -75,6 +75,34 @@ class Util
         }
         return $result;
     }
-    
- 
+
+    public static function jsonResponseFormat($status, $data, $message)
+    {
+        $reStatus = "";
+        switch ($status) {
+            case 1:
+                $reStatus = "success";
+                break;
+            case 2:
+                $reStatus = "warning";
+                break;
+            case 3:
+                $reStatus = "error";
+                break;
+            default:
+                $reStatus = "";
+        }
+
+        return array("status" => $reStatus, "data" => $data, "message" => $message);
+    }
+
+    public static function dateFormatToNewDateFormat($srcFormat, $srcDateStr, $descFormat)
+    {
+        try {
+            $curDateTiem = \DateTime::createFromFormat($srcFormat, $srcDateStr);
+            return $curDateTiem->format($descFormat);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 }
