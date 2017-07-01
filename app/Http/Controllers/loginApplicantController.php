@@ -7,6 +7,7 @@ use App\Repositories\Contracts\ApplicantRepository;
 use App\Repositories\Contracts\NameTitleRepository;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class LoginApplicantController extends Controller {
@@ -20,7 +21,8 @@ class LoginApplicantController extends Controller {
     }
 
     public function showLoginPage(Request $request) {
-        $titles = $this->nametitleRepo->getAll();      
+        Log::info('showLoginPage: iCHOK');
+        $titles = $this->nametitleRepo->getAll();
         return view('loginApplicant', ['titles' => $titles]);
     }
 
@@ -52,9 +54,6 @@ class LoginApplicantController extends Controller {
     }
 
     public function register(request $request) {
-
-<<<<<<< HEAD
-=======
         $result = $this->loginapplicantRepo->saveApplicant($request->all());
         if ($result) {
             session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
@@ -63,7 +62,6 @@ class LoginApplicantController extends Controller {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
             return back();
         }
->>>>>>> 507aa28a36df08bb783a159b32679d21d110fec0
     }
 
 }
