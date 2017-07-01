@@ -7,22 +7,27 @@ use App\Models\Applicant;
 use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
+use App\Utils\Util;
+use Illuminate\Support\Facades\DB;
+
 
 class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
 
-    protected $statusPassRepo;
+    protected $appNewsSrcRepo;
     private $paging = 10;
 
-    public function __construct() {
-        parent::setModelClassName(TblApplicant::class);
+    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo)
+    {
+        parent::setModelClassName(Applicant::class);
+        $this->appNewsSrcRepo = $appNewsSrcRepo;
     }
 
     public function checkLogin($criteria = null) {
         $result = null;
         try {
             $result = Applicant::where('stu_email', $criteria->stu_email)
-                    ->where('stu_password', $criteria->stu_password)
-                    ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
+                    ->where('stu_password',  $criteria->stu_password) 
+                    ->select('applicant_id', 'stu_first_name','stu_last_name','stu_email')
                     ->first();
         } catch (\Exception $ex) {
             throw $ex;
@@ -87,9 +92,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('applicant_id', $data) || !empty($data['applicant_id']))
                 $id = $data['applicant_id'];
 
-            $chk = Applicant::where('applicant_id', $id)->first();
+            $chk = $this->find($id);
             $curObj = $chk ? $chk : new Applicant;
-
             if (array_key_exists('stu_citizen_card', $data))
                 $curObj->stu_citizen_card = $data['stu_citizen_card'];
             if (array_key_exists('name_title_id', $data))
@@ -102,6 +106,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->stu_first_name_en = $data['stu_first_name_en'];
             if (array_key_exists('stu_last_name_en', $data))
                 $curObj->stu_last_name_en = $data['stu_last_name_en'];
+            if (array_key_exists('stu_sex', $data))
+                $curObj->stu_sex = $data['stu_sex'];
             if (array_key_exists('nation_id', $data))
                 $curObj->nation_id = $data['nation_id'];
             if (array_key_exists('stu_addr_no', $data))
@@ -114,10 +120,10 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->stu_addr_road = $data['stu_addr_road'];
             if (array_key_exists('stu_addr_tumbon', $data))
                 $curObj->stu_addr_tumbon = $data['stu_addr_tumbon'];
-            if (array_key_exists('stu_addr_dist', $data))
-                $curObj->stu_addr_dist = $data['stu_addr_dist'];
-            if (array_key_exists('stu_addr_prov', $data))
-                $curObj->stu_addr_prov = $data['stu_addr_prov'];
+            if (array_key_exists('district_code', $data))
+                $curObj->district_code = $data['district_code'];
+            if (array_key_exists('province_id', $data))
+                $curObj->province_id = $data['province_id'];
             if (array_key_exists('stu_addr_pcode', $data))
                 $curObj->stu_addr_pcode = $data['stu_addr_pcode'];
             if (array_key_exists('stu_phone', $data))
@@ -160,16 +166,10 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->sys_activate_code = $data['sys_activate_code'];
 
 
-            if (!$chk) {
-                if (array_key_exists('stu_citizen_card', $data))
-                    $curObj->creator = $data['stu_citizen_card'];
-
-                $curObj->created = \Carbon\Carbon::now()->timestamp;
-            }
+            if (array_key_exists('creator', $data))
+                $curObj->creator = $data['creator'];
             if (array_key_exists('modifier', $data))
                 $curObj->modifier = $data['modifier'];
-
-            $curObj->modifier = \Carbon\Carbon::now()->timestamp;
 
 
             $result = $curObj->save();
@@ -261,8 +261,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
         return $result;
     }
-
-    public function saveApplicatNewsSource($data) {
+    
+     public function saveApplicatNewsSource($data) {
         $result = false;
         try {
             $id = null;
@@ -277,13 +277,47 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('id', $data))
                 $curObj->grad_level_id = $data['id'];
             if (array_key_exists('orther', $data))
-                $curObj->edu_pass_id = $data['orther'];
+                $curObj->edu_pass_id = $data['orther']; 
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
+    }
+
+    public function getApplicantProfileByApplicantId($applicantId)
+    {
+        try {
+            if (empty($applicantId)) {
+                throw new \Exception('Required Applicant ID');
+            }
+            $applicantProfile = $this->find($applicantId);
+            if (empty($applicantProfile)) {
+                return null;
+//                throw new \Exception(Util::DATA_NOT_FOUND);
+            }
+            $newsSource = $this->appNewsSrcRepo->getApplicantNewsSourceByApplicantId($applicantId);
+
+            return array('applicant' => $applicantProfile, 'applicantNewsSource' => $newsSource);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function saveApplicantPersonalInfo(array $data)
+    {
+        DB::beginTransaction();
+        try {
+            if ($this->saveApplicant($data)) {
+                $this->appNewsSrcRepo->updateSetOfApplicantNewsSrc($data);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
     }
 
 }
