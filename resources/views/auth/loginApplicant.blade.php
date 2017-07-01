@@ -88,7 +88,7 @@
                 <option value=""></option>
                 @if($titles)
                 @foreach($titles as $key => $title)
-                <option value="{{$title->name_title_id}}">{{$title->name_title}}</option> 
+                <option value="{{$title->name_title_id}}">{{$title->name_title.' - '.$title->name_title_en}}</option> 
                 @endforeach
                 @endif
             </select>

@@ -17,14 +17,20 @@ Route::get('/', function () {
 
 //RegisApplicant
 
+Route::get('usersldap','Auth\LoginUserController@checkuserldap');
 Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginApplicantController@register']);
 Route::post('/login/repass', 'Auth\LoginApplicantController@reLogin')->name('rePassLoginApplicant');
 Route::get('login', 'Auth\LoginApplicantController@showLoginForm')->name('showLogin');
 Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginApplicantController@postLogin']);
 Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
 
-//SetLangues
+//SetLangues just call function
 Route::get('language', 'LoginApplicantController@language');
+
+//Apply
+Route::get('apply', 'ApplyController@showAnnouncement');
+Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
+ 
 
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
