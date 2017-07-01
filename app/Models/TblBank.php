@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 14:04:56 +0700.
  */
 
 namespace App\Models;
@@ -12,10 +12,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class TblBank
  * 
- * @property int $id
- * @property string $bank_id
+ * @property int $bank_id
+ * @property string $bank_code
  * @property string $bank_account
  * @property string $bank_name
+ * @property string $bank_name_en
  * @property string $bank_fee
  * @property string $bank_logo
  *
@@ -24,12 +25,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class TblBank extends Eloquent
 {
 	protected $table = 'tbl_bank';
+	protected $primaryKey = 'bank_id';
 	public $timestamps = false;
 
 	protected $fillable = [
-		'bank_id',
+		'bank_code',
 		'bank_account',
 		'bank_name',
+		'bank_name_en',
 		'bank_fee',
 		'bank_logo'
 	];

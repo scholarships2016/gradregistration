@@ -49,6 +49,7 @@
 
     ga('create', 'UA-101641288-1', 'auto');
     ga('send', 'pageview');
+    
 </script>
 <script>
     $(document).ready(function () {

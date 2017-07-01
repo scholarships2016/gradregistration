@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:37 +0700.
+ * Date: Thu, 29 Jun 2017 14:04:56 +0700.
  */
 
 namespace App\Models;
@@ -15,6 +15,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $university_id
  * @property string $university_code
  * @property string $university_name
+ * @property string $university_name_en
  * @property float $university_type
  *
  * @package App\Models
@@ -33,6 +34,7 @@ class TblUniversity extends Eloquent
 	protected $fillable = [
 		'university_code',
 		'university_name',
+		'university_name_en',
 		'university_type'
 	];
 }

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 14:04:56 +0700.
  */
 
 namespace App\Models;
@@ -14,7 +14,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $app_news_id
  * @property int $applicant_id
- * @property int $id
+ * @property int $news_source_id
  * @property string $orther
  *
  * @package App\Models
@@ -27,12 +27,12 @@ class ApplicatNewsSource extends Eloquent
 
 	protected $casts = [
 		'applicant_id' => 'int',
-		'id' => 'int'
+		'news_source_id' => 'int'
 	];
 
 	protected $fillable = [
 		'applicant_id',
-		'id',
+		'news_source_id',
 		'orther'
 	];
 }
