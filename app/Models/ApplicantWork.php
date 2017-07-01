@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 14:04:56 +0700.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class ApplicantWork
  * 
- * @property int $work_stu_id
+ * @property int $app_work_id
  * @property int $applicant_id
  * @property string $work_stu_phone
  * @property string $work_status_id
@@ -21,6 +21,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $work_stu_yr
  * @property string $work_stu_mth
  * @property string $work_stu_salary
+ * @property bool $app_work_status
  * @property string $creator
  * @property \Carbon\Carbon $created
  * @property string $modifier
@@ -31,11 +32,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ApplicantWork extends Eloquent
 {
 	protected $table = 'applicant_work';
-	protected $primaryKey = 'work_stu_id';
+	protected $primaryKey = 'app_work_id';
 	public $timestamps = false;
 
 	protected $casts = [
-		'applicant_id' => 'int'
+		'applicant_id' => 'int',
+		'app_work_status' => 'bool'
 	];
 
 	protected $dates = [
@@ -52,6 +54,7 @@ class ApplicantWork extends Eloquent
 		'work_stu_yr',
 		'work_stu_mth',
 		'work_stu_salary',
+		'app_work_status',
 		'creator',
 		'created',
 		'modifier',

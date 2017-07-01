@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Thu, 29 Jun 2017 14:04:56 +0700.
  */
 
 namespace App\Models;
@@ -26,8 +26,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $stu_addr_soi
  * @property string $stu_addr_road
  * @property string $stu_addr_tumbon
- * @property int $stu_addr_dist
- * @property int $stu_addr_prov
+ * @property int $district_code
+ * @property int $province_id
  * @property string $stu_addr_pcode
  * @property string $stu_phone
  * @property string $stu_phone2
@@ -37,7 +37,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $thai_test_score
  * @property string $cu_best_score
  * @property string $stu_img
- * @property int $stu_birthdate
+ * @property \Carbon\Carbon $stu_birthdate
  * @property string $stu_religion
  * @property string $stu_married
  * @property string $stu_birthplace
@@ -50,6 +50,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $eng_test_id_admin
  * @property string $stu_password
  * @property string $sys_activate_code
+ * @property string $remember_token
  * @property string $creator
  * @property \Carbon\Carbon $created
  * @property string $modifier
@@ -65,20 +66,21 @@ class Applicant extends Eloquent
 
 	protected $casts = [
 		'nation_id' => 'int',
-		'stu_addr_dist' => 'int',
-		'stu_addr_prov' => 'int',
-		'stu_birthdate' => 'int',
+		'district_code' => 'int',
+		'province_id' => 'int',
 		'eng_date_taken' => 'int',
 		'fund_interesting' => 'int'
 	];
 
 	protected $dates = [
+		'stu_birthdate',
 		'created',
 		'modified'
 	];
 
 	protected $hidden = [
-		'stu_password'
+		'stu_password',
+		'remember_token'
 	];
 
 	protected $fillable = [
@@ -95,8 +97,8 @@ class Applicant extends Eloquent
 		'stu_addr_soi',
 		'stu_addr_road',
 		'stu_addr_tumbon',
-		'stu_addr_dist',
-		'stu_addr_prov',
+		'district_code',
+		'province_id',
 		'stu_addr_pcode',
 		'stu_phone',
 		'stu_phone2',
@@ -119,6 +121,7 @@ class Applicant extends Eloquent
 		'eng_test_id_admin',
 		'stu_password',
 		'sys_activate_code',
+		'remember_token',
 		'creator',
 		'created',
 		'modifier',
