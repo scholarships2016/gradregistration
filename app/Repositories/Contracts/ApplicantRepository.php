@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
-interface ApplicantRepository {
+interface ApplicantRepository
+{
 
     public function getByCitizenOrEmail($citizencard, $email);
 
@@ -13,6 +14,11 @@ interface ApplicantRepository {
     public function getWorkApplicant($applicantID);
 
     public function checkLogin($criteria = null);
-    
-    public function saveApplicant($request) ;
+
+    public function saveApplicant($request);
+
+    public function getApplicantProfileByApplicantId($applicantId);
+
+    public function saveApplicantPersonalInfo(array $data);
+
 }
