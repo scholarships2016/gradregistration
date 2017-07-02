@@ -48,6 +48,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\WorkStatusRepository', 'App\Repositories\WorkStatusRepositoryImpl');
 
 
+        
+        $this->app->bind('App\Repositories\Contracts\DepartmentRepository', 'App\Repositories\DepartmentRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\FacultyRepository', 'App\Repositories\FacultyRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\CourseRepository', 'App\Repositories\CourseRepositoryImpl');
+         $this->app->bind('App\Repositories\Contracts\CurriculaRepository', 'App\Repositories\CurriculaRepositoryImpl');
     }
 
 }

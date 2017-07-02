@@ -130,7 +130,7 @@
                                         <li class="dropdown dropdown-user">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                                data-close-others="true">
-                                                <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg"/>
+                                                <img alt="" class="img-circle" src="{{url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
                                                 <span class="username username-hide-on-mobile">  {{ session('first_name').' '.session('last_name')  }} </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
