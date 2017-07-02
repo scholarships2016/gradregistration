@@ -89,19 +89,5 @@ class MasterDataController extends Controller
         return null;
     }
     
-     public function getTypeOfRecruitByCurriculaIdForDropdown(Request $request)
-    {
-        if ($request->ajax()) {
-            $param = $request->all();
-            try {
-                if (array_key_exists('department_id', $param)) {
-                    $result = Util::prepareDataForDropdownList($this->curriculaRepo->getByDepartment_Id($param['department_id']), 'curricula_id', 'curricula_name');
-                    return response()->json($result);
-                }
-            } catch (\Exception $ex) {
-                return null;
-            }
-        }
-        return null;
-    }
+  
 }
