@@ -21,4 +21,5 @@ interface ApplicantRepository
 
     public function saveApplicantPersonalInfo(array $data);
 
+
 }
