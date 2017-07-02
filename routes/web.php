@@ -25,7 +25,7 @@ Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginApplicantController@
 Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
 
 //SetLangues just call function
-Route::get('language', 'LoginApplicantController@language');
+Route::get('language', 'Auth\LoginApplicantController@language');
 
  
 //Apply
@@ -33,18 +33,18 @@ Route::get('apply', 'ApplyController@showAnnouncement');
 Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
 Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
 
- 
-
+  Route::get('/home', function () {
+        return view('home');
+    });
+  Route::get('/', function () {
+        return view('home');
+    });
  
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return view('index');
-    });
-    Route::get('/home', function () {
-        return view('index');
-    });
+  
+    
 });
 
 

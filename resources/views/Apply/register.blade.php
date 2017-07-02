@@ -174,8 +174,8 @@ Search Result
                                                                     <td class="center"> 12.12.2011 </td>
                                                                     <td>
                                                                         <div class="btn-group">
-                                                                            <button class="btn btn-xs green  " type="button"  > สมัคร/Apply  
-                                                                            </button>
+                                                                            <a class="btn btn-xs green " href="{{url('apply/registerCourse/')}}" type="button"  > สมัคร/Apply  
+                                                                            </a>
                                                                             
                                                                         </div>
                                                                     </td>
