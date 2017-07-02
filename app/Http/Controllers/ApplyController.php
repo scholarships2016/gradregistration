@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\AnnouncementRepositoryImpl;
-use App\Repositories\ProvinceRepositoryImpl;
 
 class ApplyController extends Controller {
 
     protected $part_doc = "Apply.";
     protected $AnnouncementRepo;
-     protected $ProvinceRepo;
 
-    public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo,ProvinceRepositoryImpl $ProvinceRepo) {
+    public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
-         $this->ProvinceRepo = $ProvinceRepo;
     }
 
     public function index() {
@@ -22,19 +19,15 @@ class ApplyController extends Controller {
     }
 
     public function showAnnouncement() {
-        $data = $this->AnnouncementRepo->getAnnouncementAll();
-        return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1]);
+        $data = $this->AnnouncementRepo->getAnnouncementAll();         
+        return view($this->part_doc . 'announcement', ['announcements' => $data,'startstep' => 1]);
+          
+    }
+    public function managementRegister(){
+      return view($this->part_doc . 'register');
     }
 
-    public function managementRegister() {
-//        $faculty = \App\Repositories\FacultyRepositoryImpl::all();
-//        $department = \App\Repositories\Contracts\DepartmentRepository::all();
-//        $Subject = ;
-//        $typerecruit = "";
-        $province =  $this->ProvinceRepo->all();
-
-        return view($this->part_doc . 'register', ['provinces' => $province]);
-    }
+    
 
     public function getForm($id = 0) {
         if ($id != 0) {
