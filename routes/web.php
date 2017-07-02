@@ -14,10 +14,13 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
+    Route::get('/getDistrictListByProvinceId', 'MasterDataController@getDistrictByProvinceIdForDropdown')->name('masterdata.getDistrictListByProvinceId');
+});
 
 //RegisApplicant
 
-Route::get('usersldap','Auth\LoginUserController@checkuserldap');
+Route::get('usersldap', 'Auth\LoginUserController@checkuserldap');
 Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginApplicantController@register']);
 Route::post('/login/repass', 'Auth\LoginApplicantController@reLogin')->name('rePassLoginApplicant');
 Route::get('login', 'Auth\LoginApplicantController@showLoginForm')->name('showLogin');
@@ -30,7 +33,6 @@ Route::get('language', 'LoginApplicantController@language');
 //Apply
 Route::get('apply', 'ApplyController@showAnnouncement');
 Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
- 
 
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
