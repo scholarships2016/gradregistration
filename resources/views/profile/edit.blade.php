@@ -78,6 +78,7 @@
             @include('includes.profile.editPresentAddress')
             @include('includes.profile.editKnowledgeSkill')
             @include('includes.profile.editEduBackground')
+            @include('includes.profile.editWorkExp')
         </div>
     </div>
 @stop
@@ -184,6 +185,18 @@
                 }
             });
         });
+
+        $('#saveWorkExp').click(function () {
+            var data = $("#workExpForm").serializeArray();
+            $.ajax({
+                url: "{{route('profile.doSaveWorkExp')}}",
+                method: "POST",
+                data: data,
+                success: function (result) {
+                    var data = showToastFromAjaxResponse(result);
+                }
+            });
+        });
     }
 
     function setDefaultValue() {
@@ -196,39 +209,15 @@
         $("#province_id").val($("#province_id_hidden").val()).change();
         $("#eng_test_id").val($("#eng_test_id_hidden").val()).change();
 
-        $('.mt-repeater').each(function (index) {
-
-                alert(index);
-
-
-
-//            $(this).repeater({
-//                show: function () {
-//                    console.log(this);
-//                    $(this).slideDown();
-//                    $(".select2").select2({
-//                        allowClear: true,
-//                        width: null,
-//                        placeholder: '---Choose---'
-//                    });
-//
-//
-//                    console.log($(this).find("#edu_year"));
-//
-//                },
-//
-//                hide: function (deleteElement) {
-//                    $(this).slideUp(deleteElement);
-//
-//                },
-//
-//                ready: function (setIndexes) {
-//
-//                }
-//
-//            });
+        $("#eduBackGroup").find(".mt-repeater-item").each(function (index) {
+            $(this).find("#grad_level").val($(this).find("#grad_level_hidden").val()).change();
+            $(this).find("#edu_pass_id").val($(this).find("#edu_pass_id_hidden").val()).change();
+            $(this).find("#university_id").val($(this).find("#university_id_hidden").val()).change();
         });
 
+        $("#workExpGroup").find(".mt-repeater-item").each(function (index) {
+            $(this).find("#work_status_id").val($(this).find("#work_status_id_hidden").val()).change();
+        });
     }
 
     $(document).ready(function () {

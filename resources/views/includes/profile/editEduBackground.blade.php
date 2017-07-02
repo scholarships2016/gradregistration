@@ -13,6 +13,7 @@
     <div class="portlet-body form">
         <form id="eduBackForm" name="eduBackForm" action="#" class="mt-repeater form-horizontal">
             {{csrf_field()}}
+            <input type="hidden" name="applicant_id" id="applicant_id" value="{{$applicant->applicant_id}}">
             <div class="form-body">
                 <div class="mt-repeater">
                     <div class="row">
@@ -23,8 +24,8 @@
                         </div>
                     </div>
                     <hr>
-                    <div data-repeater-list="eduback-group">
-                        @if(empty($applicantEduList))
+                    <div id="eduBackGroup" data-repeater-list="eduback-group">
+                        @if(empty($applicantEduList) || sizeof($applicantEduList) == 0)
                             <div data-repeater-item class="mt-repeater-item row">
                                 <!-- jQuery Repeater Container -->
                                 <div class="row">
@@ -40,13 +41,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" id="app_edu_id" name="app_edu_id" value=""/>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
                                             <label class="control-label">ระดับการศึกษา
                                                 &nbsp;<small>Level</small>
                                             </label>
-                                            <input type="hidden" id="grad_level_hidden_0" name="grad_level_hidden"
+                                            <input type="hidden" id="grad_level_hidden" name="grad_level_hidden"
                                                    value="">
                                             <select id="grad_level" name="grad_level" class="form-control select2">
                                                 <option value="BACHELOR">ปริญญาตรี - Bachelor Degree</option>
@@ -58,7 +60,7 @@
                                             <label class="control-label">
                                                 สถานะ&nbsp;<small>Status</small>
                                             </label>
-                                            <input type="hidden" id="edu_pass_id_hidden_0" name="edu_pass_id_hidden"
+                                            <input type="hidden" id="edu_pass_id_hidden" name="edu_pass_id_hidden"
                                                    value="">
                                             <select id="edu_pass_id" name="edu_pass_id"
                                                     class="form-control input-small select2">
@@ -147,15 +149,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" id="app_edu_id" name="app_edu_id"
+                                           value="{{$appEdu->app_edu_id}}"/>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
                                                 <label class="control-label">ระดับการศึกษา
                                                     &nbsp;<small>Level</small>
                                                 </label>
-                                                <input type="hidden" id="grad_level_hidden{{$index}}" name="grad_level_hidden"
-                                                       value="">
-                                                <select id="grad_level{{$index}}" name="grad_level" class="form-control select2">
+                                                <input type="hidden" id="grad_level_hidden"
+                                                       name="grad_level_hidden"
+                                                       value="{{$appEdu->grad_level}}">
+                                                <select id="grad_level" name="grad_level"
+                                                        class="form-control select2">
                                                     <option value="BACHELOR">ปริญญาตรี - Bachelor Degree</option>
                                                     <option value="MASTER">ปริญญาโท - Master Degree</option>
                                                     <option value="DOCTOR">ปริญญาเอก - Doctor Degree</option>
@@ -165,9 +171,10 @@
                                                 <label class="control-label">
                                                     สถานะ&nbsp;<small>Status</small>
                                                 </label>
-                                                <input type="hidden" id="edu_pass_id_hidden{{$index}}" name="edu_pass_id_hidden"
-                                                       value="">
-                                                <select id="edu_pass_id{{$index}}" name="edu_pass_id"
+                                                <input type="hidden" id="edu_pass_id_hidden"
+                                                       name="edu_pass_id_hidden"
+                                                       value="{{$appEdu->edu_pass_id}}">
+                                                <select id="edu_pass_id" name="edu_pass_id"
                                                         class="form-control input-small select2">
                                                     @if(!empty($eduPassList))
                                                         @foreach ($eduPassList as $eduPass)
@@ -185,9 +192,10 @@
                                                 <label class="control-label">มหาวิทยาลัย/สถาบันอุดมศึกษา
                                                     &nbsp;<small>Institution</small>
                                                 </label>
-                                                <input type="hidden" id="university_id_hidden{{'_'.$index}}"
-                                                       name="university_id_hidden">
-                                                <select name="university_id" id="university_id{{'_'.$index}}"
+                                                <input type="hidden" id="university_id_hidden"
+                                                       name="university_id_hidden"
+                                                       value="{{$appEdu->university_id}}">
+                                                <select name="university_id" id="university_id"
                                                         class="form-control select2">
                                                     @if(!empty($uniList))
                                                         @foreach ($uniList as $uni)
@@ -200,8 +208,9 @@
                                                 <label class="control-label">คณะ
                                                     &nbsp;<small>Faculty</small>
                                                 </label>
-                                                <input class="form-control" id="edu_faculty{{'_'.$index}}" name="edu_faculty"
-                                                       type="text">
+                                                <input class="form-control" id="edu_faculty"
+                                                       name="edu_faculty"
+                                                       type="text" value="{{$appEdu->edu_faculty}}">
                                             </div>
                                         </div>
                                     </div>
@@ -212,13 +221,15 @@
                                                 <label class="control-label">ปีที่สำเร็จ
                                                     &nbsp;<small>Year Graduated</small>
                                                 </label>
-                                                <input class="form-control" id="edu_year{{'_'.$index}}" name="edu_year" type="text">
+                                                <input class="form-control" id="edu_year" name="edu_year"
+                                                       type="text" value="{{$appEdu->edu_year}}">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="control-label">แต้มเฉลี่ย
                                                     &nbsp;<small>GPAX</small>
                                                 </label>
-                                                <input class="form-control" id="edu_gpax{{'_'.$index}}" name="edu_gpax" type="text">
+                                                <input class="form-control" id="edu_gpax" name="edu_gpax"
+                                                       type="text" value="{{$appEdu->edu_gpax}}">
                                             </div>
                                         </div>
                                     </div>
@@ -228,14 +239,16 @@
                                                 <label class="control-label">สาขาวิชาเอก
                                                     &nbsp;<small>Major Subjects</small>
                                                 </label>
-                                                <input class="form-control" id="edu_major{{'_'.$index}}" name="edu_major" type="text">
+                                                <input class="form-control" id="edu_major"
+                                                       name="edu_major" type="text" value="{{$appEdu->edu_major}}">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="control-label">ประกาศนียบัตร/ปริญญาบัตร
                                                     &nbsp;<small>Title of Degree</small>
                                                 </label>
-                                                <input class="form-control" id="edu_degree{{'_'.$index}}" name="edu_degree"
-                                                       type="text">
+                                                <input class="form-control" id="edu_degree"
+                                                       name="edu_degree"
+                                                       type="text" value="{{$appEdu->edu_degree}}">
                                             </div>
                                         </div>
                                     </div>
