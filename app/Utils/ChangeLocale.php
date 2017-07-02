@@ -13,9 +13,7 @@ class ChangeLocale
 
     public function handle()
     {
-       
- 
-        session()->put('locale',$this->lang);
+           session()->put('locale',$this->lang);
                   
     }
 }
