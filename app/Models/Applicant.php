@@ -60,9 +60,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Applicant extends Eloquent
 {
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+
 	protected $table = 'applicant';
 	protected $primaryKey = 'applicant_id';
-	public $timestamps = false;
+	public $timestamps = true;
 
     protected $casts = [
         'nation_id' => 'int',
