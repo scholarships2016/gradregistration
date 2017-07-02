@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class ApplicantEdu
- * 
+ *
  * @property int $edu_id
  * @property int $applicant_id
  * @property int $grad_level_id
@@ -31,32 +31,34 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class ApplicantEdu extends Eloquent
 {
-	protected $table = 'applicant_edu';
-	protected $primaryKey = 'app_edu_id';
-	public $timestamps = false;
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+    protected $table = 'applicant_edu';
+    protected $primaryKey = 'app_edu_id';
+    public $timestamps = true;
 
-	protected $casts = [
-		'applicant_id' => 'int',
-	];
+    protected $casts = [
+        'applicant_id' => 'int',
+    ];
 
-	protected $dates = [
-		'created',
-		'modified'
-	];
+    protected $dates = [
+        'created',
+        'modified'
+    ];
 
-	protected $fillable = [
-		'applicant_id',
-		'grad_level',
-		'edu_pass_id',
-		'university_id',
-		'edu_year',
-		'edu_faculty',
-		'edu_major',
-		'edu_gpax',
-		'edu_degree',
-		'creator',
-		'created',
-		'modifier',
-		'modified'
-	];
+    protected $fillable = [
+        'applicant_id',
+        'grad_level',
+        'edu_pass_id',
+        'university_id',
+        'edu_year',
+        'edu_faculty',
+        'edu_major',
+        'edu_gpax',
+        'edu_degree',
+        'creator',
+//		'created',
+        'modifier'
+//		'modified'
+    ];
 }
