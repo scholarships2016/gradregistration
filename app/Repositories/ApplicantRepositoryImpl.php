@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Contracts\ApplicantNewsSourceRepository;
 use App\Repositories\Contracts\ApplicantRepository;
 use App\Models\Applicant;
 use App\Models\ApplicantWork;
