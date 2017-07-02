@@ -29,8 +29,6 @@ class AppServiceProvider extends ServiceProvider
         /*Applicant Info*/
         $this->app->bind('App\Repositories\Contracts\ApplicantRepository', 'App\Repositories\ApplicantRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicantNewsSourceRepository', 'App\Repositories\ApplicantNewsSourceRepositoryImpl');
-        $this->app->bind('App\Repositories\Contracts\ApplicantWorkRepository', 'App\Repositories\ApplicantWorkRepositoryImpl');
-        $this->app->bind('App\Repositories\Contracts\ApplicantEduRepository', 'App\Repositories\ApplicantEduRepositoryImpl');
 
 
         /* Master Data */
