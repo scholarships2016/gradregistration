@@ -21,7 +21,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class ApplicantNewsSource extends Eloquent
 {
-	protected $table = 'applicat_news_source';
+	protected $table = 'applicant_news_source';
 	protected $primaryKey = 'app_news_id';
 	public $timestamps = false;
 
