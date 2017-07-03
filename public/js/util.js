@@ -11,3 +11,4 @@ function showToastFromAjaxResponse(obj) {
     }
     return obj.data;
 }
+ 

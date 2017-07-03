@@ -34,6 +34,7 @@ class LoginApplicantController extends Controller {
 
     public function showLoginForm() {
         $titles = $this->nametitleRepo->getAll();
+
         return view('auth.loginApplicant', ['titles' => $titles]);
     }
 

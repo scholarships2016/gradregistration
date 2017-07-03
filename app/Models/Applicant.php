@@ -2,12 +2,11 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Mon, 03 Jul 2017 16:09:09 +0700.
  */
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -27,8 +26,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $stu_addr_soi
  * @property string $stu_addr_road
  * @property string $stu_addr_tumbon
- * @property int $stu_addr_dist
- * @property int $stu_addr_prov
+ * @property int $district_code
+ * @property int $province_id
  * @property string $stu_addr_pcode
  * @property string $stu_phone
  * @property string $stu_phone2
@@ -38,7 +37,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $thai_test_score
  * @property string $cu_best_score
  * @property string $stu_img
- * @property int $stu_birthdate
+ * @property \Carbon\Carbon $stu_birthdate
  * @property string $stu_religion
  * @property string $stu_married
  * @property string $stu_birthplace
@@ -51,6 +50,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $eng_test_id_admin
  * @property string $stu_password
  * @property string $sys_activate_code
+ * @property string $remember_token
  * @property string $creator
  * @property \Carbon\Carbon $created
  * @property string $modifier
@@ -60,86 +60,71 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Applicant extends Eloquent
 {
-    const CREATED_AT = 'created';
-    const UPDATED_AT = 'modified';
-
 	protected $table = 'applicant';
 	protected $primaryKey = 'applicant_id';
-	public $timestamps = true;
+	public $timestamps = false;
 
-    protected $casts = [
-        'nation_id' => 'int',
-        'fund_interesting' => 'int'
-    ];
+	protected $casts = [
+		'nation_id' => 'int',
+		'district_code' => 'int',
+		'province_id' => 'int',
+		'eng_date_taken' => 'int',
+		'fund_interesting' => 'int'
+	];
 
-    protected $dates = [
-        'created',
-        'modified'
-    ];
+	protected $dates = [
+		'stu_birthdate',
+		'created',
+		'modified'
+	];
 
 	protected $hidden = [
 		'stu_password',
 		'remember_token'
 	];
 
-    protected $fillable = [
-        'stu_citizen_card',
-        'name_title_id',
-        'stu_first_name',
-        'stu_last_name',
-        'stu_first_name_en',
-        'stu_last_name_en',
-        'stu_sex',
-        'nation_id',
-        'stu_addr_no',
-        'stu_addr_village',
-        'stu_addr_soi',
-        'stu_addr_road',
-        'stu_addr_tumbon',
-        'province_id',
-        'district_code',
-        'stu_addr_pcode',
-        'stu_phone',
-        'stu_phone2',
-        'stu_email',
-        'eng_test_id',
-        'eng_test_score',
-        'thai_test_score',
-        'cu_best_score',
-        'stu_img',
-        'stu_birthdate',
-        'stu_religion',
-        'stu_married',
-        'stu_birthplace',
-        'additional_addr',
-        'eng_date_taken',
-        'convert',
-        'fund_interesting',
-        'eng_test_score_admin',
-        'modifire',
-        'eng_test_id_admin',
-        'stu_password',
-        'sys_activate_code',
-        'remember_token',
-        'creator',
-        'created',
-        'modifier',
-        'modified'
-    ];
-
-    public function getStuBirthdateAttribute($value)
-    {
-        if(empty($value)){
-            return null;
-        }
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
-
-    public function getEngDateTakenAttribute($value)
-    {
-        if(empty($value)){
-            return null;
-        }
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
+	protected $fillable = [
+		'stu_citizen_card',
+		'name_title_id',
+		'stu_first_name',
+		'stu_last_name',
+		'stu_first_name_en',
+		'stu_last_name_en',
+		'stu_sex',
+		'nation_id',
+		'stu_addr_no',
+		'stu_addr_village',
+		'stu_addr_soi',
+		'stu_addr_road',
+		'stu_addr_tumbon',
+		'district_code',
+		'province_id',
+		'stu_addr_pcode',
+		'stu_phone',
+		'stu_phone2',
+		'stu_email',
+		'eng_test_id',
+		'eng_test_score',
+		'thai_test_score',
+		'cu_best_score',
+		'stu_img',
+		'stu_birthdate',
+		'stu_religion',
+		'stu_married',
+		'stu_birthplace',
+		'additional_addr',
+		'eng_date_taken',
+		'convert',
+		'fund_interesting',
+		'eng_test_score_admin',
+		'modifire',
+		'eng_test_id_admin',
+		'stu_password',
+		'sys_activate_code',
+		'remember_token',
+		'creator',
+		'created',
+		'modifier',
+		'modified'
+	];
 }

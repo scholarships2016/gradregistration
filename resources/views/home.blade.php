@@ -13,7 +13,7 @@
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{url('home/')}}">{{Lang::get('resource.lbMHome')}}</a>
                 <i class="fa fa-circle"></i>
             </li>
            
