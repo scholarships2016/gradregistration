@@ -33,13 +33,10 @@ Route::get('apply', 'ApplyController@showAnnouncement');
 Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
 Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
 
-  Route::get('/home', function () {
-        return view('home');
-    });
-  Route::get('/', function () {
-        return view('home');
-    });
- 
+//PageMain
+  Route::get('/home', function () {   return view('home'); });
+  Route::get('/', function () {    return view('home');  });
+ Route::get('/contact', function () {    return view('contact');  });
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {

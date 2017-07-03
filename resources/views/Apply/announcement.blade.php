@@ -12,11 +12,11 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="/">หน้าหลัก</a>
-            <i class="fa fa-circle"></i>
+                <a href="{{url('home/')}}">{{Lang::get('resource.lbMHome')}}</a>
+                <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>วิธีการสมัคร</span>
+            <span>{{Lang::get('resource.lbMApply')}}</span>
         </li>
     </ul>
     {{--<div class="page-tool    bar">--}}
@@ -50,8 +50,8 @@
 @stop
 
 @section('pagetitle')
-    <h1 class="page-title"> Graduate Student Registration
-        
+    <h1 class="page-title"> 
+        {{Lang::get('resource.lbMApply')}}
     </h1>
 @stop
  
@@ -63,9 +63,8 @@
                                                                            <div data-index="{{$loop->iteration}}" class="col-md-3 mt-step-col    {{(1 == $loop->iteration)?'active':''}}  {{($loop->iteration==1)?'first':''}} {{($loop->last)?'last':''}} ">
                                                                               <div class="mt-step-number bg-white">{{$loop->iteration}}</div>
                                                                              
-                                                                              <div class="mt-step-title uppercase font-grey-cascade">{{explode('<br>', $announcement->anno_title, 2)[0]}}</div>
-                                                                              <div class="mt-step-content font-grey-cascade">{{(explode('<br>', $announcement->anno_title, 2)[1])?explode('<br>', $announcement->anno_title, 2)[1]:''}}</div>
-                                                                          </div>
+                                                                              <div class="mt-step-title uppercase font-grey-cascade">{{  (session('locale')=='th')?  $announcement->anno_title : $announcement->anno_title_en  }}</div>
+                                                                             </div>
 
 
 
@@ -76,15 +75,15 @@
 <div class="mt-content border-grey-steel">
 @foreach ($announcements as $announcement)
  <div class="anno-detail" data-index="{{$loop->iteration}}" {{ ( 1 != $loop->iteration)? '  style=display:none;  ' : '' }}  > 
-     {!! $announcement->anno_detail !!}
+     {!! (session('locale')=='th')?  $announcement->anno_detail :$announcement->anno_detail_en !!}
  </div>
  @endforeach    
                                                         </div>
 <br><br>
 <div style='width:100%;text-align: center;'>
 <input type='hidden' value='{{$startstep}}' id='hidstep'> 
-<a href="javascript:;" id="pre-btn"  class="btn btn-circle red btn-outline">ก่อนหน้า/Previous</a>  
-<a href="javascript:;" id="next-btn" class="btn btn-circle red btn-outline">ถัดไป/Next</a>
+<a href="javascript:;" id="pre-btn"  class="btn btn-circle red btn-outline">{{Lang::get('resource.lbPrevious')}}</a>  
+<a href="javascript:;" id="next-btn" class="btn btn-circle red btn-outline">{{Lang::get('resource.lbNext')}}</a>
 </div>
 <br>
 
@@ -128,7 +127,7 @@
                                                                                                $("#next-btn").text('ถัดไป/Next');
                                                                                                $("#next-btn").removeAttr('href');
                                                                                          }
-                                                                                         if($oldstep==$('.mt-step-col').length){   $("#next-btn").attr('href','apply/register/');}                                                                                          
+                                                                                         if($oldstep==$('.mt-step-col').length){   $("#next-btn").attr('href','{{(session('user_id'))? url('apply/register/'): url('login/')}}');}                                                                                          
                                                                                          $("#hidstep").val($step);                                                                                      
                                                                                 }
                                                                           </script>

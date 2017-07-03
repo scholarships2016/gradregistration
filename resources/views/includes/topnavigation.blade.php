@@ -125,7 +125,7 @@
                                         <!-- END NOTIFICATION DROPDOWN -->
                                         <!-- BEGIN INBOX DROPDOWN -->
                                         
-                                        @if(session('first_name'))
+                                        @if(session('user_id'))
                                         <!-- BEGIN USER LOGIN DROPDOWN -->
                                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                                         <li class="dropdown dropdown-user">
