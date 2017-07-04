@@ -41,6 +41,9 @@ class ApplyController extends Controller {
     public function registerCourse() {
         return view($this->part_doc . 'registerCourse');
     }
+    public function registerDetailForapply(){
+        return view($this->part_doc . 'registerDetailForapply');  
+    }
     
 
     public function getForm($id = 0) {

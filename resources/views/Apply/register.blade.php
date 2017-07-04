@@ -18,7 +18,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>วิธีการสมัคร</span>
+            <span>สมัคร</span>
         </li>
     </ul>
     {{--<div class="page-tool    bar">--}}
