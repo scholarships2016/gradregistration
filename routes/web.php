@@ -30,9 +30,7 @@ Route::get('language', 'Auth\LoginApplicantController@language');
 
 //Apply
 Route::get('apply', 'ApplyController@showAnnouncement');
-Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
-Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
-Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
+
 
 //PageMain
 Route::get('/home', function () {
@@ -47,7 +45,9 @@ Route::get('/contact', function () {
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
-    
+    Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
+Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
+Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
 });
 
 
