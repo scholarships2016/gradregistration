@@ -167,7 +167,7 @@
                             <!-- End Left Panel -->
                             <!-- Start Right Panel -->
                             <div class="col-md-4">
-                                <div class="row margin-bottom-20">
+                                <div class="row margin-bottom-20"><a href="{{url('apply')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">
                                             <div class="card-icon">
@@ -181,7 +181,7 @@
                                                     <br> to lose yourself in the service of others </span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div></a>
                                 </div>
                                 <div class="row margin-bottom-20"><a href="{{url('login')}}">
                                     <div class="col-md-12">
