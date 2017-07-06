@@ -25,7 +25,7 @@
 
 
             <li class="nav-item menuitem"  data-index="2">
-                <a class="nav-link nav-toggle" href="javascript:;">
+                <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
                     <i class="icon-bulb"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
                     <span class="arrow"></span>
@@ -41,7 +41,7 @@
 
             </li>
             <li class="nav-item menuitem "  data-index="4">
-                <a class="nav-link nav-toggle" href="javascript:;">
+                <a class="nav-link nav-toggle" href="{{url('faq/')}}">
                     <i class="icon-wallet"></i>
                     <span class="title">{{Lang::get('resource.lbMFAQs')}}</span>
                     <span class="arrow"></span>
@@ -49,7 +49,7 @@
 
             </li>
             <li class="nav-item menuitem "   data-index="5">
-                <a class="nav-link nav-toggle" href="javascript:;">
+                <a class="nav-link nav-toggle" href="{{url('download/')}}">
                     <i class="icon-bar-chart"></i>
                     <span class="title">{{Lang::get('resource.lbMDownlods')}}</span>
                     <span class="arrow"></span>
