@@ -42,12 +42,19 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
-
+Route::get('/faq', function () {
+    return view('faqs');
+});
+Route::get('/download', function () {
+    return view('download');
+});
+ Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
-Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
-Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
+   
+    Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
+    Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
+    Route::get('apply/manageMyCourse', 'ApplyController@manageMyCourse')->name('manageMyCourse');
 });
 
 
