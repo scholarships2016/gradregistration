@@ -52,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         /*File*/
         $this->app->bind('App\Repositories\Contracts\FileRepository', 'App\Repositories\FileRepositoryImpl');
 
+
     }
 
 }
