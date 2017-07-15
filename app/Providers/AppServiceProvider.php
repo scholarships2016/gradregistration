@@ -30,8 +30,6 @@ class AppServiceProvider extends ServiceProvider
         /*Applicant Info*/
         $this->app->bind('App\Repositories\Contracts\ApplicantRepository', 'App\Repositories\ApplicantRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicantNewsSourceRepository', 'App\Repositories\ApplicantNewsSourceRepositoryImpl');
-        $this->app->bind('App\Repositories\Contracts\ApplicantWorkRepository', 'App\Repositories\ApplicantWorkRepositoryImpl');
-        $this->app->bind('App\Repositories\Contracts\ApplicantEduRepository', 'App\Repositories\ApplicantEduRepositoryImpl');
 
         /* Master Data */
         $this->app->bind('App\Repositories\Contracts\NewsSourceRepository', 'App\Repositories\NewsSourceRepositoryImpl');
@@ -48,11 +46,22 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\EducationPassRepository', 'App\Repositories\EducationPassRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\UniversityRepository', 'App\Repositories\UniversityRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\WorkStatusRepository', 'App\Repositories\WorkStatusRepositoryImpl');
+         $this->app->bind('App\Repositories\Contracts\ProgramTypeRepository', 'App\Repositories\ProgramTypeRepositoryImpl');
 
         /*File*/
         $this->app->bind('App\Repositories\Contracts\FileRepository', 'App\Repositories\FileRepositoryImpl');
 
 
+        
+        $this->app->bind('App\Repositories\Contracts\DepartmentRepository', 'App\Repositories\DepartmentRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\FacultyRepository', 'App\Repositories\FacultyRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\CourseRepository', 'App\Repositories\CourseRepositoryImpl');
+         $this->app->bind('App\Repositories\Contracts\CurriculaRepository', 'App\Repositories\CurriculaRepositoryImpl');
+          $this->app->bind('App\Repositories\Contracts\BankRepository', 'App\Repositories\BankRepositoryImpl');
+           $this->app->bind('App\Repositories\Contracts\DocumentsRepository', 'App\Repositories\DocumentsRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\ApplicationPeopleRefRepository', 'App\Repositories\ApplicationPeopleRefRepositoryImpl');
+         $this->app->bind('App\Repositories\Contracts\CurriculumRepository', 'App\Repositories\CurriculumRepositoryImpl');
+           
     }
 
 }

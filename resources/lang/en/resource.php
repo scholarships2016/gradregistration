@@ -65,4 +65,25 @@ return [
     'lbContactNo' => 'Contact No',
     'lbTopInfo' => 'Your Citizen ID or Passport ID will be used to login next time.',
     'lbAppInfo' => 'Applicant Information',
+    
+    
+    'lbNameContact' => 'Graduate Student Registration.',
+    'lbAddress1Contact' => 'Graduate Student Registration.254 Phayathai Rd, Pathum Wan, Bangkok 10330',
+    'lbAddress2Contact' => 'Graduate School Chulalongkorn University Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan, Bangkok 10330',
+    'lbContacts' => 'Contacts',
+    'lbAddress' =>'Address',
+    
+    //Menu
+    'lbMHome' => 'Home',
+    'lbMCurriculum' => 'Curriculum',
+    'lbMApply' => 'How to Apply',
+    'lbMFAQs' => 'FAQs',
+    'lbMDownlods' => 'Downlods',    
+    'lbMContactsUs' =>'Contact Us',
+    'lbManageCouse' => 'Program Selected',
+    
+    
+     //botton
+    'lbNext' => 'Next',
+    'lbPrevious' => 'Previous',
 ];

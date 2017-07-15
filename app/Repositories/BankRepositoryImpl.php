@@ -25,6 +25,15 @@ class BankRepositoryImpl extends AbstractRepositoryImpl implements BankRepositor
         }
         return $result;
     }
+     public function getBank() {
+        $result = null;
+        try {
+            $result = TblBank::where('bank_account','>','100')->get();            
+        } catch (\Exception $ex) {   
+            throw $ex;
+        }
+        return $result;
+    }
 
     public function searchByCriteria($criteria = null, $paging = false) {
         $result = null;

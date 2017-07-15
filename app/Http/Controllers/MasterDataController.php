@@ -30,7 +30,7 @@ class MasterDataController extends Controller
     public function __construct(DistrictRepository $districtRepo, ProvinceRepository $provinceRepo,
                                 EngTestRepository $engTestRepo, NationRepository $nationRepo,
                                 NameTitleRepository $nameTitleRepo, NewsSourceRepository $newSrcRepo,
-                                DepartmentRepository $departmentRepo, CurriculaRepository $curriculaRepo)
+                                DepartmentRepository $departmentRepo, CurriculaRepository $curriculaRepo )
     {
         $this->districtRepo = $districtRepo;
         $this->provinceRepo = $provinceRepo;
@@ -38,8 +38,8 @@ class MasterDataController extends Controller
         $this->nationRepo = $nationRepo;
         $this->nameTitleRepo = $nameTitleRepo;
         $this->newSrcRepo = $newSrcRepo;
-        $this->departmentRepo = $departmentRepo;
-        $this->curriculaRepo = $curriculaRepo;
+        $this->departmentRepo =$departmentRepo;
+        $this->curriculaRepo =$curriculaRepo;
     }
 
     public function getDistrictByProvinceIdForDropdown(Request $request)

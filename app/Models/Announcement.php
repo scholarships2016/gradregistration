@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 29 Jun 2017 14:04:55 +0700.
+ * Date: Thu, 13 Jul 2017 15:57:23 +0700.
  */
 
 namespace App\Models;
@@ -14,7 +14,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $anno_id
  * @property string $anno_title
+ * @property string $anno_title_en
  * @property string $anno_detail
+ * @property string $anno_detail_en
  * @property string $anno_flag
  * @property string $creator
  * @property \Carbon\Carbon $created
@@ -36,7 +38,9 @@ class Announcement extends Eloquent
 
 	protected $fillable = [
 		'anno_title',
+		'anno_title_en',
 		'anno_detail',
+		'anno_detail_en',
 		'anno_flag',
 		'creator',
 		'created',
