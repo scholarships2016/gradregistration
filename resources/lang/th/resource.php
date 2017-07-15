@@ -88,6 +88,28 @@ return [
     //botton
     'lbNext' => 'ถัดไป',
     'lbPrevious' => 'ก่อนหน้า',
+    'lbAll' => 'ทั้งหมด',
+    'lbSelect' => 'เลือก/Select',
+    'lbDetail' => 'รายละเอียด',
+    
+    //other Use
+     'lbYear'=>'ปีการศึกษา(พ.ศ.)/year',
+     'lbDepartment'=>'ภาควิชา-สาขา/Department',
+     'lbSubject'=>'สาขาวิชา/Subject',
+     'lbMajor'=>'หลักสูตร/Major',
+     'lbMajorCode'=>'รหัสหลักสูตร/Major Code',
+    
+    //register Detail Page
+     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+     'lbSelProgram'=>'เลือกรหัสหลักสูตร(แขนงวิชา)/ Select program (subject)',     
+     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+    
+    
+    
+    
     
     
 ];

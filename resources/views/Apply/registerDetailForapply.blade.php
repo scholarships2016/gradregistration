@@ -55,7 +55,7 @@
 @stop
 
 @section('pagetitle')
-    <h1 class="page-title"> รายละเอียดหลักสูตร</h1>
+    <h1 class="page-title"> {{Lang::get('lbRegDetail')}}</h1>
     
 @stop
  
@@ -63,53 +63,55 @@
 @section('maincontent')
    
 <div class="invoice">
+    @if($curDiss->count()>0)
+     @foreach ($curDiss as $curDis)
                             <div class="row invoice-logo">
                                 <div class="col-xs-6 invoice-logo-space">
                                    <div class="col-xs-10 ">
                                     <ul class="list-unstyled amounts">
                                         <li>
-                                            <strong>เลือกรหัสหลักสูตร(แขนงวิชา)/ Select program (subject)</strong> </li><br>
+                                            <strong>{{Lang::get('lbSelProgram')}}</strong> </li><br>
                                         <li>                                            
                                         <li>
                                              <select class="select2"  id="type_of_recruit_id" class="form-control"> 
-                        <option value="" selected="" >========== ทั้งหมด ==========</option>                        
+                        <option value="" selected="" >========== {{Lang::get('lbAll')}} ==========</option>                        
                          <option value="" selected="" >2086 - ปริญยาโท</option> 
                                              </select>
                                         </li>
                                     </ul>
                                    
-                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> เลือก/Select
+                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  ยกเลิก
+                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
                                     </div>
                                 <div class="col-xs-6">
                                     <p>  
-                                        <span class="muted" style="font-size:26px;">  วิศวกรรมศาสตร์ (Faculty of Engineering) </span>
+                                        <span class="muted" style="font-size:26px;"> {{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }} </span>
                                     </p>
                                 </div>
                             </div>
                             <hr>
-                            <div class="row" style="font-size:16px;">  <h3 style="padding-left: 15px">รายละเอียด :</h3>
+                            <div class="row" style="font-size:16px;">  <h3 style="padding-left: 15px">{{Lang::get('lbDetail')}} :</h3>
                                 <div class="col-xs-3">                                    
                                     <ul class="list-unstyled">
-                                        <li> ปีการศึกษา(พ.ศ.)/year </li>
-                                        <li> ภาควิชา-สาขา/Department</li>
-                                        <li> สาขาวิชา/Subject </li>
-                                        <li> หลักสูตร/Syllabus </li>
-                                        <li> รหัสหลักสูตร/Syllabus ID </li>
+                                        <li> {{Lang::get('lbYear')}} </li>
+                                        <li> {{Lang::get('lbDepartment')}}</li>
+                                        <li> {{Lang::get('lbSubject')}} </li>
+                                        <li> {{Lang::get('lbMajor')}} </li>
+                                        <li> {{Lang::get('lbMajorCode')}} </li>
                                     </ul>
                                 </div>
                                 <div class="col-xs-7">                                   
                                     <ul class="list-unstyled">
-                                        <li> 2558 </li>
-                                        <li> วิศวกรรมอุตสาหการ </li>
-                                        <li> วิศวกรรมอุตสาหการ </li>
-                                        <li> วิศวกรรมศาสตร์มหาบัณฑิต - Master of Engineering </li>
-                                        <li> 2086 - ปริญญาโท </li>
+                                        <li> {{$curDis->academic_year}}  </li>
+                                        <li>  {{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }}  </li>
+                                        <li>  {{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }} </li>
+                                        <li>  {{  (session('locale')=='th')? $curDis->major_name:$curDis->major_name_en }} </li>
+                                        <li>  {{  $curDis->major_code   }} </li>
                                         
                                     </ul>
                                 </div>
@@ -180,7 +182,11 @@
                                 </div>
                              
                             </div>
-                        </div>
+      @endforeach 
+     @else
+     ไม่มีข้อมูล/No Data.
+     @endif
+ </div>
 
                                                                           @stop
 

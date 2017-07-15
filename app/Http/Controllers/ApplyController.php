@@ -49,14 +49,12 @@ class ApplyController extends Controller {
               
         $faculty = $this->FacultyRepo->all();
         $typeofRec = $this->ProgramType->all();
-        $curDiss = $this->CurriculumRepo->searchByCriteria($request->search, $request->faculty_id ,$request->degree_id ,1,$request->program_id,true);
-  
-        return view($this->part_doc . 'register', ['facultys' => $faculty, 'typeofRecs' => $typeofRec, 'curDiss' => $curDiss]);
+         
+        return view($this->part_doc . 'register', ['facultys' => $faculty, 'typeofRecs' => $typeofRec ]);
     }
      public function getRegisterCourse(Request $request=null) {        
-       $curDiss = $this->CurriculumRepo->searchByCriteria($request->search, $request->faculty_id ,$request->degree_id ,1,$request->program_id,false);
-       
-        return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
+       $curDiss = $this->CurriculumRepo->searchByCriteria(null,null,$request->search, $request->faculty_id ,$request->degree_id ,1,$request->program_id,false);
+       return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
     }
     
 
@@ -86,8 +84,10 @@ class ApplyController extends Controller {
         }
     }
 
-    public function registerDetailForapply() {
-        return view($this->part_doc . 'registerDetailForapply');
+    public function registerDetailForapply($id) {
+         $curDiss = $this->CurriculumRepo->searchByCriteria($id,null,null,null ,null ,1,null,false);
+      
+        return view($this->part_doc . 'registerDetailForapply',['curDiss' => $curDiss]);
     }
 
     public function manageMyCourse() {

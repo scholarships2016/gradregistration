@@ -98,6 +98,7 @@ class ProfileController extends Controller
                 'applicantEduList' => $applicantEduList, 'applicantWorkExpList' => $applicantWorkExpList]);
 
         } catch (\Exception $ex) {
+            echo $ex->getMessage(); return ;
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             return back();
         }

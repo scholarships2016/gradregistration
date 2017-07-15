@@ -53,7 +53,7 @@ Route::get('/download', function () {
  Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
   Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
  Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
- Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
+ Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
  Route::get('apply/confDocApply', 'ApplyController@confDocApply')->name('confDocApply');
  Route::get('apply/peopleData', 'ApplyController@getPeopoleRef')->name('datatables.data');
  Route::post('apply/peopleData/$json', 'ApplyController@savePeopoleRef')->name('datatables.peopleSave');
