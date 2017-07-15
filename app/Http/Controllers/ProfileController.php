@@ -18,7 +18,10 @@ use App\Repositories\Contracts\GaduateLevelRepository;
 use App\Utils\Util;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -65,6 +68,8 @@ class ProfileController extends Controller
 
     public function showProfilePage(Request $request)
     {
+        Log::info('showProfilePage');
+
         try {
             $applicantID = 1;
 
@@ -85,8 +90,6 @@ class ProfileController extends Controller
             $eduPassList = $this->eduPassRepo->all();
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
-            $applicantEduList = $this->applicantEduRepo->getApplicantEduByApplicantId($applicantID);
-            $applicantWorkExpList = $this->applicantWorkRepo->getApplicantWorkByApplicantId($applicantID);
 
             return view('profile.edit', ['applicant' => $applicantProfile['applicant'],
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
@@ -95,7 +98,53 @@ class ProfileController extends Controller
                 'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
                 'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
                 'uniList' => $uniList, 'provinceList' => $provinceList,
-                'applicantEduList' => $applicantEduList, 'applicantWorkExpList' => $applicantWorkExpList]);
+                'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
+
+        } catch (\Exception $ex) {
+            session()->flash('errorMsg', Util::ERROR_OCCUR);
+            return back();
+        }
+    }
+
+    public function showPersonalProfilePage(Request $request)
+    {
+        Log::info('showPersonalProfilePage');
+
+        try {
+            $applicantID = 1;
+
+            $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($applicantID);
+
+            if (empty($applicantProfile)) {
+                session()->flash('errorMsg', Util::DATA_NOT_FOUND);
+                return back();
+            }
+
+            //Master Data
+            $nameTitleList = $this->nameTitleRepo->all();
+            $newSrcList = $this->newSrcRepo->getAll();
+            $nationList = $this->nationRepo->all();
+            $religionList = $this->religionRepo->all();
+            $engTestList = $this->engTestRepo->all();
+            $workStatusList = $this->workStatusRepo->all();
+            $gaduateLevelList = $this->gaduateLevelRepo->all();
+            $eduPassList = $this->eduPassRepo->all();
+            $uniList = $this->uniRepo->all();
+            $provinceList = $this->provinceRepo->all();
+
+            $filename = "6kZ6WllPfxj1K6E1lYrLiaLeCX0sANOqwq3Ohg8P.jpeg"; // Next is : get Path file from Database
+            $contents = Storage::get(env('PROFILE_PIC_PATH') . $filename);
+            $base64Img = 'data:image/*' . ';base64,' . base64_encode($contents);
+
+
+            return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => $base64Img,
+                'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
+                'newSrcList' => $newSrcList, 'nationList' => $nationList,
+                'religionList' => $religionList, 'engTestList' => $engTestList,
+                'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
+                'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
+                'uniList' => $uniList, 'provinceList' => $provinceList,
+                'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
 
         } catch (\Exception $ex) {
             session()->flash('errorMsg', Util::ERROR_OCCUR);
@@ -108,6 +157,10 @@ class ProfileController extends Controller
         Log::info('doSavePersonalInfomation');
         try {
             $data = $request->all();
+            if (array_key_exists('stu_profile_pic', $data) && !empty($data['stu_profile_pic'])) {
+                $filename = Storage::putFile(env(Util::PROFILE_FOLDER), $request->file('stu_profile_pic'));
+                $data['stu_profile_pic_filename'] = $filename;
+            }
             if (array_key_exists('stu_birthdate', $data) && !empty($data['stu_birthdate'])) {
                 $data['stu_birthdate'] = Carbon::createFromFormat('d/m/Y', $data['stu_birthdate'])->format('Y-m-d');
             }
@@ -126,8 +179,6 @@ class ProfileController extends Controller
             $result = $this->applicantRepo->saveApplicant($data);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
-            echo $ex->getMessage();
-            return;
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
 
