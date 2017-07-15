@@ -10,21 +10,22 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class TblEngTest
+ * Class TblFlowApply
  * 
- * @property string $eng_test_id
- * @property string $eng_test_name
+ * @property int $flow_id
+ * @property string $flow_name
+ * @property string $flow_name_en
  *
  * @package App\Models
  */
-class TblEngTest extends Eloquent
+class TblFlowApply extends Eloquent
 {
-	protected $table = 'tbl_eng_test';
-	protected $primaryKey = 'eng_test_id';
-	public $incrementing = false;
+	protected $table = 'tbl_flow_apply';
+	protected $primaryKey = 'flow_id';
 	public $timestamps = false;
 
 	protected $fillable = [
-		'eng_test_name'
+		'flow_name',
+		'flow_name_en'
 	];
 }

@@ -48,13 +48,22 @@ Route::get('/faq', function () {
 Route::get('/download', function () {
     return view('download');
 });
- Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
+ Route::any('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
+ 
+ Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
+  Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
+ Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
+ Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
+ Route::get('apply/confDocApply', 'ApplyController@confDocApply')->name('confDocApply');
+ Route::get('apply/peopleData', 'ApplyController@getPeopoleRef')->name('datatables.data');
+ Route::post('apply/peopleData/$json', 'ApplyController@savePeopoleRef')->name('datatables.peopleSave');
+ 
+ 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
    
-    Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
-    Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
-    Route::get('apply/manageMyCourse', 'ApplyController@manageMyCourse')->name('manageMyCourse');
+ 
+   
 });
 
 

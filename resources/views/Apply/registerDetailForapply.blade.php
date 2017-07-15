@@ -78,7 +78,7 @@
                                         </li>
                                     </ul>
                                    
-                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/register/')}}"> เลือก/Select
+                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> เลือก/Select
                                       <i class="fa fa-check"></i>
                                     </a>
                                   <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  ยกเลิก

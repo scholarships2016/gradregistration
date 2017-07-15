@@ -2,8 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface TypeOfRecruitRepository
-{
-
-
+interface ProgramTypeRepository {
+ 
+ 
 }

@@ -23,7 +23,6 @@
             </li>
 
 
-
             <li class="nav-item menuitem"  data-index="2">
                 <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
                     <i class="icon-bulb"></i>
@@ -32,6 +31,18 @@
                 </a>
 
             </li>
+            
+            @if(session('user_id'))
+             <li class="nav-item menuitem"  data-index="7">
+                <a class="nav-link nav-toggle" href="{{url('apply/manageMyCourse/')}}">
+                    <i class="icon-bulb"></i>
+                    <span class="title">{{Lang::get('resource.lbManageCouse')}}</span>
+                    <span class="arrow"></span>
+                </a>
+
+            </li>
+            @endif
+            
             <li class="nav-item  menuitem "   data-index="3">
                 <a class="nav-link  nav-toggle" href="{{url('apply')}}">
                     <i class="icon-briefcase"></i>

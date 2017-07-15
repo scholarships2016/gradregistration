@@ -80,6 +80,7 @@ return [
     'lbMFAQs' => 'FAQs',
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'Contact Us',
+    'lbManageCouse' => 'Program Selected',
     
     
      //botton

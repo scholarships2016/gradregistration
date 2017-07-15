@@ -46,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\EducationPassRepository', 'App\Repositories\EducationPassRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\UniversityRepository', 'App\Repositories\UniversityRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\WorkStatusRepository', 'App\Repositories\WorkStatusRepositoryImpl');
+         $this->app->bind('App\Repositories\Contracts\ProgramTypeRepository', 'App\Repositories\ProgramTypeRepositoryImpl');
 
 
         
@@ -53,6 +54,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\FacultyRepository', 'App\Repositories\FacultyRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\CourseRepository', 'App\Repositories\CourseRepositoryImpl');
          $this->app->bind('App\Repositories\Contracts\CurriculaRepository', 'App\Repositories\CurriculaRepositoryImpl');
+          $this->app->bind('App\Repositories\Contracts\BankRepository', 'App\Repositories\BankRepositoryImpl');
+           $this->app->bind('App\Repositories\Contracts\DocumentsRepository', 'App\Repositories\DocumentsRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\ApplicationPeopleRefRepository', 'App\Repositories\ApplicationPeopleRefRepositoryImpl');
+         $this->app->bind('App\Repositories\Contracts\CurriculumRepository', 'App\Repositories\CurriculumRepositoryImpl');
+           
     }
 
 }

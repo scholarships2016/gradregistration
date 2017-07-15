@@ -83,6 +83,7 @@ return [
     'lbMFAQs' => 'คำถาม/ตอบ',
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'ติดต่อเรา',
+    'lbManageCouse' => 'หลักสูตรที่สมัคร',
     
     //botton
     'lbNext' => 'ถัดไป',
