@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Utils\FileManager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,7 +33,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\ApplicantWorkRepository', 'App\Repositories\ApplicantWorkRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicantEduRepository', 'App\Repositories\ApplicantEduRepositoryImpl');
 
-
         /* Master Data */
         $this->app->bind('App\Repositories\Contracts\NewsSourceRepository', 'App\Repositories\NewsSourceRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\NationRepository', 'App\Repositories\NationRepositoryImpl');
@@ -49,6 +49,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\UniversityRepository', 'App\Repositories\UniversityRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\WorkStatusRepository', 'App\Repositories\WorkStatusRepositoryImpl');
 
+        /*File*/
+        $this->app->bind('App\Repositories\Contracts\FileRepository', 'App\Repositories\FileRepositoryImpl');
 
     }
 
