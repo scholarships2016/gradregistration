@@ -141,4 +141,9 @@ class Applicant extends Eloquent
     {
         return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
     }
+
+    public function tblNation()
+    {
+        return $this->hasOne(TblNation::class, 'nation_id', 'nation_id');
+    }
 }
