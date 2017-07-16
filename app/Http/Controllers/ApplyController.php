@@ -104,8 +104,15 @@ class ApplyController extends Controller {
     }
     public function submitregisterDetailForapply(Request $data){
       
-         $this->ApplicationRepo->saveApplication($data);
-        return ;
+       $res=  $this->ApplicationRepo->saveApplication($data);
+         if ($res) {
+            session()->flash('successMsg', 'บันทึกสำเร็จ');
+            return redirect('manageMyCourse') ;
+        } else {
+            session()->flash('errorMsg', 'ไม่สามารถบันทึกได้');
+            return back();
+        }
+        
     }
 
     public function manageMyCourse() {

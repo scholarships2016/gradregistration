@@ -12,15 +12,15 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     protected $ApplicationRepo;
     private $paging = 10;
 
-    public function __construct(ApplicationRepository $ApplicationRepo) {
+    public function __construct( ) {
         parent::setModelClassName(Applicant::class);
-        $this->$ApplicationRepo = $ApplicationRepo;
+       
     }
-
-    public function searchByCriteria($criteria = null, $paging = false) {
-
-        return $result;
-    }
+//
+//    public function searchByCriteria($criteria = null, $paging = false) {
+//
+//        return $result;
+//    }
 
     public function saveApplication($data) {
         $result = false;

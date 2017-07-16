@@ -68,7 +68,7 @@
                             <div class="row invoice-logo">
                                 <div class="col-xs-6 invoice-logo-space">
                                    <div class="col-xs-10 ">
-                                   <form class="forget-form" action="{{route('rePassLoginApplicant')}}" method="post">
+                                   <form class="forget-form" action="{{route('submitregisterDetailForapply')}}" method="post">
                                     {{csrf_field()}}
                                    @if($subMajors->count()> 0)
                                   <div class="form-group form-md-radios  ">
@@ -115,12 +115,12 @@
                                      <input type="hidden" name="curr_act_id" value=""> 
                                      <input type="hidden" name="academic_year" value="">
                                       <input type="hidden" name="semester" value="">
-                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+                                    <button class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
-                                    </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+                                    </button>
+                                  <button class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
-                                    </a>
+                                    </button>
                                    </form>
                                 </div>
                                     </div>
