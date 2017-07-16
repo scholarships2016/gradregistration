@@ -63,6 +63,13 @@ class LoginApplicantController extends Controller {
             session()->put('first_name', $user_data->stu_first_name);
             session()->put('last_name', $user_data->stu_last_name);
             session()->put('email_address', $user_data->stu_email);
+            
+            $app = new \stdClass();
+            $app->applicant_id= $user_data->applicant_id;
+            $app->stu_citizen_card=$user_data->stu_citizen_card;
+            $app->stu_email=$user_data->stu_email;            
+            session()->put('Applicant',$app);
+            
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
             return redirect('/home');
         } else {

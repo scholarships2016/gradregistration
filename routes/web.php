@@ -57,6 +57,8 @@ Route::get('/download', function () {
  Route::get('apply/confDocApply', 'ApplyController@confDocApply')->name('confDocApply');
  Route::get('apply/peopleData', 'ApplyController@getPeopoleRef')->name('datatables.data');
  Route::post('apply/peopleData/$json', 'ApplyController@savePeopoleRef')->name('datatables.peopleSave');
+ Route::post('apply/submitregisterDetailForapply', 'ApplyController@submitregisterDetailForapply')->name('submitregisterDetailForapply');
+ 
  
  
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ

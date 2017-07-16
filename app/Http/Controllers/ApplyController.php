@@ -14,6 +14,7 @@ use App\Repositories\CurriculumRepositoryImpl;
 use Illuminate\Support\Facades\Lang;
 use App\Repositories\CurriculumSubMajorRepositoryImpl;
 use App\Repositories\CurriculumProgramRepositoryImpl;
+use App\Repositories\ApplicationRepositoryImpl;
 
 class ApplyController extends Controller {
 
@@ -28,9 +29,11 @@ class ApplyController extends Controller {
     protected $CurriculumRepo;
     protected $SubCurriculumRepo;
     protected $CurriculumProgramRepo;
-    
+    protected $ApplicationRepo;
+
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
-    , CurriculumRepositoryImpl $CurriculumRepo,CurriculumSubMajorRepositoryImpl $SubCurriculumRepo,CurriculumProgramRepositoryImpl $CurriculumProgramRepo) {
+    , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
+    , ApplicationRepositoryImpl $ApplicationRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -39,8 +42,9 @@ class ApplyController extends Controller {
         $this->DocumentApply = $DocumentApply;
         $this->ApplicationPeopleRef = $ApplicationPeopleRef;
         $this->CurriculumRepo = $CurriculumRepo;
-        $this->SubCurriculumRepo =$SubCurriculumRepo;
+        $this->SubCurriculumRepo = $SubCurriculumRepo;
         $this->CurriculumProgramRepo = $CurriculumProgramRepo;
+        $this->ApplicationRepo = $ApplicationRepo;
     }
 
     public function index() {
@@ -53,22 +57,22 @@ class ApplyController extends Controller {
     }
 
     public function managementRegister(Request $request) {
-              
+
         $faculty = $this->FacultyRepo->all();
         $typeofRec = $this->ProgramType->all();
-         
-        return view($this->part_doc . 'register', ['facultys' => $faculty, 'typeofRecs' => $typeofRec ]);
+
+        return view($this->part_doc . 'register', ['facultys' => $faculty, 'typeofRecs' => $typeofRec]);
     }
-     public function getRegisterCourse(Request $request=null) {        
-       $curDiss = $this->CurriculumRepo->searchByCriteria(null,null,$request->search, $request->faculty_id ,$request->degree_id ,1,$request->program_id,true,false);
-       
-       return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
+
+    public function getRegisterCourse(Request $request = null) {
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, $request->program_id, true, false);
+
+        return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
     }
-    
 
     public function registerCourse() {
         $Bank = $this->BankRepo->getBank();
-      
+
         return view($this->part_doc . 'registerCourse', ['banks' => $Bank]);
     }
 
@@ -93,19 +97,36 @@ class ApplyController extends Controller {
     }
 
     public function registerDetailForapply($id) {
-         $curDiss = $this->CurriculumRepo->searchByCriteria($id,null,null,null ,null ,1,null,true,false);
-         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
-         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id);
-        return view($this->part_doc . 'registerDetailForapply',['curDiss' => $curDiss,'subMajors' => $subMajor,'programs'=>$program]);
+        $curDiss = $this->CurriculumRepo->searchByCriteria($id, null, null, null, null, 1, null, true, false);
+        $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
+        $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id);
+        return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
     }
-    public function submitregisterDetailForapply(Request $data){
-        
-        
-        
+
+    public function submitregisterDetailForapply(Request $data) {
+
+        $gdata = $data->all();
+        $gdata['flow_id'] = 1;
+        $gdata['creator'] = session('user_id');
+        $gdata['modifier'] = session('user_id');
+        $gdata['applicant_id'] = session('Applicant')->applicant_id;
+        $gdata['stu_citizen_card'] = session('Applicant')->stu_citizen_card;
+
+        $res = $this->ApplicationRepo->saveApplication($gdata);
+
+        if ($res) {
+            session()->flash('successMsg', 'บันทึกสำเร็จ');
+            return redirect('apply/manageMyCourse');
+        } else {
+            session()->flash('errorMsg', 'ไม่สามารถบันทึกได้');
+
+            return back();
+        }
     }
 
     public function manageMyCourse() {
-        return view($this->part_doc . 'manageMyCourse');
+        $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
+        return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication]);
     }
 
     public function confDocApply() {
