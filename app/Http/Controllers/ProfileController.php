@@ -132,10 +132,6 @@ class ProfileController extends Controller
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
 
-//            $filename = "6kZ6WllPfxj1K6E1lYrLiaLeCX0sANOqwq3Ohg8P.jpeg"; // Next is : get Path file from Database
-//            $contents = Storage::get(env('PROFILE_PIC_PATH') . $filename);
-//            $base64Img = 'data:image/*' . ';base64,' . base64_encode($contents);
-
 
             return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
