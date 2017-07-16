@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 13 Jul 2017 15:57:23 +0700.
+ * Date: Sun, 16 Jul 2017 15:05:21 +0700.
  */
 
 namespace App\Models;
@@ -28,6 +28,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $comm_appr_no
  * @property \Carbon\Carbon $comm_appr_date
  * @property string $contact_tel
+ * @property bool $is_approve
  * @property bool $status
  * @property string $creator
  * @property \Carbon\Carbon $created
@@ -47,6 +48,7 @@ class Curriculum extends Eloquent
 		'department_id' => 'int',
 		'degree_id' => 'int',
 		'project_id' => 'int',
+		'is_approve' => 'bool',
 		'status' => 'bool'
 	];
 
@@ -72,6 +74,7 @@ class Curriculum extends Eloquent
 		'comm_appr_no',
 		'comm_appr_date',
 		'contact_tel',
+		'is_approve',
 		'status',
 		'creator',
 		'created',

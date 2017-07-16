@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 25 Jun 2017 19:06:36 +0700.
+ * Date: Sun, 16 Jul 2017 15:05:21 +0700.
  */
 
 namespace App\Models;
@@ -10,11 +10,11 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class ApplicatNewsSource
+ * Class ApplicantNewsSource
  * 
  * @property int $app_news_id
  * @property int $applicant_id
- * @property int $id
+ * @property int $news_source_id
  * @property string $orther
  *
  * @package App\Models
@@ -25,13 +25,14 @@ class ApplicantNewsSource extends Eloquent
 	protected $primaryKey = 'app_news_id';
 	public $timestamps = false;
 
-    protected $casts = [
-        'applicant_id' => 'int',
-    ];
+	protected $casts = [
+		'applicant_id' => 'int',
+		'news_source_id' => 'int'
+	];
 
-    protected $fillable = [
-        'applicant_id',
-        'news_source_id',
-        'orther'
-    ];
+	protected $fillable = [
+		'applicant_id',
+		'news_source_id',
+		'orther'
+	];
 }

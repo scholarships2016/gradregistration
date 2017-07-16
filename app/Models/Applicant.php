@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 13 Jul 2017 15:57:23 +0700.
+ * Date: Sun, 16 Jul 2017 15:05:21 +0700.
  */
 
 namespace App\Models;
@@ -42,7 +42,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $stu_married
  * @property string $stu_birthplace
  * @property string $additional_addr
- * @property int $eng_date_taken
+ * @property \Carbon\Carbon $eng_date_taken
  * @property string $convert
  * @property int $fund_interesting
  * @property string $eng_test_score_admin
@@ -68,12 +68,12 @@ class Applicant extends Eloquent
 		'nation_id' => 'int',
 		'district_code' => 'int',
 		'province_id' => 'int',
-		'eng_date_taken' => 'int',
 		'fund_interesting' => 'int'
 	];
 
 	protected $dates = [
 		'stu_birthdate',
+		'eng_date_taken',
 		'created',
 		'modified'
 	];
