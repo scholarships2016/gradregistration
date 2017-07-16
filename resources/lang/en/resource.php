@@ -108,5 +108,8 @@ return [
      'lbFee'=>'Fee',
      'lbTimeExam'=>'Recruit date',   
         'lbQuestion'=>'Question',
+     'lbDocID'=>'Document ID',
+     'lbWTodo'=>'To do task',
+     'lbConfApp'=>'Confirm',
     
 ];
