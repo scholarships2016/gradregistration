@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements ApplicationRepository {
 
-    protected $projectPassRepo;
+    protected $ApplicationRepo;
     private $paging = 10;
 
-    public function __construct(ApplicationRepository $projectPassRepo) {
+    public function __construct(ApplicationRepository $ApplicationRepo) {
         parent::setModelClassName(Applicant::class);
-        $this->$projectPassRepo = $projectPassRepo;
+        $this->$ApplicationRepo = $ApplicationRepo;
     }
 
     public function searchByCriteria($criteria = null, $paging = false) {
