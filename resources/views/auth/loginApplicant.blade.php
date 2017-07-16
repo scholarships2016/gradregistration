@@ -98,14 +98,14 @@
             <label class="control-label visible-ie8 visible-ie9">First-Name</label>
             <div class="input-icon">
                 <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="First-Name" name="stu_first_name"/>
+                <input class="form-control placeholder-no-fix" onkeyup="return this.value = this.value.toUpperCase()" type="text" placeholder="First-Name" name="stu_first_name_en"/>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Last-Name</label>
             <div class="input-icon">
                 <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Last-Name" name="stu_last_name"/>
+                <input class="form-control placeholder-no-fix" onkeyup="return this.value = this.value.toUpperCase()" type="text" placeholder="Last-Name" name="stu_last_name_en"/>
             </div>
         </div>
        

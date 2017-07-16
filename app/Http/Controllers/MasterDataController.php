@@ -13,7 +13,6 @@ use App\Repositories\Contracts\CurriculaRepository;
 use App\Utils\Util;
 use Illuminate\Http\Request;
 
-
 class MasterDataController extends Controller
 {
     protected $districtRepo;
@@ -49,7 +48,7 @@ class MasterDataController extends Controller
             $param = $request->all();
             try {
                 if (array_key_exists('province_id', $param)) {
-                    $result = Util::prepareDataForDropdownList($this->departmentRepo->getByfaculty_Id($param['province_id']), 'district_id', 'district_name');
+                    $result = Util::prepareDataForDropdownList($this->districtRepo->getDistrictByProvinceId($param['province_id']), 'district_code', 'district_name');
                     return response()->json($result);
                 }
             } catch (\Exception $ex) {
@@ -58,7 +57,8 @@ class MasterDataController extends Controller
         }
         return null;
     }
-     public function getDepartmentByFacultyIdForDropdown(Request $request)
+
+    public function getDepartmentByFacultyIdForDropdown(Request $request)
     {
         if ($request->ajax()) {
             $param = $request->all();
@@ -73,7 +73,8 @@ class MasterDataController extends Controller
         }
         return null;
     }
-     public function getCurriculaByDepartmentIdForDropdown(Request $request)
+
+    public function getCurriculaByDepartmentIdForDropdown(Request $request)
     {
         if ($request->ajax()) {
             $param = $request->all();
@@ -88,6 +89,5 @@ class MasterDataController extends Controller
         }
         return null;
     }
-    
-  
+
 }

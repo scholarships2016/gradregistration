@@ -23,7 +23,7 @@ Route::post('/login/repass', 'Auth\LoginApplicantController@reLogin')->name('reP
 Route::get('login', 'Auth\LoginApplicantController@showLoginForm')->name('showLogin');
 Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginApplicantController@postLogin']);
 Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-
+ 
 //SetLangues just call function
 Route::get('language', 'Auth\LoginApplicantController@language');
 
@@ -48,18 +48,27 @@ Route::get('/faq', function () {
 Route::get('/download', function () {
     return view('download');
 });
- Route::get('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
+ Route::any('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
+ 
+ Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
+  Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
+ Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
+ Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
+ Route::get('apply/confDocApply', 'ApplyController@confDocApply')->name('confDocApply');
+ Route::get('apply/peopleData', 'ApplyController@getPeopoleRef')->name('datatables.data');
+ Route::post('apply/peopleData/$json', 'ApplyController@savePeopoleRef')->name('datatables.peopleSave');
+ 
+ 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
    
-    Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
-    Route::get('apply/registerDetailForapply', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
-    Route::get('apply/manageMyCourse', 'ApplyController@manageMyCourse')->name('manageMyCourse');
+ 
+   
 });
 
 
 Route::group(['prefix' => 'profile', 'middleware' => []], function () {
-    Route::get('/', 'ProfileController@showProfilePage')->name('profile.showProfilePage');
+    Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
     Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
     Route::post('/doSavePretAddr', 'ProfileController@doSavePresentAddress')->name('profile.doSavePretAddr');
     Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');

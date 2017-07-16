@@ -55,6 +55,12 @@ class Util
         'เกษียณอายุก่อนกำหนด', 'ถึงแก่กรรม', 'ปลดออก', 'เกษียณอายุทางเลือก',
         'ให้ออก', 'เลิกจ้าง'];
 
+    /*Folder*/
+    const PROFILE_FOLDER = 'PROFILE_FOLDER';
+    const DOC_FOLDER = 'DOC_FOLDER';
+    const TRASH_FOLDER = 'TRASH_FOLDER';
+    const TEMP_FOLDER = 'TEMP_FOLDER';
+
 
     /**
      * Util constructor.
@@ -105,5 +111,5 @@ class Util
             throw $ex;
         }
     }
-            
+
 }

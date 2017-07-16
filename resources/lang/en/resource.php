@@ -80,9 +80,33 @@ return [
     'lbMFAQs' => 'FAQs',
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'Contact Us',
+    'lbManageCouse' => 'Program Selected',
     
     
      //botton
     'lbNext' => 'Next',
     'lbPrevious' => 'Previous',
+     'lbAll' => 'All',
+    'lbSelect' => 'Select',
+    'lbDetail' => 'Detail',
+    
+    //other Use
+     'lbYear'=>'year',
+     'lbDepartment'=>'Department',
+     'lbSubject'=>'Subject',
+     'lbMajor'=>'Major',
+     'lbMajorCode'=>'Major Code',
+    
+    //register Detail Page
+     'lbRegDetail'=>'Course details',
+     'lbSelProgram'=>'Select program', 
+     'lbSelSubMajor'=>'Select program (subject)',
+     'lbExam_schedule'=>'Exam schedule',
+     'lbStartExam'=>'Recruit date',
+     'lbExpectation'=>'Expectation',     
+     'lbMoreInformation'=>'More Information',
+     'lbFee'=>'Fee',
+     'lbTimeExam'=>'Recruit date',   
+        'lbQuestion'=>'Question',
+    
 ];

@@ -83,10 +83,39 @@ return [
     'lbMFAQs' => 'คำถาม/ตอบ',
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'ติดต่อเรา',
+    'lbManageCouse' => 'หลักสูตรที่สมัคร',
     
     //botton
     'lbNext' => 'ถัดไป',
     'lbPrevious' => 'ก่อนหน้า',
+    'lbAll' => 'ทั้งหมด',
+    'lbSelect' => 'เลือก/Select',
+    'lbDetail' => 'รายละเอียด',
+    
+    //other Use
+     'lbYear'=>'ปีการศึกษา(พ.ศ.)',
+     'lbDepartment'=>'ภาควิชา-สาขา',
+     'lbSubject'=>'สาขาวิชา',
+     'lbMajor'=>'หลักสูตร',
+     'lbMajorCode'=>'รหัสหลักสูตร',
+    
+    //register Detail Page
+     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+     'lbSelProgram'=>'เลือกรหัสแผนหลักสูตร', 
+     'lbSelSubMajor'=>'เลือกรหัสหลักสูตร(แขนงวิชา)',
+    'lbExam_schedule'=>'ตารางสอบ',
+    'lbExpectation'=>'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
+     'lbStartExam'=>'รับสมัคร วันที่',
+     'lbMoreInformation'=>'รายละเอียดเพิ่มเติม/More Information',
+     'lbFee'=>'ค่าธรรมเนียม/Fee',
+     'lbTimeExam'=>'ระยะเวลาที่เปิดรับสมัคร',
+    'lbQuestion'=>'คำถาม',
+    
+    
+    
+    
+    
+    
     
     
 ];

@@ -7,4 +7,6 @@ interface ApplicantWorkRepository
     public function saveApplicantWorkList(array $datas, $applicantId);
 
     public function getApplicantWorkByApplicantId($applicantId);
+
+    public function save(array $data);
 }
