@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class ApplicantWork
- * 
+ *
  * @property int $app_work_id
  * @property int $applicant_id
  * @property string $work_stu_phone
@@ -31,33 +31,35 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class ApplicantWork extends Eloquent
 {
-	protected $table = 'applicant_work';
-	protected $primaryKey = 'app_work_id';
-	public $timestamps = false;
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+    protected $table = 'applicant_work';
+    protected $primaryKey = 'app_work_id';
+    public $timestamps = true;
 
-	protected $casts = [
-		'applicant_id' => 'int',
-		'app_work_status' => 'bool'
-	];
+    protected $casts = [
+        'applicant_id' => 'int',
+        'app_work_status' => 'bool'
+    ];
 
-	protected $dates = [
-		'created',
-		'modified'
-	];
+    protected $dates = [
+        'created',
+        'modified'
+    ];
 
-	protected $fillable = [
-		'applicant_id',
-		'work_stu_phone',
-		'work_status_id',
-		'work_stu_detail',
-		'work_stu_position',
-		'work_stu_yr',
-		'work_stu_mth',
-		'work_stu_salary',
-		'app_work_status',
-		'creator',
-		'created',
-		'modifier',
-		'modified'
-	];
+    protected $fillable = [
+        'applicant_id',
+        'work_stu_phone',
+        'work_status_id',
+        'work_stu_detail',
+        'work_stu_position',
+        'work_stu_yr',
+        'work_stu_mth',
+        'work_stu_salary',
+        'app_work_status',
+        'creator',
+        'created',
+        'modifier',
+        'modified'
+    ];
 }
