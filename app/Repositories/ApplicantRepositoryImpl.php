@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Contracts\ApplicantEduRepository;
 use App\Repositories\Contracts\ApplicantNewsSourceRepository;
 use App\Repositories\Contracts\ApplicantRepository;
 use App\Models\Applicant;
@@ -9,6 +10,7 @@ use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
 
+use App\Repositories\Contracts\ApplicantWorkRepository;
 use Illuminate\Support\Facades\DB;
 
 
