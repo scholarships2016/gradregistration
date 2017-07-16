@@ -6,6 +6,7 @@ use App\Repositories\Contracts\CurriculumRepository;
 use App\Models\Curriculum;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements CurriculumRepository {
 
@@ -16,7 +17,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         parent::setModelClassName(TblCurriculum::class);
     }
 
-    public function searchByCriteria($curriculum_id = null,$curr_act_id = null,$criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null, $paging = false) {
+    public function searchByCriteria($curriculum_id = null,$curr_act_id = null,$criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null,$inTime =true, $paging = false) {
  
         $result = null;
         try {
@@ -55,13 +56,20 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     })
                     ->Where(function ($query)use ($faculty_id) {
                         if ($faculty_id) {
-                            $query->where('tbl_Degree.degree_id', $faculty_id);
+                            $query->where('tbl_Degree.faculty_id', $faculty_id);
                         }
                     })  
                       ->Where(function ($query)use ($program_id) {
                         if ($program_id) {
                             $query->where('curriculum_program.program_id', $program_id);
                         }
+                    }) 
+                    ->Where(function ($query)use ($inTime) {
+                        if ($inTime) {
+                            $query->where('apply_setting.start_date','<=',Carbon::now())
+                                    ->where('apply_setting.end_date','>=',Carbon::now())
+                                     ;
+                        } 
                     }) 
                     ->Where(function ($query)use ($criteria) {
                         $query->where('degree_name', 'like', '%' . $criteria . '%')
@@ -93,4 +101,5 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         return $result;
     }
 
+    
 }

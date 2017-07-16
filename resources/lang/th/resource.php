@@ -93,19 +93,25 @@ return [
     'lbDetail' => 'รายละเอียด',
     
     //other Use
-     'lbYear'=>'ปีการศึกษา(พ.ศ.)/year',
-     'lbDepartment'=>'ภาควิชา-สาขา/Department',
-     'lbSubject'=>'สาขาวิชา/Subject',
-     'lbMajor'=>'หลักสูตร/Major',
-     'lbMajorCode'=>'รหัสหลักสูตร/Major Code',
+     'lbYear'=>'ปีการศึกษา(พ.ศ.)',
+     'lbDepartment'=>'ภาควิชา-สาขา',
+     'lbSubject'=>'สาขาวิชา',
+     'lbMajor'=>'หลักสูตร',
+     'lbMajorCode'=>'รหัสหลักสูตร',
     
     //register Detail Page
      'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbSelProgram'=>'เลือกรหัสหลักสูตร(แขนงวิชา)/ Select program (subject)',     
-     'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbRegDetail'=>'รายละเอียดหลักสูตร',
+     'lbSelProgram'=>'เลือกรหัสแผนหลักสูตร', 
+     'lbSelSubMajor'=>'เลือกรหัสหลักสูตร(แขนงวิชา)',
+    'lbExam_schedule'=>'ตารางสอบ',
+    'lbExpectation'=>'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
+     'lbStartExam'=>'รับสมัคร วันที่',
+     'lbMoreInformation'=>'รายละเอียดเพิ่มเติม/More Information',
+     'lbFee'=>'ค่าธรรมเนียม/Fee',
+     'lbTimeExam'=>'ระยะเวลาที่เปิดรับสมัคร',
+    'lbQuestion'=>'คำถาม',
+    
+    
     
     
     

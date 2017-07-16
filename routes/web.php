@@ -23,7 +23,7 @@ Route::post('/login/repass', 'Auth\LoginApplicantController@reLogin')->name('reP
 Route::get('login', 'Auth\LoginApplicantController@showLoginForm')->name('showLogin');
 Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginApplicantController@postLogin']);
 Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-
+ 
 //SetLangues just call function
 Route::get('language', 'Auth\LoginApplicantController@language');
 
@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['prefix' => 'profile', 'middleware' => []], function () {
-    Route::get('/', 'ProfileController@showProfilePage')->name('profile.showProfilePage');
+    Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
     Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
     Route::post('/doSavePretAddr', 'ProfileController@doSavePresentAddress')->name('profile.doSavePretAddr');
     Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');
