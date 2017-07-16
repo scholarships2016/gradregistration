@@ -110,9 +110,11 @@
                                                     </div>
                                    </div>
                                    @endif
-                                   <input type="hidden" name="curr_act_id" value="">
-                                    <input type="hidden" name="curriculum_id" value="">
                                      <input type="hidden" name="curr_act_id" value="">
+                                     <input type="hidden" name="curriculum_id" value="">
+                                     <input type="hidden" name="curr_act_id" value=""> 
+                                     <input type="hidden" name="academic_year" value="">
+                                      <input type="hidden" name="semester" value="">
                                     <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </a>

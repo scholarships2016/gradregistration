@@ -14,6 +14,7 @@ use App\Repositories\CurriculumRepositoryImpl;
 use Illuminate\Support\Facades\Lang;
 use App\Repositories\CurriculumSubMajorRepositoryImpl;
 use App\Repositories\CurriculumProgramRepositoryImpl;
+ use App\Repositories\ApplicationRepositoryImpl;
 
 class ApplyController extends Controller {
 
@@ -28,9 +29,11 @@ class ApplyController extends Controller {
     protected $CurriculumRepo;
     protected $SubCurriculumRepo;
     protected $CurriculumProgramRepo;
+    protected $ApplicationRepo;
     
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
-    , CurriculumRepositoryImpl $CurriculumRepo,CurriculumSubMajorRepositoryImpl $SubCurriculumRepo,CurriculumProgramRepositoryImpl $CurriculumProgramRepo) {
+    , CurriculumRepositoryImpl $CurriculumRepo,CurriculumSubMajorRepositoryImpl $SubCurriculumRepo,CurriculumProgramRepositoryImpl $CurriculumProgramRepo 
+    , ApplicationRepositoryImpl $ApplicationRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -41,6 +44,7 @@ class ApplyController extends Controller {
         $this->CurriculumRepo = $CurriculumRepo;
         $this->SubCurriculumRepo =$SubCurriculumRepo;
         $this->CurriculumProgramRepo = $CurriculumProgramRepo;
+        $this->ApplicationRepo = $ApplicationRepo;
     }
 
     public function index() {
@@ -99,9 +103,9 @@ class ApplyController extends Controller {
         return view($this->part_doc . 'registerDetailForapply',['curDiss' => $curDiss,'subMajors' => $subMajor,'programs'=>$program]);
     }
     public function submitregisterDetailForapply(Request $data){
-        
-        
-        
+      
+         $this->ApplicationRepo->saveApplication($data);
+        return ;
     }
 
     public function manageMyCourse() {
