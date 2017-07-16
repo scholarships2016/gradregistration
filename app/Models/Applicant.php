@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -60,20 +61,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Applicant extends Eloquent
 {
+    const UPDATED_AT = 'modified';
+    const CREATED_AT = 'created';
 
-	protected $casts = [
-		'nation_id' => 'int',
-		'district_code' => 'int',
-		'province_id' => 'int',
-		'fund_interesting' => 'int'
-	];
-
-	protected $dates = [
-		'stu_birthdate',
-		'eng_date_taken',
-		'created',
-		'modified'
-	];
+    protected $table = 'applicant';
+    protected $primaryKey = 'applicant_id';
+    public $timestamps = true;
 
     protected $casts = [
         'nation_id' => 'int',
@@ -84,6 +77,7 @@ class Applicant extends Eloquent
 
     protected $dates = [
         'stu_birthdate',
+        'eng_date_taken',
         'created',
         'modified'
     ];
@@ -137,4 +131,14 @@ class Applicant extends Eloquent
         'modifier',
         'modified'
     ];
+
+    public function getStuBirthdateAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    }
+
+    public function getEngDateTakenAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    }
 }
