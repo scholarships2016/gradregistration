@@ -119,7 +119,7 @@ class ProfileController extends Controller
                 session()->flash('errorMsg', Util::DATA_NOT_FOUND);
                 return back();
             }
-
+ 
             //Master Data
             $nameTitleList = $this->nameTitleRepo->all();
             $newSrcList = $this->newSrcRepo->getAll();
@@ -132,12 +132,12 @@ class ProfileController extends Controller
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
 
-            $filename = "6kZ6WllPfxj1K6E1lYrLiaLeCX0sANOqwq3Ohg8P.jpeg"; // Next is : get Path file from Database
-            $contents = Storage::get(env('PROFILE_PIC_PATH') . $filename);
-            $base64Img = 'data:image/*' . ';base64,' . base64_encode($contents);
+//            $filename = "6kZ6WllPfxj1K6E1lYrLiaLeCX0sANOqwq3Ohg8P.jpeg"; // Next is : get Path file from Database
+//            $contents = Storage::get(env('PROFILE_PIC_PATH') . $filename);
+//            $base64Img = 'data:image/*' . ';base64,' . base64_encode($contents);
 
 
-            return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => $base64Img,
+            return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
                 'newSrcList' => $newSrcList, 'nationList' => $nationList,
                 'religionList' => $religionList, 'engTestList' => $engTestList,
@@ -147,6 +147,7 @@ class ProfileController extends Controller
                 'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
 
         } catch (\Exception $ex) {
+            echo $ex->getMessage(); return;
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             return back();
         }

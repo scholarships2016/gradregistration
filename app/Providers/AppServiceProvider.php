@@ -5,16 +5,14 @@ namespace App\Providers;
 use App\Utils\FileManager;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
 //
     }
 
@@ -23,11 +21,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         /* Binding Repository */
 
-        /*Applicant Info*/
+        /* Applicant Info */
         $this->app->bind('App\Repositories\Contracts\ApplicantRepository', 'App\Repositories\ApplicantRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicantNewsSourceRepository', 'App\Repositories\ApplicantNewsSourceRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicantWorkRepository', 'App\Repositories\ApplicantWorkRepositoryImpl');
@@ -51,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\WorkStatusRepository', 'App\Repositories\WorkStatusRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ProgramTypeRepository', 'App\Repositories\ProgramTypeRepositoryImpl');
 
-        /*File*/
+        /* File */
         $this->app->bind('App\Repositories\Contracts\FileRepository', 'App\Repositories\FileRepositoryImpl');
 
 
@@ -63,7 +60,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\DocumentsRepository', 'App\Repositories\DocumentsRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicationPeopleRefRepository', 'App\Repositories\ApplicationPeopleRefRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\CurriculumRepository', 'App\Repositories\CurriculumRepositoryImpl');
-
+        $this->app->bind('App\Repositories\Contracts\CurriculumSubMajorRepository', 'App\Repositories\CurriculumSubMajorRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\CurriculumProgramRepository', 'App\Repositories\CurriculumProgramRepositoryImpl');
     }
 
 }

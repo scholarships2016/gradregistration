@@ -55,7 +55,7 @@
 @stop
 
 @section('pagetitle')
-    <h1 class="page-title"> รายละเอียดหลักสูตร</h1>
+    <h1 class="page-title"> {{Lang::get('resource.lbRegDetail')}}</h1>
     
 @stop
  
@@ -63,53 +63,89 @@
 @section('maincontent')
    
 <div class="invoice">
+    @if($curDiss->count()>0)
+     @foreach ($curDiss as $curDis)
                             <div class="row invoice-logo">
                                 <div class="col-xs-6 invoice-logo-space">
                                    <div class="col-xs-10 ">
-                                    <ul class="list-unstyled amounts">
-                                        <li>
-                                            <strong>เลือกรหัสหลักสูตร(แขนงวิชา)/ Select program (subject)</strong> </li><br>
-                                        <li>                                            
-                                        <li>
-                                             <select class="select2"  id="type_of_recruit_id" class="form-control"> 
-                        <option value="" selected="" >========== ทั้งหมด ==========</option>                        
-                         <option value="" selected="" >2086 - ปริญยาโท</option> 
-                                             </select>
-                                        </li>
-                                    </ul>
-                                   
-                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> เลือก/Select
+                                   <form class="forget-form" action="{{route('rePassLoginApplicant')}}" method="post">
+                                    {{csrf_field()}}
+                                   @if($subMajors->count()> 0)
+                                  <div class="form-group form-md-radios  ">
+                                                    <label class="col-md-12 control-label" for="form_control_1"><strong>{{Lang::get('resource.lbSelSubMajor')}}</strong></label>
+                                                    <div class="col-md-12">
+                                                        <div class="md-radio-inline">
+                                                          
+                                                             @foreach($subMajors as $subMajor)
+                                                              
+                                                            <div class="md-radio">
+                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->major_name }}" name="sub_major_id" class="md-radiobtn">
+                                                                <label for="checkbox_{{ $loop->iteration}}">
+                                                                    <span class="inc"></span>
+                                                                    <span class="check"></span>
+                                                                    <span class="box"></span> {{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }} </label>
+                                                            </div>
+                                                               @endforeach                                                             
+                                                        </div>
+                                                    </div>
+                                   </div>
+                                   @endif
+                                     @if($programs->count()> 0)
+                                  <div class="form-group form-md-radios  ">
+                                                    <label class="col-md-12 control-label" for="form_control_1"><strong>{{Lang::get('resource.lbSelProgram')}}</strong></label>
+                                                    <div class="col-md-12">
+                                                        <div class="md-radio-inline">
+                                                          
+                                                             @foreach($programs as $program)
+                                                              
+                                                            <div class="md-radio">
+                                                                <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->thai }}" name="program_id" class="md-radiobtn">
+                                                                <label for="checkbox_P{{ $loop->iteration}}">
+                                                                    <span class="inc"></span>
+                                                                    <span class="check"></span>
+                                                                    <span class="box"></span> {{ (session('locale')=='th')?$program->thai : $program->thai }} </label>
+                                                            </div>
+                                                               @endforeach                                                             
+                                                        </div>
+                                                    </div>
+                                   </div>
+                                   @endif
+                                   <input type="hidden" name="curr_act_id" value="">
+                                    <input type="hidden" name="curriculum_id" value="">
+                                     <input type="hidden" name="curr_act_id" value="">
+                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  ยกเลิก
+                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </a>
+                                   </form>
                                 </div>
                                     </div>
                                 <div class="col-xs-6">
                                     <p>  
-                                        <span class="muted" style="font-size:26px;">  วิศวกรรมศาสตร์ (Faculty of Engineering) </span>
+                                        <span class="muted" style="font-size:26px;"> {{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }} </span>
                                     </p>
                                 </div>
                             </div>
                             <hr>
-                            <div class="row" style="font-size:16px;">  <h3 style="padding-left: 15px">รายละเอียด :</h3>
+                            <div class="row" style="font-size:16px;">  <h3 style="padding-left: 15px">{{Lang::get('resource.lbDetail')}} :</h3>
                                 <div class="col-xs-3">                                    
                                     <ul class="list-unstyled">
-                                        <li> ปีการศึกษา(พ.ศ.)/year </li>
-                                        <li> ภาควิชา-สาขา/Department</li>
-                                        <li> สาขาวิชา/Subject </li>
-                                        <li> หลักสูตร/Syllabus </li>
-                                        <li> รหัสหลักสูตร/Syllabus ID </li>
+                                        <li> {{Lang::get('resource.lbYear')}} </li>
+                                        <li> {{Lang::get('resource.lbDepartment')}}</li>
+                                        <li> {{Lang::get('resource.lbSubject')}} </li>
+                                        <li> {{Lang::get('resource.lbMajor')}} </li>
+                                        <li> {{Lang::get('resource.lbMajorCode')}} </li>
                                     </ul>
                                 </div>
                                 <div class="col-xs-7">                                   
                                     <ul class="list-unstyled">
-                                        <li> 2558 </li>
-                                        <li> วิศวกรรมอุตสาหการ </li>
-                                        <li> วิศวกรรมอุตสาหการ </li>
-                                        <li> วิศวกรรมศาสตร์มหาบัณฑิต - Master of Engineering </li>
-                                        <li> 2086 - ปริญญาโท </li>
+                                        <li> {{$curDis->academic_year}}  </li>
+                                        <li>  {{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }}  </li>
+                                        <li>  {{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }} </li>
+                                        <li>  {{  ($curDis->major_name != '')?(session('locale')=='th')? $curDis->major_name:$curDis->major_name_en :'-'}} </li>
+                                        <li>  {{  $curDis->major_code   }} </li>
                                         
                                     </ul>
                                 </div>
@@ -118,34 +154,8 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <table class="table table-striped table-hover">
-                                        <h4>ตารางสอบ : <p style="color: red;"> รับสมัคร วันที่ 15 มิถุนายน 2559 - 19 มิถุนายน 2559</p></h4> 
-                                        <thead>
-                                            <tr>
-                                                <th> วิชาที่สอบ </th>
-                                                <th> วันและเวลาที่ทำการทดสอบ </th>
-                                                <th class="hidden-xs"> สถานที่สอบ </th>
-                                               
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                
-                                                <td> พื้นฐานสถิติสำหรับวิศวกรรอุตสาหกรรม </td>
-                                                <td class="hidden-xs"> 28 มิถุนายน 2559 (13:00 - 16:00)</td>
-                                                <td class="hidden-xs"> อาคารเจริญวิศวกรรม คณะวิศวกรรมศาสตร์ </td>
-                                                 
-                                            </tr>
-                                            <tr>
-                                               <td> ประกาศผลสอบข้อเขียน </td>
-                                                <td class="hidden-xs"> 30 มิถุนายน 2559 (14:00)</td>
-                                                <td class="hidden-xs"> อาคารเจริญวิศวกรรม คณะวิศวกรรมศาสตร์ </td>
-                                            </tr>
-                                            <tr>
-                                                <td> สอบสัมภาษณ์(เฉพาะผู้สอบผ่านข้อเขียนเท่านั้น) </td>
-                                                <td class="hidden-xs"> 1 กรกฏาคม 2559 (09:00 - 11:00)</td>
-                                                <td class="hidden-xs"> อาคารเจริญวิศวกรรม คณะวิศวกรรมศาสตร์ </td>
-                                            </tr>
-                                        </tbody>
+                                        <h4> {{Lang::get('resource.lbExam_schedule')}} :  </h4> 
+                                       {!!  $curDis->exam_schedule  !!} 
                                     </table>
                                 </div>
                             </div>
@@ -155,10 +165,11 @@
                                          <div class="row" style="font-size:16px;">  
                                      <div class="col-xs-4">                                    
                                     <ul class="list-unstyled">
-                                        <li> จำนวนนิสิตที่คาดว่าจะรับ/Expectation </li>
-                                        <li> รายละเอียดเพิ่มเติม/More Information</li>
-                                        <li> ค่าธรรมเนียม/Fee </li>
-                                        <li>  ระยะเวลาที่เปิดรับสมัคร </li>
+                                        <li> {{Lang::get('resource.lbExpectation')}} </li>
+                                        <li> {{Lang::get('resource.lbMoreInformation')}}</li>
+                                        
+                                        <li>  {{Lang::get('resource.lbFee')}} </li>
+                                        <li>  {{Lang::get('resource.lbTimeExam')}} </li>
                                          <li>   </li>
                                         <li>   </li>
                                          <li>   </li> 
@@ -166,11 +177,12 @@
                                 </div>
                                 <div class="col-xs-8" style="color:red;">                                   
                                     <ul class="list-unstyled">
-                                        <li> 20 คน </li>
-                                        <li>  <br> </li>
-                                        <li> 500 บาท </li>
-                                        <li> วัน พุธ ที่ 3 มิถุนายน 2559 - วันศุกร์ ที่ 19 ตุลาคม 2559 </li>
-                                        <li>   </li>
+                                        <li>   {{  $curDis->expected_amount  }}  </li>
+                                        <li>  {{  $curDis->addtional_detail  }} </li>
+                                      
+                                        <li> {{  $curDis->apply_fee  }} </li>
+                                        <li>   {{$curDis->start_date}}  - {{$curDis->end_date}} </li>
+                                        
                                         <li>   </li>
                                          <li>   </li> 
                                     </ul>
@@ -180,7 +192,11 @@
                                 </div>
                              
                             </div>
-                        </div>
+      @endforeach 
+     @else
+     ไม่มีข้อมูล/No Data.
+     @endif
+ </div>
 
                                                                           @stop
 
