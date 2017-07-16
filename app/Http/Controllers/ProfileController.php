@@ -18,8 +18,6 @@ use App\Repositories\Contracts\GaduateLevelRepository;
 use App\Utils\Util;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -71,13 +69,9 @@ class ProfileController extends Controller
         Log::info('showProfilePage');
 
         try {
-            $applicantID = 1;
+            $applicantId = session('user_id');
 
-            $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($applicantID);
-            if (empty($applicantProfile)) {
-                session()->flash('errorMsg', Util::DATA_NOT_FOUND);
-                return back();
-            }
+            $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($applicantId);
 
             //Master Data
             $nameTitleList = $this->nameTitleRepo->all();
@@ -111,15 +105,11 @@ class ProfileController extends Controller
         Log::info('showPersonalProfilePage');
 
         try {
-            $applicantID = 1;
 
-            $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($applicantID);
+            $applicantId = session('user_id');
 
-            if (empty($applicantProfile)) {
-                session()->flash('errorMsg', Util::DATA_NOT_FOUND);
-                return back();
-            }
- 
+            $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($applicantId);
+
             //Master Data
             $nameTitleList = $this->nameTitleRepo->all();
             $newSrcList = $this->newSrcRepo->getAll();
@@ -143,7 +133,8 @@ class ProfileController extends Controller
                 'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
 
         } catch (\Exception $ex) {
-            echo $ex->getMessage(); return;
+            echo $ex->getMessage();
+            return;
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             return back();
         }
