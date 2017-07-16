@@ -9,4 +9,6 @@ interface ApplicantEduRepository
 
     public function getApplicantEduByApplicantId($applicantId);
 
+    public function save(array $data);
+
 }

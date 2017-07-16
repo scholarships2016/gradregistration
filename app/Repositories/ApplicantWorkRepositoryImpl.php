@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements ApplicantWorkRepository
 {
-    private $paging = 10;
 
     public function __construct()
     {
@@ -18,12 +17,9 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
 
     public function saveApplicantWorkList(array $datas, $applicantId)
     {
-
         DB::beginTransaction();
         try {
-
             $deletedRow = ApplicantWork::where('applicant_id', '=', $applicantId)->delete();
-
             if (array_key_exists('workexp-group', $datas)) {
                 foreach ($datas['workexp-group'] as $workExp) {
                     //Create
@@ -32,38 +28,8 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
                         $this->create($workExp);
                         continue;
                     }
-
-                    // Update
-                    $work = $this->find($workExp->app_work_id);
-                    if (array_key_exists("work_stu_phone", $workExp)) {
-                        $work->work_stu_phone = $workExp['work_stu_phone'];
-                    }
-                    if (array_key_exists("work_status_id", $workExp)) {
-                        $work->work_status_id = $workExp['work_status_id'];
-                    }
-                    if (array_key_exists("work_stu_detail", $workExp)) {
-                        $work->work_stu_detail = $workExp['work_stu_detail'];
-                    }
-                    if (array_key_exists("work_stu_position", $workExp)) {
-                        $work->work_stu_position = $workExp['work_stu_position'];
-                    }
-                    if (array_key_exists("work_stu_yr", $workExp)) {
-                        $work->work_stu_yr = $workExp['work_stu_yr'];
-                    }
-                    if (array_key_exists("work_stu_mth", $workExp)) {
-                        $work->work_stu_mth = $workExp['work_stu_mth'];
-                    }
-                    if (array_key_exists("work_stu_salary", $workExp)) {
-                        $work->work_stu_salary = $workExp['work_stu_salary'];
-                    }
-                    if (array_key_exists("app_work_status", $workExp)) {
-                        $work->app_work_status = $workExp['app_work_status'];
-                    }
-                    if (array_key_exists("modifier", $workExp)) {
-                        $work->modifier = $workExp['modifier'];
-                    }
-
-
+                    //Update
+                    $this->save($workExp);
                 }
             }
 
@@ -76,7 +42,6 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
             DB::rollback();
             throw $ex;
         }
-
     }
 
     public function getApplicantWorkByApplicantId($applicantId)
@@ -87,6 +52,46 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
             throw $ex;
         }
 
+    }
+
+    public function save(array $data)
+    {
+        try {
+            $id = null;
+            if (array_key_exists('app_work_id', $data) || !empty($data['app_work_id']))
+                $id = $data['app_work_id'];
+
+            $chk = $this->find($id);
+            $curObj = $chk ? $chk : new ApplicantWork();
+            if (array_key_exists('applicant_id', $data))
+                $curObj->applicant_id = $data['applicant_id'];
+            if (array_key_exists('work_stu_phone', $data))
+                $curObj->work_stu_phone = $data['work_stu_phone'];
+            if (array_key_exists('work_status_id', $data))
+                $curObj->work_status_id = $data['work_status_id'];
+            if (array_key_exists('work_stu_position', $data))
+                $curObj->work_stu_position = $data['work_stu_position'];
+            if (array_key_exists('work_stu_yr', $data))
+                $curObj->work_stu_yr = $data['work_stu_yr'];
+            if (array_key_exists('work_stu_detail', $data))
+                $curObj->work_stu_detail = $data['work_stu_detail'];
+            if (array_key_exists('work_stu_mth', $data))
+                $curObj->work_stu_mth = $data['work_stu_mth'];
+            if (array_key_exists('work_stu_salary', $data))
+                $curObj->work_stu_salary = $data['work_stu_salary'];
+
+            if (array_key_exists('creator', $data))
+                $curObj->creator = $data['creator'];
+            if (array_key_exists('modifier', $data))
+                $curObj->modifier = $data['modifier'];
+
+            if (!$curObj->save()) {
+                return null;
+            }
+            return $curObj;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
     }
 
 
