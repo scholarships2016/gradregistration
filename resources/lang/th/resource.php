@@ -66,56 +66,77 @@ return [
     'lbContactNo' => 'หมายเลขโทรศัพท์ที่สามารถติดต่อได้',
     'lbTopInfo' => 'เลขที่บัตรประจำตัวประชาชน และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้ จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป ',
     'lbAppInfo' => 'ข้อมูลประวัติผู้สมัคร',
-    
-    
-    
-    
+
+
     'lbNameContact' => 'บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
     'lbAddress1Contact' => 'บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย  254 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330',
     'lbAddress2Contact' => 'อาคารเฉลิมราชกุมารี 60 พรรษา (อาคารจามจุรี 10) ซอยจุฬา 12 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330',
     'lbContacts' => 'ติดต่อ',
     'lbAddress' => 'ที่อยู่',
-   
-       //Menu
+
+    //Menu
     'lbMHome' => 'หน้าหลัก',
     'lbMCurriculum' => 'หลักสูตร',
     'lbMApply' => 'ขั้นตอนสมัคร',
     'lbMFAQs' => 'คำถาม/ตอบ',
-    'lbMDownlods' => 'Downlods',    
-    'lbMContactsUs' =>'ติดต่อเรา',
+    'lbMDownlods' => 'Downlods',
+    'lbMContactsUs' => 'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
-    
+    'lbMProfile' => 'โพรไฟล์',
+
+
     //botton
     'lbNext' => 'ถัดไป',
     'lbPrevious' => 'ก่อนหน้า',
     'lbAll' => 'ทั้งหมด',
     'lbSelect' => 'เลือก/Select',
     'lbDetail' => 'รายละเอียด',
-    
+
     //other Use
-     'lbYear'=>'ปีการศึกษา(พ.ศ.)',
-     'lbDepartment'=>'ภาควิชา-สาขา',
-     'lbSubject'=>'สาขาวิชา',
-     'lbMajor'=>'หลักสูตร',
-     'lbMajorCode'=>'รหัสหลักสูตร',
-    
+    'lbYear' => 'ปีการศึกษา(พ.ศ.)',
+    'lbDepartment' => 'ภาควิชา-สาขา',
+    'lbSubject' => 'สาขาวิชา',
+    'lbMajor' => 'หลักสูตร',
+    'lbMajorCode' => 'รหัสหลักสูตร',
+
     //register Detail Page
-     'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbSelProgram'=>'เลือกรหัสแผนหลักสูตร', 
-     'lbSelSubMajor'=>'เลือกรหัสหลักสูตร(แขนงวิชา)',
-    'lbExam_schedule'=>'ตารางสอบ',
-    'lbExpectation'=>'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
-     'lbStartExam'=>'รับสมัคร วันที่',
-     'lbMoreInformation'=>'รายละเอียดเพิ่มเติม/More Information',
-     'lbFee'=>'ค่าธรรมเนียม/Fee',
-     'lbTimeExam'=>'ระยะเวลาที่เปิดรับสมัคร',
-    'lbQuestion'=>'คำถาม',
-    
-    
-    
-    
-    
-    
-    
-    
+    'lbRegDetail' => 'รายละเอียดหลักสูตร',
+    'lbSelProgram' => 'เลือกรหัสแผนหลักสูตร',
+    'lbSelSubMajor' => 'เลือกรหัสหลักสูตร(แขนงวิชา)',
+    'lbExam_schedule' => 'ตารางสอบ',
+    'lbExpectation' => 'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
+    'lbStartExam' => 'รับสมัคร วันที่',
+    'lbMoreInformation' => 'รายละเอียดเพิ่มเติม/More Information',
+    'lbFee' => 'ค่าธรรมเนียม/Fee',
+    'lbTimeExam' => 'ระยะเวลาที่เปิดรับสมัคร',
+    'lbQuestion' => 'คำถาม',
+
+
+    //ApplicantInfo
+    'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
+
+    //ProfilePage
+    'perInfoSectionTitle' => 'ข้อมูลทั่วไปผู้สมัคร',
+    'perInfoTitle' => 'คำนำหน้าชื่อ',
+    'perInfoName' => 'ชื่อ',
+    'perInfoSurname' => 'นามสกุล',
+    'perInfoNameEn' => 'ชื่อ (ภาษาอังกฤษ)',
+    'perInfoSurnameEn' => 'นามสกุล (ภาษาอังกฤษ)',
+    'perInfoSex' => 'เพศ',
+    'perInfoCitizenship' => 'สัญชาติ',
+    'perInfoReligion' => 'ศาสนา',
+    'perInfoMaritalStatus' => 'สถานภาพสมรส',
+    'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
+    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
+    'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
+    'perInfoEmail' => 'อีเมล',
+    'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
+    'perInfoPhoto' => 'รูปถ่าย',
+    'perInfoFundInterest' => 'ท่านสนใจสมัครทุนอุดหนุนการศึกษาเฉพาะค่าเล่าเรียนหรือไม่?',
+    'perInfoInterest' => 'สนใจ',
+    'perInfoNotInterest' => 'ไม่สนใจ',
+    'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?'
+
+
+
 ];
