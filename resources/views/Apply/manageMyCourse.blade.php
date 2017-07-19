@@ -124,132 +124,40 @@
                             <div class="col-md-12 col-sm-4">
                                 <div class="todo-tasklist">
 
+          @foreach ($Apps as $curDis)
+                         
                                     <div class="todo-tasklist-item todo-tasklist-item-border-green">
 
-                                        <div class="todo-tasklist-item-title"> หลักสูตร วิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering. </div>
-                                        <div class="todo-tasklist-item-text"> เลขที่ใบสมัคร [00089]  </div>
-                                        <div class="todo-tasklist-item-text"> รหัสหลักสูตร : 2086 คณะวิศวกรรมศาสตร์(Faculty of Engineering) สาขา วิศวกรรมอุตสาหการ สาขาวิชา วิศวกรรมอุตสาหการ   </div>
-                                        <div class="todo-tasklist-item-text"> สถานะ : รอผู้สมัครยื่นยัน </div>
+                                        <div class="todo-tasklist-item-title"> {{Lang::get('resource.lbMajor')}} {{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }}. </div>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbDocID')}}  [{{$curDis->app_id}}]  </div>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbMajorCode')}} : {{  $curDis->major_code   }} {{Lang::get('resource.lbMajor')}}{{  ($curDis->major_name != '')?(session('locale')=='th')? $curDis->major_name:$curDis->major_name_en :'-'}}     {{Lang::get('resource.lbSubject')}}{{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }}   </div>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}} : {{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </div>
                                         <div class="todo-tasklist-controls pull-left">
                                             <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> 21 Sep 2014 </span>
-
-
-                                            <div class="mt-element-ribbon">
-                                                <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">สิ่งที่ต้องดำเนินการ</div>
-                                                <div class="ribbon-content"> <a class="btn  blue" href="{{url('apply/register/')}}"> ยืนยันการสมัคร
+                                                <i class="fa fa-calendar"></i> {{$curDis->appDates}} </span>
+          <div class="col-md-12 portlet mt-element-ribbon light portlet-fit bordered"> 
+<div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase"> 
+<div class="ribbon-sub ribbon-bookmark"></div> 
+<i class="fa fa-star"></i> 
+</div> 
+<div class="portlet-title"> 
+<div class="caption"> 
+<i class=" icon-layers font-green"></i> 
+<span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span> 
+</div> 
+</div> 
+<div class="portlet-body">  @if($curDis->flow_id==1)
+                                                    <a class="btn  blue" href="{{url('apply/register/')}}"> {{Lang::get('resource.lbConfApp')}}
                                                         <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  ยกเลิก
+                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                                         <i class="fa fa-times"></i>
-                                                    </a> </div>
-                                            </div> 
+                                                    </a> 
+                                                    @endif </div> 
+</div>
+                                            
                                         </div>
                                     </div>
-          <div class="todo-tasklist-item todo-tasklist-item-border-green">
-
-                                        <div class="todo-tasklist-item-title"> หลักสูตร วิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering. </div>
-                                        <div class="todo-tasklist-item-text"> เลขที่ใบสมัคร [00089]  </div>
-                                        <div class="todo-tasklist-item-text"> รหัสหลักสูตร : 2086 คณะวิศวกรรมศาสตร์(Faculty of Engineering) สาขา วิศวกรรมอุตสาหการ สาขาวิชา วิศวกรรมอุตสาหการ   </div>
-                                        <div class="todo-tasklist-item-text"> สถานะ : รอผู้สมัครยื่นยัน </div>
-                                        <div class="todo-tasklist-controls pull-left">
-                                            <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> 21 Sep 2014 </span>
-
-
-                                            <div class="mt-element-ribbon">
-                                                <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">สิ่งที่ต้องดำเนินการ</div>
-                                                <div class="ribbon-content"> <a class="btn  blue" href="{{url('apply/register/')}}"> ยืนยันการสมัคร
-                                                        <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  ยกเลิก
-                                                        <i class="fa fa-times"></i>
-                                                    </a> </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                       <div class="todo-tasklist-item todo-tasklist-item-border-green">
-
-                                        <div class="todo-tasklist-item-title"> หลักสูตร วิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering. </div>
-                                        <div class="todo-tasklist-item-text"> เลขที่ใบสมัคร [00089]  </div>
-                                        <div class="todo-tasklist-item-text"> รหัสหลักสูตร : 2086 คณะวิศวกรรมศาสตร์(Faculty of Engineering) สาขา วิศวกรรมอุตสาหการ สาขาวิชา วิศวกรรมอุตสาหการ   </div>
-                                        <div class="todo-tasklist-item-text"> สถานะ : รอผู้สมัครยื่นยัน </div>
-                                        <div class="todo-tasklist-controls pull-left">
-                                            <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> 21 Sep 2014 </span>
-
-
-                                            <div class="mt-element-ribbon">
-                                                <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">สิ่งที่ต้องดำเนินการ</div>
-                                                <div class="ribbon-content"> <a class="btn  blue" href="{{url('apply/register/')}}"> ยืนยันการสมัคร
-                                                        <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  ยกเลิก
-                                                        <i class="fa fa-times"></i>
-                                                    </a> </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                       <div class="todo-tasklist-item todo-tasklist-item-border-green">
-
-                                        <div class="todo-tasklist-item-title"> หลักสูตร วิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering. </div>
-                                        <div class="todo-tasklist-item-text"> เลขที่ใบสมัคร [00089]  </div>
-                                        <div class="todo-tasklist-item-text"> รหัสหลักสูตร : 2086 คณะวิศวกรรมศาสตร์(Faculty of Engineering) สาขา วิศวกรรมอุตสาหการ สาขาวิชา วิศวกรรมอุตสาหการ   </div>
-                                        <div class="todo-tasklist-item-text"> สถานะ : รอผู้สมัครยื่นยัน </div>
-                                        <div class="todo-tasklist-controls pull-left">
-                                            <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> 21 Sep 2014 </span>
-
-
-                                            <div class="mt-element-ribbon">
-                                                <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">สิ่งที่ต้องดำเนินการ</div>
-                                                <div class="ribbon-content"> <a class="btn  blue" href="{{url('apply/register/')}}"> ยืนยันการสมัคร
-                                                        <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  ยกเลิก
-                                                        <i class="fa fa-times"></i>
-                                                    </a> </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                       <div class="todo-tasklist-item todo-tasklist-item-border-green">
-
-                                        <div class="todo-tasklist-item-title"> หลักสูตร วิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering. </div>
-                                        <div class="todo-tasklist-item-text"> เลขที่ใบสมัคร [00089]  </div>
-                                        <div class="todo-tasklist-item-text"> รหัสหลักสูตร : 2086 คณะวิศวกรรมศาสตร์(Faculty of Engineering) สาขา วิศวกรรมอุตสาหการ สาขาวิชา วิศวกรรมอุตสาหการ   </div>
-                                        <div class="todo-tasklist-item-text"> สถานะ : รอผู้สมัครยื่นยัน </div>
-                                        <div class="todo-tasklist-controls pull-left">
-                                            <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> 21 Sep 2014 </span>
-
-
-                                            <div class="mt-element-ribbon">
-                                                <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">สิ่งที่ต้องดำเนินการ</div>
-                                                <div class="ribbon-content"> <a class="btn  blue" href="{{url('apply/register/')}}"> ยืนยันการสมัคร
-                                                        <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  ยกเลิก
-                                                        <i class="fa fa-times"></i>
-                                                    </a> </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                       <div class="todo-tasklist-item todo-tasklist-item-border-green">
-
-                                        <div class="todo-tasklist-item-title"> หลักสูตร วิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering. </div>
-                                        <div class="todo-tasklist-item-text"> เลขที่ใบสมัคร [00089]  </div>
-                                        <div class="todo-tasklist-item-text"> รหัสหลักสูตร : 2086 คณะวิศวกรรมศาสตร์(Faculty of Engineering) สาขา วิศวกรรมอุตสาหการ สาขาวิชา วิศวกรรมอุตสาหการ   </div>
-                                        <div class="todo-tasklist-item-text"> สถานะ : รอผู้สมัครยื่นยัน </div>
-                                        <div class="todo-tasklist-controls pull-left">
-                                            <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> 21 Sep 2014 </span>
-
-
-                                            <div class="mt-element-ribbon">
-                                                <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">สิ่งที่ต้องดำเนินการ</div>
-                                                <div class="ribbon-content"> <a class="btn  blue" href="{{url('apply/register/')}}"> ยืนยันการสมัคร
-                                                        <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  ยกเลิก
-                                                        <i class="fa fa-times"></i>
-                                                    </a> </div>
-                                            </div> 
-                                        </div>
-                                    </div>
+           @endforeach
                                 </div>
                             </div>
                             <div class="todo-tasklist-devider"> </div>

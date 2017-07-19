@@ -68,7 +68,7 @@
                             <div class="row invoice-logo">
                                 <div class="col-xs-6 invoice-logo-space">
                                    <div class="col-xs-10 ">
-                                   <form class="forget-form" action="{{route('rePassLoginApplicant')}}" method="post">
+                                   <form class="forget-form" action="{{route('submitregisterDetailForapply')}}" method="post">
                                     {{csrf_field()}}
                                    @if($subMajors->count()> 0)
                                   <div class="form-group form-md-radios  ">
@@ -79,7 +79,7 @@
                                                              @foreach($subMajors as $subMajor)
                                                               
                                                             <div class="md-radio">
-                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->major_name }}" name="sub_major_id" class="md-radiobtn">
+                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" name="sub_major_id" class="md-radiobtn">
                                                                 <label for="checkbox_{{ $loop->iteration}}">
                                                                     <span class="inc"></span>
                                                                     <span class="check"></span>
@@ -99,7 +99,7 @@
                                                              @foreach($programs as $program)
                                                               
                                                             <div class="md-radio">
-                                                                <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->thai }}" name="program_id" class="md-radiobtn">
+                                                                <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->curr_prog_id }}" name="program_id" class="md-radiobtn">
                                                                 <label for="checkbox_P{{ $loop->iteration}}">
                                                                     <span class="inc"></span>
                                                                     <span class="check"></span>
@@ -110,15 +110,15 @@
                                                     </div>
                                    </div>
                                    @endif
-                                   <input type="hidden" name="curr_act_id" value="">
-                                    <input type="hidden" name="curriculum_id" value="">
-                                     <input type="hidden" name="curr_act_id" value="">
-                                    <a class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+                                     <input type="hidden" name="curr_act_id" value="1">
+                                     <input type="hidden" name="curriculum_id" value="1">
+                                      
+                                    <button class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
-                                    </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+                                    </button>
+                                  <button class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
-                                    </a>
+                                    </button>
                                    </form>
                                 </div>
                                     </div>
