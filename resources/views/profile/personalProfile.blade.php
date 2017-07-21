@@ -18,19 +18,19 @@
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
-                <a href="/">หน้าหลัก</a>
+                <a href="/">{{Lang::get('resource.lbMHome')}}</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>โพรไฟล์</span>
+                <span>{{Lang::get('resource.lbMProfile')}}</span>
             </li>
         </ul>
     </div>
 @stop
 
 @section('pagetitle')
-    <h1 class="page-title"> ข้อมูลประวัติผู้สมัคร
-        <small>Applicant Information</small>
+    <h1 class="page-title">
+        {{Lang::get('resource.appctInfoPageTitle')}}
     </h1>
 @stop
 
@@ -72,7 +72,12 @@
                                     <p> อธิบายสั้นๆ นะ </p>
                                     <ul class="list-inline">
                                         <li>
-                                            <i class="fa fa-map-marker"></i> Spain
+                                            <i class="fa fa-map-marker"></i>
+                                            @if(!empty($applicant->nation_id))
+                                                {{(session('locale')=='th')?$applicant->tblNation->nation_name :$applicant->tblNation->nation_name_en }}
+                                            @else
+                                                -
+                                            @endif
                                         </li>
                                         <li>
                                             <i class="fa fa-calendar"></i>
@@ -654,7 +659,7 @@
             $.each($("#personalInfoForm").serializeArray(), function (index, field) {
                 formData.append(field.name, field.value)
             });
-//            formData.append("stu_profile_pic", $("#stu_profile_pic")[0].files[0]);
+            formData.append("stu_profile_pic", $("#stu_profile_pic")[0].files[0]);
             $.ajax({
                 url: '{{route('profile.doSavePersInfo')}}',
                 headers: {
