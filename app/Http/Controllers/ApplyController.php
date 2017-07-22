@@ -165,14 +165,17 @@ class ApplyController extends Controller {
     }
 
     public function submitDocApply(Request $data) {
-
+        $res = null;
         $checkbox = [];
         $file = [];
         $fileData = [];
+        $docID = [];
+         
         foreach ($data->all() as $key => $value) {
 
             if (strpos($key, 'box') > 0) {
                 array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
+                array_push($docID,$value);
             }
 
             if (strpos($key, 'file') > 0) {
@@ -188,7 +191,7 @@ class ApplyController extends Controller {
             } else {
                 $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC);
             }
-
+      
             foreach ($checkbox as $chkKey) {
 
                 if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
@@ -197,11 +200,23 @@ class ApplyController extends Controller {
             }
         }
 
-        foreach ($fileData as $val) {           
-             $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
+        $res = $this->ApplicationDocumentFileRepo->DeleteNOTIN($data->application_id, $docID);
+ 
+        foreach ($fileData as $val) {
+            $res = $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
+            if (!$res) {
+                session()->flash('errorMsg',  Lang::get('resource.lbError'));
+                return back();
+            }
         }
-        
-        return;
+
+        if ($res) {
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+            return redirect('apply/manageMyCourse');
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
+        }
     }
 
     public function getForm($id = 0) {

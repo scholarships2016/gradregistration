@@ -84,6 +84,7 @@ return [
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
+    'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
     
     //botton
     'lbNext' => 'ถัดไป',

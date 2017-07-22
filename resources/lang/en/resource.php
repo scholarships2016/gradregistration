@@ -81,6 +81,7 @@ return [
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'Contact Us',
     'lbManageCouse' => 'Program Selected',
+     'lbConfirmationDoc'=> 'Confirmation documents apply',
     
     
      //botton

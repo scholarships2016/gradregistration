@@ -60,7 +60,7 @@ Route::get('/download', function () {
  Route::post('apply/submitregisterDetailForapply', 'ApplyController@submitregisterDetailForapply')->name('submitregisterDetailForapply');
  Route::get('apply/actionCourse/{action}/{id}', 'ApplyController@actionCourse')->name('confDocApply');
  Route::post('apply/submitDocApply', 'ApplyController@submitDocApply')->name('submitDocApply');
- 
+  Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
  
  
  

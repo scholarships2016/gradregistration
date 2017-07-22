@@ -28,7 +28,7 @@
 @stop
 
 @section('pagetitle')
-<h1 class="page-title"> ปรับปรุงเอกสารที่ต้องส่ง/Confirmation documents apply  </h1>
+<h1 class="page-title">{{Lang::get('resource.lbConfirmationDoc')}}</h1>
 
 @stop
 
@@ -101,9 +101,18 @@
                                                     @endif
                                                     <input id="pfile_ID{{$Doc->doc_apply_id}}" valid="{{$Doc->doc_apply_id}}" name="pfile_ID{{$Doc->doc_apply_id}}" data-max-size="2048" accept=".gif,.jpg,.jpeg,.png,.pdf " class="upload-file" type="file" >
                                                         <p class="help-block">  
+                                                            
                                                             @foreach($Files as $file)
-                                                           {{($Doc->doc_apply_id == $file->doc_apply_id)?  $file->file_origi_name :' '}}
-                                                            @endforeach   </p>
+                                                              @if($Doc->doc_apply_id == $file->doc_apply_id)
+                                                               {{ $file->file_origi_name }}
+                                                               <a href="{{route('downloadFile').'?file_id='.$file->file_id}}" target="_blank" class="btn btn-xs green" download> 
+                                                                 Download
+                                                                <i class="fa fa-link"></i>
+                                                               </a>
+                                                                @endif
+                                                            @endforeach 
+                                                        
+                                                        </p>
                                                  </div><br><br>
                                                  @endif
                                                 @endif
@@ -147,7 +156,8 @@
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
- 
+    
+   
 </script>
 @endpush
 
