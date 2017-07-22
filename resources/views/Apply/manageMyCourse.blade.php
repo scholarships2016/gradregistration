@@ -135,7 +135,8 @@
                                         <div class="todo-tasklist-controls pull-left">
                                             <span class="todo-tasklist-date">
                                                 <i class="fa fa-calendar"></i> {{$curDis->appDates}} </span>
-          <div class="col-md-12 portlet mt-element-ribbon light portlet-fit bordered"> 
+                                               
+                                                <div  class="col-md-12 col-md-offset-4 portlet mt-element-ribbon light portlet-fit bordered"> 
 <div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase"> 
 <div class="ribbon-sub ribbon-bookmark"></div> 
 <i class="fa fa-star"></i> 
@@ -147,12 +148,23 @@
 </div> 
 </div> 
 <div class="portlet-body">  @if($curDis->flow_id==1)
-                                                    <a class="btn  blue" href="{{url('apply/register/')}}"> {{Lang::get('resource.lbConfApp')}}
+                                                    <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfApp')}}
                                                         <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+                                                    </a>   <a class="btn red " href="{{url('apply/actionCourse/cancel/'.$curDis->application_id )}}">  {{Lang::get('resource.lbCancel')}}
                                                         <i class="fa fa-times"></i>
                                                     </a> 
-                                                    @endif </div> 
+                           @endif 
+                            @if($curDis->flow_id==2)
+                                                    <a class="btn  blue" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDoc')}}
+                                                        <i class="fa fa-check"></i>
+                                                    </a>    
+                           @endif 
+
+
+
+
+
+</div> 
 </div>
                                             
                                         </div>

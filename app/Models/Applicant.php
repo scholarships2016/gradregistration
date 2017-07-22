@@ -2,17 +2,16 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 16 Jul 2017 15:05:21 +0700.
+ * Date: Sat, 22 Jul 2017 14:18:46 +0700.
  */
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Applicant
- *
+ * 
  * @property int $applicant_id
  * @property string $stu_citizen_card
  * @property string $name_title_id
@@ -61,89 +60,71 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Applicant extends Eloquent
 {
-    const UPDATED_AT = 'modified';
-    const CREATED_AT = 'created';
+	protected $table = 'applicant';
+	protected $primaryKey = 'applicant_id';
+	public $timestamps = false;
 
-    protected $table = 'applicant';
-    protected $primaryKey = 'applicant_id';
-    public $timestamps = true;
+	protected $casts = [
+		'nation_id' => 'int',
+		'district_code' => 'int',
+		'province_id' => 'int',
+		'fund_interesting' => 'int'
+	];
 
-    protected $casts = [
-        'nation_id' => 'int',
-        'district_code' => 'int',
-        'province_id' => 'int',
-        'fund_interesting' => 'int'
-    ];
+	protected $dates = [
+		'stu_birthdate',
+		'eng_date_taken',
+		'created',
+		'modified'
+	];
 
-    protected $dates = [
-        'stu_birthdate',
-        'eng_date_taken',
-        'created',
-        'modified'
-    ];
+	protected $hidden = [
+		'stu_password',
+		'remember_token'
+	];
 
-    protected $hidden = [
-        'stu_password',
-        'remember_token'
-    ];
-
-    protected $fillable = [
-        'stu_citizen_card',
-        'name_title_id',
-        'stu_first_name',
-        'stu_last_name',
-        'stu_first_name_en',
-        'stu_last_name_en',
-        'stu_sex',
-        'nation_id',
-        'stu_addr_no',
-        'stu_addr_village',
-        'stu_addr_soi',
-        'stu_addr_road',
-        'stu_addr_tumbon',
-        'district_code',
-        'province_id',
-        'stu_addr_pcode',
-        'stu_phone',
-        'stu_phone2',
-        'stu_email',
-        'eng_test_id',
-        'eng_test_score',
-        'thai_test_score',
-        'cu_best_score',
-        'stu_img',
-        'stu_birthdate',
-        'stu_religion',
-        'stu_married',
-        'stu_birthplace',
-        'additional_addr',
-        'eng_date_taken',
-        'convert',
-        'fund_interesting',
-        'eng_test_score_admin',
-        'modifire',
-        'eng_test_id_admin',
-        'stu_password',
-        'sys_activate_code',
-        'remember_token',
-        'creator',
-        'created',
-        'modifier',
-        'modified'
-    ];
-
-    public function getStuBirthdateAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
-
-    public function getEngDateTakenAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
-
-    public function tblNation()
-    {
-        return $this->hasOne(TblNation::class, 'nation_id', 'nation_id');
-    }
+	protected $fillable = [
+		'stu_citizen_card',
+		'name_title_id',
+		'stu_first_name',
+		'stu_last_name',
+		'stu_first_name_en',
+		'stu_last_name_en',
+		'stu_sex',
+		'nation_id',
+		'stu_addr_no',
+		'stu_addr_village',
+		'stu_addr_soi',
+		'stu_addr_road',
+		'stu_addr_tumbon',
+		'district_code',
+		'province_id',
+		'stu_addr_pcode',
+		'stu_phone',
+		'stu_phone2',
+		'stu_email',
+		'eng_test_id',
+		'eng_test_score',
+		'thai_test_score',
+		'cu_best_score',
+		'stu_img',
+		'stu_birthdate',
+		'stu_religion',
+		'stu_married',
+		'stu_birthplace',
+		'additional_addr',
+		'eng_date_taken',
+		'convert',
+		'fund_interesting',
+		'eng_test_score_admin',
+		'modifire',
+		'eng_test_id_admin',
+		'stu_password',
+		'sys_activate_code',
+		'remember_token',
+		'creator',
+		'created',
+		'modifier',
+		'modified'
+	];
 }

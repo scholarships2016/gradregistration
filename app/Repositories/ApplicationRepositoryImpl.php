@@ -16,7 +16,16 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function __construct() {
         parent::setModelClassName(Application::class);
     }
+ public function getAppData($applicationID = null) {
+        $result = null;
+        try {
+            $result = Application::where('application.application_id', $applicationID) ->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
 
+        return $result;
+    }
     public function getData($applicantID = null, $applicationID = null) {
         $result = null;
         try {
@@ -39,8 +48,6 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
-                            
-                           
                             ->Where(function ($query)use ($applicationID) {
                                 if ($applicationID) {
                                     $query->where('application.application_id', $applicationID);
@@ -55,35 +62,42 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         } catch (\Exception $ex) {
             throw $ex;
         }
-       
+
         return $result;
     }
 
     public function saveApplication($data) {
         $result = false;
         $app_id = null;
+        $year = null;
         $curriculum_num = null;
-
+        $id = null;
         try {
-            $id = null;
+
 
             if (array_key_exists('application_id', $data) || !empty($data['application_id']))
                 $id = $data['application_id'];
 
             $chk = $this->find($id);
             $curObj = $chk ? $chk : new Application;
+
             if ($chk) {
-                if ($chk[0]['curriculum_num'] == null && array_key_exists('curriculum_id', $data)) {
+                if ($chk->curriculum_num == null) {
+
                     $year = CurriculumActivity::leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', 'apply_setting.apply_setting_id')
-                                    ->where('curriculum_id', $data['curriculum_id'])->select('academic_year')->get();
+                                    ->leftJoin('application', 'curriculum_activity.curr_act_id', 'application.curr_act_id')
+                                    ->where('application_id', $data['application_id'])->get();
 
                     $app_id = Application::leftJoin('curriculum_activity', 'application.curr_act_id', 'curriculum_activity.curr_act_id')
                                     ->leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', 'apply_setting.apply_setting_id')
-                                    ->where('academic_year', $year->academic_year)->count() + 1;
+                                    ->whereNotNull('app_id')
+                                    ->where('semester', $year[0]->semester)
+                                    ->where('academic_year', $year[0]->academic_year)->count() + 1;
 
 
-                    $curriculum_num = Application::where('curriculum_id', $data['curriculum_id'])->whereNotNull('curriculum_num')->count() + 1;
+                    $curriculum_num = Application::where('curriculum_id', $year[0]->curriculum_id)->whereNotNull('curriculum_num')->count() + 1;
                 }
+ 
             }
 
 
@@ -102,6 +116,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                 $curObj->sub_major_id = $data['sub_major_id'];
             if (array_key_exists('flow_id', $data))
                 $curObj->flow_id = $data['flow_id'];
+            
+            if (array_key_exists('bank_id', $data))
+                $curObj->bank_id = $data['bank_id'];
 
             if ($app_id)
                 $curObj->app_id = $app_id;

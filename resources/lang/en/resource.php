@@ -89,6 +89,12 @@ return [
      'lbAll' => 'All',
     'lbSelect' => 'Select',
     'lbDetail' => 'Detail',
+    'lbSearch' => 'Search',
+    'lbReset' => 'Reset',
+    'lbSAdvanced' => 'Advanced Search',
+    'lbUpdateDoc' => 'Document Apply ',
+    'lbUpdateDocApply' => 'Please update documents for apply ',
+     
     
     //other Use
      'lbYear'=>'year',
@@ -96,6 +102,10 @@ return [
      'lbSubject'=>'Subject',
      'lbMajor'=>'Major',
      'lbMajorCode'=>'Major Code',
+     'lbSuccess'=>'Success',
+     'lbError'=>'Error',
+    'lbProgarmID'=>'Program ID',
+    
     
     //register Detail Page
      'lbRegDetail'=>'Course details',

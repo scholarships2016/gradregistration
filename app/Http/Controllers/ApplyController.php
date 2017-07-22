@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Lang;
 use App\Repositories\CurriculumSubMajorRepositoryImpl;
 use App\Repositories\CurriculumProgramRepositoryImpl;
 use App\Repositories\ApplicationRepositoryImpl;
+use App\Repositories\ApplicationDocumentFileRepositoryImpl;
+use App\Repositories\FileRepositoryImpl;
 
 class ApplyController extends Controller {
 
@@ -30,10 +32,12 @@ class ApplyController extends Controller {
     protected $SubCurriculumRepo;
     protected $CurriculumProgramRepo;
     protected $ApplicationRepo;
+    protected $ApplicationDocumentFileRepo;
+    protected $FileRepo;
 
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
-    , ApplicationRepositoryImpl $ApplicationRepo) {
+    , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -45,6 +49,8 @@ class ApplyController extends Controller {
         $this->SubCurriculumRepo = $SubCurriculumRepo;
         $this->CurriculumProgramRepo = $CurriculumProgramRepo;
         $this->ApplicationRepo = $ApplicationRepo;
+        $this->ApplicationDocumentFileRepo = $ApplicationDocumentFileRepo;
+        $this->FileRepo = $FileRepo;
     }
 
     public function index() {
@@ -70,28 +76,32 @@ class ApplyController extends Controller {
         return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
     }
 
-    public function registerCourse() {
+    public function registerCourse($id) {
         $Bank = $this->BankRepo->getBank();
-
-        return view($this->part_doc . 'registerCourse', ['banks' => $Bank]);
+        $Data = $this->ApplicationRepo->find($id);
+        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data]);
     }
 
-    public function getPeopoleRef() {
-        $people = $this->ApplicationPeopleRef->getDetail("1");
+    public function getPeopoleRef($id) {
+        $people = $this->ApplicationPeopleRef->getDetail($id);
         return ['data' => $people, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
     }
 
-    public function savePeopoleRef(Requests\ArticleRequest $json) {
-        $datas = json_decode($json, true);
+    public function savePeopoleRef(Request $request) {
+
+        $datas = json_decode($request->values, true);
+        $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id];
+        $this->ApplicationRepo->saveApplication($data);
         foreach ($datas as $data) {
             $people = $this->ApplicationPeopleRef->save($data);
             if (!$people)
                 break;
         }
         if ($people) {
-            session()->flash('successMsg', 'บันทึกสำเร็จ');
+            $this->actionCourse('conf', $request->application_id);
+            return redirect('apply/manageMyCourse');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถบันทึกได้');
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
     }
@@ -115,10 +125,10 @@ class ApplyController extends Controller {
         $res = $this->ApplicationRepo->saveApplication($gdata);
 
         if ($res) {
-            session()->flash('successMsg', 'บันทึกสำเร็จ');
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('apply/manageMyCourse');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถบันทึกได้');
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
 
             return back();
         }
@@ -129,10 +139,69 @@ class ApplyController extends Controller {
         return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication]);
     }
 
-    public function confDocApply() {
+    public function actionCourse($action, $id) {
+
+        $gdata = ['modifier' => session('user_id'),
+            'application_id' => $id,
+            'flow_id' => ($action == 'conf') ? 2 : 0];
+
+        $res = $this->ApplicationRepo->saveApplication($gdata);
+
+        if ($res) {
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+            return redirect('apply/manageMyCourse');
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
+        }
+    }
+
+    public function confDocApply($id) {
         $DocumentApplys = $this->DocumentApply->getDetail();
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
-        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup]);
+        $Datas = $this->ApplicationRepo->getData(null, $id);
+        $files = $this->ApplicationDocumentFileRepo->GetData($id);
+        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id]);
+    }
+
+    public function submitDocApply(Request $data) {
+
+        $checkbox = [];
+        $file = [];
+        $fileData = [];
+        foreach ($data->all() as $key => $value) {
+
+            if (strpos($key, 'box') > 0) {
+                array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
+            }
+
+            if (strpos($key, 'file') > 0) {
+                array_push($file, ['doc_apply_id' => str_replace('pfile_ID', '', $key), 'uploadedFile' => $value]);
+            }
+        }
+
+        foreach ($file as $key) {
+            $dFile = null;
+
+            if (strpos($key['uploadedFile']->getClientMimeType(), 'mage') > 0) {
+                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG);
+            } else {
+                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC);
+            }
+
+            foreach ($checkbox as $chkKey) {
+
+                if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
+                    array_push($fileData, ['application_id' => $data->application_id, 'doc_apply_id' => $chkKey['doc_apply_id'], 'file_id' => $dFile->file_id, 'other_val' => ($chkKey['doc_apply_id'] == 16) ? $data->other_val : '']);
+                }
+            }
+        }
+
+        foreach ($fileData as $val) {           
+             $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
+        }
+        
+        return;
     }
 
     public function getForm($id = 0) {

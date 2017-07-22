@@ -99,10 +99,10 @@ class LoginApplicantController extends Controller {
             Mail::send('email.rePassword', $data, function($message)use ($result) {
                 $message->to($result->stu_email, $result->stu_first_name)->subject('Your new password!');
             });
-            session()->flash('successMsg', 'ตรวจสอบ e-mail  ทำการ Re-password เรียบร้อย.');
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('login');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail ');
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
     }
@@ -112,7 +112,7 @@ class LoginApplicantController extends Controller {
         if (count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, $request->stu_email)) == 0) {
             $result = $this->loginapplicantRepo->saveApplicant($request->all());
             if ($result) {
-                session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
+                session()->flash('successMsg',Lang::get('resource.lbSuccess'));
                 return redirect('login');
             } else {
                 session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');

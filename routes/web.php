@@ -52,12 +52,15 @@ Route::get('/download', function () {
  
  Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
   Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
- Route::get('apply/registerCourse', 'ApplyController@registerCourse')->name('registerCourse');
+ Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
  Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
- Route::get('apply/confDocApply', 'ApplyController@confDocApply')->name('confDocApply');
- Route::get('apply/peopleData', 'ApplyController@getPeopoleRef')->name('datatables.data');
- Route::post('apply/peopleData/$json', 'ApplyController@savePeopoleRef')->name('datatables.peopleSave');
+ Route::get('apply/confDocApply/{id}', 'ApplyController@confDocApply')->name('confDocApply');
+ Route::get('apply/peopleData/{id}', 'ApplyController@getPeopoleRef')->name('datatables.data');
+ Route::post('apply/savePeopoleRef', 'ApplyController@savePeopoleRef')->name('datatables.savePeopoleRef');
  Route::post('apply/submitregisterDetailForapply', 'ApplyController@submitregisterDetailForapply')->name('submitregisterDetailForapply');
+ Route::get('apply/actionCourse/{action}/{id}', 'ApplyController@actionCourse')->name('confDocApply');
+ Route::post('apply/submitDocApply', 'ApplyController@submitDocApply')->name('submitDocApply');
+ 
  
  
  

@@ -16,7 +16,7 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="/">หน้าหลัก</a>
+            <a href="/">{{Lang::get('resource.lbMain')}}</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -70,13 +70,13 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="search" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn green-soft uppercase bold" onclick="getData();" type="button">Search</button>
+                        <button class="btn green-soft uppercase bold" onclick="getData();" type="button">{{Lang::get('resource.lbSearch')}}</button>
                     </span>
                 </div>
             </div>
             <div class="col-md-4 extra-buttons">
-                <button class="btn grey-steel uppercase bold"   id="reset" type="button">Reset Search</button>
-                <button class="btn grey-cararra font-blue" id="btnAdvanced" type="button">Advanced Search</button>
+                <button class="btn grey-steel uppercase bold"   id="reset" type="button"> {{Lang::get('resource.lbReset').' '.Lang::get('resource.lbSearch')}}</button>
+                <button class="btn grey-cararra font-blue" id="btnAdvanced" type="button"> {{ Lang::get('resource.lbSAdvanced')}}</button>
             </div>
         </div>
         <div class="row">
@@ -223,7 +223,7 @@ orderable: true,
 className: 'table-desc',
 name: 'prog_type_name', 
 render: function (data, type, full, meta) { 
-return ('Faculty of '+  (('{{session('locale')}}'=='th')? full.faculty_name :full.faculty_full) + 'Department of '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'Major in '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
+return ('{{Lang::get('resource.lbFaculty')}}'+  (('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) + ' <br>{{Lang::get('resource.lbDepartment')}} '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'<br> {{Lang::get('resource.lbMajor')}} '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
 }},{ 
 targets: [4], 
 orderable: true, 

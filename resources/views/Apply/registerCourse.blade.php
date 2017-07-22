@@ -1,5 +1,5 @@
 @extends('layouts.default')
-
+<meta name="_token" content="{{ csrf_token() }}"/>
 @push('pageCss')
 
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -34,7 +34,7 @@
  
 
 @section('maincontent')
-   <div class="page-container">
+   <div class="page-container">{{csrf_field()}}
             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar-wrapper">
  <div class="search-page search-content-2">
@@ -44,9 +44,9 @@
                                                                                   <div class="note note-info">
                                                                 <p>  ธนาคารที่ต้องการชำระเงิน.      </p>
                                                             </div>                       
-                                                            <select   id="faculty_id" class="form-control">                                
+                                                            <select   id="bank_id" class="form-control">                                
                                                                 @foreach ($banks as $bank)
-                                                                <option value="{{$bank->bank_id}}">{{$bank->bank_name}}</option>
+                                                                <option value="{{$bank->bank_id}}" {{ $Datas->bank_id == $bank->bank_id ? 'selected="selected"' : '' }}>{{$bank->bank_name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -69,6 +69,7 @@
                                         <table id="tblpeople" class="table table-striped table-bordered table-advance table-hover">
                                               <thead>
                                                 <tr>
+                                                    
                                                     <th>
                                                         <i class="fa fa-user"></i> ชื่อ </th>
                                                     <th class="hidden-xs">
@@ -119,6 +120,7 @@
                                                        <div class="col-md-12">
                                                                             <div class="form-group form-md-line-input">
                                                                                 <input type="hidden" id="row_id">
+                                                                                <input type="hidden" id="RowNum">
                                                                                 <input type="hidden" id="application_id" value="{{session('application_id')}}">
                                                                                 <input type="hidden" id="app_people_id" >
                                                                                 <input class="form-control" id="app_people_name" type="text" placeholder="Enter your name">
@@ -147,8 +149,8 @@
                                                     </div><div class="slimScrollBar" style="background: rgb(187, 187, 187); border-radius: 7px; top: 0px; width: 7px; height: 300px; right: 1px; display: none; position: absolute; z-index: 99; opacity: 0.4;"></div><div class="slimScrollRail" style="background: rgb(234, 234, 234); border-radius: 7px; top: 0px; width: 7px; height: 100%; right: 1px; display: none; position: absolute; z-index: 90; opacity: 0.2;"></div></div>
                                              
                                                 <div class="modal-footer">
-                                                    <button class="btn dark " type="button" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="editSave">Save changes</button>
+                                                    <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
+                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
                                                 </div>
                                                
                                           </div> </form></div></div>
@@ -171,16 +173,15 @@
                
 $(function() {
       var table = $('#tblpeople').DataTable({
-        ajax: '{!! route('datatables.data') !!}',
+        ajax: '{!! url('apply/peopleData/'.$idApp) !!}',
         columns: [
-           
             { data: 'app_people_name', name: 'app_people_name' },
             { data: 'app_people_phone', name: 'app_people_phone' },            
             { data: 'app_people_position', name: 'app_people_position' },
             {
             targets : -1,
                 data: null,
-            defaultContent : '<a id="edit" class="btn yellow " href="#responsive" data-toggle="modal">Edit</a> '
+            defaultContent : '<a id="edit" class="btn green" href="#responsive" data-toggle="modal">Edit</a> '
         } ,{                
             targets : -2,
             data: null,
@@ -197,43 +198,51 @@ $(function() {
     });    
     
       $('#tblpeople tbody').on( 'click', 'a', function () {
-        
+       
          if($(this).attr('id')=="edit"){
           var data = table.row( $(this).parents('tr') ).data();
-          
+           
         $('#app_people_id').val(data['app_people_id']);
         $('#app_people_name').val(data['app_people_name']);
         $('#app_people_phone').val(data['app_people_phone']);
         $('#app_people_address').val(data['app_people_address']);
         $('#app_people_position').val(data['app_people_position']);
-        $('#row_id').val($(this).parent().index()-3);
-   
+        $('#row_id').val($(this).parents('tr').index());
+        
+        
          }else if($(this).attr('id')=="del"){
           table.row( $(this).parents('tr') ).remove(); 
           table.draw();
         }
     } );
-      $('#editSave').click(function() {          
-      if(!$('#app_people_id').val()){
+    
+      $('#editdel').click(function() { cleardata(); });
+    
+      $('#editSave').click(function() {  
+          
+       if($('#row_id').val()==''){
        table.row.add( {
-        "application_id":  $('#application_id').val(),
+        "application_id":  {{$idApp}},
         "app_people_id":   $('#app_people_id').val()  ,
         "app_people_name":    $('#app_people_name').val() ,
         "app_people_phone": $('#app_people_phone').val() ,
         "app_people_address": $('#app_people_address').val() ,
-        "app_people_position": $('#app_people_position').val()         
+        "app_people_position": $('#app_people_position').val() 
     } ).draw();    
     }else{
-        table.row($('#row_id').val()).remove(); 
+         table.row($('#row_id').val()).remove(); 
          table.row.add( {
-        "application_id":  $('#application_id').val(),
+       
+        "application_id":  {{$idApp}},
         "app_people_id":   $('#app_people_id').val()  ,
         "app_people_name":    $('#app_people_name').val() ,
         "app_people_phone": $('#app_people_phone').val() ,
         "app_people_address": $('#app_people_address').val() ,
-        "app_people_position": $('#app_people_position').val()         
-    } ).draw();    
+        "app_people_position": $('#app_people_position').val()
+         
+    }).draw();    
         }
+     cleardata();
   
      });
         $('#pageSave').click(function() {  
@@ -241,14 +250,38 @@ $(function() {
                 var valdata = [];
                 table.rows().every(function(){
                 valdata.push(this.data());
+               
             });
-                console.log( JSON.stringify(valdata));  
+           
+  $.ajax({
+					type: "POST",
+					url: '{!! Route('datatables.savePeopoleRef') !!}',
+					data :{ 
+                                                values : JSON.stringify(valdata),
+                                                bank_id : $('#bank_id').val(),
+                                                application_id : {{$idApp}},
+                                                _token:     '{{ csrf_token() }}'
+                                               } ,
+					success : function(data){
+                                  	window.location.href = '{!! Route('manageMyCourse') !!}';
+                                                
+					}
+				},"json");
+                
           });
- 
-     
+  
+  
+  
        });
 
- 
+ function cleardata(){
+        $('#app_people_id').val(null);
+        $('#app_people_name').val(null);
+        $('#app_people_phone').val(null);
+        $('#app_people_address').val(null);
+        $('#app_people_position').val(null);
+        $('#row_id').val(null);
+ }
                                           </script>
                                             @endpush
 

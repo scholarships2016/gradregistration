@@ -14,7 +14,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     private $paging = 10;
 
     public function __construct() {
-        parent::setModelClassName(TblCurriculum::class);
+        parent::setModelClassName(Curriculum::class);
     }
 
     public function searchByCriteria($curriculum_id = null,$curr_act_id = null,$criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null,$inTime =true, $paging = false) {

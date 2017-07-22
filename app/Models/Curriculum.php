@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 16 Jul 2017 15:05:21 +0700.
+ * Date: Sat, 22 Jul 2017 14:18:46 +0700.
  */
 
 namespace App\Models;
@@ -16,6 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $faculty_id
  * @property int $department_id
  * @property int $degree_id
+ * @property int $major_id
  * @property int $project_id
  * @property string $apply_method
  * @property string $responsible_person
@@ -47,6 +48,7 @@ class Curriculum extends Eloquent
 		'faculty_id' => 'int',
 		'department_id' => 'int',
 		'degree_id' => 'int',
+		'major_id' => 'int',
 		'project_id' => 'int',
 		'is_approve' => 'bool',
 		'status' => 'bool'
@@ -62,6 +64,7 @@ class Curriculum extends Eloquent
 		'faculty_id',
 		'department_id',
 		'degree_id',
+		'major_id',
 		'project_id',
 		'apply_method',
 		'responsible_person',

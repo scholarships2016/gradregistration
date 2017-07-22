@@ -19,7 +19,11 @@ class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implemen
     public function getDetail($appID) {
         $result = null;
         try {
-            $result = ApplicationPeopleRef::where('application_id', $appID)->get();
+            DB::statement(DB::raw('set @rownum=0'));
+            $result =  DB::table('application_people_ref') 
+                      ->select(DB::raw('application_people_ref.*, @rownum := @rownum + 1  AS RowNum'))
+                  
+                    ->where('application_id', $appID)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -35,16 +39,16 @@ class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implemen
 
             $chk = $this->find($id);
             $curObj = $chk ? $chk : new ApplicationPeopleRef;
-            if (array_key_exists('application_id ', $data))
-                $curObj->application_id = $data['application_id '];
-            if (array_key_exists('app_people_name ', $data))
-                $curObj->app_people_name = $data['app_people_name '];
-            if (array_key_exists('app_people_phone ', $data))
-                $curObj->app_people_phone = $data['app_people_phone '];
+            if (array_key_exists('application_id', $data))
+                $curObj->application_id = $data['application_id'];
+            if (array_key_exists('app_people_name', $data))
+                $curObj->app_people_name = $data['app_people_name'];
+            if (array_key_exists('app_people_phone', $data))
+                $curObj->app_people_phone = $data['app_people_phone'];
             if (array_key_exists('app_people_address', $data))
-                $curObj->app_people_address = $data['app_people_address '];
-            if (array_key_exists('app_people_position ', $data))
-                $curObj->app_people_position = $data['app_people_position '];
+                $curObj->app_people_address = $data['app_people_address'];
+            if (array_key_exists('app_people_position', $data))
+                $curObj->app_people_position = $data['app_people_position'];
 
             $result = $curObj->save();
         } catch (\Exception $ex) {

@@ -91,6 +91,13 @@ return [
     'lbAll' => 'ทั้งหมด',
     'lbSelect' => 'เลือก/Select',
     'lbDetail' => 'รายละเอียด',
+    'lbSearch' => 'ค้นหา',
+    'lbReset' => 'ยกเลิก',
+    'lbSAdvanced' => 'การค้นหาขั้นสูง',
+    'lbUpdateDoc' => 'เอกสารสำหรับสมัคร',
+      'lbUpdateDocApply' => 'ปรับปรุงข้อมูลเอกสารที่สมัคร ',
+    
+    
     
     //other Use
      'lbYear'=>'ปีการศึกษา(พ.ศ.)',
@@ -98,6 +105,9 @@ return [
      'lbSubject'=>'สาขาวิชา',
      'lbMajor'=>'หลักสูตร',
      'lbMajorCode'=>'รหัสหลักสูตร',
+    'lbSuccess'=>'ดำเนินการเรียบร้อย',
+    'lbError'=>'ไม่สมารถดำเนินการได้',
+    'lbProgarmID'=>'รหัสหลักสูตร',
     
     //register Detail Page
      'lbRegDetail'=>'รายละเอียดหลักสูตร',
