@@ -81,25 +81,107 @@
                                             </thead>   
                      
                                         </table>
-                                                                     </div>        <div style=" text-align: center;">       <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> บันทึก/Save
-                                      <i class="fa fa-check"></i>
-                                    </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  ยกเลิก
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                                                </div>           
+                                                                     </div>    
+                                                                    
+                                                                    
+                                                                      
                                                                       
                                                                 </li>
-                                                            
+                                                                
+                                                                
+                                                           
+                                                             
+                                                             
+                                                           
                                                             </ul>
                                                            
                                                         </div>
                                                     </div>
 
                                                 </div>
+    @if($Sats==null)
+        <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="search-container ">
+                                                            <ul>
+                                                                  <li class="search-item-header"> 
+                                                                    <div class="row">
+                                                                        <div class="note note-info">
+                                                                            <p> โปรดกรอกแบบประเมินความพอใจการใช้งานระบบ
+Please fill in satisfactory form
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                  <div style=" text-align: center;">      
+                                                       <div class="md-radio-inline">  <label class="col-md-2 control-label" for="form_control_1">ระดับความพอใจ / Satisfactory level</label>
+                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio1" value="1" name="radioB" class="md-radiobtn">
+                                                        <label for="radio1">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> ไม่พอใจ/Unsatisfactory </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio2"  value="2"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio2">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> พอใช้/Satisfactory </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio3"  value="3"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio3">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> ดี/Good </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio4" value="4"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio4">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> มาก/Very Good </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio5"  value="5"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio5">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> มากที่สุด/Excellent  </label>
+                                                    </div>
+                                                           <br><br>
+                                                   
+                                                                                <div class="form-group form-md-line-input has-success">
+                                                    <label class="col-md-2 control-label" for="form_control_1">ข้อเสนอแนะ / Suggestion</label>
+                                                    <div class="col-md-10">
+                                                       <input type="text" class="form-control" id="txtSug" name="txtSug" placeholder="">
+                                                        <div class="form-control-focus"> </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                                     
+                                                                  </div>  
+                                                             </li>   
+                                                            </ul></div></div></div>
+    @endif
+         <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="search-container ">
+                                                            <ul>
+                                                                 <li class="search-item-header"> 
+                                                                       <div class="row" style=" text-align: center;  ">      
+                                                                           <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> บันทึก/Save
+                                      <i class="fa fa-check"></i>
+                                    </a>
+                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  ยกเลิก
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                                                       </div>  </li>  
+                                                            </ul></div></div></div>
    
                                             </div>
-                                </div></div>
+                                </div>
+   </div>
   @stop
 <div class="page-content-wrapper">
                
@@ -148,6 +230,10 @@
                                                         </div>
                                                     </div><div class="slimScrollBar" style="background: rgb(187, 187, 187); border-radius: 7px; top: 0px; width: 7px; height: 300px; right: 1px; display: none; position: absolute; z-index: 99; opacity: 0.4;"></div><div class="slimScrollRail" style="background: rgb(234, 234, 234); border-radius: 7px; top: 0px; width: 7px; height: 100%; right: 1px; display: none; position: absolute; z-index: 90; opacity: 0.2;"></div></div>
                                              
+                               
+                                            
+                                                    
+                                                    
                                                 <div class="modal-footer">
                                                     <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
                                                     <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
@@ -259,11 +345,13 @@ $(function() {
 					data :{ 
                                                 values : JSON.stringify(valdata),
                                                 bank_id : $('#bank_id').val(),
+                                                SATI_SUGGESTION  : $('#txtSug').val(),
+                                                SATI_LEVEL   :$('input[name=radioB]:checked').val(),
                                                 application_id : {{$idApp}},
                                                 _token:     '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                  	window.location.href = '{!! Route('manageMyCourse') !!}';
+//                                  	window.location.href = '{!! Route('manageMyCourse') !!}';
                                                 
 					}
 				},"json");

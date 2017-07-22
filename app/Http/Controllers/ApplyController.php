@@ -17,6 +17,7 @@ use App\Repositories\CurriculumProgramRepositoryImpl;
 use App\Repositories\ApplicationRepositoryImpl;
 use App\Repositories\ApplicationDocumentFileRepositoryImpl;
 use App\Repositories\FileRepositoryImpl;
+use App\Repositories\SatisfactionRepositoryImpl;
 
 class ApplyController extends Controller {
 
@@ -34,10 +35,12 @@ class ApplyController extends Controller {
     protected $ApplicationRepo;
     protected $ApplicationDocumentFileRepo;
     protected $FileRepo;
+    protected $SatisfactionRepo;
 
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
-    , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo) {
+    , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo
+    ,  SatisfactionRepositoryImpl   $SatisfactionRepo    ) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -51,6 +54,7 @@ class ApplyController extends Controller {
         $this->ApplicationRepo = $ApplicationRepo;
         $this->ApplicationDocumentFileRepo = $ApplicationDocumentFileRepo;
         $this->FileRepo = $FileRepo;
+        $this->SatisfactionRepo =$SatisfactionRepo;
     }
 
     public function index() {
@@ -77,9 +81,11 @@ class ApplyController extends Controller {
     }
 
     public function registerCourse($id) {
+        
         $Bank = $this->BankRepo->getBank();
         $Data = $this->ApplicationRepo->find($id);
-        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data]);
+        $Sat = $this->SatisfactionRepo->getById(session('Applicant')->stu_citizen_card);
+        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data,'Sats'=>$Sat]);
     }
 
     public function getPeopoleRef($id) {
@@ -88,7 +94,7 @@ class ApplyController extends Controller {
     }
 
     public function savePeopoleRef(Request $request) {
-
+//          เหลือ save sug  ส่งค่ามาแล้ว เอามา Save เข้า DB เช็กด้วยว่า ถ้าไม่มี ค่า ก็ไม่ต้อง save
         $datas = json_decode($request->values, true);
         $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id];
         $this->ApplicationRepo->saveApplication($data);

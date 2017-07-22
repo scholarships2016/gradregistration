@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Jul 2017 14:18:46 +0700.
+ * Date: Sat, 22 Jul 2017 22:38:49 +0700.
  */
 
 namespace App\Models;
@@ -14,7 +14,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $curr_prog_id
  * @property int $curriculum_id
- * @property int $program_id
+ * @property string $program_id
  * @property int $program_type_id
  * @property int $program_plan_id
  * @property string $coursecodeno
@@ -29,7 +29,6 @@ class CurriculumProgram extends Eloquent
 
 	protected $casts = [
 		'curriculum_id' => 'int',
-		'program_id' => 'int',
 		'program_type_id' => 'int',
 		'program_plan_id' => 'int'
 	];
