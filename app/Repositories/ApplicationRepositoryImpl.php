@@ -16,16 +16,18 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function __construct() {
         parent::setModelClassName(Application::class);
     }
- public function getAppData($applicationID = null) {
+
+    public function getAppData($applicationID = null) {
         $result = null;
         try {
-            $result = Application::where('application.application_id', $applicationID) ->get();
+            $result = Application::where('application.application_id', $applicationID)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
 
         return $result;
     }
+
     public function getData($applicantID = null, $applicationID = null) {
         $result = null;
         try {
@@ -66,6 +68,37 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         return $result;
     }
 
+    public function getDatacountByStatusUse($applicantID) {
+        $result = null;
+        try {
+            $result = Application::leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
+                            ->groupBy('application.flow_id')
+                            ->groupBy('tbl_flow_apply.flow_name_en')
+                            ->groupBy('tbl_flow_apply.flow_name')
+                            ->select('application.flow_id', 'tbl_flow_apply.flow_name_en', 'tbl_flow_apply.flow_name', DB::raw('count(*) as numc'))
+                            ->Where('application.applicant_id', $applicantID)
+                            ->Where('application.flow_id', '<>', 0)
+                            ->orderBy('application.application_id')->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
+
+    public function getDatacountByStatus($applicantID) {
+
+        $result = null;
+        try {
+            $result = \App\Models\TblFlowApply::select('flow_id', 'flow_name_en', 'flow_name', DB::raw('(select count(flow_id) as numc from application where application.flow_id= tbl_flow_apply.flow_id and application.applicant_id = ' . $applicantID . ') as cnum'))
+                            ->orderBy('tbl_flow_apply.flow_id')->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
+
     public function saveApplication($data) {
         $result = false;
         $app_id = null;
@@ -73,6 +106,16 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         $curriculum_num = null;
         $id = null;
         try {
+
+            if (array_key_exists('flow_id', $data) || !empty($data['flow_id'])) {
+                if ($data['flow_id'] == 0) {
+                   
+                    $chks = $this->find($data['application_id']);
+                    $rs = $chks->delete();
+                    return $rs;
+                }
+            }
+
 
 
             if (array_key_exists('application_id', $data) || !empty($data['application_id']))
@@ -97,7 +140,6 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
                     $curriculum_num = Application::where('curriculum_id', $year[0]->curriculum_id)->whereNotNull('curriculum_num')->count() + 1;
                 }
- 
             }
 
 
@@ -116,7 +158,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                 $curObj->sub_major_id = $data['sub_major_id'];
             if (array_key_exists('flow_id', $data))
                 $curObj->flow_id = $data['flow_id'];
-            
+
             if (array_key_exists('bank_id', $data))
                 $curObj->bank_id = $data['bank_id'];
 

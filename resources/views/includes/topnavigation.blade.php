@@ -27,7 +27,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hove                                   r="dropdown"
                data-close-others="true">
                 <i class="icon-bell"></i>
-                <span class="badge badge-default"> 7 </span>
+                <span id="regHeadsum" name="regHeadsum" class="badge badge-default">  </span>
             </a>
             <ul class="dropdown-menu">
                 <li class="external">
@@ -36,88 +36,9 @@
                     <a href="                                           page_user_profile_1.ht                                           ml">view all</a>
                 </li>
                 <li>
-                    <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">just now</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-success">
-                                        <i class="fa fa-plus                                                                           "></i>
-                                    </span> New user registered. </                                                                       span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">3 mins</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt"></i>
-                                    </span> Server #12 overloaded. </span>
-                            </a>
-                        </li>                                               
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">10 mins</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-warning">
-                                        <i class="fa fa-bell-o"></i>
-                                    </span> Server #2 not responding. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">14 hrs</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-info">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </span> Application error. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">2 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt                                                                           "></i>
-                                    </span> Database overloaded                                                                       68%. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">3 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt"></i>
-                                    </span> A user IP blocked. </s                                                               pan>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">4 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-warning">
-                                        <i class="fa fa-bell-o"></i>
-                                    </span> Storage Server #4 not responding dfdfdfd. </s                                                               pan>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">5 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-info">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </span> System Error. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">9 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt"></i>
-                                        </span> Storage server failed. </sp                                                                                         an>
-                                        </a>
-                                        </li>
+                    <ul id ="regHead" name="regHead" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                      
+                       
                                         </ul>
                                         </li>
                                         </ul>
@@ -151,4 +72,24 @@
                                         <!-- END USER LOGIN DROPDOWN -->
                                         @endif
                                         </ul>
-                                        </div>
+  </div>
+
+<script>
+    
+ $.ajax({
+					type: "GET",
+					url: '{!! Route('showRegisHead') !!}',
+					data :{ 
+                                            _token:     '{{ csrf_token() }}'
+                                               } ,
+					success : function(data){ 
+                                  	   $('#regHead').html(data['val']); 
+                                           $('#regHeadsum').html(data['cot']); 
+					}
+				});
+
+
+    
+
+</script>
+ 

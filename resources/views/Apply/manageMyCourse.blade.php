@@ -6,6 +6,8 @@
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/pages/css/invoice.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/apps/css/todo-2.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/css/components-md.min.css')}}" rel="stylesheet" id="style_components" type="text/css">
+ 
 <style type="text/css">
 
 </style>
@@ -78,26 +80,12 @@
                     <div class="portlet-body todo-project-list-content" style="height: auto;">
                         <div class="todo-project-list">
                             <ul class="nav nav-stacked">
+                                @foreach($CountStatus as $CountStat)
                                 <li>
                                     <a href="javascript:;">
-                                        <span class="badge badge-info"> 5 </span>รอผู้สมัครยืนยัน </a>
+                                        <span class="badge badge-info"> {{$CountStat->cnum}} </span>{{(session('locale')=='th')? $CountStat->flow_name : $CountStat->flow_name_en }} </a>
                                 </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-success"> 0 </span>รอผู้สมัครชำระค่าธรรมเนียม และส่งเอกสาร</a>
-                                </li>
-                                <li  >
-                                    <a href="javascript:;">
-                                        <span class="badge badge-success"> 0 </span> ได้รับค่าธรรมเนียมแล้ว</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-default"> 0 </span> บัณฑิตได้รับเอกสารแล้ว </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-info"> 0 </span> รอประกาศผล </a>
-                                </li>
+                           @endforeach
 
                             </ul>
                         </div>
@@ -114,7 +102,7 @@
                         <div class="caption">
                             <i class="icon-bar-chart font-green-sharp hide"></i>
 
-                            <span class="caption-subject font-green-sharp bold uppercase">หลักสูตรที่สมัคร</span>
+                            <span class="caption-subject font-green-sharp bold uppercase"> {{Lang::get('resource.lbManageCouse')}}</span>
                         </div>
 
                     </div>
@@ -150,9 +138,10 @@
 <div class="portlet-body">  @if($curDis->flow_id==1)
                                                     <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfApp')}}
                                                         <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " href="{{url('apply/actionCourse/cancel/'.$curDis->application_id )}}">  {{Lang::get('resource.lbCancel')}}
+                                                    </a>   <a class="btn red " data-toggle="confirmation" data-original-title="Are you sure ?" title="" href="{{url('apply/actionCourse/cancel/'.$curDis->application_id )}}">  {{Lang::get('resource.lbCancel')}}
                                                         <i class="fa fa-times"></i>
                                                     </a> 
+                                                      
                            @endif 
                             @if($curDis->flow_id==2)
                                                     <a class="btn  blue" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDoc')}}
@@ -190,6 +179,7 @@
 @push('pageJs')
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
 </script>

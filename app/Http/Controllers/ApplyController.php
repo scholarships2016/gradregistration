@@ -40,7 +40,7 @@ class ApplyController extends Controller {
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
     , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo
-    ,  SatisfactionRepositoryImpl   $SatisfactionRepo    ) {
+    , SatisfactionRepositoryImpl $SatisfactionRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -54,7 +54,7 @@ class ApplyController extends Controller {
         $this->ApplicationRepo = $ApplicationRepo;
         $this->ApplicationDocumentFileRepo = $ApplicationDocumentFileRepo;
         $this->FileRepo = $FileRepo;
-        $this->SatisfactionRepo =$SatisfactionRepo;
+        $this->SatisfactionRepo = $SatisfactionRepo;
     }
 
     public function index() {
@@ -81,11 +81,11 @@ class ApplyController extends Controller {
     }
 
     public function registerCourse($id) {
-        
+
         $Bank = $this->BankRepo->getBank();
         $Data = $this->ApplicationRepo->find($id);
         $Sat = $this->SatisfactionRepo->getById(session('Applicant')->stu_citizen_card);
-        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data,'Sats'=>$Sat]);
+        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data, 'Sats' => $Sat]);
     }
 
     public function getPeopoleRef($id) {
@@ -94,10 +94,16 @@ class ApplyController extends Controller {
     }
 
     public function savePeopoleRef(Request $request) {
-//          เหลือ save sug  ส่งค่ามาแล้ว เอามา Save เข้า DB เช็กด้วยว่า ถ้าไม่มี ค่า ก็ไม่ต้อง save
+
+
+
         $datas = json_decode($request->values, true);
         $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id];
         $this->ApplicationRepo->saveApplication($data);
+        if ($request->SATI_LEVEL != "") {
+            $SData = ['SATI_LEVEL' => $request->SATI_LEVEL, 'SATI_SUGGESTION' => $request->SATI_SUGGESTION, 'stu_citizen_card' => session('Applicant')->stu_citizen_card];
+            $this->SatisfactionRepo->save($SData);
+        }
         foreach ($datas as $data) {
             $people = $this->ApplicationPeopleRef->save($data);
             if (!$people)
@@ -142,7 +148,30 @@ class ApplyController extends Controller {
 
     public function manageMyCourse() {
         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
-        return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication]);
+        $countStatus = $this->ApplicationRepo->getDatacountByStatus(session('Applicant')->applicant_id);
+
+        return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus]);
+    }
+
+    public function showRegisHead() {
+        $countStatus = $this->ApplicationRepo->getDatacountByStatusUse(session('Applicant')->applicant_id);
+        $val = '';
+        $cval=0;
+        foreach ($countStatus as $cStatus) {
+            $val .= ' <li> ';
+            $val .= ' <a href="' . url('apply/manageMyCourse') . '"> ';
+            $val .= '  <span class="time">' . $cStatus->numc . '</span> ';
+            $val .= '  <span class="details"> ';
+            $val .= '  <span class="label label-sm label-icon label-success"> ';
+            $val .= '  <i class="fa fa-bell-o"></i> ';
+            $val .= '  </span> ' . ((session('locale')=='th')? $cStatus->flow_name : $cStatus->flow_name_en) . ' </ span> ';
+            $val .= '  </a> ';
+            $val .= '  </li>  ';
+            $cval+=$cStatus->numc;
+        }
+
+
+        return ['val'=>$val,'cot'=>$cval];
     }
 
     public function actionCourse($action, $id) {
@@ -176,12 +205,12 @@ class ApplyController extends Controller {
         $file = [];
         $fileData = [];
         $docID = [];
-         
+
         foreach ($data->all() as $key => $value) {
 
             if (strpos($key, 'box') > 0) {
                 array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
-                array_push($docID,$value);
+                array_push($docID, $value);
             }
 
             if (strpos($key, 'file') > 0) {
@@ -197,7 +226,7 @@ class ApplyController extends Controller {
             } else {
                 $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC);
             }
-      
+
             foreach ($checkbox as $chkKey) {
 
                 if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
@@ -207,11 +236,11 @@ class ApplyController extends Controller {
         }
 
         $res = $this->ApplicationDocumentFileRepo->DeleteNOTIN($data->application_id, $docID);
- 
+
         foreach ($fileData as $val) {
             $res = $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
             if (!$res) {
-                session()->flash('errorMsg',  Lang::get('resource.lbError'));
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
                 return back();
             }
         }
