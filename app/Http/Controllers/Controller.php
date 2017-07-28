@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Repositories\FileRepositoryImpl;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController {
 
@@ -37,6 +38,16 @@ class Controller extends BaseController {
             return response()->download($path, $file->file_origi_name);
         } catch (\Exception $ex) {
             
+        }
+    }
+
+    public function WLog($message, $activity, $errorLog) {
+        $log =  '|User:' . ((session('user_id') != null) ? session('email_address') : 'unknowUser' ). '|Activity:' . $activity . '|Message:' . $message;
+        $ip = request()->ip();
+        if ($errorLog == null || $errorLog == '') {
+            Log::info($log . '|IP:' . $ip. PHP_EOL);
+        } else {
+            Log::error($log . '|Error Message:' . $errorLog . '|IP:' . $ip. PHP_EOL);
         }
     }
 

@@ -6,7 +6,7 @@
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/pages/css/invoice.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/apps/css/todo-2.min.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/global/css/components-md.min.css')}}" rel="stylesheet" id="style_components" type="text/css">
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
  
 <style type="text/css">
 
@@ -138,9 +138,12 @@
 <div class="portlet-body">  @if($curDis->flow_id==1)
                                                     <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfApp')}}
                                                         <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn red " data-toggle="confirmation" data-original-title="Are you sure ?" title="" href="{{url('apply/actionCourse/cancel/'.$curDis->application_id )}}">  {{Lang::get('resource.lbCancel')}}
+                                                    </a>   <a class="btn btn-danger mt-sweetalert sweet-8"  href="javascript:cancel({{$curDis->application_id}});"   >  {{Lang::get('resource.lbCancel')}}
                                                         <i class="fa fa-times"></i>
                                                     </a> 
+                                                
+                                                     
+                                                    
                                                       
                            @endif 
                             @if($curDis->flow_id==2)
@@ -179,9 +182,25 @@
 @push('pageJs')
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
-<script src="{{asset('/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js')}}" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="../assets/pages/scripts/ui-sweetalert.min.js" type="text/javascript"></script>
 <script type="application/javascript">
-
+   
+     function cancel($id) {
+    swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this application form again!",
+  type: "warning",
+  showCancelButton: true,
+  closeOnConfirm: false,
+  showLoaderOnConfirm: true
+}, function () {
+  setTimeout(function () {
+   window.location.href = '{{ url('apply/actionCourse/cancel') }}' + '/' +$id
+  }, 100);
+});
+         }
+ 
 </script>
 @endpush
 

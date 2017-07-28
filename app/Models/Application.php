@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Jul 2017 22:38:49 +0700.
+ * Date: Sun, 23 Jul 2017 20:32:39 +0700.
  */
 
 namespace App\Models;
@@ -23,6 +23,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $app_id
  * @property int $curriculum_num
  * @property int $flow_id
+ * @property string $additional_answer
  * @property string $creator
  * @property \Carbon\Carbon $created
  * @property string $modifier
@@ -64,6 +65,7 @@ class Application extends Eloquent
 		'app_id',
 		'curriculum_num',
 		'flow_id',
+		'additional_answer',
 		'creator',
 		'created',
 		'modifier',

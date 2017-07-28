@@ -82,6 +82,7 @@ return [
     'lbMContactsUs' =>'Contact Us',
     'lbManageCouse' => 'Program Selected',
      'lbConfirmationDoc'=> 'Confirmation documents apply',
+     'lbConfirmApply'=> 'Confirmation',
     
     
      //botton
@@ -106,6 +107,8 @@ return [
      'lbSuccess'=>'Success',
      'lbError'=>'Error',
     'lbProgarmID'=>'Program ID',
+     'lbAnswer'=>'Answer',
+    'lbQuestionAsk'=>'Question',
     
     
     //register Detail Page

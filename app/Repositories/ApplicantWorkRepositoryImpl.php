@@ -53,6 +53,16 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
         }
 
     }
+       public function getApplicantWorkAllByApplicantId($applicantId)
+    {
+        try {
+            return ApplicantWork::leftjoin('tbl_work_status','tbl_work_status.work_status_id' ,'applicant_work.work_status_id' )
+                    ->where('applicant_id', '=', $applicantId)->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+    }
 
     public function save(array $data)
     {

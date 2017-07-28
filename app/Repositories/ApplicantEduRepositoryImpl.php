@@ -53,6 +53,17 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
             throw $ex;
         }
     }
+    public function getApplicantEduAllByApplicantId($applicantId)
+    {
+        try {
+            return ApplicantEdu::leftjoin('tbl_university','tbl_university.university_id','applicant_edu.university_id')
+                    ->leftjoin('tbl_education_pass','tbl_education_pass.edu_pass_id','applicant_edu.edu_pass_id')
+                      
+                    ->where('applicant_id', '=', $applicantId)->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
     public function save(array $data)
     {

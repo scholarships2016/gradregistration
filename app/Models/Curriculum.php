@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Jul 2017 22:38:49 +0700.
+ * Date: Sun, 23 Jul 2017 20:32:39 +0700.
  */
 
 namespace App\Models;
@@ -20,9 +20,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $project_id
  * @property string $apply_method
  * @property string $responsible_person
- * @property string $addtional_detail
+ * @property string $additional_detail
  * @property string $apply_fee
- * @property string $addtional_question
+ * @property string $additional_question
  * @property string $mailing_address
  * @property string $document_file
  * @property string $comm_appr_name
@@ -68,9 +68,9 @@ class Curriculum extends Eloquent
 		'project_id',
 		'apply_method',
 		'responsible_person',
-		'addtional_detail',
+		'additional_detail',
 		'apply_fee',
-		'addtional_question',
+		'additional_question',
 		'mailing_address',
 		'document_file',
 		'comm_appr_name',

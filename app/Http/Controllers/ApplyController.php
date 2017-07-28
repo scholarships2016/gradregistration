@@ -18,6 +18,7 @@ use App\Repositories\ApplicationRepositoryImpl;
 use App\Repositories\ApplicationDocumentFileRepositoryImpl;
 use App\Repositories\FileRepositoryImpl;
 use App\Repositories\SatisfactionRepositoryImpl;
+use App\Repositories\ApplicantRepositoryImpl;
 
 class ApplyController extends Controller {
 
@@ -36,11 +37,12 @@ class ApplyController extends Controller {
     protected $ApplicationDocumentFileRepo;
     protected $FileRepo;
     protected $SatisfactionRepo;
+    protected $ApplicantRepo;
 
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
     , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo
-    , SatisfactionRepositoryImpl $SatisfactionRepo) {
+    , SatisfactionRepositoryImpl $SatisfactionRepo, ApplicantRepositoryImpl $ApplicantRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -55,6 +57,7 @@ class ApplyController extends Controller {
         $this->ApplicationDocumentFileRepo = $ApplicationDocumentFileRepo;
         $this->FileRepo = $FileRepo;
         $this->SatisfactionRepo = $SatisfactionRepo;
+        $this->ApplicantRepo = $ApplicantRepo;
     }
 
     public function index() {
@@ -83,9 +86,11 @@ class ApplyController extends Controller {
     public function registerCourse($id) {
 
         $Bank = $this->BankRepo->getBank();
+        $Qus = $this->ApplicationRepo->getData(null, $id);
         $Data = $this->ApplicationRepo->find($id);
         $Sat = $this->SatisfactionRepo->getById(session('Applicant')->stu_citizen_card);
-        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data, 'Sats' => $Sat]);
+
+        return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data, 'Sats' => $Sat, 'Qus' => $Qus->all()]);
     }
 
     public function getPeopoleRef($id) {
@@ -98,7 +103,7 @@ class ApplyController extends Controller {
 
 
         $datas = json_decode($request->values, true);
-        $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id];
+        $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id, 'additional_answer' => $request->additional_answer];
         $this->ApplicationRepo->saveApplication($data);
         if ($request->SATI_LEVEL != "") {
             $SData = ['SATI_LEVEL' => $request->SATI_LEVEL, 'SATI_SUGGESTION' => $request->SATI_SUGGESTION, 'stu_citizen_card' => session('Applicant')->stu_citizen_card];
@@ -123,6 +128,23 @@ class ApplyController extends Controller {
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id);
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
+    }
+
+    public function docMyCourse($id) {
+ 
+        $dataApplication = $this->ApplicationRepo->getData(null, $id);
+        $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
+        $people = $this->ApplicationPeopleRef->getDetail($id);
+        $DocumentApplys = $this->DocumentApply->getDetail();
+        $DocumentApplyGroup = $this->DocumentApply->getGroup();
+        $files = $this->ApplicationDocumentFileRepo->GetData($id);
+        return view($this->part_doc . 'docMyCourse', ['apps' => $dataApplication,
+            'applicant' => $applicantProfile['applicant']
+            , 'appEdus' => $applicantProfile['applicantEdu']
+            , 'appapplicantWorks' => $applicantProfile['applicantWork']
+            , 'peoples' => $people
+                ,'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup,   'Files' => $files
+        ]);
     }
 
     public function submitregisterDetailForapply(Request $data) {
@@ -156,7 +178,7 @@ class ApplyController extends Controller {
     public function showRegisHead() {
         $countStatus = $this->ApplicationRepo->getDatacountByStatusUse(session('Applicant')->applicant_id);
         $val = '';
-        $cval=0;
+        $cval = 0;
         foreach ($countStatus as $cStatus) {
             $val .= ' <li> ';
             $val .= ' <a href="' . url('apply/manageMyCourse') . '"> ';
@@ -164,14 +186,14 @@ class ApplyController extends Controller {
             $val .= '  <span class="details"> ';
             $val .= '  <span class="label label-sm label-icon label-success"> ';
             $val .= '  <i class="fa fa-bell-o"></i> ';
-            $val .= '  </span> ' . ((session('locale')=='th')? $cStatus->flow_name : $cStatus->flow_name_en) . ' </ span> ';
+            $val .= '  </span> ' . ((session('locale') == 'th') ? $cStatus->flow_name : $cStatus->flow_name_en) . ' </ span> ';
             $val .= '  </a> ';
             $val .= '  </li>  ';
-            $cval+=$cStatus->numc;
+            $cval += $cStatus->numc;
         }
 
 
-        return ['val'=>$val,'cot'=>$cval];
+        return ['val' => $val, 'cot' => $cval];
     }
 
     public function actionCourse($action, $id) {

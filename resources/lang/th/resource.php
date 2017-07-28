@@ -85,6 +85,7 @@ return [
     'lbMContactsUs' =>'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
     'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
+    'lbConfirmApply'=> 'ยืนยันการสมัคร',
     
     //botton
     'lbNext' => 'ถัดไป',
@@ -109,6 +110,8 @@ return [
     'lbSuccess'=>'ดำเนินการเรียบร้อย',
     'lbError'=>'ไม่สมารถดำเนินการได้',
     'lbProgarmID'=>'รหัสหลักสูตร',
+    'lbAnswer'=>'คำตอบ',
+    'lbQuestionAsk'=>'คำถามเพิ่มเติม',
     
     //register Detail Page
      'lbRegDetail'=>'รายละเอียดหลักสูตร',

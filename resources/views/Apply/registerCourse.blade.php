@@ -1,5 +1,5 @@
 @extends('layouts.default')
-<meta name="_token" content="{{ csrf_token() }}"/>
+ 
 @push('pageCss')
 
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -15,33 +15,76 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="/">หน้าหลัก</a>
+            <a href="/">{{Lang::get('resource.lbMHome')}}</a>
             <i class="fa fa-circle"></i>
         </li>
 
         <li>
-            <span>ยืนยันการสมัคร</span>
+            <span>{{Lang::get('resource.lbConfirmApply')}}</span>
         </li>
     </ul>
- 
+    {{--<div class="page-tool    bar">--}}
+    {{--<div class="btn-group pull-right">--}}
+    {{--<butto    n type="button" class="btn green btn-sm btn-outline dropdown-toggle"--}}
+    {{--data-toggl    e="dropdown"> Actions--}}
+    {{--<i class="fa f    a-angle-down"></i>--}}
+    {{--</button>--}}
+        {{--<ul clas    s="dropdown-menu pull-right" role="menu">--}}
+        {{--<li>--}}
+        {{--<a href="#">-    -}}
+        {{--<i cl    ass="icon-bell"></i> Action</    a>--}}
+                {{--                                            </li>--}}
+                    {{--                <li>--}}
+                                            {{--<a href="#">--}}
+        {{--<i class="icon-shield"></i> Another action</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}                
+                {{--<a href="#">--}}
+                {{--<i class="ico                n-user"></i> Something else h                ere</a>--}}
+                {{--</li>--}}
+                    {{--                <li class="divider"></li>--}}
+                    {{--<li>--}}
+                                             {{--<a href="#">--}}
+                                            {{--<i class="icon-bag"></i> Separated link</a>--}}
+                {{--</li>--}}
+                {{--</ul>--}                }
+                                     {{--</div>--}}
+                  {{--</div>--}}
     </div>
 @stop
-                
 @section('pagetitle')
- <h1 class="page-title"> ยืนยันการสมัคร  </h1>
+    <h1 class="page-title"> {{Lang::get('resource.lbConfirmApply')}}</h1>
     
 @stop
- 
 
 @section('maincontent')
-   <div class="page-container">{{csrf_field()}}
-            <!-- BEGIN SIDEBAR -->
+   <div class="page-container">
+{{csrf_field()}}
+           
             <div class="page-sidebar-wrapper">
- <div class="search-page search-content-2">
+ <div class="search-page search-content-2">@foreach ($Qus as $Q)  
+ <div  class="search-bar ">
+                            <div class="row">
+                                <div class="col-md-14">
+                                        <div class="note note-info">
+                                                <p>  {{Lang::get('resource.lbQuestionAsk')}}      </p> 
+                                                                
+                                        </div>   <p> 
+                                                                     {{$Q->additional_question }} 
+                                                                        </p>                     
+                                                             <div class="form-group form-md-line-input form-md-floating-label has-success">
+                                                    <textarea class="form-control" name="additional_answer" id="additional_answer" rows="3"></textarea>
+                                                    <label for="form_control_1">{{Lang::get('resource.lbAnswer')}}</label>
+                                                    <span class="help-block">{{Lang::get('resource.lbAnswer')}}...</span>
+                                                </div>
+                                                        </div>
+ 
+                                                    </div>
+                                                </div>@endforeach  
                         <div  class="search-bar ">
                             <div class="row">
                                 <div class="col-md-14">
-                                                                                  <div class="note note-info">
+                                        <div class="note note-info">
                                                                 <p>  ธนาคารที่ต้องการชำระเงิน.      </p>
                                                             </div>                       
                                                             <select   id="bank_id" class="form-control">                                
@@ -182,7 +225,7 @@ Please fill in satisfactory form
                                             </div>
                                 </div>
    </div>
-  @stop
+
 <div class="page-content-wrapper">
                
            
@@ -244,7 +287,7 @@ Please fill in satisfactory form
  </div></div></div></div>
                 </div></div>
 
-
+  @stop
  
  
 
@@ -347,6 +390,7 @@ $(function() {
                                                 bank_id : $('#bank_id').val(),
                                                 SATI_SUGGESTION  : $('#txtSug').val(),
                                                 SATI_LEVEL   :$('input[name=radioB]:checked').val(),
+                                                additional_answer :$('#additional_answer').val(),
                                                 application_id : {{$idApp}},
                                                 _token:     '{{ csrf_token() }}'
                                                } ,
