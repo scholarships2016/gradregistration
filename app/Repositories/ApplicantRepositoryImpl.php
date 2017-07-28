@@ -178,6 +178,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
+             Controller::WLog( 'Save Applicant' , 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;

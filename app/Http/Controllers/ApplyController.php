@@ -100,8 +100,6 @@ class ApplyController extends Controller {
 
     public function savePeopoleRef(Request $request) {
 
-
-
         $datas = json_decode($request->values, true);
         $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id, 'additional_answer' => $request->additional_answer];
         $this->ApplicationRepo->saveApplication($data);
@@ -116,6 +114,7 @@ class ApplyController extends Controller {
         }
         if ($people) {
             $this->actionCourse('conf', $request->application_id);
+            Controller::WLog('Confirmation People Reference', 'Enroll', null);
             return redirect('apply/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
@@ -131,19 +130,21 @@ class ApplyController extends Controller {
     }
 
     public function docMyCourse($id) {
- 
+
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);
         $DocumentApplys = $this->DocumentApply->getDetail();
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
+
+
         return view($this->part_doc . 'docMyCourse', ['apps' => $dataApplication,
             'applicant' => $applicantProfile['applicant']
             , 'appEdus' => $applicantProfile['applicantEdu']
             , 'appapplicantWorks' => $applicantProfile['applicantWork']
             , 'peoples' => $people
-                ,'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup,   'Files' => $files
+            , 'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Files' => $files
         ]);
     }
 
@@ -159,11 +160,10 @@ class ApplyController extends Controller {
         $res = $this->ApplicationRepo->saveApplication($gdata);
 
         if ($res) {
-            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('apply/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
-
             return back();
         }
     }

@@ -20,10 +20,9 @@ class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implemen
         $result = null;
         try {
             DB::statement(DB::raw('set @rownum=0'));
-            $result =  DB::table('application_people_ref') 
-                      ->select(DB::raw('application_people_ref.*, @rownum := @rownum + 1  AS RowNum'))
-                  
-                    ->where('application_id', $appID)->get();
+            $result = DB::table('application_people_ref')
+                            ->select(DB::raw('application_people_ref.*, @rownum := @rownum + 1  AS RowNum'))
+                            ->where('application_id', $appID)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -49,9 +48,10 @@ class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implemen
                 $curObj->app_people_address = $data['app_people_address'];
             if (array_key_exists('app_people_position', $data))
                 $curObj->app_people_position = $data['app_people_position'];
-
+            Controller::WLog('Save People Reference', 'Enroll', null);
             $result = $curObj->save();
         } catch (\Exception $ex) {
+            Controller::WLog('Save People Reference Error', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;

@@ -44,8 +44,9 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
             $result = ApplicationDocumentFile::Where('application_id', $application_ID)
                     ->whereNotIn('doc_apply_id', $doc_apply_id)
                     ->delete();
+            Controller::WLog(' Edit update file upload [application ID:' . $application_ID . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-
+            Controller::WLog(' Edit file upload for enroll Error [application ID:' . $application_ID . ']', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
@@ -76,8 +77,9 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
             $curObj->other_val = $data['other_val'];
 
             $result = $curObj->save();
+            Controller::WLog('Save  update file upload [application ID:' . $data['application_id'] . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-
+            Controller::WLog('error to edit or save file upload', 'Enroll', $ex->getMessage());
             $result = false;
             throw $ex;
         }
