@@ -97,7 +97,12 @@ return [
     'lbReset' => 'ยกเลิก',
     'lbSAdvanced' => 'การค้นหาขั้นสูง',
     'lbUpdateDoc' => 'เอกสารสำหรับสมัคร',
-      'lbUpdateDocApply' => 'ปรับปรุงข้อมูลเอกสารที่สมัคร ',
+     'lbUpdateDocApply' => 'ปรับปรุงข้อมูลเอกสารที่สมัคร ',
+    'lbdocMyCourse'=>'ใบสมัคร',
+     'lbdocPayMyCourse'=>'ใบแจ้งชำระค่าธรรมเนียม',
+    'lbdocEnvelop'=>'ใบปะหน้าซอง',
+     
+     
     
     
     

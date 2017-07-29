@@ -7,16 +7,20 @@ use App\Models\ApplicationDocumentFile;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\FileRepositoryImpl;
+use App\Http\Controllers\Controller;
 
 class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl implements ApplicationDocumentFileRepository {
 
     protected $ApplicationDocumentFileRepo;
     protected $fileRepo;
     private $paging = 10;
+    
+    private $controllers;
 
-    public function __construct(FileRepositoryImpl $fileRepo) {
+    public function __construct(FileRepositoryImpl $fileRepo,Controller $controllors) {
         parent::setModelClassName(ApplicationDocumentFile::class);
         $this->fileRepo = $fileRepo;
+        $this->controllers =$controllors;
     }
 
     public function GetData($application_ID) {
@@ -44,9 +48,9 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
             $result = ApplicationDocumentFile::Where('application_id', $application_ID)
                     ->whereNotIn('doc_apply_id', $doc_apply_id)
                     ->delete();
-            Controller::WLog(' Edit update file upload [application ID:' . $application_ID . ']', 'Enroll', null);
+            $this->controllers->WLog(' Edit update file upload [application ID:' . $application_ID . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-            Controller::WLog(' Edit file upload for enroll Error [application ID:' . $application_ID . ']', 'Enroll', $ex->getMessage());
+            $this->controllers->WLog(' Edit file upload for enroll Error [application ID:' . $application_ID . ']', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
@@ -77,9 +81,9 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
             $curObj->other_val = $data['other_val'];
 
             $result = $curObj->save();
-            Controller::WLog('Save  update file upload [application ID:' . $data['application_id'] . ']', 'Enroll', null);
+            $this->controllers->WLog('Save  update file upload [application ID:' . $data['application_id'] . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-            Controller::WLog('error to edit or save file upload', 'Enroll', $ex->getMessage());
+            $this->controllers->WLog('error to edit or save file upload', 'Enroll', $ex->getMessage());
             $result = false;
             throw $ex;
         }

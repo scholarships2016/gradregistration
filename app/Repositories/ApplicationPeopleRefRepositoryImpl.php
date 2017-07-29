@@ -6,14 +6,17 @@ use App\Repositories\Contracts\ApplicationPeopleRefRepository;
 use App\Models\ApplicationPeopleRef;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implements ApplicationPeopleRefRepository {
 
     protected $ApplicationPeopleRefRepo;
     private $paging = 10;
+    private $controllors;
 
-    public function __construct() {
+    public function __construct(Controller $controllors) {
         parent::setModelClassName(ApplicationPeopleRef::class);
+        $this->controllors =$controllors;
     }
 
     public function getDetail($appID) {
@@ -48,10 +51,10 @@ class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implemen
                 $curObj->app_people_address = $data['app_people_address'];
             if (array_key_exists('app_people_position', $data))
                 $curObj->app_people_position = $data['app_people_position'];
-            Controller::WLog('Save People Reference', 'Enroll', null);
+            $this->controllors->WLog('Save People Reference [Application id:'.$data['application_id'].']', 'Enroll', null);
             $result = $curObj->save();
         } catch (\Exception $ex) {
-            Controller::WLog('Save People Reference Error', 'Enroll', $ex->getMessage());
+            $this->controllors->WLog('Save People Reference Error', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;

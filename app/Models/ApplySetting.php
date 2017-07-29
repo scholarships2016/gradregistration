@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 23 Jul 2017 20:32:39 +0700.
+ * Date: Sat, 29 Jul 2017 23:39:04 +0700.
  */
 
 namespace App\Models;
@@ -18,30 +18,48 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $round_no
  * @property \Carbon\Carbon $start_date
  * @property \Carbon\Carbon $end_date
+ * @property int $is_active
+ * @property int $status
+ * @property \Carbon\Carbon $created
+ * @property string $creator
+ * @property \Carbon\Carbon $modified
+ * @property string $modifier
  *
  * @package App\Models
  */
 class ApplySetting extends Eloquent
 {
 	protected $table = 'apply_setting';
-	protected $primaryKey = 'apply_setting_id';
+	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'apply_setting_id' => 'int',
 		'semester' => 'int',
-		'round_no' => 'int'
+		'round_no' => 'int',
+		'is_active' => 'int',
+		'status' => 'int'
 	];
 
 	protected $dates = [
 		'start_date',
-		'end_date'
+		'end_date',
+		'created',
+		'modified'
 	];
 
 	protected $fillable = [
+		'apply_setting_id',
 		'semester',
 		'academic_year',
 		'round_no',
 		'start_date',
-		'end_date'
+		'end_date',
+		'is_active',
+		'status',
+		'created',
+		'creator',
+		'modified',
+		'modifier'
 	];
 }

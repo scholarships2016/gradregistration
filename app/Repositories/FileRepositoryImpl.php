@@ -103,15 +103,18 @@ class FileRepositoryImpl extends AbstractRepositoryImpl implements FileRepositor
     {
         try {
             $result = File::where('file_id', '=', $id)
-                ->where('file_mimetype', 'like', 'image%');
+                ->where('file_mimetype', 'like', 'image%')->first();
 
             if (empty($result)) {
                 throw new \Exception('Not Found');
             }
-            return 'data:image/*' . ';base64,' . base64_encode(Storage::get($result->file_path));
+        
+           
+            return 'data:image/*' . ';base64,' . str_replace ("\n", "",base64_encode(Storage::get($result->file_path)));
         } catch (\Exception $ex) {
             throw $ex;
         }
+   
     }
 
 }

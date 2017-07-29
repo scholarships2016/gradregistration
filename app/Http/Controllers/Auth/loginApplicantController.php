@@ -62,7 +62,7 @@ class LoginApplicantController extends Controller {
             session()->put('first_name', $user_data->stu_first_name);
             session()->put('last_name', $user_data->stu_last_name);
             session()->put('email_address', $user_data->stu_email);
-
+            session()->put('stu_img', $user_data->stu_img);
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;
             $app->stu_citizen_card = $user_data->stu_citizen_card;
@@ -106,7 +106,7 @@ class LoginApplicantController extends Controller {
 
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('login');
-        } else {            
+        } else {
             Controller::WLog('User can not Re-password not User', 'User_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
@@ -123,13 +123,13 @@ class LoginApplicantController extends Controller {
                 session()->flash('successMsg', Lang::get('resource.lbSuccess'));
                 return redirect('login');
             } else {
-                Controller::WLog('User cannot register, Email or citizen are in the system.' , 'User_Login', null);
+                Controller::WLog('User cannot register, Email or citizen are in the system.', 'User_Login', null);
                 session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
                 return back();
             }
         } else {
-            Controller::WLog('User cannot register, Email or citizen are in the system.' , 'User_Login', null);
-                
+            Controller::WLog('User cannot register, Email or citizen are in the system.', 'User_Login', null);
+
             session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
             return back();
         }

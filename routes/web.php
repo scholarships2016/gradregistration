@@ -61,6 +61,9 @@ Route::get('/download', function () {
  Route::get('apply/actionCourse/{action}/{id}', 'ApplyController@actionCourse')->name('confDocApply');
  Route::post('apply/submitDocApply', 'ApplyController@submitDocApply')->name('submitDocApply');
  Route::get('apply/docMyCourse/{id}', 'ApplyController@docMyCourse')->name('docMyCourse');
+ Route::get('apply/docMyCourserintPDF/{id}', 'ApplyController@docMyCourserintPDF')->name('docMyCourserintPDF');
+  Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
+ 
   Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
  Route::get('showRegisHead', 'ApplyController@showRegisHead')->name('showRegisHead');
  

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Repositories\FileRepositoryImpl;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+ 
 
 class Controller extends BaseController {
 
@@ -40,6 +41,16 @@ class Controller extends BaseController {
             
         }
     }
+        public function doPDFImg($id) {
+        try {             
+            $file = $this->FileRepo->findOrFail($id);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
+
+            return  $path;
+        } catch (\Exception $ex) {
+            
+        }
+    }
 
     public function WLog($message, $activity, $errorLog) {
         $log =  '|User:' . ((session('user_id') != null) ? session('email_address') : 'unknowUser' ). '|Activity:' . $activity . '|Message:' . $message;
@@ -50,5 +61,6 @@ class Controller extends BaseController {
             Log::error($log . '|Error Message:' . $errorLog . '|IP:' . $ip. PHP_EOL);
         }
     }
+
 
 }

@@ -110,15 +110,16 @@
                                                     </div>
                                    </div>
                                    @endif
-                                     <input type="hidden" name="curr_act_id" value="1">
-                                     <input type="hidden" name="curriculum_id" value="1">
-                                      
+                                       @if(session('Applicant'))
+                                     <input type="hidden" name="curr_act_id" value='{{$curDis->curr_act_id}}'  >
+                                     <input type="hidden" name="curriculum_id" value='{{$curDis->curriculum_id}}' >                                  
                                     <button class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
-                                  <button class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+                                     <button class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </button>
+                                      @endif
                                    </form>
                                 </div>
                                     </div>

@@ -11,6 +11,7 @@ use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
 use App\Repositories\Contracts\ApplicantWorkRepository;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
 
@@ -18,12 +19,14 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     protected $appEduRepo;
     protected $appWorkRepo;
     private $paging = 10;
+    private $controllors;
 
-    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo, ApplicantEduRepository $appEduRepo, ApplicantWorkRepository $appWorkRepo) {
+    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo, ApplicantEduRepository $appEduRepo, ApplicantWorkRepository $appWorkRepo, Controller $controllors) {
         parent::setModelClassName(Applicant::class);
         $this->appNewsSrcRepo = $appNewsSrcRepo;
         $this->appEduRepo = $appEduRepo;
         $this->appWorkRepo = $appWorkRepo;
+        $this->controllors = $controllors;
     }
 
     public function checkLogin($criteria = null) {
@@ -178,7 +181,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
-             Controller::WLog( 'Save Applicant' , 'Enroll', $ex->getMessage());
+            $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
@@ -308,17 +311,17 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
     public function getApplicantProfileAllByApplicantId($applicantId) {
         try {
-            $applicantProfile = Applicant::select('*','tbl_name_title.name_title as name_titles')->leftjoin('tbl_religion', 'tbl_religion.religion_id', 'applicant.stu_religion')
+            $applicantProfile = Applicant::select('*', 'tbl_name_title.name_title as name_titles')->leftjoin('tbl_religion', 'tbl_religion.religion_id', 'applicant.stu_religion')
                             ->leftjoin('tbl_nation', 'tbl_nation.nation_id', 'applicant.nation_id')
                             ->leftjoin('tbl_name_title', 'tbl_name_title.name_title_id', 'applicant.name_title_id')
                             ->leftjoin('tbl_province', 'tbl_province.province_id', 'applicant.province_id')
                             ->leftjoin('tbl_district', 'tbl_district.district_code', 'applicant.district_code')
                             ->where('applicant_id', '=', $applicantId)->first();
-            
+
             $newsSource = $this->appNewsSrcRepo->getApplicantNewsSourceByApplicantId($applicantId);
             $appEdu = $this->appEduRepo->getApplicantEduAllByApplicantId($applicantId);
             $appWork = $this->appWorkRepo->getApplicantWorkByApplicantId($applicantId);
- 
+
             return array('applicant' => $applicantProfile, 'applicantNewsSource' => $newsSource,
                 'applicantEdu' => $appEdu, 'applicantWork' => $appWork);
         } catch (\Exception $ex) {

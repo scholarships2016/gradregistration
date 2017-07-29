@@ -4,7 +4,7 @@
 
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
-<link href="../assets/pages/css/invoice-2.min.css" rel="stylesheet" type="text/css"> 
+<link href="{{asset('assets/pages/css/invoice-2.min.css')}}" rel="stylesheet" type="text/css"> 
 
 <style type="text/css">
     page[size="A4"] {
@@ -67,9 +67,9 @@
                     </div>
                     @stop
                     @section('maincontent')
-                    <div class="invoice-content-2 ">
+                    <div class="invoice-content-2">
 
-<table width="800" border="0        " cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center" height="100%" >
+<table width="800" border="0"  cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center" height="100%" >
         <tbody>
             <tr>
                 <td valign="top" align="center">
@@ -88,7 +88,7 @@
                                     <td width="441" height="158"><div align="center"><img src="{{asset('images/bwpk.gif')}}" border="0"><br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br>Graduate School, Chulalongkorn University <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา<br>Application Form<br>
                                             &nbsp;&nbsp;<br>
                                         </div></td>
-                                    <td width="278" rowspan="4" align="center"></td>
+                                    <td width="278" rowspan="4" align="center"><img src="{{$pictrue}}" width="180px" border="0"></td>
                                 </tr>
                                 <tr>
                                     <td><div align="center">ประจำภาค[Term]:
@@ -98,7 +98,7 @@
                                     <td><div align="center">ปีการศึกษา[Year]:{{$app->academic_year}}            </div></td>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;</td>
+                                    <td></td>
                                 </tr>
                             </tbody></table>
 
@@ -140,8 +140,8 @@
                                     <td colspan="2" rowspan="2">หมายเลขบัตรประชาชน/พาสปอร์ต <br>[ Citizen ID / Passport ID]
                                         <br>{{$applicant->stu_citizen_card}}</td>
                                     <td width="618" colspan="2">วัน/เดือน/ปีเกิด [ Date of Birth]
-                                        วันพุธ ที่ 5 กรกฎาคม 2560     อายุ [Age]
-                                        -1ปี[Year]  </td>
+                                        {{$applicant->stu_birthdate->format('Y-m-d') }}   อายุ [Age]
+                                       {{ $age }}   </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">สถานที่เกิด (จังหวัด) [Place of Birth(Province)]
@@ -426,6 +426,11 @@
     <div class="row">
         <div class="col-xs-12">
             <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>
+              
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >PDF</a>
+    
+        
+        
         </div>
     </div>
 </div> 
@@ -437,8 +442,11 @@
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
 <script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
 <script src="../assets/pages/scripts/ui-sweetalert.min.js" type="text/javascript"></script>
-<script type="application/javascript">    
+ 
+ 
 
+<script type="application/javascript">    
+ 
 </script>
 @endpush
 

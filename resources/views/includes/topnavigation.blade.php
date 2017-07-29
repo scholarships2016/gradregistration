@@ -29,12 +29,13 @@
                 <i class="icon-bell"></i>
                 <span id="regHeadsum" name="regHeadsum" class="badge badge-default">  </span>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu">  @if(session('user_id'))
                 <li class="external">
                     <h3>
-                        <span class="bold">12 pending</span> notifications</h3>
-                    <a href="                                           page_user_profile_1.ht                                           ml">view all</a>
+                        <span class="bold"><label id="regHeadsum2" name="regHeadsum2"  ></label> pending</span> notifications</h3>
+                   
                 </li>
+                @endif
                 <li>
                     <ul id ="regHead" name="regHead" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
                       
@@ -52,7 +53,7 @@
                                         <li class="dropdown dropdown-user">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                                data-close-others="true">
-                                                <img alt="" class="img-circle" src="{{url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
+                                                <img alt="" class="img-circle" id='userimg' src="{{url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
                                                 <span class="username username-hide-on-mobile">  {{ session('first_name').' '.session('last_name')  }} </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
@@ -84,7 +85,10 @@
                                                } ,
 					success : function(data){ 
                                   	   $('#regHead').html(data['val']); 
-                                           $('#regHeadsum').html(data['cot']); 
+                                           $('#regHeadsum2').html(data['cot']);
+                                           $('#regHeadsum').html(data['cot']);
+                                           if(data['cusimg']) $('#userimg').attr("src",data['cusimg']);
+                                            
 					}
 				});
 

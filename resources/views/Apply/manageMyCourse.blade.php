@@ -124,7 +124,7 @@
                                             <span class="todo-tasklist-date">
                                                 <i class="fa fa-calendar"></i> {{$curDis->appDates}} </span>
                                                
-                                                <div  class="col-md-12 col-md-offset-4 portlet mt-element-ribbon light portlet-fit bordered"> 
+                                                <div  class="col-md-12 col-md-offset-1 portlet mt-element-ribbon light portlet-fit bordered"> 
 <div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase"> 
 <div class="ribbon-sub ribbon-bookmark"></div> 
 <i class="fa fa-star"></i> 
@@ -135,8 +135,8 @@
 <span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span> 
 </div> 
 </div> 
-<div class="portlet-body">  @if($curDis->flow_id==1)
-                                                    <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfApp')}}
+<div class="portlet-body">  @if($curDis->flow_id==1 && $curDis->is_active==1)
+                                                    <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
                                                         <i class="fa fa-check"></i>
                                                     </a>   <a class="btn btn-danger mt-sweetalert sweet-8"  href="javascript:cancel({{$curDis->application_id}});"   >  {{Lang::get('resource.lbCancel')}}
                                                         <i class="fa fa-times"></i>
@@ -145,11 +145,31 @@
                                                      
                                                     
                                                       
-                           @endif 
+                            @endif 
                             @if($curDis->flow_id==2)
-                                                    <a class="btn  blue" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDoc')}}
-                                                        <i class="fa fa-check"></i>
-                                                    </a>    
+                                                    <a class="btn  blue" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>  
+                            <div class="btn-group dropup">
+                                                                    <button class="btn green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Download <i class="icon-cloud-download"></i></button>
+                                                                    <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                      <i class="fa fa-angle-up"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu pull-right" role="menu">
+                                                                        <li>
+                                                                            <span>  <i class="fa fa-file-o"></i> <a   href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocMyCourse')}}     </a> </span>  </li>
+                                                                      
+                                                                        <li>
+                                                                          <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPayMyCourse')}}   </a> </span>   </li>
+                                                                         <li>
+                                                                           <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>    </li>
+                                                                    </ul>
+                                                                </div>
+                            
+                            
+                            
+                              
+                            
                            @endif 
 
 
@@ -184,6 +204,9 @@
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
 <script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
 <script src="../assets/pages/scripts/ui-sweetalert.min.js" type="text/javascript"></script>
+
+
+
 <script type="application/javascript">
    
      function cancel($id) {
@@ -200,6 +223,8 @@
   }, 100);
 });
          }
+         
+         
  
 </script>
 @endpush

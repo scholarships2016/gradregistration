@@ -7,14 +7,17 @@ use App\Models\CurriculumActivity;
 use App\Models\Application;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements ApplicationRepository {
 
     protected $ApplicationRepo;
     private $paging = 10;
+    private $controllors;
 
-    public function __construct() {
+    public function __construct(Controller $controllors) {
         parent::setModelClassName(Application::class);
+      $this->controllors= $controllors;
     }
 
     public function getAppData($applicationID = null) {
@@ -41,7 +44,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
                             ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
                             ->leftJoin('mcoursestudy', 'curriculum_program.coursecodeno', '=', 'mcoursestudy.coursecodeno')
-                            ->leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
+                            ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
                             ->leftJoin('tbl_bank', 'application.bank_id', '=', 'tbl_bank.bank_id')
                             ->leftJoin("tbl_major", function($join) {
                                 $join->on("tbl_major.major_code", "=", "mcoursestudy.majorcode")
@@ -61,7 +64,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     $query->where('application.applicant_id', $applicantID);
                                 }
                             })
-                            ->orderBy('application.application_id')->get();
+                            ->orderBy('application.application_id','desc')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -106,6 +109,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         $year = null;
         $curriculum_num = null;
         $id = null;
+          if (array_key_exists('application_id', $data) || !empty($data['application_id']))
+                $id = $data['application_id'];
         try {
 
             if (array_key_exists('flow_id', $data) || !empty($data['flow_id'])) {
@@ -119,8 +124,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
 
 
-            if (array_key_exists('application_id', $data) || !empty($data['application_id']))
-                $id = $data['application_id'];
+          
 
             $chk = $this->find($id);
             $curObj = $chk ? $chk : new Application;
@@ -180,9 +184,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
 
             $result = $curObj->save();
-            Controller::WLog('Save Application[application id:'.$data['application_id'].']', 'Enroll', null);
+             $this->controllors->WLog('Save Application[application id:'.$id.']', 'Enroll', null);
         } catch (\Exception $ex) {
-            Controller::WLog('Save Application Error[application id:'.$data['application_id'].']', 'Enroll', $ex->getMessage());
+            $this->controllors->WLog('Save Application Error[application id:'.$id.']', 'Enroll', $ex->getMessage());
             $result = false;
             throw $ex;
         }

@@ -94,8 +94,13 @@ return [
     'lbSearch' => 'Search',
     'lbReset' => 'Reset',
     'lbSAdvanced' => 'Advanced Search',
-    'lbUpdateDoc' => 'Document Apply ',
+    'lbUpdateDoc' => 'Document Apply',
     'lbUpdateDocApply' => 'Please update documents for apply ',
+    'lbdocMyCourse'=>'Application Form',
+     'lbdocPayMyCourse'=>'Pay in Form',
+     'lbdocEnvelop'=>'Envelop',
+     
+     
      
     
     //other Use

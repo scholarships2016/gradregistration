@@ -30,7 +30,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
                     ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
                     ->leftJoin('mcoursestudy', 'curriculum_program.coursecodeno', '=', 'mcoursestudy.coursecodeno')
-                    ->leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
+                    ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
                     ->leftJoin("tbl_major", function($join) {
                         $join->on("tbl_major.major_code", "=", "mcoursestudy.majorcode")
                         ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
@@ -39,6 +39,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                     ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                     ->where('curriculum.status', 'like', '%' . $status . '%')
+                   ->where('apply_setting.is_active', 'like', '%' . $status . '%')
                     ->Where(function ($query)use ($curriculum_id) {
                         if ($curriculum_id) {
                             $query->where('curriculum.curriculum_id', $curriculum_id);
