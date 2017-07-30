@@ -29,8 +29,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class ApplySetting extends Eloquent
 {
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 	protected $table = 'apply_setting';
 	public $incrementing = false;
+		protected $primaryKey = 'apply_setting_id';
 	public $timestamps = false;
 
 	protected $casts = [

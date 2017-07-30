@@ -84,6 +84,7 @@ return [
     'lbMDownlods' => 'Downlods',    
     'lbMContactsUs' =>'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
+     'lbMProfile' => 'โพรไฟล์',
     'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
     'lbConfirmApply'=> 'ยืนยันการสมัคร',
     
@@ -134,9 +135,55 @@ return [
     'lbWTodo'=>'สิ่งที่ต้องดำเนินการ',
     'lbConfApp'=>'สิ่งที่ต้องดำเนินการ',
     
+     //ApplicantInfo
+    'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
+
+    //ProfilePage
+    'perInfoSectionTitle' => 'ข้อมูลทั่วไปผู้สมัคร',
+    'perInfoTitle' => 'คำนำหน้าชื่อ',
+    'perInfoName' => 'ชื่อ',
+    'perInfoSurname' => 'นามสกุล',
+    'perInfoNameEn' => 'ชื่อ (ภาษาอังกฤษ)',
+    'perInfoSurnameEn' => 'นามสกุล (ภาษาอังกฤษ)',
+    'perInfoSex' => 'เพศ',
+    'perInfoCitizenship' => 'สัญชาติ',
+    'perInfoReligion' => 'ศาสนา',
+    'perInfoMaritalStatus' => 'สถานภาพสมรส',
+    'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
+    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
+    'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
+    'perInfoEmail' => 'อีเมล',
+    'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
+    'perInfoPhoto' => 'รูปถ่าย',
+    'perInfoFundInterest' => 'ท่านสนใจสมัครทุนอุดหนุนการศึกษาเฉพาะค่าเล่าเรียนหรือไม่?',
+    'perInfoInterest' => 'สนใจ',
+    'perInfoNotInterest' => 'ไม่สนใจ',
+    'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
     
-    
-    
+        //ApplicantInfo
+    'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
+
+    //ProfilePage
+    'perInfoSectionTitle' => 'ข้อมูลทั่วไปผู้สมัคร',
+    'perInfoTitle' => 'คำนำหน้าชื่อ',
+    'perInfoName' => 'ชื่อ',
+    'perInfoSurname' => 'นามสกุล',
+    'perInfoNameEn' => 'ชื่อ (ภาษาอังกฤษ)',
+    'perInfoSurnameEn' => 'นามสกุล (ภาษาอังกฤษ)',
+    'perInfoSex' => 'เพศ',
+    'perInfoCitizenship' => 'สัญชาติ',
+    'perInfoReligion' => 'ศาสนา',
+    'perInfoMaritalStatus' => 'สถานภาพสมรส',
+    'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
+    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
+    'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
+    'perInfoEmail' => 'อีเมล',
+    'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
+    'perInfoPhoto' => 'รูปถ่าย',
+    'perInfoFundInterest' => 'ท่านสนใจสมัครทุนอุดหนุนการศึกษาเฉพาะค่าเล่าเรียนหรือไม่?',
+    'perInfoInterest' => 'สนใจ',
+    'perInfoNotInterest' => 'ไม่สนใจ',
+    'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
     
     
     //boxMessage

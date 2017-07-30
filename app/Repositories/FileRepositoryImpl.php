@@ -117,4 +117,22 @@ class FileRepositoryImpl extends AbstractRepositoryImpl implements FileRepositor
    
     }
 
+
+    public function justUpload(UploadedFile $uploadedFile, $path = null)
+    {
+        try {
+            return Storage::putFile(empty($path) ? env(Util::TEMP_FOLDER) : $path, $uploadedFile);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function justUploadWithName(UploadedFile $uploadedFile, $newFilename, $path = null)
+    {
+        try {
+            return Storage::putFileAs(empty($path) ? env(Util::TEMP_FOLDER) : $path, $uploadedFile, $newFilename);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 }

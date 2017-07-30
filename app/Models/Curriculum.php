@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -40,9 +41,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Curriculum extends Eloquent
 {
-	protected $table = 'curriculum';
-	protected $primaryKey = 'curriculum_id';
-	public $timestamps = false;
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+
+    protected $table = 'curriculum';
+    protected $primaryKey = 'curriculum_id';
+    public $timestamps = true;
 
 	protected $casts = [
 		'faculty_id' => 'int',
@@ -84,4 +88,13 @@ class Curriculum extends Eloquent
 		'modifier',
 		'modified'
 	];
+ public function file()
+    {
+        return $this->hasOne(File::class, 'file_id', 'document_file');
+    }
+
+    public function getCommApprDateAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    }
 }

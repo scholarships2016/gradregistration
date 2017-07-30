@@ -21,7 +21,10 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     private $paging = 10;
     private $controllors;
 
-    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo, ApplicantEduRepository $appEduRepo, ApplicantWorkRepository $appWorkRepo, Controller $controllors) {
+    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo,
+     ApplicantEduRepository $appEduRepo,
+      ApplicantWorkRepository $appWorkRepo,
+       Controller $controllors) {
         parent::setModelClassName(Applicant::class);
         $this->appNewsSrcRepo = $appNewsSrcRepo;
         $this->appEduRepo = $appEduRepo;

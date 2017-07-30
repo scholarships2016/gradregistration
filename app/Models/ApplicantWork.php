@@ -31,9 +31,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class ApplicantWork extends Eloquent
 {
-	protected $table = 'applicant_work';
-	protected $primaryKey = 'app_work_id';
-	public $timestamps = false;
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+    protected $table = 'applicant_work';
+    protected $primaryKey = 'app_work_id';
+    public $timestamps = true;
 
 	protected $casts = [
 		'applicant_id' => 'int',

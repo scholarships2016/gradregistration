@@ -83,7 +83,7 @@ return [
     'lbManageCouse' => 'Program Selected',
      'lbConfirmationDoc'=> 'Confirmation documents apply',
      'lbConfirmApply'=> 'Confirmation',
-    
+        'lbMProfile' => 'Profile',
     
      //botton
     'lbNext' => 'Next',
@@ -133,6 +133,30 @@ return [
      'lbConfApp'=>'Confirm',
      'lbRegisterbtn'=>'Apply',
     
+//ApplicantInfo
+    'appctInfoPageTitle' => 'Applicant Information',
+
+    //ProfilePage
+    'perInfoSectionTitle' => 'Personal Information',
+    'perInfoTitle' => 'Title',
+    'perInfoName' => 'Name (TH)',
+    'perInfoSurname' => 'Surname (TH)',
+    'perInfoNameEn' => 'Name (EN)',
+    'perInfoSurnameEn' => 'Surname (EN)',
+    'perInfoSex' => 'Sex',
+    'perInfoCitizenship' => 'Citizenship',
+    'perInfoReligion' => 'Religion',
+    'perInfoMaritalStatus' => 'Marital Status',
+    'perInfoBirthdate' => 'Birthdate',
+    'perInfoBirthdateEx' => '-->&nbsp;20/1/1977',
+    'perInfoPlaceOfBirth' => 'Place of Birth',
+    'perInfoEmail' => 'Email',
+    'perInfoEmailNotice' => 'Please fill in your valid email, graduate school will inform application result via this email.',
+    'perInfoPhoto' => 'Photo',
+    'perInfoFundInterest' => 'Do you want fund?',
+    'perInfoInterest' => 'Interesting',
+    'perInfoNotInterest' => 'Not Interesting',
+    'perInfoMedia' => 'How can you know this news?',
     
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
