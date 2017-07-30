@@ -1,13 +1,10 @@
 <div class="portlet box red-pink">
     <div class="portlet-title">
         <div class="caption">
-            {{--<i class="fa fa-user"></i>--}}
-            ข้อมูลทั่วไปผู้สมัคร
-            <small>Personal Information</small>
+            {{Lang::get('resource.perInfoSectionTitle')}}
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
-            <a href="javascript:;" class="reload"> </a>
         </div>
     </div>
     <div class="portlet-body form">
@@ -19,13 +16,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">คำนำหน้าชื่อ
-                                <div>
-                                    <small>Title</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoTitle')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="hidden" id="name_title_id_hidden" name="name_title_id_hidden" value="{{$applicant->name_title_id}}">
+                                <input type="hidden" id="name_title_id_hidden" name="name_title_id_hidden"
+                                       value="{{$applicant->name_title_id}}">
                                 <select class="form-control select2" id="name_title_id"
                                         name="name_title_id">
                                     @if(!empty($nameTitleList))
@@ -42,10 +38,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ชื่อ
-                                <div>
-                                    <small>Name&nbsp;(Th)</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoName')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_first_name"
@@ -56,10 +50,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">นามสกุล
-                                <div>
-                                    <small>Surname&nbsp;(Th)</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoSurname')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_last_name"
@@ -73,7 +65,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label col-md-3">
-                                Name&nbsp;(En)
+                                {{Lang::get('resource.perInfoNameEn')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_first_name_en"
@@ -86,7 +78,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label col-md-3">
-                                Surname&nbsp;(En)
+                                {{Lang::get('resource.perInfoSurnameEn')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_last_name_en"
@@ -100,10 +92,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">เพศ
-                                <div>
-                                    <small>Sex</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoSex')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="stu_sex_hidden" name="stu_sex_hidden"
@@ -118,10 +108,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">สัญชาติ
-                                <div>
-                                    <small>Citizenship</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoCitizenship')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="nation_id_hidden" name="nation_id_hidden"
@@ -142,10 +130,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ศาสนา
-                                <div>
-                                    <small>Religion</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoReligion')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="stu_religion_hidden" name="stu_religion_hidden"
@@ -163,10 +149,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">สถานภาพสมรส
-                                <div>
-                                    <small>Marital&nbsp;Status</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoMaritalStatus')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="stu_married_hidden" name="stu_married_hidden"
@@ -186,15 +170,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">วัน/เดือน/ปีเกิด
-                                <div>
-                                    <small>Birthdate</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoBirthdate')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_birthdate"
                                        name="stu_birthdate" value="{{$applicant->stu_birthdate}}">
-                                <span class="help-block"><small>วัน/เดือน/ปี คศ. ตัวอย่างการกรอก เช่น 20 มกราคม 2520 --> 20/1/1977</small></span>
+                                <span class="help-block"><small>{{Lang::get('resource.perInfoBirthdateEx')}}</small></span>
                             </div>
                         </div>
                     </div>
@@ -202,10 +184,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">สถานที่เกิด&nbsp;(จังหวัด)
-                                <div>
-                                    <small>Place&nbsp;of&nbsp;Birth</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoPlaceOfBirth')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_birthplace"
@@ -218,16 +198,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">อีเมล
-                                <div>
-                                    <small>E-Mail</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoEmail')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="email" class="form-control" id="stu_email" name="stu_email"
                                        value="{{$applicant->stu_email}}">
-                                <span class="help-block"><small>ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้<br>
-                                                Please fill in your valid email, graduate school will inform application result via this email.</small></span>
+                                <span class="help-block">
+                                    <small>{{Lang::get('resource.perInfoEmailNotice')}}</small>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -235,10 +214,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">รูปถ่าย
-                                <div>
-                                    <small>Photo</small>
-                                </div>
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoPhoto')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" placeholder="Chee Kin">
@@ -250,11 +227,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">ท่านสนใจสมัครทุนอุดหนุนการศึกษา
-                                เฉพาะค่าเล่าเรียนหรือไม่?
-                                <div>
-                                    <small>Do you want fund?</small>
-                                </div>
+                            <label class="col-md-4 control-label">
+                                {{Lang::get('resource.perInfoFundInterest')}}
                             </label>
                             <div class="col-md-8">
                                 <div class="mt-radio-inline">
@@ -262,10 +236,8 @@
                                         <input type="radio" name="fund_interesting" id="fund_interesting1"
                                                value="1"
                                                @if(!empty($applicant) && $applicant->fund_interesting == 1) checked @endif
-                                        > สนใจ
-                                        <div>
-                                            <small>Interesting</small>
-                                        </div>
+                                        >
+                                        {{Lang::get('resource.perInfoInterest')}}
                                         <span></span>
                                     </label>
                                     <label class="mt-radio mt-radio-outline">
@@ -273,10 +245,8 @@
                                                value="0"
                                                @if(!empty($applicant) && $applicant->fund_interesting == 0) checked @endif
 
-                                        > ไม่สนใจ
-                                        <div>
-                                            <small>Not interesting</small>
-                                        </div>
+                                        >
+                                        {{Lang::get('resource.perInfoNotInterest')}}
                                         <span></span>
                                     </label>
                                     <label><a>ดูรายละเอียดเกี่ยวกับทุน</a></label>
@@ -289,10 +259,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">ท่านทราบข้อมูลการรับสมัครจากสื่อใด?
-                                <div>
-                                    <small>How can you know this news?</small>
-                                </div>
+                            <label class="col-md-4 control-label">
+                                {{Lang::get('resource.perInfoMedia')}}
                             </label>
                             <div class="col-md-8">
                                 <div class="mt-checkbox-list">
@@ -325,8 +293,12 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="button" id="savePersonalInfo" class="btn green">บันทึก</button>
-                                <button type="reset" class="btn default">ยกเลิก</button>
+                                <button type="button" id="savePersonalInfo" class="btn green">
+                                    {{Lang::get('resource.lbSave')}}
+                                </button>
+                                <button type="reset" class="btn default">
+                                    {{Lang::get('resource.lbCancel')}}
+                                </button>
                             </div>
                         </div>
                     </div>
