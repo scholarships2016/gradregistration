@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
-interface ProgramTypeRepository {
- 
- 
+interface ProgramTypeRepository
+{
+
+    public function getAllProgramTypeForDropdown();
 }
