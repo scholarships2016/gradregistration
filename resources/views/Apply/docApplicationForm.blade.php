@@ -367,7 +367,7 @@
                     <span >
                         <strong>คณะ [Faculty]
                             {{$app->faculty_name}} - {{$app->faculty_full }}                       
-                            สมัครสาขาวิชา[Field of Study] {{$app->department_name }} - {{$app->department_name_en }}                         (
+                            สมัครสาขาวิชา[Field of Study] {{$app->major_name }} - {{$app->major_name_en }}                         (
                             [Program ID]  {{$app->program_id}}                        )
                             ระดับ[Degree]
                             <strong>

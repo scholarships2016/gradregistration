@@ -22,7 +22,7 @@
                 </a>                                
             </li>
 
-
+   @if(!session('user_id'))
             <li class="nav-item menuitem"  data-index="2">
                 <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
                     <i class="icon-bulb"></i>
@@ -31,7 +31,7 @@
                 </a>
 
             </li>
-            
+     @endif
             @if(session('user_id'))
              <li class="nav-item menuitem"  data-index="7">
                 <a class="nav-link nav-toggle" href="{{url('apply/manageMyCourse/')}}">
@@ -41,16 +41,15 @@
                 </a>
 
             </li>
-            @endif
-            
+             
             <li class="nav-item  menuitem "   data-index="3">
                 <a class="nav-link  nav-toggle" href="{{url('apply')}}">
                     <i class="icon-briefcase"></i>
-                    <span class="title">{{Lang::get('resource.lbMApply')}}</span>
+                    <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
                     <span class="arrow"></span>
                 </a>
-
             </li>
+              @endif
             <li class="nav-item menuitem "  data-index="4">
                 <a class="nav-link nav-toggle" href="{{url('faq/')}}">
                     <i class="icon-wallet"></i>
@@ -91,8 +90,10 @@
             $selectTag ='<span class="selected"></span>';
             if($str1.substr($str1.lastIndexOf("/") + 1) == $str2.substr($str2.lastIndexOf("/") + 1)){
             $(this).addClass("active");
-        $(this).find('a:first').append($selectTag);
-            };
+            $(this).find('a:first').append($selectTag);
+            }else if($str2.substr($str2.lastIndexOf("/") + 1)=='register' && $str1.substr($str1.lastIndexOf("/") + 1)=="apply"){  
+           $(this).addClass("active");
+             };
         });
 
 

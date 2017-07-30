@@ -44,7 +44,7 @@
     <body >   
          @foreach($apps as $app)
         <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
-                ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวันที่    วันพุธ ที่ 3 มิถุนายน 2558 - วันศุกร์ ที่ 19 ตุลาคม 2561 </strong></div>
+                ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
         <table border="1" cellspacing="0" cellpadding="0" width="700px">
             <tbody><tr>
                     <td width="115"><div align="center"><strong>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย</strong></div></td>
@@ -97,7 +97,7 @@
         <p align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน
         </p><hr>
  <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
-                ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวันที่    วันพุธ ที่ 3 มิถุนายน 2558 - วันศุกร์ ที่ 19 ตุลาคม 2561 </strong></div>
+                ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน   {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
         <table border="1" cellspacing="0" cellpadding="0" width="700px">
             <tbody><tr>
                     <td width="115"><div align="center"><strong>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย</strong></div></td>
@@ -150,7 +150,7 @@
         <p align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน
         </p><hr>
          <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
-                ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวันที่    วันพุธ ที่ 3 มิถุนายน 2558 - วันศุกร์ ที่ 19 ตุลาคม 2561 </strong></div>
+                ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน  {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
         <table border="1" cellspacing="0" cellpadding="0" width="700px">
             <tbody><tr>
                     <td width="115"><div align="center"><strong>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย</strong></div></td>

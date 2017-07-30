@@ -87,6 +87,7 @@ return [
     
      //botton
     'lbNext' => 'Next',
+    'lbSkip' => 'Skip',
     'lbPrevious' => 'Previous',
      'lbAll' => 'All',
     'lbSelect' => 'Select',
@@ -130,5 +131,13 @@ return [
      'lbDocID'=>'Document ID',
      'lbWTodo'=>'To do task',
      'lbConfApp'=>'Confirm',
+     'lbRegisterbtn'=>'Apply',
+    
+    
+    //boxMessage
+    // ต้องการจะสมัครแต่ติด Login
+    'lbMessageBeforLogin_title' => 'Would you like to register?',
+    'lbMessageBeforLogin_text' => 'You have to register member or login system before registration',
+     
     
 ];

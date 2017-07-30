@@ -158,11 +158,12 @@
                                                                     <ul class="dropdown-menu pull-right" role="menu">
                                                                         <li>
                                                                             <span>  <i class="fa fa-file-o"></i> <a   href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocMyCourse')}}     </a> </span>  </li>
-                                                                      
+                                                                      @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
                                                                         <li>
                                                                           <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPayMyCourse')}}   </a> </span>   </li>
-                                                                         <li>
-                                                                           <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>    </li>
+                                                                      @endif
+                                                                        <li>
+                                                                           <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>    </li>
                                                                     </ul>
                                                                 </div>
                             
@@ -202,8 +203,8 @@
 @push('pageJs')
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
-<script src="../assets/pages/scripts/ui-sweetalert.min.js" type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
 
 
 

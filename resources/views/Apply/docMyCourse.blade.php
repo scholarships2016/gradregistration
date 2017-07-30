@@ -68,7 +68,16 @@
                     @stop
                     @section('maincontent')
                     <div class="invoice-content-2">
-
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>
+              
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >PDF</a>
+    
+        
+        
+        </div>
+    </div>
 <table width="800" border="0"  cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center" height="100%" >
         <tbody>
             <tr>
@@ -423,16 +432,7 @@
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>
-              
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >PDF</a>
-    
-        
-        
-        </div>
-    </div>
+
 </div> 
 @stop
 

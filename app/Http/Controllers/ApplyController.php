@@ -71,7 +71,8 @@ class ApplyController extends Controller {
 
     public function showAnnouncement() {
         $data = $this->AnnouncementRepo->getAnnouncementAll();
-        return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1]);
+         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
+        return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1,'appCount'=>$dataApplication->count()]);
     }
 
     public function managementRegister(Request $request) {
@@ -83,6 +84,7 @@ class ApplyController extends Controller {
     }
 
     public function getRegisterCourse(Request $request = null) {
+        
         $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, $request->program_id, true, false);
 
         return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
@@ -198,7 +200,7 @@ class ApplyController extends Controller {
     public function docApplicationFee($id) {
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
-
+        
 
         $page=  view($this->part_doc . 'docApplicationFee', ['apps' => $dataApplication,
             'applicant' => $applicantProfile['applicant']]);
@@ -217,6 +219,31 @@ class ApplyController extends Controller {
         $pdf->render();
 
         return $pdf->stream("CU_ApplicationFee.pdf");
+    }
+    
+    
+      public function docApplicationEnvelop($id) {
+        $dataApplication = $this->ApplicationRepo->getData(null, $id);
+        $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
+ 
+        
+        $page=  view($this->part_doc . 'docApplicationEnvelop', ['apps' => $dataApplication,
+            'applicant' => $applicantProfile['applicant']]);
+        
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $options->setIsPhpEnabled(true);
+        $options->setDebugKeepTemp(true);
+        $options->setIsHtml5ParserEnabled(true);
+
+        $options->set('defaultFont', 'THSarabunNew');
+        $pdf = new Dompdf($options);
+        $pdf->loadHtml((string) $page);
+        $pdf->setPaper('A4', 'portrait');
+
+        $pdf->render();
+
+        return $pdf->stream("CU_ApplicationEnvelop.pdf");
     }
 
     public function submitregisterDetailForapply(Request $data) {
@@ -248,10 +275,7 @@ class ApplyController extends Controller {
 
     public function showRegisHead() {
         $countStatus = $this->ApplicationRepo->getDatacountByStatusUse(session('Applicant')->applicant_id);
-        $pic = null;
-        if (session('stu_img')) {
-            $pic = $this->FileRepo->getImageFileAsBase64ById(session('stu_img'));
-        }
+       
         $val = '';
         $cval = 0;
         foreach ($countStatus as $cStatus) {
@@ -268,7 +292,7 @@ class ApplyController extends Controller {
         }
 
 
-        return ['val' => $val, 'cot' => $cval, 'cusimg' => $pic];
+        return ['val' => $val, 'cot' => $cval];
     }
 
     public function actionCourse($action, $id) {

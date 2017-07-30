@@ -5,6 +5,8 @@
  <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/pages/css/invoice.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
+ 
 <style type="text/css">
 
 </style>
@@ -116,9 +118,10 @@
                                     <button class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
-                                     <button class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+                                     
+                                     <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
-                                    </button>
+                                    </a>
                                       @endif
                                    </form>
                                 </div>
@@ -191,8 +194,15 @@
                                          </div>
                                     </div>
                                 </div>
-                             
+                              <div class="col-md-12" style='text-align:center;' > 
+                                @if(!session('user_id'))                            
+                                      <a class="btn btn-success mt-sweetalert" href="javascript:getLogin();"   >  {{Lang::get('resource.lbRegisterbtn')}}
+                                                        <i class="fa fa-user"></i>
+                                                    </a> 
+                                     @endif
                             </div>
+                            </div>
+                           
       @endforeach 
      @else
      ไม่มีข้อมูล/No Data.
@@ -205,8 +215,26 @@
                                                                           @push('pageJs')
                                                                           <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
                                                                           <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
+                                                                         <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+                                                                         <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
+
                                                                           <script type="application/javascript">
-                                                                             
+  function getLogin() {
+    swal({
+  title:  '{{Lang::get('resource.lbMessageBeforLogin_title')}}',
+  text: '{{Lang::get('resource.lbMessageBeforLogin_text')}}' ,
+  type: "warning",
+  showCancelButton: true,
+  closeOnConfirm: false,
+  showLoaderOnConfirm: true
+}, function () {
+  setTimeout(function () {
+   window.location.href = '{{ url('/login') }}' 
+  }, 100);
+});
+         }
+         
                                                                           </script>
                                                                           @endpush
 

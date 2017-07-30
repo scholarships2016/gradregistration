@@ -9,6 +9,8 @@ interface ApplicationRepository {
     public function getAppData($applicationID = null);
 
     public function getData($applicantID = null, $applicationID = null);
+    
+    public function getDataonly($applicantID = null, $applicationID = null);
 
     public function getDatacountByStatus($applicantID);
 

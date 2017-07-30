@@ -17,13 +17,34 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
     public function __construct(Controller $controllors) {
         parent::setModelClassName(Application::class);
-      $this->controllors= $controllors;
+        $this->controllors = $controllors;
     }
 
     public function getAppData($applicationID = null) {
         $result = null;
         try {
             $result = Application::where('application.application_id', $applicationID)->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
+
+    public function getDataonly($applicantID = null, $applicationID = null) {
+        $result = null;
+        try {
+            $result = Application:: Where(function ($query)use ($applicationID) {
+                                if ($applicationID) {
+                                    $query->where('application.application_id', $applicationID);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicantID) {
+                                if ($applicantID) {
+                                    $query->where('application.applicant_id', $applicantID);
+                                }
+                            })
+                            ->orderBy('application.application_id', 'desc')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -64,7 +85,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     $query->where('application.applicant_id', $applicantID);
                                 }
                             })
-                            ->orderBy('application.application_id','desc')->get();
+                            ->orderBy('application.application_id', 'desc')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -109,8 +130,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         $year = null;
         $curriculum_num = null;
         $id = null;
-          if (array_key_exists('application_id', $data) || !empty($data['application_id']))
-                $id = $data['application_id'];
+        if (array_key_exists('application_id', $data) || !empty($data['application_id']))
+            $id = $data['application_id'];
         try {
 
             if (array_key_exists('flow_id', $data) || !empty($data['flow_id'])) {
@@ -124,7 +145,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
 
 
-          
+
 
             $chk = $this->find($id);
             $curObj = $chk ? $chk : new Application;
@@ -184,9 +205,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
 
             $result = $curObj->save();
-             $this->controllors->WLog('Save Application[application id:'.$id.']', 'Enroll', null);
+            $this->controllors->WLog('Save Application[application id:' . $id . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-            $this->controllors->WLog('Save Application Error[application id:'.$id.']', 'Enroll', $ex->getMessage());
+            $this->controllors->WLog('Save Application Error[application id:' . $id . ']', 'Enroll', $ex->getMessage());
             $result = false;
             throw $ex;
         }

@@ -12,6 +12,8 @@ use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use \Illuminate\Support\Facades\Crypt;
+use App\Repositories\FileRepositoryImpl;
+
 
 class LoginApplicantController extends Controller {
 
@@ -21,10 +23,12 @@ class LoginApplicantController extends Controller {
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
+     protected $FileRepo;
 
-    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo) {
+    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, FileRepositoryImpl $FileRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
+        $this->FileRepo = $FileRepo;
     }
 
     //Authen
@@ -58,18 +62,23 @@ class LoginApplicantController extends Controller {
     public function postLogin(Request $request) {
         if (Auth::attempt(['stu_email' => $request->stu_email, 'password' => $request->stu_password])) {
             $user_data = Auth::user();
+            $pic = null;
+            if ($user_data->stu_img) {
+                $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
+            }
+
             session()->put('user_id', $user_data->applicant_id);
-            session()->put('first_name', $user_data->stu_first_name);
-            session()->put('last_name', $user_data->stu_last_name);
+            session()->put('first_name', $user_data->stu_first_name_en);
+            session()->put('last_name', $user_data->stu_last_name_en);
             session()->put('email_address', $user_data->stu_email);
-            session()->put('stu_img', $user_data->stu_img);
+            session()->put('stu_img', $pic);
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;
             $app->stu_citizen_card = $user_data->stu_citizen_card;
             $app->stu_email = $user_data->stu_email;
+            $app->nation_id = $user_data->nation_id;
             session()->put('Applicant', $app);
             Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
-
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
             return redirect('/home');
         } else {

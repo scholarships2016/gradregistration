@@ -6,7 +6,9 @@
 <link href="../assets/pages/css/search.min.css" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css">
-<link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -189,13 +191,13 @@ function getData(){
      
     var table = $('#tblcurr').DataTable({
         ajax:{ url: '{!! route('manageMyCourse.data') !!}',type:"GET", data: function(d) {
-         d.search = $("#search").val()
-         d.faculty_id = $("#faculty_id").val()
-         d.degree_id = $("#degree_id").val()
-          d.program_id = $("#program_id").val()
-               
+         d.search = $("#search").val();
+         d.faculty_id = $("#faculty_id").val();
+         d.degree_id = $("#degree_id").val();
+         d.program_id = $("#program_id").val();               
         }}
     , 
+    
 columnDefs: [{ 
 targets: [0], 
 orderable: false, 
@@ -237,7 +239,8 @@ return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+
     info: false,
     ordering: false,
     processing: true,
-    retrieve: false  , sPaginationType : 'full_numbers', 
+    retrieve: false  ,
+    pagingType : "full_numbers", 
      
     
     });   

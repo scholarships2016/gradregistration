@@ -23,8 +23,16 @@
                             </li>
         
         @endif
+          @if(!session('user_id'))
+          <li class="dropdown dropdown-quick-sidebar-toggler">
+                                <a href="{{url('\login')}}" class="dropdown-toggle">
+                                <span aria-hidden="true" class="icon-users"></span>Login
+                                </a>
+                            </li>
+          @endif
+          @if(session('user_id'))
         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hove                                   r="dropdown"
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                data-close-others="true">
                 <i class="icon-bell"></i>
                 <span id="regHeadsum" name="regHeadsum" class="badge badge-default">  </span>
@@ -47,13 +55,13 @@
                                         <!-- END NOTIFICATION DROPDOWN -->
                                         <!-- BEGIN INBOX DROPDOWN -->
                                         
-                                        @if(session('user_id'))
+                                       
                                         <!-- BEGIN USER LOGIN DROPDOWN -->
                                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                                         <li class="dropdown dropdown-user">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                                data-close-others="true">
-                                                <img alt="" class="img-circle" id='userimg' src="{{url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
+                                                <img alt="" class="img-circle" id='userimg' src="{{   (session('stu_img'))?session('stu_img'):url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
                                                 <span class="username username-hide-on-mobile">  {{ session('first_name').' '.session('last_name')  }} </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
@@ -76,7 +84,7 @@
   </div>
 
 <script>
-    
+   @if(session('user_id'))
  $.ajax({
 					type: "GET",
 					url: '{!! Route('showRegisHead') !!}',
@@ -87,13 +95,13 @@
                                   	   $('#regHead').html(data['val']); 
                                            $('#regHeadsum2').html(data['cot']);
                                            $('#regHeadsum').html(data['cot']);
-                                           if(data['cusimg']) $('#userimg').attr("src",data['cusimg']);
+                                           
                                             
 					}
 				});
 
 
     
-
+@endif
 </script>
  

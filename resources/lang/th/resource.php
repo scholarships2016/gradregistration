@@ -89,6 +89,7 @@ return [
     
     //botton
     'lbNext' => 'ถัดไป',
+    'lbSkip' => 'ข้าม',
     'lbPrevious' => 'ก่อนหน้า',
     'lbAll' => 'ทั้งหมด',
     'lbSelect' => 'เลือก/Select',
@@ -101,7 +102,7 @@ return [
     'lbdocMyCourse'=>'ใบสมัคร',
      'lbdocPayMyCourse'=>'ใบแจ้งชำระค่าธรรมเนียม',
     'lbdocEnvelop'=>'ใบปะหน้าซอง',
-     
+     'lbRegisterbtn'=>'สมัคร',
      
     
     
@@ -135,6 +136,14 @@ return [
     
     
     
+    
+    
+    
+    //boxMessage
+    // ต้องการจะสมัครแต่ติด Login
+    'lbMessageBeforLogin_title' => 'คุณต้องการที่จะสมัครหรือไม่?',
+    'lbMessageBeforLogin_text' => 'เนื่องจากก่อนคุณจะสมัคร คุณจะต้องทำการลงทะเบียนและเข้าสู่ระบบก่อน จะดำเนินการเข้าระบบหรือไม่',
+     
     
     
     
