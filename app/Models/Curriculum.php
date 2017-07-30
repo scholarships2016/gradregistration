@@ -93,8 +93,8 @@ class Curriculum extends Eloquent
         return $this->hasOne(File::class, 'file_id', 'document_file');
     }
 
-    public function getCommApprDateAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
+//    public function getCommApprDateAttribute($value)
+//    {
+//        return Carbon::createFromFormat('Y-m-d', $value);
+//    }
 }

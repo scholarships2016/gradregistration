@@ -86,7 +86,8 @@ class ApplyController extends Controller {
     public function getRegisterCourse(Request $request = null) {
         
         $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, $request->program_id, true, false);
-
+   
+        
         return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
     }
 
