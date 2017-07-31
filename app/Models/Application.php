@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 16 Jul 2017 15:05:21 +0700.
+ * Date: Sat, 29 Jul 2017 23:39:04 +0700.
  */
 
 namespace App\Models;
@@ -16,12 +16,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $applicant_id
  * @property string $stu_citizen_card
  * @property int $curr_act_id
+ * @property int $bank_id
  * @property int $curriculum_id
  * @property int $program_id
  * @property int $sub_major_id
  * @property int $app_id
  * @property int $curriculum_num
  * @property int $flow_id
+ * @property string $additional_answer
  * @property string $creator
  * @property \Carbon\Carbon $created
  * @property string $modifier
@@ -33,13 +35,12 @@ class Application extends Eloquent
 {
 	protected $table = 'application';
 	protected $primaryKey = 'application_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'application_id' => 'int',
 		'applicant_id' => 'int',
 		'curr_act_id' => 'int',
+		'bank_id' => 'int',
 		'curriculum_id' => 'int',
 		'program_id' => 'int',
 		'sub_major_id' => 'int',
@@ -57,12 +58,14 @@ class Application extends Eloquent
 		'applicant_id',
 		'stu_citizen_card',
 		'curr_act_id',
+		'bank_id',
 		'curriculum_id',
 		'program_id',
 		'sub_major_id',
 		'app_id',
 		'curriculum_num',
 		'flow_id',
+		'additional_answer',
 		'creator',
 		'created',
 		'modifier',

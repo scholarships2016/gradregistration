@@ -6,7 +6,9 @@
 <link href="../assets/pages/css/search.min.css" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css">
-<link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -16,7 +18,7 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="/">หน้าหลัก</a>
+            <a href="/">{{Lang::get('resource.lbMain')}}</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -70,13 +72,13 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="search" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn green-soft uppercase bold" onclick="getData();" type="button">Search</button>
+                        <button class="btn green-soft uppercase bold" onclick="getData();" type="button">{{Lang::get('resource.lbSearch')}}</button>
                     </span>
                 </div>
             </div>
             <div class="col-md-4 extra-buttons">
-                <button class="btn grey-steel uppercase bold"   id="reset" type="button">Reset Search</button>
-                <button class="btn grey-cararra font-blue" id="btnAdvanced" type="button">Advanced Search</button>
+                <button class="btn grey-steel uppercase bold"   id="reset" type="button"> {{Lang::get('resource.lbReset').' '.Lang::get('resource.lbSearch')}}</button>
+                <button class="btn grey-cararra font-blue" id="btnAdvanced" type="button"> {{ Lang::get('resource.lbSAdvanced')}}</button>
             </div>
         </div>
         <div class="row">
@@ -189,13 +191,13 @@ function getData(){
      
     var table = $('#tblcurr').DataTable({
         ajax:{ url: '{!! route('manageMyCourse.data') !!}',type:"GET", data: function(d) {
-         d.search = $("#search").val()
-         d.faculty_id = $("#faculty_id").val()
-         d.degree_id = $("#degree_id").val()
-          d.program_id = $("#program_id").val()
-               
+         d.search = $("#search").val();
+         d.faculty_id = $("#faculty_id").val();
+         d.degree_id = $("#degree_id").val();
+         d.program_id = $("#program_id").val();               
         }}
     , 
+    
 columnDefs: [{ 
 targets: [0], 
 orderable: false, 
@@ -223,7 +225,7 @@ orderable: true,
 className: 'table-desc',
 name: 'prog_type_name', 
 render: function (data, type, full, meta) { 
-return ('Faculty of '+  (('{{session('locale')}}'=='th')? full.faculty_name :full.faculty_full) + 'Department of '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'Major in '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
+return ('{{Lang::get('resource.lbFaculty')}}'+  (('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) + ' <br>{{Lang::get('resource.lbDepartment')}} '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'<br> {{Lang::get('resource.lbMajor')}} '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
 }},{ 
 targets: [4], 
 orderable: true, 
@@ -237,7 +239,8 @@ return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+
     info: false,
     ordering: false,
     processing: true,
-    retrieve: false  , sPaginationType : 'full_numbers', 
+    retrieve: false  ,
+    pagingType : "full_numbers", 
      
     
     });   

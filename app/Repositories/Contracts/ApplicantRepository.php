@@ -18,6 +18,8 @@ interface ApplicantRepository
     public function saveApplicant($request);
 
     public function getApplicantProfileByApplicantId($applicantId);
+    
+     public function getApplicantProfileAllByApplicantId($applicantId);
 
     public function saveApplicantPersonalInfo(array $data);
 

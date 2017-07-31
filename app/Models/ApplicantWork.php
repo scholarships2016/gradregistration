@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 16 Jul 2017 15:05:21 +0700.
+ * Date: Sat, 29 Jul 2017 23:39:04 +0700.
  */
 
 namespace App\Models;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class ApplicantWork
- *
+ * 
  * @property int $app_work_id
  * @property int $applicant_id
  * @property string $work_stu_phone
@@ -37,29 +37,29 @@ class ApplicantWork extends Eloquent
     protected $primaryKey = 'app_work_id';
     public $timestamps = true;
 
-    protected $casts = [
-        'applicant_id' => 'int',
-        'app_work_status' => 'bool'
-    ];
+	protected $casts = [
+		'applicant_id' => 'int',
+		'app_work_status' => 'bool'
+	];
 
-    protected $dates = [
-        'created',
-        'modified'
-    ];
+	protected $dates = [
+		'created',
+		'modified'
+	];
 
-    protected $fillable = [
-        'applicant_id',
-        'work_stu_phone',
-        'work_status_id',
-        'work_stu_detail',
-        'work_stu_position',
-        'work_stu_yr',
-        'work_stu_mth',
-        'work_stu_salary',
-        'app_work_status',
-        'creator',
-        'created',
-        'modifier',
-        'modified'
-    ];
+	protected $fillable = [
+		'applicant_id',
+		'work_stu_phone',
+		'work_status_id',
+		'work_stu_detail',
+		'work_stu_position',
+		'work_stu_yr',
+		'work_stu_mth',
+		'work_stu_salary',
+		'app_work_status',
+		'creator',
+		'created',
+		'modifier',
+		'modified'
+	];
 }

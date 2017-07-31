@@ -23,101 +23,31 @@
                             </li>
         
         @endif
+          @if(!session('user_id'))
+          <li class="dropdown dropdown-quick-sidebar-toggler">
+                                <a href="{{url('\login')}}" class="dropdown-toggle">
+                                <span aria-hidden="true" class="icon-users"></span>Login
+                                </a>
+                            </li>
+          @endif
+          @if(session('user_id'))
         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hove                                   r="dropdown"
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                data-close-others="true">
                 <i class="icon-bell"></i>
-                <span class="badge badge-default"> 7 </span>
+                <span id="regHeadsum" name="regHeadsum" class="badge badge-default">  </span>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu">  @if(session('user_id'))
                 <li class="external">
                     <h3>
-                        <span class="bold">12 pending</span> notifications</h3>
-                    <a href="                                           page_user_profile_1.ht                                           ml">view all</a>
+                        <span class="bold"><label id="regHeadsum2" name="regHeadsum2"  ></label> pending</span> notifications</h3>
+                   
                 </li>
+                @endif
                 <li>
-                    <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">just now</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-success">
-                                        <i class="fa fa-plus                                                                           "></i>
-                                    </span> New user registered. </                                                                       span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">3 mins</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt"></i>
-                                    </span> Server #12 overloaded. </span>
-                            </a>
-                        </li>                                               
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">10 mins</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-warning">
-                                        <i class="fa fa-bell-o"></i>
-                                    </span> Server #2 not responding. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">14 hrs</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-info">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </span> Application error. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">2 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt                                                                           "></i>
-                                    </span> Database overloaded                                                                       68%. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">3 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt"></i>
-                                    </span> A user IP blocked. </s                                                               pan>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">4 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-warning">
-                                        <i class="fa fa-bell-o"></i>
-                                    </span> Storage Server #4 not responding dfdfdfd. </s                                                               pan>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">5 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-info">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </span> System Error. </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="time">9 days</span>
-                                <span class="details">
-                                    <span class="label label-sm label-icon label-danger">
-                                        <i class="fa fa-bolt"></i>
-                                        </span> Storage server failed. </sp                                                                                         an>
-                                        </a>
-                                        </li>
+                    <ul id ="regHead" name="regHead" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                      
+                       
                                         </ul>
                                         </li>
                                         </ul>
@@ -125,13 +55,13 @@
                                         <!-- END NOTIFICATION DROPDOWN -->
                                         <!-- BEGIN INBOX DROPDOWN -->
                                         
-                                        @if(session('user_id'))
+                                       
                                         <!-- BEGIN USER LOGIN DROPDOWN -->
                                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                                         <li class="dropdown dropdown-user">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                                data-close-others="true">
-                                                <img alt="" class="img-circle" src="{{url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
+                                                <img alt="" class="img-circle" id='userimg' src="{{   (session('stu_img'))?session('stu_img'):url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
                                                 <span class="username username-hide-on-mobile">  {{ session('first_name').' '.session('last_name')  }} </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
@@ -151,4 +81,27 @@
                                         <!-- END USER LOGIN DROPDOWN -->
                                         @endif
                                         </ul>
-                                        </div>
+  </div>
+
+<script>
+   @if(session('user_id'))
+ $.ajax({
+					type: "GET",
+					url: '{!! Route('showRegisHead') !!}',
+					data :{ 
+                                            _token:     '{{ csrf_token() }}'
+                                               } ,
+					success : function(data){ 
+                                  	   $('#regHead').html(data['val']); 
+                                           $('#regHeadsum2').html(data['cot']);
+                                           $('#regHeadsum').html(data['cot']);
+                                           
+                                            
+					}
+				});
+
+
+    
+@endif
+</script>
+ 

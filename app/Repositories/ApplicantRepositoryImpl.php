@@ -9,68 +9,64 @@ use App\Models\Applicant;
 use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
-
 use App\Repositories\Contracts\ApplicantWorkRepository;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
-
-class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository
-{
+class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
 
     protected $appNewsSrcRepo;
     protected $appEduRepo;
     protected $appWorkRepo;
-
     private $paging = 10;
+    private $controllors;
 
     public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo,
-                                ApplicantEduRepository $appEduRepo,
-                                ApplicantWorkRepository $appWorkRepo)
-    {
+     ApplicantEduRepository $appEduRepo,
+      ApplicantWorkRepository $appWorkRepo,
+       Controller $controllors) {
         parent::setModelClassName(Applicant::class);
         $this->appNewsSrcRepo = $appNewsSrcRepo;
         $this->appEduRepo = $appEduRepo;
         $this->appWorkRepo = $appWorkRepo;
+        $this->controllors = $controllors;
     }
 
-    public function checkLogin($criteria = null)
-    {
+    public function checkLogin($criteria = null) {
         $result = null;
         try {
             $result = Applicant::where('stu_email', $criteria->stu_email)
-                ->where('stu_password', $criteria->stu_password)
-                ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
-                ->first();
+                    ->where('stu_password', $criteria->stu_password)
+                    ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
+                    ->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
 
-    public function getByCitizenOrEmail($citizencard, $email)
-    {
+    public function getByCitizenOrEmail($citizencard, $email) {
         $result = null;
         try {
             $result = Applicant::where('stu_citizen_card', $citizencard)
-                ->orwhere('stu_email', $email)
-                ->first();
+                    ->orwhere('stu_email', $email)
+                    ->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
 
-    public function searchByCriteria($criteria = null, $paging = false)
-    {
+    public function searchByCriteria($criteria = null, $paging = false) {
         $result = null;
         try {
             $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
-                ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
-                ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
-                ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
-                ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
-                ->orwhere('stu_sex ', 'like', '%' . $criteria . '%')
-                ->orderBy('applicant_id');
+                    ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
+                    ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
+                    ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
+                    ->orwhere('stu_sex ', 'like', '%' . $criteria . '%')
+                    ->orderBy('applicant_id');
             $result = ($paging) ? $banks->paginate($this->paging) : $banks;
         } catch (\Exception $ex) {
             throw $ex;
@@ -78,8 +74,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getEduApplicant($applicantID)
-    {
+    public function getEduApplicant($applicantID) {
         $result = null;
         try {
             $result = ApplicantEdu::where('applicant_id ', $applicantID)->first();
@@ -89,8 +84,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getWorkApplicant($applicantID)
-    {
+    public function getWorkApplicant($applicantID) {
         $result = null;
         try {
             $result = ApplicantWork::where('applicant_id ', $applicantID)->first();
@@ -100,8 +94,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveApplicant($data)
-    {
+    public function saveApplicant($data) {
         $result = false;
         try {
             $id = null;
@@ -191,13 +184,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
+            $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
     }
 
-    public function saveWorkApplicant($data)
-    {
+    public function saveWorkApplicant($data) {
         $result = false;
         try {
             $id = null;
@@ -238,8 +231,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveEduApplicant($data)
-    {
+    public function saveEduApplicant($data) {
         $result = false;
         try {
             $id = null;
@@ -281,8 +273,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveApplicatNewsSource($data)
-    {
+    public function saveApplicatNewsSource($data) {
         $result = false;
         try {
             $id = null;
@@ -306,8 +297,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getApplicantProfileByApplicantId($applicantId)
-    {
+    public function getApplicantProfileByApplicantId($applicantId) {
         try {
             $applicantProfile = $this->findOrFail($applicantId);
 
@@ -322,8 +312,27 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
-    public function saveApplicantPersonalInfo(array $data)
-    {
+    public function getApplicantProfileAllByApplicantId($applicantId) {
+        try {
+            $applicantProfile = Applicant::select('*', 'tbl_name_title.name_title as name_titles')->leftjoin('tbl_religion', 'tbl_religion.religion_id', 'applicant.stu_religion')
+                            ->leftjoin('tbl_nation', 'tbl_nation.nation_id', 'applicant.nation_id')
+                            ->leftjoin('tbl_name_title', 'tbl_name_title.name_title_id', 'applicant.name_title_id')
+                            ->leftjoin('tbl_province', 'tbl_province.province_id', 'applicant.province_id')
+                            ->leftjoin('tbl_district', 'tbl_district.district_code', 'applicant.district_code')
+                            ->where('applicant_id', '=', $applicantId)->first();
+
+            $newsSource = $this->appNewsSrcRepo->getApplicantNewsSourceByApplicantId($applicantId);
+            $appEdu = $this->appEduRepo->getApplicantEduAllByApplicantId($applicantId);
+            $appWork = $this->appWorkRepo->getApplicantWorkByApplicantId($applicantId);
+
+            return array('applicant' => $applicantProfile, 'applicantNewsSource' => $newsSource,
+                'applicantEdu' => $appEdu, 'applicantWork' => $appWork);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function saveApplicantPersonalInfo(array $data) {
         DB::beginTransaction();
         try {
             if ($this->saveApplicant($data)) {

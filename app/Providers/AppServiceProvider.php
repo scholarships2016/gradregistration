@@ -47,6 +47,12 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('App\Repositories\Contracts\UniversityRepository', 'App\Repositories\UniversityRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\WorkStatusRepository', 'App\Repositories\WorkStatusRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ProgramTypeRepository', 'App\Repositories\ProgramTypeRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\TblMajorRepository', 'App\Repositories\TblMajorRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\TblSubMajorRepository', 'App\Repositories\TblSubMajorRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\TblProjectRepository', 'App\Repositories\TblProjectRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\McourseStudyRepository', 'App\Repositories\McourseStudyRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\ApplySettingRepository', 'App\Repositories\ApplySettingRepositoryImpl');
+
 
         /* File */
         $this->app->bind('App\Repositories\Contracts\FileRepository', 'App\Repositories\FileRepositoryImpl');
@@ -63,6 +69,10 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('App\Repositories\Contracts\CurriculumSubMajorRepository', 'App\Repositories\CurriculumSubMajorRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\CurriculumProgramRepository', 'App\Repositories\CurriculumProgramRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicationRepository', 'App\Repositories\ApplicationRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\ApplicationDocumentFileRepository', 'App\Repositories\ApplicationDocumentFileRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\SatisfactionRepository', 'App\Repositories\SatisfactionRepositoryImpl');
+    $this->app->bind('App\Repositories\Contracts\CurriculumActivityRepository', 'App\Repositories\CurriculumActivityRepositoryImpl');
+
     }
 
 }

@@ -7,7 +7,7 @@
 <html lang="en"> <!--<![endif]-->
 
 @include('includes.head')
-
+<script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
 <div class="page-wrapper">
     <!-- BEGIN HEADER -->
@@ -16,7 +16,7 @@
         <div class="page-header-inner ">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index.html">
+                <a href="{{url('home/')}}">
                     <img src="{{url('/assets/layouts/layout/img/logo.png')}}" alt="logo" class="logo-default"/> </a>
                 <div class="menu-toggler sidebar-toggler">
                     <span></span>
@@ -75,7 +75,7 @@
 <script src="{{asset('assets/global/plugins/ie8.fix.min.js')}}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"

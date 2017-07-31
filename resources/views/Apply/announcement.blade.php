@@ -84,6 +84,9 @@
 <input type='hidden' value='{{$startstep}}' id='hidstep'> 
 <a href="javascript:;" id="pre-btn"  class="btn btn-circle red btn-outline">{{Lang::get('resource.lbPrevious')}}</a>  
 <a href="javascript:;" id="next-btn" class="btn btn-circle red btn-outline">{{Lang::get('resource.lbNext')}}</a>
+@if($appCount > 0)
+<a href="{{url('apply/register/')}}" id="next-btn" class="btn btn-circle red btn-outline">{{Lang::get('resource.lbSkip')}}</a>
+@endif
 </div>
 <br>
 
@@ -122,9 +125,12 @@
                                                                                            }                                                                                           
                                                                                          });     
                                                                                          if($step == $('.mt-step-col').length){
-                                                                                               $("#next-btn").text('สมัคร/Register');                                                                                         
+                                                                                             
+                                                                                               $("#next-btn").text('{{Lang::get('resource.lbRegisterbtn')}}'); 
+                                                                                           
                                                                                          }else{
-                                                                                               $("#next-btn").text('ถัดไป/Next');
+                                                                                               
+                                                                                               $("#next-btn").text('{{Lang::get('resource.lbNext')}}');
                                                                                                $("#next-btn").removeAttr('href');
                                                                                          }
                                                                                          if($oldstep==$('.mt-step-col').length){   $("#next-btn").attr('href','{{(session('user_id'))? url('apply/register/'): url('login/')}}');}                                                                                          

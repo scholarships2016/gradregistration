@@ -1,5 +1,5 @@
 @extends('layouts.default')
-
+ 
 @push('pageCss')
 
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -15,38 +15,81 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="/">หน้าหลัก</a>
+            <a href="/">{{Lang::get('resource.lbMHome')}}</a>
             <i class="fa fa-circle"></i>
         </li>
 
         <li>
-            <span>ยืนยันการสมัคร</span>
+            <span>{{Lang::get('resource.lbConfirmApply')}}</span>
         </li>
     </ul>
- 
+    {{--<div class="page-tool    bar">--}}
+    {{--<div class="btn-group pull-right">--}}
+    {{--<butto    n type="button" class="btn green btn-sm btn-outline dropdown-toggle"--}}
+    {{--data-toggl    e="dropdown"> Actions--}}
+    {{--<i class="fa f    a-angle-down"></i>--}}
+    {{--</button>--}}
+        {{--<ul clas    s="dropdown-menu pull-right" role="menu">--}}
+        {{--<li>--}}
+        {{--<a href="#">-    -}}
+        {{--<i cl    ass="icon-bell"></i> Action</    a>--}}
+                {{--                                            </li>--}}
+                    {{--                <li>--}}
+                                            {{--<a href="#">--}}
+        {{--<i class="icon-shield"></i> Another action</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}                
+                {{--<a href="#">--}}
+                {{--<i class="ico                n-user"></i> Something else h                ere</a>--}}
+                {{--</li>--}}
+                    {{--                <li class="divider"></li>--}}
+                    {{--<li>--}}
+                                             {{--<a href="#">--}}
+                                            {{--<i class="icon-bag"></i> Separated link</a>--}}
+                {{--</li>--}}
+                {{--</ul>--}                }
+                                     {{--</div>--}}
+                  {{--</div>--}}
     </div>
 @stop
-                
 @section('pagetitle')
- <h1 class="page-title"> ยืนยันการสมัคร  </h1>
+    <h1 class="page-title"> {{Lang::get('resource.lbConfirmApply')}}</h1>
     
 @stop
- 
 
 @section('maincontent')
    <div class="page-container">
-            <!-- BEGIN SIDEBAR -->
+{{csrf_field()}}
+           
             <div class="page-sidebar-wrapper">
- <div class="search-page search-content-2">
+ <div class="search-page search-content-2">@foreach ($Qus as $Q)  
+ <div  class="search-bar ">
+                            <div class="row">
+                                <div class="col-md-14">
+                                        <div class="note note-info">
+                                                <p>  {{Lang::get('resource.lbQuestionAsk')}}      </p> 
+                                                                
+                                        </div>   <p> 
+                                                                     {{$Q->additional_question }} 
+                                                                        </p>                     
+                                                             <div class="form-group form-md-line-input form-md-floating-label has-success">
+                                                    <textarea class="form-control" name="additional_answer" id="additional_answer" rows="3"></textarea>
+                                                    <label for="form_control_1">{{Lang::get('resource.lbAnswer')}}</label>
+                                                    <span class="help-block">{{Lang::get('resource.lbAnswer')}}...</span>
+                                                </div>
+                                                        </div>
+ 
+                                                    </div>
+                                                </div>@endforeach  
                         <div  class="search-bar ">
                             <div class="row">
                                 <div class="col-md-14">
-                                                                                  <div class="note note-info">
+                                        <div class="note note-info">
                                                                 <p>  ธนาคารที่ต้องการชำระเงิน.      </p>
                                                             </div>                       
-                                                            <select   id="faculty_id" class="form-control">                                
+                                                            <select   id="bank_id" class="form-control">                                
                                                                 @foreach ($banks as $bank)
-                                                                <option value="{{$bank->bank_id}}">{{$bank->bank_name}}</option>
+                                                                <option value="{{$bank->bank_id}}" {{ $Datas->bank_id == $bank->bank_id ? 'selected="selected"' : '' }}>{{$bank->bank_name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -69,6 +112,7 @@
                                         <table id="tblpeople" class="table table-striped table-bordered table-advance table-hover">
                                               <thead>
                                                 <tr>
+                                                    
                                                     <th>
                                                         <i class="fa fa-user"></i> ชื่อ </th>
                                                     <th class="hidden-xs">
@@ -80,26 +124,108 @@
                                             </thead>   
                      
                                         </table>
-                                                                     </div>        <div style=" text-align: center;">       <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> บันทึก/Save
-                                      <i class="fa fa-check"></i>
-                                    </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  ยกเลิก
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                                                </div>           
+                                                                     </div>    
+                                                                    
+                                                                    
+                                                                      
                                                                       
                                                                 </li>
-                                                            
+                                                                
+                                                                
+                                                           
+                                                             
+                                                             
+                                                           
                                                             </ul>
                                                            
                                                         </div>
                                                     </div>
 
                                                 </div>
+    @if($Sats==null)
+        <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="search-container ">
+                                                            <ul>
+                                                                  <li class="search-item-header"> 
+                                                                    <div class="row">
+                                                                        <div class="note note-info">
+                                                                            <p> โปรดกรอกแบบประเมินความพอใจการใช้งานระบบ
+Please fill in satisfactory form
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                  <div style=" text-align: center;">      
+                                                       <div class="md-radio-inline">  <label class="col-md-2 control-label" for="form_control_1">ระดับความพอใจ / Satisfactory level</label>
+                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio1" value="1" name="radioB" class="md-radiobtn">
+                                                        <label for="radio1">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> ไม่พอใจ/Unsatisfactory </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio2"  value="2"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio2">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> พอใช้/Satisfactory </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio3"  value="3"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio3">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> ดี/Good </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio4" value="4"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio4">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> มาก/Very Good </label>
+                                                    </div>
+                                                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio5"  value="5"  name="radioB" class="md-radiobtn">
+                                                        <label for="radio5">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span> มากที่สุด/Excellent  </label>
+                                                    </div>
+                                                           <br><br>
+                                                   
+                                                                                <div class="form-group form-md-line-input has-success">
+                                                    <label class="col-md-2 control-label" for="form_control_1">ข้อเสนอแนะ / Suggestion</label>
+                                                    <div class="col-md-10">
+                                                       <input type="text" class="form-control" id="txtSug" name="txtSug" placeholder="">
+                                                        <div class="form-control-focus"> </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                                     
+                                                                  </div>  
+                                                             </li>   
+                                                            </ul></div></div></div>
+    @endif
+         <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="search-container ">
+                                                            <ul>
+                                                                 <li class="search-item-header"> 
+                                                                       <div class="row" style=" text-align: center;  ">      
+                                                                           <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> บันทึก/Save
+                                      <i class="fa fa-check"></i>
+                                    </a>
+                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  ยกเลิก
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                                                       </div>  </li>  
+                                                            </ul></div></div></div>
    
                                             </div>
-                                </div></div>
-  @stop
+                                </div>
+   </div>
+
 <div class="page-content-wrapper">
                
            
@@ -119,6 +245,7 @@
                                                        <div class="col-md-12">
                                                                             <div class="form-group form-md-line-input">
                                                                                 <input type="hidden" id="row_id">
+                                                                                <input type="hidden" id="RowNum">
                                                                                 <input type="hidden" id="application_id" value="{{session('application_id')}}">
                                                                                 <input type="hidden" id="app_people_id" >
                                                                                 <input class="form-control" id="app_people_name" type="text" placeholder="Enter your name">
@@ -146,9 +273,13 @@
                                                         </div>
                                                     </div><div class="slimScrollBar" style="background: rgb(187, 187, 187); border-radius: 7px; top: 0px; width: 7px; height: 300px; right: 1px; display: none; position: absolute; z-index: 99; opacity: 0.4;"></div><div class="slimScrollRail" style="background: rgb(234, 234, 234); border-radius: 7px; top: 0px; width: 7px; height: 100%; right: 1px; display: none; position: absolute; z-index: 90; opacity: 0.2;"></div></div>
                                              
+                               
+                                            
+                                                    
+                                                    
                                                 <div class="modal-footer">
-                                                    <button class="btn dark " type="button" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="editSave">Save changes</button>
+                                                    <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
+                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
                                                 </div>
                                                
                                           </div> </form></div></div>
@@ -156,7 +287,7 @@
  </div></div></div></div>
                 </div></div>
 
-
+  @stop
  
  
 
@@ -171,16 +302,15 @@
                
 $(function() {
       var table = $('#tblpeople').DataTable({
-        ajax: '{!! route('datatables.data') !!}',
+        ajax: '{!! url('apply/peopleData/'.$idApp) !!}',
         columns: [
-           
             { data: 'app_people_name', name: 'app_people_name' },
             { data: 'app_people_phone', name: 'app_people_phone' },            
             { data: 'app_people_position', name: 'app_people_position' },
             {
             targets : -1,
                 data: null,
-            defaultContent : '<a id="edit" class="btn yellow " href="#responsive" data-toggle="modal">Edit</a> '
+            defaultContent : '<a id="edit" class="btn green" href="#responsive" data-toggle="modal">Edit</a> '
         } ,{                
             targets : -2,
             data: null,
@@ -197,43 +327,51 @@ $(function() {
     });    
     
       $('#tblpeople tbody').on( 'click', 'a', function () {
-        
+       
          if($(this).attr('id')=="edit"){
           var data = table.row( $(this).parents('tr') ).data();
-          
+           
         $('#app_people_id').val(data['app_people_id']);
         $('#app_people_name').val(data['app_people_name']);
         $('#app_people_phone').val(data['app_people_phone']);
         $('#app_people_address').val(data['app_people_address']);
         $('#app_people_position').val(data['app_people_position']);
-        $('#row_id').val($(this).parent().index()-3);
-   
+        $('#row_id').val($(this).parents('tr').index());
+        
+        
          }else if($(this).attr('id')=="del"){
           table.row( $(this).parents('tr') ).remove(); 
           table.draw();
         }
     } );
-      $('#editSave').click(function() {          
-      if(!$('#app_people_id').val()){
+    
+      $('#editdel').click(function() { cleardata(); });
+    
+      $('#editSave').click(function() {  
+          
+       if($('#row_id').val()==''){
        table.row.add( {
-        "application_id":  $('#application_id').val(),
+        "application_id":  {{$idApp}},
         "app_people_id":   $('#app_people_id').val()  ,
         "app_people_name":    $('#app_people_name').val() ,
         "app_people_phone": $('#app_people_phone').val() ,
         "app_people_address": $('#app_people_address').val() ,
-        "app_people_position": $('#app_people_position').val()         
+        "app_people_position": $('#app_people_position').val() 
     } ).draw();    
     }else{
-        table.row($('#row_id').val()).remove(); 
+         table.row($('#row_id').val()).remove(); 
          table.row.add( {
-        "application_id":  $('#application_id').val(),
+       
+        "application_id":  {{$idApp}},
         "app_people_id":   $('#app_people_id').val()  ,
         "app_people_name":    $('#app_people_name').val() ,
         "app_people_phone": $('#app_people_phone').val() ,
         "app_people_address": $('#app_people_address').val() ,
-        "app_people_position": $('#app_people_position').val()         
-    } ).draw();    
+        "app_people_position": $('#app_people_position').val()
+         
+    }).draw();    
         }
+     cleardata();
   
      });
         $('#pageSave').click(function() {  
@@ -241,14 +379,41 @@ $(function() {
                 var valdata = [];
                 table.rows().every(function(){
                 valdata.push(this.data());
+               
             });
-                console.log( JSON.stringify(valdata));  
+           
+  $.ajax({
+					type: "POST",
+					url: '{!! Route('datatables.savePeopoleRef') !!}',
+					data :{ 
+                                                values : JSON.stringify(valdata),
+                                                bank_id : $('#bank_id').val(),
+                                                SATI_SUGGESTION  : $('#txtSug').val(),
+                                                SATI_LEVEL   :$('input[name=radioB]:checked').val(),
+                                                additional_answer :$('#additional_answer').val(),
+                                                application_id : {{$idApp}},
+                                                _token:     '{{ csrf_token() }}'
+                                               } ,
+					success : function(data){
+                                 	window.location.href = '{!! Route('manageMyCourse') !!}';
+                                                
+					}
+				},"json");
+                
           });
- 
-     
+  
+  
+  
        });
 
- 
+ function cleardata(){
+        $('#app_people_id').val(null);
+        $('#app_people_name').val(null);
+        $('#app_people_phone').val(null);
+        $('#app_people_address').val(null);
+        $('#app_people_position').val(null);
+        $('#row_id').val(null);
+ }
                                           </script>
                                             @endpush
 

@@ -2,11 +2,12 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 16 Jul 2017 15:05:21 +0700.
+ * Date: Sat, 29 Jul 2017 23:39:04 +0700.
  */
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -16,12 +17,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $faculty_id
  * @property int $department_id
  * @property int $degree_id
+ * @property int $major_id
  * @property int $project_id
  * @property string $apply_method
  * @property string $responsible_person
- * @property string $addtional_detail
+ * @property string $additional_detail
  * @property string $apply_fee
- * @property string $addtional_question
+ * @property string $additional_question
  * @property string $mailing_address
  * @property string $document_file
  * @property string $comm_appr_name
@@ -39,14 +41,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Curriculum extends Eloquent
 {
-	protected $table = 'curriculum';
-	protected $primaryKey = 'curriculum_id';
-	public $timestamps = false;
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+
+    protected $table = 'curriculum';
+    protected $primaryKey = 'curriculum_id';
+    public $timestamps = true;
 
 	protected $casts = [
 		'faculty_id' => 'int',
 		'department_id' => 'int',
 		'degree_id' => 'int',
+		'major_id' => 'int',
 		'project_id' => 'int',
 		'is_approve' => 'bool',
 		'status' => 'bool'
@@ -62,12 +68,13 @@ class Curriculum extends Eloquent
 		'faculty_id',
 		'department_id',
 		'degree_id',
+		'major_id',
 		'project_id',
 		'apply_method',
 		'responsible_person',
-		'addtional_detail',
+		'additional_detail',
 		'apply_fee',
-		'addtional_question',
+		'additional_question',
 		'mailing_address',
 		'document_file',
 		'comm_appr_name',
@@ -81,4 +88,13 @@ class Curriculum extends Eloquent
 		'modifier',
 		'modified'
 	];
+ public function file()
+    {
+        return $this->hasOne(File::class, 'file_id', 'document_file');
+    }
+
+//    public function getCommApprDateAttribute($value)
+//    {
+//        return Carbon::createFromFormat('Y-m-d', $value);
+//    }
 }

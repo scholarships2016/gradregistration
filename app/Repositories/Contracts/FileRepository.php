@@ -19,6 +19,11 @@ interface FileRepository
     public function getContentFileById($id);
 
     public function getImageFileAsBase64ById($id);
+
+    public function justUpload(UploadedFile $uploadedFile, $path = null);
+
+    public function justUploadWithName(UploadedFile $uploadedFile, $newFilename, $path = null);
+
 }
  
 

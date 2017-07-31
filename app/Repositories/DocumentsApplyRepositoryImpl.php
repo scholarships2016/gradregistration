@@ -28,7 +28,7 @@ class DocumentsApplyRepositoryImpl extends AbstractRepositoryImpl implements Doc
      public function getGroup(){
          $result = null;
         try {
-            $result = TblDocumentsApply::where('active', 0)->groupBy('doc_apply_group') ->select('doc_apply_group')->orderby('doc_apply_id')->get();
+            $result = TblDocumentsApply::where('active', 0)->groupBy('doc_apply_group','doc_apply_group_en') ->select('doc_apply_group','doc_apply_group_en')->orderby('doc_apply_id')->get();
              } catch (\Exception $ex) {
             throw $ex;
         }

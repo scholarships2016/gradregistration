@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 16 Jul 2017 15:05:21 +0700.
+ * Date: Sat, 29 Jul 2017 23:39:04 +0700.
  */
 
 namespace App\Models;
@@ -22,7 +22,12 @@ class TblFlowApply extends Eloquent
 {
 	protected $table = 'tbl_flow_apply';
 	protected $primaryKey = 'flow_id';
+	public $incrementing = false;
 	public $timestamps = false;
+
+	protected $casts = [
+		'flow_id' => 'int'
+	];
 
 	protected $fillable = [
 		'flow_name',

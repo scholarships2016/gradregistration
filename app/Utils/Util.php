@@ -60,7 +60,11 @@ class Util
     const DOC_FOLDER = 'DOC_FOLDER';
     const TRASH_FOLDER = 'TRASH_FOLDER';
     const TEMP_FOLDER = 'TEMP_FOLDER';
-
+    
+    /*Folder by M*/
+    
+   const APPLY_DOC = 'APPLY_DOC/DOC';
+   const APPLY_IMG = 'APPLY_DOC/IMG';
 
     /**
      * Util constructor.
