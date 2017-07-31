@@ -131,15 +131,15 @@ class Applicant extends Eloquent
 		'modifier',
 		'modified'
 	];
- public function getStuBirthdateAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
-
-    public function getEngDateTakenAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-    }
+// public function getStuBirthdateAttribute($value)
+//    {
+//        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+//    }
+//
+//    public function getEngDateTakenAttribute($value)
+//    {
+//        return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+//    }
 
     public function tblNation()
     {

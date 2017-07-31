@@ -26,33 +26,32 @@ class LoginUserController extends Controller {
     public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
+
+        Auth::setDefaultDriver('admins');
     }
 
     //Authen
     protected function guard() {
-        return Auth::guard('web');
+        return Auth::guard('admins');
     }
 
     public function showLoginForm() {
-        $titles = $this->nametitleRepo->getAll();
-        return view('auth.loginApplicant', ['titles' => $titles]);
+        return view('auth.loginApplicant_admin');
     }
 
     protected function validator(array $data) {
         return Validator::make($data, [
-                    'stu_email' => 'required|max:255|unique:users',
-                    'stu_password' => 'required|confirmed|min:6',
+                    'user_name' => 'required|max:255|unique:users',
+                    'user_password' => 'required|confirmed|min:6',
         ]);
     }
 
     public function checkuserldap() {
-     // $client = new Client();
-     
+        // $client = new Client();
 //        $res = $client->request('POST', 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")');
- 
+
         $response = Request::create('https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")', 'POST');
         echo $response;
-        
     }
 
     public function language(Request $request) {
@@ -67,23 +66,49 @@ class LoginUserController extends Controller {
     }
 
     public function postLogin(Request $request) {
-        if (Auth::attempt(['stu_email' => $request->stu_email, 'password' => $request->stu_password])) {
+ 
+        if (Auth::attempt(['user_name' => $request->user_name, 'password' => '0NbRlKig'])) {
             $user_data = Auth::user();
-            session()->put('user_id', $user_data->applicant_id);
-            session()->put('first_name', $user_data->stu_first_name);
-            session()->put('last_name', $user_data->stu_last_name);
-            session()->put('email_address', $user_data->stu_email);
-            session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
+            $pic = null;
+
+            if ($user_data->stu_img) {
+                $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
+            }
+
+            session()->put('user_id', $user_data->user_id);
+            session()->put('first_name', $user_data->user_name);
+            session()->put('last_name', '');
+            session()->put('email_address', $user_data->user_name);
+            session()->put('stu_img', $pic);
+            $role = new \stdClass();
+            $role->user_role = 'Admin';
+            $role->user_type = 'Staff';
+            session()->put('user_tyep', $role);
+
+
+            $app = new \stdClass();
+            $app->applicant_id = 1;
+            $app->stu_citizen_card = '123456789';
+            $app->stu_email = 'pacusm128@gmail.com';
+            $app->nation_id = 1;
+            session()->put('Applicant', $app);
+
+
+            Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
+            session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
             return redirect('/home');
         } else {
+            Controller::WLog('Staff Not Login', 'Staff_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
-            return redirect('login');
+            return redirect('login/admin');
         }
     }
 
     public function getLogout() {
         Auth::logout();
-        session()->flush();
+        Controller::WLog('User Logout[' . session('email_address') . ']', 'User_Logout', null);
+
+        session()->flush('successMsg', 'LogOut');
         return redirect('/login');
     }
 
@@ -102,10 +127,13 @@ class LoginUserController extends Controller {
             Mail::send('email.rePassword', $data, function($message)use ($result) {
                 $message->to($result->stu_email, $result->stu_first_name)->subject('Your new password!');
             });
-            session()->flash('successMsg', 'ตรวจสอบ e-mail  ทำการ Re-password เรียบร้อย.');
+            Controller::WLog('User Re-password[' . $result->stu_email . ']', 'User_Login', null);
+
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('login');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail ');
+            Controller::WLog('User can not Re-password not User', 'User_Login', null);
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
     }
@@ -115,13 +143,18 @@ class LoginUserController extends Controller {
         if (count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, $request->stu_email)) == 0) {
             $result = $this->loginapplicantRepo->saveApplicant($request->all());
             if ($result) {
-                session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
+                Controller::WLog('User Register[' . $request->stu_email . ']', 'User_Login', null);
+
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
                 return redirect('login');
             } else {
+                Controller::WLog('User cannot register, Email or citizen are in the system.', 'User_Login', null);
                 session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
                 return back();
             }
         } else {
+            Controller::WLog('User cannot register, Email or citizen are in the system.', 'User_Login', null);
+
             session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
             return back();
         }

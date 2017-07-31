@@ -1,7 +1,7 @@
 <div class="page-sidebar-wrapper">
     <!-- BEGIN SIDEBAR -->
     <div class="page-sidebar navbar-collapse collapse">
-        <!-- BEGIN SIDEBAR MENU -->
+        <!-- BEGIN SIDEBAR MENU for applicant -->
         <ul class="page-sidebar-menu  page-header-fixed " style="padding-top: 20px" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
             <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
             <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -13,16 +13,16 @@
             <!-- END SIDEBAR TOGGLER BUTTON -->
             <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
 
-            <li class="nav-item start menuitem" data-index="1">
+            <li class="nav-item start menuitem active open" data-index="1">
                 <a class="nav-link nav-toggle" href="{{url('home/')}}">
                     <i class="icon-home"></i>
                     <span class="title">{{Lang::get('resource.lbMHome')}}</span>
-                 
+
                     <span class="arrow"></span> 
                 </a>                                
             </li>
 
-   @if(!session('user_id'))
+            @if(!session('user_id'))
             <li class="nav-item menuitem"  data-index="2">
                 <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
                     <i class="icon-bulb"></i>
@@ -31,9 +31,9 @@
                 </a>
 
             </li>
-     @endif
+            @endif
             @if(session('user_id'))
-             <li class="nav-item menuitem"  data-index="7">
+            <li class="nav-item menuitem"  data-index="7">
                 <a class="nav-link nav-toggle" href="{{url('apply/manageMyCourse/')}}">
                     <i class="icon-bulb"></i>
                     <span class="title">{{Lang::get('resource.lbManageCouse')}}</span>
@@ -41,7 +41,7 @@
                 </a>
 
             </li>
-             
+
             <li class="nav-item  menuitem "   data-index="3">
                 <a class="nav-link  nav-toggle" href="{{url('apply')}}">
                     <i class="icon-briefcase"></i>
@@ -49,7 +49,7 @@
                     <span class="arrow"></span>
                 </a>
             </li>
-              @endif
+            @endif
             <li class="nav-item menuitem "  data-index="4">
                 <a class="nav-link nav-toggle" href="{{url('faq/')}}">
                     <i class="icon-wallet"></i>
@@ -74,9 +74,9 @@
                 </a>
 
             </li>
-        </ul>
+        </ul>        
         <!-- END SIDEBAR MENU -->
-        <!-- END SIDEBAR MENU -->
+        
     </div>
 
     <!-- END SIDEBAR -->
@@ -87,13 +87,15 @@
             $(this).removeClass("active");
             $str1 = $(this).find('a:first').attr('href');
             $str2 = window.location.pathname;
-            $selectTag ='<span class="selected"></span>';
-            if($str1.substr($str1.lastIndexOf("/") + 1) == $str2.substr($str2.lastIndexOf("/") + 1)){
-            $(this).addClass("active");
-            $(this).find('a:first').append($selectTag);
-            }else if($str2.substr($str2.lastIndexOf("/") + 1)=='register' && $str1.substr($str1.lastIndexOf("/") + 1)=="apply"){  
-           $(this).addClass("active");
-             };
+            $selectTag = '<span class="selected"></span>';
+           
+            if ($str1.substr($str1.lastIndexOf("/") + 1) == $str2.substr($str2.lastIndexOf("/") + 1) ||($str1.substr($str1.lastIndexOf("/") + 1) =='home' &&$str2.substr($str2.lastIndexOf("/") + 1)=='')) {
+                $(this).addClass("active");
+                $(this).find('a:first').append($selectTag);
+            } else if ($str2.substr($str2.lastIndexOf("/") + 1) == 'register' && $str1.substr($str1.lastIndexOf("/") + 1) == "apply") {
+                $(this).addClass("active");
+            }
+            ;
         });
 
 

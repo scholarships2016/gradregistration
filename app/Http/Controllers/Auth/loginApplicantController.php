@@ -29,6 +29,8 @@ class LoginApplicantController extends Controller {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
         $this->FileRepo = $FileRepo;
+        
+        Auth::setDefaultDriver( 'web' );
     }
 
     //Authen
@@ -71,7 +73,13 @@ class LoginApplicantController extends Controller {
             session()->put('first_name', $user_data->stu_first_name_en);
             session()->put('last_name', $user_data->stu_last_name_en);
             session()->put('email_address', $user_data->stu_email);
-            session()->put('stu_img', $pic);
+            session()->put('stu_img', $pic);         
+            $role = new \stdClass();
+            $role->user_role = '';
+            $role->user_type = 'applicant';
+            session()->put('user_tyep', $role);
+            
+            
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;
             $app->stu_citizen_card = $user_data->stu_citizen_card;

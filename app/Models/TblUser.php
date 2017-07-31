@@ -41,18 +41,19 @@ class TblUser extends Eloquent
 	];
 
 	protected $hidden = [
-		'password'
+		'user_password'
 	];
 
 	protected $fillable = [
 		'user_name',
-		'password',
+		'user_password',
 		'name',
 		'last_login',
 		'ipaddress',
 		'creator',
 		'created',
 		'modifier',
+            'remember_token',
 		'modified'
 	];
 }

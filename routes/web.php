@@ -16,12 +16,22 @@ Route::get('/', function () {
 });
 
 //ไม่ล๊อกอินก็สามารถเห็นได้
-//RegisApplicant
-Route::get('usersldap', 'Auth\LoginUserController@checkuserldap');
-Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginApplicantController@register']);
+//login  User
 Route::post('/login/repass', 'Auth\LoginApplicantController@reLogin')->name('rePassLoginApplicant');
 Route::get('login', 'Auth\LoginApplicantController@showLoginForm')->name('showLogin');
-Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginApplicantController@postLogin']);
+Route::post('login', 'Auth\LoginApplicantController@postLogin')->name('logins');
+Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginApplicantController@register']);
+
+//login Admin
+//Route::get('login/admin', 'Auth\LoginUserController@checkuserldap');
+Route::get('login/admin', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
+Route::post('login_admin', 'Auth\LoginUserController@postLogin')->name('adminlogin');
+
+
+
+
+
+
 
 
 //SetLangues just call function
@@ -61,6 +71,7 @@ Route::get('/download', function () {
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
+    
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
 //Apply 
     Route::get('apply', 'ApplyController@showAnnouncement');
