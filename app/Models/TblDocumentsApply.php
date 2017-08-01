@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -16,8 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $doc_apply_group
  * @property string $doc_apply_group_en
  * @property string $doc_apply_detail
- * @property string $doc_apply_detail_en
- * @property bool $flag_upload
+ * @property string $doc_apply_detail_ne
  * @property bool $active
  *
  * @package App\Models
@@ -29,7 +28,6 @@ class TblDocumentsApply extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'flag_upload' => 'bool',
 		'active' => 'bool'
 	];
 
@@ -37,8 +35,7 @@ class TblDocumentsApply extends Eloquent
 		'doc_apply_group',
 		'doc_apply_group_en',
 		'doc_apply_detail',
-		'doc_apply_detail_en',
-		'flag_upload',
+		'doc_apply_detail_ne',
 		'active'
 	];
 }

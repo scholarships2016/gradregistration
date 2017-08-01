@@ -183,6 +183,7 @@
                                         </div>
                                     </div></a>
                                 </div>
+                                @if(!session('user_id'))
                                 <div class="row margin-bottom-20"><a href="{{url('login')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">
@@ -199,6 +200,7 @@
                                         </div>
                                     </div></a>
                                         </div>
+                                @endif
                                     <div class="row margin-bottom-20">
                                     <div class="col-md-12">
                                         <div class="portlet light">

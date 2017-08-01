@@ -10,13 +10,11 @@ class Authenticate {
 
     public function handle($request, Closure $next) {
 
-           if ( Auth::check() )
-        {
-            return $next($request);
+        if (!Auth::guard()->check() && !Auth::guard('admins')->check()) {
+            return redirect('/login');
         }
 
-        return redirect('/login');
-
+        return $next($request);
     }
 
 }
