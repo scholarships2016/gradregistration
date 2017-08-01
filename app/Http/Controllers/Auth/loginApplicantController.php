@@ -75,8 +75,8 @@ class LoginApplicantController extends Controller {
             session()->put('email_address', $user_data->stu_email);
             session()->put('stu_img', $pic);         
             $role = new \stdClass();
-            $role->user_role = '';
-            $role->user_type = 'applicant';
+            $role->user_role= '';
+            $role->user_type= 'applicant';
             session()->put('user_tyep', $role);
             
             

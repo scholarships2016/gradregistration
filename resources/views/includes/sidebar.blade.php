@@ -1,7 +1,283 @@
 <div class="page-sidebar-wrapper">
-    <!-- BEGIN SIDEBAR -->
+    <!-- BEGIN SIDEBAR for applicant -->
     <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU for admin -->       
+        @if(session('user_tyep'))
+        @if(session('user_tyep')->user_type=='Staff')
+
+        <ul class="page-sidebar-menu  page-header-fixed " style="padding-top: 20px" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
+            <li class="sidebar-toggler-wrapper hide">
+                <div class="sidebar-toggler">
+                    <span></span>
+                </div>
+            </li>
+
+            <li class=" nav-item  menuitem  start active open" data-index="10">
+                <a href="dashboard_3.html" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Dashboard</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+
+            </li>
+            <li class=" nav-item  menuitem   "data-index="11">
+                <a href="todolist.html" class="nav-link nav-toggle">
+                    <i class="icon-calendar"></i>
+                    <span class="title">To-Do List</span>
+                    <span class="badge badge-danger">2</span>
+<!--                     <span class="arrow"></span>-->
+                </a>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Management</h3>
+            </li>
+            <li class=" nav-item  menuitem   "data-index="12">
+                <a href="manage-curriculum.html" class="nav-link nav-toggle">
+                    <i class="icon-briefcase"></i>
+                    <span class="title">จัดการหลักสูตร</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-curriculum.html" class="nav-link ">
+                            <span class="title">รายการหลักสูตร</span>
+                        </a>
+                    </li>
+
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls.html" class="nav-link ">
+                            <span class="title">กรอกฟอร์มขอเปิดหลักสูตร</span>
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </li>
+
+            <li class=" nav-item  menuitem   "data-index="13">
+                <a href="manage-payment-documents.html" class="nav-link nav-toggle">
+                    <i class="icon-layers"></i>
+                    <span class="title">จัดการข้อมูลการสมัคร</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-payment-documents.html" class="nav-link ">
+                            <span class="title">ปรับปรุงการชำระเงิน และส่งเอกสาร</span>
+                        </a>
+                    </li>
+
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-gs03.html" class="nav-link ">
+                            <span class="title">ปรับปรุงผู้มีสิทธิ์สอบ (GS03)</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-gs05.html" class="nav-link ">
+                            <span class="title">ปรับปรุงผู้มีสิทธิ์เข้าศึกษา (GS05)</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item  menuitem  "data-index="14">
+                <a href="่" class="nav-link nav-toggle">
+                    <i class="icon-user-follow"></i>
+                    <span class="title">เพิ่มผู้สอบได้</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+
+            </li>
+            <li class=" nav-item  menuitem  "data-index="15">
+                <a href="" class="nav-link nav-toggle">
+                    <i class="icon-check"></i>
+                    <span class="title">ออกหนังสือรับรอง</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+
+            </li>
+            <li class=" nav-item  menuitem   "data-index="16">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">รายงาน</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="components_date_time_pickers.html" class="nav-link ">
+                            <span class="title">รายงานการ</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">รายงานการ</span>
+
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Settings</h3>
+            </li>
+            <li class=" nav-item  menuitem   "data-index="17">
+                <a href="apply-setting.html" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">ตั้งค่าการสมัคร</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="apply-setting.html" class="nav-link ">
+                            <span class="title">รายการเปิดรับสมัคร</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="apply-setting-form.html" class="nav-link ">
+                            <span class="title">ตั้งค่าการเปิดรับสมัคร</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+            <li class=" nav-item  menuitem   "data-index="18">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-user"></i>
+                    <span class="title">ผู้ใช้งาน</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-applicant.html" class="nav-link ">
+                            <span class="title">จัดการผู้สมัคร</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-admin.html" class="nav-link ">
+                            <span class="title">จัดการผู้ดูแลระบบ</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class=" nav-item  menuitem   "data-index="19">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-note"></i>
+                    <span class="title">จัดการเนื้อหา</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls.html" class="nav-link ">
+                            <span class="title">ข่าว &amp; ประกาศ</span>
+                        </a>
+                    </li>
+
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">ขั้นตอนการสมัคร</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">ถามตอบ</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">ติดต่อเรา</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+            <!--
+            <li class=" nav-item  menuitem   ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">Master Data Management</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls.html" class="nav-link ">
+                            <span class="title">กำหนดแหล่งข่าว</span>
+                        </a>
+                    </li>
+            -->
+
+
+
+
+            <li class=" nav-item  menuitem   "data-index="20">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class=" icon-wrench"></i>
+                    <span class="title">Extra Feature</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls.html" class="nav-link ">
+                            <span class="title">ให้สิทธิ์การสมัคร เป็นกรณีพิเศษ</span>
+                        </a>
+                    </li>
+
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">เพิ่มผู้สอบได้ หลักสูตรนอกเวลาราชการ/หลักสูตรนานาชาติ</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">การสมัครวิธีพิเศษ</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">ออกหนังสือรับรอง</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class=" nav-item  menuitem   "data-index="21">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">Logs</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls_md.html" class="nav-link ">
+                            <span class="title">Audit Logs</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item  menuitem   ">
+                        <a href="form_controls.html" class="nav-link ">
+                            <span class="title">Transactions logs</span>
+                        </a>
+                    </li>
+
+
+
+
+                </ul>
+            </li>
+        </ul>
+
+        @endif
+        @endif
+        <!-- END SIDEBAR MENU  admin-->
         <!-- BEGIN SIDEBAR MENU for applicant -->
+        
+        @if(!session('user_tyep') || (session('user_tyep')->user_type=='applicant'))
+
         <ul class="page-sidebar-menu  page-header-fixed " style="padding-top: 20px" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
             <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
             <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -13,7 +289,7 @@
             <!-- END SIDEBAR TOGGLER BUTTON -->
             <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
 
-            <li class="nav-item start menuitem active open" data-index="1">
+            <li class=" nav-item    start menuitem active open" data-index="1">
                 <a class="nav-link nav-toggle" href="{{url('home/')}}">
                     <i class="icon-home"></i>
                     <span class="title">{{Lang::get('resource.lbMHome')}}</span>
@@ -23,7 +299,7 @@
             </li>
 
             @if(!session('user_id'))
-            <li class="nav-item menuitem"  data-index="2">
+            <li class=" nav-item    menuitem"  data-index="2">
                 <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
                     <i class="icon-bulb"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
@@ -33,7 +309,7 @@
             </li>
             @endif
             @if(session('user_id'))
-            <li class="nav-item menuitem"  data-index="7">
+            <li class=" nav-item    menuitem"  data-index="7">
                 <a class="nav-link nav-toggle" href="{{url('apply/manageMyCourse/')}}">
                     <i class="icon-bulb"></i>
                     <span class="title">{{Lang::get('resource.lbManageCouse')}}</span>
@@ -42,7 +318,7 @@
 
             </li>
 
-            <li class="nav-item  menuitem "   data-index="3">
+            <li class=" nav-item  menuitem   menuitem "   data-index="3">
                 <a class="nav-link  nav-toggle" href="{{url('apply')}}">
                     <i class="icon-briefcase"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
@@ -50,7 +326,7 @@
                 </a>
             </li>
             @endif
-            <li class="nav-item menuitem "  data-index="4">
+            <li class=" nav-item    menuitem "  data-index="4">
                 <a class="nav-link nav-toggle" href="{{url('faq/')}}">
                     <i class="icon-wallet"></i>
                     <span class="title">{{Lang::get('resource.lbMFAQs')}}</span>
@@ -58,7 +334,7 @@
                 </a>
 
             </li>
-            <li class="nav-item menuitem "   data-index="5">
+            <li class=" nav-item    menuitem "   data-index="5">
                 <a class="nav-link nav-toggle" href="{{url('download/')}}">
                     <i class="icon-bar-chart"></i>
                     <span class="title">{{Lang::get('resource.lbMDownlods')}}</span>
@@ -66,7 +342,7 @@
                 </a>
 
             </li>
-            <li class="nav-item  menuitem "  data-index="6">
+            <li class=" nav-item     menuitem "  data-index="6">
                 <a class="nav-link nav-toggle" href="{{url('contact/')}}">
                     <i class="icon-pointer"></i>
                     <span class="title">{{Lang::get('resource.lbMContactsUs')}}</span>
@@ -75,11 +351,11 @@
 
             </li>
         </ul>        
+
+        @endif   
         <!-- END SIDEBAR MENU -->
-        
     </div>
 
-    <!-- END SIDEBAR -->
 </div>
 <script>
     window.onload = function () {
@@ -88,8 +364,8 @@
             $str1 = $(this).find('a:first').attr('href');
             $str2 = window.location.pathname;
             $selectTag = '<span class="selected"></span>';
-           
-            if ($str1.substr($str1.lastIndexOf("/") + 1) == $str2.substr($str2.lastIndexOf("/") + 1) ||($str1.substr($str1.lastIndexOf("/") + 1) =='home' &&$str2.substr($str2.lastIndexOf("/") + 1)=='')) {
+
+            if ($str1.substr($str1.lastIndexOf("/") + 1) == $str2.substr($str2.lastIndexOf("/") + 1) || ($str1.substr($str1.lastIndexOf("/") + 1) == 'home' && $str2.substr($str2.lastIndexOf("/") + 1) == '')) {
                 $(this).addClass("active");
                 $(this).find('a:first').append($selectTag);
             } else if ($str2.substr($str2.lastIndexOf("/") + 1) == 'register' && $str1.substr($str1.lastIndexOf("/") + 1) == "apply") {
