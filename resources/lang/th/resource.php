@@ -66,28 +66,28 @@ return [
     'lbContactNo' => 'หมายเลขโทรศัพท์ที่สามารถติดต่อได้',
     'lbTopInfo' => 'เลขที่บัตรประจำตัวประชาชน และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้ จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป ',
     'lbAppInfo' => 'ข้อมูลประวัติผู้สมัคร',
-    
-    
-    
-    
+
+
+
+
     'lbNameContact' => 'บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
     'lbAddress1Contact' => 'บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย  254 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330',
     'lbAddress2Contact' => 'อาคารเฉลิมราชกุมารี 60 พรรษา (อาคารจามจุรี 10) ซอยจุฬา 12 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330',
     'lbContacts' => 'ติดต่อ',
     'lbAddress' => 'ที่อยู่',
-   
+
        //Menu
     'lbMHome' => 'หน้าหลัก',
     'lbMCurriculum' => 'หลักสูตร',
     'lbMApply' => 'ขั้นตอนสมัคร',
     'lbMFAQs' => 'คำถาม/ตอบ',
-    'lbMDownlods' => 'Downlods',    
+    'lbMDownlods' => 'Downlods',
     'lbMContactsUs' =>'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
      'lbMProfile' => 'โพรไฟล์',
     'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
     'lbConfirmApply'=> 'ยืนยันการสมัคร',
-    
+
     //botton
     'lbNext' => 'ถัดไป',
     'lbSkip' => 'ข้าม',
@@ -104,10 +104,10 @@ return [
      'lbdocPayMyCourse'=>'ใบแจ้งชำระค่าธรรมเนียม',
     'lbdocEnvelop'=>'ใบปะหน้าซอง',
      'lbRegisterbtn'=>'สมัคร',
-     
-    
-    
-    
+
+
+
+
     //other Use
      'lbYear'=>'ปีการศึกษา(พ.ศ.)',
      'lbDepartment'=>'ภาควิชา-สาขา',
@@ -115,14 +115,14 @@ return [
      'lbMajor'=>'หลักสูตร',
      'lbMajorCode'=>'รหัสหลักสูตร',
     'lbSuccess'=>'ดำเนินการเรียบร้อย',
-    'lbError'=>'ไม่สมารถดำเนินการได้',
+    'lbError'=>'ไม่สามารถดำเนินการได้',
     'lbProgarmID'=>'รหัสหลักสูตร',
     'lbAnswer'=>'คำตอบ',
     'lbQuestionAsk'=>'คำถามเพิ่มเติม',
-    
+
     //register Detail Page
      'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbSelProgram'=>'เลือกรหัสแผนหลักสูตร', 
+     'lbSelProgram'=>'เลือกรหัสแผนหลักสูตร',
      'lbSelSubMajor'=>'เลือกรหัสหลักสูตร(แขนงวิชา)',
     'lbExam_schedule'=>'ตารางสอบ',
     'lbExpectation'=>'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
@@ -134,7 +134,7 @@ return [
     'lbDocID'=>'เลขที่ใบสมัคร',
     'lbWTodo'=>'สิ่งที่ต้องดำเนินการ',
     'lbConfApp'=>'สิ่งที่ต้องดำเนินการ',
-    
+
      //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
 
@@ -159,7 +159,7 @@ return [
     'perInfoInterest' => 'สนใจ',
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
-    
+
         //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
 
@@ -184,14 +184,14 @@ return [
     'perInfoInterest' => 'สนใจ',
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
-    
-    
+
+
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'คุณต้องการที่จะสมัครหรือไม่?',
     'lbMessageBeforLogin_text' => 'เนื่องจากก่อนคุณจะสมัคร คุณจะต้องทำการลงทะเบียนและเข้าสู่ระบบก่อน จะดำเนินการเข้าระบบหรือไม่',
-     
-    
-    
-    
+
+
+
+
 ];

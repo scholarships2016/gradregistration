@@ -65,26 +65,26 @@ return [
     'lbContactNo' => 'Contact No',
     'lbTopInfo' => 'Your Citizen ID or Passport ID will be used to login next time.',
     'lbAppInfo' => 'Applicant Information',
-    
-    
+
+
     'lbNameContact' => 'Graduate Student Registration.',
     'lbAddress1Contact' => 'Graduate Student Registration.254 Phayathai Rd, Pathum Wan, Bangkok 10330',
     'lbAddress2Contact' => 'Graduate School Chulalongkorn University Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan, Bangkok 10330',
     'lbContacts' => 'Contacts',
     'lbAddress' =>'Address',
-    
+
     //Menu
     'lbMHome' => 'Home',
     'lbMCurriculum' => 'Curriculum',
     'lbMApply' => 'How to Apply',
     'lbMFAQs' => 'FAQs',
-    'lbMDownlods' => 'Downlods',    
+    'lbMDownlods' => 'Downlods',
     'lbMContactsUs' =>'Contact Us',
     'lbManageCouse' => 'Program Selected',
      'lbConfirmationDoc'=> 'Confirmation documents apply',
      'lbConfirmApply'=> 'Confirmation',
         'lbMProfile' => 'Profile',
-    
+
      //botton
     'lbNext' => 'Next',
     'lbSkip' => 'Skip',
@@ -100,10 +100,10 @@ return [
     'lbdocMyCourse'=>'Application Form',
      'lbdocPayMyCourse'=>'Pay in Form',
      'lbdocEnvelop'=>'Envelop',
-     
-     
-     
-    
+
+
+
+
     //other Use
      'lbYear'=>'year',
      'lbDepartment'=>'Department',
@@ -115,24 +115,24 @@ return [
     'lbProgarmID'=>'Program ID',
      'lbAnswer'=>'Answer',
     'lbQuestionAsk'=>'Question',
-    
-    
+
+
     //register Detail Page
      'lbRegDetail'=>'Course details',
-     'lbSelProgram'=>'Select program', 
+     'lbSelProgram'=>'Select program',
      'lbSelSubMajor'=>'Select program (subject)',
      'lbExam_schedule'=>'Exam schedule',
      'lbStartExam'=>'Recruit date',
-     'lbExpectation'=>'Expectation',     
+     'lbExpectation'=>'Expectation',
      'lbMoreInformation'=>'More Information',
      'lbFee'=>'Fee',
-     'lbTimeExam'=>'Recruit date',   
-        'lbQuestion'=>'Question',
+     'lbTimeExam'=>'Recruit date',
+     'lbQuestion'=>'Question',
      'lbDocID'=>'Document ID',
      'lbWTodo'=>'To do task',
      'lbConfApp'=>'Confirm',
      'lbRegisterbtn'=>'Apply',
-    
+
 //ApplicantInfo
     'appctInfoPageTitle' => 'Applicant Information',
 
@@ -157,11 +157,11 @@ return [
     'perInfoInterest' => 'Interesting',
     'perInfoNotInterest' => 'Not Interesting',
     'perInfoMedia' => 'How can you know this news?',
-    
+
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'Would you like to register?',
     'lbMessageBeforLogin_text' => 'You have to register member or login system before registration',
-     
-    
+
+
 ];

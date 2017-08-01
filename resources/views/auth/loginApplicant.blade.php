@@ -13,7 +13,7 @@
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
 
-    <form class="login-form" action="{{ url('/login')}}" method="post">    
+    <form class="login-form" action="{{ url('/login')}}" method="post">
         {{csrf_field()}}
         <h3 class="form-title">Login to your account     </h3>
 
@@ -28,14 +28,14 @@
             <div class="input-icon">
                 <i class="fa fa-envelope"></i>
                 <input class="form-control placeholder-no-fix" pattern="[^ @]*@[^ @]*" type="text" autocomplete="off" placeholder="E-Mail"
-                       name="stu_email"/></div>
+                      id="stu_email" name="stu_email"/></div>
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Password</label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                       placeholder="Password" name="stu_password"/></div>
+                       placeholder="Password" id="stu_password" name="stu_password"/></div>
         </div>
         <div class="form-actions">
 
@@ -43,8 +43,8 @@
         </div>
         <div class="forget-password">
             <h4>Forgot your password ?</h4>
-            <p> no worries, click
-                <a href="javascript:;" id="forget-password"> here </a> to reset your password. </p>
+            <p> Click
+                <a href="javascript:;" id="forget-password"> here </a> to get your password. </p>
         </div>
         <div class="create-account">
             <p> Don't have an account yet ?&nbsp;
@@ -57,12 +57,12 @@
     <form class="forget-form" action="{{route('rePassLoginApplicant')}}" method="post">
         {{csrf_field()}}
         <h3>Forget Password ?</h3>
-        <p> Enter your e-mail address below to reset your password. </p>
+        <p> Enter your e-mail address below to get your password. </p>
         <div class="form-group">
             <div class="input-icon">
                 <i class="fa fa-envelope"></i>
                 <input class="form-control placeholder-no-fix" pattern="[^ @]*@[^ @]*" type="text" autocomplete="off" placeholder="Email"
-                       name="stu_email"/></div>
+                      id="stu_email" name="stu_email"/></div>
         </div>
         <div class="form-actions">
             <button type="button" id="back-btn" class="btn red btn-outline">Back</button>
@@ -76,64 +76,64 @@
         <h3>Sign Up</h3>
         <p> Enter your personal details below: </p>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Citizen/Passport</label>
+            <label class="control-label visible-ie8 visible-ie9">Citizen ID / Passport ID</label>
             <div class="input-icon">
                 <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Citizen/Passport" name="stu_citizen_card"/>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Citizen ID / Passport ID" id="stu_citizen_card" name="stu_citizen_card"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Title</label>
-            <select name="name_title_id" id="name_title_id" placeholder="Title" class="select2 form-control">
-                <option value=""></option>
+            <label class="control-label">Name Title</label>
+            <select name="name_title_id" id="name_title_id" placeholder="Name Title" class="select2 form-control">
+                <option value="">--Select--</option>
                 @if($titles)
                 @foreach($titles as $key => $title)
-                <option value="{{$title->name_title_id}}">{{$title->name_title.' - '.$title->name_title_en}}</option> 
+                <option value="{{$title->name_title_id}}">{{$title->name_title.' - '.$title->name_title_en}}</option>
                 @endforeach
                 @endif
             </select>
         </div>
 
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">First-Name</label>
+            <label class="control-label visible-ie8 visible-ie9">First Name</label>
             <div class="input-icon">
                 <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" onkeyup="return this.value = this.value.toUpperCase()" type="text" placeholder="First-Name" name="stu_first_name_en"/>
+                <input class="form-control placeholder-no-fix" onkeyup="return this.value = this.value.toUpperCase()" type="text" placeholder="First Name in English" id="stu_first_name_en" name="stu_first_name_en"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Last-Name</label>
+            <label class="control-label visible-ie8 visible-ie9">Last Name</label>
             <div class="input-icon">
                 <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" onkeyup="return this.value = this.value.toUpperCase()" type="text" placeholder="Last-Name" name="stu_last_name_en"/>
+                <input class="form-control placeholder-no-fix" onkeyup="return this.value = this.value.toUpperCase()" type="text" placeholder="Last Name in English" id="stu_last_name_en" name="stu_last_name_en"/>
             </div>
         </div>
-       
+
 
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">Phone</label>
+            <label class="control-label visible-ie8 visible-ie9">Mobile Phone Number</label>
             <div class="input-icon">
                 <i class="fa fa-phone"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Phone" name="stu_phone"/></div>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Mobile Phone Number" id="stu_phone" name="stu_phone"/></div>
         </div>
 
 
 
-        <p> Enter your email and password below: </p>
+        <p> Enter your login informations below: </p>
  <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">Email</label>
             <div class="input-icon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control placeholder-no-fix" type="text" pattern="[^ @]*@[^ @]*" placeholder="Email" name="stu_email"/></div>
+                <input class="form-control placeholder-no-fix" type="text" pattern="[^ @]*@[^ @]*" placeholder="Email" id="stud_email" name="stu_email"/></div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            <label class="control-label ">Password (at least 6 characters.)</label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                       id="register_password" placeholder="Password" name="stu_password"/></div>
+                       id="register_password" placeholder="Password" id="stu_password" name="stu_password"/></div>
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
@@ -141,7 +141,7 @@
                 <div class="input-icon">
                     <i class="fa fa-check"></i>
                     <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                           placeholder="Re-type Your Password" name="rpassword"/></div>
+                           placeholder="Re-type Your Password" id="rpassword" name="rpassword"/></div>
             </div>
         </div>
 
@@ -154,7 +154,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"> 2014 &copy; Metronic - Admin Dashboard Template.</div>
+<div class="copyright"> 2017 &copy; Graduate School, Chulalongkorn University</div>
 <!-- END COPYRIGHT -->
 @stop
 
@@ -167,7 +167,8 @@
 @endpush
 
 @push('pageJs')
-<script src="{{asset('assets/pages/scripts/login-4.min.js')}}"></script>
+<script src="{{asset('assets/pages/scripts/login-4.js')}}"></script>
+
 <script type="application/javascript">
 </script>
 @endpush

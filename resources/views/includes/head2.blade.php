@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8"/>
-    <title>Metronic Admin Theme #1 | User Login 4</title>
+    <title>Graduate School Registration - Applicant Login</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="Preview page of Metronic Admin Theme #1 for " name="description"/>
@@ -33,6 +33,7 @@
     <!-- END THEME LAYOUT STYLES -->
     <link href="{{asset('favicon.ico')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
+    <!-- BEGIN CUSTOM STYLES -->
+    <link href="{{asset('assets/global/css/custom.css')}}" rel="stylesheet" type="text/css">
+    <!-- END CUSTOM STYLES -->
 </head>
-
-

@@ -41,8 +41,8 @@
             </div>
             <div class="forget-password">
                 <h4>Forgot your password ?</h4>
-                <p> no worries, click
-                    <a href="javascript:;" id="forget-password"> here </a> to reset your password. </p>
+                <p> Click
+                    <a href="javascript:;" id="forget-password"> here </a> to get your password. </p>
             </div>
             <div class="create-account">
                 <p> Don't have an account yet ?&nbsp;
@@ -54,7 +54,7 @@
         <!-- BEGIN FORGOT PASSWORD FORM -->
         <form class="forget-form" action="" method="post">
             <h3>Forget Password ?</h3>
-            <p> Enter your e-mail address below to reset your password. </p>
+            <p> Enter your e-mail address below to get your password. </p>
             <div class="form-group">
                 <div class="input-icon">
                     <i class="fa fa-envelope"></i>
@@ -382,7 +382,7 @@
     </div>
     <!-- END LOGIN -->
     <!-- BEGIN COPYRIGHT -->
-    <div class="copyright"> 2014 &copy; Metronic - Admin Dashboard Template.</div>
+    <div class="copyright"> 2017 &copy; Graduate School, Chulalongkorn University</div>
     <!-- END COPYRIGHT -->
 @stop
 

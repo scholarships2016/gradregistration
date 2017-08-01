@@ -35,13 +35,13 @@
                                               placeholder="Password" name="stu_password"/></div>
                                </div>
                                <div class="form-actions">
-                                    
+
                                    <button type="submit" class="btn green pull-right"> Login</button>
                                </div>
                                <div class="forget-password">
                                    <h4>Forgot your password ?</h4>
-                                   <p> no worries, click
-                                       <a href="javascript:;" id="forget-password"> here </a> to reset your password. </p>
+                                   <p> Click
+                                       <a href="javascript:;" id="forget-password"> here </a> to get your password. </p>
                                </div>
                                <div class="create-account">
                                    <p> Don't have an account yet ?&nbsp;
@@ -54,7 +54,7 @@
                            <form class="forget-form" action="{{route('rePassLoginApplicant')}}" method="post">
                                {{csrf_field()}}
                                <h3>Forget Password ?</h3>
-                               <p> Enter your e-mail address below to reset your password. </p>
+                               <p> Enter your e-mail address below to get your password. </p>
                                <div class="form-group">
                                    <div class="input-icon">
                                        <i class="fa fa-envelope"></i>
@@ -85,12 +85,12 @@
                                        <option value=""></option>
                                        @if($titles)
                                        @foreach($titles as $key => $title)
-                                       <option value="{{$title->name_title_id}}">{{$title->name_title_thai}}</option> 
+                                       <option value="{{$title->name_title_id}}">{{$title->name_title_thai}}</option>
                                        @endforeach
                                        @endif
                                    </select>
                                </div>
-                           
+
                                <div class="form-group">
                                    <label class="control-label visible-ie8 visible-ie9">First-Name</label>
                                    <div class="input-icon">
@@ -112,7 +112,7 @@
                                        <i class="fa fa-envelope"></i>
                                        <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="stu_email"/></div>
                                </div>
-                               
+
                                 <div class="form-group">
                                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                                    <label class="control-label visible-ie8 visible-ie9">Phone</label>
@@ -122,7 +122,7 @@
                                </div>
 
 
-                               
+
                                <p> Enter your password below: </p>
 
                                <div class="form-group">
@@ -141,7 +141,7 @@
                                                   placeholder="Re-type Your Password" name="rpassword"/></div>
                                    </div>
                                </div>
-                               
+
                                <div class="form-actions">
                                    <button id="register-back-btn" type="button" class="btn red btn-outline"> Back</button>
                                    <button type="submit" id="register-submit-btn" class="btn green pull-right"> Sign Up</button>
@@ -151,7 +151,7 @@
                     </div>
                     <!-- END LOGIN -->
                     <!-- BEGIN COPYRIGHT -->
-                    <div class="copyright"> 2014 &copy; Metronic - Admin Dashboard Template.</div>
+                    <div class="copyright"> 2017 &copy; Graduate School, Chulalongkorn University</div>
                     <!-- END COPYRIGHT -->
                     @stop
 

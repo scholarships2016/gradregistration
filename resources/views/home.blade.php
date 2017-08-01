@@ -4,6 +4,7 @@
 <link id="style_color" href="../assets/layouts/layout/css/themes/light2.min.css" rel="stylesheet" type="text/css">
 <link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css">
  <link href="../assets/pages/css/about.min.css" rel="stylesheet" type="text/css">
+ <link href="../assets/global/css/custom.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -16,7 +17,7 @@
                 <a href="{{url('home/')}}">{{Lang::get('resource.lbMHome')}}</a>
                 <i class="fa fa-circle"></i>
             </li>
-           
+
         </ul>
         <div class="page-toolbar">
             <div class="btn-group pull-right">
@@ -49,17 +50,17 @@
 @stop
 
 @section('pagetitle')
-     
+
 @stop
 
 
 
 @section('maincontent')
-     
+
                         <h1 class="page-title"> Admin Dashboard
                             <small>statistics, charts, recent events and reports</small>
                         </h1>
-                      
+
 
                         <div class="row margin-bottom-40">
                             <!-- Start Left Panel -->
@@ -238,14 +239,14 @@
                         </div>
 
 
- 
+
 @stop
 
 
 @push('pageJs')
 <script type="application/javascript">
     $(document).ready(function () {
-        alert("IamReady");
+
     });
 </script>
 @endpush

@@ -13,7 +13,7 @@
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
 
-    <form class="login-form" action="{{ url('/login_admin')}}" method="post">    
+    <form class="login-form" action="{{ url('/login_admin')}}" method="post">
         {{csrf_field()}}
         <h3 class="form-title">Login to your account     </h3>
         <div class="alert al                                       ert-danger display-hide">
@@ -39,14 +39,14 @@
 
             <button type="submit" class="btn green pull-right"> Login</button>
         </div>
-        
-       
+
+
     </form>
-    
+
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"> 2014 &copy; Metronic - Admin Dashboard Template.</div>
+<div class="copyright"> 2017 &copy; Graduate School, Chulalongkorn University</div>
 <!-- END COPYRIGHT -->
 @stop
 
