@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -23,24 +23,27 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Satisfaction extends Eloquent
-{
-	protected $table = 'satisfaction';
-	protected $primaryKey = 'SATI_NO';
-	public $timestamps = false;
+class Satisfaction extends Eloquent {
 
-	protected $casts = [
-		'CREATED' => 'int',
-		'MODIFIED' => 'int'
-	];
+    protected $table = 'satisfaction';
+    protected $primaryKey = 'SATI_NO';
 
-	protected $fillable = [
-		'stu_citizen_card',
-		'SATI_LEVEL',
-		'SATI_SUGGESTION',
-		'CREATED',
-		'CREATOR',
-		'MODIFIED',
-		'MODIFIER'
-	];
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+
+    public $timestamps = true;
+    protected $casts = [
+        'CREATED' => 'int',
+        'MODIFIED' => 'int'
+    ];
+    protected $fillable = [
+        'stu_citizen_card',
+        'SATI_LEVEL',
+        'SATI_SUGGESTION',
+        'CREATED',
+        'CREATOR',
+        'MODIFIED',
+        'MODIFIER'
+    ];
+
 }

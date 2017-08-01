@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -27,42 +27,39 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class ApplySetting extends Eloquent
-{
+class ApplySetting extends Eloquent {
+
+    protected $table = 'apply_setting';
+    protected $primaryKey = 'apply_setting_id';
+
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
-	protected $table = 'apply_setting';
-	public $incrementing = false;
-		protected $primaryKey = 'apply_setting_id';
-	public $timestamps = false;
 
-	protected $casts = [
-		'apply_setting_id' => 'int',
-		'semester' => 'int',
-		'round_no' => 'int',
-		'is_active' => 'int',
-		'status' => 'int'
-	];
+    public $timestamps = true;
+    protected $casts = [
+        'semester' => 'int',
+        'round_no' => 'int',
+        'is_active' => 'int',
+        'status' => 'int'
+    ];
+    protected $dates = [
+        'start_date',
+        'end_date',
+        'created',
+        'modified'
+    ];
+    protected $fillable = [
+        'semester',
+        'academic_year',
+        'round_no',
+        'start_date',
+        'end_date',
+        'is_active',
+        'status',
+        'created',
+        'creator',
+        'modified',
+        'modifier'
+    ];
 
-	protected $dates = [
-		'start_date',
-		'end_date',
-		'created',
-		'modified'
-	];
-
-	protected $fillable = [
-		'apply_setting_id',
-		'semester',
-		'academic_year',
-		'round_no',
-		'start_date',
-		'end_date',
-		'is_active',
-		'status',
-		'created',
-		'creator',
-		'modified',
-		'modifier'
-	];
 }

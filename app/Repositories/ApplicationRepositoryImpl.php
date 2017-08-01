@@ -64,11 +64,11 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
                             ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
                             ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
-                            ->leftJoin('mcoursestudy', 'curriculum_program.coursecodeno', '=', 'mcoursestudy.coursecodeno')
+                            ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
                             ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
                             ->leftJoin('tbl_bank', 'application.bank_id', '=', 'tbl_bank.bank_id')
                             ->leftJoin("tbl_major", function($join) {
-                                $join->on("tbl_major.major_code", "=", "mcoursestudy.majorcode")
+                                $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                                 ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                             })
                             ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')

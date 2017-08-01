@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -17,7 +17,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $program_id
  * @property int $program_type_id
  * @property int $program_plan_id
- * @property string $coursecodeno
  *
  * @package App\Models
  */
@@ -37,7 +36,6 @@ class CurriculumProgram extends Eloquent
 		'curriculum_id',
 		'program_id',
 		'program_type_id',
-		'program_plan_id',
-		'coursecodeno'
+		'program_plan_id'
 	];
 }

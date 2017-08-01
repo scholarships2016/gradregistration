@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -16,7 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $prog_type_name
  * @property string $prog_type_name_en
  * @property string $cond_id
- * @property string $degree_lavel_name
+ * @property string $degree_level_name
  * @property string $office_time
  *
  * @package App\Models
@@ -36,7 +36,7 @@ class TblProgramType extends Eloquent
 		'prog_type_name',
 		'prog_type_name_en',
 		'cond_id',
-		'degree_lavel_name',
+		'degree_level_name',
 		'office_time'
 	];
 }

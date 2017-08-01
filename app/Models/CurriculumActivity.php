@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -20,7 +20,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $announce_admission_date
  * @property \Carbon\Carbon $orientation_date
  * @property string $orientation_location
- * @property int $expected_amount
  *
  * @package App\Models
  */

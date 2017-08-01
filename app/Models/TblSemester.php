@@ -10,27 +10,27 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class TblReligion
+ * Class TblSemester
  * 
- * @property int $religion_id
- * @property string $religion_name
- * @property string $religion_name_en
+ * @property int $semester_id
+ * @property string $semester_name_th
+ * @property string $semester_name_en
  *
  * @package App\Models
  */
-class TblReligion extends Eloquent
+class TblSemester extends Eloquent
 {
-	protected $table = 'tbl_religion';
-	protected $primaryKey = 'religion_id';
+	protected $table = 'tbl_semester';
+	protected $primaryKey = 'semester_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'religion_id' => 'int'
+		'semester_id' => 'int'
 	];
 
 	protected $fillable = [
-		'religion_name',
-		'religion_name_en'
+		'semester_name_th',
+		'semester_name_en'
 	];
 }

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Jul 2017 23:39:04 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class TblFaculty
  * 
- * @property int $faculty_id
+ * @property string $faculty_id
  * @property string $faculty_name
  * @property string $faculty_eng
  * @property int $fac_sort
@@ -24,6 +24,7 @@ class TblFaculty extends Eloquent
 {
 	protected $table = 'tbl_faculty';
 	protected $primaryKey = 'faculty_id';
+	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

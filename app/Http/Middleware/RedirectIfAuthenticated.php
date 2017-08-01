@@ -15,6 +15,10 @@ class RedirectIfAuthenticated {
          if (Auth::guard('web')->check()) {
             return redirect('/');
         }
+        
+         if (Auth::guard('admins')->check()) {
+            return redirect('/');
+        }
         return $next($request);
     }
 

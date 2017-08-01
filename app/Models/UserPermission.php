@@ -10,21 +10,26 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class TblEngTest
+ * Class UserPermission
  * 
- * @property string $eng_test_id
- * @property string $eng_test_name
+ * @property int $user_id
+ * @property int $permission_id
  *
  * @package App\Models
  */
-class TblEngTest extends Eloquent
+class UserPermission extends Eloquent
 {
-	protected $table = 'tbl_eng_test';
-	protected $primaryKey = 'eng_test_id';
+	protected $table = 'user_permission';
 	public $incrementing = false;
 	public $timestamps = false;
 
+	protected $casts = [
+		'user_id' => 'int',
+		'permission_id' => 'int'
+	];
+
 	protected $fillable = [
-		'eng_test_name'
+		'user_id',
+		'permission_id'
 	];
 }
