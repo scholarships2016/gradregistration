@@ -11,8 +11,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use \Illuminate\Support\Facades\Crypt;
-use GuzzleHttp\Client;
+  
+use App\Repositories\UserRepositoryImpl;
 
 class LoginUserController extends Controller {
 
@@ -22,10 +22,12 @@ class LoginUserController extends Controller {
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
+    protected $userRepo;
 
-    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo) {
+    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, UserRepositoryImpl $userRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
+        $this->userRepo = $userRepo;
 
         Auth::setDefaultDriver('admins');
     }
@@ -36,6 +38,7 @@ class LoginUserController extends Controller {
     }
 
     public function showLoginForm() {
+      
         return view('auth.loginApplicant_admin');
     }
 
@@ -66,8 +69,8 @@ class LoginUserController extends Controller {
     }
 
     public function postLogin(Request $request) {
- 
-        if (Auth::attempt(['user_name' => $request->user_name, 'password' => '0NbRlKig'])) {
+
+        if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
             $user_data = Auth::user();
             $pic = null;
 
@@ -92,8 +95,9 @@ class LoginUserController extends Controller {
             $app->stu_email = 'pacusm128@gmail.com';
             $app->nation_id = 1;
             session()->put('Applicant', $app);
-
-
+            
+            
+            $this->userRepo->save(['user_id'=>$user_data->user_id,'user_name','ipaddress'=> $_SERVER['REMOTE_ADDR'] ]);
             Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
             return redirect('/home');

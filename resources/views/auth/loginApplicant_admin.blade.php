@@ -16,11 +16,9 @@
     <form class="login-form" action="{{ url('/login_admin')}}" method="post">    
         {{csrf_field()}}
         <h3 class="form-title">Login to your account     </h3>
-
-
         <div class="alert al                                       ert-danger display-hide">
             <button class="close" data-close="alert"></button>
-            <span> Enter any e-mail and password.     </span>
+            <span> Enter any user and password.     </span>
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -41,16 +39,8 @@
 
             <button type="submit" class="btn green pull-right"> Login</button>
         </div>
-        <div class="forget-password">
-            <h4>Forgot your password ?</h4>
-            <p> no worries, click
-                <a href="javascript:;" id="forget-password"> here </a> to reset your password. </p>
-        </div>
-        <div class="create-account">
-            <p> Don't have an account yet ?&nbsp;
-                <a href="javascript:;" id="register-btn"> Create an account </a>
-            </p>
-        </div>
+        
+       
     </form>
     
 </div>
