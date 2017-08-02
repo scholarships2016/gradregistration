@@ -1,7 +1,7 @@
 <div class="page-sidebar-wrapper">
     <!-- BEGIN SIDEBAR for applicant -->
     <div class="page-sidebar navbar-collapse collapse">
-        <!-- BEGIN SIDEBAR MENU for admin -->       
+        <!-- BEGIN SIDEBAR MENU for admin -->
         @if(session('user_tyep'))
         @if(session('user_tyep')->user_type=='Staff')
 
@@ -275,7 +275,7 @@
         @endif
         <!-- END SIDEBAR MENU  admin-->
         <!-- BEGIN SIDEBAR MENU for applicant -->
-        
+
         @if(!session('user_tyep') || (session('user_tyep')->user_type=='applicant'))
 
         <ul class="page-sidebar-menu  page-header-fixed " style="padding-top: 20px" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
@@ -294,8 +294,8 @@
                     <i class="icon-home"></i>
                     <span class="title">{{Lang::get('resource.lbMHome')}}</span>
 
-                    <span class="arrow"></span> 
-                </a>                                
+                    <span class="arrow"></span>
+                </a>
             </li>
 
             @if(!session('user_id'))
@@ -311,7 +311,7 @@
             @if(session('user_id'))
             <li class=" nav-item    menuitem"  data-index="7">
                 <a class="nav-link nav-toggle" href="{{url('apply/manageMyCourse/')}}">
-                    <i class="icon-bulb"></i>
+                    <i class="icon-briefcase"></i>
                     <span class="title">{{Lang::get('resource.lbManageCouse')}}</span>
                     <span class="arrow"></span>
                 </a>
@@ -320,7 +320,7 @@
 
             <li class=" nav-item  menuitem   menuitem "   data-index="3">
                 <a class="nav-link  nav-toggle" href="{{url('apply')}}">
-                    <i class="icon-briefcase"></i>
+                    <i class="icon-bulb"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
                     <span class="arrow"></span>
                 </a>
@@ -350,9 +350,9 @@
                 </a>
 
             </li>
-        </ul>        
+        </ul>
 
-        @endif   
+        @endif
         <!-- END SIDEBAR MENU -->
     </div>
 

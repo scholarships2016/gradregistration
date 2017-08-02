@@ -43,12 +43,15 @@
         </div>
         <div class="forget-password">
             <h4>Forgot your password ?</h4>
-            <p> Click
-                <a href="javascript:;" id="forget-password"> here </a> to get your password. </p>
+            <p>  <button type="button" class="btn btn-circle red-pink btn-outline  "  id="forget-password">Click here</button>
+                to get your password. </p>
         </div>
         <div class="create-account">
             <p> Don't have an account yet ?&nbsp;
-                <a href="javascript:;" id="register-btn"> Create an account </a>
+
+                <a href="javascript:;" class="btn btn-circle btn-lg red-pink" id="register-btn"><span class="glyphicon glyphicon-user"> </span> Create an account
+
+                                                                        </a>
             </p>
         </div>
     </form>
