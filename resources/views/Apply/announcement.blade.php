@@ -50,11 +50,11 @@
 @stop
 
 @section('pagetitle')
-    <h1 class="page-title"> 
+    <h1 class="page-title">
         {{Lang::get('resource.lbMApply')}}
     </h1>
 @stop
- 
+
 
 @section('maincontent')
         <div class="mt-element-step">
@@ -62,27 +62,27 @@
                                                   @foreach ($announcements as $announcement)
                                                                            <div data-index="{{$loop->iteration}}" class="col-md-3 mt-step-col    {{(1 == $loop->iteration)?'active':''}}  {{($loop->iteration==1)?'first':''}} {{($loop->last)?'last':''}} ">
                                                                               <div class="mt-step-number bg-white">{{$loop->iteration}}</div>
-                                                                             
+
                                                                               <div class="mt-step-title uppercase font-grey-cascade">{{  (session('locale')=='th')?  $announcement->anno_title : $announcement->anno_title_en  }}</div>
                                                                              </div>
 
 
 
-@endforeach    
-                                                                           
+@endforeach
+
                                                                           </div> </div>
-   
+
 <div class="mt-content border-grey-steel">
 @foreach ($announcements as $announcement)
- <div class="anno-detail" data-index="{{$loop->iteration}}" {{ ( 1 != $loop->iteration)? '  style=display:none;  ' : '' }}  > 
+ <div class="anno-detail" data-index="{{$loop->iteration}}" {{ ( 1 != $loop->iteration)? '  style=display:none;  ' : '' }}  >
      {!! (session('locale')=='th')?  $announcement->anno_detail :$announcement->anno_detail_en !!}
  </div>
- @endforeach    
+ @endforeach
                                                         </div>
 <br><br>
 <div style='width:100%;text-align: center;'>
-<input type='hidden' value='{{$startstep}}' id='hidstep'> 
-<a href="javascript:;" id="pre-btn"  class="btn btn-circle red btn-outline">{{Lang::get('resource.lbPrevious')}}</a>  
+<input type='hidden' value='{{$startstep}}' id='hidstep'>
+<a href="javascript:;" id="pre-btn"  class="btn btn-circle red btn-outline">{{Lang::get('resource.lbPrevious')}}</a>
 <a href="javascript:;" id="next-btn" class="btn btn-circle red btn-outline">{{Lang::get('resource.lbNext')}}</a>
 @if($appCount > 0)
 <a href="{{url('apply/register/')}}" id="next-btn" class="btn btn-circle red btn-outline">{{Lang::get('resource.lbSkip')}}</a>
@@ -97,45 +97,44 @@
                                                                           <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
                                                                           <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
                                                                           <script type="application/javascript">
-                                                                             $(document).ready(function(){  
+                                                                             $(document).ready(function(){
                                                                               $('#pre-btn').click(function(){ changeStep(1);  });
                                                                               $('#next-btn').click(function(){ changeStep(2);  });
                                                                                 });
                                                                                 function changeStep($id){
-                                                                                    $oldstep = parseInt($("#hidstep").val()) ;                                                                         
-                                                                                    $step = ($id==2)? ($oldstep < $('.mt-step-col').length)? $oldstep + 1 : $oldstep :($step > 1)? $oldstep - 1 : 1 ;  
-                                                                                        $('.mt-step-col').each(function(index,item) { 
+                                                                                    $oldstep = parseInt($("#hidstep").val()) ;
+                                                                                    $step = ($id==2)? ($oldstep < $('.mt-step-col').length)? $oldstep + 1 : $oldstep :($step > 1)? $oldstep - 1 : 1 ;
+                                                                                        $('.mt-step-col').each(function(index,item) {
                                                                                             if(parseInt($(item).data('index'))==$step ){
-                                                                                               $( this ).addClass( "active" );                                                                                               
+                                                                                               $( this ).addClass( "active" );
                                                                                            } else{
                                                                                                 $( this ).removeClass( "active" );
                                                                                            }
                                                                                            if(parseInt($(item).data('index'))<$step ){
-                                                                                               $( this ).addClass( "done" );                                                                                               
+                                                                                               $( this ).addClass( "done" );
                                                                                            } else{
                                                                                                 $( this ).removeClass( "done" );
                                                                                            }
                                                                                          });
-                                                                                         
-                                                                                          $('.anno-detail').each(function(index,item) { 
+
+                                                                                          $('.anno-detail').each(function(index,item) {
                                                                                             if(parseInt($(item).data('index'))==$step ){
-                                                                                               $( this ).removeAttr( 'style' );;                                                                                               
+                                                                                               $( this ).removeAttr( 'style' );;
                                                                                            } else{
                                                                                                 $( this ).css("display", "none")
-                                                                                           }                                                                                           
-                                                                                         });     
+                                                                                           }
+                                                                                         });
                                                                                          if($step == $('.mt-step-col').length){
-                                                                                             
+
                                                                                                $("#next-btn").text('{{Lang::get('resource.lbRegisterbtn')}}'); 
-                                                                                           
+
                                                                                          }else{
-                                                                                               
+
                                                                                                $("#next-btn").text('{{Lang::get('resource.lbNext')}}');
                                                                                                $("#next-btn").removeAttr('href');
                                                                                          }
-                                                                                         if($oldstep==$('.mt-step-col').length){   $("#next-btn").attr('href','{{(session('user_id'))? url('apply/register/'): url('login/')}}');}                                                                                          
-                                                                                         $("#hidstep").val($step);                                                                                      
+                                                                                         if($oldstep==$('.mt-step-col').length){   $("#next-btn").attr('href','{{(session('user_id'))? url('apply/register/'): url('login/')}}');}
+                                                                                         $("#hidstep").val($step);
                                                                                 }
                                                                           </script>
                                                                           @endpush
-

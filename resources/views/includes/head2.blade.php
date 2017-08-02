@@ -1,10 +1,15 @@
 <head>
     <meta charset="utf-8"/>
-    <title>Graduate School Registration - Applicant Login</title>
+    <title>Online Registration - Graduate School Chulalongkorn University</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="Preview page of Metronic Admin Theme #1 for " name="description"/>
-    <meta content="" name="author"/>
+    <meta name="author" content="chula" />
+    <meta name="author" content="chula" />
+    <meta name="title" content="เข้าสู่ระบบ รับสมัครเข้าศึกษา บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"

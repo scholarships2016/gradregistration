@@ -301,7 +301,7 @@
             @if(!session('user_id'))
             <li class=" nav-item    menuitem"  data-index="2">
                 <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
-                    <i class="icon-bulb"></i>
+                    <i class="icon-book-open"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
                     <span class="arrow"></span>
                 </a>
@@ -320,15 +320,15 @@
 
             <li class=" nav-item  menuitem   menuitem "   data-index="3">
                 <a class="nav-link  nav-toggle" href="{{url('apply')}}">
-                    <i class="icon-bulb"></i>
-                    <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
+                    <i class="icon-book-open"></i>
+                    <span class="title">{{Lang::get('resource.lbMCurriculumLogedin')}}</span>
                     <span class="arrow"></span>
                 </a>
             </li>
             @endif
             <li class=" nav-item    menuitem "  data-index="4">
                 <a class="nav-link nav-toggle" href="{{url('faq/')}}">
-                    <i class="icon-wallet"></i>
+                    <i class="icon-question"></i>
                     <span class="title">{{Lang::get('resource.lbMFAQs')}}</span>
                     <span class="arrow"></span>
                 </a>
@@ -336,7 +336,7 @@
             </li>
             <li class=" nav-item    menuitem "   data-index="5">
                 <a class="nav-link nav-toggle" href="{{url('download/')}}">
-                    <i class="icon-bar-chart"></i>
+                    <i class="icon-cloud-download"></i>
                     <span class="title">{{Lang::get('resource.lbMDownlods')}}</span>
                     <span class="arrow"></span>
                 </a>

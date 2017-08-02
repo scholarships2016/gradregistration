@@ -2,8 +2,8 @@
 
 return [
      'lbWelcome' => 'Welcome ',
-    'lbCannotLogin' => "Unable to login.",
-    'lbMain' => 'Main',
+    'lbCannotLogin' => "Invalid Email or Password",
+    'lbMain' => 'Home',
     'lbTitle' => 'scholarships2016',
     'lbName' => 'Name',
     'lbLastName' => 'Last Name',
@@ -67,25 +67,26 @@ return [
     'lbAppInfo' => 'Applicant Information',
 
 
-    'lbNameContact' => 'Graduate Student Registration.',
-    'lbAddress1Contact' => 'Graduate Student Registration.254 Phayathai Rd, Pathum Wan, Bangkok 10330',
-    'lbAddress2Contact' => 'Graduate School Chulalongkorn University Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan, Bangkok 10330',
+    'lbNameContact' => 'Graduate School, Chulalongkorn University',
+    'lbAddress1Contact' => '254 Phayathai Rd, Pathum Wan, Bangkok 10330',
+    'lbAddress2Contact' => 'Graduate School Chulalongkorn University, Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan, Bangkok 10330',
     'lbContacts' => 'Contacts',
     'lbAddress' =>'Address',
 
     //Menu
     'lbMHome' => 'Home',
     'lbMCurriculum' => 'Curriculum',
+    'lbMCurriculumLogedin' => 'Search & Apply',
     'lbMApply' => 'How to Apply',
     'lbMFAQs' => 'FAQs',
     'lbMDownlods' => 'Downlods',
     'lbMContactsUs' =>'Contact Us',
-    'lbManageCouse' => 'Program Selected',
+    'lbManageCouse' => 'My Applied Program',
      'lbConfirmationDoc'=> 'Confirmation documents apply',
      'lbConfirmApply'=> 'Confirmation',
         'lbMProfile' => 'Profile',
 
-     //botton
+     //button
     'lbNext' => 'Next',
     'lbSkip' => 'Skip',
     'lbPrevious' => 'Previous',
@@ -100,8 +101,17 @@ return [
     'lbdocMyCourse'=>'Application Form',
      'lbdocPayMyCourse'=>'Pay in Form',
      'lbdocEnvelop'=>'Envelop',
+      'lbSearchPlaceHolder'=>'Search for faculty, program ID or program name',
 
-
+//Search Label
+'lbSearchFaculty'=>'Faculty',
+'lbSearchProgramType'=>'Program Type',
+'lbSearchProgramId'=>'Program ID',
+'lbSearchPageTopic'=>'Search & Apply',
+'lbSearchResultDegreeName'=>'Degree Name',
+'lbSearchResultProgramType'=>'Program Type',
+'lbSearchResultDetail'=>'Detail',
+'lbSearchResultAction'=>'View/Apply',
 
 
     //other Use
@@ -133,6 +143,7 @@ return [
      'lbConfApp'=>'Confirm',
      'lbRegisterbtn'=>'Apply',
 
+
 //ApplicantInfo
     'appctInfoPageTitle' => 'Applicant Information',
 
@@ -154,14 +165,14 @@ return [
     'perInfoEmailNotice' => 'Please fill in your valid email, graduate school will inform application result via this email.',
     'perInfoPhoto' => 'Photo',
     'perInfoFundInterest' => 'Do you want fund?',
-    'perInfoInterest' => 'Interesting',
-    'perInfoNotInterest' => 'Not Interesting',
+    'perInfoInterest' => 'Interested',
+    'perInfoNotInterest' => 'Not Interested',
     'perInfoMedia' => 'How can you know this news?',
 
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
-    'lbMessageBeforLogin_title' => 'Would you like to register?',
-    'lbMessageBeforLogin_text' => 'You have to register member or login system before registration',
+    'lbMessageBeforLogin_title' => 'Would you like to apply?',
+    'lbMessageBeforLogin_text' => 'You have to register for membership and login to system before apply.',
 
 
 ];

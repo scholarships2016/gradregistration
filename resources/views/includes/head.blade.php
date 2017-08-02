@@ -2,11 +2,20 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>CU Grad Registration</title>
+    <title>Online Registration - Graduate School Chulalongkorn University</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="Preview page of Metronic Admin Theme #1 for blank page layout" name="description"/>
-    <meta content="" name="author"/>
+
+    <meta name="author" content="chula" />
+    <meta name="title" content="ขอต้อนรับสู่ ระบบรับสมัครเข้าศึกษา บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย" />
+    <meta name="description" content="ระบบรับสมัครเข้าศึกษาระดับบัณฑิตศึกษา บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย" />
+    <meta name="keywords" content="บัณฑิตวิทยาลัย, จุฬาลงกรณ์มหาวิทยาลัย, สมัครเข้าศึกษา, สมัครเรียน, บัณฑิตศึกษา, หลักสูตรภาษาไทย, หลักสูตรนานาชาติ" />
+    <meta property="og:title" content="ขอต้อนรับสู่ ระบบรับสมัครเข้าศึกษา บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="ระบบรับสมัครเข้าศึกษาระดับบัณฑิตศึกษา บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -32,6 +41,10 @@
     <!-- END THEME LAYOUT STYLES -->
     <link href="{{asset('favicon.ico')}}" rel="shortcut icon">
     <link href="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
+
     @stack('pageCss')
+    <!-- BEGIN CUSTOM STYLES -->
+    <link href="{{asset('assets/global/css/custom.css')}}" rel="stylesheet" type="text/css">
+    <!-- END CUSTOM STYLES -->
 </head>
 <!-- END HEAD -->

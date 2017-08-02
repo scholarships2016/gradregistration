@@ -78,17 +78,18 @@ return [
 
        //Menu
     'lbMHome' => 'หน้าหลัก',
-    'lbMCurriculum' => 'หลักสูตร',
+    'lbMCurriculum' => 'หลักสูตรที่เปิด',
+    'lbMCurriculumLogedin' => 'ค้นหา & สมัคร',
     'lbMApply' => 'ขั้นตอนสมัคร',
-    'lbMFAQs' => 'คำถาม/ตอบ',
-    'lbMDownlods' => 'Downlods',
+    'lbMFAQs' => 'คำถามที่พบบ่อย',
+    'lbMDownlods' => 'ดาวน์โหลดฟอร์ม',
     'lbMContactsUs' =>'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
-     'lbMProfile' => 'โพรไฟล์',
+     'lbMProfile' => 'ข้อมูลส่วนตัว',
     'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
     'lbConfirmApply'=> 'ยืนยันการสมัคร',
 
-    //botton
+    //button
     'lbNext' => 'ถัดไป',
     'lbSkip' => 'ข้าม',
     'lbPrevious' => 'ก่อนหน้า',
@@ -104,9 +105,16 @@ return [
      'lbdocPayMyCourse'=>'ใบแจ้งชำระค่าธรรมเนียม',
     'lbdocEnvelop'=>'ใบปะหน้าซอง',
      'lbRegisterbtn'=>'สมัคร',
-
-
-
+    'lbSearchPlaceHolder'=>'ค้นหาจากคณะ รหัสหลักสูตร ประเภทหลักสูตร หรือชื่อหลักสูตร',
+    //Search Label
+    'lbSearchFaculty'=>'คณะ',
+    'lbSearchProgramType'=>'ประเภทหลักสูตร',
+    'lbSearchProgramId'=>'รหัสโปรแกรม',
+    'lbSearchPageTopic'=>'ค้นหา และ สมัคร',
+    'lbSearchResultDegreeName'=>'ชื่อปริญญา',
+    'lbSearchResultProgramType'=>'ประเภทหลักสูตร',
+    'lbSearchResultDetail'=>'สังกัด',
+    'lbSearchResultAction'=>'ดูรายละเอียด/สมัคร',
 
     //other Use
      'lbYear'=>'ปีการศึกษา(พ.ศ.)',
