@@ -91,11 +91,11 @@ return [
     'lbSkip' => 'Skip',
     'lbPrevious' => 'Previous',
      'lbAll' => 'All',
-    'lbSelect' => 'Select',
+    'lbSelect' => 'Apply',
     'lbDetail' => 'Detail',
     'lbSearch' => 'Search',
     'lbReset' => 'Reset',
-    'lbSAdvanced' => 'Advanced Search',
+    'lbSAdvanced' => 'Advanced',
     'lbUpdateDoc' => 'Document Apply',
     'lbUpdateDocApply' => 'Please update documents for apply ',
     'lbdocMyCourse'=>'Application Form',
@@ -115,7 +115,7 @@ return [
 
 
     //other Use
-     'lbYear'=>'year',
+     'lbYear'=>'Year',
      'lbDepartment'=>'Department',
      'lbSubject'=>'Subject',
      'lbMajor'=>'Major',
@@ -124,16 +124,16 @@ return [
      'lbError'=>'Error',
     'lbProgarmID'=>'Program ID',
      'lbAnswer'=>'Answer',
-    'lbQuestionAsk'=>'Question',
+    'lbQuestionAsk'=>'Additional Question',
 
 
     //register Detail Page
-     'lbRegDetail'=>'Course details',
+     'lbRegDetail'=>'Program details',
      'lbSelProgram'=>'Select program',
      'lbSelSubMajor'=>'Select program (subject)',
      'lbExam_schedule'=>'Exam schedule',
      'lbStartExam'=>'Recruit date',
-     'lbExpectation'=>'Expectation',
+     'lbExpectation'=>'Expectation Amount',
      'lbMoreInformation'=>'More Information',
      'lbFee'=>'Fee',
      'lbTimeExam'=>'Recruit date',

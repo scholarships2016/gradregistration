@@ -94,7 +94,7 @@ return [
     'lbSkip' => 'ข้าม',
     'lbPrevious' => 'ก่อนหน้า',
     'lbAll' => 'ทั้งหมด',
-    'lbSelect' => 'เลือก/Select',
+    'lbSelect' => 'สมัคร',
     'lbDetail' => 'รายละเอียด',
     'lbSearch' => 'ค้นหา',
     'lbReset' => 'ยกเลิก',
@@ -130,8 +130,8 @@ return [
 
     //register Detail Page
      'lbRegDetail'=>'รายละเอียดหลักสูตร',
-     'lbSelProgram'=>'เลือกรหัสแผนหลักสูตร',
-     'lbSelSubMajor'=>'เลือกรหัสหลักสูตร(แขนงวิชา)',
+     'lbSelProgram'=>'เลือกหลักสูตร',
+     'lbSelSubMajor'=>'เลือกแขนงวิชา',
     'lbExam_schedule'=>'ตารางสอบ',
     'lbExpectation'=>'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
      'lbStartExam'=>'รับสมัคร วันที่',

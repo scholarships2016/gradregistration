@@ -144,7 +144,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-      
+
         /*
          * Package Service Providers...
          */
@@ -164,7 +164,7 @@ return [
         Reliese\Coders\CodersServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 //          niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
-        
+
     ],
     /*
       |--------------------------------------------------------------------------

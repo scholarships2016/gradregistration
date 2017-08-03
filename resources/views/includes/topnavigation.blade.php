@@ -4,29 +4,29 @@
         <!-- DOC: Apply "dropdown-dark" class after "dropdown-extended" to change the dropdown styte -->
         <!-- DOC: Apply "dropdown-hoverable" class after below "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
         <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
-       @if(session('locale'))        
-        
+       @if(session('locale'))
+
         <li class="dropdown dropdown-language">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
                                     <img alt="" src="{{url('/assets/global/img/flags/'.session('locale').'.png')}}">
                                     <span class="langname"> {{strtoupper(session('locale'))}} </span>
                                     <i class="fa fa-angle-down"></i>
-                                </a>       
+                                </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
                                        @foreach(config('app.languages') as $lang)
                                     <li>
                                         <a href="/language?lang={{ $lang }}">
                                             <img alt="" src="{{url('/assets/global/img/flags/'.$lang.'.png')}}"> {{ strtoupper($lang) }} </a>
-                                    </li>   
+                                    </li>
                                        @endforeach
                                 </ul>
                             </li>
-        
+
         @endif
           @if(!session('user_id'))
           <li class="dropdown dropdown-quick-sidebar-toggler">
                                 <a href="{{url('\login')}}" class="dropdown-toggle">
-                                <span aria-hidden="true" class="icon-users"></span>Login
+                                <span aria-hidden="true" class="icon-user"></span>Login
                                 </a>
                             </li>
           @endif
@@ -41,21 +41,21 @@
                 <li class="external">
                     <h3>
                         <span class="bold"><label id="regHeadsum2" name="regHeadsum2"  ></label> pending</span> notifications</h3>
-                   
+
                 </li>
                 @endif
                 <li>
                     <ul id ="regHead" name="regHead" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                      
-                       
+
+
                                         </ul>
                                         </li>
                                         </ul>
                                         </li>
                                         <!-- END NOTIFICATION DROPDOWN -->
                                         <!-- BEGIN INBOX DROPDOWN -->
-                                        
-                                       
+
+
                                         <!-- BEGIN USER LOGIN DROPDOWN -->
                                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                                         <li class="dropdown dropdown-user">
@@ -71,7 +71,7 @@
                                                         <i class="icon-user"></i> My Profile </a>
                                                 </li>
                                                 <li class="divider"></li>
-                                               
+
                                                 <li>
                                                     <a href="{{ url('/logout') }}">
                                                         <i class="icon-key"></i> Log Out </a>
@@ -88,20 +88,19 @@
  $.ajax({
 					type: "GET",
 					url: '{!! Route('showRegisHead') !!}',
-					data :{ 
+					data :{
                                             _token:     '{{ csrf_token() }}'
                                                } ,
-					success : function(data){ 
-                                  	   $('#regHead').html(data['val']); 
+					success : function(data){
+                                  	   $('#regHead').html(data['val']);
                                            $('#regHeadsum2').html(data['cot']);
                                            $('#regHeadsum').html(data['cot']);
-                                           
-                                            
+
+
 					}
 				});
 
 
-    
+
 @endif
 </script>
- 

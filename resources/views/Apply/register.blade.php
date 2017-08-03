@@ -136,7 +136,7 @@
     <div class="search-table table-responsive">
 
           <table id="tblcurr" class="table table-bordered table-striped table-condensed">
-            <thead class="bg-blue">
+            <thead style="background: #c3788c!important;">
                 <tr>
                     <th width="25px">
                         <a href="javascript:;">#</a>
@@ -147,11 +147,11 @@
                     <th >
                         <a href="javascript:;">{{ Lang::get('resource.lbSearchResultProgramType')}}</a>
                     </th>
-                    <th  style="width:335px;">
+                    <th  style="">
                         <a href="javascript:;">{{ Lang::get('resource.lbSearchResultDetail')}}</a>
                     </th>
 
-                    <th style="width:125px;">
+                    <th style="">
                         <a href="javascript:;">{{ Lang::get('resource.lbSearchResultAction')}}</a>
                     </th>
 
@@ -233,10 +233,10 @@ return (('{{session('locale')}}'=='th')? full.degree_name:full.degree_name_en) ;
 } },{
 targets: [2],
 orderable: true,
-className: 'table-title',
+className: 'table-desc',
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return '<h3>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</h3>'+'<p>'+ full.office_time+'</p>' ;
+return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</b>'+'<br/>'+ full.office_time+'' ;
 } },{
 targets: [3],
 orderable: true,
@@ -246,20 +246,19 @@ render: function (data, type, full, meta) {
 return ('{{Lang::get('resource.lbFaculty')}}'+  (('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) + ' <br>{{Lang::get('resource.lbDepartment')}} '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'<br> {{Lang::get('resource.lbMajor')}} '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
 }},{
 targets: [4],
-orderable: true,
+orderable: false,
 className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
 return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
 } }] ,
      destroy: true,
-    filter: false,
-    info: false,
-    ordering: false,
+    filter: true,
+    info: true,
+    ordering: true,
     processing: true,
-    retrieve: false  ,
+    retrieve: true  ,
     pagingType : "full_numbers",
-
 
     });
        $('#tblcurr_paginate').addClass('search-pagination pagination-rounded');
