@@ -111,38 +111,39 @@ return [
     'lbSearchProgramType'=>'ประเภทหลักสูตร',
     'lbSearchProgramId'=>'รหัสโปรแกรม',
     'lbSearchPageTopic'=>'ค้นหา และ สมัคร',
-    'lbSearchResultDegreeName'=>'ชื่อปริญญา',
+    'lbSearchResultDegreeName'=>'ชื่อหลักสูตร',
     'lbSearchResultProgramType'=>'ประเภทหลักสูตร',
     'lbSearchResultDetail'=>'สังกัด',
     'lbSearchResultAction'=>'ดูรายละเอียด/สมัคร',
 
     //other Use
      'lbYear'=>'ปีการศึกษา(พ.ศ.)',
-     'lbDepartment'=>'ภาควิชา-สาขา',
+     'lbDepartment'=>'ภาควิชา',
      'lbSubject'=>'สาขาวิชา',
-     'lbMajor'=>'หลักสูตร',
+     'lbMajor'=>'ชื่อหลักสูตร',
      'lbMajorCode'=>'รหัสหลักสูตร',
     'lbSuccess'=>'ดำเนินการเรียบร้อย',
     'lbError'=>'ไม่สามารถดำเนินการได้',
     'lbProgarmID'=>'รหัสหลักสูตร',
     'lbAnswer'=>'คำตอบ',
-    'lbQuestionAsk'=>'คำถามเพิ่มเติม',
+    'lbQuestionAsk'=>'โปรดตอบคำถามเหล่านี้เพิ่มเติม สำหรับหลักสูตรที่สมัครนี้ โดยระบุข้อที่ตอบไว้ด้วย ',
 
     //register Detail Page
      'lbRegDetail'=>'รายละเอียดหลักสูตร',
      'lbSelProgram'=>'เลือกหลักสูตร',
      'lbSelSubMajor'=>'เลือกแขนงวิชา',
     'lbExam_schedule'=>'ตารางสอบ',
-    'lbExpectation'=>'จำนวนนิสิตที่คาดว่าจะรับ/Expectation',
+    'lbExpectation'=>'จำนวนที่คาดว่าจะรับ (คน)',
      'lbStartExam'=>'รับสมัคร วันที่',
-     'lbMoreInformation'=>'รายละเอียดเพิ่มเติม/More Information',
-     'lbFee'=>'ค่าธรรมเนียม/Fee',
+     'lbMoreInformation'=>'รายละเอียดเพิ่มเติม',
+     'lbFee'=>'ค่าธรรมเนียม',
      'lbTimeExam'=>'ระยะเวลาที่เปิดรับสมัคร',
     'lbQuestion'=>'คำถาม',
     'lbDocID'=>'เลขที่ใบสมัคร',
     'lbWTodo'=>'สิ่งที่ต้องดำเนินการ',
     'lbConfApp'=>'สิ่งที่ต้องดำเนินการ',
-
+    'lbSubMajor'=>'แขนงวิชา',
+    'lbAppNo'=>'รหัสผู้สมัคร',
      //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
 
@@ -197,9 +198,31 @@ return [
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'คุณต้องการที่จะสมัครหรือไม่?',
-    'lbMessageBeforLogin_text' => 'เนื่องจากก่อนคุณจะสมัคร คุณจะต้องทำการลงทะเบียนและเข้าสู่ระบบก่อน จะดำเนินการเข้าระบบหรือไม่',
+    'lbMessageBeforLogin_text' => 'คุณต้องลงทะเบียนเป็นสมาชิก ก่อนการสมัคร',
 
+    'lbProgDetailDocument' => 'เอกสารประกอบหลักสูตร',
+    'lbProgDetailCommAppr' => 'ผ่านมติ',
+    'lbProgDetailContactTel' => 'ติดต่อเจ้าหน้าที่ โทร.',
+    'lbButtonRemoveApplication' => 'ยกเลิกการสมัคร',
 
+    //Confirmation
+    'lbConfirmInstructions' => 'กรุณากรอกข้อมูลเพิ่มเติม',
+    'lbConfirmPaymentBank' => 'ธนาคารที่ต้องการชำระเงิน',
+    'lbConfirmPaymentBank-1' => 'ธนาคาร',
+    'lbConfirmReferencePerson' => 'บุคคลอ้างอิง (สำหรับผู้สมัครระดับปริญญาเอกและมีภาควิชาต้องการหนังสือรับรองคุณสมบัติฯ ให้ระบุชื่อและที่อยู่ของผู้รับรองทั้งหมด)',
+    'btnConfirmAddReferencePerson' => 'เพิ่มบุคคลอ้างอิง',
+    'lbConfirmTableReferencePersonFullname' => 'ชื่อ-นามสกุล',
+    'lbConfirmTableReferencePersonPosition' => 'ตำแหน่ง',
+    'lbConfirmTableReferencePersonContactAddr' => 'ที่อยู่สำหรับติดต่อ',
+    'lbConfirmTableReferencePersonTel' => 'หมายเลขโทรศัพท์',
+    'lbConfirmTSurveyTopic' => 'โปรดกรอกแบบประเมินความพอใจการใช้งานระบบ',
+    'lbConfirmTSurveyLevel' => 'ระดับความพอใจ',
+    'lbConfirmTSurveyLevel1' => 'ไม่พอใจ',
+    'lbConfirmTSurveyLevel2' => 'พอใช้',
+    'lbConfirmTSurveyLevel3' => 'ดี',
+    'lbConfirmTSurveyLevel4' => 'ดีมาก',
+    'lbConfirmTSurveyLevel5' => 'มากที่สุด',
+    'lbConfirmTSurveySugestion' => 'ข้อเสนอแนะ',
 
 
 ];

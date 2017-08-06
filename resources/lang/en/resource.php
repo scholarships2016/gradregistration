@@ -108,7 +108,7 @@ return [
 'lbSearchProgramType'=>'Program Type',
 'lbSearchProgramId'=>'Program ID',
 'lbSearchPageTopic'=>'Search & Apply',
-'lbSearchResultDegreeName'=>'Degree Name',
+'lbSearchResultDegreeName'=>'Program Name',
 'lbSearchResultProgramType'=>'Program Type',
 'lbSearchResultDetail'=>'Detail',
 'lbSearchResultAction'=>'View/Apply',
@@ -117,14 +117,14 @@ return [
     //other Use
      'lbYear'=>'Year',
      'lbDepartment'=>'Department',
-     'lbSubject'=>'Subject',
-     'lbMajor'=>'Major',
-     'lbMajorCode'=>'Major Code',
+     'lbSubject'=>'Major',
+     'lbMajor'=>'Program Name',
+     'lbMajorCode'=>'Program ID',
      'lbSuccess'=>'Success',
      'lbError'=>'Error',
     'lbProgarmID'=>'Program ID',
      'lbAnswer'=>'Answer',
-    'lbQuestionAsk'=>'Additional Question',
+    'lbQuestionAsk'=>'Please answer all questions with specify the number of question also.',
 
 
     //register Detail Page
@@ -133,16 +133,17 @@ return [
      'lbSelSubMajor'=>'Select program (subject)',
      'lbExam_schedule'=>'Exam schedule',
      'lbStartExam'=>'Recruit date',
-     'lbExpectation'=>'Expectation Amount',
+     'lbExpectation'=>'Expectation Amount (person)',
      'lbMoreInformation'=>'More Information',
      'lbFee'=>'Fee',
      'lbTimeExam'=>'Recruit date',
      'lbQuestion'=>'Question',
-     'lbDocID'=>'Document ID',
+     'lbDocID'=>'Application ID',
      'lbWTodo'=>'To do task',
      'lbConfApp'=>'Confirm',
      'lbRegisterbtn'=>'Apply',
-
+     'lbSubMajor'=>'Sub-Major',
+     'lbAppNo'=>'Application No.',
 
 //ApplicantInfo
     'appctInfoPageTitle' => 'Applicant Information',
@@ -172,7 +173,29 @@ return [
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'Would you like to apply?',
-    'lbMessageBeforLogin_text' => 'You have to register for membership and login to system before apply.',
+    'lbMessageBeforLogin_text' => 'You have to register to be a member before applying.',
 
+      'lbProgDetailDocument' => 'Curriculum Document',
+      'lbProgDetailCommAppr' => 'Committee Approval',
+      'lbProgDetailContactTel' => 'Contact Tel.',
+      'lbButtonRemoveApplication' => 'Delete Application',
 
+      //Confirmation
+      'lbConfirmInstructions' => 'Please specify more information',
+      'lbConfirmPaymentBank' => 'Bank for payment',
+      'lbConfirmPaymentBank-1' => 'Bank',
+      'lbConfirmReferencePerson' => 'Reference person',
+      'btnConfirmAddReferencePerson' => 'Add Reference Person',
+      'lbConfirmTableReferencePersonFullname' => 'Firstname & Surname',
+      'lbConfirmTableReferencePersonPosition' => 'Position',
+      'lbConfirmTableReferencePersonContactAddr' => 'Contact Address',
+      'lbConfirmTableReferencePersonTel' => 'Telephone Number',
+      'lbConfirmTSurveyTopic' => 'Please fill in satisfactory survey.',      
+      'lbConfirmTSurveyLevel' => 'Satisfactory level',
+      'lbConfirmTSurveyLevel1' => 'Unsatisfactory',
+      'lbConfirmTSurveyLevel2' => 'Satisfactory',
+      'lbConfirmTSurveyLevel3' => 'Good',
+      'lbConfirmTSurveyLevel4' => 'Very Good',
+      'lbConfirmTSurveyLevel5' => 'Excellent',
+      'lbConfirmTSurveySugestion' => 'Suggestion',
 ];

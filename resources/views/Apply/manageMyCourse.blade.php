@@ -7,7 +7,7 @@
 <link href="{{asset('assets/pages/css/invoice.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/apps/css/todo-2.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
- 
+
 <style type="text/css">
 
 </style>
@@ -40,7 +40,7 @@
                                             {{--<a href="#">--}}
         {{--<i class="icon-shield"></i> Another action</a>--}}
                 {{--</li>--}}
-                {{--<li>--}}                
+                {{--<li>--}}
                 {{--<a href="#">--}}
                 {{--<i class="ico                n-user"></i> Something else h                ere</a>--}}
                 {{--</li>--}}
@@ -54,12 +54,12 @@
                   {{--</div>--}}
     </div>
 @stop
-                
+
 @section('pagetitle')
     <h1 class="page-title"> {{Lang::get('resource.lbManageCouse')}}</h1>
-    
+
 @stop
- 
+
 
 @section('maincontent')
 
@@ -113,43 +113,55 @@
                                 <div class="todo-tasklist">
 
           @foreach ($Apps as $curDis)
-                         
+
                                     <div class="todo-tasklist-item todo-tasklist-item-border-green">
 
-                                        <div class="todo-tasklist-item-title"> {{Lang::get('resource.lbMajor')}} {{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }}. </div>
-                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbDocID')}}  [{{$curDis->app_id}}]  </div>
-                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbMajorCode')}} : {{  $curDis->major_code   }} {{Lang::get('resource.lbMajor')}}{{  ($curDis->major_name != '')?(session('locale')=='th')? $curDis->major_name:$curDis->major_name_en :'-'}}     {{Lang::get('resource.lbSubject')}}{{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }}   </div>
-                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}} : {{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </div>
+                                        <div class="todo-tasklist-item-title"> {{Lang::get('resource.lbMajor')}} : {{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}.
+                                          <br/>{{Lang::get('resource.lbSearchProgramType')}} : {{(session('locale')=='th')?$curDis->prog_type_name:$curDis->prog_type_name_en}}
+                                        </div>
+                                        <div class="todo-tasklist-item-text">
+                                          {{(session('locale')=='th')? 'คณะ'.$curDis->faculty_name:$curDis->faculty_full.', '}}
+                                          {{ (session('locale')=='th')? $curDis->department_name:$curDis->department_name_en.', '   }}
+                                          {{  ($curDis->major_name != '')?(session('locale')=='th')? 'สาขาวิชา'.$curDis->major_name:'Major in '.$curDis->major_name_en :'-'}}
+                                        <!--  {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}-->
+
+                                        </div>
+                                        <br/>
+                                        <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbDocID')}}  <span class="label label-warning">{{$curDis->app_id}}</span> </div>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}}  <span class="label label-warning">{{$curDis->curriculum_num}}</span>  </div>
+
+
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}}   <span class="label label-success">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
                                         <div class="todo-tasklist-controls pull-left">
                                             <span class="todo-tasklist-date">
                                                 <i class="fa fa-calendar"></i> {{$curDis->appDates}} </span>
-                                               
-                                                <div  class="col-md-12 col-md-offset-1 portlet mt-element-ribbon light portlet-fit bordered"> 
-<div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase"> 
-<div class="ribbon-sub ribbon-bookmark"></div> 
-<i class="fa fa-star"></i> 
-</div> 
-<div class="portlet-title"> 
-<div class="caption"> 
-<i class=" icon-layers font-green"></i> 
-<span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span> 
-</div> 
-</div> 
+
+                                                <div  class="col-md-12 col-md-offset-1 portlet mt-element-ribbon light portlet-fit bordered">
+<div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase">
+<div class="ribbon-sub ribbon-bookmark"></div>
+<i class="fa fa-star"></i>
+</div>
+<div class="portlet-title">
+<div class="caption">
+<i class="icon-clock font-green"></i>
+<span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span>
+</div>
+</div>
 <div class="portlet-body">  @if($curDis->flow_id==1 && $curDis->is_active==1)
                                                     <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
                                                         <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn btn-danger mt-sweetalert sweet-8"  href="javascript:cancel({{$curDis->application_id}});"   >  {{Lang::get('resource.lbCancel')}}
+                                                    </a>   <a class="btn btn-danger mt-sweetalert sweet-8"  href="javascript:cancel({{$curDis->application_id}});"   >  {{Lang::get('resource.lbButtonRemoveApplication')}}
                                                         <i class="fa fa-times"></i>
-                                                    </a> 
-                                                
-                                                     
-                                                    
-                                                      
-                            @endif 
+                                                    </a>
+
+
+
+
+                            @endif
                             @if($curDis->flow_id==2)
                                                     <a class="btn  blue" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
                                                         <i class="fa fa-edit"></i>
-                                                    </a>  
+                                                    </a>
                             <div class="btn-group dropup">
                                                                     <button class="btn green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Download <i class="icon-cloud-download"></i></button>
                                                                     <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -166,20 +178,20 @@
                                                                            <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>    </li>
                                                                     </ul>
                                                                 </div>
-                            
-                            
-                            
-                              
-                            
-                           @endif 
 
 
 
 
 
-</div> 
+                           @endif
+
+
+
+
+
 </div>
-                                            
+</div>
+
                                         </div>
                                     </div>
            @endforeach
@@ -209,7 +221,7 @@
 
 
 <script type="application/javascript">
-   
+
      function cancel($id) {
     swal({
   title: "Are you sure?",
@@ -224,11 +236,8 @@
   }, 100);
 });
          }
-         
-         
- 
+
+
+
 </script>
 @endpush
-
-
-

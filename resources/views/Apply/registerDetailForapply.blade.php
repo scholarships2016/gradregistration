@@ -73,7 +73,7 @@
                                 <div class="col-xs-8 invoice-logo-space">
                                    @if(session('Applicant'))
                                    <div class="col-xs-10 well">
-                                   <form class="forget-form" action="{{route('submitregisterDetailForapply')}}" method="post">
+                                   <form class="choose-program-form" action="{{route('submitregisterDetailForapply')}}" method="post">
                                     {{csrf_field()}}
 
                                     @if($programs->count()> 0)
@@ -120,7 +120,7 @@
 
                                      <input type="hidden" name="curr_act_id" value='{{$curDis->curr_act_id}}'  >
                                      <input type="hidden" name="curriculum_id" value='{{$curDis->curriculum_id}}' >
-                                    <button class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+                                    <button  class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
 
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row" style="font-size:16px;">  <h4 style="padding-left: 15px"> <i class="fa fa-book"></i> {{Lang::get('resource.lbDetail')}} :</h4>
+                            <div class="row" >  <h4 style="padding-left: 15px"> <i class="fa fa-book"></i> {{Lang::get('resource.lbDetail')}} :</h4>
                               <div class="col-md-12">
                                 <form class="form-horizontal">
                                   <div class="form-body">
@@ -153,26 +153,25 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">{{Lang::get('resource.lbDepartment')}}</label>
                                         <div class="col-md-8">
-                                          <span class="form-control-static">{{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }}  </span>
+                                          <span class="form-control-static">{{ (session('locale')=='th')? $curDis->department_name:$curDis->department_name_en   }}  </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">{{Lang::get('resource.lbSubject')}}</label>
                                         <div class="col-md-8">
-                                          <span class="form-control-static"> {{  ($curDis->sub_major_name != '')?(session('locale')=='th')?  $curDis->sub_major_name : $curDis->sub_major_name_en:'-'   }}  </span>
+                                          <span class="form-control-static">{{  ($curDis->major_name != '')?(session('locale')=='th')? $curDis->major_name:$curDis->major_name_en :'-'}}   </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">{{Lang::get('resource.lbMajor')}}</label>
                                         <div class="col-md-8">
-                                          <span class="form-control-static"> {{  ($curDis->major_name != '')?(session('locale')=='th')? $curDis->major_name:$curDis->major_name_en :'-'}}  </span>
+                                          <span class="form-control-static"> {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}  </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">{{Lang::get('resource.lbMajorCode')}}</label>
                                         <div class="col-md-8">
                                           <span class="form-control-static">
-
                                             @if($programs->count()> 0)
                                             <div class="form-group form-md-radios  ">
                                                            <div class="col-md-12">
@@ -196,6 +195,34 @@
                                           </span>
                                         </div>
                                     </div>
+                                      @if($subMajors->count()> 0)
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">{{Lang::get('resource.lbSubMajor')}}</label>
+                                        <div class="col-md-8">
+                                          <span class="form-control-static">
+
+                                           <div class="form-group form-md-radios  " >
+                                                             <div class="col-md-12">
+                                                                 <div class="md-radio-inline">
+
+                                                                      @foreach($subMajors as $subMajor)
+
+                                                                     <div class="md-radio">
+                                                                         <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" name="sub_major_id" class="md-radiobtn">
+                                                                         <label for="checkbox_{{ $loop->iteration}}">
+                                                                             <span class="inc"></span>
+                                                                             <span class="check"></span>
+                                                                             <span class="box"></span> {{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }} </label>
+                                                                     </div>
+                                                                        @endforeach
+                                                                 </div>
+                                                             </div>
+                                            </div>
+
+                                          </span>
+                                        </div>
+                                    </div>
+                                      @endif
                                   </div>
 
                                 </form>
@@ -238,6 +265,27 @@
                                                 <span class="form-control-static">{{$curDis->start_date}}  - {{$curDis->end_date}}  </span>
                                               </div>
                                           </div>
+                                          <div class="form-group">
+                                              <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailDocument')}}</label>
+                                              <div class="col-md-8">
+                                                <span class="form-control-static"> {{$curDis->document_file}}
+                                                  <a href="javascript:;" class="btn btn-circle btn-xs blue btn-outline">
+                                                                            <i class="fa fa-file-word-o"></i> Download </a>
+                                                 </span>
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailCommAppr')}}</label>
+                                              <div class="col-md-8">
+                                                <span class="form-control-static">{{$curDis->comm_appr_name}} ครั้งที่ {{$curDis->comm_appr_no}} วันที่ {{$curDis->comm_appr_date}} </span>
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailContactTel')}}</label>
+                                              <div class="col-md-8">
+                                                <span class="form-control-static">{{$curDis->contact_tel}} </span>
+                                              </div>
+                                          </div>
                                       </div>
                                     </form>
 
@@ -271,7 +319,11 @@
                                                                           <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
                                                                          <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
                                                                          <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
+                                                                          <script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
+
+                                                                          <script src="{{asset('/assets/global/plugins/jquery-validation/js/jquery.validate.min.js')}}" type="text/javascript"></script>
+                                                                          <script src="{{asset('/assets/pages/scripts/registerDetailForapply.validate.js')}}" type="text/javascript"></script>
+
 
                                                                           <script type="application/javascript">
   function getLogin() {
