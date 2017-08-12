@@ -83,7 +83,7 @@
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_last_name_en"
                                        onkeyup="return this.value = this.value.toUpperCase()"
-                                       name="stu_last_name_en" value="{{$applicant->stu_first_name_en}}">
+                                       name="stu_last_name_en" value="{{$applicant->stu_last_name_en}}">
                                 <span class="help-block"></span>
                             </div>
                         </div>

@@ -40,16 +40,16 @@
     <div class="profile">
         <div class="tabbable-line tabbable-full-width">
             <ul class="nav nav-tabs">
-              <!--
+
                 <li class="active">
                     <a href="#tab_1_1" data-toggle="tab"> Overview </a>
                 </li>
-              -->
-                <li  class="active">
-                    <a href="#tab_1_3" data-toggle="tab"> Account </a>
+
+                <li  class="">
+                    <a href="#tab_1_3" data-toggle="tab"> Profile </a>
                 </li>
             </ul>
-            <div class="tab-content">
+            <div class="tab-content active">
                 <div class="tab-pane " id="tab_1_1">
                     <div class="row">
                         <div class="col-md-3">
@@ -69,9 +69,16 @@
                             <div class="row">
                                 <div class="col-md-8 profile-info">
                                     <h1 class="font-green sbold uppercase">
-                                        {{$applicant->stu_first_name.' '.$applicant->stu_last_name}}
+                                        {{$applicant->stu_first_name_en.' '.$applicant->stu_last_name_en}}
                                     </h1>
-                                    <p> อธิบายสั้นๆ นะ </p>
+                                    <p>
+                                      <i class="fa fa-user"></i> 1331300017002
+                                      <br/>
+                                      <i class="fa fa-phone"></i> 086-606-4655
+                                      <br/>
+                                      <i class="fa fa-envelope"></i> chok-chon@hotmail.com
+                                      <br/>
+                                    </p>
                                     <ul class="list-inline">
                                         <li>
                                             <i class="fa fa-map-marker"></i>
@@ -102,7 +109,7 @@
                             <div class="tabbable-line tabbable-custom-profile">
                                 <ul class="nav nav-tabs">
                                     <li class="active">
-                                        <a href="#tab_1_11" data-toggle="tab"> Latest Customers </a>
+                                        <a href="#tab_1_11" data-toggle="tab">  {{Lang::get('resource.lbManageCouse')}} </a>
                                     </li>
                                     <!--
                                     <li>
@@ -117,13 +124,13 @@
                                                 <thead>
                                                 <tr>
                                                     <th>
-                                                        <i class="fa fa-briefcase"></i> Company
+                                                        <i class="fa fa-briefcase"></i> Program
                                                     </th>
                                                     <th class="hidden-xs">
-                                                        <i class="fa fa-question"></i> Descrition
+                                                        <i class="fa fa-question"></i> Major
                                                     </th>
                                                     <th>
-                                                        <i class="fa fa-bookmark"></i> Amount
+                                                        <i class="fa fa-bookmark"></i> Status
                                                     </th>
                                                     <th></th>
                                                 </tr>
@@ -500,7 +507,7 @@
                     </div>
                 </div>
                 <!--tab_1_2-->
-                <div class="tab-pane active" id="tab_1_3">
+                <div class="tab-pane " id="tab_1_3">
                     <div class="row profile-account">
                         <div class="col-md-3">
                             <ul class="ver-inline-menu tabbable margin-bottom-10">

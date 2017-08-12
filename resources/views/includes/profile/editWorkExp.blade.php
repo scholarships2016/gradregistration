@@ -2,12 +2,11 @@
     <div class="portlet-title">
         <div class="caption">
             {{--<i class="fa fa-user"></i>--}}
-            ประสบการณ์การทำงาน
-            <small>Work Experience</small>
+              {{Lang::get('resource.lbWorkExp')}}
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
-            <a href="javascript:;" class="reload"> </a>
+
         </div>
     </div>
     <div class="portlet-body form">
@@ -17,10 +16,10 @@
             <div class="form-body">
                 <div class="mt-repeater">
                     <div class="row">
-                        <div class="col-md-12 text-right">
-                            <a href="javascript:;" data-repeater-create
-                               class="btn btn-success mt-repeater-add">
-                                <i class="fa fa-plus"></i> เพิ่ม</a>
+                        <div class="col-md-12 text-left">
+                            <a title="เพิ่มข้อมูลประวัติการทำงาน" href="javascript:;" data-repeater-create
+                               class="btn btn-circle green-haze btn-outline  btn-success mt-repeater-add">
+                                <i class="fa fa-plus"></i> {{Lang::get('resource.lbAdd')}}</a>
                         </div>
                     </div>
                     <hr>
@@ -36,7 +35,7 @@
                                             </label>
                                             <a href="javascript:;" data-repeater-delete=""
                                                class="btn btn-danger">
-                                                <i class="fa fa-close">ลบ</i>
+                                                <i class="fa fa-close"> {{Lang::get('resource.lbDel')}}</i>
                                             </a>
                                         </div>
                                     </div>
@@ -44,8 +43,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
-                                            <label class="control-label">ประเภท
-                                                &nbsp;<small>Work Status</small>
+                                            <label class="control-label"> {{Lang::get('resource.lbWorkStatus')}}
                                             </label>
                                             <input type="hidden" id="work_status_id_hidden"
                                                    name="work_status_id_hidden" value="">
@@ -60,7 +58,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">
-                                                สถานที่ทำงาน&nbsp;<small>Work Place</small>
+                                                {{Lang::get('resource.lbWorkPlace')}}
                                             </label>
                                             <input class="form-control" id="work_stu_detail" name="work_stu_detail" type="text" value="">
                                         </div>
@@ -69,24 +67,22 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
-                                            <label class="control-label">ตำแหน่ง/หน้าที่
-                                                &nbsp;<small>Postion</small>
+                                            <label class="control-label">{{Lang::get('resource.lbPosition')}}
                                             </label>
                                             <input type="text" class="form-control" id="work_stu_position" name="work_stu_position" value="">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">
-                                                ระยะเวลาในการทำงาน&nbsp;<small>Period&nbsp;of&nbsp;Time&nbsp;Working
-                                                </small>
+                                              {{Lang::get('resource.lbPeriodWorking')}}
                                             </label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="work_stu_yr" name="work_stu_yr" value="">
                                                 <span class="input-group-addon">
-                                                            <small>ปี Year</small>
+                                                            {{Lang::get('resource.lbPeriodWorkingYear')}}
                                                         </span>
                                                 <input type="number" class="form-control" id="work_stu_mth" name="work_stu_mth" value="">
                                                 <span class="input-group-addon">
-                                                            <small>เดือน Month</small>
+                                                            {{Lang::get('resource.lbPeriodWorkingMonth')}}
                                                         </span>
                                             </div>
                                         </div>
@@ -95,15 +91,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
-                                            <label class="control-label">เงินเดือนที่ได้รับ
-                                                &nbsp;<small>Salary</small>
+                                            <label class="control-label">{{Lang::get('resource.lbSalary')}}
                                             </label>
                                             <input class="form-control" type="text" id="work_stu_salary" name="work_stu_salary" value="">
-                                            <span class="help-block"><small>บาท Baht</small></span>
+                                            <span class="help-block"><small>{{Lang::get('resource.lbSalaryCurrency')}}</small></span>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">
-                                                โทรศัพท์&nbsp;<small>Contact No</small>
+                                                {{Lang::get('resource.lbContactNo')}}
                                             </label>
                                             <input class="form-control" type="text" id="work_stu_phone" name="work_stu_phone" value="">
                                         </div>
@@ -123,7 +118,7 @@
                                                 </label>
                                                 <a href="javascript:;" data-repeater-delete=""
                                                    class="btn btn-danger">
-                                                    <i class="fa fa-close">ลบ</i>
+                                                    <i class="fa fa-close"> {{Lang::get('resource.lbDel')}}</i>
                                                 </a>
                                             </div>
                                         </div>
@@ -131,8 +126,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
-                                                <label class="control-label">ประเภท
-                                                    &nbsp;<small>Work Status</small>
+                                                <label class="control-label">{{Lang::get('resource.lbWorkStatus')}}
                                                 </label>
                                                 <input type="hidden" id="work_status_id_hidden"
                                                        name="work_status_id_hidden" value="{{$workExp->work_status_id}}">
@@ -147,7 +141,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="control-label">
-                                                    สถานที่ทำงาน&nbsp;<small>Work Place</small>
+                                                    {{Lang::get('resource.lbWorkPlace')}}
                                                 </label>
                                                 <input class="form-control" id="work_stu_detail" name="work_stu_detail" type="text" value="{{$workExp->work_stu_detail}}">
 
@@ -157,24 +151,23 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
-                                                <label class="control-label">ตำแหน่ง/หน้าที่
-                                                    &nbsp;<small>Postion</small>
-                                                </label>
+                                              <label class="control-label">{{Lang::get('resource.lbPosition')}}
+                                              </label>
                                                 <input type="text" class="form-control" id="work_stu_position" name="work_stu_position" value="{{$workExp->work_stu_position}}">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="control-label">
-                                                    ระยะเวลาในการทำงาน&nbsp;<small>Period&nbsp;of&nbsp;Time&nbsp;Working
+                                                    {{Lang::get('resource.lbPeriodWorking')}}
                                                     </small>
                                                 </label>
                                                 <div class="input-group">
                                                     <input type="number" class="form-control" id="work_stu_yr" name="work_stu_yr" value="{{$workExp->work_stu_yr}}">
                                                     <span class="input-group-addon">
-                                                            <small>ปี Year</small>
+                                                            <small>{{Lang::get('resource.lbPeriodWorkingYear')}}</small>
                                                         </span>
                                                     <input type="number" class="form-control" id="work_stu_mth" name="work_stu_mth" value="{{$workExp->work_stu_mth}}">
                                                     <span class="input-group-addon">
-                                                            <small>เดือน Month</small>
+                                                            <small>{{Lang::get('resource.lbPeriodWorkingMonth')}}</small>
                                                         </span>
                                                 </div>
                                             </div>
@@ -183,15 +176,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
-                                                <label class="control-label">เงินเดือนที่ได้รับ
-                                                    &nbsp;<small>Salary</small>
+                                                <label class="control-label">{{Lang::get('resource.lbSalary')}}
                                                 </label>
                                                 <input class="form-control" type="text" id="work_stu_salary" name="work_stu_salary" value="{{$workExp->work_stu_salary}}">
-                                                <span class="help-block"><small>บาท Baht</small></span>
+                                                <span class="help-block"><small>{{Lang::get('resource.lbSalaryCurrency')}}</small></span>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="control-label">
-                                                    โทรศัพท์&nbsp;<small>Contact No</small>
+                                                    {{Lang::get('resource.lbContactNo')}}
                                                 </label>
                                                 <input class="form-control" type="text" id="work_stu_phone" name="work_stu_phone" value="{{$workExp->work_stu_phone}}">
                                             </div>
@@ -210,8 +202,8 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="button" id="saveWorkExp" class="btn green">บันทึก</button>
-                                <button type="reset" id="clearWorkExp" class="btn default">ยกเลิก</button>
+                                <button type="button" id="saveWorkExp" class="btn green">{{Lang::get('resource.lbSave')}}</button>
+                                <button type="reset" id="clearWorkExp" class="btn default">{{Lang::get('resource.lbCancel')}}</button>
                             </div>
                         </div>
                     </div>

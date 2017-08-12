@@ -27,12 +27,12 @@ class Util
 
 
     /*Message*/
-    const CANNOT_SAVE = 'ไม่สามารถบันทึกข้อมูลได้';
-    const FAIL_SAVE = 'บันทึกไม่สำเร็จ';
-    const SUCCESS_SAVE = 'บันทึกสำเร็จ';
-    const UNABLE_TO_ACCESS = 'ไม่สามารถใข้งานในส่วนนี้ได้ กรุณาติดต่อ Admin';
-    const DATA_NOT_FOUND = 'ไม่พบข้อมูล';
-    const ERROR_OCCUR = 'เกิดข้อผิดพลาด';
+    const CANNOT_SAVE = 'ไม่สามารถบันทึกข้อมูลได้<br/>Unable to save.';
+    const FAIL_SAVE = 'บันทึกไม่สำเร็จ<br/>Saving failed.';
+    const SUCCESS_SAVE = 'บันทึกสำเร็จ<br/>Saving is successful.';
+    const UNABLE_TO_ACCESS = 'ไม่สามารถใข้งานในส่วนนี้ได้ กรุณาติดต่อ Admin</br>Service is unavailable, please contact administrator.';
+    const DATA_NOT_FOUND = 'ไม่พบข้อมูล<br/>No Data Found';
+    const ERROR_OCCUR = 'เกิดข้อผิดพลาด<br/>Error';
 
     /*Role Name Eng*/
     const ROLE_APPROVER = 'Approver';
@@ -60,9 +60,9 @@ class Util
     const DOC_FOLDER = 'DOC_FOLDER';
     const TRASH_FOLDER = 'TRASH_FOLDER';
     const TEMP_FOLDER = 'TEMP_FOLDER';
-    
+
     /*Folder by M*/
-    
+
    const APPLY_DOC = 'APPLY_DOC/DOC';
    const APPLY_IMG = 'APPLY_DOC/IMG';
 

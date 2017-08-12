@@ -2,12 +2,11 @@
     <div class="portlet-title">
         <div class="caption">
             {{--<i class="fa fa-user"></i>--}}
-            การทดสอบความรู้ความสามารถ
-            <small>Knowledge Skill</small>
+            {{Lang::get('resource.lbSkill')}}
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
-            <a href="javascript:;" class="reload"> </a>
+    
         </div>
     </div>
     <div class="portlet-body form">
@@ -16,12 +15,9 @@
             <input type="hidden" name="applicant_id" id="applicant_id" value="{{$applicant->applicant_id}}">
             <div class="form-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ภาษาอังกฤษ
-                                <div>
-                                    <small>English</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbEnglish')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="eng_test_id_hidden" name="eng_test_id_hidden"
@@ -32,26 +28,20 @@
                                             <option value="{{$engTest->eng_test_id}}">{{$engTest->eng_test_name}}</option>
                                         @endforeach
                                     @endif
-                                </select> <span class="help-block">(ตัวอย่างการเทียบคะแนน Example)</span>
+                                </select> <span class="help-block"><a href="http://www.eurogates.nl/en-TOEFL-IELTS-score-conversion/" target="_">{{Lang::get('resource.lbExScoreTest')}}</a></span>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
-                                            <label class="control-label">คะแนน
-                                                <div>
-                                                    <small>Score</small>
-                                                </div>
+                                            <label class="control-label">{{Lang::get('resource.lbScore')}}
                                             </label>
-                                            <input type="text" class="form-control" id="eng_test_score"
+                                            <input type="text" class="form-control input-small" id="eng_test_score"
                                                    name="eng_test_score" value="{{$applicant->eng_test_score}}">
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="control-label">เมื่อวันที่
-                                                <div>
-                                                    <small>Date Taken</small>
-                                                </div>
+                                            <label class="control-label">{{Lang::get('resource.lbDateTaken')}}
                                             </label>
-                                            <input type="text" class="form-control" id="eng_date_taken"
-                                                   name="eng_date_taken" value="">
+                                            <input type="text" class="form-control input-small" id="eng_date_taken"
+                                                   name="eng_date_taken" value="{{$applicant->eng_date_taken}}">
                                         </div>
                                     </div>
                                 </div>
@@ -60,29 +50,26 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ภาษาไทย
-                                <div>
-                                    <small>Thai</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbThai')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="thai_test_score" name="thai_test_score"
+                                <input type="text" class="form-control input-small" id="thai_test_score" name="thai_test_score"
                                        value="{{$applicant->thai_test_score}}">
-                                <span class="help-block">คะแนน&nbsp;<small>Score</small></span>
+                                <span class="help-block">{{Lang::get('resource.lbScore')}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ความถนัดทางธุรกิจ (CU-BEST)
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbCUBEST')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="cu_best_score" name="cu_best_score" value="{{$applicant->cu_best_score}}">
-                                <span class="help-block">คะแนน&nbsp;<small>Score</small></span>
+                                <input type="text" class="form-control input-small" id="cu_best_score" name="cu_best_score" value="{{$applicant->cu_best_score}}">
+                                <span class="help-block">{{Lang::get('resource.lbScore')}}</span>
                             </div>
                         </div>
                     </div>
@@ -93,8 +80,8 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="button" id="saveKnowledge" name="saveKnowledge" class="btn green">บันทึก</button>
-                                <button type="reset" id="clearKnowledge" name="clearKnowledge" class="btn default">ยกเลิก</button>
+                                <button type="button" id="saveKnowledge" name="saveKnowledge" class="btn green">{{Lang::get('resource.lbSave')}}</button>
+                                <button type="reset" id="clearKnowledge" name="clearKnowledge" class="btn default">{{Lang::get('resource.lbCancel')}}</button>
                             </div>
                         </div>
                     </div>

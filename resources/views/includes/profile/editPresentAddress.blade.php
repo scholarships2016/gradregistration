@@ -2,12 +2,12 @@
     <div class="portlet-title">
         <div class="caption">
             {{--<i class="fa fa-user"></i>--}}
-            ที่อยู่ที่สามารถติดต่อได้
-            <small>Present Address</small>
+            {{Lang::get('resource.lbPerAddress')}}
+
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
-            <a href="javascript:;" class="reload"> </a>
+  
         </div>
     </div>
     <div class="portlet-body form">
@@ -19,10 +19,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">เลขที่/หมู่
-                                <div>
-                                    <small>No/Moo</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbNoMoo')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" id="stu_addr_no" name="stu_addr_no"
@@ -33,10 +30,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">หมู่บ้าน
-                                <div>
-                                    <small>Village</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbVillage')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" id="stu_addr_village" name="stu_addr_village"
@@ -49,10 +43,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ตรอก/ซอย
-                                <div>
-                                    <small>Soi</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbSoi')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" id="stu_addr_soi" name="stu_addr_soi"
@@ -63,10 +54,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ถนน
-                                <div>
-                                    <small>Road</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbRoad')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" id="stu_addr_road" name="stu_addr_road"
@@ -79,10 +67,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">จังหวัด
-                                <div>
-                                    <small>Province</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbProvince')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="province_id_hidden" name="province_id_hidden"
@@ -101,10 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">อำเภอ
-                                <div>
-                                    <small>District</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbDistrict')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="district_code_hidden" name="district_code_hidden"
@@ -120,10 +102,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">ตำบล
-                                <div>
-                                    <small>Subdistrict</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbSubdistrict')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" id="stu_addr_tumbon" name="stu_addr_tumbon"
@@ -134,13 +113,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">รหัสไปรษณีย์
-                                <div>
-                                    <small>Zipcode</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbZipcode')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" id="stu_addr_pcode" name="stu_addr_pcode"
+                                <input type="text" id="stu_addr_pcode" maxlength="5" name="stu_addr_pcode"
                                        value="{{$applicant->stu_addr_pcode}}" class="form-control">
                                 <span class="help-block"></span>
                             </div>
@@ -150,10 +126,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">โทรศัพท์อื่นๆ ที่สามารถติดต่อได้
-                                <div>
-                                    <small>Other Contact No.</small>
-                                </div>
+                            <label class="control-label col-md-3">{{Lang::get('resource.lbOtherContactNo')}}
                             </label>
                             <div class="col-md-9">
                                 <input type="text" id="stu_phone" name="stu_phone" value="{{$applicant->stu_phone}}"
@@ -169,8 +142,8 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="button" class="btn green" id="savePersAddress">บันทึก</button>
-                                <button type="reset" class="btn default" id="clearPersAddress">ยกเลิก</button>
+                                <button type="button" class="btn green" id="savePersAddress">{{Lang::get('resource.lbSave')}}</button>
+                                <button type="reset" class="btn default" id="clearPersAddress">{{Lang::get('resource.lbCancel')}}</button>
                             </div>
                         </div>
                     </div>
