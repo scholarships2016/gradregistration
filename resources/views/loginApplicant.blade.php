@@ -161,6 +161,7 @@
                     <script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
                     <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
                     <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
+                  
                     @endpush
 
                     @push('pageJs')

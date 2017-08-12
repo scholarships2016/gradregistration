@@ -18,7 +18,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>โพรไฟล์</span>
+                <span>ข้อมูลส่วนตัว</span>
             </li>
         </ul>
         {{--<div class="page-toolbar">--}}

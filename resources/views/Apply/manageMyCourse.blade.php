@@ -72,7 +72,7 @@
                 <div class="portlet light ">
                     <div class="portlet-title">
                         <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
-                            <span class="caption-subject font-gree                    n-sharp bold uppercase">Status </span>
+                            <span class="caption-subject font-gree  n-sharp bold uppercase">Status </span>
                             <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
                         </div>
 
@@ -116,14 +116,23 @@
 
                                     <div class="todo-tasklist-item todo-tasklist-item-border-green">
 
-                                        <div class="todo-tasklist-item-title"> {{Lang::get('resource.lbMajor')}} : {{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}.
-                                          <br/>{{Lang::get('resource.lbSearchProgramType')}} : {{(session('locale')=='th')?$curDis->prog_type_name:$curDis->prog_type_name_en}}
-                                        </div>
+                                        <div class="todo-tasklist-item-title"> <h4>{{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}
+
+                                         {{  ($curDis->sub_major_id != '')?(session('locale')=='th')?' - แขนงวิชา '. $curDis->sub_major_name:' - '.$curDis->sub_major_name_en :'-'}}
+                                        </h4>
+
+                                          <i class="fa fa-book"></i> {{ (session('locale')=='th')?$curDis->prog_plan_name : $curDis->prog_plan_name_en }}
+                                            <br/>
+                                          <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$curDis->prog_type_name : $curDis->prog_type_name_en }}
+                                          ({{$curDis->office_time}})
+
+                                          </div>
                                         <div class="todo-tasklist-item-text">
-                                          {{(session('locale')=='th')? 'คณะ'.$curDis->faculty_name:$curDis->faculty_full.', '}}
+                                          {{  ($curDis->major_name != '')?(session('locale')=='th')? 'สาขาวิชา'.$curDis->major_name:'Major in '.$curDis->major_name_en .', ':'-'}}
                                           {{ (session('locale')=='th')? $curDis->department_name:$curDis->department_name_en.', '   }}
-                                          {{  ($curDis->major_name != '')?(session('locale')=='th')? 'สาขาวิชา'.$curDis->major_name:'Major in '.$curDis->major_name_en :'-'}}
-                                        <!--  {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}-->
+
+                                          {{(session('locale')=='th')? 'คณะ'.$curDis->faculty_name:$curDis->faculty_full.' '}}
+                                          <!--  {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}-->
 
                                         </div>
                                         <br/>

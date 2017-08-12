@@ -40,15 +40,17 @@
     <div class="profile">
         <div class="tabbable-line tabbable-full-width">
             <ul class="nav nav-tabs">
+              <!--
                 <li class="active">
                     <a href="#tab_1_1" data-toggle="tab"> Overview </a>
                 </li>
-                <li>
+              -->
+                <li  class="active">
                     <a href="#tab_1_3" data-toggle="tab"> Account </a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_1_1">
+                <div class="tab-pane " id="tab_1_1">
                     <div class="row">
                         <div class="col-md-3">
                             <ul class="list-unstyled profile-nav">
@@ -102,9 +104,11 @@
                                     <li class="active">
                                         <a href="#tab_1_11" data-toggle="tab"> Latest Customers </a>
                                     </li>
+                                    <!--
                                     <li>
                                         <a href="#tab_1_22" data-toggle="tab"> Feeds </a>
                                     </li>
+                                  -->
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1_11">
@@ -133,6 +137,7 @@
                                         </div>
                                     </div>
                                     <!--tab-pane-->
+                                    <!--
                                     <div class="tab-pane" id="tab_1_22">
                                         <div class="tab-pane active" id="tab_1_1_1">
                                             <div class="scroller" data-height="290px" data-always-visible="1"
@@ -487,6 +492,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                  -->
                                     <!--tab-pane-->
                                 </div>
                             </div>
@@ -494,7 +500,7 @@
                     </div>
                 </div>
                 <!--tab_1_2-->
-                <div class="tab-pane" id="tab_1_3">
+                <div class="tab-pane active" id="tab_1_3">
                     <div class="row profile-account">
                         <div class="col-md-3">
                             <ul class="ver-inline-menu tabbable margin-bottom-10">
@@ -512,6 +518,7 @@
                         <div class="col-md-9">
                             <div class="tab-content">
                                 <div id="tab_1-1" class="tab-pane active">
+                                  <!--
                                     <div class="m-heading-1 border-yellow-saffron bg-yellow-saffron bg-font-yellow-saffron m-bordered">
                                         <p class="text-center font-red-intense"><b>เลขที่บัตรประจำตัวประชาชน
                                                 และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้
@@ -520,11 +527,13 @@
                                                 </small>
                                             </b></p>
                                     </div>
+                                  -->
                                     <div class="note note-info">
-                                        <p class="text-center">เลขที่บัตรประจำตัวประชาชน Citizen ID or Passport ID
-                                            <b>{{$applicant->stu_citizen_card}}</b><br>
+                                        <p class="text-center">{{Lang::get('resource.lbCitizen')}} <span class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
+                                        <!--  <br>
                                             หมายเลขโทรศัพท์ที่สามารถติดต่อได้ Contact No
                                             <b>{{$applicant->stu_phone}}</b>
+                                          -->
                                         </p>
                                     </div>
                                     <div class="row">
@@ -607,7 +616,7 @@
         }
 
         var select2Option = {
-            placeholder: '--เลือก--',
+            placeholder: '--Select--',
             allowClear: true,
             width: '100%'
         };

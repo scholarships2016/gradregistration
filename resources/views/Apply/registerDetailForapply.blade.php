@@ -70,9 +70,9 @@
      @foreach ($curDiss as $curDis)
                             <div class="row invoice-logo">
 
-                                <div class="col-xs-8 invoice-logo-space">
+                                <div id="select-program-area" class="col-md-9 invoice-logo-space">
                                    @if(session('Applicant'))
-                                   <div class="col-xs-10 well">
+                                   <div class="col-xs-10 note note-danger">
                                    <form class="choose-program-form" action="{{route('submitregisterDetailForapply')}}" method="post">
                                     {{csrf_field()}}
 
@@ -89,13 +89,22 @@
                                                                <label for="checkbox_P{{ $loop->iteration}}">
                                                                    <span class="inc"></span>
                                                                    <span class="check"></span>
-                                                                   <span class="box"></span>{{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }} </label>
+                                                                   <span class="box"></span>
+                                                                   <b>{{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}</b>
+                                                                    <br/>
+                                                                    <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name : $program->prog_plan_name_en }}
+                                                                      <br/>
+                                                                    <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
+                                                                    ({{$program->office_time}})
+                                                                 </label>
                                                            </div>
                                                               @endforeach
                                                        </div>
                                                    </div>
                                   </div>
                                   @endif
+                                  <br/>
+                                  <hr/>
                                    @if($subMajors->count()> 0)
                                   <div class="form-group form-md-radios  " >
                                                     <label class="col-md-12 control-label" for="form_control_1"><strong><span class="badge badge-info">2</span> {{Lang::get('resource.lbSelSubMajor')}}</strong></label>
@@ -109,7 +118,10 @@
                                                                 <label for="checkbox_{{ $loop->iteration}}">
                                                                     <span class="inc"></span>
                                                                     <span class="check"></span>
-                                                                    <span class="box"></span> {{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }} </label>
+                                                                    <span class="box"></span>
+                                                                    <b>{{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }}
+                                                                    </b>
+                                                                     </label>
                                                             </div>
                                                                @endforeach
                                                         </div>
@@ -124,7 +136,7 @@
                                       <i class="fa fa-check"></i>
                                     </button>
 
-                                     <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+                                     <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </a>
 
@@ -133,9 +145,9 @@
   @endif
 
                                     </div>
-                                <div class="col-xs-4">
+                                <div class="col-md-3">
                                     <p>
-                                        <span class="muted" style="font-size:26px;"> {{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }} </span>
+                                        <span class="muted" style="font-size:26px;"> {{Lang::get('resource.lbSearchResultFaculty')}}{{ (session('locale')=='th')? $curDis->faculty_name:$curDis->faculty_full   }} </span>
                                     </p>
                                 </div>
                             </div>
@@ -175,19 +187,24 @@
                                             @if($programs->count()> 0)
                                             <div class="form-group form-md-radios  ">
                                                            <div class="col-md-12">
-                                                               <div class="md-radio-inline">
-
+                                                             <div class="todo-tasks-container">
+                                                            	  <ul class="todo-tasks-content">
                                                                     @foreach($programs as $program)
-
-                                                                   <div class="md-radio">
-                                                                       <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->curr_prog_id }}" name="program_id" class="md-radiobtn">
-                                                                       <label for="checkbox_P{{ $loop->iteration}}">
-                                                                           <span class="inc"></span>
-                                                                           <span class="check"></span>
-                                                                           <span class="box"></span>{{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }} </label>
-                                                                   </div>
+                                                                      <li class="todo-tasks-item">
+                                                                  			<div class="todo-inline">
+                                                                  				 {{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}
+                                                                           <br/>
+                                                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name : $program->prog_plan_name_en }}
+                                                                             <br/>
+                                                                           <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
+                                                                           ({{$program->office_time}})
+                                                                        </div>
+                                                                  		</li>
                                                                       @endforeach
-                                                               </div>
+                                                                    </ul>
+                                                                </div>
+
+
                                                            </div>
                                             </div>
                                             @endif
@@ -203,19 +220,21 @@
 
                                            <div class="form-group form-md-radios  " >
                                                              <div class="col-md-12">
-                                                                 <div class="md-radio-inline">
 
-                                                                      @foreach($subMajors as $subMajor)
 
-                                                                     <div class="md-radio">
-                                                                         <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" name="sub_major_id" class="md-radiobtn">
-                                                                         <label for="checkbox_{{ $loop->iteration}}">
-                                                                             <span class="inc"></span>
-                                                                             <span class="check"></span>
-                                                                             <span class="box"></span> {{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }} </label>
-                                                                     </div>
+                                                               <div class="todo-tasks-container">
+                                                              	  <ul class="todo-tasks-content">
+                                                                        @foreach($subMajors as $subMajor)
+                                                                        <li class="todo-tasks-item">
+                                                                    			<div class="todo-inline">
+                                                                    				 {{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }}
+                                                                    			</div>
+                                                                    		</li>
                                                                         @endforeach
-                                                                 </div>
+                                                                      </ul>
+                                                                  </div>
+
+
                                                              </div>
                                             </div>
 

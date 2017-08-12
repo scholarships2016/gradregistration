@@ -37,6 +37,11 @@
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
                        placeholder="Password" id="stu_password" name="stu_password"/></div>
         </div>
+        <div class="formm-group">
+          <div class="g-recaptcha" data-sitekey="6LdTciwUAAAAAIghJhuM4wf8Dnzc-eadlLikCWiR"  data-callback="recaptchaCallback"></div>
+          <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
+
+        </div>
         <div class="form-actions">
 
             <button type="submit" class="btn green pull-right"> Login</button>
@@ -147,7 +152,9 @@
                            placeholder="Re-type Your Password" id="rpassword" name="rpassword"/></div>
             </div>
         </div>
-
+        <div class="formm-group">
+          <div class="g-recaptcha" data-sitekey="6LdTciwUAAAAAIghJhuM4wf8Dnzc-eadlLikCWiR"></div>
+        </div>
         <div class="form-actions">
             <button id="register-back-btn" type="button" class="btn red btn-outline"> Back</button>
             <button type="submit" id="register-submit-btn" class="btn green pull-right"> Sign Up</button>
@@ -167,11 +174,15 @@
 <script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 @endpush
 
 @push('pageJs')
 <script src="{{asset('assets/pages/scripts/login-4.js')}}"></script>
 
 <script type="application/javascript">
+function recaptchaCallback() {
+  $('#hiddenRecaptcha').valid();
+};
 </script>
 @endpush

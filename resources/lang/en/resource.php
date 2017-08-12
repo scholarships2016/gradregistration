@@ -97,7 +97,7 @@ return [
     'lbReset' => 'Reset',
     'lbSAdvanced' => 'Advanced',
     'lbUpdateDoc' => 'Document Apply',
-    'lbUpdateDocApply' => 'Please update documents for apply ',
+    'lbUpdateDocApply' => 'Update related apply documents',
     'lbdocMyCourse'=>'Application Form',
      'lbdocPayMyCourse'=>'Pay in Form',
      'lbdocEnvelop'=>'Envelop',
@@ -112,7 +112,8 @@ return [
 'lbSearchResultProgramType'=>'Program Type',
 'lbSearchResultDetail'=>'Detail',
 'lbSearchResultAction'=>'View/Apply',
-
+'lbSearchResultMajor'=>'Major in ',
+'lbSearchResultFaculty'=>'',
 
     //other Use
      'lbYear'=>'Year',
@@ -160,15 +161,16 @@ return [
     'perInfoReligion' => 'Religion',
     'perInfoMaritalStatus' => 'Marital Status',
     'perInfoBirthdate' => 'Birthdate',
-    'perInfoBirthdateEx' => '-->&nbsp;20/1/1977',
+    'perInfoBirthdateEx' => '-->&nbsp;20/01/1983',
     'perInfoPlaceOfBirth' => 'Place of Birth',
     'perInfoEmail' => 'Email',
     'perInfoEmailNotice' => 'Please fill in your valid email, graduate school will inform application result via this email.',
     'perInfoPhoto' => 'Photo',
-    'perInfoFundInterest' => 'Do you want fund?',
+    'perInfoFundInterest' => 'Are you interested in applying for a tuition-only scholarship?',
     'perInfoInterest' => 'Interested',
     'perInfoNotInterest' => 'Not Interested',
-    'perInfoMedia' => 'How can you know this news?',
+    'perInfoMedia' => 'Which media you know this information from?',
+    'perInfoFundInterestSeeMore' => 'See More',
 
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
@@ -190,7 +192,7 @@ return [
       'lbConfirmTableReferencePersonPosition' => 'Position',
       'lbConfirmTableReferencePersonContactAddr' => 'Contact Address',
       'lbConfirmTableReferencePersonTel' => 'Telephone Number',
-      'lbConfirmTSurveyTopic' => 'Please fill in satisfactory survey.',      
+      'lbConfirmTSurveyTopic' => 'Please fill in satisfactory survey.',
       'lbConfirmTSurveyLevel' => 'Satisfactory level',
       'lbConfirmTSurveyLevel1' => 'Unsatisfactory',
       'lbConfirmTSurveyLevel2' => 'Satisfactory',

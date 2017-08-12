@@ -100,7 +100,7 @@ return [
     'lbReset' => 'ยกเลิก',
     'lbSAdvanced' => 'การค้นหาขั้นสูง',
     'lbUpdateDoc' => 'เอกสารสำหรับสมัคร',
-     'lbUpdateDocApply' => 'ปรับปรุงข้อมูลเอกสารที่สมัคร ',
+     'lbUpdateDocApply' => 'ปรับปรุงเอกสารประกอบการสมัคร ',
     'lbdocMyCourse'=>'ใบสมัคร',
      'lbdocPayMyCourse'=>'ใบแจ้งชำระค่าธรรมเนียม',
     'lbdocEnvelop'=>'ใบปะหน้าซอง',
@@ -115,6 +115,8 @@ return [
     'lbSearchResultProgramType'=>'ประเภทหลักสูตร',
     'lbSearchResultDetail'=>'สังกัด',
     'lbSearchResultAction'=>'ดูรายละเอียด/สมัคร',
+    'lbSearchResultMajor'=>'สาขาวิชา',
+    'lbSearchResultFaculty'=>'คณะ',
 
     //other Use
      'lbYear'=>'ปีการศึกษา(พ.ศ.)',
@@ -159,7 +161,7 @@ return [
     'perInfoReligion' => 'ศาสนา',
     'perInfoMaritalStatus' => 'สถานภาพสมรส',
     'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
-    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
+    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;&nbsp;เช่น&nbsp;20/01/1983',
     'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
     'perInfoEmail' => 'อีเมล',
     'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
@@ -168,6 +170,7 @@ return [
     'perInfoInterest' => 'สนใจ',
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
+    'perInfoFundInterestSeeMore' => 'ดูรายละเอียดเกี่ยวกับทุน',
 
         //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',

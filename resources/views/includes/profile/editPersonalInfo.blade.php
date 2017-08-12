@@ -249,7 +249,7 @@
                                         {{Lang::get('resource.perInfoNotInterest')}}
                                         <span></span>
                                     </label>
-                                    <label><a>ดูรายละเอียดเกี่ยวกับทุน</a></label>
+                                    <label><a href="http://www.grad.chula.ac.th/scholarship/schedule.php" target="_blank">  {{Lang::get('resource.perInfoFundInterestSeeMore')}}</a></label>
                                 </div>
                                 <span class="help-block"></span>
                             </div>

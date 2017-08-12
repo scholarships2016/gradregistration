@@ -229,7 +229,7 @@ orderable: true,
 className: 'table-desc font-blue',
 name: 'degree_name',
 render: function (data, type, full, meta) {
-return (('{{session('locale')}}'=='th')? full.degree_name:full.degree_name_en) ;
+return (('{{session('locale')}}'=='th')? full.thai:full.english) ;
 } },{
 targets: [2],
 orderable: true,
@@ -243,7 +243,7 @@ orderable: true,
 className: 'table-desc',
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return ('{{Lang::get('resource.lbFaculty')}}'+  (('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) + ' <br>{{Lang::get('resource.lbDepartment')}} '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'<br> {{Lang::get('resource.lbMajor')}} '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
+return ('{{Lang::get('resource.lbSearchResultMajor')}}'+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)+'<br/>'+ ''+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) + '<br/>'+'{{Lang::get('resource.lbSearchResultFaculty')}}'+(('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) ) ;
 }},{
 targets: [4],
 orderable: false,

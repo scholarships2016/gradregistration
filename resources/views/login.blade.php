@@ -373,6 +373,10 @@
                 </label>
                 <div id="register_tnc_error"></div>
             </div>
+            <div class="formm-group">
+              <div class="g-recaptcha" data-sitekey="6LdTciwUAAAAAIghJhuM4wf8Dnzc-eadlLikCWiR"></div>
+            </div>
+            </form>
             <div class="form-actions">
                 <button id="register-back-btn" type="button" class="btn red btn-outline"> Back</button>
                 <button type="submit" id="register-submit-btn" class="btn green pull-right"> Sign Up</button>
@@ -392,6 +396,7 @@
 <script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 @endpush
 
 @push('pageJs')

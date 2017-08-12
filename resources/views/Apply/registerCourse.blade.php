@@ -57,6 +57,7 @@
 @stop
 @section('pagetitle')
     <h1 class="page-title"> {{Lang::get('resource.lbConfirmApply')}}</h1>
+
     <div class="m-heading-1 border-yellow-lemon m-bordered">
       <h3>
         <span class="item">
@@ -76,7 +77,7 @@
 
    <div class="row">
      <div class="col-md-12">
-           <div class="note note-danger">
+           <div class="alert alert-info">
                <p><span class="badge badge-info">1</span>  {{Lang::get('resource.lbConfirmPaymentBank')}}     </p>
            </div>
 
@@ -100,7 +101,7 @@
    @foreach ($Qus as $Q)
    <div class="row">
      <div class="col-md-12">
-       <div class="note note-danger">
+       <div class="alert alert-info">
           <p><span class="badge badge-info">2</span>   {{Lang::get('resource.lbQuestionAsk')}}      </p>
       </div>
       </div>
@@ -129,7 +130,7 @@
     <div class="search-container ">
       <div class="row">
         <div class="col-md-12">
-          <div class="note note-danger">
+          <div class="alert alert-info">
             <p><span class="badge badge-info">3</span> {{Lang::get('resource.lbConfirmReferencePerson')}}
          </div>
          </div>
@@ -228,7 +229,7 @@
           <div class="search-container ">
             <div class="row">
               <div class="col-md-12">
-                <div class="note note-danger">
+                <div class="alert alert-info">
                   <p><span class="badge badge-info">4</span> {{Lang::get('resource.lbConfirmTSurveyTopic')}}
 
                </div>
@@ -305,10 +306,10 @@
                                                             <ul>
                                                                  <li class="search-item-header">
                                                                        <div class="row" style=" text-align: center;  ">
-                                                                           <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> บันทึก/Save
+                                                                           <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> {{Lang::get('resource.lbSave')}}
                                       <i class="fa fa-check"></i>
                                     </a>
-                                  <a class="btn btn-lg red   margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  ยกเลิก
+                                  <a class="btn btn-lg grey-steel  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </a>
                                                                        </div>  </li>
