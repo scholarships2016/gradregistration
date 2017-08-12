@@ -93,7 +93,8 @@ return [
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
      'lbMProfile' => 'ข้อมูลส่วนตัว',
     'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
-    'lbConfirmApply'=> 'ยืนยันการสมัคร',
+    'lbConfirmApply'=> 'ยืนยันการสมัคร',  
+    'lbMLogout'=> 'ออกจากระบบ',
 
     //button
     'lbNext' => 'ถัดไป',

@@ -68,13 +68,13 @@
                                             <ul class="dropdown-menu dropdown-menu-default">
                                                 <li>
                                                     <a href="{{route('profile.showProfilePage')}}">
-                                                        <i class="icon-user"></i> My Profile </a>
+                                                        <i class="icon-user"></i> {{Lang::get('resource.lbMProfile')}} </a>
                                                 </li>
                                                 <li class="divider"></li>
 
                                                 <li>
                                                     <a href="{{ url('/logout') }}">
-                                                        <i class="icon-key"></i> Log Out </a>
+                                                        <i class="icon-key"></i> {{Lang::get('resource.lbMLogout')}} </a>
                                                 </li>
                                             </ul>
                                         </li>

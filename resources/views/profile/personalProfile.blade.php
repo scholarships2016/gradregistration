@@ -50,7 +50,7 @@
                 </li>
             </ul>
             <div class="tab-content active">
-                <div class="tab-pane " id="tab_1_1">
+                <div class="tab-pane active" id="tab_1_1">
                     <div class="row">
                         <div class="col-md-3">
                             <ul class="list-unstyled profile-nav">
@@ -67,20 +67,26 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-8 profile-info">
-                                    <h1 class="font-green sbold uppercase">
+                                <div class="col-md-8 profile-info"  id="view-basic-info">
+                                    <h1 class="font-blue sbold uppercase">
                                         {{$applicant->stu_first_name_en.' '.$applicant->stu_last_name_en}}
+                                        <br/><h4 class="font-blue">{{$applicant->stu_first_name.' '.$applicant->stu_last_name}}</h4>
                                     </h1>
                                     <p>
-                                      <i class="fa fa-user"></i> 1331300017002
-                                      <br/>
-                                      <i class="fa fa-phone"></i> 086-606-4655
-                                      <br/>
-                                      <i class="fa fa-envelope"></i> chok-chon@hotmail.com
-                                      <br/>
+                                      <ul>
+                                        <li>
+                                      <i class="fa fa-user font-blue" title="Citizen ID/Passport ID"></i> {{$applicant->stu_citizen_card}}
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-envelope font-blue"></i> {{$applicant->stu_email}}
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-phone font-blue"></i> {{$applicant->stu_phone}}
+                                    </li>
+                                  </ul>
                                     </p>
                                     <ul class="list-inline">
-                                        <li>
+                                        <li  title="Nation">
                                             <i class="fa fa-map-marker"></i>
                                             @if(!empty($applicant->nation_id))
                                                 {{(session('locale')=='th')?$applicant->tblNation->nation_name :$applicant->tblNation->nation_name_en }}
@@ -88,11 +94,11 @@
                                                 -
                                             @endif
                                         </li>
-                                        <li>
-                                            <i class="fa fa-calendar"></i>
+                                        <li title="Date of Birth">
+                                            <i class="fa fa-birthday-cake"></i>
                                             <span id="birthdateBrief">
                                                 @if(!empty($applicant->stu_birthdate))
-                                                    {{\Carbon\Carbon::createFromFormat('d/m/Y',$applicant->stu_birthdate)->format('d M Y')}}
+                                                    {{$applicant->stu_birthdate->format('d/m/Y')}}
                                                 @else
                                                     -
                                                 @endif
@@ -100,6 +106,8 @@
                                         </li>
                                     </ul>
                                 </div>
+
+
                                 <!--end col-md-8-->
                             {{--<div class="col-md-4">--}}
                             {{--</div>--}}
@@ -536,11 +544,11 @@
                                     </div>
                                   -->
                                     <div class="note note-info">
-                                        <p class="text-center">{{Lang::get('resource.lbCitizen')}} <span class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
-                                        <!--  <br>
-                                            หมายเลขโทรศัพท์ที่สามารถติดต่อได้ Contact No
-                                            <b>{{$applicant->stu_phone}}</b>
-                                          -->
+                                        <p class="text-center">{{Lang::get('resource.lbCitizen')}} : <span class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
+                                          <br>
+                                            Email :
+                                            <span class="label label-warning"> <b>{{$applicant->stu_email}}</b></span>
+
                                         </p>
                                     </div>
                                     <div class="row">
