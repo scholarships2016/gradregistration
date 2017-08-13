@@ -160,13 +160,13 @@
                                                                                   <li>
                                                                                        <a target="_blank"  href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> <i class="fa fa-file-pdf-o"></i> {{Lang::get('resource.lbdocMyCourse')}}     </a>
                                                                                   </li>
-                                                                                @if($curDis->flow_id==2 && $curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+                                                                                @if($curDis->flow_id==2&& $curDis->is_active==1 && $curDis->apply_method==1 && session('Applicant')->nation_id == '001')
                                                                                   <li>
                                                                                      <a  target="_blank" href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
 
                                                                                   </li>
                                                                                 @endif
-                                                                                @if($curDis->flow_id==2)
+                                                                                @if($curDis->flow_id==2&& $curDis->is_active==1)
                                                                                   <li>
 
                                                                                            <a target="_blank" href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> <i class="fa fa-envelope"></i> {{Lang::get('resource.lbdocEnvelop')}} </a>
@@ -194,7 +194,7 @@
 
 
 
-
+<!-- ยังไม่ยืนยันการสมัคร -->
    @if($curDis->flow_id==1 && $curDis->is_active==1)
      <div class="mt-element-list">
 
