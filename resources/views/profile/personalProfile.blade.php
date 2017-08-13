@@ -67,23 +67,26 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-8 profile-info"  id="view-basic-info">
+                                <div class="col-md-12 profile-info"  id="view-basic-info">
                                     <h1 class="font-blue sbold uppercase">
-                                        {{$applicant->stu_first_name_en.' '.$applicant->stu_last_name_en}}
-                                        <br/><h4 class="font-blue">{{$applicant->stu_first_name.' '.$applicant->stu_last_name}}</h4>
+                                        {{$applicant->name_title_en}} {{$applicant->stu_first_name_en.' '.$applicant->stu_last_name_en}}
+                                        <br/><h4 class="font-blue">{{$applicant->name_title}} {{$applicant->stu_first_name.' '.$applicant->stu_last_name}}</h4>
                                     </h1>
                                     <p>
-                                      <ul>
-                                        <li>
+
+
+
+                                      <div class="row">
+                                        <div class="col-md-4">
                                       <i class="fa fa-user font-blue" title="Citizen ID/Passport ID"></i> {{$applicant->stu_citizen_card}}
-                                    </li>
-                                    <li>
+                                    </div>
+                                    <div class="col-md-4">
                                       <i class="fa fa-envelope font-blue"></i> {{$applicant->stu_email}}
-                                    </li>
-                                    <li>
+                                    </div>
+                                    <div class="col-md-4">
                                       <i class="fa fa-phone font-blue"></i> {{$applicant->stu_phone}}
-                                    </li>
-                                  </ul>
+                                    </div>
+                                  </div>
                                     </p>
                                     <ul class="list-inline">
                                         <li  title="Nation">
@@ -115,18 +118,19 @@
                             </div>
                             <!--end row-->
                             <div class="tabbable-line tabbable-custom-profile">
+                              <a title="{{Lang::get('resource.lbManageCouse')}}" href="apply/manageMyCourse"  class="btn btn-circle red-pink btn-outline">
+                        <i class="icon-briefcase"></i>  {{Lang::get('resource.lbManageCouse')}}</a>
+
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#tab_1_11" data-toggle="tab">  {{Lang::get('resource.lbManageCouse')}} </a>
+
+                                    <li class="">
+
                                     </li>
-                                    <!--
-                                    <li>
-                                        <a href="#tab_1_22" data-toggle="tab"> Feeds </a>
-                                    </li>
-                                  -->
+
+
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="tab_1_11">
+                                    <div class="tab-pane " id="tab_1_11">
                                         <div class="portlet-body">
                                             <table class="table table-striped table-bordered table-advance table-hover">
                                                 <thead>
@@ -152,362 +156,8 @@
                                         </div>
                                     </div>
                                     <!--tab-pane-->
-                                    <!--
-                                    <div class="tab-pane" id="tab_1_22">
-                                        <div class="tab-pane active" id="tab_1_1_1">
-                                            <div class="scroller" data-height="290px" data-always-visible="1"
-                                                 data-rail-visible1="1">
-                                                <ul class="feeds">
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-success">
-                                                                        <i class="fa fa-bell-o"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> You have 4 pending tasks.
-                                                                        <span class="label label-danger label-sm"> Take action
-                                                                                                <i class="fa fa-share"></i>
-                                                                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> Just now</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:;">
-                                                            <div class="col1">
-                                                                <div class="cont">
-                                                                    <div class="cont-col1">
-                                                                        <div class="label label-success">
-                                                                            <i class="fa fa-bell-o"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="cont-col2">
-                                                                        <div class="desc"> New version v1.4 just
-                                                                            lunched!
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col2">
-                                                                <div class="date"> 20 mins</div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-danger">
-                                                                        <i class="fa fa-bolt"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> Database server #12 overloaded.
-                                                                        Please fix the issue.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 24 mins</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-info">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 30 mins</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-success">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 40 mins</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-warning">
-                                                                        <i class="fa fa-plus"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New user registered.</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 1.5 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-success">
-                                                                        <i class="fa fa-bell-o"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> Web server hardware needs to be
-                                                                        upgraded.
-                                                                        <span class="label label-inverse label-sm"> Overdue </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 2 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 3 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-warning">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 5 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-info">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 18 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 21 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-info">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 22 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 21 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-info">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 22 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 21 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-info">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 22 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 21 hours</div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-info">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc"> New order received. Please take
-                                                                        care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date"> 22 hours</div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  -->
+
+
                                     <!--tab-pane-->
                                 </div>
                             </div>
@@ -543,7 +193,7 @@
                                             </b></p>
                                     </div>
                                   -->
-                                    <div class="note note-info">
+                                    <div class="alert alert-info">
                                         <p class="text-center">{{Lang::get('resource.lbCitizen')}} : <span class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
                                           <br>
                                             Email :
