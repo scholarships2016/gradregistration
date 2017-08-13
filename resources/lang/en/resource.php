@@ -104,7 +104,7 @@ return [
     'lbUpdateDoc' => 'Document Apply',
     'lbUpdateDocApply' => 'Update related apply documents',
     'lbdocMyCourse'=>'Application Form',
-     'lbdocPayMyCourse'=>'Pay in Form',
+     'lbdocPayMyCourse'=>'Payment Invoice Form',
      'lbdocEnvelop'=>'Envelop',
       'lbSearchPlaceHolder'=>'Search for faculty, program ID or program name',
 
@@ -205,4 +205,16 @@ return [
       'lbConfirmTSurveyLevel4' => 'Very Good',
       'lbConfirmTSurveyLevel5' => 'Excellent',
       'lbConfirmTSurveySugestion' => 'Suggestion',
+
+      'lbProcessTime' => 'Must be processed by ',
+      'lbBtnDownload' => 'Download',
+      'lbTodolistPayment' => 'Pay Apply Fee',
+      'lbTodolistDocument' => 'Send documents to Graduate School',
+      'lbTodolistPaymentBank' => 'with Bank Seal',
+      'lbTodolistViewExamTable' => 'View Exam Schedule',
+      'lbTodolistExamRightResultTitle' => 'Examination Result',
+      'lbTodolistAdmissionRightResultTitle' => 'Admission Result',
+      'lbTodolistOrientationDate' => 'Orientation on ',
+      'lbTodolistOrientationLocation' => 'At ',
+
 ];

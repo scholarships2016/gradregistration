@@ -116,9 +116,12 @@
 
                                     <div class="todo-tasklist-item todo-tasklist-item-border-green">
 
-                                        <div class="todo-tasklist-item-title"> <h4>{{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}
-
+                                        <div class="todo-tasklist-item-title"> <h4>
+                                          <b>
+                                          {{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}
+                                        </b>
                                          {{  ($curDis->sub_major_id != '')?(session('locale')=='th')?' - แขนงวิชา '. $curDis->sub_major_name:' - '.$curDis->sub_major_name_en :'-'}}
+                                         {{  ($curDis->major_name != '')?(session('locale')=='th')? ' - สาขาวิชา'.$curDis->major_name:' - Major in '.$curDis->major_name_en :'-'}}
                                         </h4>
 
                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$curDis->prog_plan_name : $curDis->prog_plan_name_en }}
@@ -128,6 +131,7 @@
 
                                           </div>
                                         <div class="todo-tasklist-item-text">
+                                          <i class="icon-info"></i>
                                           {{  ($curDis->major_name != '')?(session('locale')=='th')? 'สาขาวิชา'.$curDis->major_name:'Major in '.$curDis->major_name_en .', ':'-'}}
                                           {{ (session('locale')=='th')? $curDis->department_name:$curDis->department_name_en.', '   }}
 
@@ -135,67 +139,267 @@
                                           <!--  {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}-->
 
                                         </div>
-                                        <br/>
+
+                                        <hr/>
                                         <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbDocID')}}  <span class="label label-warning">{{$curDis->app_id}}</span> </div>
                                         <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}}  <span class="label label-warning">{{$curDis->curriculum_num}}</span>  </div>
 
 
-                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}}   <span class="label label-success">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
-                                        <div class="todo-tasklist-controls pull-left">
-                                            <span class="todo-tasklist-date">
-                                                <i class="fa fa-calendar"></i> {{$curDis->appDates}} </span>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}}   <span class="label label-info">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
+
+                                        <div class="todo-tasklist-controls pull-left"  id="mycourse-todolist">
 
                                                 <div  class="col-md-12 col-md-offset-1 portlet mt-element-ribbon light portlet-fit bordered">
-<div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase">
-<div class="ribbon-sub ribbon-bookmark"></div>
-<i class="fa fa-star"></i>
-</div>
-<div class="portlet-title">
-<div class="caption">
-<i class="icon-clock font-green"></i>
-<span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span>
-</div>
-</div>
-<div class="portlet-body">  @if($curDis->flow_id==1 && $curDis->is_active==1)
-                                                    <a class="btn  blue" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
-                                                        <i class="fa fa-check"></i>
-                                                    </a>   <a class="btn btn-danger mt-sweetalert sweet-8"  href="javascript:cancel({{$curDis->application_id}});"   >  {{Lang::get('resource.lbButtonRemoveApplication')}}
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
+                                                  @if($curDis->flow_id>=2)
+                                                    <div class="btn-group pull-right">
+                                                                              <a class="btn green" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                                                                                  <i class="fa fa-download"></i> {{Lang::get('resource.lbBtnDownload')}}
+                                                                                  <i class="fa fa-angle-down"></i>
+                                                                              </a>
+                                                                              <ul class="dropdown-menu">
+                                                                                  <li>
+                                                                                       <a target="_blank"  href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> <i class="fa fa-file-pdf-o"></i> {{Lang::get('resource.lbdocMyCourse')}}     </a>
+                                                                                  </li>
+                                                                                @if($curDis->flow_id==2 && $curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+                                                                                  <li>
+                                                                                     <a  target="_blank" href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
 
+                                                                                  </li>
+                                                                                @endif
+                                                                                @if($curDis->flow_id==2)
+                                                                                  <li>
+
+                                                                                           <a target="_blank" href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> <i class="fa fa-envelope"></i> {{Lang::get('resource.lbdocEnvelop')}} </a>
+                                                                                  </li>
+                                                                                @endif
+
+                                                                              </ul>
+                                                                          </div>
+                                                  @endif
+
+                                        <!--  <div class="ribbon ribbon-vertical-right ribbon-shadow ribbon-color-primary uppercase">
+                                          <div class="ribbon-sub ribbon-bookmark"></div>
+                                          <i class="fa fa-star"></i>
+                                          </div>
+                                        -->
+                                          <div class="portlet-title">
+                                          <div class="caption">
+                                          <i class="icon-clock font-green"></i>
+                                          <span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span>
+                                          </div>
+
+                                          </div>
+<div class="portlet-body">
+
+
+
+
+
+   @if($curDis->flow_id==1 && $curDis->is_active==1)
+     <div class="mt-element-list">
+
+         <div class="mt-list-container list-simple">
+             <ul>
+                 <li class="mt-list-item done">
+                     <div class="list-icon-container">
+                         <i class="icon-close"></i>
+                     </div>
+
+                     <div class="list-item-content">
+                         <h3 class="uppercase">
+                             <a href="javascript:;">{{Lang::get('resource.lbConfirmApply')}}</a>
+                         </h3>
+                         <div style="margin:10px 0px 10px 0px">
+                           <a class="btn  green" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
+                               <i class="fa fa-check"></i>
+                           </a>
+                           <a class="btn btn-danger mt-sweetalert sweet-8"  href="javascript:cancel({{$curDis->application_id}});"   >  {{Lang::get('resource.lbButtonRemoveApplication')}}
+                               <i class="fa fa-times"></i>
+                           </a>
+                         </div>
+                     </div>
+                 </li>
+
+
+             </ul>
+         </div>
+     </div>
+<br/>
+      <div class="alert alert-danger">
+      <i class="icon-info"></i>
+      {{Lang::get('resource.lbProcessTime')}} 05/09/2017
+    </div>
 
 
 
                             @endif
                             @if($curDis->flow_id==2)
-                                                    <a class="btn  blue" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
+                              <div class="mt-element-list">
+
+                                  <div class="mt-list-container list-simple">
+                                      <ul>
+                                          <li class="mt-list-item">
+                                              <div class="list-icon-container">
+                                                  <i class="font-red icon-close"></i>
+                                              </div>
+
+                                              <div class="list-item-content">
+                                                  <h3 class="uppercase">
+                                                      <a href="javascript:;">{{Lang::get('resource.lbUpdateDocApply')}}</a>
+                                                  </h3>
+                                                  <div style="margin:10px 0px 10px 0px">
+                                                    <a class="btn btn-circle blue btn-outline" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                            <div class="btn-group dropup">
-                                                                    <button class="btn green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Download <i class="icon-cloud-download"></i></button>
-                                                                    <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                      <i class="fa fa-angle-up"></i>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu pull-right" role="menu">
-                                                                        <li>
-                                                                            <span>  <i class="fa fa-file-o"></i> <a   href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocMyCourse')}}     </a> </span>  </li>
-                                                                      @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
-                                                                        <li>
-                                                                          <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPayMyCourse')}}   </a> </span>   </li>
-                                                                      @endif
-                                                                        <li>
-                                                                           <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>    </li>
-                                                                    </ul>
-                                                                </div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                            @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+                                          <li class="mt-list-item">
+                                              <div class="list-icon-container">
+                                                  <i class="font-red icon-close"></i>
+                                              </div>
+
+                                              <div class="list-item-content">
+                                                  <h3 class="uppercase">
+                                                      <a href="javascript:;">{{Lang::get('resource.lbTodolistPayment')}}</a>
+                                                  </h3>
+                                                  <div style="margin:10px 0px 10px 0px">
 
 
+                                                        <span>   <i class="fa fa-money"></i><a target="_blank"  href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbBtnDownload')}} {{Lang::get('resource.lbdocPayMyCourse')}}   </a> </span>
 
 
+                                                  </div>
+                                              </div>
+                                            </li>
+                                            @endif
+                                              <li class="mt-list-item">
+                                                  <div class="list-icon-container">
+                                                      <i class="font-red icon-close"></i>
+                                                  </div>
+                                              <div class="list-item-content">
+                                                  <h3 class="uppercase">
+                                                      <a href="javascript:;">{{Lang::get('resource.lbTodolistDocument')}}</a>
+                                                  </h3>
+                                                  <div style="margin:10px 0px 10px 0px">
+                                                    @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+                                                    <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPayMyCourse')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
+                                                    <br/>
+                                                  @endif
+                                                    <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>
+
+
+                                                  </div>
+                                              </div>
+                                          </li>
+
+                                      </ul>
+                                  </div>
+                              </div>
+                                 <br/>
+                                       <div class="alert alert-danger">
+                                       <i class="icon-info"></i>
+                                       {{Lang::get('resource.lbProcessTime')}}  05/09/2017
+                                     </div>
 
                            @endif
 
+<!-- รอพิจารณาสิทธิ์การสอบ-->
+@if($curDis->flow_id==3)
+  <h4 class=" text-center alert alert-success">{{Lang::get('resource.lbTodolistExamRightResultTitle')}}</h4>
+    <div class="mt-element-list">
 
+        <div class="mt-list-container list-simple">
 
+            <ul>
+                <li class="mt-list-item done">
+
+                    <div class="list-icon-container">
+                        <i class="icon-hourglass font-blue"></i>
+                        <i class="icon-check font-green"></i>
+                        <i class="icon-close font-red"></i>
+                    </div>
+                    <div class="list-item-content">
+
+                        <h3 class="uppercase">
+                            <a href="javascript:;">รอการพิจารณา / มีสิทธิ์สอบ / ไม่มีสิทธิ์สอบ</a>
+                        </h3>
+                        <div style="margin:10px 0px 10px 0px">
+
+                          <a class="btn btn-circle blue btn-outline" href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
+                              <i class="fa fa-table"></i>
+                          </a>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+     <div class="alert alert-info">
+
+     <i class="icon-info"></i>
+     ดึงหมายเหตุมาแสดง
+   </div>
+   <!-- Exam Table -->
+    <div id="exam-schedule-data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">{{Lang::get('resource.lbTodolistViewExamTable')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p> แสดงตารางสอบ </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn default" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
+<!-- รอพิจารณาสิทธิ์การเข้าศึกษา-->
+@if($curDis->flow_id==4)
+  <h4 class=" text-center alert alert-success">{{Lang::get('resource.lbTodolistAdmissionRightResultTitle')}}</h4>
+    <div class="mt-element-list">
+
+        <div class="mt-list-container list-simple">
+
+            <ul>
+                <li class="mt-list-item done">
+
+                    <div class="list-icon-container">
+                        <i class="icon-hourglass font-blue"></i>
+                        <i class="icon-check font-green"></i>
+                        <i class="icon-close font-red"></i>
+                    </div>
+                    <div class="list-item-content">
+
+                        <h3 class="uppercase">
+                            <a href="javascript:;">รอการพิจารณา / มีสิทธิ์ศึกษา / ไม่มีสิทธิ์เข้าศึกษา</a>
+                        </h3>
+                        <div style="margin:10px 0px 10px 0px">
+                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationDate')}}  <span class="label label-warning">26/05/2017</span> </div>
+                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationLocation')}}  <span class="label label-warning">อาคารจามจุรี9 ชั้น 3 ห้องจามจุรีศรีจุฬาฯ</span> </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+     <div class="alert alert-info">
+
+     <i class="icon-info"></i>
+     ดึงหมายเหตุมาแสดง
+   </div>
+
+@endif
 
 
 </div>

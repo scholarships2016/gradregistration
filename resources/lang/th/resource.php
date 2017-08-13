@@ -93,7 +93,7 @@ return [
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
      'lbMProfile' => 'ข้อมูลส่วนตัว',
     'lbConfirmationDoc'=> 'ปรับปรุงเอกสารที่ต้องส่ง',
-    'lbConfirmApply'=> 'ยืนยันการสมัคร',  
+    'lbConfirmApply'=> 'ยืนยันการสมัคร',
     'lbMLogout'=> 'ออกจากระบบ',
 
     //button
@@ -234,5 +234,16 @@ return [
     'lbConfirmTSurveyLevel5' => 'มากที่สุด',
     'lbConfirmTSurveySugestion' => 'ข้อเสนอแนะ',
 
+
+    'lbProcessTime' => 'ต้องดำเนินการภายในวันที่ ',
+    'lbBtnDownload' => 'ดาวน์โหลด',
+    'lbTodolistPayment' => 'ชำระค่าธรรมเนียมการสมัคร',
+    'lbTodolistDocument' => 'ส่งเอกสารที่บัณฑิตวิทยาลัย',
+    'lbTodolistPaymentBank' => 'ที่ประทับตราธนาคาร',
+    'lbTodolistViewExamTable' => 'ดูตารางสอบ',
+    'lbTodolistExamRightResultTitle' => 'ผลการพิจารณาสิทธิ์การเข้าสอบ',
+    'lbTodolistAdmissionRightResultTitle' => 'ผลการพิจารณาสิทธิ์การเข้าศึกษา',
+    'lbTodolistOrientationDate' => 'ปฐมนิเทศ วันที่ ',
+    'lbTodolistOrientationLocation' => 'ที่ ',
 
 ];
