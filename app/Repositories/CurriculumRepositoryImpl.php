@@ -434,7 +434,11 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     $join->on('de.degree_id', '=', 'curr.degree_id');
 
                 })
-                ->groupBy('curr.curriculum_id', 'app_set.apply_setting_id');
+                ->groupBy('curr.curriculum_id', 'app_set.apply_setting_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                    'dep.department_id', 'dep.department_name', 'dep.department_name_en',
+                    'maj.major_id', 'maj.major_name', 'maj.major_name_en','de.degree_name',
+                    'curr.apply_method',
+                    'curr.is_approve');
 
             $recordsTotal = $query->get()->count();
 
