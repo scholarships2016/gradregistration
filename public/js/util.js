@@ -27,3 +27,7 @@ function serializeObject(a) {
     });
     return o;
 }
+
+function isUndefinedOrNull(obj) {
+    return (obj === undefined || obj === null || obj === '') ? true : false;
+}
