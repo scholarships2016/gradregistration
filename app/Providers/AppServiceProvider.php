@@ -79,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\UserRepository', 'App\Repositories\UserRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\CurriculumWorkflowTransactionRepository', 'App\Repositories\CurriculumWorkflowTransactionRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\AudittrailRepository', 'App\Repositories\AudittrailRepositoryImpl');
+$this->app->bind('App\Repositories\Contracts\TblExamStatusRepository', 'App\Repositories\TblExamStatusRepositoryImpl');
 
     }
 

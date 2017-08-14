@@ -203,8 +203,33 @@ return [
     'perInfoInterest' => 'สนใจ',
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
+    
+        //ApplicantInfo
+    'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
 
-
+    //ProfilePage
+    'perInfoSectionTitle' => 'ข้อมูลทั่วไปผู้สมัคร',
+    'perInfoTitle' => 'คำนำหน้าชื่อ',
+    'perInfoName' => 'ชื่อ',
+    'perInfoSurname' => 'นามสกุล',
+    'perInfoNameEn' => 'ชื่อ (ภาษาอังกฤษ)',
+    'perInfoSurnameEn' => 'นามสกุล (ภาษาอังกฤษ)',
+    'perInfoSex' => 'เพศ',
+    'perInfoCitizenship' => 'สัญชาติ',
+    'perInfoReligion' => 'ศาสนา',
+    'perInfoMaritalStatus' => 'สถานภาพสมรส',
+    'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
+    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
+    'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
+    'perInfoEmail' => 'อีเมล',
+    'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
+    'perInfoPhoto' => 'รูปถ่าย',
+    'perInfoFundInterest' => 'ท่านสนใจสมัครทุนอุดหนุนการศึกษาเฉพาะค่าเล่าเรียนหรือไม่?',
+    'perInfoInterest' => 'สนใจ',
+    'perInfoNotInterest' => 'ไม่สนใจ',
+    'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
+    
+    
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'คุณต้องการที่จะสมัครหรือไม่?',
@@ -214,7 +239,8 @@ return [
     'lbProgDetailCommAppr' => 'ผ่านมติ',
     'lbProgDetailContactTel' => 'ติดต่อเจ้าหน้าที่ โทร.',
     'lbButtonRemoveApplication' => 'ยกเลิกการสมัคร',
-
+'lbMessageBeforLogin_text' => 'เนื่องจากก่อนคุณจะสมัคร คุณจะต้องทำการลงทะเบียนและเข้าสู่ระบบก่อน จะดำเนินการเข้าระบบหรือไม่',
+     
     //Confirmation
     'lbConfirmInstructions' => 'กรุณากรอกข้อมูลเพิ่มเติม',
     'lbConfirmPaymentBank' => 'ธนาคารที่ต้องการชำระเงิน',

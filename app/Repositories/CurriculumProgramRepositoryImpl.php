@@ -22,7 +22,7 @@ class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements 
            
             $result = CurriculumProgram::leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
                     ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
-                    ->leftJoin('mcoursestudy','curriculum_program.coursecodeno','mcoursestudy.coursecodeno')
+                    ->leftJoin('mcoursestudy','curriculum_program.program_id','mcoursestudy.coursecodeno')
                     ->where('curriculum_id',$id)->get();
                      
         } catch (\Exception $ex) {
