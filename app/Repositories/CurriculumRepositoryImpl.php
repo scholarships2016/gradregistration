@@ -41,8 +41,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         $this->auditRepo = $auditRepo;
     }
 
-    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null, $inTime = true, $paging = false)
-    {
+    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false,  $academic_year = null, $semester = null,$round_no = null) {
 
         $result = null;
         try {
@@ -64,7 +63,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                 ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                 ->where('curriculum.status', 'like', '%' . $status . '%')
-->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
+                ->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
                 ->Where(function ($query) use ($curriculum_id) {
                     if ($curriculum_id) {
@@ -450,7 +449,11 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     $join->on('de.degree_id', '=', 'curr.degree_id');
 
                 })
-                ->groupBy('curr.curriculum_id', 'app_set.apply_setting_id');
+                ->groupBy('curr.curriculum_id', 'app_set.apply_setting_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                    'dep.department_id', 'dep.department_name', 'dep.department_name_en',
+                    'maj.major_id', 'maj.major_name', 'maj.major_name_en','de.degree_name',
+                    'curr.apply_method',
+                    'curr.is_approve');
 
             $recordsTotal = $query->get()->count();
 

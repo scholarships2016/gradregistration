@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class CurriculumWorkflowTransaction
- * 
+ *
  * @property int $curr_wf_tran_id
  * @property int $workflow_id
  * @property string $comment
@@ -21,25 +21,26 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class CurriculumWorkflowTransaction extends Eloquent {
+class CurriculumWorkflowTransaction extends Eloquent
+{
 
     protected $table = 'curriculum_workflow_transaction';
     protected $primaryKey = 'curr_wf_tran_id';
 
     const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
     public $timestamps = true;
     protected $casts = [
-        'workflow_id' => 'int',
         'workflow_status_id' => 'int'
     ];
     protected $dates = [
         'created'
     ];
     protected $fillable = [
-        'workflow_id',
         'comment',
         'workflow_status_id',
+        'curriculum_id',
         'created',
         'creator'
     ];
