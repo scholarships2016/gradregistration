@@ -170,6 +170,10 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->fund_interesting = $data['fund_interesting'];
             if (array_key_exists('eng_test_score_admin', $data))
                 $curObj->eng_test_score_admin = $data['eng_test_score_admin'];
+             if (array_key_exists('eng_test_id_admin', $data))
+                $curObj->eng_test_id_admin = $data['eng_test_id_admin'];
+              if (array_key_exists('eng_date_taken_admin', $data))
+                $curObj->eng_date_taken_admin = $data['eng_date_taken_admin'];
             if (array_key_exists('stu_password', $data))
                 $curObj->stu_password = bcrypt($data['stu_password']);
             if (array_key_exists('sys_activate_code', $data))

@@ -71,8 +71,8 @@ class ApplyController extends Controller {
 
     public function showAnnouncement() {
         $data = $this->AnnouncementRepo->getAnnouncementAll();
-         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
-        return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1,'appCount'=>$dataApplication->count()]);
+        $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
+        return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1, 'appCount' => $dataApplication->count()]);
     }
 
     public function managementRegister(Request $request) {
@@ -84,11 +84,10 @@ class ApplyController extends Controller {
     }
 
     public function getRegisterCourse(Request $request = null) {
-        
-        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, $request->program_id, true, false);
-   
-        
-        return ['data' => $curDiss, 'iDisplayLength' => 100, 'iDisplayStart' => 0];
+
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, false);
+
+        return ['data' => $curDiss, 'iDisplayLength' =>  $curDiss->count(), 'iDisplayStart' => 0];
     }
 
     public function registerCourse($id) {
@@ -131,7 +130,7 @@ class ApplyController extends Controller {
     }
 
     public function registerDetailForapply($id) {
-        $curDiss = $this->CurriculumRepo->searchByCriteria($id, null, null, null, null, 1, null, true, false);
+        $curDiss = $this->CurriculumRepo->searchByCriteria($id, null, null, null, null, 1, 4, null, true, false);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id);
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
@@ -201,11 +200,9 @@ class ApplyController extends Controller {
     public function docApplicationFee($id) {
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
-        
 
-        $page=  view($this->part_doc . 'docApplicationFee', ['apps' => $dataApplication,
-            'applicant' => $applicantProfile['applicant']]);
-        
+        $page = view($this->part_doc . 'docApplicationFee', ['apps' => $dataApplication,'applicant' => $applicantProfile['applicant']]);
+
         $options = new Options();
         $options->setIsRemoteEnabled(true);
         $options->setIsPhpEnabled(true);
@@ -216,21 +213,19 @@ class ApplyController extends Controller {
         $pdf = new Dompdf($options);
         $pdf->loadHtml((string) $page);
         $pdf->setPaper('A4', 'portrait');
-
         $pdf->render();
 
         return $pdf->stream("CU_ApplicationFee.pdf");
     }
-    
-    
-      public function docApplicationEnvelop($id) {
+
+    public function docApplicationEnvelop($id) {
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
- 
-        
-        $page=  view($this->part_doc . 'docApplicationEnvelop', ['apps' => $dataApplication,
+
+
+        $page = view($this->part_doc . 'docApplicationEnvelop', ['apps' => $dataApplication,
             'applicant' => $applicantProfile['applicant']]);
-        
+
         $options = new Options();
         $options->setIsRemoteEnabled(true);
         $options->setIsPhpEnabled(true);
@@ -275,25 +270,27 @@ class ApplyController extends Controller {
     }
 
     public function showRegisHead() {
-        $countStatus = $this->ApplicationRepo->getDatacountByStatusUse(session('Applicant')->applicant_id);
-       
-        $val = '';
-        $cval = 0;
-        foreach ($countStatus as $cStatus) {
-            $val .= ' <li> ';
-            $val .= ' <a href="' . url('apply/manageMyCourse') . '"> ';
-            $val .= '  <span class="time">' . $cStatus->numc . '</span> ';
-            $val .= '  <span class="details"> ';
-            $val .= '  <span class="label label-sm label-icon label-success"> ';
-            $val .= '  <i class="fa fa-bell-o"></i> ';
-            $val .= '  </span> ' . ((session('locale') == 'th') ? $cStatus->flow_name : $cStatus->flow_name_en) . ' </ span> ';
-            $val .= '  </a> ';
-            $val .= '  </li>  ';
-            $cval += $cStatus->numc;
+        if (session('Applicant')) {
+            $countStatus = $this->ApplicationRepo->getDatacountByStatusUse(session('Applicant')->applicant_id);
+
+            $val = '';
+            $cval = 0;
+            foreach ($countStatus as $cStatus) {
+                $val .= ' <li> ';
+                $val .= ' <a href="' . url('apply/manageMyCourse') . '"> ';
+                $val .= '  <span class="time">' . $cStatus->numc . '</span> ';
+                $val .= '  <span class="details"> ';
+                $val .= '  <span class="label label-sm label-icon label-success"> ';
+                $val .= '  <i class="fa fa-bell-o"></i> ';
+                $val .= '  </span> ' . ((session('locale') == 'th') ? $cStatus->flow_name : $cStatus->flow_name_en) . ' </ span> ';
+                $val .= '  </a> ';
+                $val .= '  </li>  ';
+                $cval += $cStatus->numc;
+            }
+
+
+            return ['val' => $val, 'cot' => $cval];
         }
-
-
-        return ['val' => $val, 'cot' => $cval];
     }
 
     public function actionCourse($action, $id) {
@@ -369,7 +366,11 @@ class ApplyController extends Controller {
 
         if ($res) {
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            if (session('user_tyep')->user_type == 'applicant') {
+                return redirect()->route('manageMyCourse');
+            } else {
+                return redirect()->route('showManagePay');
+            }
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();

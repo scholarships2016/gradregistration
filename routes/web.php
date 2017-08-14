@@ -24,7 +24,7 @@ Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginAppli
 
 //login Admin
 //Route::get('login/admin', 'Auth\LoginUserController@checkuserldap');
-Route::get('login/admin', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
+Route::get('admin/login/', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
 Route::post('login_admin', 'Auth\LoginUserController@postLogin')->name('adminlogin');
 
 
@@ -65,10 +65,20 @@ Route::get('/download', function () {
     return view('download');
 });
 
+//test
 
+Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
+Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
+Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
+Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
 
+//GS03
 
-
+Route::get('admin/ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
+Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCourse');
+Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
+Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
+Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
     

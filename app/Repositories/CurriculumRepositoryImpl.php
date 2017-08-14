@@ -64,6 +64,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                 ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                 ->where('curriculum.status', 'like', '%' . $status . '%')
+->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
                 ->Where(function ($query) use ($curriculum_id) {
                     if ($curriculum_id) {
@@ -94,6 +95,21 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     if ($inTime) {
                         $query->where('apply_setting.start_date', '<=', Carbon::now())
                             ->where('apply_setting.end_date', '>=', Carbon::now());
+    }
+                    })
+                    ->Where(function ($query)use ($semester) {
+                        if ($semester != null || $semester != '') {
+                            $query->where('apply_setting.semester', $semester);
+                        }
+                    })
+                    ->Where(function ($query)use ($academic_year) {
+                        if ($academic_year != null || $academic_year != '') {
+                            $query->where('apply_setting.academic_year', $academic_year);
+                        }
+                    })
+                    ->Where(function ($query)use ($round_no) {
+                        if ($round_no != null || $round_no != '') {
+                            $query->where('apply_setting.round_no', $round_no);
                     }
                 })
                 ->Where(function ($query) use ($criteria) {
@@ -114,9 +130,9 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                         ->orwhere('academic_year', 'like', '%' . $criteria . '%')
                         ->orwhere('academic_year', 'like', '%' . $criteria . '%')
                         ->orwhere('academic_year', 'like', '%' . $criteria . '%');
-                })
-                ->select([DB::raw('* , @rownum  := @rownum  + 1 AS rownum')])
-                ->orderBy('curriculum.curriculum_id');
+                    })
+                    ->select([DB::raw('curriculum.curriculum_id,curriculum_activity.curr_act_id ,apply_method ,responsible_person  ,additional_detail  ,apply_fee ,additional_question  ,mailing_address ,document_file  ,comm_appr_name  ,comm_appr_no ,comm_appr_date  ,contact_tel ,is_approve ,expected_amount ,curriculum.status  ,curr_prog_id ,program_id ,tbl_program_type.program_type_id ,tbl_program_plan.program_plan_id ,curr_act_id ,apply_setting.apply_setting_id ,exam_schedule ,announce_exam_date ,announce_admission_date ,orientation_date ,orientation_location ,tbl_project.project_id ,project_name ,project_name_en ,curr_sub_major_id ,tbl_sub_major.sub_major_id ,sub_major_name ,sub_major_name_en  ,prog_plan_name ,prog_plan_name_en ,prog_plan_desc1 ,prog_plan_desc2   ,prog_type_name ,prog_type_name_en ,cond_id ,degree_level_name ,office_time ,programsystem ,studyprogramsystem ,calendar ,coursecodeno ,degree ,depcode ,majorcode ,noyear ,minperiod ,maxperiod ,credittot ,plan ,language ,beginacadyear ,beginsemester ,lastacadyear ,lastsemester ,stopacadyear ,stopsemester ,thai ,english ,degreethai ,degreeenglish ,apply_setting.status apply_status,usercode ,updatedate ,changestame , semester ,academic_year ,round_no ,start_date ,end_date ,is_active  ,tbl_major.major_id ,major_name ,major_name_en ,tbl_department.department_id ,tbl_degree.degree_id ,degree_name ,degree_name_en ,tbl_faculty.faculty_id ,faculty_name, faculty_eng ,fac_sort ,faculty_full ,thai,coursecodeno,sub_major_name,tbl_sub_major.sub_major_id, department_name ,department_name_en ,  @rownum  := @rownum  + 1 AS rownum')])
+                    ->orderBy('curriculum.curriculum_id');
 
             $result = ($paging) ? $cur->offset($paging['start'])->limit($paging['length']) : $cur->get();
         } catch (\Exception $ex) {

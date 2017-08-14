@@ -84,20 +84,21 @@ class LoginUserController extends Controller {
             session()->put('email_address', $user_data->user_name);
             session()->put('stu_img', $pic);
             $role = new \stdClass();
-            $role->user_role = 'Admin';
+            $role->user_role = '1';
             $role->user_type = 'Staff';
             session()->put('user_tyep', $role);
+            session()->put('locale','th');
+            
+
+//            $app = new \stdClass();
+//            $app->applicant_id = 1;
+//            $app->stu_citizen_card = '123456789';
+//            $app->stu_email = 'pacusm128@gmail.com';
+//            $app->nation_id = 1;
+//            session()->put('Applicant', $app);
 
 
-            $app = new \stdClass();
-            $app->applicant_id = 1;
-            $app->stu_citizen_card = '123456789';
-            $app->stu_email = 'pacusm128@gmail.com';
-            $app->nation_id = 1;
-            session()->put('Applicant', $app);
-            
-            
-            $this->userRepo->save(['user_id'=>$user_data->user_id,'user_name','ipaddress'=> $_SERVER['REMOTE_ADDR'] ]);
+            $this->userRepo->save(['user_id' => $user_data->user_id, 'user_name', 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
             Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
             return redirect('/home');

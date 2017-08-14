@@ -33,7 +33,7 @@ return [
       | application. If disabled, a simple generic error page is shown.
       |
      */
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
     /*
       |--------------------------------------------------------------------------
       | Application URL
@@ -106,7 +106,7 @@ return [
       |
      */
     'log' => env('APP_LOG', 'daily'),
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_level' => env('APP_LOG_LEVEL', 'info'),
     'log_max_files' => 30,
     /*
       |--------------------------------------------------------------------------
