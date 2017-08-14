@@ -17,7 +17,7 @@
         </li>
 
     </ul>
-  
+
 </div>
 @stop
 
@@ -31,29 +31,31 @@
 
 
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> 
+<h1 class="page-title">
 </h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
 <div class="c-content-contact-1 c-opt-1">
     <div class="row" data-auto-height=".c-height">
-        <div class="col-lg-8 col-md-6 c-desktop"></div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-7 col-md-6 c-desktop"></div>
+        <div class="col-lg-5 col-md-6">
             <div class="c-body">
                 <div class="c-section">
                     <h3>{{Lang::get('resource.lbNameContact')}}</h3>
                 </div>
                 <div class="c-section">
                     <div class="c-content-label uppercase bg-blue">{{Lang::get('resource.lbAddress')}}</div>
-                    <p>{{Lang::get('resource.lbAddress1Contact')}}<br><br>{{Lang::get('resource.lbAddress2Contact')}}</p>
+                    <p>{!!Lang::get('resource.lbAddress1Contact')!!}<br><br>{!!Lang::get('resource.lbAddress2Contact')!!}</p>
                 </div>
                 <div class="c-section">
                     <div class="c-content-label uppercase bg-blue">{{Lang::get('resource.lbContacts')}}</div>
                     <p>
-                        +662-218-3501
+                        {{Lang::get('resource.lbTelContact')}}
+
+
                          </p>
                 </div>
-              
+
             </div>
         </div>
     </div>
@@ -73,7 +75,7 @@
 type="text/javascript"></script>
 <script type="application/javascript">
       function initMap() {
-        var uluru = {lat: 13.73841, lng: 100.52826};
+        var uluru = {lat: 13.742835, lng: 100.5277266};
         var map = new google.maps.Map(document.getElementById('gmapbg'), {
           zoom: 16,
           center: uluru
@@ -82,6 +84,6 @@ type="text/javascript"></script>
           position: uluru,
           map: map
         });
-      }  
+      }
 </script>
 @endpush

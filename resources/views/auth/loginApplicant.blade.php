@@ -54,7 +54,7 @@
         <div class="create-account">
             <p> Don't have an account yet ?&nbsp;
 
-                <a href="javascript:;" class="btn btn-circle btn-lg red-pink" id="register-btn"><span class="glyphicon glyphicon-user"> </span> Create an account
+                <a href="javascript:;" class="btn btn-circle btn-lg red-pink" id="register-btn"><span class="icon-user-follow"> </span> Create an account
 
                                                                         </a>
             </p>

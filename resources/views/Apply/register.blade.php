@@ -199,10 +199,11 @@ $(document).ready(function(){
 //reset background-color
 $(".page-content").css("background-color","#eef1f5");
 
+
   });
 
   $(function() {
-     getData();
+  getData();
 
 });
 
@@ -261,33 +262,8 @@ return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+
     pagingType : "full_numbers",
 
     });
+    console.log(table);
        $('#tblcurr_paginate').addClass('search-pagination pagination-rounded');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        </script>
-                                                        @endpush
+</script>
+  @endpush

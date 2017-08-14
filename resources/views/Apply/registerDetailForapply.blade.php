@@ -77,10 +77,13 @@
                                     {{csrf_field()}}
 
                                     @if($programs->count()> 0)
-                                 <div class="form-group form-md-radios  ">
-                                                   <label class="col-md-12 control-label" for="form_control_1"><strong><span class="badge badge-info">1</span> {{Lang::get('resource.lbSelProgram')}}</strong></label>
+
+                                                 <div class="form-group form-md-radios  ">
+                                                   <label class="col-md-12 control-label" for="form_control_1">
+                                                     <h4><span class="badge badge-info">1</span> {{Lang::get('resource.lbSelProgram')}}</h4>
+                                                   </label>
                                                    <div class="col-md-12">
-                                                       <div class="md-radio-inline">
+                                                       <div class="md-radio-inline font-blue">
 
                                                             @foreach($programs as $program)
 
@@ -104,10 +107,12 @@
                                   </div>
                                   @endif
                                   <br/>
-                                  <hr/>
+
                                    @if($subMajors->count()> 0)
-                                  <div class="form-group form-md-radios  " >
-                                                    <label class="col-md-12 control-label" for="form_control_1"><strong><span class="badge badge-info">2</span> {{Lang::get('resource.lbSelSubMajor')}}</strong></label>
+
+                                  <div class="form-group form-md-radios" >
+                                                    <label class="col-md-12 control-label" for="form_control_1">
+                                                      <h4><span class="badge badge-info">2</span> {{Lang::get('resource.lbSelSubMajor')}}</h4></label>
                                                     <div class="col-md-12">
                                                         <div class="md-radio-inline">
 

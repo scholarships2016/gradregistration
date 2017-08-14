@@ -72,10 +72,11 @@ return [
 
 
     'lbNameContact' => 'Graduate School, Chulalongkorn University',
-    'lbAddress1Contact' => '254 Phayathai Rd, Pathum Wan, Bangkok 10330',
-    'lbAddress2Contact' => 'Graduate School Chulalongkorn University, Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan, Bangkok 10330',
+    'lbAddress1Contact' => '254 Pathumwan,<br/> Bangkok Thailand. 10330',
+    'lbAddress2Contact' => 'Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan,<br/>  Bangkok 10330',
     'lbContacts' => 'Contacts',
     'lbAddress' =>'Address',
+    'lbTelContact' =>'+662-218-3502 to 5',
 
     //Menu
     'lbMHome' => 'Home',
@@ -136,7 +137,7 @@ return [
     //register Detail Page
      'lbRegDetail'=>'Program details',
      'lbSelProgram'=>'Select program',
-     'lbSelSubMajor'=>'Select program (subject)',
+     'lbSelSubMajor'=>'Select Sub-Major',
      'lbExam_schedule'=>'Exam schedule',
      'lbStartExam'=>'Recruit date',
      'lbExpectation'=>'Expectation Amount (person)',
@@ -216,5 +217,18 @@ return [
       'lbTodolistAdmissionRightResultTitle' => 'Admission Result',
       'lbTodolistOrientationDate' => 'Orientation on ',
       'lbTodolistOrientationLocation' => 'At ',
+      //Home
+      'lbHomeWelcome' => 'Welcome',
+      'lbHomeSystemName' => 'Online Registration System - Graduate School, Chulalongkorn University',
+      'lbHomeApply' => 'Apply Now',
+      'lbHomeApplyDescription' => 'Search and Apply',
+      'lbHomeApplyAndCheckStatus' => 'Check Status',
+       'lbHomeApplyAndCheckStatusDesc' => 'Check Your Appplication Status',
+       'lbHomeRegistration' => 'Registration',
+       'lbHomeRegistrationDesc' => 'Register for the first time, to start apply.',
+       'lbHomeContactus' => 'Contact Us',
+       'lbHomeContactusDesc' => 'If you have any question, call 0-2218-3502-5',
+           'lbHomeOpenRegister' => 'Opening Now',
+           'lbHeaderLogin' => 'Login'
 
 ];

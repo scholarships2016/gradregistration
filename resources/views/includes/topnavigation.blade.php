@@ -26,7 +26,7 @@
           @if(!session('user_id'))
           <li class="dropdown dropdown-quick-sidebar-toggler">
                                 <a href="{{url('\login')}}" class="dropdown-toggle">
-                                <span aria-hidden="true" class="icon-user"></span>Login
+                                <span aria-hidden="true" class="glyphicon glyphicon-user"></span>{{Lang::get('resource.lbHeaderLogin')}}
                                 </a>
                             </li>
           @endif
@@ -80,6 +80,7 @@
                                         </li>
                                         <!-- END USER LOGIN DROPDOWN -->
                                         @endif
+  
                                         </ul>
   </div>
 

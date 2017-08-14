@@ -75,12 +75,12 @@ return [
 
 
 
-
     'lbNameContact' => 'บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
-    'lbAddress1Contact' => 'บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย  254 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330',
-    'lbAddress2Contact' => 'อาคารเฉลิมราชกุมารี 60 พรรษา (อาคารจามจุรี 10) ซอยจุฬา 12 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330',
+    'lbAddress1Contact' => '254 ถนนพญาไท แขวงวังใหม่ <br/>เขตปทุมวัน กรุงเทพฯ 10330',
+    'lbAddress2Contact' => 'อาคารเฉลิมราชกุมารี 60 พรรษา <br/>(อาคารจามจุรี 10) ซอยจุฬา 12 <br/>ถนนพญาไท แขวงวังใหม่ <br/>เขตปทุมวัน กรุงเทพฯ 10330',
     'lbContacts' => 'ติดต่อ',
     'lbAddress' => 'ที่อยู่',
+    'lbTelContact' =>'02-218-3502 ถึง 5',
 
        //Menu
     'lbMHome' => 'หน้าหลัก',
@@ -246,4 +246,17 @@ return [
     'lbTodolistOrientationDate' => 'ปฐมนิเทศ วันที่ ',
     'lbTodolistOrientationLocation' => 'ที่ ',
 
+   //Home
+   'lbHomeWelcome' => 'ยินดีต้อนรับ',
+   'lbHomeSystemName' => 'ระบบรับสมัครเข้าศึกษา บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
+   'lbHomeApply' => 'สมัครเข้าศึกษา',
+   'lbHomeApplyDescription' => 'ค้นหาหลักสูตรที่สนใจ และทำการสมัคร',
+   'lbHomeApplyAndCheckStatus' => 'ตรวจสอบสถานะ',
+    'lbHomeApplyAndCheckStatusDesc' => 'ตรวจสอบสถานะการสมัคร',
+    'lbHomeRegistration' => 'ลงทะเบียน',
+    'lbHomeRegistrationDesc' => 'ลงทะเบียนครั้งแรก เพื่อเริ่มต้นการสมัคร',
+      'lbHomeContactus' => 'ติดต่อเรา',
+      'lbHomeContactusDesc' => 'หากมีข้อสงสัย กรุณาติดต่อ โทร. 0-2218-3502-5',
+      'lbHomeOpenRegister' => 'เปิดรับสมัคร',
+      'lbHeaderLogin' => 'เข้าสู่ระบบ'
 ];
