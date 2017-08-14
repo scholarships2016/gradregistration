@@ -11,7 +11,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Curriculum
- * 
+
+ *
  * @property int $curriculum_id
  * @property string $faculty_id
  * @property string $department_id
@@ -37,7 +38,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Curriculum extends Eloquent {
+class Curriculum extends Eloquent
+{
 
     protected $table = 'curriculum';
     protected $primaryKey = 'curriculum_id';
@@ -51,8 +53,9 @@ class Curriculum extends Eloquent {
         'department_id' => 'int',
         'degree_id' => 'int',
         'project_id' => 'int',
-        'is_approve' => 'bool',
-        'status' => 'bool'
+        'is_approve' => 'int',
+        'status' => 'bool',
+        'expected_amount' => 'int'
     ];
     protected $dates = [
         'comm_appr_date',
@@ -81,7 +84,8 @@ class Curriculum extends Eloquent {
         'creator',
         'created',
         'modifier',
-        'modified'
+        'modified',
+        'expected_amount'
     ];
 
     public function file()
@@ -89,10 +93,10 @@ class Curriculum extends Eloquent {
         return $this->hasOne(File::class, 'file_id', 'document_file');
     }
 
-   // public function getCommApprDateAttribute($value)
-   // {
-   //     return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-   // }
+
+
+
+
 
 
 }

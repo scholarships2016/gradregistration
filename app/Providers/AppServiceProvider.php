@@ -5,14 +5,16 @@ namespace App\Providers;
 use App\Utils\FileManager;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider {
+class AppServiceProvider extends ServiceProvider
+{
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
 //
     }
 
@@ -21,7 +23,8 @@ class AppServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
+    public function register()
+    {
         /* Binding Repository */
 
         /* Applicant Info */
@@ -52,6 +55,7 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('App\Repositories\Contracts\TblProjectRepository', 'App\Repositories\TblProjectRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\McourseStudyRepository', 'App\Repositories\McourseStudyRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplySettingRepository', 'App\Repositories\ApplySettingRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\TblCurriculumWorkflowStatusRepository', 'App\Repositories\TblCurriculumWorkflowStatusRepositoryImpl');
 
 
         /* File */
@@ -73,6 +77,9 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('App\Repositories\Contracts\SatisfactionRepository', 'App\Repositories\SatisfactionRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\CurriculumActivityRepository', 'App\Repositories\CurriculumActivityRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\UserRepository', 'App\Repositories\UserRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\CurriculumWorkflowTransactionRepository', 'App\Repositories\CurriculumWorkflowTransactionRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\AudittrailRepository', 'App\Repositories\AudittrailRepositoryImpl');
+
     }
 
 }

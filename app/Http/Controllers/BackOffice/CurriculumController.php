@@ -7,6 +7,7 @@ use App\Repositories\Contracts\CurriculumActivityRepository;
 use App\Repositories\Contracts\CurriculumProgramRepository;
 use App\Repositories\Contracts\CurriculumRepository;
 use App\Repositories\Contracts\CurriculumSubMajorRepository;
+use App\Repositories\Contracts\CurriculumWorkflowTransactionRepository;
 use App\Repositories\Contracts\DegreeRepository;
 use App\Repositories\Contracts\FacultyRepository;
 use App\Repositories\Contracts\ProgramTypeRepository;
@@ -29,6 +30,7 @@ class CurriculumController extends Controller
     protected $currActRepo;
     protected $currProgRepo;
     protected $currSubMRepo;
+    protected $currWFTrans;
 
 
     /**
@@ -42,7 +44,8 @@ class CurriculumController extends Controller
                                 CurriculumRepository $curriculumRepo,
                                 CurriculumActivityRepository $currActRepo,
                                 CurriculumProgramRepository $currProgRepo,
-                                CurriculumSubMajorRepository $currSubMRepo)
+                                CurriculumSubMajorRepository $currSubMRepo,
+                                CurriculumWorkflowTransactionRepository $currWFTrans)
     {
         $this->projectRepo = $projectRepo;
         $this->facultyRepo = $facultyRepo;
@@ -53,6 +56,30 @@ class CurriculumController extends Controller
         $this->currActRepo = $currActRepo;
         $this->currProgRepo = $currProgRepo;
         $this->currSubMRepo = $currSubMRepo;
+        $this->currWFTrans = $currWFTrans;
+    }
+
+    public function showManagePage(Request $request)
+    {
+        try {
+            $facList = $this->facultyRepo->all();
+            $progTypeList = $this->progTypeRepo->getAllProgramTypeForDropdown();
+            $acaYearList = $this->applyRepo->getDistinctAcademicYear();
+            return view('backoffice.curriculum.manage',
+                ['facList' => $facList, 'progTypeList' => $progTypeList,
+                    'acaYearList' => $acaYearList]);
+        } catch (\Exception $ex) {
+
+        }
+    }
+
+    public function doCurriculumManagePaging(Request $request)
+    {
+        try {
+            return response()->json($this->curriculumRepo->doPaging1($request->all()));
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
     }
 
     public function showAddPage(Request $request)
@@ -93,9 +120,6 @@ class CurriculumController extends Controller
                     'applySemesterList' => $applySemesterList,
                     'semAcaYr' => $semAcaYr,
                     'curriculum' => $currInfo
-//                    ,
-//                    'currActList' => $currInfo['curriculum_activity']
-//
                 ]);
         } catch (\Exception $ex) {
             throw $ex;
@@ -106,7 +130,6 @@ class CurriculumController extends Controller
     {
         try {
             $data = $request->all();
-
             $data['rounds'] = json_decode($data['rounds'], true);
             $data['programs'] = json_decode($data['programs'], true);
             $data['creator'] = 'test';
@@ -176,4 +199,64 @@ class CurriculumController extends Controller
         } catch (\Exception $ex) {
         }
     }
+
+    public function doSendToApprove(Request $request)
+    {
+        try {
+            $data = $request->all();
+            //Pending
+            $data['workflow_status_id'] = 2;
+            $data['creator'] = 'test';
+            $data['modifier'] = 'test';
+            $result = $this->curriculumRepo->changeTransactionStatus($data);
+            return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
+        } catch (\Exception $ex) {
+            return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
+        }
+    }
+
+    public function doApprove(Request $request)
+    {
+        try {
+            $data = $request->all();
+            //Approve
+            $data['workflow_status_id'] = 4;
+            $data['creator'] = 'test';
+            $data['modifier'] = 'test';
+            $result = $this->curriculumRepo->changeTransactionStatus($data);
+            return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
+        } catch (\Exception $ex) {
+            return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
+        }
+    }
+
+    public function doReject(Request $request)
+    {
+        try {
+            $data = $request->all();
+            //Reject
+            $data['workflow_status_id'] = 3;
+            $data['creator'] = 'test';
+            $data['modifier'] = 'test';
+            $result = $this->curriculumRepo->changeTransactionStatus($data);
+            return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
+        } catch (\Exception $ex) {
+            return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
+        }
+    }
+
+    public function doDelete(Request $request)
+    {
+        try {
+            $data = $request->all();
+            if (!isset($data['curriculum_id'])) {
+                return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+            }
+            $result = $this->curriculumRepo->deleteCurriculumInfoByCurriculumId($data['curriculum_id']);
+            return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_DELETE));
+        } catch (\Exception $ex) {
+            return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+        }
+    }
+
 }

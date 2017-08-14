@@ -24,6 +24,8 @@ class Util
     const SQL_BETWEEN = ' BETWEEN ';
     const SQL_INT_TRUE = 1;
     const SQL_INT_FALSE = 0;
+    const ORDER_ASC = 'asc';
+    const ORDER_DESC = 'desc';
 
 
     /*Message*/
@@ -33,6 +35,12 @@ class Util
     const UNABLE_TO_ACCESS = 'ไม่สามารถใข้งานในส่วนนี้ได้ กรุณาติดต่อ Admin</br>Service is unavailable, please contact administrator.';
     const DATA_NOT_FOUND = 'ไม่พบข้อมูล<br/>No Data Found';
     const ERROR_OCCUR = 'เกิดข้อผิดพลาด<br/>Error';
+
+	
+	
+    const SUCCESS_DELETE = 'ลบข้อมูลสำเร็จ';
+    const CANNOT_DELETE = 'ไม่สามารถลบข้อมูลได้';
+
 
     /*Role Name Eng*/
     const ROLE_APPROVER = 'Approver';
@@ -60,11 +68,24 @@ class Util
     const DOC_FOLDER = 'DOC_FOLDER';
     const TRASH_FOLDER = 'TRASH_FOLDER';
     const TEMP_FOLDER = 'TEMP_FOLDER';
+    const CURRICULUM_DOC_FOLDER = 'CURRICULUM_DOC_FOLDER';
 
     /*Folder by M*/
 
-   const APPLY_DOC = 'APPLY_DOC/DOC';
-   const APPLY_IMG = 'APPLY_DOC/IMG';
+    const APPLY_DOC = 'APPLY_DOC/DOC';
+    const APPLY_IMG = 'APPLY_DOC/IMG';
+
+    /* Audit Action*/
+    const AUDIT_ACT_VIEW = 1;
+    const AUDIT_ACT_CREATE = 2;
+    const AUDIT_ACT_UPDATE = 3;
+    const AUDIT_ACT_DELETE = 4;
+    const AUDIT_ACT_APPROVE = 5;
+    const AUDIT_ACT_REJECT = 6;
+
+    /*Section Name*/
+    const SECTION_CURRICULUM = 'Curriculum';
+
 
     /**
      * Util constructor.
@@ -111,6 +132,40 @@ class Util
         try {
             $curDateTiem = \DateTime::createFromFormat($srcFormat, $srcDateStr);
             return $curDateTiem->format($descFormat);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+    public static function prepareAudittrail($section, $actionId, $detail, $performer)
+    {
+        $auditObj['section'] = $section;
+        $auditObj['audit_action_id'] = $actionId;
+        $auditObj['detail'] = $detail;
+        $auditObj['performer'] = $performer;
+        return $auditObj;
+    }
+
+    public static function prepareAcademicYearList($currYear, $nextNo = 0, $backNo = 0, $sort = 'asc')
+    {
+        try {
+            $curr = intval($currYear) + 543;
+            $minYear = $curr - intval($backNo);
+            $maxYeay = $curr + intval($nextNo);
+
+            $yearList = array();
+
+            for ($i = $minYear; $i <= $maxYeay; $i++) {
+                array_push($yearList, $i);
+            }
+
+            if (strcmp($sort, Util::ORDER_DESC)) {
+                sort($yearList);
+            } else if (strcmp($sort, Util::ORDER_ASC)) {
+                rsort($yearList);
+            }
+            return $yearList;
         } catch (\Exception $ex) {
             throw $ex;
         }

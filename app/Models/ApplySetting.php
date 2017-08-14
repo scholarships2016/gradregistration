@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -56,9 +57,9 @@ class ApplySetting extends Eloquent {
         'end_date',
         'is_active',
         'status',
-        'created',
+
         'creator',
-        'modified',
+
         'modifier'
     ];
 

@@ -10,4 +10,18 @@ interface ApplySettingRepository
 
     public function getApplySettingBySemesterAndAcademicYear($semester, $year);
 
+    public function getDistinctAcademicYear();
+
+    public function saveApplySetting(array $data);
+
+    public function save(array $data);
+
+    public function getApplySettingPaging();
+
+    public function checkRemoveableApplySettingByApplySettingId($id);
+
+    public function checkRemoveableApplySettingBySemesterAndAcademicYear($semester, $academicYear);
+
+    public function deleteBySemesterAndAcademicYear($semester, $academicYear);
+
 }

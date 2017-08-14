@@ -20,11 +20,16 @@
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
-                <a href="/">{{Lang::get('resource.lbMHome')}}</a>
+                <a href="index.html">Home</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>{{Lang::get('resource.lbMProfile')}}</span>
+                <a href="#">จัดการข้อมูลหลักสูตร</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="#">กรอกฟอร์มขอเปิดหลักสูตร</a>
+                <i class="fa fa-circle"></i>
             </li>
         </ul>
     </div>
@@ -38,6 +43,27 @@
 
 
 @section('maincontent')
+    <div class="modal fade bs-modal-lg" id="transCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">หมายเหตุ</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="wfTransForm">
+                        <textarea id="comment" class="form-control" name="comment" rows="5"></textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="modalSaveBt" class="btn green">บันทึก</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     <!-- BEGIN SAMPLE FORM PORTLET-->
     <div class="portlet light bordered">
         <div class="portlet-title">
@@ -46,17 +72,10 @@
                 <span class="caption-subject bold uppercase">แบบฟอร์มขอเปิดหลักสูตร</span>
             </div>
             <div class="actions">
-                <a class="btn btn-circle btn-icon-only blue" href="javascript:;">
-                    <i class="icon-cloud-upload"></i>
-                </a>
-                <a class="btn btn-circle btn-icon-only green" href="javascript:;">
-                    <i class="icon-wrench"></i>
-                </a>
-                <a class="btn btn-circle btn-icon-only red" href="javascript:;">
-                    <i class="icon-trash"></i>
-                </a>
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"
                    data-original-title="" title=""> </a>
+                <a href="javascript:window.history.back();" class="btn btn-circle blue-steel btn-outline">
+                    <i class="fa fa-mail-reply"></i> กลับหน้าหลัก </a>
             </div>
         </div>
         <div class="portlet-body form">
@@ -65,417 +84,445 @@
                 {{csrf_field()}}
                 <input type="hidden" id="curriculum_id" name="curriculum_id"
                        value="@if(!empty($curriculum)){{$curriculum->curriculum_id}}@endif"/>
+                <input type="hidden" id="curr_flow_status" name="curr_flow_status"
+                       value="@if(!empty($curriculum)){{$curriculum->is_approve}}@endif"/>
+
                 <div class="form-body">
-                    <div class="row">
-                        <div class="col-md-12 form-group">
-                            <label class="col-md-5 control-label"
-                                   for="apply_setting_id"><strong>ภาคการศึกษาและปีการศึกษาที่เปิดรับสมัคร</strong>
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-4">
-                                <input type="hidden" id="semester_hidden" name="semester_hidden"
-                                       value="@if(!empty($semAcaYr)){{$semAcaYr->semester.'|'.$semAcaYr->academic_year}}@endif"/>
-                                <select id="semester" name="semester" class="form-control">
-                                    @if(!empty($applySemesterList))
-                                        @foreach($applySemesterList as $value)
-                                            <option value="{{$value->semester.'|'.$value->academic_year}}">{{$value->semester_th.' / '.$value->academic_year}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="roundDiv" class="row">
-                        <div class="col-md-12 form-group">
-                            <label class="col-md-5 control-label"
-                                   for="round_no"><strong>รอบที่เปิดรับสมัคร</strong>
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-6">
-                                <div id="roundListDiv" class="mt-checkbox-list">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label class="control-label col-md-3"><strong>วิธีรับสมัคร</strong>
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-9">
-                                <div class="mt-radio-inline">
-                                    <label class="mt-radio mt-radio-outline">
-                                        <input type="radio" name="apply_method" value="1"
-                                               @if(!empty($curriculum) && $curriculum->apply_method == 1) checked @endif
-                                        > รับผ่านบัณฑิต
-                                        <span></span>
-                                    </label>
-                                    <label class="mt-radio mt-radio-outline">
-                                        <input type="radio" name="apply_method" value="2"
-                                               @if(!empty($curriculum) && $curriculum->apply_method == 2) checked @endif
-                                        > รับตรงโดยหลักสูตร
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3" for="project_id"><strong>โครงการ</strong>
+                    {{--Section1 START--}}
+                    <div id="section1">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label class="col-md-5 control-label"
+                                       for="apply_setting_id"><strong>ภาคการศึกษาและปีการศึกษาที่เปิดรับสมัคร</strong>
                                     <span class="required" aria-required="true"> * </span>
                                 </label>
-                                <div class="col-md-9">
-                                    <input type="hidden" id="project_id_hidden" name="project_id_hidden"
-                                           value="@if(!empty($curriculum)){{$curriculum->project_id}}@endif"/>
-                                    <select name="project_id" id="project_id" class="form-control">
-                                        @if(!empty($projList))
-                                            @foreach($projList as $proj)
-                                                <option value="{{$proj->project_id}}">{{$proj->project_name}}</option>
+                                <div class="col-md-4">
+                                    <input type="hidden" id="semester_hidden" name="semester_hidden"
+                                           value="@if(!empty($semAcaYr)){{$semAcaYr->semester.'|'.$semAcaYr->academic_year}}@endif"/>
+                                    <select id="semester" name="semester" class="form-control">
+                                        @if(!empty($applySemesterList))
+                                            @foreach($applySemesterList as $value)
+                                                <option value="{{$value->semester.'|'.$value->academic_year}}">{{$value->semester_th.' / '.$value->academic_year}}</option>
                                             @endforeach
                                         @endif
                                     </select>
-                                    <span class="help-block"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
+                        <div id="roundDiv" class="row">
+                            <div class="col-md-12 form-group">
+                                <label class="col-md-5 control-label"
+                                       for="round_no"><strong>รอบที่เปิดรับสมัคร</strong>
                                     <span class="required" aria-required="true"> * </span>
                                 </label>
-                                <div class="col-md-9">
-                                    <input type="hidden" id="faculty_id_hidden" name="faculty_id_hidden"
-                                           value="@if(!empty($curriculum)){{$curriculum->faculty_id}}@endif"/>
-                                    <select name="faculty_id" id="faculty_id" class="form-control">
-                                        @if(!empty($facList))
-                                            @foreach($facList as $fac)
-                                                <option value="{{$fac->faculty_id}}">{{$fac->faculty_name.' ('.$fac->faculty_full.')'}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"
-                                       for="department_id"><strong>ภาควิชา/สหสาขา</strong>
-                                    <span class="required" aria-required="true"> * </span>
-                                </label>
-                                <div class="col-md-9">
-                                    <input type="hidden" id="department_id_hidden" name="department_id_hidden"
-                                           value="@if(!empty($curriculum)){{$curriculum->department_id}}@endif"/>
-                                    <select name="department_id" id="department_id" class="form-control">
-                                    </select>
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3" for="major_id"><strong>สาขาวิชา</strong>
-                                    <span class="required" aria-required="true"> * </span>
-                                </label>
-                                <div class="col-md-9">
-                                    <input type="hidden" id="major_id_hidden" name="major_id_hidden"
-                                           value="@if(!empty($curriculum)){{$curriculum->major_id}}@endif"/>
-                                    <select name="major_id" id="major_id" class="form-control">
-                                    </select>
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"
-                                       for="sub_major_id"><strong>แขนงวิชา</strong></label>
-                                <div class="col-md-9">
-                                    <div id="sub_major" class="mt-checkbox-list">
+                                <div class="col-md-6">
+                                    <div id="roundListDiv" class="mt-checkbox-list">
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label offset-col-md-3 col-md-2"
-                                       for="degree_id"><strong>ชื่อหลักสูตร</strong>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="control-label col-md-3"><strong>วิธีรับสมัคร</strong>
                                     <span class="required" aria-required="true"> * </span>
                                 </label>
-                                <div class="col-md-8">
-                                    <input type="hidden" id="degree_id_hidden" name="degree_id_hidden"
-                                           value="@if(!empty($curriculum)){{$curriculum->degree_id}}@endif"/>
-                                    <select name="degree_id" id="degree_id" class="form-control">
-                                        @if(!empty($degList))
-                                            @foreach($degList as $deg)
-                                                <option value="{{$deg->degree_id}}">{{$deg->degree_name.' ('.$deg->degree_name_en.')'}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <span class="help-block"></span>
+                                <div class="col-md-9">
+                                    <div class="mt-radio-inline">
+                                        <label class="mt-radio mt-radio-outline">
+                                            <input type="radio" name="apply_method" value="1"
+                                                   @if(!empty($curriculum) && $curriculum->apply_method == 1) checked @endif
+                                            > รับผ่านบัณฑิต
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio mt-radio-outline">
+                                            <input type="radio" name="apply_method" value="2"
+                                                   @if(!empty($curriculum) && $curriculum->apply_method == 2) checked @endif
+                                            > รับตรงโดยหลักสูตร
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="project_id"><strong>โครงการ</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" id="project_id_hidden" name="project_id_hidden"
+                                               value="@if(!empty($curriculum)){{$curriculum->project_id}}@endif"/>
+                                        <select name="project_id" id="project_id" class="form-control">
+                                            @if(!empty($projList))
+                                                @foreach($projList as $proj)
+                                                    <option value="{{$proj->project_id}}">{{$proj->project_name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" id="faculty_id_hidden" name="faculty_id_hidden"
+                                               value="@if(!empty($curriculum)){{$curriculum->faculty_id}}@endif"/>
+                                        <select name="faculty_id" id="faculty_id" class="form-control">
+                                            @if(!empty($facList))
+                                                @foreach($facList as $fac)
+                                                    <option value="{{$fac->faculty_id}}">{{$fac->faculty_name.' ('.$fac->faculty_full.')'}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="department_id"><strong>ภาควิชา/สหสาขา</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" id="department_id_hidden" name="department_id_hidden"
+                                               value="@if(!empty($curriculum)){{$curriculum->department_id}}@endif"/>
+                                        <select name="department_id" id="department_id" class="form-control">
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="major_id"><strong>สาขาวิชา</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" id="major_id_hidden" name="major_id_hidden"
+                                               value="@if(!empty($curriculum)){{$curriculum->major_id}}@endif"/>
+                                        <select name="major_id" id="major_id" class="form-control">
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="sub_major_id"><strong>แขนงวิชา</strong></label>
+                                    <div class="col-md-9">
+                                        <div id="sub_major" class="mt-checkbox-list">
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                   id="currProgramTbl">
-                                <thead>
-                                <tr>
-                                    <th style="width:50px">
-                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                            <input type="checkbox" class="group-checkable"
-                                                   data-set="#currProgramTbl .checkboxes"/>
-                                            <span></span>
-                                        </label>
-                                    </th>
-                                    <th style="width:60px"> รหัสหลักสูตร</th>
-                                    <th style="width:170px"> ชื่อหลักสูตร</th>
-                                    <th style="width:50px"> แผน</th>
-                                    <th> ประเภท</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="roundFormDiv">
-                        {{--For Round Form--}}
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"
-                                       for="additional_detail"><strong>รายละเอียดเพิ่มเติม</strong></label>
-                                <div class="col-md-9">
-                                    <textarea id="additional_detail" class="form-control" name="additional_detail"
-                                              rows="5">@if(!empty($curriculum)){{$curriculum->additional_detail}}@endif</textarea>
-                                    <div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label offset-col-md-3 col-md-2"
+                                           for="degree_id"><strong>ชื่อหลักสูตร</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input type="hidden" id="degree_id_hidden" name="degree_id_hidden"
+                                               value="@if(!empty($curriculum)){{$curriculum->degree_id}}@endif"/>
+                                        <select name="degree_id" id="degree_id" class="form-control">
+                                            @if(!empty($degList))
+                                                @foreach($degList as $deg)
+                                                    <option value="{{$deg->degree_id}}">{{$deg->degree_name.' ('.$deg->degree_name_en.')'}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                       id="currProgramTbl">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:50px">
+                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                <input type="checkbox" class="group-checkable"
+                                                       data-set="#currProgramTbl .checkboxes"/>
+                                                <span></span>
+                                            </label>
+                                        </th>
+                                        <th style="width:60px"> รหัสหลักสูตร</th>
+                                        <th style="width:170px"> ชื่อหลักสูตร</th>
+                                        <th style="width:50px"> แผน</th>
+                                        <th> ประเภท</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"
-                                       for="mailing_address"><strong>ที่อยู่สำหรับส่งเอกสาร</strong></label>
-                                <div class="col-md-9">
+                    {{--Section1 END--}}
+
+                    {{--Section2 START--}}
+
+                    <div id="section2">
+                        <div id="roundFormDiv">
+                            {{--For Round Form--}}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="additional_detail"><strong>รายละเอียดเพิ่มเติม</strong></label>
+                                    <div class="col-md-9">
+                                    <textarea id="additional_detail" class="form-control" name="additional_detail"
+                                              rows="5">@if(!empty($curriculum)){{$curriculum->additional_detail}}@endif</textarea>
+                                        <div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="mailing_address"><strong>ที่อยู่สำหรับส่งเอกสาร</strong></label>
+                                    <div class="col-md-9">
                                 <textarea id="mailing_address" class="form-control" name="mailing_address"
                                           rows="5">@if(!empty($curriculum)){{$curriculum->mailing_address}}@endif</textarea>
-                                    <span class="help-block"></span>
+                                        <span class="help-block"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"
-                                       for="additional_question"><strong>ข้อมุลที่ต้องการเพิ่มเติมจากผู้สมัคร</strong></label>
-                                <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="additional_question"><strong>ข้อมุลที่ต้องการเพิ่มเติมจากผู้สมัคร</strong></label>
+                                    <div class="col-md-9">
                                     <textarea id="additional_question" class="form-control" name="additional_question"
                                               rows="5">@if(!empty($curriculum)){{$curriculum->additional_question}}@endif</textarea>
-                                    <span class="help-block"></span>
+                                        <span class="help-block"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"
-                                       for="apply_fee"><strong>ค่าธรรมเนียม</strong>
-                                    <span class="required" aria-required="true"> * </span>
-                                </label>
-                                <div class="col-md-9">
-                                    <input type="number" id="apply_fee" name="apply_fee"
-                                           class="form-control"
-                                           value="@if(!empty($curriculum)){{$curriculum->apply_fee}}@endif">
-                                    <span class="help-block"></span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="apply_fee"><strong>ค่าธรรมเนียม</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="number" id="apply_fee" name="apply_fee"
+                                               class="form-control"
+                                               value="@if(!empty($curriculum)){{$curriculum->apply_fee}}@endif">
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4"
+                                           for="expected_amount"><strong>จำนวนนิสิตที่คาดว่าจะรับ</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input type="number" id="expected_amount"
+                                               name="expected_amount"
+                                               class="form-control"
+                                               value="@if(!empty($curriculum)){{$curriculum->expected_amount}}@endif"
+                                        >
+                                        <span class="help-block">(คน)</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-4"
-                                       for="expected_amount"><strong>จำนวนนิสิตที่คาดว่าจะรับ</strong>
-                                    <span class="required" aria-required="true"> * </span>
-                                </label>
-                                <div class="col-md-8">
-                                    <input type="number" id="expected_amount"
-                                           name="expected_amount"
-                                           class="form-control"
-{{--                                           value="@if(!empty($curriculum)){{$curriculum->expected_amount}}@endif"--}}
-                                    >
-                                    <span class="help-block">(คน)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"><strong>เอกสารประกอบหลักสูตร</strong></label>
-                                <div class="col-md-9">
-                                    <div id="fileuploadDiv"
-                                         class="fileinput @if(!empty($curriculum)&&!empty($curriculum->file))fileinput-exists @else fileinput-new @endif"
-                                         data-provides="fileinput">
-                                        <input type="hidden" id="canDownload" name="canDownload"
-                                               value="@if(!empty($curriculum)&&!empty($curriculum->file)){{1}}@endif"/>
-                                        <div class="input-group input-large">
-                                            <div class="form-control uneditable-input input-fixed input-large"
-                                                 data-trigger="fileinput">
-                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
-                                                <span id="fileuploadName"
-                                                      class="fileinput-filename">@if(!empty($curriculum)&&!empty($curriculum->file)){{$curriculum->file->file_origi_name}}@endif</span>
-                                            </div>
-                                            <span id="fileuploadBtnGrp" class="input-group-addon btn default btn-file">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"><strong>เอกสารประกอบหลักสูตร</strong></label>
+                                    <div class="col-md-9">
+                                        <div id="fileuploadDiv"
+                                             class="fileinput @if(!empty($curriculum)&&!empty($curriculum->file))fileinput-exists @else fileinput-new @endif"
+                                             data-provides="fileinput">
+                                            <input type="hidden" id="canDownload" name="canDownload"
+                                                   value="@if(!empty($curriculum)&&!empty($curriculum->file)){{1}}@endif"/>
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large"
+                                                     data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                    <span id="fileuploadName"
+                                                          class="fileinput-filename">@if(!empty($curriculum)&&!empty($curriculum->file)){{$curriculum->file->file_origi_name}}@endif</span>
+                                                </div>
+                                                <span id="fileuploadBtnGrp"
+                                                      class="input-group-addon btn default btn-file">
                                                                     <span class="fileinput-new"> เลือก </span>
                                                                     <span class="fileinput-exists"> เปลี่ยน </span>
                                                                     <input type="file" id="document_file"
                                                                            name="document_file"> </span>
-                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists"
-                                               data-dismiss="fileinput" id="fileinputRmvBtn"> ลบ </a>
-                                            <a href="@if(!empty($curriculum)&&!empty($curriculum->file)){{route('admin.curriculum.downloadCurriculumDoc').'?curriculum_id='.$curriculum->curriculum_id}}@endif"
-                                               id="fileinputDownloadBtn"
-                                               class="input-group-addon btn green fileinput-exists"
-                                               onclick="downloadFile(this)" target="_blank" download> ดาวน์โหลด </a>
+                                                <a href="javascript:;"
+                                                   class="input-group-addon btn red fileinput-exists"
+                                                   data-dismiss="fileinput" id="fileinputRmvBtn"> ลบ </a>
+                                                <a href="@if(!empty($curriculum)&&!empty($curriculum->file)){{route('admin.curriculum.downloadCurriculumDoc').'?curriculum_id='.$curriculum->curriculum_id}}@endif"
+                                                   id="fileinputDownloadBtn"
+                                                   class="input-group-addon btn green fileinput-exists"
+                                                   onclick="downloadFile(this)" target="_blank" download> ดาวน์โหลด </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 well">
+                                <div class="col-md-12 text-left">
+                                    <h4><u>ผ่านมติ</u></h4>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-md-3"
+                                               for="comm_appr_name"><strong>คณะกรรมการ</strong>
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="comm_appr_name" name="comm_appr_name"
+                                                   class="form-control"
+                                                   value="@if(!empty($curriculum)){{$curriculum->comm_appr_name}}@endif">
+                                            <span class="help-block"></span>
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 well">
-                            <div class="col-md-12 text-left">
-                                <h4><u>ผ่านมติ</u></h4>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md-3"
-                                           for="comm_appr_name"><strong>คณะกรรมการ</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="comm_appr_name" name="comm_appr_name"
-                                               class="form-control"
-                                               value="@if(!empty($curriculum)){{$curriculum->comm_appr_name}}@endif">
-                                        <span class="help-block"></span>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-md-3"
+                                               for="comm_appr_no"><strong>ครั้งที่</strong>
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="comm_appr_no" name="comm_appr_no"
+                                                   class="form-control"
+                                                   value="@if(!empty($curriculum)){{$curriculum->comm_appr_no}}@endif">
+                                            <span class="help-block"></span>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md-3"
-                                           for="comm_appr_no"><strong>ครั้งที่</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="comm_appr_no" name="comm_appr_no"
-                                               class="form-control"
-                                               value="@if(!empty($curriculum)){{$curriculum->comm_appr_no}}@endif">
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md-3"
-                                           for="comm_appr_date"><strong>วันที่</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="comm_appr_date" name="comm_appr_date"
-                                               class="form-control form-control-inline input-medium date-picker"
-                                               value="@if(!empty($curriculum)){{$curriculum->comm_appr_date}}@endif">
-                                        <span class="help-block"></span>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-md-3"
+                                               for="comm_appr_date"><strong>วันที่</strong>
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="comm_appr_date" name="comm_appr_date"
+                                                   class="form-control form-control-inline input-medium date-picker"
+                                                   value="@if(!empty($curriculum)){{$curriculum->comm_appr_date->format('d/m/Y')}}@endif">
+                                            <span class="help-block"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label class="control-label col-md-3"
-                                   for="project_id"><strong>ติดต่อเจ้าหน้าที่โทร</strong>
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" id="contact_tel" name="contact_tel"
-                                       class="form-control"
-                                       value="@if(!empty($curriculum)){{$curriculum->contact_tel}}@endif">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label class="control-label col-md-3"><strong>สถานะหลักสูตร</strong>
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-9">
-                                <div class="mt-radio-inline">
-                                    <label class="mt-radio mt-radio-outline">
-                                        <input type="radio" name="status" value="1"
-                                               @if(!empty($curriculum) && $curriculum->status == 1) checked @endif
-                                        > เปิดให้ลงทะเบียน
-                                        <span></span>
-                                    </label>
-                                    <label class="mt-radio mt-radio-outline">
-                                        <input type="radio" name="status" value="2"
-                                               @if(!empty($curriculum) && $curriculum->status == 2) checked @endif
-                                        > ไม่เปิดให้ลงทะเบียน
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
                                 <label class="control-label col-md-3"
-                                       for="project_id"><strong>Special User</strong>
+                                       for="project_id"><strong>ติดต่อเจ้าหน้าที่โทร</strong>
                                     <span class="required" aria-required="true"> * </span>
                                 </label>
                                 <div class="col-md-9">
-                                    <select name="" id="" class="form-control">
-                                    </select>
+                                    <input type="text" id="contact_tel" name="contact_tel"
+                                           class="form-control"
+                                           value="@if(!empty($curriculum)){{$curriculum->contact_tel}}@endif">
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-actions">
                         <div class="row">
-                            <div class="col-md-offset-2 col-md-10">
-                                <button type="button" class="btn default">ยกเลิก</button>
-                                <button type="button" onclick="submit_form()" class="btn blue">บันทึก</button>
+                            <div class="col-md-6 form-group">
+                                <label class="control-label col-md-3"><strong>สถานะหลักสูตร</strong>
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="mt-radio-inline">
+                                        <label class="mt-radio mt-radio-outline">
+                                            <input type="radio" name="status" value="1"
+                                                   @if(!empty($curriculum) && $curriculum->status == 1) checked @endif
+                                            > เปิดให้ลงทะเบียน
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio mt-radio-outline">
+                                            <input type="radio" name="status" value="2"
+                                                   @if(!empty($curriculum) && $curriculum->status == 2) checked @endif
+                                            > ไม่เปิดให้ลงทะเบียน
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"
+                                           for="project_id"><strong>Special User</strong>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <select name="" id="" class="form-control">
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{--Section2 END--}}
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
+                                ยกเลิก
+                            </a>
+                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
+                            </a>
+                            <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
+                               class="btn blue">
+                                ส่งอนุมัติ
+                            </a>
+                            <a id="apprBtn" onclick="prepareModal('APPR')" class="btn green">อนุมัติ</a>
+                            <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn yellow">ส่งกลับแก้ไข</a>
+                            <a id="delBtn" onclick="doDelete()" class="btn red">ลบ
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -513,6 +560,7 @@
     var firstLoadSubmajor = true;
     var firstLoadCourse = true;
     var firstLoad = true;
+    var firstLoadForm = true;
 
 
     var firstRenderTbl = true;
@@ -726,6 +774,7 @@
                             $('#roundFormDiv').hide();
                         }
                         $('#roundDiv').show();
+
                     }
                 });
                 firstLoadRound = false;
@@ -753,6 +802,7 @@
                             $('#roundFormDiv').hide();
                         }
                         $('#roundDiv').show();
+
                     }
                 });
             }
@@ -770,6 +820,7 @@
                 if (firstLoadDep) {
                     child.val($('#department_id_hidden').val()).change();
                     firstLoadDep = false;
+
                 } else {
                     child.select2('open');
                 }
@@ -782,6 +833,7 @@
                 if (firstLoadMajor) {
                     child.val($('#major_id_hidden').val()).change();
                     firstLoadMajor = false;
+
                 } else {
                     child.select2('open');
                 }
@@ -852,6 +904,7 @@
                         } else {
                             $("#sub_major").html('-');
                         }
+
                     }
                 });
                 firstLoadSubmajor = false;
@@ -881,6 +934,7 @@
                         } else {
                             $("#sub_major").html('-');
                         }
+
                     }
                 });
             }
@@ -900,6 +954,7 @@
                             courseTable.fnDraw();
                             firstRenderTbl = false;
                         }
+
                     }
                 });
                 firstLoadCourse = false;
@@ -918,6 +973,7 @@
                             courseTable.fnDraw();
                             firstRenderTbl = false;
                         }
+
                     }
                 });
             }
@@ -949,7 +1005,7 @@
         var openRoundNo = 0;
 
         $.each(obj, function (index, value) {
-            if (value.is_active == 1 && value.round_no > openRoundNo) {
+            if (value.status == 1 && value.round_no > openRoundNo) {
                 openRoundNo = value.round_no;
                 return true;
             }
@@ -963,7 +1019,7 @@
                 html += '<input';
             }
             html += ''
-            if (value.status == 0 || value.round_no < openRoundNo) {
+            if (value.is_active == 0 || value.round_no < openRoundNo) {
                 html += ' type="checkbox" name="app_set_round[]" value="' + value.round_no + '" data-id="' + value.apply_setting_id + '" onchange="onRoundChange(this);" disabled/>รอบที่ ' + value.round_no + ' - ตั้งแต่ ' + value.start_date + ' ถึง ' + value.end_date;
                 html += '&nbsp;&nbsp;<div class="label label-danger">ปิด</div>';
             } else if (value.round_no == openRoundNo) {
@@ -996,42 +1052,7 @@
             return;
         }
 
-        var formData = new FormData();
-
-        //All Field
-        $.each($("#progSettingForm").serializeArray(), function (index, field) {
-            if (field.name == 'program_id' || field.name == 'program_type_id' ||
-                field.name == 'exam_schedule' || field.name == 'announce_admission_date' ||
-                field.name == 'announce_exam_date' || field.name == 'orientation_date' ||
-                field.name == 'orientation_location') {
-                return true;
-            }
-            formData.append(field.name, field.value)
-        });
-
-        //Program For Regis
-        var programs = [];
-        var rows = courseTable.$('tbody tr');
-        $.each(rows, function (index, value) {
-            var chkbox = $(value).find('input[name=program_id]')[0];
-            if (chkbox.checked) {
-                programs.push(serializeObject($(value).find('input,select').serializeArray()));
-            }
-        });
-        formData.append('programs', JSON.stringify(programs));
-
-
-        //Round For Regis
-        var roundForms = [];
-        $.each($('#roundFormDiv .round-row:visible'), function (index, value) {
-            roundForms.push(serializeObject($(value).find('input,select,textarea').serializeArray()))
-        });
-        formData.append('rounds', JSON.stringify(roundForms));
-
-        //FileUpload
-        if ($("#document_file").val() !== '') {
-            formData.append("document_file", $("#document_file")[0].files[0]);
-        }
+        var formData = prepareData();
 
         $.ajax({
             url: '{{route('admin.curriculum.doSave')}}',
@@ -1080,6 +1101,8 @@
                         courseTable.fnDraw();
                     }
                 }
+
+                setActionButtonAndDisableForm();
             }
         });
 
@@ -1342,9 +1365,7 @@
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit
-//                success3.hide();
-//                error3.show();
-//                App.scrollTo(error3, -200);
+
             },
 
             highlight: function (element) { // hightlight error inputs
@@ -1363,23 +1384,254 @@
             },
 
             submitHandler: function (form) {
-//                success3.show();
-//                error3.hide();
-                //form[0].submit(); // submit the form
+
             }
 
         });
 
     }
 
+    function setActionButtonAndDisableForm() {
+        var currFlowStatus = $("#curr_flow_status").val();
+
+        //Hard Code
+        var isStaff = false;
+
+
+        $("#cancelBtn").hide();
+        $("#saveBtn").hide();
+        $("#apprBtn").hide();
+        $("#delBtn").hide();
+        $("#rejectBtn").hide();
+        $("#sendToApprBtn").hide();
+
+        if (isStaff) {
+            if (currFlowStatus == null || currFlowStatus == "") {
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+            } else if (currFlowStatus == 1) { //draft
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                $("#sendToApprBtn").show();
+                $("#delBtn").show();
+            } else if (currFlowStatus == 2) { //pending
+                $("#cancelBtn").show();
+                section1Disable();
+                section2Disable();
+            } else if (currFlowStatus == 3) { //rejected
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                $("#sendToApprBtn").show();
+            } else if (currFlowStatus == 4) { //approved
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                section1Disable();
+            }
+        } else {
+            if (currFlowStatus == null || currFlowStatus == "") {
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+            } else if (currFlowStatus == 1) { //draft
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                $("#sendToApprBtn").show();
+                $("#delBtn").show();
+            } else if (currFlowStatus == 2) { //pending
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                $("#rejectBtn").show();
+                $("#apprBtn").show();
+            } else if (currFlowStatus == 3) { //rejected
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                $("#sendToApprBtn").show();
+            } else if (currFlowStatus == 4) { //approved
+                $("#cancelBtn").show();
+                $("#saveBtn").show();
+                $("#semester").attr('disabled', 'disabled');
+            }
+        }
+
+    }
+
+    function section1Disable() {
+        $("#section1").find("input").attr('disabled', 'disabled');
+        $("#section1").find("select").attr('disabled', 'disabled');
+        $("#section1").find("textarea").attr('disabled', 'disabled');
+    }
+
+    function section2Disable() {
+        $("#section2").find("input").attr('disabled', 'disabled');
+        $("#section2").find("select").attr('disabled', 'disabled');
+        $("#section2").find("textarea").attr('disabled', 'disabled');
+    }
+
+    function prepareData() {
+        var formData = new FormData();
+
+        //All Field
+        $.each($("#progSettingForm").serializeArray(), function (index, field) {
+            if (field.name == 'program_id' || field.name == 'program_type_id' ||
+                field.name == 'exam_schedule' || field.name == 'announce_admission_date' ||
+                field.name == 'announce_exam_date' || field.name == 'orientation_date' ||
+                field.name == 'orientation_location') {
+                return true;
+            }
+            formData.append(field.name, field.value)
+        });
+
+        //Program For Regis
+        var programs = [];
+        var rows = courseTable.$('tbody tr');
+        $.each(rows, function (index, value) {
+            var chkbox = $(value).find('input[name=program_id]')[0];
+            if (chkbox.checked) {
+                programs.push(serializeObject($(value).find('input,select').serializeArray()));
+            }
+        });
+        formData.append('programs', JSON.stringify(programs));
+
+        //Round For Regis
+        var roundForms = [];
+        $.each($('#roundFormDiv .round-row:visible'), function (index, value) {
+            roundForms.push(serializeObject($(value).find('input,select,textarea').serializeArray()))
+        });
+        formData.append('rounds', JSON.stringify(roundForms));
+
+        //FileUpload
+        if ($("#document_file").val() !== '') {
+            formData.append("document_file", $("#document_file")[0].files[0]);
+        }
+
+        return formData;
+    }
+
+    function prepareModal(action) {
+        $("#comment").val('');
+        $("#transCommentModal").modal('show');
+        if (action == 'SEND_APPR') {
+            $("#modalSaveBt").attr("onclick", "doSendToApprove() ");
+        } else if (action == 'APPR') {
+            $("#modalSaveBt").attr("onclick", "doApprove() ");
+        } else if (action == 'REJECT') {
+            $("#modalSaveBt").attr("onclick", "doReject() ");
+        }
+
+    }
+
+    function doSendToApprove() {
+        var dataObj = prepareData();
+        dataObj.append('comment', $("#comment").val());
+        $.ajax({
+            url: '{{route('admin.curriculum.doSendToApprove')}}',
+            headers: {
+                'X-CSRF-Token': $("#progSettingForm").find("input[name='_token']").val()
+            },
+            method: "POST",
+            data: dataObj,
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            success: function (result) {
+                var data = showToastFromAjaxResponse(result);
+                if (data !== null) {
+                    $("#curr_flow_status").val(data.workflow_status_id);
+                }
+                setActionButtonAndDisableForm();
+                $("#transCommentModal").modal('hide');
+            }
+        });
+    }
+
+    function doApprove() {
+        var dataObj = prepareData();
+        dataObj.append('comment', $("#comment").val());
+
+        $.ajax({
+            url: '{{route('admin.curriculum.doApprove')}}',
+            headers: {
+                'X-CSRF-Token': $("#progSettingForm").find("input[name='_token']").val()
+            },
+            method: "POST",
+            data: dataObj,
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            success: function (result) {
+                var data = showToastFromAjaxResponse(result);
+                if (data !== null) {
+                    $("#curr_flow_status").val(data.workflow_status_id);
+                }
+                setActionButtonAndDisableForm();
+                $("#transCommentModal").modal('hide');
+            }
+        });
+    }
+
+    function doReject() {
+        var dataObj = prepareData();
+        dataObj.append('comment', $("#comment").val());
+
+        $.ajax({
+            url: '{{route('admin.curriculum.doReject')}}',
+            headers: {
+                'X-CSRF-Token': $("#progSettingForm").find("input[name='_token']").val()
+            },
+            method: "POST",
+            data: dataObj,
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            success: function (result) {
+                var data = showToastFromAjaxResponse(result);
+                if (data !== null) {
+                    $("#curr_flow_status").val(data.workflow_status_id);
+                }
+                setActionButtonAndDisableForm();
+                $("#transCommentModal").modal('hide');
+            }
+        });
+    }
+
+    function doDelete() {
+        var dataObj = prepareData();
+        $.ajax({
+            url: '{{route('admin.curriculum.doDelete')}}',
+            headers: {
+                'X-CSRF-Token': $("#progSettingForm").find("input[name='_token']").val()
+            },
+            method: "POST",
+            data: dataObj,
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            success: function (result) {
+                var data = showToastFromAjaxResponse(result);
+                if (data !== null) {
+                }
+                setActionButtonAndDisableForm();
+            }
+        });
+    }
+
     $(document).ready(function () {
         initCurrProgramTbl();
         initValidation();
         initForm();
-
         $('select', mainForm).change(function () {
             mainForm.validate().element($(this));
         });
+    });
+
+    $(document).ajaxStop(function () {
+        if (firstLoadForm) {
+            setActionButtonAndDisableForm();
+            firstLoadForm = false;
+        }
     });
 
 </script>

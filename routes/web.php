@@ -115,17 +115,47 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
-    Route::group(['prefix' => 'curriculum', 'middleware' => []], function () {
-        Route::get('add', 'BackOffice\CurriculumController@showAddPage')->name('admin.curriculum.showAdd');
-        Route::get('edit/{id}', 'BackOffice\CurriculumController@showEditPage')->name('admin.curriculum.showEdit');
-        Route::post('save', 'BackOffice\CurriculumController@doSave')->name('admin.curriculum.doSave');
-        Route::get('getCurrProgListByCurriculumId', 'BackOffice\CurriculumController@getCurrProgListByCurriculumId')->name('admin.curriculum.getCurrProgListByCurriculumId');
-        Route::get('getCurrActByCurriculumId', 'BackOffice\CurriculumController@getCurrActByCurriculumId')->name('admin.curriculum.getCurrActByCurriculumId');
-        Route::get('getCurrSubMajorByCurriculumId', 'BackOffice\CurriculumController@getCurrSubMajorByCurriculumId')->name('admin.curriculum.getCurrSubMajorByCurriculumId');
-        Route::get('downloadCurriculumDoc', 'BackOffice\CurriculumController@downloadCurriculumDoc')->name('admin.curriculum.downloadCurriculumDoc');
+
+    Route::group(['prefix' => 'management', 'middleware' => []], function () {
+        Route::group(['prefix' => 'curriculum', 'middleware' => []], function () {
+            Route::get('add', 'BackOffice\CurriculumController@showAddPage')->name('admin.curriculum.showAdd');
+            Route::get('edit/{id}', 'BackOffice\CurriculumController@showEditPage')->name('admin.curriculum.showEdit');
+            Route::post('save', 'BackOffice\CurriculumController@doSave')->name('admin.curriculum.doSave');
+            Route::get('getCurrProgListByCurriculumId', 'BackOffice\CurriculumController@getCurrProgListByCurriculumId')->name('admin.curriculum.getCurrProgListByCurriculumId');
+            Route::get('getCurrActByCurriculumId', 'BackOffice\CurriculumController@getCurrActByCurriculumId')->name('admin.curriculum.getCurrActByCurriculumId');
+            Route::get('getCurrSubMajorByCurriculumId', 'BackOffice\CurriculumController@getCurrSubMajorByCurriculumId')->name('admin.curriculum.getCurrSubMajorByCurriculumId');
+            Route::get('downloadCurriculumDoc', 'BackOffice\CurriculumController@downloadCurriculumDoc')->name('admin.curriculum.downloadCurriculumDoc');
+
+            Route::get('manage', 'BackOffice\CurriculumController@showManagePage')->name('admin.curriculum.showManagePage');
+            Route::get('paging1', 'BackOffice\CurriculumController@doCurriculumManagePaging')->name('admin.curriculum.doPaging1');
+
+            Route::post('doSendToApprove', 'BackOffice\CurriculumController@doSendToApprove')->name('admin.curriculum.doSendToApprove');
+            Route::post('doApprove', 'BackOffice\CurriculumController@doApprove')->name('admin.curriculum.doApprove');
+            Route::post('doReject', 'BackOffice\CurriculumController@doReject')->name('admin.curriculum.doReject');
+            Route::post('doDelete', 'BackOffice\CurriculumController@doDelete')->name('admin.curriculum.doDelete');
+        });
     });
+
+    Route::group(['prefix' => 'setting', 'middleware' => []], function () {
+        Route::group(['prefix' => 'applysetting', 'middleware' => []], function () {
+            Route::get('add', 'BackOffice\ApplySettingController@showAddPage')->name('admin.applysetting.showAdd');
+            Route::get('edit', 'BackOffice\ApplySettingController@showEditPage')->name('admin.applysetting.showEdit');
+            Route::post('save', 'BackOffice\ApplySettingController@doSave')->name('admin.applysetting.doSave');
+            Route::get('manage', 'BackOffice\ApplySettingController@showManagePage')->name('admin.applysetting.showManagePage');
+            Route::get('paging', 'BackOffice\ApplySettingController@doPaging')->name('admin.applysetting.doPaging');
+            Route::post('doDelete', 'BackOffice\ApplySettingController@doDelete')->name('admin.applysetting.doDelete');
+        });
+
+        Route::group(['prefix' => 'applicantManage', 'middleware' => []], function () {
+        });
+
+        Route::group(['prefix' => 'adminManage', 'middleware' => []], function () {
+            Route::get('add', 'BackOffice\AdminManagementController@showAddPage')->name('admin.adminManage.showAdd');
+            Route::get('edit', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEdit');
+            Route::post('save', 'BackOffice\AdminManagementController@doSave')->name('admin.adminManage.doSave');
+        });
+
+    });
+
 });
-
-
-
 

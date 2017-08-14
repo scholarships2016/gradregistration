@@ -2,94 +2,102 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Contracts\AudittrailRepository;
 use App\Repositories\Contracts\CurriculumActivityRepository;
 use App\Repositories\Contracts\CurriculumProgramRepository;
 use App\Repositories\Contracts\CurriculumRepository;
 use App\Models\Curriculum;
 use App\Repositories\Contracts\CurriculumSubMajorRepository;
+use App\Repositories\Contracts\CurriculumWorkflowTransactionRepository;
 use App\Repositories\Contracts\FileRepository;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements CurriculumRepository {
-
+class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements CurriculumRepository
+{
     protected $projectPassRepo;
     protected $currActRepo;
     protected $currProgRepo;
     protected $fileRepo;
     protected $currSubMajorRepo;
+    protected $currWFTransRepo;
+    protected $auditRepo;
 
     private $paging = 10;
 
     public function __construct(CurriculumActivityRepository $currActRepo, CurriculumProgramRepository $currProgRepo,
-                                FileRepository $fileRepo, CurriculumSubMajorRepository $currSubMajorRepo)
+                                FileRepository $fileRepo, CurriculumSubMajorRepository $currSubMajorRepo,
+                                CurriculumWorkflowTransactionRepository $currWFTransRepo,
+                                AudittrailRepository $auditRepo)
     {
         parent::setModelClassName(Curriculum::class);
         $this->currActRepo = $currActRepo;
         $this->currProgRepo = $currProgRepo;
         $this->fileRepo = $fileRepo;
         $this->currSubMajorRepo = $currSubMajorRepo;
+        $this->currWFTransRepo = $currWFTransRepo;
+        $this->auditRepo = $auditRepo;
     }
 
-    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null, $inTime = true, $paging = false) {
+    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null, $inTime = true, $paging = false)
+    {
 
         $result = null;
         try {
             DB::statement(DB::raw('set @rownum=0'));
             $cur = Curriculum::leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
-                    ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
-                    ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
-                    ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
-                    ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
-                    ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
-                    ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
-                    ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
-                    ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
-                    ->leftJoin("tbl_major", function($join) {
-                        $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
+                ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
+                ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
+                ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
+                ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
+                ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
+                ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
+                ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
+                ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
+                ->leftJoin("tbl_major", function ($join) {
+                    $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                         ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
-                    })
-                    ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
-                    ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
-                    ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
-                    ->where('curriculum.status', 'like', '%' . $status . '%')
-                    ->where('apply_setting.is_active', 'like', '%' . $status . '%')
-                    ->Where(function ($query)use ($curriculum_id) {
-                        if ($curriculum_id) {
-                            $query->where('curriculum.curriculum_id', $curriculum_id);
-                        }
-                    })
-                    ->Where(function ($query)use ($curr_act_id) {
-                        if ($curr_act_id != null || $curr_act_id != '') {
-                            $query->where('curriculum_activity.curr_act_id', $curr_act_id);
-                        }
-                    })
-                    ->Where(function ($query)use ($degree_id) {
-                        if ($degree_id != null || $degree_id != '') {
-                            $query->where('tbl_Degree.degree_id', $degree_id);
-                        }
-                    })
-                    ->Where(function ($query)use ($faculty_id) {
-                        if ($faculty_id != null || $faculty_id != '') {
-                            $query->where('tbl_faculty.faculty_id', $faculty_id);
-                        }
-                    })
-                    ->Where(function ($query)use ($program_id) {
-                        if ($program_id != null || $program_id != '') {
-                            $query->where('curriculum_program.program_id', $program_id);
-                        }
-                    })
-                    ->Where(function ($query)use ($inTime) {
-                        if ($inTime) {
-                            $query->where('apply_setting.start_date', '<=', Carbon::now())
-                            ->where('apply_setting.end_date', '>=', Carbon::now())
-                            ;
-                        }
-                    })
-                    ->Where(function ($query)use ($criteria) {
-                        $query->where('degree_name', 'like', '%' . $criteria . '%')
+                })
+                ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
+                ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
+                ->where('curriculum.status', 'like', '%' . $status . '%')
+                ->where('apply_setting.is_active', 'like', '%' . $status . '%')
+                ->Where(function ($query) use ($curriculum_id) {
+                    if ($curriculum_id) {
+                        $query->where('curriculum.curriculum_id', $curriculum_id);
+                    }
+                })
+                ->Where(function ($query) use ($curr_act_id) {
+                    if ($curr_act_id != null || $curr_act_id != '') {
+                        $query->where('curriculum_activity.curr_act_id', $curr_act_id);
+                    }
+                })
+                ->Where(function ($query) use ($degree_id) {
+                    if ($degree_id != null || $degree_id != '') {
+                        $query->where('tbl_Degree.degree_id', $degree_id);
+                    }
+                })
+                ->Where(function ($query) use ($faculty_id) {
+                    if ($faculty_id != null || $faculty_id != '') {
+                        $query->where('tbl_faculty.faculty_id', $faculty_id);
+                    }
+                })
+                ->Where(function ($query) use ($program_id) {
+                    if ($program_id != null || $program_id != '') {
+                        $query->where('curriculum_program.program_id', $program_id);
+                    }
+                })
+                ->Where(function ($query) use ($inTime) {
+                    if ($inTime) {
+                        $query->where('apply_setting.start_date', '<=', Carbon::now())
+                            ->where('apply_setting.end_date', '>=', Carbon::now());
+                    }
+                })
+                ->Where(function ($query) use ($criteria) {
+                    $query->where('degree_name', 'like', '%' . $criteria . '%')
                         ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
                         ->orwhere('department_name', 'like', '%' . $criteria . '%')
                         ->orwhere('department_name_en', 'like', '%' . $criteria . '%')
@@ -106,9 +114,9 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                         ->orwhere('academic_year', 'like', '%' . $criteria . '%')
                         ->orwhere('academic_year', 'like', '%' . $criteria . '%')
                         ->orwhere('academic_year', 'like', '%' . $criteria . '%');
-                    })
-                    ->select([DB::raw('* , @rownum  := @rownum  + 1 AS rownum')])
-                    ->orderBy('curriculum.curriculum_id');
+                })
+                ->select([DB::raw('* , @rownum  := @rownum  + 1 AS rownum')])
+                ->orderBy('curriculum.curriculum_id');
 
             $result = ($paging) ? $cur->offset($paging['start'])->limit($paging['length']) : $cur->get();
         } catch (\Exception $ex) {
@@ -122,9 +130,13 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         Log::info('save Curriculum');
 
         try {
+            $isNew = true;
+
             $currObj = (array_key_exists('curriculum_id', $data) && !empty($data['curriculum_id'])) ? $this->find($data['curriculum_id']) : new Curriculum();
             if (empty($currObj)) {
                 $currObj = new Curriculum();
+            } elsE {
+                $isNew = false;
             }
             if (array_key_exists('faculty_id', $data)) {
                 $currObj->faculty_id = $data['faculty_id'];
@@ -180,6 +192,9 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             if (array_key_exists('major_id', $data)) {
                 $currObj->major_id = $data['major_id'];
             }
+            if (array_key_exists('expected_amount', $data)) {
+                $currObj->expected_amount = $data['expected_amount'];
+            }
 
             //Creator and Editor
             if (array_key_exists('creator', $data)) {
@@ -190,7 +205,6 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             }
 
             $currObj->save();
-
             return $currObj;
         } catch (\Exception $ex) {
             throw $ex;
@@ -210,6 +224,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $creator = $datas['creator'];
             $modifier = $datas['modifier'];
 
+
             if (isset($datas['comm_appr_date'])) {
                 $datas['comm_appr_date'] = Carbon::createFromFormat('d/m/Y', $datas['comm_appr_date'])->format('Y-m-d');
             }
@@ -220,7 +235,19 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 $datas['document_file'] = $file->file_id;
             }
 
+            //Draft Step
+            if (!isset($datas['curriculum_id'])) {
+                $datas['is_approve'] = 1;
+            }
+
             $currObj = $this->save($datas);
+
+            if (!isset($datas['curriculum_id'])) {
+                $wftStatus['workflow_status_id'] = 1;
+                $wftStatus['curriculum_id'] = $currObj->curriculum_id;
+                $wftStatus['creator'] = $creator;
+                $this->currWFTransRepo->save($wftStatus);
+            }
 
             if (array_key_exists('sub_major_id', $datas) && !empty($datas['sub_major_id'])) {
                 $deletedSubMajorRows = $this->currSubMajorRepo->removeCurrSubmajorByCurriculumId($currObj->curriculum_id);
@@ -239,7 +266,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $currActIds = array();
             foreach ($datas['rounds'] as $index => $value) {
                 if (!empty($value['curr_act_id'])) {
-                    $currActIds = array_push($currActIds, $value['curr_act_id']);
+                     array_push($currActIds, $value['curr_act_id']);
                     $datas['rounds'][$index]['modifier'] = $modifier;
                 } else {
                     $datas['rounds'][$index]['creator'] = $creator;
@@ -324,5 +351,127 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
+    public function changeTransactionStatus(array $datas)
+    {
+        DB::beginTransaction();
+        try {
+            if (!isset($datas['curriculum_id'])) {
+                throw new \Exception('No ID');
+            }
+            $currWFT = $this->currWFTransRepo->save($datas);
+            $curr = $this->find($datas['curriculum_id']);
+            $curr->is_approve = $currWFT->workflow_status_id;
+            $curr->save();
+            DB::commit();
+            return $currWFT;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
+
+    public function deleteCurriculumInfoByCurriculumId($id)
+    {
+        DB::beginTransaction();
+        try {
+            $currAct = DB::table('curriculum_activity')->where('curriculum_id', '=', $id)->delete();
+            $currProg = DB::table('curriculum_program')->where('curriculum_id', '=', $id)->delete();
+            $currSubMajor = DB::table('curriculum_sub_major')->where('curriculum_id', '=', $id)->delete();
+            $currWFT = DB::table('curriculum_workflow_transaction')->where('curriculum_id', '=', $id)->delete();
+            $curr = DB::table('curriculum')->where('curriculum_id', '=', $id)->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
+
+    public function doPaging1($criteria = null)
+    {
+        try {
+            $columnMap = array(
+                1 => "curr.curriculum_id",
+                2 => "fac.faculty_name",
+                3 => "dep.department_name",
+                4 => "maj.major_name",
+                5 => "curriculum_progs",
+                6 => "program_name_thai",
+                7 => "curr.apply_method",
+                8 => "curr.is_approve");
+            $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
+            $data = null;
+
+            $query = DB::table('curriculum_activity as curr_act')
+                ->select('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                    'dep.department_id', 'dep.department_name', 'dep.department_name_en',
+                    'maj.major_id', 'maj.major_name', 'maj.major_name_en',
+                    DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as curriculum_progs"),
+//                    DB::raw("GROUP_CONCAT(course.thai SEPARATOR ',') as program_name_thai"),
+//                    DB::raw("GROUP_CONCAT(course.english SEPARATOR ',') as program_name_eng"),
+                    'de.degree_name',
+                    'curr.apply_method',
+                    'curr.is_approve')
+                ->join('apply_setting as app_set', function ($join) {
+                    $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                })
+                ->join('curriculum as curr', function ($join) {
+                    $join->on('curr.curriculum_id', '=', 'curr_act.curriculum_id');
+                })
+                ->leftJoin('tbl_faculty as fac', function ($join) {
+                    $join->on('fac.faculty_id', '=', 'curr.faculty_id');
+                })
+                ->leftJoin('tbl_department as dep', function ($join) {
+                    $join->on('dep.department_id', '=', 'curr.department_id');
+                })
+                ->leftJoin('tbl_major as maj', function ($join) {
+                    $join->on('maj.major_id', '=', 'curr.major_id');
+                })
+                ->leftJoin('curriculum_program as curr_prog', function ($join) {
+                    $join->on('curr_prog.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->leftJoin('tbl_degree as de', function ($join) {
+                    $join->on('de.degree_id', '=', 'curr.degree_id');
+
+                })
+                ->groupBy('curr.curriculum_id', 'app_set.apply_setting_id');
+
+            $recordsTotal = $query->get()->count();
+
+            if (isset($criteria['faculty_id'])) {
+                $query->where('fac.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where('curr_prog.program_type_id', '=', $criteria['program_type_id']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('curr_prog.program_type_id', '=', $criteria['program_type_id']);
+            }
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['apply_method'])) {
+                $query->where('curr.apply_method', '=', $criteria['apply_method']);
+            }
+            if (isset($criteria['is_approve'])) {
+                $query->where('curr.is_approve', '=', $criteria['is_approve']);
+            }
+            $recordsFiltered = $query->get()->count();
+            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            $query->offset($criteria['start'])->limit($criteria['length']);
+            $data = $query->get();
+
+            $result = array('draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data
+            );
+
+            return $result;
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
 }
