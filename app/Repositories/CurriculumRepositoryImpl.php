@@ -41,8 +41,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         $this->auditRepo = $auditRepo;
     }
 
-    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $program_id = null, $inTime = true, $paging = false)
-    {
+    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false,  $academic_year = null, $semester = null,$round_no = null) {
 
         $result = null;
         try {
@@ -64,7 +63,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                 ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                 ->where('curriculum.status', 'like', '%' . $status . '%')
-->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
+                ->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
                 ->Where(function ($query) use ($curriculum_id) {
                     if ($curriculum_id) {
