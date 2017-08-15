@@ -89,16 +89,18 @@ class ManageApplyController extends Controller {
     }
 
     public function getRegisterCourse(Request $request = null) {
+       
         $status = $request->flow;
         $semester = $request->semester;
         $year = $request->year;
         $roundNo = $request->roundNo;
         $criteria = $request->criteria;
-        $curr_act_id =$request->curr_act_id;
+        $curr_act_id = $request->curr_act_id;
+        
         $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user,$curr_act_id);
- 
+
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
 
@@ -165,6 +167,43 @@ class ManageApplyController extends Controller {
 
 
         return $res;
+    }
+    
+   public function sentMail(Request $request){
+       if($request){
+       $curr_act_id  = $request->curr_act_id;
+       $applications = $arrayOfEmails=json_decode($request->users);
+       
+       
+       $curr = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
+       foreach ($applications as $applicationID) {
+       $app = $this->ApplicationRepo->getDataForMange(null, $applicationID, null, null, null, null, null, null,null);
+ 
+       
+         $data = [
+             'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
+             'thai' =>  $curr->thai,
+             'coursecodeno' => $curr->coursecodeno,
+             'sub_major_name' => $curr->sub_major_name,
+             'sub_major_id' => $curr->sub_major_id,
+             'major_name' => $curr->major_name,
+             'major_id' => $curr->major_id,
+             'department_name' => $curr->department_name,
+             'faculty_name' => $curr->stu_email,
+             'semester' => $curr->semester.' รอบที่'.$curr->round_no,
+             'year' => $curr->academic_year,
+             'statusExam' => $app->exam_name
+            
+            ];
+            Mail::send('email.gs03.blade', $data, function($message)use ($result) {
+                $message->to($result->stu_email, $result->stu_first_name)->subject('Registration Result ');
+            });
+            Controller::WLog('Gs03 [' . $result->stu_email . ']', 'Gs03', null);
+            
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+            
+       }
+       }
     }
 
 }
