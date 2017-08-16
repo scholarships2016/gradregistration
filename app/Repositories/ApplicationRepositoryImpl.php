@@ -100,7 +100,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
             $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
-                            ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
+                            ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
                             ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
                             ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
                             ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
@@ -191,7 +191,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 }
                             })
                             ->select([DB::raw("application.application_id application_id,application.applicant_id applicant_id,app_id, lpad(app_id ,5,'0') app_ida ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,
-stu_first_name_en ,stu_last_name_en,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,  @rownum  := @rownum  + 1 AS rownum")])
+stu_first_name_en ,stu_last_name_en,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,  @rownum  := @rownum  + 1 AS rownum")])
                             ->orderBy('application.application_id', 'desc')->get();
         } catch (\Exception $ex) {
             throw $ex;

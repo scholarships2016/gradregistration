@@ -164,7 +164,7 @@
                               </div>
                               <div class="cold-md-1">
                                 <div class="form-group" style="padding-top:25px;">
-                                  <a href="javascript:;" class="btn btn-small blue"> เลือก
+                                  <a id="search_Select" href="javascript:;"  class="btn btn-small blue"> เลือก
                                                                             <i class="fa fa-mouse-pointer"></i>
                                                                         </a>
                                 </div>
@@ -186,7 +186,7 @@
                   <hr>
                    <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
                        
-                       <div ><input type="hidden" value="2" id="idsave"> <input type="hidden" value="1" id="applicantid"> applicant_id
+                       <div ><input type="hidden" value="2" id="idsave"> <input type="hidden" value="1" id="applicantid">  
                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="datatable_ajax">
                     <thead>
                       <tr>
@@ -228,7 +228,7 @@
 
 
 @push('pageJs')
-  <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/pages/scripts/table-datatables-ajax.js')}}" type="text/javascript"></script>
@@ -244,7 +244,6 @@
 <script src="{{asset('assets/global/plugins/jquery.mockjax.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-typeahead/bootstrap3-typeahead.min.js')}}" type="text/javascript"></script>
- 
  
 <script type="application/javascript">
     $('#editSave').click(function() {  
@@ -287,13 +286,17 @@
                                               $("#single").empty();
                                               var group="";
                                        jQuery.each(data, function(index, itemData) {
-                                              if(group != data[index].faculty_id){ 
-                                                  if(index!=0){ $("#single").append('</optgroup>')}
-                                                  $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">')
-                                              }
+                                              if(group != data[index].faculty_id)
+                                              { 
+                                                  if(index!=0){ $("#single").append('</optgroup>');}
+                                                  $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
+                                              }  
                                              $("#single").append('<option value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+'</option>')
-                                               if(index==data.length-1){$("#single").append('</optgroup>')}
-                                               });
+                                               if(index==data.length-1){$("#single").append('</optgroup>');}
+                                               
+                                                        group = data[index].faculty_id;
+                                                    } );
+                                              
                                         }
 				},"json");  });           
                             
@@ -330,12 +333,7 @@ var TableDatatablesAjax = function () {
                     "type":"GET",
                     "async": "false",
                     "data" : {  
-//                               flow : null,
-//                               semester  : $('#semester').val(),
-//                               year   :$('#year').val(),
-//                               roundNo :$('#roundNo').val(),
-//                               criteria :  $('#criteria').val(),
-                            curr_act_id: 0,
+                                curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                _token:     '{{ csrf_token()}}'
                                                }                 
                 },
@@ -376,20 +374,20 @@ orderable: false,
 className: 'sorting_1',
 name: 'program_id',
 render: function (data, type, full, meta) { 
-return    '<a href="javascript:;" class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'  ; 
+return    '<a href="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'  ; 
 } },{ 
 targets: [5], 
 orderable: false, 
  
 name: 'prog_type_name', 
 render: function (data, type, full, meta) { 
-return    '<a href="javascript:;" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ; 
+return    '<a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ; 
 } },{ 
 targets: [6],  
  
 name: 'bank_name', 
 render: function (data, type, full, meta) { 
-return  ' <a href="javascript:;" class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a href="javascript:;" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a href="javascript:;" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
+return  ' <a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
 }},{  
  
 targets: [7], 
@@ -423,6 +421,7 @@ return ('<a href="#responsive"  hid="' + full.application_id +'" hidd="' + full.
 
 var exam_status="";
 var EngTest="";
+
 jQuery(document).ready(function() {
   
    $('#datatable_ajax tbody').on( 'click', 'a', function () {
@@ -475,9 +474,25 @@ jQuery(document).ready(function() {
 });
 
  
-    $('#btsearch').click(function(){
+    $('#search_Select').click(function(){
     TableDatatablesAjax.init(); 
     });
+ 
+ 
+
+ function setID(appid,cantid){
+     $('#idsave').val(appid);  
+     $('#applicantid').val(cantid);
+ }
+  
+
+  function GetDateFormat(date) {
+            var month = (date.getMonth() + 1).toString();
+            month = month.length > 1 ? month : '0' + month;
+            var day = date.getDate().toString();
+            day = day.length > 1 ? day : '0' + day;
+            return date.getFullYear()+'-'+month + '-' + day ;
+        }
  
  
  
@@ -690,14 +705,10 @@ jQuery(document).ready(function() {
 				},"json");
                  
          });
-
-      
  
-        
     }
 
-    return {
-       
+    return {       
         init: function() {
         initAjaxMock();
         initEditables();
@@ -706,34 +717,6 @@ jQuery(document).ready(function() {
     };
 
 }();
-
- 
- 
-  function GetDateFormat(date) {
-            var month = (date.getMonth() + 1).toString();
-            month = month.length > 1 ? month : '0' + month;
-            var day = date.getDate().toString();
-            day = day.length > 1 ? day : '0' + day;
-            return date.getFullYear()+'-'+month + '-' + day ;
-        }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
 
