@@ -54,26 +54,26 @@
                 </ul>
             </li>
 
-            <li class="nav-item  "data-index="13">
+           <li class=" nav-item  menuitem   "data-index="13">
                 <a href="manage-payment-documents.html" class="nav-link nav-toggle">
                     <i class="icon-layers"></i>
                     <span class="title">จัดการข้อมูลการสมัคร</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item  ">
-                        <a href="manage-payment-documents.html" class="nav-link ">
+                    <li class=" nav-item  menuitem   ">
+                        <a class="nav-link " href="{{url('admin/ManagePay')}}">
                             <span class="title">ปรับปรุงการชำระเงิน และส่งเอกสาร</span>
                         </a>
                     </li>
 
-                    <li class="nav-item  ">
-                        <a href="manage-gs03.html" class="nav-link ">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-gs03.html" class="nav-link "href="{{url('admin/ManageGS03')}}>
                             <span class="title">ปรับปรุงผู้มีสิทธิ์สอบ (GS03)</span>
                         </a>
                     </li>
-                    <li class="nav-item  ">
-                        <a href="manage-gs05.html" class="nav-link ">
+                    <li class=" nav-item  menuitem   ">
+                        <a href="manage-gs05.html" class="nav-link " href="{{url('admin/ManageGS05')}}>
                             <span class="title">ปรับปรุงผู้มีสิทธิ์เข้าศึกษา (GS05)</span>
                         </a>
                     </li>

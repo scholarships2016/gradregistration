@@ -64,7 +64,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class=" nav-item  menuitem   ">
-                        <a href="manage-payment-documents.html" class="nav-link " href="{{url('admin/ManagePay')}}">
+                        <a   class="nav-link " href="{{url('admin/ManagePay')}}">
                             <span class="title">ปรับปรุงการชำระเงิน และส่งเอกสาร</span>
                         </a>
                     </li>
