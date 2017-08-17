@@ -203,7 +203,7 @@ return [
     'perInfoInterest' => 'สนใจ',
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
-    
+
         //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
 
@@ -228,8 +228,8 @@ return [
     'perInfoInterest' => 'สนใจ',
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
-    
-    
+
+
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'คุณต้องการที่จะสมัครหรือไม่?',
@@ -240,7 +240,7 @@ return [
     'lbProgDetailContactTel' => 'ติดต่อเจ้าหน้าที่ โทร.',
     'lbButtonRemoveApplication' => 'ยกเลิกการสมัคร',
 'lbMessageBeforLogin_text' => 'เนื่องจากก่อนคุณจะสมัคร คุณจะต้องทำการลงทะเบียนและเข้าสู่ระบบก่อน จะดำเนินการเข้าระบบหรือไม่',
-     
+
     //Confirmation
     'lbConfirmInstructions' => 'กรุณากรอกข้อมูลเพิ่มเติม',
     'lbConfirmPaymentBank' => 'ธนาคารที่ต้องการชำระเงิน',
@@ -284,5 +284,29 @@ return [
       'lbHomeContactus' => 'ติดต่อเรา',
       'lbHomeContactusDesc' => 'หากมีข้อสงสัย กรุณาติดต่อ โทร. 0-2218-3502-5',
       'lbHomeOpenRegister' => 'เปิดรับสมัคร',
-      'lbHeaderLogin' => 'เข้าสู่ระบบ'
+      'lbHeaderLogin' => 'เข้าสู่ระบบ',
+
+      //Login
+      'lbLoginCopyright' => '2560 &copy; บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
+      'lbLoginToptic' => 'เข้าสู่ระบบรับสมัคร',
+      'lbLoginButton' => 'Login',
+      'lbLoginForgetPassword' => 'ลืมรหัสผ่าน?',
+      'lbLoginForgetPasswordDesc' => 'กรอกอีเมล์ ที่ได้ลงทะเบียนไว้',
+      'lbLoginForgetPasswordButton' => 'คลิกที่นี่',
+      'lbLoginForgetPasswordButtonDesc' => 'เพื่อขอรหัสผ่าน',
+      'lbLoginRegisterToptic' => 'ลงทะเบียนสำหรับครั้งแรก',
+      'lbLoginRegisterButton' => 'สร้างบัญชีผู้ใช้',
+      'lbLoginSignup' => 'สร้างบัญชีผู้ใช้',
+      'lbLoginSignupDesc' => 'กรอกข้อมูลส่วนตัว',
+      'lbLoginSignupCitizen' => 'หมายเลขประจำตัวประชาชน 13 หลัก',
+      'lbLoginSignupNameTitle' => 'คำนำหน้าชื่อ',
+      'lbLoginSignupFirstname' => 'ชื่อภาษาอังกฤษ',
+      'lbLoginSignupLastname' => 'นามสกุลภาษาอังกฤษ',
+      'lbLoginSignupTel' => 'หมายเลขโทรศัพท์',
+      'lbLoginSignupLogin' => 'กรอกข้อมูลการเข้าสู่ระบบ',
+      'lbLoginEmail' => 'อีเมล์',
+      'lbLoginSignupPassword' => 'รหัสผ่าน',
+      'lbLoginSignupPasswordDesc' => 'รหัสผ่านความยาวอย่างน้อย 6 ตัวอักษร',
+      'lbLoginSignupPasswordReType' => 'กรอกรหัสผ่านอีกครั้ง',
+
 ];
