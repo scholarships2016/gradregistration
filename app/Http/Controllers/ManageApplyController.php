@@ -20,6 +20,8 @@ use App\Repositories\FileRepositoryImpl;
 use App\Repositories\SatisfactionRepositoryImpl;
 use App\Repositories\ApplicantRepositoryImpl;
 use App\Repositories\TblExamStatusRepositoryImpl;
+use App\Repositories\TblAdmissionStatusRepositoryImpl;
+use Illuminate\Support\Facades\Mail;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
@@ -43,11 +45,13 @@ class ManageApplyController extends Controller {
     protected $SatisfactionRepo;
     protected $ApplicantRepo;
     protected $ExamStatus;
+    protected $AdmissionStatus;
 
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
     , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo
-    , SatisfactionRepositoryImpl $SatisfactionRepo, ApplicantRepositoryImpl $ApplicantRepo, TblExamStatusRepositoryImpl $ExamStatus) {
+    , SatisfactionRepositoryImpl $SatisfactionRepo, ApplicantRepositoryImpl $ApplicantRepo, TblExamStatusRepositoryImpl $ExamStatus
+    , TblAdmissionStatusRepositoryImpl $AdmissionStatus) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -64,6 +68,7 @@ class ManageApplyController extends Controller {
         $this->SatisfactionRepo = $SatisfactionRepo;
         $this->ApplicantRepo = $ApplicantRepo;
         $this->ExamStatus = $ExamStatus;
+        $this->AdmissionStatus = $AdmissionStatus;
     }
 
     public function showManagePay() {
@@ -89,17 +94,21 @@ class ManageApplyController extends Controller {
     }
 
     public function getRegisterCourse(Request $request = null) {
-       
-        $status = $request->flow;
+
+        $status = explode(',', $request->flow);
         $semester = $request->semester;
         $year = $request->year;
         $roundNo = $request->roundNo;
         $criteria = $request->criteria;
         $curr_act_id = $request->curr_act_id;
-        
+        $exam_status = $request->exams;
+        $program_id= $request->program_id;
+        $sub_major_id= $request->sub_major_id;
+        $program_type_id = $request->program_type_id;
+
         $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user,$curr_act_id);
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status,$sub_major_id,$program_id,$program_type_id);
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
@@ -122,8 +131,11 @@ class ManageApplyController extends Controller {
 
     //GS03
     public function showManageGS03() {
+        return view($this->part_doc . 'manage_GS03');
+    }
 
-        return view($this->part_doc . 'manage_status_applicant');
+    public function showManageGS05() {
+        return view($this->part_doc . 'manage_GS05');
     }
 
     public function getCourse(Request $request = null) {
@@ -139,6 +151,11 @@ class ManageApplyController extends Controller {
         return response()->json($exam);
     }
 
+    public function getStatusAdmission() {
+        $exam = $this->AdmissionStatus->all();
+        return response()->json($exam);
+    }
+
     public function getEngTest() {
         $exam = \App\Models\TblEngTest::get();
         return response()->json($exam);
@@ -146,14 +163,29 @@ class ManageApplyController extends Controller {
 
     public function updateApplication(Request $request = null) {
         $data = '';
-       
+        $res = false;
         if ($request->exam_remark)
             $data = ['exam_remark' => $request->exam_remark, 'application_id' => $request->application_id];
-        if ($request->exam_status)
-            $data = ['exam_status' => $request->exam_status, 'application_id' => $request->application_id];
+        if ($request->exam_status) {
+            $flow_id = ($request->exam_status == 2 || $request->exam_status == 3 ) ? 4 : 3;
+            $data = ['exam_status' => $request->exam_status, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
+        }
         if ($request->exam_remark || $request->exam_status) {
             $res = $this->ApplicationRepo->saveApplication($data);
         }
+
+        if ($request->admission_remark)
+            $data = ['admission_remark' => $request->admission_remark, 'application_id' => $request->application_id];
+        if ($request->admission_status_id) {
+            $flow_id = ($request->admission_status_id != 'X' && $request->admission_status_id != '0') ? 5 : 4;
+            $data = ['admission_status_id' => $request->admission_status_id, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
+        }
+        if ($request->admission_remark || $request->admission_status_id) {
+            $res = $this->ApplicationRepo->saveApplication($data);
+        }
+
+
+
 
         if ($request->eng_test_id_admin)
             $data = ['eng_test_id_admin' => $request->eng_test_id_admin, 'applicant_id' => $request->applicant_id];
@@ -164,46 +196,99 @@ class ManageApplyController extends Controller {
         if ($request->eng_test_id_admin || $request->eng_test_score_admin || $request->eng_date_taken_admin) {
             $res = $this->ApplicantRepo->saveApplicant($data);
         }
-
-
-        return $res;
+        return response()->json($res);
     }
-    
-   public function sentMail(Request $request){
-       if($request){
-       $curr_act_id  = $request->curr_act_id;
-       $applications = $arrayOfEmails=json_decode($request->users);
-       
-       
-       $curr = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-       foreach ($applications as $applicationID) {
-       $app = $this->ApplicationRepo->getDataForMange(null, $applicationID, null, null, null, null, null, null,null);
- 
-       
-         $data = [
-             'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
-             'thai' =>  $curr->thai,
-             'coursecodeno' => $curr->coursecodeno,
-             'sub_major_name' => $curr->sub_major_name,
-             'sub_major_id' => $curr->sub_major_id,
-             'major_name' => $curr->major_name,
-             'major_id' => $curr->major_id,
-             'department_name' => $curr->department_name,
-             'faculty_name' => $curr->stu_email,
-             'semester' => $curr->semester.' รอบที่'.$curr->round_no,
-             'year' => $curr->academic_year,
-             'statusExam' => $app->exam_name
-            
-            ];
-            Mail::send('email.gs03.blade', $data, function($message)use ($result) {
-                $message->to($result->stu_email, $result->stu_first_name)->subject('Registration Result ');
-            });
-            Controller::WLog('Gs03 [' . $result->stu_email . ']', 'Gs03', null);
-            
-            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            
-       }
-       }
+
+    public function sentMailGS03(Request $request) {
+        try {
+            if ($request) {
+                $curr_act_id = $request->curr_act_id;
+                $applications = $arrayOfEmails = json_decode($request->application);
+
+                $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
+                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+
+                foreach ($currs as $curr) {
+
+
+                    foreach ($apps as $app) {
+
+                        $data = [
+                            'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
+                            'thai' => $curr->thai,
+                            'coursecodeno' => $curr->coursecodeno,
+                            'sub_major_name' => $curr->sub_major_name,
+                            'sub_major_id' => $curr->sub_major_id,
+                            'major_name' => $curr->major_name,
+                            'major_id' => $curr->major_id,
+                            'department_name' => $curr->department_name,
+                            'department_id' => $curr->department_id,
+                            'faculty_name' => $curr->stu_email,
+                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                            'year' => $curr->academic_year,
+                            'statusExam' => $app->exam_name
+                        ];
+                        Mail::send('email.gs03', $data, function($message)use ($app) {
+                            $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                        });
+                        Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+
+                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                        return;
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+    }
+
+    public function sentMailGS05(Request $request) {
+        try {
+            if ($request) {
+                $curr_act_id = $request->curr_act_id;
+                $applications = $arrayOfEmails = json_decode($request->application);
+
+                $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
+                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+
+                foreach ($currs as $curr) {
+
+
+                    foreach ($apps as $app) {
+
+                        $data = [
+                            'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
+                            'thai' => $curr->thai,
+                            'coursecodeno' => $curr->coursecodeno,
+                            'sub_major_name' => $curr->sub_major_name,
+                            'sub_major_id' => $curr->sub_major_id,
+                            'major_name' => $curr->major_name,
+                            'major_id' => $curr->major_id,
+                            'department_name' => $curr->department_name,
+                            'department_id' => $curr->department_id,
+                            'faculty_name' => $curr->stu_email,
+                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                            'year' => $curr->academic_year,
+                            'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก') . '[' . $app->admission_status_name_th . ']'
+                        ];
+                        Mail::send('email.gs05', $data, function($message)use ($app) {
+                            $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
+                        });
+                        Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
+
+                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                        return;
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
     }
 
 }

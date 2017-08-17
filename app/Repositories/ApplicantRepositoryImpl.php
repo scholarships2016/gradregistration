@@ -21,10 +21,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     private $paging = 10;
     private $controllors;
 
-    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo,
-     ApplicantEduRepository $appEduRepo,
-      ApplicantWorkRepository $appWorkRepo,
-       Controller $controllors) {
+    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo, ApplicantEduRepository $appEduRepo, ApplicantWorkRepository $appWorkRepo, Controller $controllors) {
         parent::setModelClassName(Applicant::class);
         $this->appNewsSrcRepo = $appNewsSrcRepo;
         $this->appEduRepo = $appEduRepo;
@@ -170,9 +167,9 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->fund_interesting = $data['fund_interesting'];
             if (array_key_exists('eng_test_score_admin', $data))
                 $curObj->eng_test_score_admin = $data['eng_test_score_admin'];
-             if (array_key_exists('eng_test_id_admin', $data))
+            if (array_key_exists('eng_test_id_admin', $data))
                 $curObj->eng_test_id_admin = $data['eng_test_id_admin'];
-              if (array_key_exists('eng_date_taken_admin', $data))
+            if (array_key_exists('eng_date_taken_admin', $data))
                 $curObj->eng_date_taken_admin = $data['eng_date_taken_admin'];
             if (array_key_exists('stu_password', $data))
                 $curObj->stu_password = bcrypt($data['stu_password']);
@@ -186,7 +183,9 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->modifier = $data['modifier'];
 
 
-            $result = $curObj->save();
+            if ($curObj->save()) {
+                return true;
+            }
         } catch (\Exception $ex) {
             $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;

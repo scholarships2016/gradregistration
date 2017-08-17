@@ -9,8 +9,8 @@
       type="text/css"/> 
 <link href="{{asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css">
  
-<link href="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css')}}" rel="stylesheet" type="text/css">
-
+   <link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
+      type="text/css"/> 
 <style type="text/css">
 
 </style>
@@ -180,7 +180,7 @@
 
                   </div>
                   <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
-                  <a href="apply-setting-form.html" class="btn btn-circle green btn-outline sbold uppercase">
+                  <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
 <i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
 </a>
                   <hr>
@@ -212,8 +212,8 @@
                   <div class="form-actions">
                     <div class="row">
                       <div class="col-md-offset-4 col-md-8">
-                        <button type="button" class="btn grey-steel">ยกเลิก</button>
-                        <button type="submit" class="btn green"><i class="fa fa-envelope-o"></i> ส่งอีเมล์ แจ้งผลพิจารณา</button>
+                        <a type="button" class="btn grey-steel">ยกเลิก</a>
+                        <a id="sentmailall" type="submit" class="btn green"><i class="fa fa-envelope-o"></i> ส่งอีเมล์ แจ้งผลพิจารณา</a>
                       </div>
                     </div>
                   </div>
@@ -222,8 +222,55 @@
               </div>
               <!-- END EXAMPLE TABLE PORTLET-->
             </div>
-          </div>
-
+        
+<div class="col-md-12">
+ <div class="portlet light ">
+     <div class="portlet-body">
+ <div tabindex="-1" class="modal fade in" id="responsive" aria-hidden="true"   >
+     <div class="modal-dialog">
+                                            <div class="modal-content">
+                                      <form id="addData"> 
+                                          <div class="modal-dialog">       
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" aria-hidden="true" type="button" data-dismiss="modal"></button>
+                                                    <h4 class="modal-title">เพิ่มผู้สมัคร เป็นกรณีพิเศษ</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                        
+                                                            <div class="row">
+                                                             <div class="col-md-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-user"></i>
+                                                                </span>
+                                                                <input type="text" class="form-control" placeholder="รหัสบัตรประชาชน">  
+                                                                <span class="input-group-btn">
+                                                            <a class="btn blue" type="button">ตรวจสอบ</a>
+                                                        </span>
+                                                            </div> </div></div>
+                                                     <div class="row"><div class="col-md-12">
+                                                             
+                                                             </div></div>
+                                                   
+                                                    
+                                                <div class="modal-footer">
+                                                    <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
+                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
+                                                </div>
+                                               
+                                          </div>
+                                              
+</div>
+                                          </div>  </form>
+                                       
+ </div>
+     </div>
+ </div>
+     </div> 
+ </div>
+                </div>
+</div>
 @stop
 
 
@@ -246,29 +293,41 @@
 <script src="{{asset('assets/global/plugins/bootstrap-typeahead/bootstrap3-typeahead.min.js')}}" type="text/javascript"></script>
  
 <script type="application/javascript">
-    $('#editSave').click(function() {  
-                                    $.ajax({
+    $('#sentmailall').click(function() {  
+        var data = [];
+           $('#datatable_ajax tbody').find('tr').each(function () {
+         var row = $(this);
+         if (row.find('input[type="checkbox"]').is(':checked') &&
+            row.find('input[type="hidden"]').val().length > 0) {
+            data.push(row.find('input[type="hidden"]').val());
+         }
+    });
+         if(data.length>0){            
+             sentmail(JSON.stringify(data));
+         } 
+     });
+     function mailbyapp(app){
+         var data = [];
+         data.push(app);
+         sentmail(JSON.stringify(data));
+     }
+                               
+                               
+     function sentmail(app){
+                $.ajax({
 					type: "POST",
-					url: '{!! Route('datatables.savePayment') !!}',
+					url: '{!! Route('sentMailGS03') !!}',
                                          async: false,
 					data :{ 
-                                                application_id : $('#application_id').val(),
-                                                payment_date  : $('#payment_date').val(),
-                                                receipt_book : $('#receipt_book').val(),
-                                                receipt_no : $('#receipt_no').val(),
-                                                flow_id : 3,
+                                                curr_act_id : $('#single').val(),
+                                                application  : app,
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                                 $('#application_id').val(''),
-                                                 $('#payment_date').val(''),
-                                                 $('#receipt_book').val(''),
-                                                 $('#receipt_no').val('')
-                                 	  TableDatatablesAjax.init();
-                                        
-                                          toastr.success('ดำเนินการเรียบร้อย');
+                                           toastr.success('ดำเนินการเรียบร้อย');
                                         }
-				},"json");  });
+				},"json");
+              }                          
                             
                             
                   $('#btnSearch1').click(function() {  
@@ -291,7 +350,7 @@
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
                                               }  
-                                             $("#single").append('<option value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+'</option>')
+                                             $("#single").append('<option  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
                                                
                                                         group = data[index].faculty_id;
@@ -334,6 +393,10 @@ var TableDatatablesAjax = function () {
                     "async": "false",
                     "data" : {  
                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
+                                sub_major_id : $('option:selected','#single').attr('smj'),
+                                program_id : $('option:selected','#single').attr('pg'),
+                                  program_type_id : $('option:selected','#single').attr('pt'),
+                                flow : '3,4', 
                                _token:     '{{ csrf_token()}}'
                                                }                 
                 },
@@ -367,27 +430,27 @@ orderable: false,
  
 name: 'stu_first_name_stu_last_name', 
 render: function (data, type, full, meta) { 
-return (  full.stu_first_name + '['+full.stu_first_name_en+']   ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
+return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
 }},{ 
 targets: [4], 
 orderable: false, 
 className: 'sorting_1',
 name: 'program_id',
 render: function (data, type, full, meta) { 
-return    '<a href="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'  ; 
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'+'<input type="hidden" value="'+full.application_id+'">'  ; 
 } },{ 
 targets: [5], 
 orderable: false, 
  
 name: 'prog_type_name', 
 render: function (data, type, full, meta) { 
-return    '<a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ; 
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ; 
 } },{ 
 targets: [6],  
  
 name: 'bank_name', 
 render: function (data, type, full, meta) { 
-return  ' <a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a href="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
+return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
 }},{  
  
 targets: [7], 
@@ -395,8 +458,7 @@ orderable: false,
  
 name: 'apply', 
 render: function (data, type, full, meta) { 
-return ('<a href="#responsive"  hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   id="edit"  data-toggle="modal" data-original-title="จัดการยื่นยันการชำระเงิน"  class="btn btn-icon-only blue tooltips"><i class="fa fa-dollar"></i></a>'+
-   '<a href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ปรับเอกสาร" class="btn btn-icon-only blue tooltips"><i class="fa fa-file-o"></i></a>') ;
+return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li></ul></div>') ;
 } }],      
                 "bDestroy": true,
                 "ordering": false,
@@ -481,7 +543,7 @@ jQuery(document).ready(function() {
  
 
  function setID(appid,cantid){
-     $('#idsave').val(appid);  
+      $('#idsave').val(appid);  
      $('#applicantid').val(cantid);
  }
   
@@ -581,23 +643,25 @@ jQuery(document).ready(function() {
             title: 'Enter Your Score'
         });
           $('.scoreExam').on('save', function(e, params) {
-            
+              if($('#idsave').val().length>0){
                   $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
-                                         async: false,
+                                        async: false,
 					data :{ 
                                                 eng_test_score_admin : params.newValue,
                                                 applicant_id  : $('#applicantid').val()  , 
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
+                                            
                                                  $('#idsave').val('');  
-                                                  $('#applicantid').val(''); 
+                                                  $('#applicantid').val('');
+                                                   TableDatatablesAjax.init(); 
                                  	}
 				},"json");
                  
-         });
+              }});
  
         $('.typeExam').editable({
              prepend: "เลือกสถาบัน",
@@ -623,7 +687,8 @@ jQuery(document).ready(function() {
         });
          
         $('.typeExam').on('save', function(e, params) {
-                 $.ajax({
+              if($('#idsave').val().length>0){
+                  $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
@@ -635,8 +700,9 @@ jQuery(document).ready(function() {
 					success : function(data){
                                                  $('#idsave').val(''); 
                                                   $('#applicantid').val(''); 
+                                                   TableDatatablesAjax.init(); 
                                  	}
-				},"json");
+				},"json");}
                  
          });
 
@@ -645,7 +711,8 @@ jQuery(document).ready(function() {
             showbuttons: false
         });
          $('.examSel').on('save', function(e, params) {
-                  $.ajax({
+                  if($('#idsave').val().length>0){
+                     $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
@@ -657,8 +724,9 @@ jQuery(document).ready(function() {
 					success : function(data){
                                                  $('#idsave').val('');   
                                                   $('#applicantid').val(''); 
+                                                   TableDatatablesAjax.init(); 
                                  	}
-				},"json");
+				},"json");}
                  
          });
         $('.vacation').editable({
@@ -667,7 +735,8 @@ jQuery(document).ready(function() {
         });
         
          $('.vacation').on('save', function(e, params) {
-                    $.ajax({
+                    if($('#idsave').val().length>0){
+                     $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
@@ -678,9 +747,10 @@ jQuery(document).ready(function() {
                                                } ,
 					success : function(data){
                                                  $('#idsave').val('');  
-                                                  $('#applicantid').val('');   
+                                                  $('#applicantid').val(''); 
+                                                   TableDatatablesAjax.init(); 
                                  	}
-				},"json");
+				},"json");}
                  
          });
 
@@ -689,7 +759,8 @@ jQuery(document).ready(function() {
             showbuttons: 'bottom'
         });
           $('.commentsExam').on('save', function(e, params) {
-                  $.ajax({
+                if($('#idsave').val().length>0){
+                       $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
@@ -701,8 +772,9 @@ jQuery(document).ready(function() {
 					success : function(data){
                                                  $('#idsave').val('');  
                                                   $('#applicantid').val(''); 
+                                                   TableDatatablesAjax.init(); 
                                  	}
-				},"json");
+				},"json");}
                  
          });
  

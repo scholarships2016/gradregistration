@@ -65,7 +65,7 @@ Route::get('/download', function () {
     return view('download');
 });
 
-//test
+//payment
 
 Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
 Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
@@ -79,6 +79,15 @@ Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCours
 Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
 Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
 Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
+Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
+
+//GS05
+Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
+Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
+Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
+
+
+
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
     

@@ -3,9 +3,9 @@
 
 Dear {{$stu_name}}, 
 
-ผลการพิจารณาใบสมัคร {{ $thai.'['.$coursecodeno.']'}} แขนงวิชา {{$sub_major_name}} [{{$sub_major_id}}]  สาขาวิชา{{$major_name}}[{{$major_id}}]  ภาควิชา {{department_name}} [{{$department_id}}]  {{$faculty_name}} ประจำภาคการศึกษา {{$semester}} ปีการศึกษา {{$year}}
+ผลการพิจารณาใบสมัคร {{ $thai.'['.$coursecodeno.']'}} แขนงวิชา {{$sub_major_name}} [{{$sub_major_id}}]  สาขาวิชา{{$major_name}}[{{$major_id}}]  ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}} ประจำภาคการศึกษา {{$semester}} ปีการศึกษา {{$year}}
 
-คุณ {{$statusExam}} 
+ผลการพิจารณา คือ  {{$statusExam}} 
  
 
 For more information, please login to registration website http://161.200.133.6:443/gradRegistNew2/ or contact program officer Tel. 02-2186880 

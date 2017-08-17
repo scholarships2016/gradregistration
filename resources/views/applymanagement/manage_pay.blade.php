@@ -254,7 +254,7 @@
                                        
  </div></div></div></div>
                 </div></div>
-
+    </div>
 @stop
 
 
@@ -320,7 +320,7 @@ var TableDatatablesAjax = function () {
                     "url": "{!! route('admin.getRegisterCourse') !!}",
                     "type":"GET",
                     "data" : {  
-                               flow : $('#flow_id').val(),
+                               flow : '1,2,3',
                                semester  : $('#semester').val(),
                                year   :$('#year').val(),
                                roundNo :$('#roundNo').val(),
@@ -392,7 +392,7 @@ orderable: false,
 className: 'table-desc',
 name: 'flow_name', 
 render: function (data, type, full, meta) { 
-return ('<span class="label label-sm label-'+(( full.flow_id == 1)?'danger':(full.flow_id == 6)? 'success' :'info') +'">'+ (('{{session('locale')}}'=='th')? full.flow_name : full.flow_name_en) +'</span>');
+return ('<span class="label label-sm label-'+(( full.flow_id == 1)?'danger':((full.flow_id == 6)? 'success' :'info')) +'">'+ (('{{session('locale')}}'=='th')? full.flow_name : full.flow_name_en) +'</span>');
 }},{ 
  
 targets: [9], 
