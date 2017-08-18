@@ -1,21 +1,24 @@
 @extends('layouts.default')
 
 @push('pageCss')
+
+<link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css">
  <link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/layouts/layout/css/themes/light2.min.css')}}" rel="stylesheet" type="text/css" id="style_color">
 <link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
-      type="text/css"/> 
+      type="text/css"/>
 <link href="{{asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css">
- 
+
    <link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
-      type="text/css"/> 
+      type="text/css"/>
 <style type="text/css">
 
 </style>
 @endpush
- 
+
 @section('pagebar')
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -59,7 +62,7 @@
 
 @section('pagetitle')
 <h1 class="page-title">ปรับปรุงผู้มีสิทธิ์สอบ [GS03]
-   
+
 </h1>
 @stop
 
@@ -106,7 +109,7 @@
                                 <div class="form-group">
                                   <label>ภาคการศึกษา</label>
                                 <select id="semester" name="semester" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
+
                                         <option value="1">ภาคต้น</option>
                                         <option value="2">ภาคปลาย</option>
 
@@ -117,9 +120,9 @@
                                 <div class="form-group">
                                   <label>ปีการศึกษา</label>
                                    <select id="year" name="year" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
-                                        @for ($i = date('Y')+1; $i >= date('Y')-10; $i--)
-                                        <option value="{{ $i+543 }}"  >{{ $i+543 }}</option> 
+
+                                        @for ($i = date('Y'); $i >= date('Y')-10; $i--)
+                                        <option value="{{ $i+543 }}"  >{{ $i+543 }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -128,7 +131,7 @@
                                 <div class="form-group">
                                   <label>รอบที่</label>
                                  <select id="roundNo" name="roundNo" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
+
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -145,23 +148,26 @@
 
 
                             </div>
-                          
+
                           <p></p>
                         </div>
-                        <div class="m-heading-1 border-blue m-bordered">
+                        <div id="search-program-result" class="m-heading-1 border-blue m-bordered" style="display:none;">
                           <h3><span class="badge badge-info">2</span> เลือกหลักสูตร</h3>
                           <p>
 
-                            </p><div class="row">
+                            </p>
 
-                              <div class="col-md-11">
-                                <div class="form-group">
-                                    <label for="single" class="control-label">เลือกหลักสูตรเพื่อดำเนินการ</label>
-                                    <select id="single" class="form-control select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
- 
-                                    </select><span class="select2 select2-container select2-container--bootstrap" dir="ltr"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-single-container"><span class="select2-selection__rendered" id="select2-single-container"><span class="select2-selection__placeholder">เลือกหลักสูตร</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                </div>
-                              </div>
+                            <div class="row">
+
+                          <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="single" class="control-label">เลือกหลักสูตรเพื่อดำเนินการ</label>
+                                <select id="single" class="form-control select2">
+                                    <option></option>
+
+                                </select>
+                            </div>
+                          </div>
                               <div class="cold-md-1">
                                 <div class="form-group" style="padding-top:25px;">
                                   <a id="search_Select" href="javascript:;"  class="btn btn-small blue"> เลือก
@@ -179,14 +185,15 @@
                     </div>
 
                   </div>
+                  <div id="search-application-result" style="display:none;">
                   <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
                   <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
 <i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
 </a>
                   <hr>
                    <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
-                       
-                       <div ><input type="hidden" value="2" id="idsave"> <input type="hidden" value="1" id="applicantid">  
+
+                       <div ><input type="hidden" value="2" id="idsave"> <input type="hidden" value="1" id="applicantid">
                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="datatable_ajax">
                     <thead>
                       <tr>
@@ -204,11 +211,13 @@
                         <th> คะแนนภาษาอังกฤษ </th>
                         <th> Actions </th>
                       </tr>
-                    </thead>
-                    
-                  </table>   
-                       
-                       </div></div>
+                      </thead>
+
+                    </table>
+
+                </div>
+              </div>
+
                   <div class="form-actions">
                     <div class="row">
                       <div class="col-md-offset-4 col-md-8">
@@ -217,57 +226,57 @@
                       </div>
                     </div>
                   </div>
-
+                  </div>
                 </div>
               </div>
               <!-- END EXAMPLE TABLE PORTLET-->
             </div>
-        
+
 <div class="col-md-12">
  <div class="portlet light ">
      <div class="portlet-body">
  <div tabindex="-1" class="modal fade in" id="responsive" aria-hidden="true"   >
      <div class="modal-dialog">
                                             <div class="modal-content">
-                                      <form id="addData"> 
-                                          <div class="modal-dialog">       
+                                      <form id="addData">
+                                          <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button class="close" aria-hidden="true" type="button" data-dismiss="modal"></button>
                                                     <h4 class="modal-title">เพิ่มผู้สมัคร เป็นกรณีพิเศษ</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                        
+
                                                             <div class="row">
                                                              <div class="col-md-12">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-user"></i>
                                                                 </span>
-                                                                <input type="text" class="form-control" placeholder="รหัสบัตรประชาชน">  
+                                                                <input type="text" class="form-control" placeholder="รหัสบัตรประชาชน">
                                                                 <span class="input-group-btn">
                                                             <a class="btn blue" type="button">ตรวจสอบ</a>
                                                         </span>
                                                             </div> </div></div>
                                                      <div class="row"><div class="col-md-12">
-                                                             
+
                                                              </div></div>
-                                                   
-                                                    
+
+
                                                 <div class="modal-footer">
                                                     <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
                                                     <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
                                                 </div>
-                                               
+
                                           </div>
-                                              
+
 </div>
                                           </div>  </form>
-                                       
+
  </div>
      </div>
  </div>
-     </div> 
+     </div>
  </div>
                 </div>
 </div>
@@ -276,7 +285,7 @@
 
 @push('pageJs')
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/pages/scripts/table-datatables-ajax.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
@@ -291,9 +300,13 @@
 <script src="{{asset('assets/global/plugins/jquery.mockjax.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-typeahead/bootstrap3-typeahead.min.js')}}" type="text/javascript"></script>
- 
+
+<script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
+
 <script type="application/javascript">
-    $('#sentmailall').click(function() {  
+    $('#sentmailall').click(function() {
         var data = [];
            $('#datatable_ajax tbody').find('tr').each(function () {
          var row = $(this);
@@ -302,23 +315,23 @@
             data.push(row.find('input[type="hidden"]').val());
          }
     });
-         if(data.length>0){            
+         if(data.length>0){
              sentmail(JSON.stringify(data));
-         } 
+         }
      });
      function mailbyapp(app){
          var data = [];
          data.push(app);
          sentmail(JSON.stringify(data));
      }
-                               
-                               
+
+
      function sentmail(app){
                 $.ajax({
 					type: "POST",
 					url: '{!! Route('sentMailGS03') !!}',
                                          async: false,
-					data :{ 
+					data :{
                                                 curr_act_id : $('#single').val(),
                                                 application  : app,
                                                 _token: '{{ csrf_token() }}'
@@ -327,43 +340,48 @@
                                            toastr.success('ดำเนินการเรียบร้อย');
                                         }
 				},"json");
-              }                          
-                            
-                            
-                  $('#btnSearch1').click(function() {  
+              }
+
+
+                  $('#btnSearch1').click(function() {
                                     $.ajax({
 					type: "get",
                                          async: false,
 					url: '{!! Route('getCourse') !!}',
-					data :{ 
+					data :{
                                                 semester  : $('#semester').val(),
                                                 year   :$('#year').val(),
                                                 roundNo :$('#roundNo').val(),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
-					success : function(data){ 
+					success : function(data){
                                               $("#single").empty();
                                               var group="";
                                        jQuery.each(data, function(index, itemData) {
                                               if(group != data[index].faculty_id)
-                                              { 
+                                              {
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
-                                              }  
+                                              }
                                              $("#single").append('<option  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
-                                               
+
                                                         group = data[index].faculty_id;
                                                     } );
-                                              
+
                                         }
-				},"json");  });           
-                            
-                           
-                            
-    
- var table="";   
-var TableDatatablesAjax = function () { 
+				},"json");
+        //Show serach program result
+        $('#search-program-result').fadeIn( "slow", "linear" );
+        $('#search-application-result').fadeOut( "slow", "linear" );
+      });
+
+
+
+
+
+ var table="";
+var TableDatatablesAjax = function () {
     var handle1 = function () {
 
         var grid = new Datatable();
@@ -371,110 +389,110 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
             loadingMessage: 'Loading...',
-            dataTable: {  
-                "bStateSave": true,  
+            dataTable: {
+                "bStateSave": true,
                 "fnStateSaveParams":    function ( oSettings, sValue ) {
                     $("#datatable_ajax tr.filter .form-control").each(function() {
                         sValue[$(this).attr('name')] = $(this).val();
                     });
-                   
+
                     return sValue;
                 },
-                
+
                 "lengthMenu": [
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
                 "pageLength": 20, // default record count per page
-           
+
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourse') !!}",
                     "type":"GET",
                     "async": "false",
-                    "data" : {  
+                    "data" : {
                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                 sub_major_id : $('option:selected','#single').attr('smj'),
                                 program_id : $('option:selected','#single').attr('pg'),
                                   program_type_id : $('option:selected','#single').attr('pt'),
-                                flow : '3,4', 
+                                flow : '3,4',
                                _token:     '{{ csrf_token()}}'
-                                               }                 
+                                               }
                 },
-               
-        
-columnDefs: [
-    { 
-targets: [0], 
 
- 
+
+columnDefs: [
+    {
+targets: [0],
+
+
 name: 'rownum',
-render: function (data, type, full, meta) { 
-return  '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" value="1" /><span></span></label>'; 
-} },{ 
-targets: [1], 
-orderable: false, 
- 
-name: 'rownum', 
-render: function (data, type, full, meta) { 
-return full.rownum; 
-} },{ 
-targets: [2], 
-orderable: false, 
- 
-name: 'app_id', 
-render: function (data, type, full, meta) { 
-return  full.app_ida   ; 
-} },{ 
-targets: [3], 
-orderable: false, 
- 
-name: 'stu_first_name_stu_last_name', 
-render: function (data, type, full, meta) { 
+render: function (data, type, full, meta) {
+return  '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" value="1" /><span></span></label>';
+} },{
+targets: [1],
+orderable: false,
+
+name: 'rownum',
+render: function (data, type, full, meta) {
+return full.rownum;
+} },{
+targets: [2],
+orderable: false,
+
+name: 'app_id',
+render: function (data, type, full, meta) {
+return  full.app_ida   ;
+} },{
+targets: [3],
+orderable: false,
+
+name: 'stu_first_name_stu_last_name',
+render: function (data, type, full, meta) {
 return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
-}},{ 
-targets: [4], 
-orderable: false, 
+}},{
+targets: [4],
+orderable: false,
 className: 'sorting_1',
 name: 'program_id',
-render: function (data, type, full, meta) { 
-return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'+'<input type="hidden" value="'+full.application_id+'">'  ; 
-} },{ 
-targets: [5], 
-orderable: false, 
- 
-name: 'prog_type_name', 
-render: function (data, type, full, meta) { 
-return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ; 
-} },{ 
-targets: [6],  
- 
-name: 'bank_name', 
-render: function (data, type, full, meta) { 
+render: function (data, type, full, meta) {
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'+'<input type="hidden" value="'+full.application_id+'">'  ;
+} },{
+targets: [5],
+orderable: false,
+
+name: 'prog_type_name',
+render: function (data, type, full, meta) {
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ;
+} },{
+targets: [6],
+
+name: 'bank_name',
+render: function (data, type, full, meta) {
 return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
-}},{  
- 
-targets: [7], 
-orderable: false, 
- 
-name: 'apply', 
-render: function (data, type, full, meta) { 
+}},{
+
+targets: [7],
+orderable: false,
+
+name: 'apply',
+render: function (data, type, full, meta) {
 return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li></ul></div>') ;
-} }],      
+} }],
                 "bDestroy": true,
                 "ordering": false,
                 "order": [
                     [1, "asc"]
-                ] 
+                ]
             }
         });
 
-       
+
     }
-  
+
  setInterval(function(){FormEditable.init(); }, 2000);
     return {
      init: function () {
-             handle1();      
+             handle1();
         }
 
     };
@@ -485,68 +503,75 @@ var exam_status="";
 var EngTest="";
 
 jQuery(document).ready(function() {
-  
+  //clear serach result
+  $('#semester,#year,#roundNo').on('change', function() {
+    $('#search-program-result').fadeOut( "slow", "linear" );
+    $('#search-application-result').fadeOut( "slow", "linear" );
+  });
+
    $('#datatable_ajax tbody').on( 'click', 'a', function () {
           if($(this).attr('id')=="edit"){
                $('#application_id').val($(this).attr('hid'));
                $('#payment_date').val($(this).attr('hidd')) ;
-               $('#receipt_book').val($(this).attr('hidb')); 
+               $('#receipt_book').val($(this).attr('hidb'));
                $('#receipt_no').val($(this).attr('hidn'));
-         } 
+         }
     } );
-    
+
         $.ajax({
             type: "GET",
             data: {_token:'{{ csrf_token() }}'},
              async: false,
-            url: "{{url('admin/getStatusExam')}}",         
-          success : function(data){                               
+            url: "{{url('admin/getStatusExam')}}",
+          success : function(data){
                 jsonObj = [];
                jQuery.each(data, function(index, itemData) {
                    item = {};
                     item ["text"] = itemData.exam_name;
                     item ["value"] = itemData.exam_id;
                     jsonObj.push(item);
-               });             
+               });
              exam_status=jsonObj;
-        } 
-            
+        }
+
         })  ;
-        
+
          $.ajax({
             type: "GET",
             data: {_token:'{{ csrf_token() }}'},
              async: false,
-            url: "{{url('admin/getEngTest')}}",         
-          success : function(data){                               
+            url: "{{url('admin/getEngTest')}}",
+          success : function(data){
                jsonObj = [];
                jQuery.each(data, function(index, itemData) {
                    item = {};
                     item ["text"] = itemData.eng_test_name;
                     item ["value"] = itemData.eng_test_id;
                     jsonObj.push(item);
-               });             
+               });
              EngTest=jsonObj;
-          
-            } 
-            
+
+            }
+
         })  ;
-     
- 
+
+
 });
 
- 
+
     $('#search_Select').click(function(){
-    TableDatatablesAjax.init(); 
+      TableDatatablesAjax.init();
+    //Show serach application result
+      $('#search-application-result').fadeIn( "slow", "linear" );
     });
- 
- 
+
+
 
  function setID(appid,cantid){
-      $('#idsave').val(appid);  
+      $('#idsave').val(appid);
      $('#applicantid').val(cantid);
  }
-  
+
 
   function GetDateFormat(date) {
             var month = (date.getMonth() + 1).toString();
@@ -555,9 +580,9 @@ jQuery(document).ready(function() {
             day = day.length > 1 ? day : '0' + day;
             return date.getFullYear()+'-'+month + '-' + day ;
         }
- 
- 
- 
+
+
+
  var FormEditable = function() {
 
     $.mockjaxSettings.responseTime = 500;
@@ -596,7 +621,7 @@ jQuery(document).ready(function() {
     }
 
 
-        
+
     var initAjaxMock = function() {
         //ajax mocks
 
@@ -607,17 +632,17 @@ jQuery(document).ready(function() {
                 log(settings, this);
             }
         });
-  
+
         $.mockjax({
             url: '/exam-results',
             async: false,
-            response: function(settings) {               
+            response: function(settings) {
         this.responseText = exam_status;
-        
+
                 log(settings, this);
             }
         });
-        
+
     }
 
     var initEditables = function() {
@@ -648,21 +673,21 @@ jQuery(document).ready(function() {
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                         async: false,
-					data :{ 
+					data :{
                                                 eng_test_score_admin : params.newValue,
-                                                applicant_id  : $('#applicantid').val()  , 
+                                                applicant_id  : $('#applicantid').val()  ,
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                            
-                                                 $('#idsave').val('');  
+
+                                                 $('#idsave').val('');
                                                   $('#applicantid').val('');
-                                                   TableDatatablesAjax.init(); 
+                                                   TableDatatablesAjax.init();
                                  	}
 				},"json");
-                 
+
               }});
- 
+
         $('.typeExam').editable({
              prepend: "เลือกสถาบัน",
             inputclass: 'form-control',
@@ -685,28 +710,28 @@ jQuery(document).ready(function() {
                 }
             }
         });
-         
+
         $('.typeExam').on('save', function(e, params) {
               if($('#idsave').val().length>0){
                   $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
-					data :{ 
+					data :{
                                                 eng_test_id_admin : params.newValue,
-                                                applicant_id  : $('#applicantid').val()  , 
+                                                applicant_id  : $('#applicantid').val()  ,
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                                 $('#idsave').val(''); 
-                                                  $('#applicantid').val(''); 
-                                                   TableDatatablesAjax.init(); 
+                                                 $('#idsave').val('');
+                                                  $('#applicantid').val('');
+                                                   TableDatatablesAjax.init();
                                  	}
 				},"json");}
-                 
+
          });
 
-    
+
         $('.examSel').editable({
             showbuttons: false
         });
@@ -716,45 +741,45 @@ jQuery(document).ready(function() {
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
-					data :{ 
+					data :{
                                                 exam_status : params.newValue,
-                                                application_id  : $('#idsave').val(), 
+                                                application_id  : $('#idsave').val(),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                                 $('#idsave').val('');   
-                                                  $('#applicantid').val(''); 
-                                                   TableDatatablesAjax.init(); 
+                                                 $('#idsave').val('');
+                                                  $('#applicantid').val('');
+                                                   TableDatatablesAjax.init();
                                  	}
 				},"json");}
-                 
+
          });
         $('.vacation').editable({
             rtl: App.isRTL(),
             async: false
         });
-        
+
          $('.vacation').on('save', function(e, params) {
                     if($('#idsave').val().length>0){
                      $.ajax({
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
-					data :{ 
+					data :{
                                                  eng_date_taken_admin : GetDateFormat(params.newValue) ,
-                                                 applicant_id  : $('#applicantid').val()  ,  
+                                                 applicant_id  : $('#applicantid').val()  ,
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                                 $('#idsave').val('');  
-                                                  $('#applicantid').val(''); 
-                                                   TableDatatablesAjax.init(); 
+                                                 $('#idsave').val('');
+                                                  $('#applicantid').val('');
+                                                   TableDatatablesAjax.init();
                                  	}
 				},"json");}
-                 
+
          });
 
-         
+
         $('.commentsExam').editable({
             showbuttons: 'bottom'
         });
@@ -764,23 +789,24 @@ jQuery(document).ready(function() {
 					type: "POST",
 					url: '{!! Route('updateApplication') !!}',
                                          async: false,
-					data :{ 
+					data :{
                                                 exam_remark : params.newValue,
-                                                application_id  : $('#idsave').val(), 
+                                                application_id  : $('#idsave').val(),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                                 $('#idsave').val('');  
-                                                  $('#applicantid').val(''); 
-                                                   TableDatatablesAjax.init(); 
+                                                 $('#idsave').val('');
+                                                  $('#applicantid').val('');
+                                                   TableDatatablesAjax.init();
+
                                  	}
 				},"json");}
-                 
+
          });
- 
+
     }
 
-    return {       
+    return {
         init: function() {
         initAjaxMock();
         initEditables();
@@ -789,8 +815,8 @@ jQuery(document).ready(function() {
     };
 
 }();
- 
- 
+
+
 
 </script>
 @endpush

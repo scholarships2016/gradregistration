@@ -74,7 +74,7 @@
             <div class="actions">
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"
                    data-original-title="" title=""> </a>
-                <a href="javascript:window.history.back();" class="btn btn-circle blue-steel btn-outline">
+                <a href="{{url('admin/management/curriculum/manage')}}" class="btn btn-circle blue-steel btn-outline">
                     <i class="fa fa-mail-reply"></i> กลับหน้าหลัก </a>
             </div>
         </div>
@@ -167,6 +167,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
@@ -204,6 +206,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="major_id"><strong>สาขาวิชา</strong>
@@ -233,15 +237,15 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
+
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 <div class="form-group">
                                     <label class="control-label offset-col-md-3 col-md-2"
                                            for="degree_id"><strong>ชื่อหลักสูตร</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <input type="hidden" id="degree_id_hidden" name="degree_id_hidden"
                                                value="@if(!empty($curriculum)){{$curriculum->degree_id}}@endif"/>
                                         <select name="degree_id" id="degree_id" class="form-control">
@@ -256,6 +260,7 @@
                                 </div>
                             </div>
                         </div>
+                          <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
@@ -335,18 +340,21 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3"
+                                    <label class="control-label col-md-4"
                                            for="apply_fee"><strong>ค่าธรรมเนียม</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
-                                    <div class="col-md-9">
+                                    <div class="col-md-8">
                                         <input type="number" id="apply_fee" name="apply_fee"
                                                class="form-control"
                                                value="@if(!empty($curriculum)){{$curriculum->apply_fee}}@endif">
-                                        <span class="help-block"></span>
+                                        <span class="help-block">(บาท)</span>
                                     </div>
                                 </div>
+
                             </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-4"
@@ -357,8 +365,7 @@
                                         <input type="number" id="expected_amount"
                                                name="expected_amount"
                                                class="form-control"
-                                               value="@if(!empty($curriculum)){{$curriculum->expected_amount}}@endif"
-                                        >
+                                               value="@if(!empty($curriculum)){{$curriculum->expected_amount}}@endif">
                                         <span class="help-block">(คน)</span>
                                     </div>
                                 </div>
@@ -368,8 +375,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3"><strong>เอกสารประกอบหลักสูตร</strong></label>
-                                    <div class="col-md-9">
+                                    <label class="control-label col-md-4"><strong>เอกสารประกอบหลักสูตร</strong></label>
+                                    <div class="col-md-8">
                                         <div id="fileuploadDiv"
                                              class="fileinput @if(!empty($curriculum)&&!empty($curriculum->file))fileinput-exists @else fileinput-new @endif"
                                              data-provides="fileinput">
@@ -509,7 +516,7 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-10">
-                            <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
+                            <a id="cancelBtn" href="{{url('admin/management/curriculum/manage')}}" class="btn default">
                                 ยกเลิก
                             </a>
                             <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
@@ -551,6 +558,7 @@
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
+
 <script type="application/javascript">
 
     var mainForm;
@@ -1122,7 +1130,7 @@
         roundHtml += '<div class="portlet green-meadow box">';
         roundHtml += '<div class="portlet-title">';
         roundHtml += '<div class="caption">';
-        roundHtml += '<i class="fa fa-cogs"></i>รอบที่ ' + obj.round_no;
+        roundHtml += '<i class="fa fa-table"></i>การเปิดรับสมัครรอบที่ ' + obj.round_no;
         roundHtml += '</div>';
         roundHtml += '<div class="actions">';
 //        roundHtml += '<a href="javascript:;" class="btn btn-default btn-sm">';
@@ -1134,7 +1142,7 @@
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="form-group col-md-12">';
-        roundHtml += '<label class="control-label col-md-offset-1 col-md-1"';
+        roundHtml += '<label class="control-label  col-md-2"';
         roundHtml += 'for="exam_schedule"><strong>ตารางสอบ</strong></label>';
         roundHtml += '<div class="col-md-10">';
         roundHtml += '<textarea id="exam_schedule" class="form-control"';
@@ -1151,9 +1159,9 @@
 
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="form-group col-md-6">';
-        roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="announce_admission_date"><strong>วันที่คณะส่งผู้ผ่าน</strong></label>';
-        roundHtml += '<div class="col-md-9">';
+        roundHtml += '<label class="control-label col-md-4"';
+        roundHtml += 'for="announce_admission_date"><strong>วันที่ประกาศรายชื่อผู้มีสิทธิ์สอบ</strong></label>';
+        roundHtml += '<div class="col-md-8">';
         roundHtml += '<input type="text" id="announce_admission_date"';
         roundHtml += 'name="announce_admission_date"';
         roundHtml += 'class="form-control date-picker" value="';
@@ -1165,9 +1173,9 @@
         roundHtml += '</div>';
         roundHtml += '</div>';
         roundHtml += '<div class="form-group col-md-6">';
-        roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="announce_exam_date"><strong>วันที่คณะส่งผู้มีสิทธิสอบ</strong></label>';
-        roundHtml += '<div class="col-md-9">';
+        roundHtml += '<label class="control-label col-md-4"';
+        roundHtml += 'for="announce_exam_date"><strong>วันที่ประกาศผลการสอบคัดเลือก</strong></label>';
+        roundHtml += '<div class="col-md-8">';
         roundHtml += '<input type="text" id="announce_exam_date"';
         roundHtml += 'name="announce_exam_date"';
         roundHtml += 'class="form-control date-picker" value="';
@@ -1181,9 +1189,9 @@
         roundHtml += '</div>';
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="form-group col-md-6">';
-        roundHtml += '<label class="control-label col-md-3"';
+        roundHtml += '<label class="control-label col-md-4"';
         roundHtml += 'for="orientation_date"><strong>วันที่ปฐมนิเทศ</strong></label>';
-        roundHtml += '<div class="col-md-9">';
+        roundHtml += '<div class="col-md-8">';
         roundHtml += '<input type="text" id="orientation_date"';
         roundHtml += 'name="orientation_date"';
         roundHtml += 'class="form-control date-picker" value="';
@@ -1195,9 +1203,9 @@
         roundHtml += '</div>';
         roundHtml += '</div>';
         roundHtml += '<div class="form-group col-md-6">';
-        roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="orientation_location"><strong>ที่</strong></label>';
-        roundHtml += '<div class="col-md-9">';
+        roundHtml += '<label class="control-label col-md-4"';
+        roundHtml += 'for="orientation_location"><strong>สถานที่ปฐมนิเทศ</strong></label>';
+        roundHtml += '<div class="col-md-8">';
         roundHtml += '<input type="text" id="orientation_location"';
         roundHtml += 'name="orientation_location"';
         roundHtml += 'class="form-control" value="';

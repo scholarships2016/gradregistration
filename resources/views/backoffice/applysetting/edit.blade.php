@@ -41,7 +41,7 @@
             </div>
             <div class="actions">
 
-                <a href="javascript:window.history.back();" class="btn btn-circle blue-steel btn-outline">
+                <a href="{{url('admin/setting/applysetting/manage')}}" class="btn btn-circle blue-steel btn-outline">
                     <i class="fa fa-mail-reply"></i> กลับหน้าหลัก </a>
             </div>
         </div>
@@ -208,7 +208,7 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-4 col-md-8">
-                                <button type="button" class="btn grey-steel">ยกเลิก</button>
+                                <a href="{{url('admin/setting/applysetting/manage')}}"><button type="button" class="btn grey-steel">ยกเลิก</button></a>
                                 <button type="button" onclick="saveForm()" class="btn green">บันทึก</button>
                             </div>
                         </div>
