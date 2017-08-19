@@ -145,10 +145,12 @@ class ProfileController extends Controller
         Log::info('doSavePersonalInfomation');
         try {
             $data = $request->all();
-            if (array_key_exists('stu_profile_pic', $data) && !empty($data['stu_profile_pic'])) {
-                $filename = Storage::putFile(env(Util::PROFILE_FOLDER), $request->file('stu_profile_pic'));
-                $data['stu_profile_pic_filename'] = $filename;
-            }
+            $who = 'test';
+            $creator = $who;
+            $modifier = $who;
+
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
             if (array_key_exists('stu_birthdate', $data) && !empty($data['stu_birthdate'])) {
                 $data['stu_birthdate'] = Carbon::createFromFormat('d/m/Y', $data['stu_birthdate'])->format('Y-m-d');
             }
@@ -164,6 +166,12 @@ class ProfileController extends Controller
         Log::info('doSavePresentAddress');
         try {
             $data = $request->all();
+            $who = 'test';
+            $creator = $who;
+            $modifier = $who;
+
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
             $result = $this->applicantRepo->saveApplicant($data);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
@@ -177,6 +185,12 @@ class ProfileController extends Controller
         Log::info('doSaveKnowledgeSkill');
         try {
             $data = $request->all();
+            $who = 'test';
+            $creator = $who;
+            $modifier = $who;
+
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
             if (array_key_exists('eng_date_taken', $data) && !empty($data['eng_date_taken'])) {
                 $data['eng_date_taken'] = Carbon::createFromFormat('d/m/Y', $data['eng_date_taken'])->format('Y-m-d');
             }
@@ -192,11 +206,18 @@ class ProfileController extends Controller
         Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
+            $who = 'test';
+            $creator = $who;
+            $modifier = $who;
+
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
             if ($this->applicantEduRepo->saveApplicantEduList($data, $data['applicant_id'])) {
                 $result = $this->applicantEduRepo->getApplicantEduByApplicantId($data['applicant_id']);
             }
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            throw $ex;
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
@@ -206,12 +227,49 @@ class ProfileController extends Controller
         Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
+            $who = 'test';
+            $creator = $who;
+            $modifier = $who;
+
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
             if ($this->applicantWorkRepo->saveApplicantWorkList($data, $data['applicant_id'])) {
                 $result = $this->applicantWorkRepo->getApplicantWorkByApplicantId($data['applicant_id']);
             }
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+        }
+    }
+
+    public function doChangePassword(Request $request)
+    {
+        Log::info('doChangePassword');
+        try {
+            $data = $request->all();
+            $who = 'test';
+            $creator = $who;
+            $modifier = $who;
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
+            if ($this->applicantRepo->changePassword($data)) {
+                return response()->json(Util::jsonResponseFormat(1, null, Util::CHANGE_PASS_SUCCESS));
+            } else {
+                return response()->json(Util::jsonResponseFormat(3, null, Util::CHANGE_PASS_ERROR));
+            }
+        } catch (\Exception $ex) {
+            return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+        }
+    }
+
+    public function getProfileImg(Request $request)
+    {
+        try {
+            $id = $request->input('applicant_id');
+            $applicant = $this->applicantRepo->findOrFail($id);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($applicant->imgFile->file_path);
+            return response()->file($path);
+        } catch (\Exception $ex) {
         }
     }
 }
