@@ -73,8 +73,7 @@ class Applicant extends Eloquent
         'nation_id' => 'int',
         'district_code' => 'int',
         'province_id' => 'int',
-        'fund_interesting' => 'int',
-        'stu_img_file_id' => 'int'
+        'fund_interesting' => 'int'
     ];
     protected $dates = [
         'stu_birthdate',
@@ -111,7 +110,7 @@ class Applicant extends Eloquent
         'eng_test_score',
         'thai_test_score',
         'cu_best_score',
-        'stu_img_file_id',
+        'stu_img',
         'stu_birthdate',
         'stu_religion',
         'stu_married',
@@ -148,8 +147,4 @@ class Applicant extends Eloquent
         return $this->hasOne(TblNation::class, 'nation_id', 'nation_id');
     }
 
-    public function imgFile()
-    {
-        return $this->hasOne(File::class, 'file_id', 'stu_img_file_id');
-    }
 }
