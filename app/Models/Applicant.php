@@ -147,4 +147,8 @@ class Applicant extends Eloquent
         return $this->hasOne(TblNation::class, 'nation_id', 'nation_id');
     }
 
+    public function stuImgFile()
+    {
+        return $this->hasOne(File::class, 'file_id', 'stu_img');
+    }
 }
