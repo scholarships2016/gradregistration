@@ -191,8 +191,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->stu_password = bcrypt($data['stu_password']);
             if (array_key_exists('sys_activate_code', $data))
                 $curObj->sys_activate_code = $data['sys_activate_code'];
-            if (array_key_exists('stu_img_file_id', $data))
-                $curObj->stu_img_file_id = $data['stu_img_file_id'];
+            if (array_key_exists('stu_img', $data))
+                $curObj->stu_img = $data['stu_img'];
 
 
             if (array_key_exists('creator', $data))
@@ -363,13 +363,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             if (array_key_exists('reqDelImg', $data) && $data['reqDelImg'] == 1) {
                 $applicant = $this->findOrFail($data['applicant_id']);
-                $this->fileRepo->forceRemoveById($applicant->imgFile->file_id);
-                $data['stu_img_file_id'] = null;
+                $this->fileRepo->removeFileByPath($applicant->stu_img);
+                $data['stu_img'] = null;
             }
 
             if (array_key_exists('stu_profile_pic', $data) && !empty($data['stu_profile_pic'])) {
-                $picFile = $this->fileRepo->upload($data['stu_profile_pic'], env(Util::PROFILE_FOLDER));
-                $data['stu_img_file_id'] = $picFile->file_id;
+                $imgPath = $this->fileRepo->justUpload($data['stu_profile_pic'], env(Util::PROFILE_FOLDER));
+                $data['stu_img'] = $imgPath;
             }
 
             if ($this->saveApplicant($data)) {
@@ -378,6 +378,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             DB::commit();
             return true;
         } catch (\Exception $ex) {
+            throw $ex;
             DB::rollBack();
             throw $ex;
         }
