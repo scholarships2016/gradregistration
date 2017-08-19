@@ -363,13 +363,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             if (array_key_exists('reqDelImg', $data) && $data['reqDelImg'] == 1) {
                 $applicant = $this->findOrFail($data['applicant_id']);
-                $this->fileRepo->removeFileByPath($applicant->stu_img);
+                $this->fileRepo->forceRemoveById($applicant->stu_img);
                 $data['stu_img'] = null;
             }
 
             if (array_key_exists('stu_profile_pic', $data) && !empty($data['stu_profile_pic'])) {
-                $imgPath = $this->fileRepo->justUpload($data['stu_profile_pic'], env(Util::PROFILE_FOLDER));
-                $data['stu_img'] = $imgPath;
+                $fileImg = $this->fileRepo->upload($data['stu_profile_pic'], env(Util::PROFILE_FOLDER));
+                $data['stu_img'] = $fileImg->file_id;
             }
 
             if ($this->saveApplicant($data)) {
@@ -378,7 +378,6 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             DB::commit();
             return true;
         } catch (\Exception $ex) {
-            throw $ex;
             DB::rollBack();
             throw $ex;
         }
