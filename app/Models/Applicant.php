@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Applicant
- * 
+ *
  * @property int $applicant_id
  * @property string $stu_citizen_card
  * @property string $name_title_id
@@ -59,7 +59,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Applicant extends Eloquent {
+class Applicant extends Eloquent
+{
 
     protected $table = 'applicant';
     protected $primaryKey = 'applicant_id';
@@ -72,7 +73,8 @@ class Applicant extends Eloquent {
         'nation_id' => 'int',
         'district_code' => 'int',
         'province_id' => 'int',
-        'fund_interesting' => 'int'
+        'fund_interesting' => 'int',
+        'stu_img_file_id' => 'int'
     ];
     protected $dates = [
         'stu_birthdate',
@@ -109,7 +111,7 @@ class Applicant extends Eloquent {
         'eng_test_score',
         'thai_test_score',
         'cu_best_score',
-        'stu_img',
+        'stu_img_file_id',
         'stu_birthdate',
         'stu_religion',
         'stu_married',
@@ -131,18 +133,23 @@ class Applicant extends Eloquent {
         'modified'
     ];
 
-  //  public function getStuBirthdateAttribute($value)
-  //  {
-   //     return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-  //  }
+    //  public function getStuBirthdateAttribute($value)
+    //  {
+    //     return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //  }
 
-  //  public function getEngDateTakenAttribute($value)
-  //  {
-  //      return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-  //  }
+    //  public function getEngDateTakenAttribute($value)
+    //  {
+    //      return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //  }
 
     public function tblNation()
     {
         return $this->hasOne(TblNation::class, 'nation_id', 'nation_id');
+    }
+
+    public function imgFile()
+    {
+        return $this->hasOne(File::class, 'file_id', 'stu_img_file_id');
     }
 }
