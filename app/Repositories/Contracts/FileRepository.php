@@ -24,6 +24,8 @@ interface FileRepository
 
     public function justUploadWithName(UploadedFile $uploadedFile, $newFilename, $path = null);
 
+    public function removeFileByPath($path);
+
 }
  
 
