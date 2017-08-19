@@ -167,7 +167,7 @@ return [
     'perInfoReligion' => 'Religion',
     'perInfoMaritalStatus' => 'Marital Status',
     'perInfoBirthdate' => 'Birthdate',
-    'perInfoBirthdateEx' => '-->&nbsp;20/01/1983',
+    'perInfoBirthdateEx' => 'Example:&nbsp;20/01/1983',
     'perInfoPlaceOfBirth' => 'Place of Birth',
     'perInfoEmail' => 'Email',
     'perInfoEmailNotice' => 'Please fill in your valid email, graduate school will inform application result via this email.',
@@ -253,4 +253,12 @@ return [
            'lbLoginSignupPassword' => 'Password',
             'lbLoginSignupPasswordDesc' => 'Password (at least 6 characters.)',
            'lbLoginSignupPasswordReType' => 'Re-Type your password',
+
+           //profile
+           'lbBtnChangeImage' => 'Select',
+           'lbBtnChangeImage' => 'Change',
+           'lbBtnDeleteImage' => 'Delete',
+           'lbCurrentWorkStatusTitle' => 'Working Status',
+           'lbCurrentWorkStatus' => 'Is the current/lastest work?',
+
 ];

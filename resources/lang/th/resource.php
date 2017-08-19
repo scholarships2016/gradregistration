@@ -309,4 +309,10 @@ return [
       'lbLoginSignupPasswordDesc' => 'รหัสผ่านความยาวอย่างน้อย 6 ตัวอักษร',
       'lbLoginSignupPasswordReType' => 'กรอกรหัสผ่านอีกครั้ง',
 
+      //profile
+      'lbBtnChangeImage' => 'เลือก',
+      'lbBtnChangeImage' => 'เปลี่ยนรูป',
+      'lbBtnDeleteImage' => 'ลบ',
+      'lbCurrentWorkStatusTitle' => 'สถานะการทำงาน',
+      'lbCurrentWorkStatus' => 'เป็นที่ทำงานปัจจุบัน/ล่าสุด?',
 ];

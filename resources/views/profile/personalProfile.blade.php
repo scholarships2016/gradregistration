@@ -58,7 +58,7 @@
                                     <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
                                          onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image'"
                                          class="img-responsive pic-bordered"/>
-                                    <a href="javascript:;" class="profile-edit"> edit </a>
+                                    <a href="#tab_1_3" data-toggle="tab" aria-expanded="false" class="profile-edit"> edit </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;"> Last Login ..... </a>
