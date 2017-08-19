@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\ApplySettingRepository;
+use App\Repositories\Contracts\DegreeRepository;
 use App\Repositories\Contracts\DistrictRepository;
 use App\Repositories\Contracts\EngTestRepository;
 use App\Repositories\Contracts\FacultyRepository;
@@ -34,6 +35,7 @@ class MasterDataController extends Controller
     protected $subMajorRepo;
     protected $mcourseRepo;
     protected $applySetRepo;
+    protected $degreeRepo;
 
     /**
      * MasterDataController constructor.
@@ -44,7 +46,7 @@ class MasterDataController extends Controller
                                 DepartmentRepository $departmentRepo, CurriculaRepository $curriculaRepo,
                                 FacultyRepository $facultyRepo, TblMajorRepository $majorRepo,
                                 TblSubMajorRepository $subMajorRepo, McourseStudyRepository $mcourseRepo,
-                                ApplySettingRepository $applySetRepo)
+                                ApplySettingRepository $applySetRepo, DegreeRepository $degreeRepo)
     {
         $this->districtRepo = $districtRepo;
         $this->provinceRepo = $provinceRepo;
@@ -59,6 +61,7 @@ class MasterDataController extends Controller
         $this->subMajorRepo = $subMajorRepo;
         $this->mcourseRepo = $mcourseRepo;
         $this->applySetRepo = $applySetRepo;
+        $this->degreeRepo = $degreeRepo;
     }
 
     public function getDistrictByProvinceIdForDropdown(Request $request)
@@ -148,12 +151,12 @@ class MasterDataController extends Controller
         }
     }
 
-    public function getMcourseStudyByMajorId(Request $request)
+    public function getMcourseStudyByMajorIdAndDegreeId(Request $request)
     {
         if ($request->ajax()) {
             $param = $request->all();
             try {
-                $result = $this->mcourseRepo->getMcourseStudyByMajorId($param['major_id']);
+                $result = $this->mcourseRepo->getMcourseStudyByMajorIdAndDegreeId($param['major_id'], $param['degree_id']);
                 return response()->json($result);
             } catch (\Exception $ex) {
                 return null;
@@ -187,5 +190,16 @@ class MasterDataController extends Controller
         }
     }
 
+    public function getAllDegreeForDropdown(Request $request)
+    {
+        if ($request->ajax()) {
+            try {
+                $result = Util::prepareDataForDropdownList(json_decode($this->degreeRepo->getAllDegreeForDropdown(), true), 'degree_id', 'degree_name_full');
+                return response()->json($result);
+            } catch (\Exception $ex) {
+                throw $ex;
+            }
+        }
+    }
 
 }
