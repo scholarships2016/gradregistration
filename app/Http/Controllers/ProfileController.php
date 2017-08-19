@@ -133,8 +133,7 @@ class ProfileController extends Controller
                 'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
 
         } catch (\Exception $ex) {
-            echo $ex->getMessage();
-            return;
+
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             return back();
         }
@@ -267,7 +266,7 @@ class ProfileController extends Controller
         try {
             $id = $request->input('applicant_id');
             $applicant = $this->applicantRepo->findOrFail($id);
-            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($applicant->imgFile->file_path);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($applicant->stu_img);
             return response()->file($path);
         } catch (\Exception $ex) {
         }
