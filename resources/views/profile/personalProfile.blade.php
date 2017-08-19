@@ -45,7 +45,7 @@
                     <a href="#tab_1_1" data-toggle="tab"> Overview </a>
                 </li>
 
-                <li  class="">
+                <li class="">
                     <a href="#tab_1_3" data-toggle="tab"> Profile </a>
                 </li>
             </ul>
@@ -55,7 +55,7 @@
                         <div class="col-md-3">
                             <ul class="list-unstyled profile-nav">
                                 <li>
-                                    <img src="{{$profile_img}}"
+                                    <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
                                          onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image'"
                                          class="img-responsive pic-bordered"/>
                                     <a href="javascript:;" class="profile-edit"> edit </a>
@@ -67,29 +67,30 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-12 profile-info"  id="view-basic-info">
+                                <div class="col-md-12 profile-info" id="view-basic-info">
                                     <h1 class="font-blue sbold uppercase">
                                         {{$applicant->name_title_en}} {{$applicant->stu_first_name_en.' '.$applicant->stu_last_name_en}}
-                                        <br/><h4 class="font-blue">{{$applicant->name_title}} {{$applicant->stu_first_name.' '.$applicant->stu_last_name}}</h4>
+                                        <br/><h4
+                                                class="font-blue">{{$applicant->name_title}} {{$applicant->stu_first_name.' '.$applicant->stu_last_name}}</h4>
                                     </h1>
                                     <p>
 
 
-
-                                      <div class="row">
+                                    <div class="row">
                                         <div class="col-md-4">
-                                      <i class="fa fa-user font-blue" title="Citizen ID/Passport ID"></i> {{$applicant->stu_citizen_card}}
+                                            <i class="fa fa-user font-blue"
+                                               title="Citizen ID/Passport ID"></i> {{$applicant->stu_citizen_card}}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <i class="fa fa-envelope font-blue"></i> {{$applicant->stu_email}}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <i class="fa fa-phone font-blue"></i> {{$applicant->stu_phone}}
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                      <i class="fa fa-envelope font-blue"></i> {{$applicant->stu_email}}
-                                    </div>
-                                    <div class="col-md-4">
-                                      <i class="fa fa-phone font-blue"></i> {{$applicant->stu_phone}}
-                                    </div>
-                                  </div>
                                     </p>
                                     <ul class="list-inline">
-                                        <li  title="Nation">
+                                        <li title="Nation">
                                             <i class="fa fa-map-marker"></i>
                                             @if(!empty($applicant->nation_id))
                                                 {{(session('locale')=='th')?$applicant->tblNation->nation_name :$applicant->tblNation->nation_name_en }}
@@ -118,8 +119,9 @@
                             </div>
                             <!--end row-->
                             <div class="tabbable-line tabbable-custom-profile">
-                              <a title="{{Lang::get('resource.lbManageCouse')}}" href="apply/manageMyCourse"  class="btn btn-circle red-pink btn-outline">
-                        <i class="icon-briefcase"></i>  {{Lang::get('resource.lbManageCouse')}}</a>
+                                <a title="{{Lang::get('resource.lbManageCouse')}}" href="apply/manageMyCourse"
+                                   class="btn btn-circle red-pink btn-outline">
+                                    <i class="icon-briefcase"></i> {{Lang::get('resource.lbManageCouse')}}</a>
 
                                 <ul class="nav nav-tabs">
 
@@ -183,19 +185,20 @@
                         <div class="col-md-9">
                             <div class="tab-content">
                                 <div id="tab_1-1" class="tab-pane active">
-                                  <!--
-                                    <div class="m-heading-1 border-yellow-saffron bg-yellow-saffron bg-font-yellow-saffron m-bordered">
-                                        <p class="text-center font-red-intense"><b>เลขที่บัตรประจำตัวประชาชน
-                                                และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้
-                                                จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป <br>
-                                                <small>Your Citizen ID or Passport ID will be used to login next time.
-                                                </small>
-                                            </b></p>
-                                    </div>
-                                  -->
+                                    <!--
+                                      <div class="m-heading-1 border-yellow-saffron bg-yellow-saffron bg-font-yellow-saffron m-bordered">
+                                          <p class="text-center font-red-intense"><b>เลขที่บัตรประจำตัวประชาชน
+                                                  และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้
+                                                  จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป <br>
+                                                  <small>Your Citizen ID or Passport ID will be used to login next time.
+                                                  </small>
+                                              </b></p>
+                                      </div>
+                                    -->
                                     <div class="alert alert-info">
-                                        <p class="text-center">{{Lang::get('resource.lbCitizen')}} : <span class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
-                                          <br>
+                                        <p class="text-center">{{Lang::get('resource.lbCitizen')}} : <span
+                                                    class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
+                                            <br>
                                             Email :
                                             <span class="label label-warning"> <b>{{$applicant->stu_email}}</b></span>
 
@@ -214,19 +217,25 @@
 
                                 </div>
                                 <div id="tab_3-3" class="tab-pane">
-                                    <form action="#">
+                                    <form id="changePasswordForm" action="#">
+                                        <input type="hidden" name="applicant_id" id="applicant_id"
+                                               value="{{$applicant->applicant_id}}">
                                         <div class="form-group">
                                             <label class="control-label">Current Password</label>
-                                            <input type="password" class="form-control"/></div>
+                                            <input type="password" id="current_password" name="current_password"
+                                                   class="form-control"/></div>
                                         <div class="form-group">
                                             <label class="control-label">New Password</label>
-                                            <input type="password" class="form-control"/></div>
+                                            <input type="password" id="password" name="password" class="form-control"/>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label">Re-type New Password</label>
-                                            <input type="password" class="form-control"/></div>
+                                            <input type="password" id="confirm_password" name="confirm_password"
+                                                   class="form-control"/></div>
                                         <div class="margin-top-10">
-                                            <a href="javascript:;" class="btn green"> Change Password </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
+                                            <a href="javascript:;" id="changePassBt" class="btn green"> Change
+                                                Password </a>
+                                            <button type="reset" class="btn default"> Cancel</button>
                                         </div>
                                     </form>
                                 </div>
@@ -264,6 +273,7 @@
     var firstLoadDistrict = true;
     var profilePicFileInput;
     var persInfForm;
+    var changePassForm;
 
     function setComponent() {
         $("#stu_birthdate").inputmask("d/m/y");
@@ -311,19 +321,23 @@
         profilePicFileInput.on('change', function () {
                 var MAX_FILE_SIZE = 524288;
                 var file = $(this)[0].files[0];
-
                 if (typeof(file) == "undefined") {
                     return;
                 }
-
                 if (!(file.size <= MAX_FILE_SIZE && file.size > 0 ) ||
                     !(file.type == 'image/jpeg' || file.type == 'image/gif' || file.type == 'image/png')) {
-                    $("#profile_pic").fileinput('clear')
+                    $("#stu_profile_pic").fileinput('clear')
                     return;
                 }
-
+                $("#hasImg").val(1);
             }
         );
+
+        $("#delPicBt").on('click', function () {
+            $("#hasImg").val(0);
+            $("#reqDelImg").val(1);
+        });
+
 
         $('#savePersonalInfo').click(function () {
             if (!persInfForm.valid()) {
@@ -333,7 +347,7 @@
             $.each($("#personalInfoForm").serializeArray(), function (index, field) {
                 formData.append(field.name, field.value)
             });
-            formData.append("stu_profile_pic", $("#stu_profile_pic")[0].files[0]);
+            formData.append("stu_profile_pic", isUndefinedOrNull($("#stu_profile_pic")[0].files[0]) ? "" : $("#stu_profile_pic")[0].files[0]);
             $.ajax({
                 url: '{{route('profile.doSavePersInfo')}}',
                 headers: {
@@ -395,6 +409,29 @@
                 data: data,
                 success: function (result) {
                     var data = showToastFromAjaxResponse(result);
+                }
+            });
+        });
+
+        $('#changePassBt').click(function () {
+            if (!changePassForm.valid()) {
+                return;
+            }
+            var data = $("#changePasswordForm").serializeArray();
+            $.ajax({
+                url: '{{route('profile.doChangePassword')}}',
+                headers: {
+                    'X-CSRF-Token': '{{csrf_token()}}'
+                },
+                method: "POST",
+                data: data,
+                success: function (result) {
+                    var data = showToastFromAjaxResponse(result);
+                    if (result.status == 'success') {
+                        $("#current_password").val('');
+                        $("#password").val('');
+                        $("#confirm_password").val('');
+                    }
                 }
             });
         });
@@ -481,13 +518,13 @@
             },
 
             errorPlacement: function (error, element) { // render error placement for each input type
-                if (element.is(':checkbox')) {
-                    error.insertAfter(element.closest(".mt-checkbox-list, .mt-checkbox-inline, .checkbox-list, .checkbox-inline"));
-                } else if (element.is(':radio')) {
-                    error.insertAfter(element.closest(".mt-radio-list, .mt-radio-inline, .radio-list,.radio-inline"));
-                } else {
-                    error.insertAfter(element); // for other inputs, just perform default behavior
-                }
+//                if (element.is(':checkbox')) {
+//                    error.insertAfter(element.closest(".mt-checkbox-list, .mt-checkbox-inline, .checkbox-list, .checkbox-inline"));
+//                } else if (element.is(':radio')) {
+//                    error.insertAfter(element.closest(".mt-radio-list, .mt-radio-inline, .radio-list,.radio-inline"));
+//                } else {
+//                    error.insertAfter(element); // for other inputs, just perform default behavior
+//                }
             },
 
             highlight: function (element) {
@@ -503,6 +540,57 @@
             },
             submitHandler: function (form) {
             }
+        });
+
+
+        changePassForm = $('#changePasswordForm');
+        changePassForm.validate({
+            errorElement: 'span', //default input error message container
+            errorClass: 'help-block help-block-error', // default input error message class
+            focusInvalid: false, // do not focus the last invalid input
+            ignore: "",  // validate all fields including form hidden input
+            rules: {
+                current_password: {
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                confirm_password: {
+                    required: true,
+                    minlength: 6,
+                    equalTo: "#password"
+                }
+            },
+
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                App.scrollTo(changePassForm, -200);
+            },
+
+            errorPlacement: function (error, element) { // render error placement for each input type
+            },
+
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error'); // set error class to the control group
+            },
+
+            unhighlight: function (element) { // revert the change done by hightlight
+                $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group
+            },
+
+            success: function (label) {
+                label.closest('.form-group').removeClass('has-error'); // set success class to the control group
+            },
+            submitHandler: function (form) {
+            }
+        });
+    }
+
+    function chkToOpen(obj) {
+        var rptlist = $('#workExpGroup .mt-repeater-item').not($(obj).closest('.mt-repeater-item'));
+        $.each(rptlist, function (index, value) {
+            $(value).find("#app_work_status").removeProp('checked')
         });
     }
 
