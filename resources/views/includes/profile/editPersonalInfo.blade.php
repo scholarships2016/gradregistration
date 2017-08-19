@@ -175,7 +175,8 @@
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_birthdate"
-                                       name="stu_birthdate" value="{{$applicant->stu_birthdate->format('d/m/Y')}}">
+                                       name="stu_birthdate"
+                                       value="@if(!empty($applicant->stu_birthdate)){{$applicant->stu_birthdate->format('d/m/Y')}}@endif">
                                 <span class="help-block"><small>{{Lang::get('resource.perInfoBirthdateEx')}}</small></span>
                             </div>
                         </div>
