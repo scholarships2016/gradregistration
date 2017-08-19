@@ -243,7 +243,7 @@ class ApplyController extends Controller {
     }
 
     public function submitregisterDetailForapply(Request $data) {
-
+ 
         $gdata = $data->all();
         $gdata['flow_id'] = 1;
         $gdata['creator'] = session('user_id');

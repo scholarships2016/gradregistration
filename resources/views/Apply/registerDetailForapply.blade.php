@@ -88,7 +88,7 @@
                                                             @foreach($programs as $program)
 
                                                            <div class="md-radio">
-                                                               <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->curr_prog_id }}" name="program_id" class="md-radiobtn">
+                                                               <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->program_id }}" name="program_id" class="md-radiobtn">
                                                                <label for="checkbox_P{{ $loop->iteration}}">
                                                                    <span class="inc"></span>
                                                                    <span class="check"></span>

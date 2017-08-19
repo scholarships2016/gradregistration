@@ -93,14 +93,14 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         return $result;
     }
 
-    public function getDataForMange($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null,$curr_act_id =null) {
+    public function getDataForMange($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null,$exam_status = null,$sub_major_id = null, $program_id = null, $program_type_id = null) {
         $result = null;
         try {
             DB::statement(DB::raw('set @rownum=0'));
             $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
-                            ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
+                            ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
                             ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
                             ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
                             ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
@@ -119,9 +119,10 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
                             ->leftJoin('applicant', 'applicant.applicant_id', 'application.applicant_id')
                             ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
-                            ->leftJoin('tbl_eng_test as engTest', 'engTest.eng_test_id', '=', 'applicant.eng_test_id')  
-                            ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')  
-                           ->Where(function ($query)use ($user) {
+                            ->leftJoin('tbl_eng_test as engTest', 'engTest.eng_test_id', '=', 'applicant.eng_test_id')
+                            ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')
+                            ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
+                            ->Where(function ($query)use ($user) {
                                 if ($user) {
                                     $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
                                         $query->select('doc_id')
@@ -136,16 +137,31 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     $query->where('application.application_id', $applicationID);
                                 }
                             })
+                            ->Where(function ($query)use ($applicationsArray) {
+                                if ($applicationsArray) {
+                                    $query->whereIn('application.application_id', $applicationsArray);
+                                }
+                            })
                             ->Where(function ($query)use ($applicantID) {
                                 if ($applicantID) {
                                     $query->where('application.applicant_id', $applicantID);
                                 }
                             })
-                            ->Where(function ($query)use ($status) {
-                                if ($status) {
-                                    $query->where('application.flow_id', $status);
+                            ->Where(function ($query)use ($program_type_id) {
+                                if ($program_type_id) {
+                                    $query->where('tbl_program_type.program_type_id', $program_type_id);
                                 }
                             })
+                            ->Where(function ($query)use ($status) {
+                                if ($status) {
+                                    $query->whereIn('application.flow_id',  $status);
+                                }
+                            })
+                            ->Where(function ($query)use ($exam_status) {
+                                if ($exam_status) {
+                                    $query->where('tbl_exam_status.exam_id',  $exam_status);
+                                }
+                            }) 
                             ->Where(function ($query)use ($semester) {
                                 if ($semester) {
                                     $query->where('apply_setting.semester', $semester);
@@ -156,7 +172,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     $query->where('apply_setting.academic_year', $year);
                                 }
                             })
-                             ->Where(function ($query)use ($curr_act_id) {
+                            ->Where(function ($query)use ($curr_act_id) {
                                 if ($curr_act_id) {
                                     $query->where('curriculum_activity.curr_act_id', $curr_act_id);
                                 }
@@ -164,6 +180,16 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->Where(function ($query)use ($roundNo) {
                                 if ($roundNo) {
                                     $query->where('apply_setting.round_no', $roundNo);
+                                }
+                            })
+                              ->Where(function ($query)use ($program_id) {
+                                if ($program_id) {
+                                    $query->where('application.program_id', $program_id);
+                                }
+                            })
+                              ->Where(function ($query)use ($sub_major_id) {
+                                if ($sub_major_id) {
+                                    $query->where('application.sub_major_id', $sub_major_id);
                                 }
                             })
                             ->Where(function ($query)use ($criteria) {
@@ -190,8 +216,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     ;
                                 }
                             })
-                            ->select([DB::raw("application.application_id application_id,application.applicant_id applicant_id,app_id, lpad(app_id ,5,'0') app_ida ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,
-stu_first_name_en ,stu_last_name_en,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,  @rownum  := @rownum  + 1 AS rownum")])
+                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,app_id, lpad(app_id ,5,"0") app_ida ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,  @rownum  := @rownum  + 1 AS rownum')])
                             ->orderBy('application.application_id', 'desc')->get();
         } catch (\Exception $ex) {
             throw $ex;
@@ -294,12 +319,16 @@ stu_first_name_en ,stu_last_name_en,application.program_id,application.payment_d
 
             if (array_key_exists('bank_id', $data))
                 $curObj->bank_id = $data['bank_id'];
-            
-             if (array_key_exists('exam_remark', $data))
+
+            if (array_key_exists('exam_remark', $data))
                 $curObj->exam_remark = $data['exam_remark'];
-             
-             if (array_key_exists('exam_status', $data))
+            if (array_key_exists('exam_status', $data))
                 $curObj->exam_status = $data['exam_status'];
+            
+            if (array_key_exists('admission_remark', $data))
+                $curObj->admission_remark = $data['admission_remark'];
+            if (array_key_exists('admission_status_id', $data))
+                $curObj->admission_status_id = $data['admission_status_id'];
 
             if (array_key_exists('additional_answer', $data))
                 $curObj->additional_answer = $data['additional_answer'];

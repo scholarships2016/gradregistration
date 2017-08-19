@@ -272,10 +272,10 @@
                     render: function (data, type, full, meta) {
                         var html = '';
                         html += '<div class="btn-group btn-group-sm btn-group-solid">';
-                        html += '<a class="btn red" onclick="doDelete(this)">ลบ';
+                        html += '<a class="btn btn-xs red" onclick="doDelete(this)">ลบ';
                         html += '<i class="fa fa-trash-o"></i>';
-                        html += '</a>';
-                        html += '<a href="' + editUrl + '?semester=' + full.semester + '&academic_year=' + full.academic_year + '" class="btn blue">แก้ไข';
+                        html += '</a> ';
+                        html += '<a href="' + editUrl + '?semester=' + full.semester + '&academic_year=' + full.academic_year + '" class="btn btn-xs blue">แก้ไข';
                         html += '<i class="fa fa-edit"></i>';
                         html += '</a>';
                         html += '</div>';
