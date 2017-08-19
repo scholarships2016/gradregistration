@@ -7,16 +7,18 @@ use App\Models\TblDegree;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
 
-class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepository {
+class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepository
+{
 
-    protected $degreeRepo;
     private $paging = 10;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::setModelClassName(TblDegree::class);
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         $result = null;
         try {
             $result = TblDegree::where('degree_id', $id)->first();
@@ -26,13 +28,14 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
         return $result;
     }
 
-    public function searchByCriteria($criteria = null, $paging = false) {
+    public function searchByCriteria($criteria = null, $paging = false)
+    {
         $result = null;
         try {
             $degrees = TblDegree::where('degree_id', 'like', '%' . $criteria . '%')
-                    ->orwhere('degree_name', 'like', '%' . $criteria . '%')
-                    ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
-                    ->orderBy('degree_id');
+                ->orwhere('degree_name', 'like', '%' . $criteria . '%')
+                ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
+                ->orderBy('degree_id');
             $result = ($paging) ? $degrees->paginate($this->paging) : $degrees;
         } catch (\Exception $ex) {
             throw $ex;
@@ -40,7 +43,8 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
         return $result;
     }
 
-    public function save(array $data) {
+    public function save(array $data)
+    {
         $result = false;
         try {
             $id = null;
@@ -64,14 +68,27 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
         return $result;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $result = false;
         try {
             $result = TblDegree::where('degree_id', $id)->delete();
+            return $result;
         } catch (\Exception $ex) {
             throw $ex;
         }
-        return $result;
+    }
+
+    public function getAllDegreeForDropdown()
+    {
+        try {
+            $query = DB::table('tbl_degree')
+                ->select('degree_id', 'degree_name', 'degree_name_en',
+                    DB::raw("concat(degree_name,' (',degree_name_en,')') as degree_name_full"));
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
     }
 
 }
