@@ -4,6 +4,6 @@ namespace App\Repositories\Contracts;
 
 interface McourseStudyRepository
 {
-    public function getMcourseStudyByMajorId($majorId);
+    public function getMcourseStudyByMajorIdAndDegreeId($majorId, $degreeId);
 
 }
