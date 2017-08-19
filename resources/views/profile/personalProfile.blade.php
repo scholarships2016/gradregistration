@@ -42,11 +42,14 @@
             <ul class="nav nav-tabs">
 
                 <li class="active">
-                    <a href="#tab_1_1" data-toggle="tab"> Overview </a>
+                    <a href="#tab_1_1" data-toggle="tab"> {{Lang::get('resource.lbTabOverview')}} </a>
                 </li>
 
                 <li class="">
-                    <a href="#tab_1_3" data-toggle="tab"> Profile </a>
+                    <a href="#tab_1_3" data-toggle="tab">{{Lang::get('resource.lbTabProfileInfo')}}</a>
+                </li>
+                <li class="">
+                    <a href="#tab_1_4" data-toggle="tab"> {{Lang::get('resource.lbTabChangePassword')}} </a>
                 </li>
             </ul>
             <div class="tab-content active">
@@ -169,6 +172,7 @@
                 <!--tab_1_2-->
                 <div class="tab-pane " id="tab_1_3">
                     <div class="row profile-account">
+                      <!--
                         <div class="col-md-3">
                             <ul class="ver-inline-menu tabbable margin-bottom-10">
                                 <li class="active">
@@ -182,7 +186,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-9">
+                      -->
+                        <div class="col-md-12">
                             <div class="tab-content">
                                 <div id="tab_1-1" class="tab-pane active">
                                     <!--
@@ -195,14 +200,27 @@
                                               </b></p>
                                       </div>
                                     -->
-                                    <div class="alert alert-info">
-                                        <p class="text-center">{{Lang::get('resource.lbCitizen')}} : <span
-                                                    class="label label-info">   <b>{{$applicant->stu_citizen_card}}</b> </span>
-                                            <br>
-                                            Email :
-                                            <span class="label label-warning"> <b>{{$applicant->stu_email}}</b></span>
+                                    <div class="row alert alert-info text-center">
 
-                                        </p>
+
+
+                                          <div class="col-md-6">
+                                          {{Lang::get('resource.lbCitizen')}} :
+
+                                            <b>{{$applicant->stu_citizen_card}}</b>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                          Email :
+
+                                               <b>{{$applicant->stu_email}}</b>
+
+                                             </div>
+
+
+
+
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -216,7 +234,8 @@
 
 
                                 </div>
-                                <div id="tab_3-3" class="tab-pane">
+                                <!--
+                                <div id="tab_3-3" class="tab-pane" style="display:none;">
                                     <form id="changePasswordForm" action="#">
                                         <input type="hidden" name="applicant_id" id="applicant_id"
                                                value="{{$applicant->applicant_id}}">
@@ -239,6 +258,7 @@
                                         </div>
                                     </form>
                                 </div>
+                              -->
                             </div>
                         </div>
                         <!--end col-md-9-->
@@ -246,6 +266,28 @@
                 </div>
                 <!--end tab-pane-->
                 <!--end tab-pane-->
+                <div class="tab-pane" id="tab_1_4">
+                  <form id="changePasswordForm" action="#">
+                      <input type="hidden" name="applicant_id" id="applicant_id"
+                             value="{{$applicant->applicant_id}}">
+                      <div class="form-group">
+                          <label class="control-label">{{Lang::get('resource.lbCurrentPassword')}}</label>
+                          <input type="password" id="current_password" name="current_password"
+                                 class="form-control"/></div>
+                      <div class="form-group">
+                          <label class="control-label">{{Lang::get('resource.lbNewPassword')}}</label>
+                          <input type="password" id="password" name="password" class="form-control"/>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label">{{Lang::get('resource.lbConfirmNewPassword')}}</label>
+                          <input type="password" id="confirm_password" name="confirm_password"
+                                 class="form-control"/></div>
+                      <div class="margin-top-10">
+                          <a href="javascript:;" id="changePassBt" class="btn green"> {{Lang::get('resource.lbBtnChangePassword')}} </a>
+
+                      </div>
+                  </form>
+                </div>
             </div>
         </div>
     </div>

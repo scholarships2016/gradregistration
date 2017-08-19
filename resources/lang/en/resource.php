@@ -260,5 +260,11 @@ return [
            'lbBtnDeleteImage' => 'Delete',
            'lbCurrentWorkStatusTitle' => 'Working Status',
            'lbCurrentWorkStatus' => 'Is the current/lastest work?',
-
+           'lbTabOverview' => 'Overview',
+           'lbTabProfileInfo' => 'Profile Info',
+           'lbTabChangePassword' => 'Change Password',
+           'lbCurrentPassword' => 'Current Password',
+           'lbNewPassword' => 'New Password',
+           'lbConfirmNewPassword' => 'Re-type New Password',
+           'lbBtnChangePassword' => 'Change Password',
 ];
