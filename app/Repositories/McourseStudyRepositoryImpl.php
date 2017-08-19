@@ -16,10 +16,10 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         parent::setModelClassName(Mcoursestudy::class);
     }
 
-    public function getMcourseStudyByMajorId($majorId)
+    public function getMcourseStudyByMajorIdAndDegreeId($majorId, $degreeId)
     {
         try {
-            return Mcoursestudy::where('majorcode', '=', $majorId)->get();
+            return Mcoursestudy::where('majorcode', '=', $majorId)->where('degree', '=', $degreeId)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
