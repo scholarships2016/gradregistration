@@ -34,7 +34,7 @@ return [
     'lbDistrict' => 'District',
     'lbZipcode' => 'Zipcode',
     'lbEnglish' => 'English Testing Score',
-    'lbExScoreTest' => 'Example of Testing Score',
+    'lbExScoreTest' => 'Example of Score Conversion',
     'lbScore' => 'Score',
     'lbDateTaken' => 'Date Taken',
     'lbThai' => 'Thai Score',

@@ -223,13 +223,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
-                                                <label class="control-label">สถานะการทำงาน</label>
+                                                <label class="control-label">{{Lang::get('resource.lbCurrentWorkStatusTitle')}}</label>
                                                 <br>
                                                 <label class="mt-checkbox">
                                                     <input id="app_work_status" type="checkbox" name="app_work_status"
                                                            value="1" onclick="chkToOpen(this)"
                                                            @if($workExp->app_work_status == 1) checked @endif
-                                                    > ปัจจุบัน/ล่าสุด
+                                                    > {{Lang::get('resource.lbCurrentWorkStatus')}}
                                                     <span></span>
                                                 </label>
                                             </div>

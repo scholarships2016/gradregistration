@@ -35,7 +35,7 @@ return [
     'lbDistrict' => 'อำเภอ',
     'lbZipcode' => 'รหัสไปรษณีย์',
     'lbEnglish' => 'คะแนนการทดสอบภาษาอังกฤษ',
-    'lbExScoreTest' => '(ตัวอย่างการเทียบคะแนน Example)',
+    'lbExScoreTest' => '(ตัวอย่างการเทียบคะแนน)',
     'lbScore' => 'คะแนน',
     'lbDateTaken' => 'เมื่อวันที่',
     'lbThai' => 'คะแนนภาษาไทย',
