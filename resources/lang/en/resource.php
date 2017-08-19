@@ -267,4 +267,5 @@ return [
            'lbNewPassword' => 'New Password',
            'lbConfirmNewPassword' => 'Re-type New Password',
            'lbBtnChangePassword' => 'Change Password',
+           'lbEduRemark' =>'Please provide all educational info.',
 ];

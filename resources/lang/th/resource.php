@@ -322,5 +322,6 @@ return [
       'lbNewPassword' => 'รหัสผ่านใหม่',
       'lbConfirmNewPassword' => 'ยืนยันรหัสผ่านใหม่',
       'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
+      'lbEduRemark' =>'โปรดกรอกข้อมูลทุกระดับการศึกษา',
 
 ];
