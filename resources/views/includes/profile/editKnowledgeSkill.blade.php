@@ -6,7 +6,7 @@
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
-    
+
         </div>
     </div>
     <div class="portlet-body form">
@@ -41,7 +41,7 @@
                                             <label class="control-label">{{Lang::get('resource.lbDateTaken')}}
                                             </label>
                                             <input type="text" class="form-control input-small" id="eng_date_taken"
-                                                   name="eng_date_taken" value="{{$applicant->eng_date_taken}}">
+                                                   name="eng_date_taken" value="{{$applicant->eng_date_taken->format('d/m/Y')}}">
                                         </div>
                                     </div>
                                 </div>

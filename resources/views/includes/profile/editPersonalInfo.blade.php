@@ -175,7 +175,7 @@
                             </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="stu_birthdate"
-                                       name="stu_birthdate" value="{{$applicant->stu_birthdate}}">
+                                       name="stu_birthdate" value="{{$applicant->stu_birthdate->format('d/m/Y')}}">
                                 <span class="help-block"><small>{{Lang::get('resource.perInfoBirthdateEx')}}</small></span>
                             </div>
                         </div>
@@ -218,8 +218,33 @@
                                 {{Lang::get('resource.perInfoPhoto')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="Chee Kin">
-                                <span class="help-block"></span>
+                                <input type="hidden" id="hasImg" name="hasImg"
+                                       value="@if(!empty($applicant->imgFile)){{1}}@else{{0}}@endif"/>
+                                <input type="hidden" id="reqDelImg" name="reqDelImg" value="0"/>
+                                <div class="fileinput @if(!empty($applicant->imgFile)) fileinput-exists @else fileinput-new @endif"
+                                     data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail" style="width: 100px; height: 150px;">
+                                        <img src="http://www.placehold.it/150x200/EFEFEF/AAAAAA&amp;text=no+image"
+                                             alt=""/>
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"
+                                         style="max-width: 100px;max-height: 150px;">
+                                        @if(!empty($applicant->imgFile))
+                                            <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
+                                                 onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image';"
+                                                 alt=""/>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <span class="btn default btn-file">
+                                            <span class="fileinput-new"> เลือก </span>
+                                            <span class="fileinput-exists"> เปลี่ยน </span>
+                                            <input type="file" id="stu_profile_pic" name="stu_profile_pic">
+                                        </span>
+                                        <a href="javascript:;" id="delPicBt" class="btn red fileinput-exists"
+                                           data-dismiss="fileinput"> ลบ </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -249,7 +274,8 @@
                                         {{Lang::get('resource.perInfoNotInterest')}}
                                         <span></span>
                                     </label>
-                                    <label><a href="http://www.grad.chula.ac.th/scholarship/schedule.php" target="_blank">  {{Lang::get('resource.perInfoFundInterestSeeMore')}}</a></label>
+                                    <label><a href="http://www.grad.chula.ac.th/scholarship/schedule.php"
+                                              target="_blank">  {{Lang::get('resource.perInfoFundInterestSeeMore')}}</a></label>
                                 </div>
                                 <span class="help-block"></span>
                             </div>
