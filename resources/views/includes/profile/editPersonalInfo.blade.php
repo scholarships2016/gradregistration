@@ -220,9 +220,9 @@
                             </label>
                             <div class="col-md-9">
                                 <input type="hidden" id="hasImg" name="hasImg"
-                                       value="@if(!empty($applicant->stu_img)){{1}}@else{{0}}@endif"/>
+                                       value="@if(!empty($applicant->stuImgFile)){{1}}@else{{0}}@endif"/>
                                 <input type="hidden" id="reqDelImg" name="reqDelImg" value="0"/>
-                                <div class="fileinput @if(!empty($applicant->stu_img)) fileinput-exists @else fileinput-new @endif"
+                                <div class="fileinput @if(!empty($applicant->stuImgFile)) fileinput-exists @else fileinput-new @endif"
                                      data-provides="fileinput">
                                     <div class="fileinput-new thumbnail" style="width: 100px; height: 150px;">
                                         <img src="http://www.placehold.it/150x200/EFEFEF/AAAAAA&amp;text=no+image"
@@ -230,7 +230,7 @@
                                     </div>
                                     <div class="fileinput-preview fileinput-exists thumbnail"
                                          style="max-width: 100px;max-height: 150px;">
-                                        @if(!empty($applicant->stu_img))
+                                        @if(!empty($applicant->stuImgFile))
                                             <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
                                                  onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image';"
                                                  alt=""/>
