@@ -35,9 +35,10 @@ class Util
     const UNABLE_TO_ACCESS = 'ไม่สามารถใข้งานในส่วนนี้ได้ กรุณาติดต่อ Admin</br>Service is unavailable, please contact administrator.';
     const DATA_NOT_FOUND = 'ไม่พบข้อมูล<br/>No Data Found';
     const ERROR_OCCUR = 'เกิดข้อผิดพลาด<br/>Error';
+    const CHANGE_PASS_SUCCESS = 'เปลี่ยนรหัสผ่านสำเร็จ<br/>Changing password is successful.';
+    const CHANGE_PASS_ERROR = 'เปลี่ยนรหัสผ่านไม่สำเร็จ<br/>Changing password failed.';
 
-	
-	
+
     const SUCCESS_DELETE = 'ลบข้อมูลสำเร็จ';
     const CANNOT_DELETE = 'ไม่สามารถลบข้อมูลได้';
 
