@@ -75,6 +75,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
+                            ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
+                            ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
                             ->Where(function ($query)use ($applicationID) {
                                 if ($applicationID) {
                                     $query->where('application.application_id', $applicationID);
@@ -218,7 +220,6 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             })
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,app_id, lpad(app_id ,5,"0") app_ida ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,  @rownum  := @rownum  + 1 AS rownum')])
                             ->orderBy('application.application_id', 'desc')->get();
-                           
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -340,21 +341,21 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
             if (array_key_exists('receipt_no', $data))
                 $curObj->receipt_no = $data['receipt_no'];
-            
+
             if (array_key_exists('special_apply_by', $data))
                 $curObj->special_apply_by = $data['special_apply_by'];
             if (array_key_exists('special_apply_datetime', $data))
                 $curObj->special_apply_datetime = $data['special_apply_datetime'];
             if (array_key_exists('special_apply_comment', $data))
                 $curObj->special_apply_comment = $data['special_apply_comment'];
-            
+
             if (array_key_exists('special_admission_by', $data))
                 $curObj->special_admission_by = $data['special_admission_by'];
             if (array_key_exists('special_admission_by', $data))
                 $curObj->special_admission_by = $data['special_admission_by'];
             if (array_key_exists('spacial_admission_comment', $data))
                 $curObj->spacial_admission_comment = $data['spacial_admission_comment'];
-            
+
 
             if ($app_id)
                 $curObj->app_id = $app_id;

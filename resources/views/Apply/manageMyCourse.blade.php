@@ -316,18 +316,18 @@
                 <li class="mt-list-item done">
 
                     <div class="list-icon-container">
-                        <i class="icon-hourglass font-blue"></i>
-                        <i class="icon-check font-green"></i>
-                        <i class="icon-close font-red"></i>
+                     {!!  ($curDis->exam_id==1)? '<i class="icon-hourglass font-blue"></i>':''!!}
+                     {!!    ($curDis->exam_id==2)?'<i class="icon-check font-green"></i>':''!!}
+                     {!!  ($curDis->exam_id==3)?'<i class="icon-close font-red"></i>':''!!}
                     </div>
                     <div class="list-item-content">
 
                         <h3 class="uppercase">
-                            <a href="javascript:;">รอการพิจารณา / มีสิทธิ์สอบ / ไม่มีสิทธิ์สอบ</a>
+                            <a href="javascript:;"> {{(session('locale')=='th')? $curDis->exam_name:$curDis->exam_name_en}}</a>
                         </h3>
                         <div style="margin:10px 0px 10px 0px">
 
-                          <a class="btn btn-circle blue btn-outline" href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
+                          <a class="btn btn-circle blue btn-outline" id="examshow" exam="{{$curDis->exam_schedule}}"  href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
                               <i class="fa fa-table"></i>
                           </a>
 
@@ -341,7 +341,7 @@
      <div class="alert alert-info">
 
      <i class="icon-info"></i>
-     ดึงหมายเหตุมาแสดง
+     {{($curDis->exam_remark)?$curDis->exam_remark:''}}
    </div>
    <!-- Exam Table -->
     <div id="exam-schedule-data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -352,7 +352,7 @@
                     <h4 class="modal-title">{{Lang::get('resource.lbTodolistViewExamTable')}}</h4>
                 </div>
                 <div class="modal-body">
-                    <p> แสดงตารางสอบ </p>
+                    <p id="examtable">  </p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn default" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -396,7 +396,7 @@
      <div class="alert alert-info">
 
      <i class="icon-info"></i>
-     ดึงหมายเหตุมาแสดง
+     {{($curDis->admission_remark)?$curDis->admission_remark:''}}
    </div>
 
 @endif
@@ -449,8 +449,13 @@
   }, 100);
 });
          }
-
-
-
+jQuery(document).ready(function() {
+   $('.todo-content').on( 'click', 'a', function () {
+          if($(this).attr('id')=="examshow"){
+              $('#examtable').text($(this).attr('exam'));               
+         } 
+    } );
+ 
+});
 </script>
 @endpush
