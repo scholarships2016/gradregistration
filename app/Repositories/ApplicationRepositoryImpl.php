@@ -291,14 +291,23 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     ->leftJoin('application', 'curriculum_activity.curr_act_id', 'application.curr_act_id')
                                     ->where('application_id', $data['application_id'])->get();
 
-                    $app_id = Application::leftJoin('curriculum_activity', 'application.curr_act_id', 'curriculum_activity.curr_act_id')
-                                    ->leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', 'apply_setting.apply_setting_id')
-                                    ->whereNotNull('app_id')
-                                    ->where('semester', $year[0]->semester)
-                                    ->where('academic_year', $year[0]->academic_year)->count() + 1;
+                    $maxapp_id = Application::leftJoin('curriculum_activity', 'application.curr_act_id', 'curriculum_activity.curr_act_id')
+                            ->leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', 'apply_setting.apply_setting_id')
+                            ->whereNotNull('app_id')
+                            ->where('semester', $year[0]->semester)
+                            ->where('academic_year', $year[0]->academic_year)
+                            ->max('app_id');
 
 
-                    $curriculum_num = Application::where('curriculum_id', $year[0]->curriculum_id)->whereNotNull('curriculum_num')->count() + 1;
+
+                    $app_id = $maxapp_id + 1;
+
+                    $maxcurprogram = Application::where('curriculum_id', $year[0]->curriculum_id)
+                            ->where('program_id', $year[0]->program_id)
+                            ->whereNotNull('curriculum_num')
+                            ->max('curriculum_num');
+
+                    $curriculum_num = $maxcurprogram + 1;
                 }
             }
 
