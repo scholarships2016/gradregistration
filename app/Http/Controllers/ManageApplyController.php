@@ -201,20 +201,47 @@ class ManageApplyController extends Controller {
 
     public function checkApplicant(Request $request) {
         if ($request) {
+            $curDiss = null;
             $citizencard = $request->citiz;
+            $curr_act_id = $request->curr_act_id;
+            $sub_major_id = $request->sub_major_id;
+            $program_id = $request->program_id;
+            $program_type_id = $request->program_type_id;
             $res = $this->ApplicantRepo->getByCitizenOrEmail($citizencard, null);
+            if ($res) {
+                $curDiss = $this->ApplicationRepo->getDataForMange($res['applicant_id'], null, null, null, null, null, null, null, $curr_act_id, null, null, $sub_major_id, $program_id, $program_type_id);
+            }
+            if ($curDiss && $curDiss->count()>0) {
+                return response()->json(['mess' => 'มีข้อมูลนี้ในระบบแล้วไม่สามารถเพิ่มได้']);
+            }
             return response()->json($res);
         }
     }
-    
-    public function addUserExam(Request $request) {
-    try {
-            if ($request) {
-            
-            }
-     } catch (Exception $e) {
-            Controller::WLog('addUserExam( ApplicaintID[ ' . $request->application . ']', 'Gs03', $e->getMessage());
 
+    public function addUserExam(Request $request) {
+        $res = null;
+        try {
+            if ($request) {
+                $data = ['curr_act_id' => $request->curr_act_id,
+                    'sub_major_id' => $request->sub_major_id,
+                    'program_id' => $request->program_id,
+                    'program_type_id' => $request->program_type_id,
+                    'stu_citizen_card' => $request->idCard,
+                    'curriculum_id' => $request->curriculum_id,
+                    'flow_id' => 1,
+                    'bank_id' => 10,
+                    'special_apply_by' => session('user_id'),
+                    'special_apply_datetime' => Carbon::now(),
+                    'special_apply_comment' => $request->apply_comment,
+                    'creator' => session('user_id'),
+                    'modifier' => session('user_id'),
+                    'applicant_id' => $request->applicant_ID];
+                $res = $this->ApplicationRepo->saveApplication($data);
+                $dataup = ['application_id' => $res->application_id, 'flow_id' => 3];
+                $res = $this->ApplicationRepo->saveApplication($dataup);
+            }
+        } catch (Exception $e) {
+            Controller::WLog('addUserExam( ApplicaintID[ ' . $request->application . ']', 'Gs03', $e->getMessage());
             session()->flash('errorMsg', Lang::get('resource.lbError'));
         }
     }

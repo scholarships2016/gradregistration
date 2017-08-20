@@ -93,7 +93,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         return $result;
     }
 
-    public function getDataForMange($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null,$exam_status = null,$sub_major_id = null, $program_id = null, $program_type_id = null) {
+    public function getDataForMange($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null) {
         $result = null;
         try {
             DB::statement(DB::raw('set @rownum=0'));
@@ -154,14 +154,14 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             })
                             ->Where(function ($query)use ($status) {
                                 if ($status) {
-                                    $query->whereIn('application.flow_id',  $status);
+                                    $query->whereIn('application.flow_id', $status);
                                 }
                             })
                             ->Where(function ($query)use ($exam_status) {
                                 if ($exam_status) {
-                                    $query->where('tbl_exam_status.exam_id',  $exam_status);
+                                    $query->where('tbl_exam_status.exam_id', $exam_status);
                                 }
-                            }) 
+                            })
                             ->Where(function ($query)use ($semester) {
                                 if ($semester) {
                                     $query->where('apply_setting.semester', $semester);
@@ -182,12 +182,12 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     $query->where('apply_setting.round_no', $roundNo);
                                 }
                             })
-                              ->Where(function ($query)use ($program_id) {
+                            ->Where(function ($query)use ($program_id) {
                                 if ($program_id) {
                                     $query->where('application.program_id', $program_id);
                                 }
                             })
-                              ->Where(function ($query)use ($sub_major_id) {
+                            ->Where(function ($query)use ($sub_major_id) {
                                 if ($sub_major_id) {
                                     $query->where('application.sub_major_id', $sub_major_id);
                                 }
@@ -324,7 +324,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                 $curObj->exam_remark = $data['exam_remark'];
             if (array_key_exists('exam_status', $data))
                 $curObj->exam_status = $data['exam_status'];
-            
+
             if (array_key_exists('admission_remark', $data))
                 $curObj->admission_remark = $data['admission_remark'];
             if (array_key_exists('admission_status_id', $data))
@@ -339,6 +339,21 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
             if (array_key_exists('receipt_no', $data))
                 $curObj->receipt_no = $data['receipt_no'];
+            
+            if (array_key_exists('special_apply_by', $data))
+                $curObj->special_apply_by = $data['special_apply_by'];
+            if (array_key_exists('special_apply_datetime', $data))
+                $curObj->special_apply_datetime = $data['special_apply_datetime'];
+            if (array_key_exists('special_apply_comment', $data))
+                $curObj->special_apply_comment = $data['special_apply_comment'];
+            
+            if (array_key_exists('special_admission_by', $data))
+                $curObj->special_admission_by = $data['special_admission_by'];
+            if (array_key_exists('special_admission_by', $data))
+                $curObj->special_admission_by = $data['special_admission_by'];
+            if (array_key_exists('spacial_admission_comment', $data))
+                $curObj->spacial_admission_comment = $data['spacial_admission_comment'];
+            
 
             if ($app_id)
                 $curObj->app_id = $app_id;
@@ -351,8 +366,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
             if (array_key_exists('modifier', $data))
                 $curObj->modifier = $data['modifier'];
 
-
-            $result = $curObj->save();
+            $curObj->save();
+            $result = $curObj;
             $this->controllors->WLog('Save Application[application id:' . $id . ']', 'Enroll', null);
         } catch (\Exception $ex) {
             $this->controllors->WLog('Save Application Error[application id:' . $id . ']', 'Enroll', $ex->getMessage());

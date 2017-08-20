@@ -271,7 +271,12 @@
                                     </div>
                                     
                                 </div>
-                            </div></div>
+                            </div>
+                                   </div>
+                                                    <div class="form-group">
+                                                    <label>หมายเหตุ</label>
+                                                    <textarea class="form-control" id="apply_comment" rows="3"></textarea>
+                                                </div>
                                                     <br>
                                                     
                                                     
@@ -325,19 +330,33 @@
       $("#idCard").text('');                                             
       $("#appcantid").val(''); 
       $("#citiz").val('');
+      $("#apply_comment").val('');
+      
   });
     $('#btSave').click(function() {
                                 $.ajax({
 					type: "POST",
-					url: '{!! Route('sentMailGS03') !!}',
+					url: '{!! Route('addUserExam') !!}',
                                          async: false,
 					data :{
-                                                curr_act_id : $('#single').val(),
-                                                application  : app,
+                                                curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
+                                                sub_major_id : $('option:selected','#single').attr('smj'),
+                                                program_id : $('option:selected','#single').attr('pg'),
+                                                program_type_id : $('option:selected','#single').attr('pt'), 
+                                                curriculum_id : $('option:selected','#single').attr('cu'), 
+                                                applicant_ID  : $("#appcantid").val(),
+                                                 idCard  : $("#idCard").text(),
+                                                 apply_comment:  $("#apply_comment").val(),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
                                            toastr.success('ดำเนินการเรียบร้อย');
+                                            $("#show_name").text('');
+      $("#idCard").text('');                                             
+      $("#appcantid").val(''); 
+      $("#citiz").val('');
+      $("#apply_comment").val('');
+       TableDatatablesAjax.init();
                                         }
 				},"json");
     });
@@ -383,12 +402,21 @@
 					url: '{!! Route('applicantGS03') !!}',
 					data :{ 
                                                 citiz  : $('#citiz').val(),
+                                                curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
+                                                sub_major_id : $('option:selected','#single').attr('smj'),
+                                                program_id : $('option:selected','#single').attr('pg'),
+                                                program_type_id : $('option:selected','#single').attr('pt'), 
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){ 
-                                               $("#show_name").text(data.stu_first_name+' '+data.stu_last_name);
+                                            if(data.stu_first_name != null){
+                                              $("#show_name").text(data.stu_first_name+' '+data.stu_last_name);
                                               $("#idCard").text(data.stu_citizen_card);                                             
-                                             $("#appcantid").val(data.applicant_id);                                           
+                                              $("#appcantid").val(data.applicant_id);      
+                                         }else if(data.mess !=null){ toastr.warning(data.mess);}
+                                         else{
+                                             toastr.warning('ไม่มีข้อมูลของผู้สมัคร');
+                                         }
                                         }
 				},"json");  });       
                             
@@ -412,7 +440,7 @@
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
                                               }
-                                             $("#single").append('<option  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
+                                             $("#single").append('<option  cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
 
                                                         group = data[index].faculty_id;
@@ -462,7 +490,7 @@ var TableDatatablesAjax = function () {
                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                 sub_major_id : $('option:selected','#single').attr('smj'),
                                 program_id : $('option:selected','#single').attr('pg'),
-                                  program_type_id : $('option:selected','#single').attr('pt'),
+                                program_type_id : $('option:selected','#single').attr('pt'),
                                 flow : '3,4',
                                _token:     '{{ csrf_token()}}'
                                                }
