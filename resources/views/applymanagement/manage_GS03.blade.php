@@ -336,7 +336,7 @@
     $('#btSave').click(function() {
                                 $.ajax({
 					type: "POST",
-					url: '{!! Route('addUserExam') !!}',
+					url: '{!! Route('addUserExamGS03') !!}',
                                          async: false,
 					data :{
                                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
@@ -395,7 +395,7 @@
                                         }
 				},"json");
               }                          
-                        $('#userSearch').click(function(){  
+                         $('#userSearch').click(function(){  
                                     $.ajax({
 					type: "get",
                                          async: false,
@@ -413,9 +413,21 @@
                                               $("#show_name").text(data.stu_first_name+' '+data.stu_last_name);
                                               $("#idCard").text(data.stu_citizen_card);                                             
                                               $("#appcantid").val(data.applicant_id);      
-                                         }else if(data.mess !=null){ toastr.warning(data.mess);}
+                                         }else if(data.mess !=null){ toastr.warning(data.mess);
+                                          $("#show_name").text('');
+      $("#idCard").text('');                                             
+      $("#appcantid").val(''); 
+      $("#citiz").val('');
+      $("#apply_comment").val('');
+        
+        }
                                          else{
                                              toastr.warning('ไม่มีข้อมูลของผู้สมัคร');
+                                              $("#show_name").text('');
+      $("#idCard").text('');                                             
+      $("#appcantid").val(''); 
+      $("#citiz").val('');
+      $("#apply_comment").val('');
                                          }
                                         }
 				},"json");  });       

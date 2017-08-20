@@ -152,8 +152,8 @@ class ManageApplyController extends Controller {
     }
 
     public function getStatusAdmission() {
-        $exam = $this->AdmissionStatus->all();
-        return response()->json($exam);
+        $exams = $this->AdmissionStatus->all();
+        return response()->json($exams);
     }
 
     public function getEngTest() {
@@ -162,6 +162,7 @@ class ManageApplyController extends Controller {
     }
 
     public function updateApplication(Request $request = null) {
+      
         $data = '';
         $res = false;
         if ($request->exam_remark)
@@ -181,7 +182,7 @@ class ManageApplyController extends Controller {
             $data = ['admission_status_id' => $request->admission_status_id, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
         }
         if ($request->admission_remark || $request->admission_status_id) {
-            $res = $this->ApplicationRepo->saveApplication($data);
+             $res = $this->ApplicationRepo->saveApplication($data);
         }
 
 
@@ -218,7 +219,7 @@ class ManageApplyController extends Controller {
         }
     }
 
-    public function addUserExam(Request $request) {
+    public function addUserExamGS03(Request $request) {
         $res = null;
         try {
             if ($request) {
@@ -238,6 +239,34 @@ class ManageApplyController extends Controller {
                     'applicant_id' => $request->applicant_ID];
                 $res = $this->ApplicationRepo->saveApplication($data);
                 $dataup = ['application_id' => $res->application_id, 'flow_id' => 3];
+                $res = $this->ApplicationRepo->saveApplication($dataup);
+            }
+        } catch (Exception $e) {
+            Controller::WLog('addUserExam( ApplicaintID[ ' . $request->application . ']', 'Gs03', $e->getMessage());
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+    }
+    public function addUserExamGS05(Request $request) {
+        $res = null;
+        try {
+            if ($request) {
+                $data = ['curr_act_id' => $request->curr_act_id,
+                    'sub_major_id' => $request->sub_major_id,
+                    'program_id' => $request->program_id,
+                    'program_type_id' => $request->program_type_id,
+                    'stu_citizen_card' => $request->idCard,
+                    'curriculum_id' => $request->curriculum_id,
+                    'flow_id' => 1,
+                    'bank_id' => 10,
+                    'special_admission_by' => session('user_id'),
+                    'special_admission_date' => Carbon::now(),
+                    'spacial_admission_comment' => $request->apply_comment,
+                    'creator' => session('user_id'),
+                    'modifier' => session('user_id'),
+                    'exam_status'=>2,
+                    'applicant_id' => $request->applicant_ID];
+                $res = $this->ApplicationRepo->saveApplication($data);
+                $dataup = ['application_id' => $res->application_id, 'flow_id' => 4];
                 $res = $this->ApplicationRepo->saveApplication($dataup);
             }
         } catch (Exception $e) {
