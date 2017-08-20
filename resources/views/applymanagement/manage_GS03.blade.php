@@ -266,7 +266,7 @@
                                         <i class="fa fa-group fa-icon-medium"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number"><label id="show_name"></label></div>
+                                        <div class="number">ชื่อ :<label id="show_name"></label></div>
                                         <div class="desc"> Passport/บัตรประชาชน :<label id="idCard"></label> </div>
                                     </div>
                                     
@@ -323,9 +323,24 @@
     $('#btcloss').click(function() {
       $("#show_name").text('');
       $("#idCard").text('');                                             
-      $("#appcantid").val('');    
-  }
-    $('#btSave').click(function() { }
+      $("#appcantid").val(''); 
+      $("#citiz").val('');
+  });
+    $('#btSave').click(function() {
+                                $.ajax({
+					type: "POST",
+					url: '{!! Route('sentMailGS03') !!}',
+                                         async: false,
+					data :{
+                                                curr_act_id : $('#single').val(),
+                                                application  : app,
+                                                _token: '{{ csrf_token() }}'
+                                               } ,
+					success : function(data){
+                                           toastr.success('ดำเนินการเรียบร้อย');
+                                        }
+				},"json");
+    });
     $('#sentmailall').click(function() {  
         var data = [];
            $('#datatable_ajax tbody').find('tr').each(function () {

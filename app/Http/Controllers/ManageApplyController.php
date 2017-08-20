@@ -206,6 +206,18 @@ class ManageApplyController extends Controller {
             return response()->json($res);
         }
     }
+    
+    public function addUserExam(Request $request) {
+    try {
+            if ($request) {
+            
+            }
+     } catch (Exception $e) {
+            Controller::WLog('addUserExam( ApplicaintID[ ' . $request->application . ']', 'Gs03', $e->getMessage());
+
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+    }
 
     public function sentMailGS03(Request $request) {
         try {
