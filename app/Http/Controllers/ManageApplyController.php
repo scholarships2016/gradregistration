@@ -102,13 +102,13 @@ class ManageApplyController extends Controller {
         $criteria = $request->criteria;
         $curr_act_id = $request->curr_act_id;
         $exam_status = $request->exams;
-        $program_id= $request->program_id;
-        $sub_major_id= $request->sub_major_id;
+        $program_id = $request->program_id;
+        $sub_major_id = $request->sub_major_id;
         $program_type_id = $request->program_type_id;
 
         $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status,$sub_major_id,$program_id,$program_type_id);
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id);
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
@@ -197,6 +197,14 @@ class ManageApplyController extends Controller {
             $res = $this->ApplicantRepo->saveApplicant($data);
         }
         return response()->json($res);
+    }
+
+    public function checkApplicant(Request $request) {
+        if ($request) {
+            $citizencard = $request->citiz;
+            $res = $this->ApplicantRepo->getByCitizenOrEmail($citizencard, null);
+            return response()->json($res);
+        }
     }
 
     public function sentMailGS03(Request $request) {

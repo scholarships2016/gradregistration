@@ -8,7 +8,8 @@
 <link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
       type="text/css"/> 
 <link href="{{asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css">
- 
+ <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+ <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" /> 
 <link href="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css')}}" rel="stylesheet" type="text/css">
 
 <style type="text/css">
@@ -156,11 +157,10 @@
 
                               <div class="col-md-11">
                                 <div class="form-group">
-                                    <label for="single" class="control-label">เลือกหลักสูตรเพื่อดำเนินการ</label>
-                                    <select id="single" class="form-control select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
- 
-                                    </select><span class="select2 select2-container select2-container--bootstrap" dir="ltr"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-single-container"><span class="select2-selection__rendered" id="select2-single-container"><span class="select2-selection__placeholder">เลือกหลักสูตร</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                </div>
+                                      <label for="single" class="control-label">เลือกหลักสูตรเพื่อดำเนินการ</label>
+                                      <select id="single" class="form-control select2">
+                                    </select>
+                                    </div>
                               </div>
                               <div class="cold-md-1">
                                 <div class="form-group" style="padding-top:25px;">
@@ -172,7 +172,7 @@
 
 
                             </div>
-
+ 
                           <p></p>
                         </div>
                       </div>
@@ -227,7 +227,6 @@
 
 @push('pageJs')
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/pages/scripts/table-datatables-ajax.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
@@ -242,7 +241,8 @@
 <script src="{{asset('assets/global/plugins/jquery.mockjax.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-typeahead/bootstrap3-typeahead.min.js')}}" type="text/javascript"></script>
- 
+ <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+
 <script type="application/javascript">
     $('#sentmailall').click(function() {  
         var data = [];
