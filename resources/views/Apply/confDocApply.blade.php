@@ -130,7 +130,7 @@
                                                  <label for="checkbox{{$Doc->doc_apply_id}}">
                                                      <span class="inc"></span>
                                                      <span class="check"></span>
-                                                     <span class="box"></span>   {{ (session('locale')=='th')? $Doc->doc_apply_detail:$Doc->doc_apply_detail_en}}  </label>            {!! ($Doc->doc_apply_id == 1)? "<a href='https://www.w3schools.com' target='_blank'>  ดูใบสมัคร </a>"  : "" !!}
+                                                     <span class="box"></span>   {{ (session('locale')=='th')? $Doc->doc_apply_detail:$Doc->doc_apply_detail_en}}  </label>            {!!($Doc->doc_apply_id == 1)? "<a href='".url('apply/docMyCourse/').'/'.$programID. "' target='_blank'>  ดูใบสมัคร </a>"  : "" !!}
                                              </div><br>
                                              @if( $Doc->flag_upload == 1)
                                              <div id="divFile{{$Doc->doc_apply_id}}"  {!! (!$val)? 'style="display:none"' :'' !!}  class="btn btn-default btn-file">
