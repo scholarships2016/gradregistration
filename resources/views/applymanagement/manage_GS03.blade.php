@@ -253,19 +253,32 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-user"></i>
                                                                 </span>
-                                                                <input type="text" class="form-control" placeholder="รหัสบัตรประชาชน">
+                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">  
                                                                 <span class="input-group-btn">
-                                                            <a class="btn blue" type="button">ตรวจสอบ</a>
+                                                            <a class="btn blue" id="userSearch" type="button">ตรวจสอบ</a>
                                                         </span>
                                                             </div> </div></div>
-                                                     <div class="row"><div class="col-md-12">
-
-                                                             </div></div>
-
-
+                                                    
+                                   <div class="row">                  
+                                       <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                               <div class="dashboard-stat green">
+                                    <div class="visual">
+                                        <i class="fa fa-group fa-icon-medium"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number"><label id="show_name"></label></div>
+                                        <div class="desc"> Passport/บัตรประชาชน :<label id="idCard"></label> </div>
+                                    </div>
+                                    
+                                </div>
+                            </div></div>
+                                                    <br>
+                                                    
+                                                    
                                                 <div class="modal-footer">
-                                                    <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
+                                                    <input type="hidden" id="appcantid">
+                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">Close</button>
+                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">Save changes</button>
                                                 </div>
 
                                           </div>
@@ -306,7 +319,14 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-    $('#sentmailall').click(function() {
+    
+    $('#btcloss').click(function() {
+      $("#show_name").text('');
+      $("#idCard").text('');                                             
+      $("#appcantid").val('');    
+  }
+    $('#btSave').click(function() { }
+    $('#sentmailall').click(function() {  
         var data = [];
            $('#datatable_ajax tbody').find('tr').each(function () {
          var row = $(this);
@@ -340,10 +360,24 @@
                                            toastr.success('ดำเนินการเรียบร้อย');
                                         }
 				},"json");
-              }
-
-
-                  $('#btnSearch1').click(function() {
+              }                          
+                        $('#userSearch').click(function(){  
+                                    $.ajax({
+					type: "get",
+                                         async: false,
+					url: '{!! Route('applicantGS03') !!}',
+					data :{ 
+                                                citiz  : $('#citiz').val(),
+                                                _token: '{{ csrf_token() }}'
+                                               } ,
+					success : function(data){ 
+                                               $("#show_name").text(data.stu_first_name+' '+data.stu_last_name);
+                                              $("#idCard").text(data.stu_citizen_card);                                             
+                                             $("#appcantid").val(data.applicant_id);                                           
+                                        }
+				},"json");  });       
+                            
+                  $('#btnSearch1').click(function(){  
                                     $.ajax({
 					type: "get",
                                          async: false,
