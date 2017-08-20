@@ -141,8 +141,8 @@
                                         </div>
 
                                         <hr/>
-                                        <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbDocID')}}  <span class="label label-warning">{{$curDis->app_id}}</span> </div>
-                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}}  <span class="label label-warning">{{$curDis->curriculum_num}}</span>  </div>
+                                        <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbDocID')}}  <span class="label label-warning">{{ str_pad($curDis->app_id, 5, '0', STR_PAD_LEFT) }} </span> </div>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}}  <span class="label label-warning">{{str_pad($curDis->curriculum_num, 4, '0', STR_PAD_LEFT)}}</span>  </div>
 
 
                                         <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}}   <span class="label label-info">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
@@ -373,18 +373,19 @@
                 <li class="mt-list-item done">
 
                     <div class="list-icon-container">
-                        <i class="icon-hourglass font-blue"></i>
-                        <i class="icon-check font-green"></i>
-                        <i class="icon-close font-red"></i>
+                         
+                         {!!  ($curDis->admission_status_id=='0')? '<i class="icon-hourglass font-blue"></i>':''!!}
+                     {!!    ($curDis->admission_status_id!='0' && $curDis->admission_status_id!='X')?'<i class="icon-check font-green"></i>':''!!}
+                     {!!  ($curDis->admission_status_id=='X')?'<i class="icon-close font-red"></i>':''!!}
                     </div>
                     <div class="list-item-content">
 
                         <h3 class="uppercase">
-                            <a href="javascript:;">รอการพิจารณา / มีสิทธิ์ศึกษา / ไม่มีสิทธิ์เข้าศึกษา</a>
+                            <a href="javascript:;">{{(session('locale')=='th')? $curDis->admission_status_name_th:$curDis->admission_status_name_en}}</a>
                         </h3>
                         <div style="margin:10px 0px 10px 0px">
-                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationDate')}}  <span class="label label-warning">26/05/2017</span> </div>
-                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationLocation')}}  <span class="label label-warning">อาคารจามจุรี9 ชั้น 3 ห้องจามจุรีศรีจุฬาฯ</span> </div>
+                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationDate')}}  <span class="label label-warning">{{$curDis->orientation_date}}</span> </div>
+                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationLocation')}}  <span class="label label-warning">{{$curDis->orientation_location}}</span> </div>
 
                         </div>
                     </div>
