@@ -7,24 +7,28 @@ use App\Models\CurriculumProgram;
 use App\Utils\Util;
 use Illuminate\Support\Facades\DB;
 
-class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements CurriculumProgramRepository {
+class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements CurriculumProgramRepository
+{
 
     protected $engtestPassRepo;
     private $paging = 10;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::setModelClassName(CurriculumProgram::class);
     }
-     public function getCurriculumProgramByCurriculum_id($id){
-    
+
+    public function getCurriculumProgramByCurriculum_id($id)
+    {
+
         $result = null;
         try {
-           
+
             $result = CurriculumProgram::leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
-                    ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
-                    ->leftJoin('mcoursestudy','curriculum_program.program_id','mcoursestudy.coursecodeno')
-                    ->where('curriculum_id',$id)->get();
-                     
+                ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
+                ->leftJoin('mcoursestudy', 'curriculum_program.program_id', 'mcoursestudy.coursecodeno')
+                ->where('curriculum_id', $id)->get();
+
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -85,6 +89,11 @@ class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements 
                     $query->from('curriculum as sub_curr')
                         ->select('sub_curr.major_id')
                         ->where('sub_curr.curriculum_id', '=', $id);
+                })
+                ->where('mc.degree', function ($query) use ($id) {
+                    $query->from('curriculum as sub_curr2')
+                        ->select('sub_curr2.degree_id')
+                        ->where('sub_curr2.curriculum_id', '=', $id);
                 });
 
             $cpQuery = DB::table('curriculum_program as cp_sub')
@@ -92,7 +101,7 @@ class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements 
                     'cp_sub.program_type_id', 'cp_sub.program_plan_id')->where('cp_sub.curriculum_id', '=', $id);
 
             $mainQuery = DB::table(DB::raw("({$cpQuery->toSql()}) as cp"))
-                ->select('cp.curr_prog_id', 'cp.curriculum_id', 'cp.program_type_id', 'cp.program_plan_id','cp.program_id',
+                ->select('cp.curr_prog_id', 'cp.curriculum_id', 'cp.program_type_id', 'cp.program_plan_id', 'cp.program_id',
                     'sub_mc.coursecodeno', 'sub_mc.degree', 'sub_mc.depcode', 'sub_mc.majorcode', 'sub_mc.thai',
                     'sub_mc.english', 'sub_mc.plan')
                 ->rightJoin(DB::raw("({$mcQuery->toSql()}) as sub_mc"), function ($join) {

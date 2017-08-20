@@ -2,7 +2,7 @@
     <div class="portlet-title">
         <div class="caption">
             {{--<i class="fa fa-user"></i>--}}
-              {{Lang::get('resource.lbEduBackground')}}
+            {{Lang::get('resource.lbEduBackground')}}
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
@@ -16,10 +16,14 @@
             <div class="form-body">
                 <div class="mt-repeater">
                     <div class="row">
-                        <div class="col-md-12 text-left">
+                        <div class="col-md-2 text-left">
                             <a title="เพิ่มข้อมูลประวัติการศึกษา" href="javascript:;" data-repeater-create
                                class="btn btn-circle green-haze btn-outline btn-success mt-repeater-add">
                                 <i class="fa fa-plus"></i> {{Lang::get('resource.lbAdd')}}</a>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="note note-danger text-center">
+                                            <i class="fa  fa-info-circle"></i> {{Lang::get('resource.lbEduRemark')}} </div>
                         </div>
                     </div>
                     <hr>
@@ -27,6 +31,7 @@
                         @if(empty($applicantEduList) || sizeof($applicantEduList) == 0)
                             <div data-repeater-item class="mt-repeater-item row">
                                 <!-- jQuery Repeater Container -->
+                                <input type="hidden" id="app_edu_id" name="app_edu_id" value=""/>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-12 text-right">
@@ -100,12 +105,12 @@
                                         <div class="col-md-6">
                                             <label class="control-label">{{Lang::get('resource.lbYearGraduated')}}
                                             </label>
-                                            <input class="form-control" id="edu_year" name="edu_year" type="text">
+                                            <input class="form-control" id="edu_year" maxlength="4" size="4" name="edu_year" type="text">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">{{Lang::get('resource.lbGPAX')}}
                                             </label>
-                                            <input class="form-control" id="edu_gpax" name="edu_gpax" type="text">
+                                            <input class="form-control" id="edu_gpax" maxlength="8" size="8" name="edu_gpax" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -125,11 +130,13 @@
                                     </div>
                                 </div>
                             </div>
-                          
+
                         @else
                             @foreach($applicantEduList as $index => $appEdu)
                                 <div data-repeater-item class="mt-repeater-item row">
                                     <!-- jQuery Repeater Container -->
+                                    <input type="hidden" id="app_edu_id" name="app_edu_id"
+                                           value="{{$appEdu->app_edu_id}}"/>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-12 text-right">
@@ -212,13 +219,13 @@
                                                 <label class="control-label">{{Lang::get('resource.lbYearGraduated')}}
                                                 </label>
                                                 <input class="form-control" id="edu_year" name="edu_year"
-                                                       type="text" value="{{$appEdu->edu_year}}">
+                                                       type="text" maxlength="4" size="4" value="{{$appEdu->edu_year}}">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="control-label">{{Lang::get('resource.lbGPAX')}}
                                                 </label>
                                                 <input class="form-control" id="edu_gpax" name="edu_gpax"
-                                                       type="text" value="{{$appEdu->edu_gpax}}">
+                                                       type="text" maxlength="8" size="8" value="{{$appEdu->edu_gpax}}">
                                             </div>
                                         </div>
                                     </div>
@@ -250,8 +257,10 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="button" id="saveEdu" class="btn green">{{Lang::get('resource.lbSave')}}</button>
-                                <button type="reset" id="clearEdu" class="btn default">{{Lang::get('resource.lbCancel')}}</button>
+                                <button type="button" id="saveEdu"
+                                        class="btn green">{{Lang::get('resource.lbSave')}}</button>
+                                <button type="reset" id="clearEdu"
+                                        class="btn default">{{Lang::get('resource.lbCancel')}}</button>
                             </div>
                         </div>
                     </div>

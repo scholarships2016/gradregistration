@@ -6,7 +6,7 @@
         </div>
         <div class="tools">
             <a href="javascript:;" class="collapse"> </a>
-    
+
         </div>
     </div>
     <div class="portlet-body form">
@@ -28,7 +28,9 @@
                                             <option value="{{$engTest->eng_test_id}}">{{$engTest->eng_test_name}}</option>
                                         @endforeach
                                     @endif
-                                </select> <span class="help-block"><a href="http://www.eurogates.nl/en-TOEFL-IELTS-score-conversion/" target="_">{{Lang::get('resource.lbExScoreTest')}}</a></span>
+                                </select> <span class="help-block"><a
+                                            href="http://www.eurogates.nl/en-TOEFL-IELTS-score-conversion/"
+                                            target="_">{{Lang::get('resource.lbExScoreTest')}}</a></span>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
@@ -41,7 +43,8 @@
                                             <label class="control-label">{{Lang::get('resource.lbDateTaken')}}
                                             </label>
                                             <input type="text" class="form-control input-small" id="eng_date_taken"
-                                                   name="eng_date_taken" value="{{$applicant->eng_date_taken}}">
+                                                   name="eng_date_taken"
+                                                   value="@if(!empty($applicant->eng_date_taken)){{$applicant->eng_date_taken->format('d/m/Y')}}@endif">
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +58,8 @@
                             <label class="control-label col-md-3">{{Lang::get('resource.lbThai')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-small" id="thai_test_score" name="thai_test_score"
+                                <input type="text" class="form-control input-small" id="thai_test_score"
+                                       name="thai_test_score"
                                        value="{{$applicant->thai_test_score}}">
                                 <span class="help-block">{{Lang::get('resource.lbScore')}}</span>
                             </div>
@@ -68,7 +72,8 @@
                             <label class="control-label col-md-3">{{Lang::get('resource.lbCUBEST')}}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-small" id="cu_best_score" name="cu_best_score" value="{{$applicant->cu_best_score}}">
+                                <input type="text" class="form-control input-small" id="cu_best_score"
+                                       name="cu_best_score" value="{{$applicant->cu_best_score}}">
                                 <span class="help-block">{{Lang::get('resource.lbScore')}}</span>
                             </div>
                         </div>
@@ -80,8 +85,10 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="button" id="saveKnowledge" name="saveKnowledge" class="btn green">{{Lang::get('resource.lbSave')}}</button>
-                                <button type="reset" id="clearKnowledge" name="clearKnowledge" class="btn default">{{Lang::get('resource.lbCancel')}}</button>
+                                <button type="button" id="saveKnowledge" name="saveKnowledge"
+                                        class="btn green">{{Lang::get('resource.lbSave')}}</button>
+                                <button type="reset" id="clearKnowledge" name="clearKnowledge"
+                                        class="btn default">{{Lang::get('resource.lbCancel')}}</button>
                             </div>
                         </div>
                     </div>

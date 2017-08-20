@@ -19,22 +19,24 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
     {
         DB::beginTransaction();
         try {
-            $deletedRow = ApplicantWork::where('applicant_id', '=', $applicantId)->delete();
+            $ids = array();
             if (array_key_exists('workexp-group', $datas)) {
-                foreach ($datas['workexp-group'] as $workExp) {
+                foreach ($datas['workexp-group'] as $index => $workExp) {
                     //Create
                     if (empty($workExp->app_work_id)) {
-                        $workExp['applicant_id'] = $applicantId;
-                        $this->create($workExp);
-                        continue;
+                        $datas['workexp-group'][$index]['creator'] = $datas['creator'];
+                        $datas['workexp-group'][$index]['modifier'] = $datas['modifier'];
+                        $datas['workexp-group'][$index]['applicant_id'] = $applicantId;
+                    } else {
+                        $datas['workexp-group'][$index]['modifier'] = $datas['modifier'];
                     }
-                    //Update
-                    $this->save($workExp);
+                    $saveObj = $this->save($datas['workexp-group'][$index]);
+                    array_push($ids, $saveObj->app_work_id);
                 }
             }
-
-            if (array_key_exists('workexp-group-rmvIds', $datas)) {
-                $this->destroy($datas['workexp-group-rmvIds']);
+            if (!empty($ids) && sizeof($ids) > 0) {
+                $del = ApplicantWork::where('applicant_id', '=', $applicantId)
+                    ->whereNotIn('app_work_id', $ids)->delete();
             }
             DB::commit();
             return true;
@@ -53,11 +55,12 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
         }
 
     }
-       public function getApplicantWorkAllByApplicantId($applicantId)
+
+    public function getApplicantWorkAllByApplicantId($applicantId)
     {
         try {
-            return ApplicantWork::leftjoin('tbl_work_status','tbl_work_status.work_status_id' ,'applicant_work.work_status_id' )
-                    ->where('applicant_id', '=', $applicantId)->get();
+            return ApplicantWork::leftjoin('tbl_work_status', 'tbl_work_status.work_status_id', 'applicant_work.work_status_id')
+                ->where('applicant_id', '=', $applicantId)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -89,6 +92,11 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
                 $curObj->work_stu_mth = $data['work_stu_mth'];
             if (array_key_exists('work_stu_salary', $data))
                 $curObj->work_stu_salary = $data['work_stu_salary'];
+            if (array_key_exists('app_work_status', $data)) {
+                $curObj->app_work_status = intval($data['app_work_status']);
+            } else {
+                $curObj->app_work_status = 0;
+            }
 
             if (array_key_exists('creator', $data))
                 $curObj->creator = $data['creator'];

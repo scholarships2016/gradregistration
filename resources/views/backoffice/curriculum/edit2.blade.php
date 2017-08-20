@@ -245,11 +245,11 @@
                                         <input type="hidden" id="degree_id_hidden" name="degree_id_hidden"
                                                value="@if(!empty($curriculum)){{$curriculum->degree_id}}@endif"/>
                                         <select name="degree_id" id="degree_id" class="form-control">
-                                            @if(!empty($degList))
-                                                @foreach($degList as $deg)
-                                                    <option value="{{$deg->degree_id}}">{{$deg->degree_name.' ('.$deg->degree_name_en.')'}}</option>
-                                                @endforeach
-                                            @endif
+                                            {{--@if(!empty($degList))--}}
+                                            {{--@foreach($degList as $deg)--}}
+                                            {{--<option value="{{$deg->degree_id}}">{{$deg->degree_name.' ('.$deg->degree_name_en.')'}}</option>--}}
+                                            {{--@endforeach--}}
+                                            {{--@endif--}}
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
@@ -550,6 +550,7 @@
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -558,6 +559,7 @@
     var firstLoadMajor = true;
     var firstLoadRound = true;
     var firstLoadSubmajor = true;
+    var firstLoadDegree = true;
     var firstLoadCourse = true;
     var firstLoad = true;
     var firstLoadForm = true;
@@ -840,10 +842,23 @@
             }
         });
 
+        var csLoadDegree = new Select2Cascade($('#major_id'), $('#degree_id'), "{{route('masterdata.getAllDegreeForDropdown')}}", select2Option);
+        csLoadDegree.then(function (parent, child, items) {
+            if (items.length != 0) {
+                if (firstLoadDegree) {
+                    child.val($('#degree_id_hidden').val()).change();
+                    firstLoadDegree = false;
+                } else {
+                    child.select2('open');
+                }
+            }
+        });
+
         $('#faculty_id').select2(select2Option).on('change', function () {
             $('#department_id').empty();
             $('#major_id').empty();
             $("#sub_major").html("-");
+            $("#degree_id").empty();
             courseTable.fnClearTable();
         });
 
@@ -851,12 +866,11 @@
         $('#department_id').select2(select2Option).on('change', function () {
             $('#major_id').empty();
             $("#sub_major").html("-");
+            $("#degree_id").empty();
             courseTable.fnClearTable();
         });
 
         $('#faculty_id').val($("#faculty_id_hidden").val()).change();
-
-        $('#degree_id').val($("#degree_id_hidden").val()).change();
 
         $(".date-picker").inputmask("d/m/y");
 
@@ -867,7 +881,6 @@
             clearBtn: true,
             format: 'dd/mm/yyyy'
         });
-
 
         $('#major_id').on('change', function (event) {
             var majorId = $("#major_id").val();
@@ -938,6 +951,17 @@
                     }
                 });
             }
+
+            $("#degree_id").empty();
+            courseTable.fnClearTable();
+
+        });
+
+        $('#degree_id').on('change', function (event) {
+            var majorId = $("#major_id").val();
+            var curriculumId = $("#curriculum_id").val();
+            var degreeId = $("#degree_id").val();
+
             // Get Related Course
             if (firstLoadCourse && curriculumId !== '') {
                 $.ajax({
@@ -960,9 +984,9 @@
                 firstLoadCourse = false;
             } else {
                 $.ajax({
-                    url: '{{route('masterdata.getMcourseStudyByMajorId')}}',
+                    url: '{{route('masterdata.getMcourseStudyByMajorIdAndDegreeId')}}',
                     method: "get",
-                    data: 'major_id=' + majorId,
+                    data: 'major_id=' + majorId + "&degree_id=" + degreeId,
                     success: function (result) {
                         if (result != null) {
                             courseTable.fnClearTable(false);
@@ -979,9 +1003,15 @@
             }
         });
 
-
         $("#document_file").on('change', function () {
             $("#fileuploadDiv #canDownload").val(0);
+        });
+
+        CKEDITOR.replace('additional_detail', {
+            customConfig: '{{asset('js/ckeditor_config.js')}}'
+        });
+        CKEDITOR.replace('additional_question', {
+            customConfig: '{{asset('js/ckeditor_config.js')}}'
         });
 
     }
@@ -1011,6 +1041,8 @@
             }
         });
 
+        $('#roundFormDiv').html(roundHtml);
+
         $.each(obj, function (index, value) {
             html += '<label class="mt-checkbox mt-checkbox-outline">';
             if (value.hasOwnProperty('curr_act_id') && (value.curr_act_id !== null && value.curr_act_id !== '')) {
@@ -1031,11 +1063,14 @@
             html += '<span></span>';
             html += '</label>';
 
-            roundHtml += roundFormGenerate(value);
+            $('#roundFormDiv').append(roundFormGenerate(index, value));
+            CKEDITOR.replace('exam_schedule_' + index, {
+                customConfig: '{{asset('js/ckeditor_config.js')}}'
+            });
         });
 
         $('#roundListDiv').html(html);
-        $('#roundFormDiv').html(roundHtml);
+
     }
 
     function submit_form() {
@@ -1046,6 +1081,10 @@
 
         if ($("input[name='program_id']:visible").length > 0) {
             mainForm.validate().element($("input[name='program_id']"));
+        }
+
+        for(var instanceName in CKEDITOR.instances) {
+            CKEDITOR.instances[instanceName].updateElement();
         }
 
         if (!mainForm.valid()) {
@@ -1086,10 +1125,13 @@
 
                     if (data.curriculum_activity !== null && data.curriculum_activity.length > 0) {
                         var roundHtml = '';
-                        $.each(data.curriculum_activity, function (index, value) {
-                            roundHtml += roundFormGenerate(value);
-                        });
                         $('#roundFormDiv').html(roundHtml);
+                        $.each(data.curriculum_activity, function (index, value) {
+                            $('#roundFormDiv').append(roundFormGenerate(index, value));
+                            CKEDITOR.replace('exam_schedule_' + index, {
+                                customConfig: '{{asset('js/ckeditor_config.js')}}'
+                            });
+                        });
                     }
 
                     if (data.curriculum_program !== null && data.curriculum_program.length > 0) {
@@ -1108,7 +1150,7 @@
 
     }
 
-    function roundFormGenerate(obj) {
+    function roundFormGenerate(index, obj) {
         var roundHtml = '';
         if (obj.hasOwnProperty('curr_act_id') && (obj.curr_act_id !== null && obj.curr_act_id !== '')) {
             roundHtml += '<div class="row round-row" id="formRound' + obj.round_no + '">';
@@ -1134,16 +1176,17 @@
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="form-group col-md-12">';
-        roundHtml += '<label class="control-label col-md-offset-1 col-md-1"';
+        roundHtml += '<label class="control-label col-md-2"';
         roundHtml += 'for="exam_schedule"><strong>ตารางสอบ</strong></label>';
         roundHtml += '<div class="col-md-10">';
-        roundHtml += '<textarea id="exam_schedule" class="form-control"';
+        roundHtml += '<textarea id="exam_schedule_' + index + '" class="ckeditor form-control" data-error-container="#exam_schedule_error"';
         roundHtml += 'name="exam_schedule"';
         roundHtml += 'rows="5">';
         if (obj.hasOwnProperty('exam_schedule') && (obj.exam_schedule !== null && obj.exam_schedule !== '')) {
             roundHtml += obj.exam_schedule;
         }
         roundHtml += '</textarea>';
+        roundHtml += '<div id="exam_schedule_error"></div>';
         roundHtml += '</div>';
         roundHtml += '<span class="help-block"></span>';
         roundHtml += '</div>';

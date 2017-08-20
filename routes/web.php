@@ -28,12 +28,6 @@ Route::get('admin/login/', 'Auth\LoginUserController@showLoginForm')->name('show
 Route::post('login_admin', 'Auth\LoginUserController@postLogin')->name('adminlogin');
 
 
-
-
-
-
-
-
 //SetLangues just call function
 Route::get('language', 'Auth\LoginApplicantController@language');
 
@@ -44,8 +38,6 @@ Route::get('showRegisHead', 'ApplyController@showRegisHead')->name('showRegisHea
 Route::any('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
 Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
 Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailForapply')->name('registerDetailForapply');
-
-
 
 
 //PageMain
@@ -91,7 +83,7 @@ Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
-    
+
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
 //Apply 
     Route::get('apply', 'ApplyController@showAnnouncement');
@@ -118,6 +110,11 @@ Route::group(['prefix' => 'profile', 'middleware' => []], function () {
     Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');
     Route::post('/doSaveEduBak', 'ProfileController@doSaveEduBackground')->name('profile.doSaveEduBak');
     Route::post('/doSaveWorkExp', 'ProfileController@doSaveWorkExp')->name('profile.doSaveWorkExp');
+    Route::post('/doChangePassword', 'ProfileController@doChangePassword')->name('profile.doChangePassword');
+
+    //ProfilePic
+    Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
+
 });
 
 Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
@@ -127,9 +124,10 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
     Route::get('/getAllFaculty', 'MasterDataController@getAllFacultyForDropdown')->name('masterdata.getAllFacultyForDropdown');
     Route::get('/getMajorByDepartmentId', 'MasterDataController@getMajorByDepartmentIdForDropdown')->name('masterdata.getMajorByDepartmentIdForDropdown');
     Route::get('/getSubMajorByMajorId', 'MasterDataController@getSubMajorByMajorIdForDropdown')->name('masterdata.getSubMajorByMajorIdForDropdown');
-    Route::get('/getMcourseStudyByMajorId', 'MasterDataController@getMcourseStudyByMajorId')->name('masterdata.getMcourseStudyByMajorId');
+    Route::get('/getMcourseStudyByMajorIdAndDegreeId', 'MasterDataController@getMcourseStudyByMajorIdAndDegreeId')->name('masterdata.getMcourseStudyByMajorIdAndDegreeId');
     Route::get('/getApplySettingByAcademicYear', 'MasterDataController@getApplySettingByAcademicYear')->name('masterdata.getApplySettingByAcademicYear');
     Route::get('/getApplySettingBySemesterAndAcademicYear', 'MasterDataController@getApplySettingBySemesterAndAcademicYear')->name('masterdata.getApplySettingBySemesterAndAcademicYear');
+    Route::get('/getAllDegreeForDropdown', 'MasterDataController@getAllDegreeForDropdown')->name('masterdata.getAllDegreeForDropdown');
 
 });
 

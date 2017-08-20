@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Applicant
- * 
+ *
  * @property int $applicant_id
  * @property string $stu_citizen_card
  * @property string $name_title_id
@@ -59,7 +59,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Applicant extends Eloquent {
+class Applicant extends Eloquent
+{
 
     protected $table = 'applicant';
     protected $primaryKey = 'applicant_id';
@@ -131,18 +132,23 @@ class Applicant extends Eloquent {
         'modified'
     ];
 
-  //  public function getStuBirthdateAttribute($value)
-  //  {
-   //     return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-  //  }
+    //  public function getStuBirthdateAttribute($value)
+    //  {
+    //     return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //  }
 
-  //  public function getEngDateTakenAttribute($value)
-  //  {
-  //      return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
-  //  }
+    //  public function getEngDateTakenAttribute($value)
+    //  {
+    //      return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
+    //  }
 
     public function tblNation()
     {
         return $this->hasOne(TblNation::class, 'nation_id', 'nation_id');
+    }
+
+    public function stuImgFile()
+    {
+        return $this->hasOne(File::class, 'file_id', 'stu_img');
     }
 }

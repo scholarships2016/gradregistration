@@ -138,7 +138,6 @@ class CurriculumController extends Controller
             $result = $this->curriculumRepo->getCurriculumInfoById($currObj->curriculum_id);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
-          throw $ex;
             return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
         }
     }

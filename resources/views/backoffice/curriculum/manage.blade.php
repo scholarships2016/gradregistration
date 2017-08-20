@@ -361,7 +361,7 @@
                         targets: 9,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            var editLink = '{{url('admin/curriculum/edit')}}';
+                            var editLink = '{{url("admin/management/curriculum/edit")}}';
                             var html = '<div class="btn-group">';
                             html += '<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions';
                             html += '<i class="fa fa-angle-down"></i>';

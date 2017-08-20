@@ -13,30 +13,34 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
     public function __construct()
     {
         parent::setModelClassName(ApplicantEdu::class);
-
     }
 
     public function saveApplicantEduList(array $datas, $applicantId)
     {
         DB::beginTransaction();
         try {
-            $deletedRow = ApplicantEdu::where('applicant_id', '=', $applicantId)->delete();
+            $ids = array();
             if (array_key_exists('eduback-group', $datas)) {
-                foreach ($datas['eduback-group'] as $eduBack) {
+                foreach ($datas['eduback-group'] as $index => $eduBack) {
                     //Create
                     if (empty($eduBack->app_edu_id)) {
-                        $eduBack['applicant_id'] = $applicantId;
-                        $this->create($eduBack);
-                        continue;
+                        $datas['eduback-group'][$index]['creator'] = $datas['creator'];
+                        $datas['eduback-group'][$index]['modifier'] = $datas['modifier'];
+                        $datas['eduback-group'][$index]['applicant_id'] = $applicantId;
+                    } else {
+                        $datas['eduback-group'][$index]['modifier'] = $datas['modifier'];
                     }
 
-                    // Update
-                    $this->save($eduBack);
+                    $saveObj = $this->save($datas['eduback-group'][$index]);
+                    array_push($ids, $saveObj->app_edu_id);
                 }
             }
-            if (array_key_exists('eduback-group-rmvIds', $datas)) {
-                $this->destroy($datas['eduback-group-rmvIds']);
+
+            if (!empty($ids) && sizeof($ids) > 0) {
+                $del = ApplicantEdu::where('applicant_id', '=', $applicantId)
+                    ->whereNotIn('app_edu_id', $ids)->delete();
             }
+
             DB::commit();
             return true;
         } catch (\Exception $ex) {
@@ -53,13 +57,13 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
             throw $ex;
         }
     }
+
     public function getApplicantEduAllByApplicantId($applicantId)
     {
         try {
-            return ApplicantEdu::leftjoin('tbl_university','tbl_university.university_id','applicant_edu.university_id')
-                    ->leftjoin('tbl_education_pass','tbl_education_pass.edu_pass_id','applicant_edu.edu_pass_id')
-                      
-                    ->where('applicant_id', '=', $applicantId)->get();
+            return ApplicantEdu::leftjoin('tbl_university', 'tbl_university.university_id', 'applicant_edu.university_id')
+                ->leftjoin('tbl_education_pass', 'tbl_education_pass.edu_pass_id', 'applicant_edu.edu_pass_id')
+                ->where('applicant_id', '=', $applicantId)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -78,7 +82,7 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
             if (array_key_exists('applicant_id', $data))
                 $curObj->applicant_id = $data['applicant_id'];
             if (array_key_exists('grad_level', $data))
-                $curObj->grad_level_id = $data['grad_level'];
+                $curObj->grad_level = $data['grad_level'];
             if (array_key_exists('edu_pass_id', $data))
                 $curObj->edu_pass_id = $data['edu_pass_id'];
             if (array_key_exists('university_id', $data))
@@ -90,7 +94,7 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
             if (array_key_exists('edu_major', $data))
                 $curObj->edu_major = $data['edu_major'];
             if (array_key_exists('edu_gpax', $data))
-                $curObj->work_stu_salary = $data['edu_gpax'];
+                $curObj->edu_gpax = $data['edu_gpax'];
             if (array_key_exists('edu_degree', $data))
                 $curObj->edu_degree = $data['edu_degree'];
 

@@ -29,11 +29,11 @@ class FileRepositoryImpl extends AbstractRepositoryImpl implements FileRepositor
             $file->file_mimetype = $uploadedFile->getClientMimeType();
             $genName = Storage::putFile(empty($path) ? env(Util::TEMP_FOLDER) : $path, $uploadedFile);
             $file->file_path = $genName;
-           $filenameArr = explode("/", $genName);
-           $file->file_gen_name = $filenameArr[sizeof($filenameArr) - 1];
+            $filenameArr = explode("/", $genName);
+            $file->file_gen_name = $filenameArr[sizeof($filenameArr) - 1];
             $file->save();
             DB::commit();
-            
+
             return $file;
         } catch (\Exception $ex) {
             DB::rollBack();
@@ -108,13 +108,13 @@ class FileRepositoryImpl extends AbstractRepositoryImpl implements FileRepositor
             if (empty($result)) {
                 throw new \Exception('Not Found');
             }
-        
-           
-            return 'data:image/*' . ';base64,' . str_replace ("\n", "",base64_encode(Storage::get($result->file_path)));
+
+
+            return 'data:image/*' . ';base64,' . str_replace("\n", "", base64_encode(Storage::get($result->file_path)));
         } catch (\Exception $ex) {
             throw $ex;
         }
-   
+
     }
 
 
@@ -135,4 +135,15 @@ class FileRepositoryImpl extends AbstractRepositoryImpl implements FileRepositor
             throw $ex;
         }
     }
+
+    public function removeFileByPath($path)
+    {
+        try {
+            return Storage::delete($path);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
 }
