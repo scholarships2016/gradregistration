@@ -1643,7 +1643,3 @@ jQuery(document).ready(function() {
 }();
 
 
->>>>>>> origin/master
-
-</script>
-@endpush
