@@ -162,11 +162,13 @@ class ManageApplyController extends Controller {
     }
 
     public function updateApplication(Request $request = null) {
-      
+
         $data = '';
         $res = false;
-        if ($request->exam_remark)
+
+        if ($request->exam_remark) {
             $data = ['exam_remark' => $request->exam_remark, 'application_id' => $request->application_id];
+        }
         if ($request->exam_status) {
             $flow_id = ($request->exam_status == 2 || $request->exam_status == 3 ) ? 4 : 3;
             $data = ['exam_status' => $request->exam_status, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
@@ -175,25 +177,30 @@ class ManageApplyController extends Controller {
             $res = $this->ApplicationRepo->saveApplication($data);
         }
 
-        if ($request->admission_remark)
+        if ($request->admission_remark) {
             $data = ['admission_remark' => $request->admission_remark, 'application_id' => $request->application_id];
-        if ($request->admission_status_id) {
+        }
+   
+        if ($request->admission_status_id || $request->admission_status_id == "0") {
             $flow_id = ($request->admission_status_id != 'X' && $request->admission_status_id != '0') ? 5 : 4;
             $data = ['admission_status_id' => $request->admission_status_id, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
         }
-        if ($request->admission_remark || $request->admission_status_id) {
-             $res = $this->ApplicationRepo->saveApplication($data);
+        if ($request->admission_remark || $request->admission_status_id || $request->admission_status_id == "0") {
+            $res = $this->ApplicationRepo->saveApplication($data);
         }
 
 
 
 
-        if ($request->eng_test_id_admin)
+        if ($request->eng_test_id_admin) {
             $data = ['eng_test_id_admin' => $request->eng_test_id_admin, 'applicant_id' => $request->applicant_id];
-        if ($request->eng_test_score_admin)
+        }
+        if ($request->eng_test_score_admin) {
             $data = ['eng_test_score_admin' => $request->eng_test_score_admin, 'applicant_id' => $request->applicant_id];
-        if ($request->eng_date_taken_admin)
+        }
+        if ($request->eng_date_taken_admin) {
             $data = ['eng_date_taken_admin' => $request->eng_date_taken_admin, 'applicant_id' => $request->applicant_id];
+        }
         if ($request->eng_test_id_admin || $request->eng_test_score_admin || $request->eng_date_taken_admin) {
             $res = $this->ApplicantRepo->saveApplicant($data);
         }
@@ -212,7 +219,7 @@ class ManageApplyController extends Controller {
             if ($res) {
                 $curDiss = $this->ApplicationRepo->getDataForMange($res['applicant_id'], null, null, null, null, null, null, null, $curr_act_id, null, null, $sub_major_id, $program_id, $program_type_id);
             }
-            if ($curDiss && $curDiss->count()>0) {
+            if ($curDiss && $curDiss->count() > 0) {
                 return response()->json(['mess' => 'มีข้อมูลนี้ในระบบแล้วไม่สามารถเพิ่มได้']);
             }
             return response()->json($res);
@@ -246,6 +253,7 @@ class ManageApplyController extends Controller {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
         }
     }
+
     public function addUserExamGS05(Request $request) {
         $res = null;
         try {
@@ -263,7 +271,7 @@ class ManageApplyController extends Controller {
                     'spacial_admission_comment' => $request->apply_comment,
                     'creator' => session('user_id'),
                     'modifier' => session('user_id'),
-                    'exam_status'=>2,
+                    'exam_status' => 2,
                     'applicant_id' => $request->applicant_ID];
                 $res = $this->ApplicationRepo->saveApplication($data);
                 $dataup = ['application_id' => $res->application_id, 'flow_id' => 4];
