@@ -12,6 +12,7 @@ use App\Models\ApplicatNewsSource;
 use App\Repositories\Contracts\ApplicantWorkRepository;
 use App\Repositories\Contracts\FileRepository;
 use App\Utils\Util;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -402,5 +403,67 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
+    public function doApplicantPaging($criteria = null)
+    {
+        try {
+            $columnMap = array(
+                1 => "",
+            );
+            $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
+            $data = null;
+
+            $mainQuery = DB::table('applicant as appt')
+                ->select(
+                    'appt.applicant_id', 'appt.stu_citizen_card',
+                    DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"),
+                    DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
+                    'appt.stu_email',
+//                    "0 as special_auth",
+                    DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"),
+                    DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"),
+                    'appt.ipaddress as login_ip'
+                )
+                ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
+                    $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
+                });
+
+            $recordsTotal = $mainQuery->get()->count();
+
+            if (isset($criteria['from_date'])) {
+                $mainQuery->whereDate('created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
+            }
+
+            if (isset($criteria['to_date'])) {
+                $mainQuery->whereDate('created', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
+            }
+
+            if (isset($criteria['emailCitizenFullname'])) {
+                $mainQuery->where(function ($query) use ($criteria) {
+                    $query->where('appt.stu_email', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_citizen_card', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_first_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_last_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_first_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_last_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%');
+                });
+            }
+
+            $recordsFiltered = $mainQuery->get()->count();
+//            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+            $data = $mainQuery->get();
+
+            $result = array('draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data
+            );
+
+            return $result;
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
 }
