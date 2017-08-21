@@ -141,8 +141,8 @@
                                         </div>
 
                                         <hr/>
-                                        <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbDocID')}}  <span class="label label-warning">{{$curDis->app_id}}</span> </div>
-                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}}  <span class="label label-warning">{{$curDis->curriculum_num}}</span>  </div>
+                                        <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbDocID')}}  <span class="label label-warning">{{ str_pad($curDis->app_id, 5, '0', STR_PAD_LEFT) }} </span> </div>
+                                        <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}}  <span class="label label-warning">{{str_pad($curDis->curriculum_num, 4, '0', STR_PAD_LEFT)}}</span>  </div>
 
 
                                         <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}}   <span class="label label-info">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
@@ -300,7 +300,7 @@
                                  <br/>
                                        <div class="alert alert-danger">
                                        <i class="icon-info"></i>
-                                       {{Lang::get('resource.lbProcessTime')}}  05/09/2017
+                                       {{Lang::get('resource.lbProcessTime')}}  {{$curDis->end_date}}
                                      </div>
 
                            @endif
@@ -316,18 +316,18 @@
                 <li class="mt-list-item done">
 
                     <div class="list-icon-container">
-                        <i class="icon-hourglass font-blue"></i>
-                        <i class="icon-check font-green"></i>
-                        <i class="icon-close font-red"></i>
+                     {!!  ($curDis->exam_id==1)? '<i class="icon-hourglass font-blue"></i>':''!!}
+                     {!!    ($curDis->exam_id==2)?'<i class="icon-check font-green"></i>':''!!}
+                     {!!  ($curDis->exam_id==3)?'<i class="icon-close font-red"></i>':''!!}
                     </div>
                     <div class="list-item-content">
 
                         <h3 class="uppercase">
-                            <a href="javascript:;">รอการพิจารณา / มีสิทธิ์สอบ / ไม่มีสิทธิ์สอบ</a>
+                            <a href="javascript:;"> {{(session('locale')=='th')? $curDis->exam_name:$curDis->exam_name_en}}</a>
                         </h3>
                         <div style="margin:10px 0px 10px 0px">
 
-                          <a class="btn btn-circle blue btn-outline" href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
+                          <a class="btn btn-circle blue btn-outline" id="examshow" exam="{{$curDis->exam_schedule}}"  href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
                               <i class="fa fa-table"></i>
                           </a>
 
@@ -341,7 +341,7 @@
      <div class="alert alert-info">
 
      <i class="icon-info"></i>
-     ดึงหมายเหตุมาแสดง
+     {{($curDis->exam_remark)?$curDis->exam_remark:''}}
    </div>
    <!-- Exam Table -->
     <div id="exam-schedule-data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -352,7 +352,7 @@
                     <h4 class="modal-title">{{Lang::get('resource.lbTodolistViewExamTable')}}</h4>
                 </div>
                 <div class="modal-body">
-                    <p> แสดงตารางสอบ </p>
+                    <p id="examtable">  </p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn default" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -373,18 +373,19 @@
                 <li class="mt-list-item done">
 
                     <div class="list-icon-container">
-                        <i class="icon-hourglass font-blue"></i>
-                        <i class="icon-check font-green"></i>
-                        <i class="icon-close font-red"></i>
+                         
+                         {!!  ($curDis->admission_status_id=='0')? '<i class="icon-hourglass font-blue"></i>':''!!}
+                     {!!    ($curDis->admission_status_id!='0' && $curDis->admission_status_id!='X')?'<i class="icon-check font-green"></i>':''!!}
+                     {!!  ($curDis->admission_status_id=='X')?'<i class="icon-close font-red"></i>':''!!}
                     </div>
                     <div class="list-item-content">
 
                         <h3 class="uppercase">
-                            <a href="javascript:;">รอการพิจารณา / มีสิทธิ์ศึกษา / ไม่มีสิทธิ์เข้าศึกษา</a>
+                            <a href="javascript:;">{{(session('locale')=='th')? $curDis->admission_status_name_th:$curDis->admission_status_name_en}}</a>
                         </h3>
                         <div style="margin:10px 0px 10px 0px">
-                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationDate')}}  <span class="label label-warning">26/05/2017</span> </div>
-                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationLocation')}}  <span class="label label-warning">อาคารจามจุรี9 ชั้น 3 ห้องจามจุรีศรีจุฬาฯ</span> </div>
+                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationDate')}}  <span class="label label-warning">{{$curDis->orientation_date}}</span> </div>
+                          <div class="todo-tasklist-item-text">  {{Lang::get('resource.lbTodolistOrientationLocation')}}  <span class="label label-warning">{{$curDis->orientation_location}}</span> </div>
 
                         </div>
                     </div>
@@ -396,7 +397,7 @@
      <div class="alert alert-info">
 
      <i class="icon-info"></i>
-     ดึงหมายเหตุมาแสดง
+     {{($curDis->admission_remark)?$curDis->admission_remark:''}}
    </div>
 
 @endif
@@ -449,8 +450,13 @@
   }, 100);
 });
          }
-
-
-
+jQuery(document).ready(function() {
+   $('.todo-content').on( 'click', 'a', function () {
+          if($(this).attr('id')=="examshow"){
+              $('#examtable').text($(this).attr('exam'));               
+         } 
+    } );
+ 
+});
 </script>
 @endpush

@@ -35,7 +35,7 @@ return [
     'lbDistrict' => 'อำเภอ',
     'lbZipcode' => 'รหัสไปรษณีย์',
     'lbEnglish' => 'คะแนนการทดสอบภาษาอังกฤษ',
-    'lbExScoreTest' => '(ตัวอย่างการเทียบคะแนน Example)',
+    'lbExScoreTest' => '(ตัวอย่างการเทียบคะแนน)',
     'lbScore' => 'คะแนน',
     'lbDateTaken' => 'เมื่อวันที่',
     'lbThai' => 'คะแนนภาษาไทย',
@@ -68,9 +68,9 @@ return [
     'lbSkill' => 'การทดสอบความรู้ความสามารถ',
     'lbEduBackground' => 'ประวัติการศึกษา',
     'lbWorkExp' => 'ประสบการณ์การทำงาน',
-    'lbCitizen' => 'เลขที่บัตรประจำตัวประชาชน',
+    'lbCitizen' => 'เลขประจำตัวประชาชน',
     'lbContactNo' => 'หมายเลขโทรศัพท์ที่สามารถติดต่อได้',
-    'lbTopInfo' => 'เลขที่บัตรประจำตัวประชาชน และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้ จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป ',
+    'lbTopInfo' => 'เลขประจำตัวประชาชน และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้ จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป ',
     'lbAppInfo' => 'ข้อมูลประวัติผู้สมัคร',
 
 
@@ -308,5 +308,20 @@ return [
       'lbLoginSignupPassword' => 'รหัสผ่าน',
       'lbLoginSignupPasswordDesc' => 'รหัสผ่านความยาวอย่างน้อย 6 ตัวอักษร',
       'lbLoginSignupPasswordReType' => 'กรอกรหัสผ่านอีกครั้ง',
+
+      //profile
+      'lbBtnChangeImage' => 'เลือก',
+      'lbBtnChangeImage' => 'เปลี่ยนรูป',
+      'lbBtnDeleteImage' => 'ลบ',
+      'lbCurrentWorkStatusTitle' => 'สถานะการทำงาน',
+      'lbCurrentWorkStatus' => 'เป็นที่ทำงานปัจจุบัน/ล่าสุด?',
+      'lbTabOverview' => 'ทั่วไป',
+      'lbTabProfileInfo' => 'ข้อมูลส่วนตัว',
+      'lbTabChangePassword' => 'เปลี่ยนรหัสผ่าน',
+      'lbCurrentPassword' => 'รหัสผ่านปัจจุบัน',
+      'lbNewPassword' => 'รหัสผ่านใหม่',
+      'lbConfirmNewPassword' => 'ยืนยันรหัสผ่านใหม่',
+      'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
+      'lbEduRemark' =>'โปรดกรอกข้อมูลทุกระดับการศึกษา',
 
 ];

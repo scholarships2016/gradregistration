@@ -53,9 +53,7 @@ class Application extends Eloquent {
         'app_id' => 'int',
         'curriculum_num' => 'int',
         'flow_id' => 'int',
-        'bank_id' => 'int',
-        'exam_status' => 'int',
-        'admission_status_id' => 'int'
+        'bank_id' => 'int' 
     ];
     protected $dates = [
         'payment_date',
@@ -73,6 +71,8 @@ class Application extends Eloquent {
         'curriculum_num',
         'flow_id',
         'bank_id',
+        'exam_status',
+        'admission_status_id' ,
         'payment_date',
         'receipt_book',
         'receipt_no',

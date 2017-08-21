@@ -102,13 +102,13 @@ class ManageApplyController extends Controller {
         $criteria = $request->criteria;
         $curr_act_id = $request->curr_act_id;
         $exam_status = $request->exams;
-        $program_id= $request->program_id;
-        $sub_major_id= $request->sub_major_id;
+        $program_id = $request->program_id;
+        $sub_major_id = $request->sub_major_id;
         $program_type_id = $request->program_type_id;
 
         $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status,$sub_major_id,$program_id,$program_type_id);
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id);
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
@@ -152,8 +152,8 @@ class ManageApplyController extends Controller {
     }
 
     public function getStatusAdmission() {
-        $exam = $this->AdmissionStatus->all();
-        return response()->json($exam);
+        $exams = $this->AdmissionStatus->all();
+        return response()->json($exams);
     }
 
     public function getEngTest() {
@@ -162,10 +162,13 @@ class ManageApplyController extends Controller {
     }
 
     public function updateApplication(Request $request = null) {
+
         $data = '';
         $res = false;
-        if ($request->exam_remark)
+
+        if ($request->exam_remark) {
             $data = ['exam_remark' => $request->exam_remark, 'application_id' => $request->application_id];
+        }
         if ($request->exam_status) {
             $flow_id = ($request->exam_status == 2 || $request->exam_status == 3 ) ? 4 : 3;
             $data = ['exam_status' => $request->exam_status, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
@@ -174,29 +177,110 @@ class ManageApplyController extends Controller {
             $res = $this->ApplicationRepo->saveApplication($data);
         }
 
-        if ($request->admission_remark)
+        if ($request->admission_remark) {
             $data = ['admission_remark' => $request->admission_remark, 'application_id' => $request->application_id];
-        if ($request->admission_status_id) {
+        }
+   
+        if ($request->admission_status_id || $request->admission_status_id == "0") {
             $flow_id = ($request->admission_status_id != 'X' && $request->admission_status_id != '0') ? 5 : 4;
             $data = ['admission_status_id' => $request->admission_status_id, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
         }
-        if ($request->admission_remark || $request->admission_status_id) {
+        if ($request->admission_remark || $request->admission_status_id || $request->admission_status_id == "0") {
             $res = $this->ApplicationRepo->saveApplication($data);
         }
 
 
 
 
-        if ($request->eng_test_id_admin)
+        if ($request->eng_test_id_admin) {
             $data = ['eng_test_id_admin' => $request->eng_test_id_admin, 'applicant_id' => $request->applicant_id];
-        if ($request->eng_test_score_admin)
+        }
+        if ($request->eng_test_score_admin) {
             $data = ['eng_test_score_admin' => $request->eng_test_score_admin, 'applicant_id' => $request->applicant_id];
-        if ($request->eng_date_taken_admin)
+        }
+        if ($request->eng_date_taken_admin) {
             $data = ['eng_date_taken_admin' => $request->eng_date_taken_admin, 'applicant_id' => $request->applicant_id];
+        }
         if ($request->eng_test_id_admin || $request->eng_test_score_admin || $request->eng_date_taken_admin) {
             $res = $this->ApplicantRepo->saveApplicant($data);
         }
         return response()->json($res);
+    }
+
+    public function checkApplicant(Request $request) {
+        if ($request) {
+            $curDiss = null;
+            $citizencard = $request->citiz;
+            $curr_act_id = $request->curr_act_id;
+            $sub_major_id = $request->sub_major_id;
+            $program_id = $request->program_id;
+            $program_type_id = $request->program_type_id;
+            $res = $this->ApplicantRepo->getByCitizenOrEmail($citizencard, null);
+            if ($res) {
+                $curDiss = $this->ApplicationRepo->getDataForMange($res['applicant_id'], null, null, null, null, null, null, null, $curr_act_id, null, null, $sub_major_id, $program_id, $program_type_id);
+            }
+            if ($curDiss && $curDiss->count() > 0) {
+                return response()->json(['mess' => 'มีข้อมูลนี้ในระบบแล้วไม่สามารถเพิ่มได้']);
+            }
+            return response()->json($res);
+        }
+    }
+
+    public function addUserExamGS03(Request $request) {
+        $res = null;
+        try {
+            if ($request) {
+                $data = ['curr_act_id' => $request->curr_act_id,
+                    'sub_major_id' => $request->sub_major_id,
+                    'program_id' => $request->program_id,
+                    'program_type_id' => $request->program_type_id,
+                    'stu_citizen_card' => $request->idCard,
+                    'curriculum_id' => $request->curriculum_id,
+                    'flow_id' => 1,
+                    'bank_id' => 10,
+                    'special_apply_by' => session('user_id'),
+                    'special_apply_datetime' => Carbon::now(),
+                    'special_apply_comment' => $request->apply_comment,
+                    'creator' => session('user_id'),
+                    'modifier' => session('user_id'),
+                    'applicant_id' => $request->applicant_ID];
+                $res = $this->ApplicationRepo->saveApplication($data);
+                $dataup = ['application_id' => $res->application_id, 'flow_id' => 3];
+                $res = $this->ApplicationRepo->saveApplication($dataup);
+            }
+        } catch (Exception $e) {
+            Controller::WLog('addUserExam( ApplicaintID[ ' . $request->application . ']', 'Gs03', $e->getMessage());
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+    }
+
+    public function addUserExamGS05(Request $request) {
+        $res = null;
+        try {
+            if ($request) {
+                $data = ['curr_act_id' => $request->curr_act_id,
+                    'sub_major_id' => $request->sub_major_id,
+                    'program_id' => $request->program_id,
+                    'program_type_id' => $request->program_type_id,
+                    'stu_citizen_card' => $request->idCard,
+                    'curriculum_id' => $request->curriculum_id,
+                    'flow_id' => 1,
+                    'bank_id' => 10,
+                    'special_admission_by' => session('user_id'),
+                    'special_admission_date' => Carbon::now(),
+                    'spacial_admission_comment' => $request->apply_comment,
+                    'creator' => session('user_id'),
+                    'modifier' => session('user_id'),
+                    'exam_status' => 2,
+                    'applicant_id' => $request->applicant_ID];
+                $res = $this->ApplicationRepo->saveApplication($data);
+                $dataup = ['application_id' => $res->application_id, 'flow_id' => 4];
+                $res = $this->ApplicationRepo->saveApplication($dataup);
+            }
+        } catch (Exception $e) {
+            Controller::WLog('addUserExam( ApplicaintID[ ' . $request->application . ']', 'Gs03', $e->getMessage());
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
     }
 
     public function sentMailGS03(Request $request) {

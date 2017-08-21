@@ -16,10 +16,14 @@
             <div class="form-body">
                 <div class="mt-repeater">
                     <div class="row">
-                        <div class="col-md-12 text-left">
+                        <div class="col-md-2 text-left">
                             <a title="เพิ่มข้อมูลประวัติการศึกษา" href="javascript:;" data-repeater-create
                                class="btn btn-circle green-haze btn-outline btn-success mt-repeater-add">
                                 <i class="fa fa-plus"></i> {{Lang::get('resource.lbAdd')}}</a>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="note note-danger text-center">
+                                            <i class="fa  fa-info-circle"></i> {{Lang::get('resource.lbEduRemark')}} </div>
                         </div>
                     </div>
                     <hr>

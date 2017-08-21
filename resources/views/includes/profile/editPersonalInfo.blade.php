@@ -13,6 +13,45 @@
             {{csrf_field()}}
             <input type="hidden" name="applicant_id" id="applicant_id" value="{{$applicant->applicant_id}}">
             <div class="form-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                {{Lang::get('resource.perInfoPhoto')}}
+                            </label>
+                            <div class="col-md-9">
+                                <input type="hidden" id="hasImg" name="hasImg"
+                                       value="@if(!empty($applicant->stuImgFile)){{1}}@else{{0}}@endif"/>
+                                <input type="hidden" id="reqDelImg" name="reqDelImg" value="0"/>
+                                <div class="fileinput @if(!empty($applicant->stuImgFile)) fileinput-exists @else fileinput-new @endif"
+                                     data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail" style="width: 100px; height: 150px;">
+                                        <img src="http://www.placehold.it/150x200/EFEFEF/AAAAAA&amp;text=no+image"
+                                             alt=""/>
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"
+                                         style="max-width: 100px;max-height: 150px;">
+                                        @if(!empty($applicant->stuImgFile))
+                                            <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
+                                                 onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image';"
+                                                 alt=""/>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <span class="btn default btn-file">
+                                            <span class="fileinput-new"> {{Lang::get('resource.lbBtnSelectImage')}} </span>
+                                            <span class="fileinput-exists"> {{Lang::get('resource.lbBtnChangeImage')}} </span>
+                                            <input type="file" id="stu_profile_pic" name="stu_profile_pic">
+                                        </span>
+                                        <a href="javascript:;" id="delPicBt" class="btn red fileinput-exists"
+                                           data-dismiss="fileinput"> {{Lang::get('resource.lbBtnDeleteImage')}} </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -212,44 +251,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">
-                                {{Lang::get('resource.perInfoPhoto')}}
-                            </label>
-                            <div class="col-md-9">
-                                <input type="hidden" id="hasImg" name="hasImg"
-                                       value="@if(!empty($applicant->stuImgFile)){{1}}@else{{0}}@endif"/>
-                                <input type="hidden" id="reqDelImg" name="reqDelImg" value="0"/>
-                                <div class="fileinput @if(!empty($applicant->stuImgFile)) fileinput-exists @else fileinput-new @endif"
-                                     data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail" style="width: 100px; height: 150px;">
-                                        <img src="http://www.placehold.it/150x200/EFEFEF/AAAAAA&amp;text=no+image"
-                                             alt=""/>
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail"
-                                         style="max-width: 100px;max-height: 150px;">
-                                        @if(!empty($applicant->stuImgFile))
-                                            <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
-                                                 onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image';"
-                                                 alt=""/>
-                                        @endif
-                                    </div>
-                                    <div>
-                                        <span class="btn default btn-file">
-                                            <span class="fileinput-new"> เลือก </span>
-                                            <span class="fileinput-exists"> เปลี่ยน </span>
-                                            <input type="file" id="stu_profile_pic" name="stu_profile_pic">
-                                        </span>
-                                        <a href="javascript:;" id="delPicBt" class="btn red fileinput-exists"
-                                           data-dismiss="fileinput"> ลบ </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <hr/>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">

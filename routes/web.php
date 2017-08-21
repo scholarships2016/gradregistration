@@ -72,6 +72,11 @@ Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('
 Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
 Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
 Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
+Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
+ Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
+  Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
+
+
 
 //GS05
 Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
