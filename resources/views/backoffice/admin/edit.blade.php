@@ -234,20 +234,25 @@
     }
 
     function eventHandle() {
-
         $("input[name='role_id']").on('change', function () {
             if ($(this).val() == 1) {
                 $("#permissionChkDiv input[type='checkbox']").attr('disabled', 'disabled');
+                $("#permissionChkDiv input[type='checkbox']").removeAttr('checked');
             } else {
                 $("#permissionChkDiv input[type='checkbox']").removeAttr('disabled');
-
             }
         });
+    }
 
+    function defaultValue() {
+        if ($("input[name='role_id']:checked").val() == 1) {
+            $("#permissionChkDiv input[type='checkbox']").attr('disabled', 'disabled');
+        }
     }
 
     $(document).ready(function () {
         initValidation();
+        defaultValue();
         eventHandle();
     });
 </script>
