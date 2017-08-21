@@ -79,6 +79,7 @@ class Applicant extends Eloquent
         'stu_birthdate',
         'eng_date_taken',
         'eng_date_taken_admin',
+        'last_login',
         'created',
         'modified'
     ];
@@ -126,6 +127,8 @@ class Applicant extends Eloquent
         'stu_password',
         'sys_activate_code',
         'remember_token',
+        'last_login',
+        'ipaddress',
         'creator',
         'created',
         'modifier',
