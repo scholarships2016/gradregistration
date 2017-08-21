@@ -24,4 +24,6 @@ interface ApplicantRepository
     public function saveApplicantPersonalInfo(array $data);
 
     public function changePassword(array $data);
+
+    public function doApplicantPaging($criteria = null);
 }

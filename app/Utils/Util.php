@@ -44,12 +44,10 @@ class Util
 
 
     /*Role Name Eng*/
-    const ROLE_APPROVER = 'Approver';
-    const ROLE_ROOT = 'Root';
-    const ROLE_COMMITTEE = 'Committee';
-    const ROLE_MODULE_ADMIN = 'Module-Admin';
     const ROLE_ADMIN = 'Admin';
-    const ROLE_REPORTER = 'Reporter';
+    const ROLE_STAFF = 'Staff';
+    const ROLE_APPLICANT = 'Applicant';
+
 
     /*Module*/
     const MODULE_LV1 = 1;

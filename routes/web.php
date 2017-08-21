@@ -172,12 +172,20 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
         });
 
         Route::group(['prefix' => 'applicantManage', 'middleware' => []], function () {
+            Route::get('manage', 'BackOffice\ApplicantManagementController@showManagePage')->name('admin.applicantManage.showManagePage');
+            Route::get('doPaging', 'BackOffice\ApplicantManagementController@doPaging')->name('admin.applicantManage.doPaging');
+
         });
 
         Route::group(['prefix' => 'adminManage', 'middleware' => []], function () {
+            Route::get('manage', 'BackOffice\AdminManagementController@showManagePage')->name('admin.adminManage.showManagePage');
             Route::get('add', 'BackOffice\AdminManagementController@showAddPage')->name('admin.adminManage.showAdd');
-            Route::get('edit', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEdit');
+            Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEdit');
             Route::post('save', 'BackOffice\AdminManagementController@doSave')->name('admin.adminManage.doSave');
+            Route::post('doDelete', 'BackOffice\AdminManagementController@doDelete')->name('admin.adminManage.doDelete');
+
+            //Paging
+            Route::get('doPaging', 'BackOffice\AdminManagementController@doPaging')->name('admin.adminManage.doPaging');
         });
 
     });
