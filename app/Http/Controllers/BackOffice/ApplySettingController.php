@@ -136,8 +136,6 @@ class ApplySettingController extends Controller
 
 
         } catch (\Exception $ex) {
-          throw $ex;
-
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
