@@ -77,6 +77,42 @@ class ManageApplyController extends Controller {
         return view($this->part_doc . 'manage_pay', ['banks' => $Bank]);
     }
 
+    public function showMangePayBarcode() {
+        return view($this->part_doc . 'manage_GS03_barcode');
+    }
+
+    public function savePaymentBarcode(Request $request) {
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, $request->application_id, null, null, null, null, null, null, null, null, null, null, null, null);
+        $res = false;
+        if (count($curDiss) > 0) {
+            if (!$curDiss[0]['payment_date']) {
+                $gdata = ['application_id' => $request->application_id,
+                    'payment_date' => Carbon::now(),
+                    'flow_id' => 3];
+                $res = $this->ApplicationRepo->saveApplication($gdata);
+            }else{
+                return 'have';
+            }
+        }
+        if ($res) {
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+            return 'true';
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return 'false';
+        }
+    }
+
+    public function getRegisterCourseBarcode(Request $request = null) {
+
+
+        $application_id = $request->application_id;
+
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, null, null, null, null, null, null, null);
+
+        return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
+    }
+
     public function savePayment(Request $request) {
 
         $gdata = ['application_id' => $request->application_id,
@@ -180,7 +216,7 @@ class ManageApplyController extends Controller {
         if ($request->admission_remark) {
             $data = ['admission_remark' => $request->admission_remark, 'application_id' => $request->application_id];
         }
-   
+
         if ($request->admission_status_id || $request->admission_status_id == "0") {
             $flow_id = ($request->admission_status_id != 'X' && $request->admission_status_id != '0') ? 5 : 4;
             $data = ['admission_status_id' => $request->admission_status_id, 'flow_id' => $flow_id, 'application_id' => $request->application_id];

@@ -82,8 +82,11 @@ Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name(
 Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
 Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
 Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
+Route::get('admin/showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
+Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
+Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
 
-
+ 
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
