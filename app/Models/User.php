@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class User
- * 
+ *
  * @property int $user_id
  * @property string $user_name
  * @property string $user_password
@@ -27,7 +27,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class User extends Eloquent {
+class User extends Eloquent
+{
 
     protected $table = 'user';
     protected $primaryKey = 'user_id';
@@ -51,7 +52,9 @@ class User extends Eloquent {
     protected $fillable = [
         'user_name',
         'user_password',
+        'user_email',
         'name',
+        'nickname',
         'role_id',
         'last_login',
         'ipaddress',
@@ -61,5 +64,10 @@ class User extends Eloquent {
         'modifier',
         'modified'
     ];
+
+    public function userPermission()
+    {
+        return $this->hasMany(UserPermission::class, 'user_id', 'user_id');
+    }
 
 }
