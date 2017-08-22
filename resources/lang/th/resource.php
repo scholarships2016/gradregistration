@@ -324,4 +324,8 @@ return [
       'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
       'lbEduRemark' =>'โปรดกรอกข้อมูลทุกระดับการศึกษา',
 
+      //Curriculum Detail
+      'lbBaht' => 'บาท',
+      'lbAdditionalInfo' => 'ข้อมูลเพิ่มเติม',
+      'lbInfo' => 'ข้อมูลหลักสูตร'
 ];
