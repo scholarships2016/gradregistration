@@ -227,7 +227,7 @@
 <br/>
       <div class="alert alert-danger">
       <i class="icon-info"></i>
-      {{Lang::get('resource.lbProcessTime')}} 05/09/2017
+      {{Lang::get('resource.lbProcessTime')}} {{$curDis->end_date}}
     </div>
 
 
@@ -373,7 +373,7 @@
                 <li class="mt-list-item done">
 
                     <div class="list-icon-container">
-                         
+
                          {!!  ($curDis->admission_status_id=='0')? '<i class="icon-hourglass font-blue"></i>':''!!}
                      {!!    ($curDis->admission_status_id!='0' && $curDis->admission_status_id!='X')?'<i class="icon-check font-green"></i>':''!!}
                      {!!  ($curDis->admission_status_id=='X')?'<i class="icon-close font-red"></i>':''!!}
@@ -453,10 +453,10 @@
 jQuery(document).ready(function() {
    $('.todo-content').on( 'click', 'a', function () {
           if($(this).attr('id')=="examshow"){
-              $('#examtable').text($(this).attr('exam'));               
-         } 
+              $('#examtable').text($(this).attr('exam'));
+         }
     } );
- 
+
 });
 </script>
 @endpush
