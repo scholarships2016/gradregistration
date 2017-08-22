@@ -274,7 +274,7 @@
                           -->
                             <div class="row">
                               <div class="col-md-12">
-                                <div class="panel panel-info">
+                                <div class="panel panel-success">
                                     <div class="panel-heading">
                                         <h3 class="panel-title"><i class="fa fa-table"></i>  {{Lang::get('resource.lbExam_schedule')}}</h3>
                                     </div>
@@ -342,7 +342,7 @@
 
                                     </div>
                                   -->
-                                    <div class="panel panel-default">
+                                    <div class="panel panel-success">
                                         <div class="panel-heading">
                                             <h3 class="panel-title"><i class="fa fa-table"></i>  {{Lang::get('resource.lbAdditionalInfo')}}</h3>
                                         </div>
