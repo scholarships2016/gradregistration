@@ -44,7 +44,7 @@
 
     @stack('pageCss')
     <!-- BEGIN CUSTOM STYLES -->
-    <link href="{{asset('assets/global/css/custom.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
     <!-- END CUSTOM STYLES -->
 </head>
 <!-- END HEAD -->
