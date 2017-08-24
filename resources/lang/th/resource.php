@@ -310,7 +310,7 @@ return [
       'lbLoginSignupPasswordReType' => 'กรอกรหัสผ่านอีกครั้ง',
 
       //profile
-      'lbBtnChangeImage' => 'เลือก',
+      'lbBtnSelectImage' => 'เลือก',
       'lbBtnChangeImage' => 'เปลี่ยนรูป',
       'lbBtnDeleteImage' => 'ลบ',
       'lbCurrentWorkStatusTitle' => 'สถานะการทำงาน',
@@ -319,7 +319,7 @@ return [
       'lbTabProfileInfo' => 'ข้อมูลส่วนตัว',
       'lbTabChangePassword' => 'เปลี่ยนรหัสผ่าน',
       'lbCurrentPassword' => 'รหัสผ่านปัจจุบัน',
-      'lbNewPassword' => 'รหัสผ่านใหม่',
+      'lbNewPassword' => 'รหัสผ่านใหม่ (ความยาวอย่างน้อย 6 ตัวอักษร)',
       'lbConfirmNewPassword' => 'ยืนยันรหัสผ่านใหม่',
       'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
       'lbEduRemark' =>'โปรดกรอกข้อมูลทุกระดับการศึกษา',

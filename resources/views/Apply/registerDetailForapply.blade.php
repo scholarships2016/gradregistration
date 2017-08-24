@@ -344,7 +344,7 @@
                                   -->
                                     <div class="panel panel-success">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title"><i class="fa fa-table"></i>  {{Lang::get('resource.lbAdditionalInfo')}}</h3>
+                                            <h3 class="panel-title"><i class="icon-info"></i>  {{Lang::get('resource.lbAdditionalInfo')}}</h3>
                                         </div>
                                         <div class="panel-body">
                                           <form class="form-horizontal">

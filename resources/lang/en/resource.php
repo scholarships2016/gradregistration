@@ -255,7 +255,7 @@ return [
            'lbLoginSignupPasswordReType' => 'Re-Type your password',
 
            //profile
-           'lbBtnChangeImage' => 'Select',
+           'lbBtnSelectImage' => 'Select',
            'lbBtnChangeImage' => 'Change',
            'lbBtnDeleteImage' => 'Delete',
            'lbCurrentWorkStatusTitle' => 'Working Status',
@@ -264,7 +264,7 @@ return [
            'lbTabProfileInfo' => 'Profile Info',
            'lbTabChangePassword' => 'Change Password',
            'lbCurrentPassword' => 'Current Password',
-           'lbNewPassword' => 'New Password',
+           'lbNewPassword' => 'New Password (at least 6 characters.)',
            'lbConfirmNewPassword' => 'Re-type New Password',
            'lbBtnChangePassword' => 'Change Password',
            'lbEduRemark' =>'Please provide all educational info.',

@@ -167,6 +167,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
@@ -204,6 +206,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="major_id"><strong>สาขาวิชา</strong>
@@ -233,7 +237,7 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -256,6 +260,7 @@
                                 </div>
                             </div>
                         </div>
+                          <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
@@ -550,7 +555,8 @@
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
-<script src="{{asset('assets/global/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/ckeditor/ckeditor_4.7.1_standard/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 

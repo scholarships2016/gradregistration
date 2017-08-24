@@ -76,7 +76,7 @@
                                         name="province_id">
                                     @if(!empty($provinceList))
                                         @foreach ( $provinceList as $prov )
-                                            <option value="{{$prov->province_id}}">{{$prov->province_name}}</option>
+                                            <option value="{{$prov->province_id}}">{{$prov->province_name}} - {{$prov->province_name_en}} </option>
                                         @endforeach
                                     @endif
                                 </select>

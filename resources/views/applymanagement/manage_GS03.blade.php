@@ -253,13 +253,13 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-user"></i>
                                                                 </span>
-                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">  
+                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">
                                                                 <span class="input-group-btn">
                                                             <a class="btn blue" id="userSearch" type="button">ตรวจสอบ</a>
                                                         </span>
                                                             </div> </div></div>
-                                                    
-                                   <div class="row">                  
+
+                                   <div class="row">
                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                                <div class="dashboard-stat green">
                                     <div class="visual">
@@ -267,9 +267,9 @@
                                     </div>
                                     <div class="details">
                                         <div class="number">ชื่อ :<label id="show_name"></label></div>
-                                        <div class="desc"> Passport/บัตรประชาชน :<label id="idCard"></label> </div>
+                                        <div class="desc"> เลขประจำตัวประชาชน/Passport :<label id="idCard"></label> </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                                    </div>
@@ -278,12 +278,12 @@
                                                     <textarea class="form-control" id="apply_comment" rows="3"></textarea>
                                                 </div>
                                                     <br>
-                                                    
-                                                    
+
+
                                                 <div class="modal-footer">
                                                     <input type="hidden" id="appcantid">
-                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">Save changes</button>
+                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">ยกเลิก</button>
+                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">บันทึก</button>
                                                 </div>
 
                                           </div>
@@ -324,14 +324,14 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-    
+
     $('#btcloss').click(function() {
       $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
-      
+
   });
     $('#btSave').click(function() {
                                 $.ajax({
@@ -342,8 +342,8 @@
                                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                                 sub_major_id : $('option:selected','#single').attr('smj'),
                                                 program_id : $('option:selected','#single').attr('pg'),
-                                                program_type_id : $('option:selected','#single').attr('pt'), 
-                                                curriculum_id : $('option:selected','#single').attr('cu'), 
+                                                program_type_id : $('option:selected','#single').attr('pt'),
+                                                curriculum_id : $('option:selected','#single').attr('cu'),
                                                 applicant_ID  : $("#appcantid").val(),
                                                  idCard  : $("#idCard").text(),
                                                  apply_comment:  $("#apply_comment").val(),
@@ -352,15 +352,15 @@
 					success : function(data){
                                            toastr.success('ดำเนินการเรียบร้อย');
                                             $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
        TableDatatablesAjax.init();
                                         }
 				},"json");
     });
-    $('#sentmailall').click(function() {  
+    $('#sentmailall').click(function() {
         var data = [];
            $('#datatable_ajax tbody').find('tr').each(function () {
          var row = $(this);
@@ -394,45 +394,45 @@
                                            toastr.success('ดำเนินการเรียบร้อย');
                                         }
 				},"json");
-              }                          
-                         $('#userSearch').click(function(){  
+              }
+                         $('#userSearch').click(function(){
                                     $.ajax({
 					type: "get",
                                          async: false,
 					url: '{!! Route('applicantGS03') !!}',
-					data :{ 
+					data :{
                                                 citiz  : $('#citiz').val(),
                                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                                 sub_major_id : $('option:selected','#single').attr('smj'),
                                                 program_id : $('option:selected','#single').attr('pg'),
-                                                program_type_id : $('option:selected','#single').attr('pt'), 
+                                                program_type_id : $('option:selected','#single').attr('pt'),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
-					success : function(data){ 
+					success : function(data){
                                             if(data.stu_first_name != null){
                                               $("#show_name").text(data.stu_first_name+' '+data.stu_last_name);
-                                              $("#idCard").text(data.stu_citizen_card);                                             
-                                              $("#appcantid").val(data.applicant_id);      
+                                              $("#idCard").text(data.stu_citizen_card);
+                                              $("#appcantid").val(data.applicant_id);
                                          }else if(data.mess !=null){ toastr.warning(data.mess);
                                           $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
-        
+
         }
                                          else{
                                              toastr.warning('ไม่มีข้อมูลของผู้สมัคร');
                                               $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
                                          }
                                         }
-				},"json");  });       
-                            
-                  $('#btnSearch1').click(function(){  
+				},"json");  });
+
+                  $('#btnSearch1').click(function(){
                                     $.ajax({
 					type: "get",
                                          async: false,
