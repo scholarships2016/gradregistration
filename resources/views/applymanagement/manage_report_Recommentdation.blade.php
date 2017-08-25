@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.defaultNoMenu')
 
 @push('pageCss')
 
@@ -175,7 +175,7 @@
                                                                                                             <div class="form-actions">
                                                                                                                 <div class="row">
                                                                                                                     <div class="col-md-offset-4 col-md-8">
-                                                                                                                        <button type="button" class="btn grey-steel">ยกเลิก</button>
+                                                                                                                        <a href="javascript:window.open('','_self').close();" class="btn grey-steel">ยกเลิก</a>
                                                                                                                         <button  type="submit" value='submit'   class="btn green"><i class="fa fa-file-text-o"></i> ออกรายงาน</button>
                                                                                                                     </div>
                                                                                                                 </div>

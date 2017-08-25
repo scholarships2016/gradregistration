@@ -53,6 +53,29 @@ Route::get('/download', function () {
     return view('download');
 });
 
+ 
+
+// หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
+//Apply 
+    Route::get('apply', 'ApplyController@showAnnouncement');
+    Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
+    Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
+    Route::get('apply/confDocApply/{id}', 'ApplyController@confDocApply')->name('confDocApply');
+    Route::get('apply/peopleData/{id}', 'ApplyController@getPeopoleRef')->name('datatables.data');
+    Route::post('apply/savePeopoleRef', 'ApplyController@savePeopoleRef')->name('datatables.savePeopoleRef');
+    Route::post('apply/submitregisterDetailForapply', 'ApplyController@submitregisterDetailForapply')->name('submitregisterDetailForapply');
+    Route::get('apply/actionCourse/{action}/{id}', 'ApplyController@actionCourse')->name('confDocApply');
+    Route::post('apply/submitDocApply', 'ApplyController@submitDocApply')->name('submitDocApply');
+    Route::get('apply/docMyCourse/{id}', 'ApplyController@docMyCourse')->name('docMyCourse');
+    Route::get('apply/docMyCourserintPDF/{id}', 'ApplyController@docMyCourserintPDF')->name('docMyCourserintPDF');
+    Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
+    Route::get('apply/docAppEnvelopPDF/{id}', 'ApplyController@docApplicationEnvelop')->name('docAppEnvelopPDF');
+    Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
+    
+    
 //payment
 
 Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
@@ -84,27 +107,6 @@ Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcod
 Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
 Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
 
- 
-
-// หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-//Apply 
-    Route::get('apply', 'ApplyController@showAnnouncement');
-    Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
-    Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
-    Route::get('apply/confDocApply/{id}', 'ApplyController@confDocApply')->name('confDocApply');
-    Route::get('apply/peopleData/{id}', 'ApplyController@getPeopoleRef')->name('datatables.data');
-    Route::post('apply/savePeopoleRef', 'ApplyController@savePeopoleRef')->name('datatables.savePeopoleRef');
-    Route::post('apply/submitregisterDetailForapply', 'ApplyController@submitregisterDetailForapply')->name('submitregisterDetailForapply');
-    Route::get('apply/actionCourse/{action}/{id}', 'ApplyController@actionCourse')->name('confDocApply');
-    Route::post('apply/submitDocApply', 'ApplyController@submitDocApply')->name('submitDocApply');
-    Route::get('apply/docMyCourse/{id}', 'ApplyController@docMyCourse')->name('docMyCourse');
-    Route::get('apply/docMyCourserintPDF/{id}', 'ApplyController@docMyCourserintPDF')->name('docMyCourserintPDF');
-    Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
-    Route::get('apply/docAppEnvelopPDF/{id}', 'ApplyController@docApplicationEnvelop')->name('docAppEnvelopPDF');
-    Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
 });
 
 

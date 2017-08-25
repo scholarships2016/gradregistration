@@ -14,7 +14,7 @@ class HomeController extends Controller {
     protected $ApplySettingRepo;
 
     public function __construct(NewsRepositoryImpl $NewsRepo, ApplicationRepositoryImpl $ApplicationRepo, ApplySettingRepositoryImpl $ApplySetting) {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->NewsRepo = $NewsRepo;
         $this->ApplicationRepo = $ApplicationRepo;
         $this->ApplySettingRepo = $ApplySetting;

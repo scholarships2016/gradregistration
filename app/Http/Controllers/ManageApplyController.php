@@ -108,7 +108,6 @@ class ManageApplyController extends Controller {
 
 
         $application_id = $request->application_id;
-
         $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, null, null, null, null, null, null, null);
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
