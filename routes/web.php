@@ -33,7 +33,7 @@ Route::get('language', 'Auth\LoginApplicantController@language');
 
 
 //Head
-Route::get('showRegisHead', 'ApplyController@showRegisHead')->name('showRegisHead');
+Route::get('showRegisHead', 'HomeController@showRegisHead')->name('showRegisHead');
 //Apply
 Route::any('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
 Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
@@ -41,12 +41,8 @@ Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailF
 
 
 //PageMain
-Route::get('/home', function () {
-    return view('home');
-});
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/home', 'HomeController@viewHome')->name('viewHome');
+ Route::get('/', 'HomeController@viewHome');
 Route::get('/contact', function () {
     return view('contact');
 });
@@ -85,6 +81,8 @@ Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission
 Route::get('admin/showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
 Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
 Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
+Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
+Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
 
  
 

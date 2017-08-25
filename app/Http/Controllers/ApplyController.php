@@ -269,29 +269,7 @@ class ApplyController extends Controller {
         return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus]);
     }
 
-    public function showRegisHead() {
-        if (session('Applicant')) {
-            $countStatus = $this->ApplicationRepo->getDatacountByStatusUse(session('Applicant')->applicant_id);
-
-            $val = '';
-            $cval = 0;
-            foreach ($countStatus as $cStatus) {
-                $val .= ' <li> ';
-                $val .= ' <a href="' . url('apply/manageMyCourse') . '"> ';
-                $val .= '  <span class="time">' . $cStatus->numc . '</span> ';
-                $val .= '  <span class="details"> ';
-                $val .= '  <span class="label label-sm label-icon label-success"> ';
-                $val .= '  <i class="fa fa-bell-o"></i> ';
-                $val .= '  </span> ' . ((session('locale') == 'th') ? $cStatus->flow_name : $cStatus->flow_name_en) . ' </ span> ';
-                $val .= '  </a> ';
-                $val .= '  </li>  ';
-                $cval += $cStatus->numc;
-            }
-
-
-            return ['val' => $val, 'cot' => $cval];
-        }
-    }
+    
 
     public function actionCourse($action, $id) {
 
