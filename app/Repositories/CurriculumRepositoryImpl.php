@@ -66,6 +66,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->where('curriculum.status', 'like', '%' . $status . '%')
                 ->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
+                ->where('curriculum.status', 'like', '%' . $status . '%')        
                 ->Where(function ($query) use ($curriculum_id) {
                     if ($curriculum_id) {
                         $query->where('curriculum.curriculum_id', $curriculum_id);

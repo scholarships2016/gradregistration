@@ -376,8 +376,8 @@
                                               <div class="form-group">
                                                   <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailDocument')}}</label>
                                                   <div class="col-md-8">
-                                                    <span class="form-control-static"> {{$curDis->document_file}}
-                                                      <a href="javascript:;" class="btn btn-circle btn-xs blue btn-outline">
+                                                    <span class="form-control-static">  
+                                                      <a href="javascript:DownloadFile({{$curDis->document_file}});" class="btn btn-circle btn-xs blue btn-outline">
                                                                                 <i class="fa fa-file-word-o"></i> Download </a>
                                                      </span>
                                                   </div>
@@ -447,7 +447,9 @@
    window.location.href = '{{ url('/login') }}'
   }, 100);
 });
-         }
+         } 
+         
+ 
 
                                                                           </script>
                                                                           @endpush
