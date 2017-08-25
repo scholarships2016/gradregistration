@@ -250,6 +250,13 @@ class ApplyController extends Controller {
         $gdata['modifier'] = session('user_id');
         $gdata['applicant_id'] = session('Applicant')->applicant_id;
         $gdata['stu_citizen_card'] = session('Applicant')->stu_citizen_card;
+        $program = explode('|',$data->program_data);
+        if(count($program) > 0){
+           $gdata['program_id']  =  $program[0];
+        }
+         if(count($program) > 1){
+           $gdata['curr_prog_id']  =  $program[1];
+        }
 
         $res = $this->ApplicationRepo->saveApplication($gdata);
 
