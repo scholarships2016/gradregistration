@@ -12,6 +12,8 @@ use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use \Illuminate\Support\Facades\Crypt;
+use App\Repositories\FileRepositoryImpl;
+
 
 class LoginApplicantController extends Controller {
 
@@ -21,10 +23,14 @@ class LoginApplicantController extends Controller {
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
+     protected $FileRepo;
 
-    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo) {
+    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, FileRepositoryImpl $FileRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
+        $this->FileRepo = $FileRepo;
+        
+        Auth::setDefaultDriver( 'web' );
     }
 
     //Authen
@@ -58,13 +64,33 @@ class LoginApplicantController extends Controller {
     public function postLogin(Request $request) {
         if (Auth::attempt(['stu_email' => $request->stu_email, 'password' => $request->stu_password])) {
             $user_data = Auth::user();
+            $pic = null;
+            if ($user_data->stu_img) {
+                $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
+            }
+
             session()->put('user_id', $user_data->applicant_id);
-            session()->put('first_name', $user_data->stu_first_name);
-            session()->put('last_name', $user_data->stu_last_name);
+            session()->put('first_name', $user_data->stu_first_name_en);
+            session()->put('last_name', $user_data->stu_last_name_en);
             session()->put('email_address', $user_data->stu_email);
+            session()->put('stu_img', $pic);         
+            $role = new \stdClass();
+            $role->user_role= '';
+            $role->user_type= 'applicant';
+            session()->put('user_tyep', $role);
+            
+            
+            $app = new \stdClass();
+            $app->applicant_id = $user_data->applicant_id;
+            $app->stu_citizen_card = $user_data->stu_citizen_card;
+            $app->stu_email = $user_data->stu_email;
+            $app->nation_id = $user_data->nation_id;
+            session()->put('Applicant', $app);
+            Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
             return redirect('/home');
         } else {
+            Controller::WLog('User Applicant Not Login', 'User_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
             return redirect('login');
         }
@@ -72,9 +98,10 @@ class LoginApplicantController extends Controller {
 
     public function getLogout() {
         Auth::logout();
-        session()->flush();
+        Controller::WLog('User Logout[' . session('email_address') . ']', 'User_Logout', null);
+
+        session()->flush('successMsg', 'LogOut');
         return redirect('/login');
-        
     }
 
     public function reLogin(Request $request) {
@@ -92,10 +119,13 @@ class LoginApplicantController extends Controller {
             Mail::send('email.rePassword', $data, function($message)use ($result) {
                 $message->to($result->stu_email, $result->stu_first_name)->subject('Your new password!');
             });
-            session()->flash('successMsg', 'ตรวจสอบ e-mail  ทำการ Re-password เรียบร้อย.');
+            Controller::WLog('User Re-password[' . $result->stu_email . ']', 'User_Login', null);
+
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('login');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail ');
+            Controller::WLog('User can not Re-password not User', 'User_Login', null);
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
     }
@@ -105,13 +135,18 @@ class LoginApplicantController extends Controller {
         if (count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, $request->stu_email)) == 0) {
             $result = $this->loginapplicantRepo->saveApplicant($request->all());
             if ($result) {
-                session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
+                Controller::WLog('User Register[' . $request->stu_email . ']', 'User_Login', null);
+
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
                 return redirect('login');
             } else {
+                Controller::WLog('User cannot register, Email or citizen are in the system.', 'User_Login', null);
                 session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
                 return back();
             }
         } else {
+            Controller::WLog('User cannot register, Email or citizen are in the system.', 'User_Login', null);
+
             session()->flash('errorMsg', 'ไม่สามารถใช้งาน Email หรือ รหัสบัตรประชาชน/passport นี้ได้เนื่องจากมีการใช้งาน');
             return back();
         }

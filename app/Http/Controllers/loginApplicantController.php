@@ -7,9 +7,8 @@ use App\Repositories\Contracts\ApplicantRepository;
 use App\Repositories\Contracts\NameTitleRepository;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\App;
-use App\Utils\ChangeLocale;
+use Illuminate\Support\Facades\Log;
+
 
 class LoginApplicantController extends Controller {
 
@@ -21,30 +20,21 @@ class LoginApplicantController extends Controller {
         $this->nametitleRepo = $nametitleRepo;
     }
 
-    public function language(Request $request) {
-        $changeLocale = new ChangeLocale($request->input('lang'));
-        $this->dispatch($changeLocale);
-        return redirect()->back();
-    }
-
     public function showLoginPage(Request $request) {
+        Log::info('showLoginPage: iCHOK');
         $titles = $this->nametitleRepo->getAll();
         return view('loginApplicant', ['titles' => $titles]);
     }
 
     public function postLogin(Request $request) {
         $result = $this->loginapplicantRepo->checkLogin($request);
-
         if ($result) {
-
-
             session()->flash('successMsg', 'ยินดีต้อนรับเข้าสู่ระบบ');
-
 
             return redirect('/');
         } else {
-            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password' . bcrypt($request->stu_password));
-            return redirect('login');
+            session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
+              return redirect('login');
         }
     }
 
@@ -64,11 +54,10 @@ class LoginApplicantController extends Controller {
     }
 
     public function register(request $request) {
-
         $result = $this->loginapplicantRepo->saveApplicant($request->all());
         if ($result) {
             session()->flash('successMsg', 'ดำเนินการลงทะเบียนเรียบร้อย กรุณา Loginใ ');
-            return redirect('login');
+           return redirect('login');
         } else {
             session()->flash('errorMsg', 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password');
             return back();

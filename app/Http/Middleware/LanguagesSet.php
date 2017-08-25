@@ -18,6 +18,7 @@ class LanguagesSet {
     }
 
     public function handle($request, Closure $next) {
+        
         $this->bus->dispatch($this->setLocale);
         return $next($request);
     }

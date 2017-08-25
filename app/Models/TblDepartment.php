@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 29 Jun 2017 14:04:56 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -12,10 +12,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class TblDepartment
  * 
- * @property int $department_id
+ * @property string $department_id
  * @property string $department_name
- * @property int $department_name_en
- * @property int $faculty_id
+ * @property string $department_name_en
+ * @property string $faculty_id
  *
  * @package App\Models
  */
@@ -23,12 +23,8 @@ class TblDepartment extends Eloquent
 {
 	protected $table = 'tbl_department';
 	protected $primaryKey = 'department_id';
+	public $incrementing = false;
 	public $timestamps = false;
-
-	protected $casts = [
-		'department_name_en' => 'int',
-		'faculty_id' => 'int'
-	];
 
 	protected $fillable = [
 		'department_name',

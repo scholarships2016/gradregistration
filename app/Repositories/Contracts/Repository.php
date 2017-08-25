@@ -21,4 +21,6 @@ interface Repository
 
     public function with($relations);
 
+    public function findOrFail($id, $columns = ['*']);
+
 }

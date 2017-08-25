@@ -41,8 +41,8 @@
             </div>
             <div class="forget-password">
                 <h4>Forgot your password ?</h4>
-                <p> no worries, click
-                    <a href="javascript:;" id="forget-password"> here </a> to reset your password. </p>
+                <p> Click
+                    <a href="javascript:;" id="forget-password"> here </a> to get your password. </p>
             </div>
             <div class="create-account">
                 <p> Don't have an account yet ?&nbsp;
@@ -54,7 +54,7 @@
         <!-- BEGIN FORGOT PASSWORD FORM -->
         <form class="forget-form" action="" method="post">
             <h3>Forget Password ?</h3>
-            <p> Enter your e-mail address below to reset your password. </p>
+            <p> Enter your e-mail address below to get your password. </p>
             <div class="form-group">
                 <div class="input-icon">
                     <i class="fa fa-envelope"></i>
@@ -373,6 +373,10 @@
                 </label>
                 <div id="register_tnc_error"></div>
             </div>
+            <div class="formm-group">
+              <div class="g-recaptcha" data-sitekey="6LdTciwUAAAAAIghJhuM4wf8Dnzc-eadlLikCWiR"></div>
+            </div>
+            </form>
             <div class="form-actions">
                 <button id="register-back-btn" type="button" class="btn red btn-outline"> Back</button>
                 <button type="submit" id="register-submit-btn" class="btn green pull-right"> Sign Up</button>
@@ -382,7 +386,7 @@
     </div>
     <!-- END LOGIN -->
     <!-- BEGIN COPYRIGHT -->
-    <div class="copyright"> 2014 &copy; Metronic - Admin Dashboard Template.</div>
+    <div class="copyright"> 2017 &copy; Graduate School, Chulalongkorn University</div>
     <!-- END COPYRIGHT -->
 @stop
 
@@ -392,6 +396,7 @@
 <script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 @endpush
 
 @push('pageJs')

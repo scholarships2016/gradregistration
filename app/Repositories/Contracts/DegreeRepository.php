@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
-interface DegreeRepository {
+interface DegreeRepository
+{
 
     public function getById($id);
 
@@ -11,6 +12,8 @@ interface DegreeRepository {
     public function save(array $data);
 
     public function delete($id);
+
+    public function getAllDegreeForDropdown();
 }
  
 

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 29 Jun 2017 14:04:56 +0700.
+ * Date: Tue, 01 Aug 2017 10:44:36 +0700.
  */
 
 namespace App\Models;
@@ -23,7 +23,12 @@ class TblRole extends Eloquent
 {
 	protected $table = 'tbl_role';
 	protected $primaryKey = 'role_id';
+	public $incrementing = false;
 	public $timestamps = false;
+
+	protected $casts = [
+		'role_id' => 'int'
+	];
 
 	protected $fillable = [
 		'role_name',

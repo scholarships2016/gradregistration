@@ -40,6 +40,11 @@ abstract class AbstractRepositoryImpl implements Repository
         return call_user_func_array("{$this->modelClassName}::with", array($relations));
     }
 
+    public function findOrFail($id, $columns = ['*'])
+    {
+        return call_user_func_array("{$this->modelClassName}::findOrFail", array($id, $columns));
+    }
+
 
     /**
      * @return mixed

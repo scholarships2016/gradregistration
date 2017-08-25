@@ -2,56 +2,82 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Contracts\ApplicantEduRepository;
+use App\Repositories\Contracts\ApplicantNewsSourceRepository;
 use App\Repositories\Contracts\ApplicantRepository;
 use App\Models\Applicant;
 use App\Models\ApplicantWork;
 use App\Models\ApplicantEdu;
 use App\Models\ApplicatNewsSource;
+use App\Repositories\Contracts\ApplicantWorkRepository;
+use App\Repositories\Contracts\FileRepository;
+use App\Utils\Util;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
-class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
+class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository
+{
 
-    protected $statusPassRepo;
+    protected $appNewsSrcRepo;
+    protected $appEduRepo;
+    protected $appWorkRepo;
     private $paging = 10;
+    private $controllors;
+    private $fileRepo;
 
-    public function __construct() {
-        parent::setModelClassName(TblApplicant::class);
+    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo,
+                                ApplicantEduRepository $appEduRepo,
+                                ApplicantWorkRepository $appWorkRepo,
+                                Controller $controllors, FileRepository $fileRepo)
+    {
+        parent::setModelClassName(Applicant::class);
+        $this->appNewsSrcRepo = $appNewsSrcRepo;
+        $this->appEduRepo = $appEduRepo;
+        $this->appWorkRepo = $appWorkRepo;
+        $this->controllors = $controllors;
+        $this->fileRepo = $fileRepo;
     }
 
-    public function checkLogin($criteria = null) {
+    public function checkLogin($criteria = null)
+    {
         $result = null;
         try {
             $result = Applicant::where('stu_email', $criteria->stu_email)
-                    ->where('stu_password', $criteria->stu_password)
-                    ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
-                    ->first();
+                ->where('stu_password', $criteria->stu_password)
+                ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
+                ->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
 
-    public function getByCitizenOrEmail($citizencard, $email) {
+    public function getByCitizenOrEmail($citizencard, $email)
+    {
         $result = null;
         try {
             $result = Applicant::where('stu_citizen_card', $citizencard)
-                    ->orwhere('stu_email', $email)
-                    ->first();
+                ->orwhere('stu_email', $email)
+                ->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
 
-    public function searchByCriteria($criteria = null, $paging = false) {
+    public function searchByCriteria($criteria = null, $paging = false)
+    {
         $result = null;
         try {
             $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_sex ', 'like', '%' . $criteria . '%')
-                    ->orderBy('applicant_id');
+                ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_sex ', 'like', '%' . $criteria . '%')
+                ->orderBy('applicant_id');
             $result = ($paging) ? $banks->paginate($this->paging) : $banks;
         } catch (\Exception $ex) {
             throw $ex;
@@ -59,7 +85,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getEduApplicant($applicantID) {
+    public function getEduApplicant($applicantID)
+    {
         $result = null;
         try {
             $result = ApplicantEdu::where('applicant_id ', $applicantID)->first();
@@ -69,7 +96,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getWorkApplicant($applicantID) {
+    public function getWorkApplicant($applicantID)
+    {
         $result = null;
         try {
             $result = ApplicantWork::where('applicant_id ', $applicantID)->first();
@@ -79,7 +107,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveApplicant($data) {
+    public function saveApplicant($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -87,9 +116,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('applicant_id', $data) || !empty($data['applicant_id']))
                 $id = $data['applicant_id'];
 
-            $chk = Applicant::where('applicant_id', $id)->first();
+            $chk = $this->find($id);
             $curObj = $chk ? $chk : new Applicant;
-
             if (array_key_exists('stu_citizen_card', $data))
                 $curObj->stu_citizen_card = $data['stu_citizen_card'];
             if (array_key_exists('name_title_id', $data))
@@ -102,6 +130,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->stu_first_name_en = $data['stu_first_name_en'];
             if (array_key_exists('stu_last_name_en', $data))
                 $curObj->stu_last_name_en = $data['stu_last_name_en'];
+            if (array_key_exists('stu_sex', $data))
+                $curObj->stu_sex = $data['stu_sex'];
             if (array_key_exists('nation_id', $data))
                 $curObj->nation_id = $data['nation_id'];
             if (array_key_exists('stu_addr_no', $data))
@@ -114,10 +144,10 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->stu_addr_road = $data['stu_addr_road'];
             if (array_key_exists('stu_addr_tumbon', $data))
                 $curObj->stu_addr_tumbon = $data['stu_addr_tumbon'];
-            if (array_key_exists('stu_addr_dist', $data))
-                $curObj->stu_addr_dist = $data['stu_addr_dist'];
-            if (array_key_exists('stu_addr_prov', $data))
-                $curObj->stu_addr_prov = $data['stu_addr_prov'];
+            if (array_key_exists('district_code', $data))
+                $curObj->district_code = $data['district_code'];
+            if (array_key_exists('province_id', $data))
+                $curObj->province_id = $data['province_id'];
             if (array_key_exists('stu_addr_pcode', $data))
                 $curObj->stu_addr_pcode = $data['stu_addr_pcode'];
             if (array_key_exists('stu_phone', $data))
@@ -154,32 +184,34 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->fund_interesting = $data['fund_interesting'];
             if (array_key_exists('eng_test_score_admin', $data))
                 $curObj->eng_test_score_admin = $data['eng_test_score_admin'];
+            if (array_key_exists('eng_test_id_admin', $data))
+                $curObj->eng_test_id_admin = $data['eng_test_id_admin'];
+            if (array_key_exists('eng_date_taken_admin', $data))
+                $curObj->eng_date_taken_admin = $data['eng_date_taken_admin'];
             if (array_key_exists('stu_password', $data))
                 $curObj->stu_password = bcrypt($data['stu_password']);
             if (array_key_exists('sys_activate_code', $data))
                 $curObj->sys_activate_code = $data['sys_activate_code'];
+            if (array_key_exists('stu_img', $data))
+                $curObj->stu_img = $data['stu_img'];
 
 
-            if (!$chk) {
-                if (array_key_exists('stu_citizen_card', $data))
-                    $curObj->creator = $data['stu_citizen_card'];
-
-                $curObj->created = \Carbon\Carbon::now()->timestamp;
-            }
+            if (array_key_exists('creator', $data))
+                $curObj->creator = $data['creator'];
             if (array_key_exists('modifier', $data))
                 $curObj->modifier = $data['modifier'];
-
-            $curObj->modifier = \Carbon\Carbon::now()->timestamp;
 
 
             $result = $curObj->save();
         } catch (\Exception $ex) {
+            $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
     }
 
-    public function saveWorkApplicant($data) {
+    public function saveWorkApplicant($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -220,7 +252,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveEduApplicant($data) {
+    public function saveEduApplicant($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -262,7 +295,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveApplicatNewsSource($data) {
+    public function saveApplicatNewsSource($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -284,6 +318,152 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             throw $ex;
         }
         return $result;
+    }
+
+    public function getApplicantProfileByApplicantId($applicantId)
+    {
+        try {
+            $applicantProfile = $this->findOrFail($applicantId);
+
+            $newsSource = $this->appNewsSrcRepo->getApplicantNewsSourceByApplicantId($applicantId);
+            $appEdu = $this->appEduRepo->getApplicantEduByApplicantId($applicantId);
+            $appWork = $this->appWorkRepo->getApplicantWorkByApplicantId($applicantId);
+
+            return array('applicant' => $applicantProfile, 'applicantNewsSource' => $newsSource,
+                'applicantEdu' => $appEdu, 'applicantWork' => $appWork);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getApplicantProfileAllByApplicantId($applicantId)
+    {
+        try {
+            $applicantProfile = Applicant::select('*', 'tbl_name_title.name_title as name_titles')->leftjoin('tbl_religion', 'tbl_religion.religion_id', 'applicant.stu_religion')
+                ->leftjoin('tbl_nation', 'tbl_nation.nation_id', 'applicant.nation_id')
+                ->leftjoin('tbl_name_title', 'tbl_name_title.name_title_id', 'applicant.name_title_id')
+                ->leftjoin('tbl_province', 'tbl_province.province_id', 'applicant.province_id')
+                ->leftjoin('tbl_district', 'tbl_district.district_code', 'applicant.district_code')
+                ->where('applicant_id', '=', $applicantId)->first();
+
+            $newsSource = $this->appNewsSrcRepo->getApplicantNewsSourceByApplicantId($applicantId);
+            $appEdu = $this->appEduRepo->getApplicantEduAllByApplicantId($applicantId);
+            $appWork = $this->appWorkRepo->getApplicantWorkByApplicantId($applicantId);
+
+            return array('applicant' => $applicantProfile, 'applicantNewsSource' => $newsSource,
+                'applicantEdu' => $appEdu, 'applicantWork' => $appWork);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function saveApplicantPersonalInfo(array $data)
+    {
+        DB::beginTransaction();
+        try {
+
+            if (array_key_exists('reqDelImg', $data) && $data['reqDelImg'] == 1) {
+                $applicant = $this->findOrFail($data['applicant_id']);
+                $this->fileRepo->forceRemoveById($applicant->stu_img);
+                $data['stu_img'] = null;
+            }
+
+            if (array_key_exists('stu_profile_pic', $data) && !empty($data['stu_profile_pic'])) {
+                $fileImg = $this->fileRepo->upload($data['stu_profile_pic'], env(Util::PROFILE_FOLDER));
+                $data['stu_img'] = $fileImg->file_id;
+            }
+
+            if ($this->saveApplicant($data)) {
+                $this->appNewsSrcRepo->updateSetOfApplicantNewsSrc($data);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
+
+    public function changePassword(array $data)
+    {
+        DB::beginTransaction();
+        try {
+            $applicant = $this->find($data['applicant_id']);
+            if (Hash::check($data['current_password'], $applicant->stu_password)) {
+                $applicant->stu_password = bcrypt($data['password']);
+                $applicant->save();
+                DB::commit();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
+
+    public function doApplicantPaging($criteria = null)
+    {
+        try {
+            $columnMap = array(
+                1 => "",
+            );
+            $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
+            $data = null;
+
+            $mainQuery = DB::table('applicant as appt')
+                ->select(
+                    'appt.applicant_id', 'appt.stu_citizen_card',
+                    DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"),
+                    DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
+                    'appt.stu_email',
+//                    "0 as special_auth",
+                    DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"),
+                    DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"),
+                    'appt.ipaddress as login_ip'
+                )
+                ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
+                    $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
+                });
+
+            $recordsTotal = $mainQuery->get()->count();
+
+            if (isset($criteria['from_date'])) {
+                $mainQuery->whereDate('created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
+            }
+
+            if (isset($criteria['to_date'])) {
+                $mainQuery->whereDate('created', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
+            }
+
+            if (isset($criteria['emailCitizenFullname'])) {
+                $mainQuery->where(function ($query) use ($criteria) {
+                    $query->where('appt.stu_email', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_citizen_card', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_first_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_last_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_first_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_last_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%');
+                });
+            }
+
+            $recordsFiltered = $mainQuery->get()->count();
+//            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+            $data = $mainQuery->get();
+
+            $result = array('draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data
+            );
+
+            return $result;
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
     }
 
 }

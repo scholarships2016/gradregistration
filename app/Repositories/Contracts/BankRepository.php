@@ -10,8 +10,7 @@ interface BankRepository {
 
     public function save(array $data);
 
+    public function getBank();
+
     public function delete($id);
 }
- 
-
- 

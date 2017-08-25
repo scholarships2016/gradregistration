@@ -74,8 +74,8 @@
 
 @push('pageJs')
 <script type="application/javascript">
-    $(document).ready(function () {
+<!--    $(document).ready(function () {
         alert("IamReady");
-    });
+    });-->
 </script>
 @endpush
