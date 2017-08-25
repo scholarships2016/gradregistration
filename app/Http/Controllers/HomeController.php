@@ -55,7 +55,7 @@ class HomeController extends Controller {
     }
 
     public function viewHome() {
-        if (!session('locale'))
+        if (!session(''))
             session()->put('locale', 'th');
         
         

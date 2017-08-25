@@ -227,7 +227,7 @@
 <br/>
       <div class="alert alert-danger">
       <i class="icon-info"></i>
-      {{Lang::get('resource.lbProcessTime')}} {{$curDis->end_date}}
+      {{Lang::get('resource.lbProcessTime')}} {{date('d-m-Y', strtotime($curDis->end_date )) }}
     </div>
 
 

@@ -370,7 +370,7 @@
                                               <div class="form-group">
                                                   <label class="col-md-4 control-label">{{Lang::get('resource.lbTimeExam')}}</label>
                                                   <div class="col-md-8">
-                                                    <span class="form-control-static">{{$curDis->start_date}}  - {{$curDis->end_date}}  </span>
+                                                    <span class="form-control-static">{{date('d-m-Y', strtotime($curDis->start_date ))}}  - {{date('d-m-Y', strtotime($curDis->end_date))}}  </span>
                                                   </div>
                                               </div>
                                               <div class="form-group">
@@ -385,7 +385,7 @@
                                               <div class="form-group">
                                                   <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailCommAppr')}}</label>
                                                   <div class="col-md-8">
-                                                    <span class="form-control-static">{{$curDis->comm_appr_name}} ครั้งที่ {{$curDis->comm_appr_no}} วันที่ {{$curDis->comm_appr_date}} </span>
+                                                    <span class="form-control-static">{{$curDis->comm_appr_name}} ครั้งที่ {{$curDis->comm_appr_no}} วันที่ {{date('d-m-Y', strtotime($curDis->comm_appr_date))}} </span>
                                                   </div>
                                               </div>
                                               <div class="form-group">
