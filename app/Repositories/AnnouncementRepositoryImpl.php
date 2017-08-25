@@ -16,7 +16,7 @@ class AnnouncementRepositoryImpl extends AbstractRepositoryImpl implements Annou
     public function getAnnouncementAll() {
         $res = null;
         try {
-            $res = Announcement::get();
+            $res = Announcement::orderBy('anno_seq')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }

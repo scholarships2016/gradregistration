@@ -74,7 +74,17 @@ class Controller extends BaseController {
 
         return $res;
     }
-    
+    public static function ConvertDateThaiNotWeek($date) {
+
+
+        $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+
+         $thaimonth = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+        $res =   date('j', strtotime($date)) . " " . $thaimonth[date('m', strtotime($date)) - 1] . " พ.ศ. " . (date('Y', strtotime($date)) + 543);
+
+        return $res;
+    }
  
 
 }

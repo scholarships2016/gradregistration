@@ -57,7 +57,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         try {
             $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
-                            ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
+                            ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
                             ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
                             ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
                             ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
@@ -115,6 +115,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                                 ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                             })
+                           
                             ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
@@ -124,7 +125,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_eng_test as engTest', 'engTest.eng_test_id', '=', 'applicant.eng_test_id')
                             ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')
                             ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
-                            ->Where(function ($query)use ($user) {
+                            ->leftJoin('tbl_name_title', 'applicant.name_title_id', '=', 'tbl_name_title.name_title_id')
+                                    ->Where(function ($query)use ($user) {
                                 if ($user) {
                                     $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
                                         $query->select('doc_id')
@@ -218,7 +220,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     ;
                                 }
                             })
-                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,app_id, lpad(app_id ,5,"0") app_ida ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,  @rownum  := @rownum  + 1 AS rownum')])
+                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,app_id, lpad(app_id ,5,"0") app_ida ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,semester,  @rownum  := @rownum  + 1 AS rownum')])
                             ->orderBy('application.application_id', 'desc')->get();
         } catch (\Exception $ex) {
             throw $ex;
@@ -330,6 +332,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
             if (array_key_exists('bank_id', $data))
                 $curObj->bank_id = $data['bank_id'];
+            
+             if (array_key_exists('curr_prog_id', $data))
+                $curObj->curr_prog_id = $data['curr_prog_id'];
 
             if (array_key_exists('exam_remark', $data))
                 $curObj->exam_remark = $data['exam_remark'];

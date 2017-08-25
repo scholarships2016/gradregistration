@@ -238,6 +238,14 @@ class ApplySettingRepositoryImpl extends AbstractRepositoryImpl implements Apply
             throw $ex;
         }
     }
+      public function getApplySettingNow()
+    {
+        try {
+            return ApplySetting::where('is_active', '=', '1')->orderBy('end_date','desc')->first();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
 
 }

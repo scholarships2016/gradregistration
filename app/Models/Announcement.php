@@ -38,6 +38,9 @@ class Announcement extends Eloquent {
         'created',
         'modified'
     ];
+    protected $casts = [
+        'anno_seq' => 'int'
+        ];
     protected $fillable = [
         'anno_title',
         'anno_title_en',

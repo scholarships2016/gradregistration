@@ -88,14 +88,14 @@
                                                             @foreach($programs as $program)
 
                                                            <div class="md-radio">
-                                                               <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->program_id }}" name="program_id" class="md-radiobtn">
+                                                               <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->program_id.'|'.$program->curr_prog_id }}" name="program_data"  {{ ($loop->iteration == 1)?'checked="checked"':''}} class="md-radiobtn">
                                                                <label for="checkbox_P{{ $loop->iteration}}">
                                                                    <span class="inc"></span>
                                                                    <span class="check"></span>
                                                                    <span class="box"></span>
                                                                    <b>{{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}</b>
                                                                     <br/>
-                                                                    <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name : $program->prog_plan_name_en }}
+                                                                    <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
                                                                       <br/>
                                                                     <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
                                                                     ({{$program->office_time}})
@@ -207,7 +207,7 @@
                                                                   			<div class="todo-inline">
                                                                   				 {{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}
                                                                            <br/>
-                                                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name : $program->prog_plan_name_en }}
+                                                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
                                                                              <br/>
                                                                            <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
                                                                            ({{$program->office_time}})
