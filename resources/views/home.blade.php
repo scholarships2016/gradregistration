@@ -4,7 +4,7 @@
 <link id="style_color" href="../assets/layouts/layout/css/themes/light2.min.css" rel="stylesheet" type="text/css">
 <link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css">
  <link href="../assets/pages/css/about.min.css" rel="stylesheet" type="text/css">
- <link href="../assets/global/css/custom.css" rel="stylesheet" type="text/css">
+ <link href="css/custom.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
