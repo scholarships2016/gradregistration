@@ -377,7 +377,7 @@ class ManageApplyController extends Controller {
         try {
             if ($request) {
                 $curr_act_id = $request->curr_act_id;
-                $applications = $arrayOfEmails = json_decode($request->application);
+                $applications =  json_decode($request->application);
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null) ;
                 $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
@@ -423,7 +423,7 @@ class ManageApplyController extends Controller {
                 try {
                 if ($request) {
                 $curr_act_id = $request->curr_act_id;
-                $applications = $arrayOfEmails = json_decode($request->application);
+                $applications = json_decode($request->application);
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
                 $apps = $this->ApplicationRepo->getDataForMange(null, null, null,  null, null, null, null, null, null, $applications);

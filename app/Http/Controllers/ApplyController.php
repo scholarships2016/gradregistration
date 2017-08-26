@@ -296,34 +296,49 @@ class ApplyController extends Controller {
     }
 
     public function sentMailRegister(Request $request) {
+ try {
+            if ($request) {
+                $curr_act_id = $request->curr_act_id;
+                $applications = json_decode($request->application);
+
+                $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null) ;
+                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+
+                foreach ($currs as $curr) {
 
 
-        $curr_act_id = $request->curr_act_id;
-        $applications = $arrayOfEmails = json_decode($request->application);
+                    foreach ($apps as $app) {
 
-        $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-        $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
-
-                $data = [
-                    'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
-                    'thai' => $curr->thai,
-                    'coursecodeno' => $curr->coursecodeno,
-                    'sub_major_name' => $curr->sub_major_name,
-                    'sub_major_id' => $curr->sub_major_id,
-                    'major_name' => $curr->major_name,
-                    'major_id' => $curr->major_id,
-                    'department_name' => $curr->department_name,
-                    'department_id' => $curr->department_id,
-                    'faculty_name' => $curr->stu_email,
-                    'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
-                    'year' => $curr->academic_year,
-                    'statusExam' => $app->exam_name
+                        $data = [
+                            'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
+                            'thai' => $curr->thai,
+                            'coursecodeno' => $curr->coursecodeno,
+                            'sub_major_name' => $curr->sub_major_name,
+                            'sub_major_id' => $curr->sub_major_id,
+                            'major_name' => $curr->major_name,
+                            'major_id' => $curr->major_id,
+                            'department_name' => $curr->department_name,
+                            'department_id' => $curr->department_id,
+                            'faculty_name' => $curr->stu_email,
+                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                'year' => $curr->academic_year,
+                'statusExam' => $app->exam_name
                 ];
-                Mail::send('email.gs03', $data, function($message)use ($app) {
-                    $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                Mail::send('email.register', $data, function($message)use ($app) {
+                $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
                 });
-                Controller::WLog('RegisterSetnMail [' . $app->stu_email . ']', 'Register', null);
- 
+                Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                return;
+                }
+                }
+                }
+                } catch (Exception $e) {
+                Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
+                }
         
     }
 
