@@ -142,7 +142,7 @@ return [
     'lbConfApp' => 'Confirm',
     'lbRegisterbtn' => 'Apply',
     'lbSubMajor' => 'Sub-Major',
-    'lbAppNo' => 'Application No.',
+    'lbAppNo' => 'Application No',
 //ApplicantInfo
     'appctInfoPageTitle' => 'Applicant Information',
     //ProfilePage

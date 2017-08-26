@@ -143,7 +143,7 @@ return [
     'lbWTodo' => 'สิ่งที่ต้องดำเนินการ',
     'lbConfApp' => 'สิ่งที่ต้องดำเนินการ',
     'lbSubMajor' => 'แขนงวิชา',
-    'lbAppNo' => 'รหัสผู้สมัคร',
+    'lbAppNo' => 'เลขประจำตัวผู้สมัคร',
     //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
     //ProfilePage
