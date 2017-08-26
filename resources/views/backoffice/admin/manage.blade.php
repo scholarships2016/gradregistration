@@ -276,7 +276,7 @@
         userTbl.fnAddData({
             'user_id': obj.hasOwnProperty('user_id') ? obj.user_id : null,
             'user_name': obj.hasOwnProperty('user_name') ? obj.user_name : null,
-            'name': obj.hasOwnProperty('name') ? obj.name : null,
+            'name': obj.hasOwnProperty('name') ? obj.name +' ('+obj.nickname+')' : null,
             'role_id': obj.hasOwnProperty('role_id') ? obj.role_id : null,
             'permission': obj.hasOwnProperty('permission') ? obj.permission : null,
             'last_login': obj.hasOwnProperty('last_login') ? obj.last_login : null

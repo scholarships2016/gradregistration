@@ -109,7 +109,7 @@
                                   <br/>
 
                                    @if($subMajors->count()> 0)
-
+<hr/>
                                   <div class="form-group form-md-radios" >
                                                     <label class="col-md-12 control-label" for="form_control_1">
                                                       <h4><span class="badge badge-info">2</span> {{Lang::get('resource.lbSelSubMajor')}}</h4></label>
