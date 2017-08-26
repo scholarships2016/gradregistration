@@ -504,7 +504,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3"
-                                           for="project_id"><strong>กำหนดสิทธิ์</strong>
+                                           for="project_id"><strong>ผู้มีสิทธิ์จัดการ</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-9">
