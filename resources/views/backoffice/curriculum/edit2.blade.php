@@ -492,8 +492,8 @@
                                             <span></span>
                                         </label>
                                         <label class="mt-radio mt-radio-outline">
-                                            <input type="radio" name="status" value="2"
-                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 2)) checked @endif
+                                            <input type="radio" name="status" value="0"
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 0)) checked @endif
                                             > ไม่เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
@@ -914,7 +914,7 @@
                             var listCheckBox = '';
                             $.each(result, function (index, value) {
                                 listCheckBox += '<label class="mt-checkbox mt-checkbox-outline">';
-                                listCheckBox += '<input type="checkbox" name="sub_major_id[]" value="' + index + '"';
+                                listCheckBox += '<input type="checkbox" name="sub_major_id[]" value="' + value.sub_major_id + '"';
                                 if (value.curr_sub_major_id !== null) {
                                     listCheckBox += 'checked'
                                 }

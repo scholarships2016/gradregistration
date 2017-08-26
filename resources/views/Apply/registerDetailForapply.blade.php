@@ -114,20 +114,20 @@
                                                     <label class="col-md-12 control-label" for="form_control_1">
                                                       <h4><span class="badge badge-info">2</span> {{Lang::get('resource.lbSelSubMajor')}}</h4></label>
                                                     <div class="col-md-12">
-                                                        <div class="md-radio-inline">
+                                                        <div class="md-radio-inline font-blue">
 
                                                              @foreach($subMajors as $subMajor)
 
                                                             <div class="md-radio">
-                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" name="sub_major_id" class="md-radiobtn">
+                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" {{ ($loop->iteration == 1)?'checked="checked"':''}} name="sub_major_id" class="md-radiobtn">
                                                                 <label for="checkbox_{{ $loop->iteration}}">
                                                                     <span class="inc"></span>
                                                                     <span class="check"></span>
                                                                     <span class="box"></span>
-                                                                    <b>{{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }}
+                                                                    <b>{{ $subMajor->sub_major_id }} {{ (session('locale')=='th')?$subMajor->sub_major_name : $subMajor->sub_major_name_en }}
                                                                     </b>
                                                                      </label>
-                                                            </div>
+                                                            </div><br/>
                                                                @endforeach
                                                         </div>
                                                     </div>
@@ -286,7 +286,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                  
+
                                     <div class="panel panel-success">
                                         <div class="panel-heading">
                                             <h3 class="panel-title"><i class="icon-info"></i>  {{Lang::get('resource.lbAdditionalInfo')}}</h3>
@@ -321,7 +321,7 @@
                                               <div class="form-group">
                                                   <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailDocument')}}</label>
                                                   <div class="col-md-8">
-                                                    <span class="form-control-static">  
+                                                    <span class="form-control-static">
                                                       <a href="javascript:DownloadFile({{$curDis->document_file}});" class="btn btn-circle btn-xs blue btn-outline">
                                                                                 <i class="fa fa-file-word-o"></i> Download </a>
                                                      </span>
@@ -392,9 +392,9 @@
    window.location.href = '{{ url('/login') }}'
   }, 100);
 });
-         } 
-         
- 
+         }
+
+
 
                                                                           </script>
                                                                           @endpush

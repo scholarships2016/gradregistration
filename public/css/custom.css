@@ -99,6 +99,7 @@ body, h1, h2, h3, h4, h5, h6 {
 #select-program-area .md-radio{
   border-bottom: 1px solid;
   border-color: #e7ecf1;
+  margin-bottom: 10px;
 }
 .about-header h1 {
   margin-top: 20px;
@@ -108,8 +109,8 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 .about-text>h4{
     background: #c3788c!important;
-        padding: 0.5em 20px;
-            font-size: 20px;
+    padding: 15px 10px 5px 10px;
+    font-size: 20px;
 }
 .about-text{
   height: auto;
@@ -144,4 +145,8 @@ table.dataTable thead .sorting_desc:after {
 }
 .btn-group, .btn-group-vertical {
     position: sticky;
+}
+#page-program-detail .todo-inline{
+  margin-bottom: 10px;
+border-bottom: 1px dotted #cccccc;
 }
