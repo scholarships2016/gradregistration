@@ -207,62 +207,64 @@ $(".page-content").css("background-color","#eef1f5");
 
 });
 
-function getData(){
 
+function getData(){
+     
     var table = $('#tblcurr').DataTable({
         ajax:{ url: '{!! route('manageMyCourse.data') !!}',type:"GET", data: function(d) {
          d.search = $("#search").val();
          d.faculty_id = $("#faculty_id").val();
          d.degree_id = $("#degree_id").val();
-         d.program_id = $("#program_id").val();
+         d.program_id = $("#program_id").val();               
         }}
-    ,
-columnDefs: [{
-targets: [0],
-orderable: false,
+    , 
+    
+columnDefs: [{ 
+targets: [0], 
+orderable: false, 
 className: 'table-status',
 name: 'rownum',
-render: function (data, type, full, meta) {
-return full.rownum;
-} },{
-targets: [1],
-orderable: true,
+render: function (data, type, full, meta) { 
+return meta.settings._iDisplayStart + meta.row + 1;
+} },{ 
+targets: [1], 
+orderable: true, 
 className: 'table-desc font-blue',
-name: 'degree_name',
-render: function (data, type, full, meta) {
-return (('{{session('locale')}}'=='th')? full.thai:full.english) ;
-} },{
-targets: [2],
-orderable: true,
+name: 'degree_name', 
+render: function (data, type, full, meta) { 
+return (('{{session('locale')}}'=='th')? full.degree_name:full.degree_name_en) ; 
+} },{ 
+targets: [2], 
+orderable: true, 
+className: 'table-title',
+name: 'prog_type_name', 
+render: function (data, type, full, meta) { 
+return '<h3>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</h3>'+'<p>'+ full.office_time+'</p>' ; 
+} },{ 
+targets: [3], 
+orderable: true, 
 className: 'table-desc',
-name: 'prog_type_name',
-render: function (data, type, full, meta) {
-return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</b>'+'<br/>'+ full.office_time+'' ;
-} },{
-targets: [3],
-orderable: true,
-className: 'table-desc',
-name: 'prog_type_name',
-render: function (data, type, full, meta) {
-return ('{{Lang::get('resource.lbSearchResultMajor')}}'+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)+'<br/>'+ ''+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) + '<br/>'+'{{Lang::get('resource.lbSearchResultFaculty')}}'+(('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) ) ;
-}},{
-targets: [4],
-orderable: false,
+name: 'prog_type_name', 
+render: function (data, type, full, meta) { 
+return ('{{Lang::get('resource.lbFaculty')}}'+  (('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) + ' <br>{{Lang::get('resource.lbDepartment')}} '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'<br> {{Lang::get('resource.lbMajor')}} '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
+}},{ 
+targets: [4], 
+orderable: true, 
 className: 'table-download',
-name: 'apply',
-render: function (data, type, full, meta) {
-return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
-} }] ,
+name: 'apply', 
+render: function (data, type, full, meta) { 
+return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P'+full.program_type_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
+} }] ,   
      destroy: true,
     filter: true,
     info: true,
     ordering: true,
     processing: true,
-    retrieve: true  ,
-    pagingType : "full_numbers",
-
-    });
-    console.log(table);
+    retrieve: false  ,
+    pagingType : "full_numbers", 
+     
+    
+    });   
        $('#tblcurr_paginate').addClass('search-pagination pagination-rounded');
 }
 </script>
