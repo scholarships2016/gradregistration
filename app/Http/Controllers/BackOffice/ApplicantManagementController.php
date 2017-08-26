@@ -117,7 +117,6 @@ class ApplicantManagementController extends Controller
             return redirect()->route('admin.applicantManage.showManagePage');
         }
 
-
     }
 
     public function showEditPage(Request $request, $id)
