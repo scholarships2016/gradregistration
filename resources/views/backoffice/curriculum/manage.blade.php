@@ -106,10 +106,10 @@
                                         <label>สถานะ</label>
                                         <select id="is_approve" name="is_approve"
                                                 class="form-control select2">
-                                            <option value="1">Draft</option>
-                                            <option value="2">Pending</option>
-                                            <option value="3">Rejected</option>
-                                            <option value="4">Approved</option>
+                                            <option value="1">ฉบับร่าง-Draft</option>
+                                            <option value="2">รออนุมัติ-Pending</option>
+                                            <option value="3">ส่งกลับให้แก้ไข-Rejected</option>
+                                            <option value="4">อนุมัติ-Approved</option>
                                         </select>
                                         <!-- /input-group -->
                                     </div>

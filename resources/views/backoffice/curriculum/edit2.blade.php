@@ -410,6 +410,7 @@
                                                    class="input-group-addon btn green fileinput-exists"
                                                    onclick="downloadFile(this)" target="_blank" download> ดาวน์โหลด </a>
                                             </div>
+                                            <span class="help-block">เป็นไฟล์ Microsoft Word (.doc,.docx) เท่านั้น</span>
                                         </div>
 
                                     </div>
