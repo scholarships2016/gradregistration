@@ -169,7 +169,7 @@
                             </div>
                           </div>
 
-                    <div class="panel panel-info">
+                    <div class="panel panel-success">
                     	<div class="panel-heading">
                     		<h3 class="panel-title">เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
                     	</div>
@@ -265,34 +265,35 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                     id="currProgramTbl">
+                                  <thead>
+                                  <tr>
+                                      <th style="width:50px">
+                                          <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                              <input type="checkbox" class="group-checkable"
+                                                     data-set="#currProgramTbl .checkboxes"/>
+                                              <span></span>
+                                          </label>
+                                      </th>
+                                      <th style="width:60px"> รหัสหลักสูตร</th>
+                                      <th style="width:170px"> ชื่อหลักสูตร</th>
+                                      <th style="width:50px"> แผน</th>
+                                      <th> ประเภท</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
                       </div>
                     </div>
 
-                          <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                       id="currProgramTbl">
-                                    <thead>
-                                    <tr>
-                                        <th style="width:50px">
-                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                <input type="checkbox" class="group-checkable"
-                                                       data-set="#currProgramTbl .checkboxes"/>
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th style="width:60px"> รหัสหลักสูตร</th>
-                                        <th style="width:170px"> ชื่อหลักสูตร</th>
-                                        <th style="width:50px"> แผน</th>
-                                        <th> ประเภท</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
                         <hr>
                     </div>
                     {{--Section1 END--}}
