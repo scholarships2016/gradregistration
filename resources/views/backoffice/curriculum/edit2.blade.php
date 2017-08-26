@@ -529,7 +529,7 @@
                             <a id="delBtn" onclick="doDelete()" class="btn red" style="display:none;">ลบข้อมูล
                             </a>
 
-                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
+                            <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
                             </a>
                         </div>
                         <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
