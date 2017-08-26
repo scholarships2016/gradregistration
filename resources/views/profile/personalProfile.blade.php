@@ -320,9 +320,11 @@
     function setComponent() {
         $("#stu_birthdate").inputmask("d/m/y");
         $("#eng_date_taken").inputmask("d/m/y");
+        $("#eng_date_taken_admin").inputmask("d/m/y");
+
 
         if (jQuery().datepicker) {
-            $('#stu_birthdate,#eng_date_taken').datepicker({
+            $('#stu_birthdate,#eng_date_taken,#eng_date_taken_admin').datepicker({
                 rtl: App.isRTL(),
                 orientation: "left",
                 autoclose: true,
@@ -498,6 +500,12 @@
         $("#workExpGroup").find(".mt-repeater-item").each(function (index) {
             $(this).find("#work_status_id").val($(this).find("#work_status_id_hidden").val()).change();
         });
+
+        //Hide Section
+        $("#adminScoreDiv").hide();
+        $("#adminScoreDiv input").attr('disabled','disabled');
+        $("#adminScoreDiv select").attr('disabled','disabled');
+
     }
 
     function setHandleValidation() {
