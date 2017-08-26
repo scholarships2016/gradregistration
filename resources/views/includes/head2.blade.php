@@ -39,6 +39,6 @@
     <link href="{{asset('favicon.ico')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- BEGIN CUSTOM STYLES -->
-    <link href="{{asset('assets/global/css/custom.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
     <!-- END CUSTOM STYLES -->
 </head>

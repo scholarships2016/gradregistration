@@ -4,7 +4,7 @@
 <link id="style_color" href="../assets/layouts/layout/css/themes/light2.min.css" rel="stylesheet" type="text/css">
 <link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css">
  <link href="../assets/pages/css/about.min.css" rel="stylesheet" type="text/css">
- <link href="../assets/global/css/custom.css" rel="stylesheet" type="text/css">
+ <link href="css/custom.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -42,8 +42,8 @@
                                 <div class="row margin-bottom-20 about-header">
                                     <div class="col-md-12">
                                         <h1>{{Lang::get('resource.lbHomeOpenRegister')}}</h1>
-                                        <h2>ภาคต้น ปีการศึกษา 2560 </h2>
-                                        <h2>รอบที่ 1 ตั้งแต่วันที่ 24/04/2017 - 25/09/2017 </h2>
+                                         <h2>{!!(session('locale')=='th')?(Lang::get('resource.lbSemester').' '.(($Applys->semester==1)?'ต้น':'ปลาย')):('<span style="text-transform: lowercase;">'.(($Applys->semester==1)?'1st ':'2nd').'</span>'.Lang::get('resource.lbSemester'))!!}  {{Lang::get('resource.lbHomeYear').' '.$Applys->academic_year}}  </h2>
+                                        <h2>{{Lang::get('resource.lbroundNo').' '.$Applys->round_no.' '.Lang::get('resource.lbStartDate').' '. $Applys->start_date->format('d/m/Y') .' - '.$Applys->end_date->format('d/m/Y')}} </h2>
                                           @if(session('user_id'))
                                             <a href="apply"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.lbSelect')}}  </button></a>
                                           @endif
@@ -53,41 +53,26 @@
 
                                     </div>
                                 </div>
+                                 @foreach ($NewsList as $news)
                                 <div class="row margin-bottom-20">
                                     <div class="col-lg-12">
                                         <div class="portlet light about-text">
                                             <h4>
-                                                <i class="fa fa-check icon-info"></i> ข่าวประกาศ</h4>
+                                                <i class="fa fa-check icon-info"></i>  {{(session('locale')=='th')?$news->news_title :$news->news_title_en}}</h4>
+
                                             <p class="margin-top-20">
-
-                                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                                lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et
-                                                iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
+                                            {{(session('locale')=='th')?$news->news_detail:$news->news_detail_en}}
+                                            </p>
 
                                             <div class="about-quote">
-                                                <p class="about-author">Tom Hardy, 2015</p>
+                                                <p class="about-author">{{$news->modified->format('d-m-Y')}}<br> </p>
                                             </div>
+
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="row margin-bottom-20">
-                                    <div class="col-lg-12">
-                                        <div class="portlet light about-text">
-                                            <h4>
-                                                <i class="fa fa-check icon-info"></i> ดาวน์โหลด</h4>
-                                            <p class="margin-top-20"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                                lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et
-                                                iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
-
-                                            <div class="about-quote">
-                                                <h3>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</h3>
-                                                <p class="about-author">Tom Hardy, 2015</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                   @endforeach
                             </div>
                             <!-- End Left Panel -->
                             <!-- Start Right Panel -->

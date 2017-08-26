@@ -33,7 +33,7 @@ Route::get('language', 'Auth\LoginApplicantController@language');
 
 
 //Head
-Route::get('showRegisHead', 'ApplyController@showRegisHead')->name('showRegisHead');
+Route::get('showRegisHead', 'HomeController@showRegisHead')->name('showRegisHead');
 //Apply
 Route::any('apply/register/', 'ApplyController@managementRegister')->name('managementRegister');
 Route::get('apply/getRegisterCourse/', 'ApplyController@getRegisterCourse')->name('manageMyCourse.data');
@@ -41,12 +41,8 @@ Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailF
 
 
 //PageMain
-Route::get('/home', function () {
-    return view('home');
-});
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/home', 'HomeController@viewHome')->name('viewHome');
+Route::get('/', 'HomeController@viewHome');
 Route::get('/contact', function () {
     return view('contact');
 });
@@ -57,37 +53,13 @@ Route::get('/download', function () {
     return view('download');
 });
 
-//payment
-
-Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
-Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
-Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
-Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
-
-//GS03
-
-Route::get('admin/ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
-Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCourse');
-Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
-Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
-Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
-Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
-Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
-Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
-Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
-
-
-//GS05
-Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
-Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
-Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
 
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-//Apply 
+//Apply
     Route::get('apply', 'ApplyController@showAnnouncement');
     Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
     Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
@@ -102,6 +74,38 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
     Route::get('apply/docAppEnvelopPDF/{id}', 'ApplyController@docApplicationEnvelop')->name('docAppEnvelopPDF');
     Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
+
+
+//payment
+
+    Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
+    Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
+    Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
+    Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
+
+//GS03
+
+    Route::get('admin/ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
+    Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCourse');
+    Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
+    Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
+    Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
+    Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
+    Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
+    Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
+    Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
+
+
+
+//GS05
+    Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
+    Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
+    Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
+    Route::get('admin/showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
+    Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
+    Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
+    Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
+    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
 });
 
 

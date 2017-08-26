@@ -18,6 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $curr_act_id
  * @property int $curriculum_id
  * @property string $program_id
+ * @property int $curr_prog_id
  * @property string $sub_major_id
  * @property int $app_id
  * @property int $curriculum_num
@@ -28,8 +29,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $receipt_no
  * @property int $exam_status
  * @property string $exam_remark
- * @property int $admission_status_id
+ * @property string $admission_status_id
  * @property string $admission_remark
+ * @property string $additional_answer
+ * @property string $special_apply_by
+ * @property \Carbon\Carbon $special_apply_datetime
+ * @property string $special_apply_comment
+ * @property string $special_admission_by
+ * @property \Carbon\Carbon $special_admission_date
+ * @property string $spacial_admission_comment
  * @property string $creator
  * @property \Carbon\Carbon $created
  * @property string $modifier
@@ -49,15 +57,18 @@ class Application extends Eloquent {
     protected $casts = [
         'applicant_id' => 'int',
         'curr_act_id' => 'int',
-        'curr_prog_id' => 'int',
         'curriculum_id' => 'int',
+        'curr_prog_id' => 'int',
         'app_id' => 'int',
         'curriculum_num' => 'int',
         'flow_id' => 'int',
-        'bank_id' => 'int' 
+        'bank_id' => 'int',
+        'exam_status' => 'int'
     ];
     protected $dates = [
         'payment_date',
+        'special_apply_datetime',
+        'special_admission_date',
         'created',
         'modified'
     ];
@@ -65,16 +76,14 @@ class Application extends Eloquent {
         'applicant_id',
         'stu_citizen_card',
         'curr_act_id',
-        'curr_prog_id',
         'curriculum_id',
         'program_id',
+        'curr_prog_id',
         'sub_major_id',
         'app_id',
         'curriculum_num',
         'flow_id',
         'bank_id',
-        'exam_status',
-        'admission_status_id' ,
         'payment_date',
         'receipt_book',
         'receipt_no',
@@ -82,6 +91,13 @@ class Application extends Eloquent {
         'exam_remark',
         'admission_status_id',
         'admission_remark',
+        'additional_answer',
+        'special_apply_by',
+        'special_apply_datetime',
+        'special_apply_comment',
+        'special_admission_by',
+        'special_admission_date',
+        'spacial_admission_comment',
         'creator',
         'created',
         'modifier',

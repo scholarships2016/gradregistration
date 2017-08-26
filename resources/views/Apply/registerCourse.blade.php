@@ -109,7 +109,7 @@
     <div class="row">
       <div class="col-md-11 col-md-offset-1">
         <i class="icon-question"></i>
-                                                                     {{$Q->additional_question }}
+                                                                     {!!$Q->additional_question !!}
 
       </div>
     </div>
@@ -146,10 +146,11 @@
                    <tr>
                        <th>
                            <i class="fa fa-user"></i> {{Lang::get('resource.lbConfirmTableReferencePersonFullname')}} </th>
-                           <th class="hidden-xs">
-                               <i class="fa fa-home"></i> {{Lang::get('resource.lbConfirmTableReferencePersonContactAddr')}} </th>
+
                        <th class="hidden-xs">
                            <i class="fa fa-mortar-board"></i> {{Lang::get('resource.lbConfirmTableReferencePersonPosition')}} </th>
+                           <th class="hidden-xs">
+                               <i class="fa fa-home"></i> {{Lang::get('resource.lbConfirmTableReferencePersonContactAddr')}} </th>
                        <th>
                            <i class="fa fa-phone"></i> {{Lang::get('resource.lbConfirmTableReferencePersonTel')}} </th>
                        <th> </th><th> </th>
@@ -186,6 +187,11 @@
                                                                                 <label for="form_control_1">{{Lang::get('resource.lbConfirmTableReferencePersonFullname')}}</label>
                                                                                 <span class="help-block">{{Lang::get('resource.lbConfirmTableReferencePersonFullname')}}</span>
                                                                             </div>
+                                                                            <div class="form-group form-md-line-input">
+                                                                              <input class="form-control" id="app_people_position" type="text" placeholder="Enter Position">
+                                                                              <label for="form_control_1">{{Lang::get('resource.lbConfirmTableReferencePersonPosition')}}</label>
+                                                                              <span class="help-block">{{Lang::get('resource.lbConfirmTableReferencePersonPosition')}}</span>
+                                                                          </div>
                                                                               <div class="form-group form-md-line-input">
                                                                                 <textarea class="form-control"id="app_people_address"  placeholder="Enter Address" rows="3"></textarea>
                                                                                 <label for="form_control_1">{{Lang::get('resource.lbConfirmTableReferencePersonContactAddr')}}</label>
@@ -196,11 +202,7 @@
                                                                                 <label for="form_control_1">{{Lang::get('resource.lbConfirmTableReferencePersonTel')}}</label>
                                                                                 <span class="help-block">{{Lang::get('resource.lbConfirmTableReferencePersonTel')}}</span>
                                                                             </div>
-                                                                              <div class="form-group form-md-line-input">
-                                                                                <input class="form-control" id="app_people_position" type="text" placeholder="Enter Position">
-                                                                                <label for="form_control_1">{{Lang::get('resource.lbConfirmTableReferencePersonPosition')}}</label>
-                                                                                <span class="help-block">{{Lang::get('resource.lbConfirmTableReferencePersonPosition')}}</span>
-                                                                            </div>
+
                                                                         </div>
 
 
@@ -339,9 +341,10 @@ $(function() {
         ajax: '{!! url('apply/peopleData/'.$idApp) !!}',
         columns: [
             { data: 'app_people_name', name: 'app_people_name' },
+              { data: 'app_people_position', name: 'app_people_position' },
             { data: 'app_people_address', name: 'app_people_address' },
             { data: 'app_people_phone', name: 'app_people_phone' },
-            { data: 'app_people_position', name: 'app_people_position' },
+
             {
             targets : -1,
                 data: null,

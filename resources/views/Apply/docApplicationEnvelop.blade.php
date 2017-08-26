@@ -107,7 +107,7 @@
                                 <tr>
                                     <td colspan="2"><div align="center">สมัครสาขาวิชา Subject: {{$app->major_name }} ( {{$app->major_code }} )[{{  strrpos($app->degree_name ,'ดุษฎีบัณฑิต')?  'ปริญญาเอก':'ปริญญาโท'}}] ระดับ Syllabus: {{$app->degree_name}} - {{$app->degree_name_en}} 
                                             <br>
-                                            คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{substr($app->start_date,0,10)}} - {{substr($app->end_date,0,10)}} )Application ID
+                                            คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{   date('d-m-Y', strtotime($app->start_date )) }} - {{ date('d-m-Y', strtotime($app->end_date ))  }} )Application ID
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}             </div></td>
                                 </tr>
                             </tbody></table>
@@ -176,7 +176,7 @@
                                 <tr>
                                     <td colspan="2"><div align="center">สมัครสาขาวิชา Subject: {{$app->major_name }} ( {{$app->major_code }} )[{{  strrpos($app->degree_name ,'ดุษฎีบัณฑิต')?  'ปริญญาเอก':'ปริญญาโท'}}] ระดับ Syllabus: {{$app->degree_name}} - {{$app->degree_name_en}} 
                                             <br>
-                                            คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{substr($app->start_date,0,10)}} - {{substr($app->end_date,0,10)}} )          </div></td>
+                                            คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{  date('d-m-Y', strtotime($app->start_date))}} - {{ date('d-m-Y', strtotime($app->end_date))}} )          </div></td>
                                 </tr>
 
                             </tbody></table>

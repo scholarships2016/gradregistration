@@ -132,7 +132,7 @@
                                     <div class="mt-radio-inline">
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="apply_method" value="1"
-                                                   @if(!empty($curriculum) && $curriculum->apply_method == 1) checked @endif
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->apply_method == 1)) checked @endif
                                             > รับผ่านบัณฑิต
                                             <span></span>
                                         </label>
@@ -167,6 +167,14 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+
+                    <div class="panel panel-info">
+                    	<div class="panel-heading">
+                    		<h3 class="panel-title">เลือก เพื่อค้นหาหลักสูตร</h3>
+                    	</div>
+                      <div class="panel-body">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
@@ -187,7 +195,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                          </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -204,6 +212,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="major_id"><strong>สาขาวิชา</strong>
@@ -233,12 +243,11 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label offset-col-md-3 col-md-2"
-                                           for="degree_id"><strong>ชื่อหลักสูตร</strong>
+                                           for="degree_id"><strong>ชื่อปริญญา</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-8">
@@ -256,6 +265,10 @@
                                 </div>
                             </div>
                         </div>
+                      </div>
+                    </div>
+
+                          <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
@@ -479,7 +492,7 @@
                                         </label>
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="status" value="2"
-                                                   @if(!empty($curriculum) && $curriculum->status == 2) checked @endif
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 2)) checked @endif
                                             > ไม่เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
@@ -491,7 +504,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3"
-                                           for="project_id"><strong>Special User</strong>
+                                           for="project_id"><strong>ผู้มีสิทธิ์จัดการ</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-9">
@@ -550,7 +563,8 @@
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
-<script src="{{asset('assets/global/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/ckeditor/ckeditor_4.7.1_standard/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 

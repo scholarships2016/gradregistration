@@ -88,14 +88,14 @@
                                                             @foreach($programs as $program)
 
                                                            <div class="md-radio">
-                                                               <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->program_id }}" name="program_id" class="md-radiobtn">
+                                                               <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->program_id.'|'.$program->curr_prog_id }}" name="program_data"  {{ ($loop->iteration == 1)?'checked="checked"':''}} class="md-radiobtn">
                                                                <label for="checkbox_P{{ $loop->iteration}}">
                                                                    <span class="inc"></span>
                                                                    <span class="check"></span>
                                                                    <span class="box"></span>
                                                                    <b>{{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}</b>
                                                                     <br/>
-                                                                    <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name : $program->prog_plan_name_en }}
+                                                                    <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
                                                                       <br/>
                                                                     <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
                                                                     ({{$program->office_time}})
@@ -157,9 +157,17 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row" >  <h4 style="padding-left: 15px"> <i class="fa fa-book"></i> {{Lang::get('resource.lbDetail')}} :</h4>
+
+
+                            <div class="row" >
+
                               <div class="col-md-12">
-                                <form class="form-horizontal">
+                                <div class="panel panel-success">
+                                  <div class="panel-heading">
+                                      <h3 class="panel-title"><i class="fa fa-book"></i> {{Lang::get('resource.lbInfo')}}</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                    <form class="form-horizontal">
                                   <div class="form-body">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">{{Lang::get('resource.lbYear')}}</label>
@@ -199,7 +207,7 @@
                                                                   			<div class="todo-inline">
                                                                   				 {{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}
                                                                            <br/>
-                                                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name : $program->prog_plan_name_en }}
+                                                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
                                                                              <br/>
                                                                            <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
                                                                            ({{$program->office_time}})
@@ -250,8 +258,11 @@
                                   </div>
 
                                 </form>
+                                  </div>
+                                </div>
                               </div>
                             </div>
+                            <!--
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-striped table-hover">
@@ -260,9 +271,25 @@
                                     </table>
                                 </div>
                             </div>
+                          -->
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><i class="fa fa-table"></i>  {{Lang::get('resource.lbExam_schedule')}}</h3>
+                                    </div>
+                                    <div class="panel-body">  {!!  $curDis->exam_schedule  !!} </div>
+                                </div>
+                              </div>
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-md-12">
+                                  <!--
+                                  <h4> <i class="fa fa-table"></i>  {{Lang::get('resource.lbExam_schedule')}} :  </h4>
                                     <div class="well">
+
                                       <form class="form-horizontal">
                                         <div class="form-body">
                                           <div class="form-group">
@@ -274,13 +301,13 @@
                                           <div class="form-group">
                                               <label class="col-md-4 control-label">{{Lang::get('resource.lbMoreInformation')}}</label>
                                               <div class="col-md-8">
-                                                <span class="form-control-static">{{  $curDis->addtional_detail  }} </span>
+                                                <span class="form-control-static">{!!  $curDis->additional_detail  !!} </span>
                                               </div>
                                           </div>
                                           <div class="form-group">
                                               <label class="col-md-4 control-label">{{Lang::get('resource.lbFee')}}</label>
                                               <div class="col-md-8">
-                                                <span class="form-control-static">{{  $curDis->apply_fee  }}  </span>
+                                                <span class="form-control-static">{{  $curDis->apply_fee  }}  {{Lang::get('resource.lbBaht')}}</span>
                                               </div>
                                           </div>
                                           <div class="form-group">
@@ -311,10 +338,67 @@
                                               </div>
                                           </div>
                                       </div>
-                                    </form>
-
+                                      </form>
 
                                     </div>
+                                  -->
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><i class="icon-info"></i>  {{Lang::get('resource.lbAdditionalInfo')}}</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                          <form class="form-horizontal">
+                                            <div class="form-body">
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbExpectation')}} </label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">{{  $curDis->expected_amount  }} </span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbMoreInformation')}}</label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">{!!  $curDis->additional_detail  !!} </span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbFee')}}</label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">{{  $curDis->apply_fee  }}  {{Lang::get('resource.lbBaht')}}</span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbTimeExam')}}</label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">{{date('d-m-Y', strtotime($curDis->start_date ))}}  - {{date('d-m-Y', strtotime($curDis->end_date))}}  </span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailDocument')}}</label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">  
+                                                      <a href="javascript:DownloadFile({{$curDis->document_file}});" class="btn btn-circle btn-xs blue btn-outline">
+                                                                                <i class="fa fa-file-word-o"></i> Download </a>
+                                                     </span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailCommAppr')}}</label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">{{$curDis->comm_appr_name}} ครั้งที่ {{$curDis->comm_appr_no}} วันที่ {{date('d-m-Y', strtotime($curDis->comm_appr_date))}} </span>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailContactTel')}}</label>
+                                                  <div class="col-md-8">
+                                                    <span class="form-control-static">{{$curDis->contact_tel}} </span>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          </form>
+                                         </div>
+                                    </div>
+
                                 </div>
                               <div class="col-md-12" style='text-align:center;' >
 
@@ -363,7 +447,9 @@
    window.location.href = '{{ url('/login') }}'
   }, 100);
 });
-         }
+         } 
+         
+ 
 
                                                                           </script>
                                                                           @endpush

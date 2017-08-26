@@ -32,6 +32,12 @@
                 font-weight: bold;
                 src: url("{{ asset('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
             }
+              @font-face {
+                font-family: 'IDAutomationHC39M';
+                font-style: normal;
+                font-weight: normal;
+                src: url("{{ asset('fonts/IDAutomationHC39M.ttf') }}") format('truetype');
+            }
 
             body {
                 font-family: "THSarabunNew";
@@ -49,7 +55,7 @@
             <tbody><tr>
                     <td width="115"><div align="center"><strong>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย</strong></div></td>
                     <td width="104"><div align="center"><strong>SERVICE CODE: CHULA </strong></div></td>
-                    <td width="200"><div align="center"><strong>ส่วนที่ 1 สำหรับบัณฑิตวิทยาลัย (แนบส่งกับใบสมัคร)</strong></div></td>
+                    <td width="200"><div align="center"><strong><font style="font-size: 18px;font-weight: bold;">ส่วนที่ 1 สำหรับบัณฑิตวิทยาลัย</font></strong></div></td>
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -86,15 +92,15 @@
                                 <tr>
                                     <td>ค่าธรรมเนียมการสมัครเข้าศึกษาระดับบัณฑิตศึกษา และค่าธรรมเนียมผ่านธนาคาร </td>
                                     <td><div align="center">{{$app->apply_fee}}</div></td>
-                                    <td><p>&nbsp;</p>
-                                        <p>&nbsp;</p>
+                                    <td><p>&nbsp;</p>                                        
                                         <p>&nbsp;</p></td>
                                 </tr>
                             </tbody></table>
                     </td>
                 </tr>
-            </tbody></table>
-        <p align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน
+            </tbody>
+        </table><br>
+         <p style="margin-top: 5px;" align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน    <span style="font-family:IDAutomationHC39M;font-size: 12px;padding-left: 40px;" >*{{ str_pad($app->application_id, 10, '0', STR_PAD_LEFT) }}*</span> 
         </p><hr>
  <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
                 ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน   {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
@@ -102,7 +108,7 @@
             <tbody><tr>
                     <td width="115"><div align="center"><strong>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย</strong></div></td>
                     <td width="104"><div align="center"><strong>SERVICE CODE: CHULA </strong></div></td>
-                    <td width="200"><div align="center"><strong>ส่วนที่ 2 สำหรับผู้สมัคร</strong></div></td>
+                    <td width="200"><div align="center"><strong><font style="font-size: 18px;font-weight: bold;">ส่วนที่ 2 สำหรับผู้สมัคร</font></strong></div></td>
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -140,14 +146,15 @@
                                     <td>ค่าธรรมเนียมการสมัครเข้าศึกษาระดับบัณฑิตศึกษา และค่าธรรมเนียมผ่านธนาคาร </td>
                                     <td><div align="center">{{$app->apply_fee}}</div></td>
                                     <td><p>&nbsp;</p>
-                                        <p>&nbsp;</p>
+                                        
                                         <p>&nbsp;</p></td>
                                 </tr>
                             </tbody></table>
                     </td>
                 </tr>
-            </tbody></table>
-        <p align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน
+            </tbody></table><br>
+          <p style="margin-top: 5px;" align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน    <span style="font-family:IDAutomationHC39M;font-size: 12px;padding-left: 40px; " >*{{ str_pad($app->application_id, 10, '0', STR_PAD_LEFT) }}*</span> 
+      
         </p><hr>
          <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
                 ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน  {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
@@ -155,7 +162,7 @@
             <tbody><tr>
                     <td width="115"><div align="center"><strong>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย</strong></div></td>
                     <td width="104"><div align="center"><strong>SERVICE CODE: CHULA </strong></div></td>
-                    <td width="200"><div align="center"><strong>ส่วนที่ 3 สำหรับธนาคาร</strong></div></td>
+                    <td width="200"><div align="center" ><font style="font-size: 18px;font-weight: bold;"> ส่วนที่ 3 สำหรับธนาคาร</font> </div></td>
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -193,13 +200,13 @@
                                     <td>ค่าธรรมเนียมการสมัครเข้าศึกษาระดับบัณฑิตศึกษา และค่าธรรมเนียมผ่านธนาคาร </td>
                                     <td><div align="center">{{$app->apply_fee}}</div></td>
                                     <td><p>&nbsp;</p>
-                                        <p>&nbsp;</p>
+                                      
                                         <p>&nbsp;</p></td>
                                 </tr>
                             </tbody></table>
                     </td>
                 </tr>
-            </tbody></table>
+            </tbody></table><br>
         <p align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน
         </p><hr>
         

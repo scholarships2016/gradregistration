@@ -5,16 +5,14 @@ namespace App\Providers;
 use App\Utils\FileManager;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
 //
     }
 
@@ -23,8 +21,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         /* Binding Repository */
 
         /* Applicant Info */
@@ -83,9 +80,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\TblExamStatusRepository', 'App\Repositories\TblExamStatusRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\TblAdmissionStatusRepository', 'App\Repositories\TblAdmissionStatusRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\UserPermissionRepository', 'App\Repositories\UserPermissionRepositoryImpl');
-
-
-
+        $this->app->bind('App\Repositories\Contracts\NewsRepository', 'App\Repositories\NewsRepositoryImpl');
     }
 
 }
