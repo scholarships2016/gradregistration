@@ -23,13 +23,13 @@ class LoginApplicantController extends Controller {
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
-     protected $FileRepo;
+    protected $FileRepo;
 
     public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, FileRepositoryImpl $FileRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
         $this->FileRepo = $FileRepo;
-        
+
         Auth::setDefaultDriver( 'web' );
     }
 
@@ -45,8 +45,8 @@ class LoginApplicantController extends Controller {
 
     protected function validator(array $data) {
         return Validator::make($data, [
-                    'stu_email' => 'required|max:255|unique:users',
-                    'stu_password' => 'required|confirmed|min:6',
+            'stu_email' => 'required|max:255|unique:users',
+            'stu_password' => 'required|confirmed|min:6',
         ]);
     }
 
@@ -73,13 +73,13 @@ class LoginApplicantController extends Controller {
             session()->put('first_name', $user_data->stu_first_name_en);
             session()->put('last_name', $user_data->stu_last_name_en);
             session()->put('email_address', $user_data->stu_email);
-            session()->put('stu_img', $pic);         
+            session()->put('stu_img', $pic);
             $role = new \stdClass();
             $role->user_role= '';
             $role->user_type= 'applicant';
             session()->put('user_tyep', $role);
-            
-            
+
+
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;
             $app->stu_citizen_card = $user_data->stu_citizen_card;
@@ -88,6 +88,7 @@ class LoginApplicantController extends Controller {
             session()->put('Applicant', $app);
             Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
+
             return redirect('/home');
         } else {
             Controller::WLog('User Applicant Not Login', 'User_Login', null);
