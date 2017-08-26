@@ -435,10 +435,10 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                     $join->on('curr_prog.curr_prog_id', '=', 'app.curr_prog_id');
                 })
                 ->groupBy('appt.applicant_id', 'appt.stu_citizen_card',
-                    'tbl_nt.name_title','appt.stu_first_name','appt.stu_last_name',
-                    'tbl_nt.name_title_en','appt.stu_first_name_en','appt.stu_last_name_en',
-                    'appt.stu_email','appt.stu_phone',
-                    'appt.created','appt.last_login');
+                    'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name',
+                    'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en',
+                    'appt.stu_email', 'appt.stu_phone',
+                    'appt.created', 'appt.last_login', 'appt.ipaddress');
 
             $recordsTotal = $mainQuery->get()->count();
 
