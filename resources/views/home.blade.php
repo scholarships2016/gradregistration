@@ -61,11 +61,11 @@
                                                 <i class="fa fa-check icon-info"></i>  {{(session('locale')=='th')?$news->news_title :$news->news_title_en}}</h4>
 
                                             <p class="margin-top-20">
-                                            {{(session('locale')=='th')?$news->news_detail:$news->news_detail_en}}
+                                            {!!(session('locale')=='th')?$news->news_detail:$news->news_detail_en!!}
                                             </p>
 
                                             <div class="about-quote">
-                                                <p class="about-author">{{$news->modified->format('d-m-Y')}}<br> </p>
+                                                <p class="about-author">{{$news->modified->format('d-m-Y h:m')}}<br> </p>
                                             </div>
 
                                         </div>
