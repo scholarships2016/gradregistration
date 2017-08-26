@@ -49,6 +49,7 @@ class Application extends Eloquent {
     protected $casts = [
         'applicant_id' => 'int',
         'curr_act_id' => 'int',
+        'curr_prog_id' => 'int',
         'curriculum_id' => 'int',
         'app_id' => 'int',
         'curriculum_num' => 'int',
@@ -64,6 +65,7 @@ class Application extends Eloquent {
         'applicant_id',
         'stu_citizen_card',
         'curr_act_id',
+        'curr_prog_id',
         'curriculum_id',
         'program_id',
         'sub_major_id',
