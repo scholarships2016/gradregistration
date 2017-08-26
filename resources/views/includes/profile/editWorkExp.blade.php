@@ -35,7 +35,7 @@
                                                 &nbsp;
                                             </label>
                                             <a href="javascript:;" data-repeater-delete=""
-                                               class="btn btn-danger">
+                                               class="btn btn-danger repeater-delete-bt">
                                                 <i class="fa fa-close"> {{Lang::get('resource.lbDel')}}</i>
                                             </a>
                                         </div>
@@ -141,7 +141,7 @@
                                                     &nbsp;
                                                 </label>
                                                 <a href="javascript:;" data-repeater-delete=""
-                                                   class="btn btn-danger">
+                                                   class="btn btn-danger repeater-delete-bt">
                                                     <i class="fa fa-close"> {{Lang::get('resource.lbDel')}}</i>
                                                 </a>
                                             </div>
