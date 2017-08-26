@@ -521,22 +521,23 @@
                 </div>
                 <div class="form-actions">
                     <div class="row">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-md-offset-2 col-md-3">
                             <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
                                 ยกเลิก
                             </a>
-                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
-                            </a>
-                            <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
-                               class="btn blue">
-                                ส่งอนุมัติ
-                            </a>
-                            <a id="apprBtn" onclick="prepareModal('APPR')" class="btn green">อนุมัติ</a>
-                            <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn yellow">ส่งกลับแก้ไข</a>
-                            <a id="delBtn" onclick="doDelete()" class="btn red">ลบ
+
+                            <a id="delBtn" onclick="doDelete()" class="btn red" style="display:none;">ลบข้อมูล
                             </a>
 
+                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
+                            </a>
                         </div>
+                        <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
+                          <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal" class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
+                          <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow" style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
+                          <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green" style="display:none;"> <i class="fa fa-check"></i> อนุมัติ </a>
+                        </div>
+
                     </div>
                 </div>
             </form>
