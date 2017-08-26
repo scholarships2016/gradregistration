@@ -169,9 +169,9 @@
                             </div>
                           </div>
 
-                    <div class="panel panel-info">
+                    <div class="panel panel-success">
                     	<div class="panel-heading">
-                    		<h3 class="panel-title">เลือก เพื่อค้นหาหลักสูตร</h3>
+                    		<h3 class="panel-title">เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
                     	</div>
                       <div class="panel-body">
                         <div class="row">
@@ -265,34 +265,35 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                     id="currProgramTbl">
+                                  <thead>
+                                  <tr>
+                                      <th style="width:50px">
+                                          <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                              <input type="checkbox" class="group-checkable"
+                                                     data-set="#currProgramTbl .checkboxes"/>
+                                              <span></span>
+                                          </label>
+                                      </th>
+                                      <th style="width:60px"> รหัสหลักสูตร</th>
+                                      <th style="width:170px"> ชื่อหลักสูตร</th>
+                                      <th style="width:50px"> แผน</th>
+                                      <th> ประเภท</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
                       </div>
                     </div>
 
-                          <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                       id="currProgramTbl">
-                                    <thead>
-                                    <tr>
-                                        <th style="width:50px">
-                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                <input type="checkbox" class="group-checkable"
-                                                       data-set="#currProgramTbl .checkboxes"/>
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th style="width:60px"> รหัสหลักสูตร</th>
-                                        <th style="width:170px"> ชื่อหลักสูตร</th>
-                                        <th style="width:50px"> แผน</th>
-                                        <th> ประเภท</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
                         <hr>
                     </div>
                     {{--Section1 END--}}
@@ -521,22 +522,23 @@
                 </div>
                 <div class="form-actions">
                     <div class="row">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-md-offset-2 col-md-3">
                             <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
                                 ยกเลิก
                             </a>
-                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
-                            </a>
-                            <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
-                               class="btn blue">
-                                ส่งอนุมัติ
-                            </a>
-                            <a id="apprBtn" onclick="prepareModal('APPR')" class="btn green">อนุมัติ</a>
-                            <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn yellow">ส่งกลับแก้ไข</a>
-                            <a id="delBtn" onclick="doDelete()" class="btn red">ลบ
+
+                            <a id="delBtn" onclick="doDelete()" class="btn red" style="display:none;">ลบข้อมูล
                             </a>
 
+                            <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
+                            </a>
                         </div>
+                        <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
+                          <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal" class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
+                          <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow" style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
+                          <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green" style="display:none;"> <i class="fa fa-check"></i> อนุมัติ </a>
+                        </div>
+
                     </div>
                 </div>
             </form>
