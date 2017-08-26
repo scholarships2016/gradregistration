@@ -425,7 +425,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
             $data = null;
 
-            $query = DB::table('curriculum_activity as curr_act')
+            $query = DB::table('curriculum as curr')
                 ->select('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
                     'dep.department_id', 'dep.department_name', 'dep.department_name_en',
                     'maj.major_id', 'maj.major_name', 'maj.major_name_en',
@@ -435,12 +435,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     'de.degree_name',
                     'curr.apply_method',
                     'curr.is_approve')
-                ->join('apply_setting as app_set', function ($join) {
-                    $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
-                })
-                ->join('curriculum as curr', function ($join) {
-                    $join->on('curr.curriculum_id', '=', 'curr_act.curriculum_id');
-                })
+
                 ->leftJoin('tbl_faculty as fac', function ($join) {
                     $join->on('fac.faculty_id', '=', 'curr.faculty_id');
                 })
@@ -457,7 +452,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     $join->on('de.degree_id', '=', 'curr.degree_id');
 
                 })
-                ->groupBy('curr.curriculum_id', 'app_set.apply_setting_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                ->groupBy('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
                     'dep.department_id', 'dep.department_name', 'dep.department_name_en',
                     'maj.major_id', 'maj.major_name', 'maj.major_name_en', 'de.degree_name',
                     'curr.apply_method',
@@ -465,18 +460,29 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
             $recordsTotal = $query->get()->count();
 
+            if (isset($criteria['academic_year']) || isset($criteria['semester'])) {
+                $query->whereIn('curr.curriculum_id', function ($query) use ($criteria) {
+                    $query->select(DB::raw('distinct curr_act.curriculum_id'))
+                        ->from('curriculum_activity as curr_act')
+                        ->join('apply_setting as app_set', function ($join) {
+                            $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                        });
+                    if (isset($criteria['academic_year'])) {
+                        $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+                    }
+                    if (isset($criteria['semester'])) {
+                        $query->where('app_set.semester', '=', $criteria['semester']);
+                    }
+                });
+            }
+
             if (isset($criteria['faculty_id'])) {
                 $query->where('fac.faculty_id', '=', $criteria['faculty_id']);
             }
             if (isset($criteria['program_type_id'])) {
                 $query->where('curr_prog.program_type_id', '=', $criteria['program_type_id']);
             }
-            if (isset($criteria['academic_year'])) {
-                $query->where('curr_prog.program_type_id', '=', $criteria['program_type_id']);
-            }
-            if (isset($criteria['semester'])) {
-                $query->where('app_set.semester', '=', $criteria['semester']);
-            }
+
             if (isset($criteria['apply_method'])) {
                 $query->where('curr.apply_method', '=', $criteria['apply_method']);
             }
