@@ -111,7 +111,7 @@ return [
     'lbSearchProgramType' => 'ประเภทหลักสูตร',
     'lbSearchProgramId' => 'รหัสโปรแกรม',
     'lbSearchPageTopic' => 'ค้นหา และ สมัคร',
-    'lbSearchResultDegreeName' => 'ชื่อหลักสูตร',
+    'lbSearchResultDegreeName' => 'ชื่อปริญญา',
     'lbSearchResultProgramType' => 'ประเภทหลักสูตร',
     'lbSearchResultDetail' => 'สังกัด',
     'lbSearchResultAction' => 'ดูรายละเอียด/สมัคร',

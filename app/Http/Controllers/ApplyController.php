@@ -131,10 +131,10 @@ class ApplyController extends Controller {
 
     public function registerDetailForapply($id) {
         $id = explode("P", $id);
-        
-        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false,null,null,null, $id[1]);
+
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1]);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
-        $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id,$curDiss[0]->program_type_id);
+        $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
     }
 
@@ -293,6 +293,38 @@ class ApplyController extends Controller {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
+    }
+
+    public function sentMailRegister(Request $request) {
+
+
+        $curr_act_id = $request->curr_act_id;
+        $applications = $arrayOfEmails = json_decode($request->application);
+
+        $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
+        $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+
+                $data = [
+                    'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
+                    'thai' => $curr->thai,
+                    'coursecodeno' => $curr->coursecodeno,
+                    'sub_major_name' => $curr->sub_major_name,
+                    'sub_major_id' => $curr->sub_major_id,
+                    'major_name' => $curr->major_name,
+                    'major_id' => $curr->major_id,
+                    'department_name' => $curr->department_name,
+                    'department_id' => $curr->department_id,
+                    'faculty_name' => $curr->stu_email,
+                    'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                    'year' => $curr->academic_year,
+                    'statusExam' => $app->exam_name
+                ];
+                Mail::send('email.gs03', $data, function($message)use ($app) {
+                    $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                });
+                Controller::WLog('RegisterSetnMail [' . $app->stu_email . ']', 'Register', null);
+ 
+        
     }
 
     public function confDocApply($id) {

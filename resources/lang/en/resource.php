@@ -109,7 +109,7 @@ return [
     'lbSearchProgramType' => 'Program Type',
     'lbSearchProgramId' => 'Program ID',
     'lbSearchPageTopic' => 'Search & Apply',
-    'lbSearchResultDegreeName' => 'Program Name',
+    'lbSearchResultDegreeName' => 'Degree Name',
     'lbSearchResultProgramType' => 'Program Type',
     'lbSearchResultDetail' => 'Detail',
     'lbSearchResultAction' => 'View/Apply',

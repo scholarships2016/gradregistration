@@ -227,27 +227,27 @@ name: 'rownum',
 render: function (data, type, full, meta) { 
 return meta.settings._iDisplayStart + meta.row + 1;
 } },{ 
-targets: [1], 
-orderable: true, 
+targets: [1],
+orderable: true,
 className: 'table-desc font-blue',
-name: 'degree_name', 
-render: function (data, type, full, meta) { 
-return (('{{session('locale')}}'=='th')? full.degree_name:full.degree_name_en) ; 
-} },{ 
-targets: [2], 
-orderable: true, 
-className: 'table-title',
-name: 'prog_type_name', 
-render: function (data, type, full, meta) { 
-return '<h3>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</h3>'+'<p>'+ full.office_time+'</p>' ; 
-} },{ 
-targets: [3], 
-orderable: true, 
+name: 'degree_name',
+render: function (data, type, full, meta) {
+return (('{{session('locale')}}'=='th')? full.degreethai:full.degreeenglish) ;
+} },{
+targets: [2],
+orderable: true,
 className: 'table-desc',
-name: 'prog_type_name', 
-render: function (data, type, full, meta) { 
-return ('{{Lang::get('resource.lbFaculty')}}'+  (('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) + ' <br>{{Lang::get('resource.lbDepartment')}} '+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) +'<br> {{Lang::get('resource.lbMajor')}} '+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)) ;
-}},{ 
+name: 'prog_type_name',
+render: function (data, type, full, meta) {
+return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</b>'+'<br/>'+ full.office_time+'' ;
+} },{
+targets: [3],
+orderable: true,
+className: 'table-desc',
+name: 'prog_type_name',
+render: function (data, type, full, meta) {
+return ('{{Lang::get('resource.lbSearchResultMajor')}}'+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)+'<br/>'+ ''+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) + '<br/>'+'{{Lang::get('resource.lbSearchResultFaculty')}}'+(('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) ) ;
+}},{
 targets: [4], 
 orderable: true, 
 className: 'table-download',
