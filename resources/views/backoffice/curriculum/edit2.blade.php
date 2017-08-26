@@ -171,7 +171,7 @@
 
                     <div class="panel panel-success">
                     	<div class="panel-heading">
-                    		<h3 class="panel-title">เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
+                    		<h3 class="panel-title"><i class="icon-info"></i> เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
                     	</div>
                       <div class="panel-body">
                         <div class="row">
@@ -1181,7 +1181,7 @@
         roundHtml += '<div class="portlet green-meadow box">';
         roundHtml += '<div class="portlet-title">';
         roundHtml += '<div class="caption">';
-        roundHtml += '<i class="fa fa-cogs"></i>รอบที่ ' + obj.round_no;
+        roundHtml += '<i class="fa fa-table"></i>ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
         roundHtml += '</div>';
         roundHtml += '<div class="actions">';
 //        roundHtml += '<a href="javascript:;" class="btn btn-default btn-sm">';
