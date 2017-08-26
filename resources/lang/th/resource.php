@@ -261,7 +261,7 @@ return [
     'lbHomeRegistration' => 'ลงทะเบียน',
     'lbHomeRegistrationDesc' => 'ลงทะเบียนครั้งแรก เพื่อเริ่มต้นการสมัคร',
     'lbHomeContactus' => 'ติดต่อเรา',
-    'lbHomeContactusDesc' => 'หากมีข้อสงสัย กรุณาติดต่อ โทร. 0-2218-3502-5',
+    'lbHomeContactusDesc' => 'ติดต่อ โทร. 0-2218-3502-5',
     'lbHomeOpenRegister' => 'เปิดรับสมัคร',
     'lbHeaderLogin' => 'เข้าสู่ระบบ',
     'lbNews' => 'ข่าวประกาศ',
@@ -307,7 +307,7 @@ return [
     'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
     'lbEduRemark' => 'โปรดกรอกข้อมูลทุกระดับการศึกษา',
       'lbHomeContactus' => 'ติดต่อเรา',
-      'lbHomeContactusDesc' => 'หากมีข้อสงสัย กรุณาติดต่อ โทร. 0-2218-3502-5',
+      'lbHomeContactusDesc' => 'ติดต่อ โทร. 0-2218-3502-5',
       'lbHomeOpenRegister' => 'เปิดรับสมัคร',
       'lbHeaderLogin' => 'เข้าสู่ระบบ',
 

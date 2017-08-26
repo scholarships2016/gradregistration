@@ -39,12 +39,12 @@
 @section('maincontent')
     <div class="profile">
         <div class="tabbable-line tabbable-full-width">
+            <input type="hidden" id="isEdit" name="isEdit" value="{{$isEdit}}">
+            <input type="hidden" id="isView" name="isView" value="{{$isView}}">
             <ul class="nav nav-tabs">
-
                 <li class="active">
                     <a href="#tab_1_1" data-toggle="tab"> {{Lang::get('resource.lbTabOverview')}} </a>
                 </li>
-
                 <li class="">
                     <a href="#tab_1_3" data-toggle="tab">{{Lang::get('resource.lbTabProfileInfo')}}</a>
                 </li>
@@ -61,7 +61,8 @@
                                     <img src="{{route('profile.getProfileImg').'?applicant_id='.$applicant->applicant_id}}"
                                          onerror="this.src='http://www.placehold.it/100x150/EFEFEF/AAAAAA&amp;text=no+image'"
                                          class="img-responsive pic-bordered"/>
-                                    <a href="#tab_1_3" data-toggle="tab" aria-expanded="false" class="profile-edit"> edit </a>
+                                    <a href="#tab_1_3" data-toggle="tab" aria-expanded="false" class="profile-edit">
+                                        edit </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;"> Last Login ..... </a>
@@ -113,8 +114,6 @@
                                         </li>
                                     </ul>
                                 </div>
-
-
                                 <!--end col-md-8-->
                             {{--<div class="col-md-4">--}}
                             {{--</div>--}}
@@ -125,14 +124,9 @@
                                 <a title="{{Lang::get('resource.lbManageCouse')}}" href="apply/manageMyCourse"
                                    class="btn btn-circle red-pink btn-outline">
                                     <i class="icon-briefcase"></i> {{Lang::get('resource.lbManageCouse')}}</a>
-
                                 <ul class="nav nav-tabs">
-
                                     <li class="">
-
                                     </li>
-
-
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane " id="tab_1_11">
@@ -161,8 +155,6 @@
                                         </div>
                                     </div>
                                     <!--tab-pane-->
-
-
                                     <!--tab-pane-->
                                 </div>
                             </div>
@@ -172,55 +164,22 @@
                 <!--tab_1_2-->
                 <div class="tab-pane " id="tab_1_3">
                     <div class="row profile-account">
-                      <!--
-                        <div class="col-md-3">
-                            <ul class="ver-inline-menu tabbable margin-bottom-10">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#tab_1-1">
-                                        <i class="fa fa-cog"></i> Personal info </a>
-                                    <span class="after"> </span>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab_3-3">
-                                        <i class="fa fa-lock"></i> Change Password </a>
-                                </li>
-                            </ul>
-                        </div>
-                      -->
                         <div class="col-md-12">
                             <div class="tab-content">
                                 <div id="tab_1-1" class="tab-pane active">
-                                    <!--
-                                      <div class="m-heading-1 border-yellow-saffron bg-yellow-saffron bg-font-yellow-saffron m-bordered">
-                                          <p class="text-center font-red-intense"><b>เลขที่บัตรประจำตัวประชาชน
-                                                  และหมายเลขโทรศัพท์ที่สามารถติดต่อได้นี้
-                                                  จะใช้สำหรับเข้าสู่ระบบครั้งต่อไป <br>
-                                                  <small>Your Citizen ID or Passport ID will be used to login next time.
-                                                  </small>
-                                              </b></p>
-                                      </div>
-                                    -->
                                     <div class="row alert alert-info text-center">
-
-
-
-                                          <div class="col-md-6">
-                                          {{Lang::get('resource.lbCitizen')}} :
+                                        <div class="col-md-6">
+                                            {{Lang::get('resource.lbCitizen')}} :
 
                                             <b>{{$applicant->stu_citizen_card}}</b>
 
                                         </div>
                                         <div class="col-md-6">
-                                          Email :
+                                            Email :
 
-                                               <b>{{$applicant->stu_email}}</b>
+                                            <b>{{$applicant->stu_email}}</b>
 
-                                             </div>
-
-
-
-
-
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -231,34 +190,7 @@
                                             @include('includes.profile.editWorkExp')
                                         </div>
                                     </div>
-
-
                                 </div>
-                                <!--
-                                <div id="tab_3-3" class="tab-pane" style="display:none;">
-                                    <form id="changePasswordForm" action="#">
-                                        <input type="hidden" name="applicant_id" id="applicant_id"
-                                               value="{{$applicant->applicant_id}}">
-                                        <div class="form-group">
-                                            <label class="control-label">Current Password</label>
-                                            <input type="password" id="current_password" name="current_password"
-                                                   class="form-control"/></div>
-                                        <div class="form-group">
-                                            <label class="control-label">New Password</label>
-                                            <input type="password" id="password" name="password" class="form-control"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Re-type New Password</label>
-                                            <input type="password" id="confirm_password" name="confirm_password"
-                                                   class="form-control"/></div>
-                                        <div class="margin-top-10">
-                                            <a href="javascript:;" id="changePassBt" class="btn green"> Change
-                                                Password </a>
-                                            <button type="reset" class="btn default"> Cancel</button>
-                                        </div>
-                                    </form>
-                                </div>
-                              -->
                             </div>
                         </div>
                         <!--end col-md-9-->
@@ -267,26 +199,26 @@
                 <!--end tab-pane-->
                 <!--end tab-pane-->
                 <div class="tab-pane" id="tab_1_4">
-                  <form id="changePasswordForm" action="#">
-                      <input type="hidden" name="applicant_id" id="applicant_id"
-                             value="{{$applicant->applicant_id}}">
-                      <div class="form-group">
-                          <label class="control-label">{{Lang::get('resource.lbCurrentPassword')}}</label>
-                          <input type="password" id="current_password" name="current_password"
-                                 class="form-control"/></div>
-                      <div class="form-group">
-                          <label class="control-label">{{Lang::get('resource.lbNewPassword')}}</label>
-                          <input type="password" id="password" name="password" class="form-control"/>
-                      </div>
-                      <div class="form-group">
-                          <label class="control-label">{{Lang::get('resource.lbConfirmNewPassword')}}</label>
-                          <input type="password" id="confirm_password" name="confirm_password"
-                                 class="form-control"/></div>
-                      <div class="margin-top-10">
-                          <a href="javascript:;" id="changePassBt" class="btn green"> {{Lang::get('resource.lbBtnChangePassword')}} </a>
-
-                      </div>
-                  </form>
+                    <form id="changePasswordForm" action="#">
+                        <input type="hidden" name="applicant_id" id="applicant_id"
+                               value="{{$applicant->applicant_id}}">
+                        <div class="form-group">
+                            <label class="control-label">{{Lang::get('resource.lbCurrentPassword')}}</label>
+                            <input type="password" id="current_password" name="current_password"
+                                   class="form-control"/></div>
+                        <div class="form-group">
+                            <label class="control-label">{{Lang::get('resource.lbNewPassword')}}</label>
+                            <input type="password" id="password" name="password" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{Lang::get('resource.lbConfirmNewPassword')}}</label>
+                            <input type="password" id="confirm_password" name="confirm_password"
+                                   class="form-control"/></div>
+                        <div class="margin-top-10">
+                            <a href="javascript:;" id="changePassBt"
+                               class="btn green"> {{Lang::get('resource.lbBtnChangePassword')}} </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -393,7 +325,7 @@
             });
             formData.append("stu_profile_pic", isUndefinedOrNull($("#stu_profile_pic")[0].files[0]) ? "" : $("#stu_profile_pic")[0].files[0]);
             $.ajax({
-                url: '{{route('profile.doSavePersInfo')}}',
+                url: '{{route('admin.applicantManage.doSavePersInfo')}}',
                 headers: {
                     'X-CSRF-Token': $("#personalInfoForm").find("input[name='_token']").val()
                 },
@@ -412,7 +344,7 @@
         $('#savePersAddress').click(function () {
             var data = $("#presentAddressForm").serializeArray();
             $.ajax({
-                url: "{{route('profile.doSavePretAddr')}}",
+                url: "{{route('admin.applicantManage.doSavePretAddr')}}",
                 method: "POST",
                 data: data,
                 success: function (result) {
@@ -424,7 +356,7 @@
         $('#saveKnowledge').click(function () {
             var data = $("#knowledgeForm").serializeArray();
             $.ajax({
-                url: "{{route('profile.doSaveKnowSkill')}}",
+                url: "{{route('admin.applicantManage.doSaveKnowSkill')}}",
                 method: "POST",
                 data: data,
                 success: function (result) {
@@ -436,7 +368,7 @@
         $('#saveEdu').click(function () {
             var data = $("#eduBackForm").serializeArray();
             $.ajax({
-                url: "{{route('profile.doSaveEduBak')}}",
+                url: "{{route('admin.applicantManage.doSaveEduBak')}}",
                 method: "POST",
                 data: data,
                 success: function (result) {
@@ -448,7 +380,7 @@
         $('#saveWorkExp').click(function () {
             var data = $("#workExpForm").serializeArray();
             $.ajax({
-                url: "{{route('profile.doSaveWorkExp')}}",
+                url: "{{route('admin.applicantManage.doSaveWorkExp')}}",
                 method: "POST",
                 data: data,
                 success: function (result) {
@@ -463,7 +395,7 @@
             }
             var data = $("#changePasswordForm").serializeArray();
             $.ajax({
-                url: '{{route('profile.doChangePassword')}}',
+                url: '{{route('admin.applicantManage.doChangePassword')}}',
                 headers: {
                     'X-CSRF-Token': '{{csrf_token()}}'
                 },
@@ -490,6 +422,8 @@
         $("#stu_married").val($("#stu_married_hidden").val()).change();
         $("#province_id").val($("#province_id_hidden").val()).change();
         $("#eng_test_id").val($("#eng_test_id_hidden").val()).change();
+        $("#eng_test_id_admin").val($("#eng_test_id_admin_hidden").val()).change();
+
 
         $("#eduBackGroup").find(".mt-repeater-item").each(function (index) {
             $(this).find("#grad_level").val($(this).find("#grad_level_hidden").val()).change();
@@ -500,12 +434,6 @@
         $("#workExpGroup").find(".mt-repeater-item").each(function (index) {
             $(this).find("#work_status_id").val($(this).find("#work_status_id_hidden").val()).change();
         });
-
-        //Hide Section
-        $("#adminScoreDiv").hide();
-        $("#adminScoreDiv input").attr('disabled','disabled');
-        $("#adminScoreDiv select").attr('disabled','disabled');
-
     }
 
     function setHandleValidation() {
@@ -644,11 +572,68 @@
         });
     }
 
+    function disablePersonalInfo() {
+        $("#personalInfoForm input").attr('disabled', 'disabled');
+        $("#personalInfoForm select").attr('disabled', 'disabled');
+        $("#personalInfoForm textarea").attr('disabled', 'disabled');
+        $("#personalInfoForm button").attr('disabled', 'disabled');
+
+    }
+
+    function disablePresentAddress() {
+        $("#presentAddressForm input").attr('disabled', 'disabled');
+        $("#presentAddressForm select").attr('disabled', 'disabled');
+        $("#presentAddressForm textarea").attr('disabled', 'disabled');
+        $("#presentAddressForm button").attr('disabled', 'disabled');
+
+    }
+
+    function disableKnowledgeSkill() {
+        $("#knowledgeForm input").attr('disabled', 'disabled');
+        $("#knowledgeForm select").attr('disabled', 'disabled');
+        $("#knowledgeForm textarea").attr('disabled', 'disabled');
+        $("#knowledgeForm button").attr('disabled', 'disabled');
+
+    }
+
+    function disableEduBackground() {
+        $("#eduBackForm input").attr('disabled', 'disabled');
+        $("#eduBackForm select").attr('disabled', 'disabled');
+        $("#eduBackForm textarea").attr('disabled', 'disabled');
+        $("#eduBackForm button").attr('disabled', 'disabled');
+        $("#eduBackForm .mt-repeater-add").hide();
+        $("#eduBackForm .repeater-delete-bt").hide();
+
+
+    }
+
+    function disableWorkExp() {
+        $("#workExpForm input").attr('disabled', 'disabled');
+        $("#workExpForm select").attr('disabled', 'disabled');
+        $("#workExpForm textarea").attr('disabled', 'disabled');
+        $("#workExpForm button").attr('disabled', 'disabled');
+        $("#workExpForm .mt-repeater-add").hide();
+        $("#workExpForm .repeater-delete-bt").hide();
+
+    }
+
+    function disableAll() {
+        disablePersonalInfo();
+        disablePresentAddress();
+        disableKnowledgeSkill();
+        disableEduBackground();
+        disableWorkExp();
+    }
+
     $(document).ready(function () {
         setComponent();
         setEventHandle();
         setDefaultValue();
         setHandleValidation();
+
+        if($("#isView").val() == 1){
+            disableAll();
+        }
     });
 </script>
 @endpush

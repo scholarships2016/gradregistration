@@ -59,7 +59,7 @@ Route::get('/download', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-//Apply 
+//Apply
     Route::get('apply', 'ApplyController@showAnnouncement');
     Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
     Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
@@ -120,6 +120,7 @@ Route::group(['prefix' => 'profile', 'middleware' => []], function () {
 
     //ProfilePic
     Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
+
 });
 
 Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
@@ -133,6 +134,7 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
     Route::get('/getApplySettingByAcademicYear', 'MasterDataController@getApplySettingByAcademicYear')->name('masterdata.getApplySettingByAcademicYear');
     Route::get('/getApplySettingBySemesterAndAcademicYear', 'MasterDataController@getApplySettingBySemesterAndAcademicYear')->name('masterdata.getApplySettingBySemesterAndAcademicYear');
     Route::get('/getAllDegreeForDropdown', 'MasterDataController@getAllDegreeForDropdown')->name('masterdata.getAllDegreeForDropdown');
+
 });
 
 
@@ -169,20 +171,36 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
         });
 
         Route::group(['prefix' => 'applicantManage', 'middleware' => []], function () {
+            Route::get('view/{id}', 'BackOffice\ApplicantManagementController@showViewPage')->name('admin.applicantManage.showViewPage');
+            Route::get('edit/{id}', 'BackOffice\ApplicantManagementController@showEditPage')->name('admin.applicantManage.showEditPage');
             Route::get('manage', 'BackOffice\ApplicantManagementController@showManagePage')->name('admin.applicantManage.showManagePage');
             Route::get('doPaging', 'BackOffice\ApplicantManagementController@doPaging')->name('admin.applicantManage.doPaging');
+            Route::post('doDelete', 'BackOffice\ApplicantManagementController@doDelete')->name('admin.applicantManage.doDelete');
+
+            Route::post('/doSavePersInfo', 'BackOffice\ApplicantManagementController@doSavePersonalInfomation')->name('admin.applicantManage.doSavePersInfo');
+            Route::post('/doSavePretAddr', 'BackOffice\ApplicantManagementController@doSavePresentAddress')->name('admin.applicantManage.doSavePretAddr');
+            Route::post('/doSaveKnowSkill', 'BackOffice\ApplicantManagementController@doSaveKnowledgeSkill')->name('admin.applicantManage.doSaveKnowSkill');
+            Route::post('/doSaveEduBak', 'BackOffice\ApplicantManagementController@doSaveEduBackground')->name('admin.applicantManage.doSaveEduBak');
+            Route::post('/doSaveWorkExp', 'BackOffice\ApplicantManagementController@doSaveWorkExp')->name('admin.applicantManage.doSaveWorkExp');
+            Route::post('/doChangePassword', 'BackOffice\ApplicantManagementController@doChangePassword')->name('admin.applicantManage.doChangePassword');
+
+            //Application
+            Route::get('getApplicationAndProgramInfo', 'BackOffice\ApplicantManagementController@getApplicationAndProgramInfo')->name('admin.applicantManage.getApplicationAndProgramInfo');
+            Route::post('doDeleteApplication', 'BackOffice\ApplicantManagementController@doDeleteApplication')->name('admin.applicantManage.doDeleteApplication');
         });
 
         Route::group(['prefix' => 'adminManage', 'middleware' => []], function () {
             Route::get('manage', 'BackOffice\AdminManagementController@showManagePage')->name('admin.adminManage.showManagePage');
             Route::get('add', 'BackOffice\AdminManagementController@showAddPage')->name('admin.adminManage.showAdd');
-            Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEdit');
+            Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEditPage');
             Route::post('save', 'BackOffice\AdminManagementController@doSave')->name('admin.adminManage.doSave');
             Route::post('doDelete', 'BackOffice\AdminManagementController@doDelete')->name('admin.adminManage.doDelete');
 
             //Paging
             Route::get('doPaging', 'BackOffice\AdminManagementController@doPaging')->name('admin.adminManage.doPaging');
         });
+
     });
+
 });
 

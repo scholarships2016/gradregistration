@@ -26,4 +26,6 @@ interface ApplicantRepository
     public function changePassword(array $data);
 
     public function doApplicantPaging($criteria = null);
+
+    public function doDelete($appliant_id);
 }

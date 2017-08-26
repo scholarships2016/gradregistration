@@ -2,7 +2,11 @@
 
 namespace App\Repositories\Contracts;
 
-interface ApplicationPeopleRefRepository {
+interface ApplicationPeopleRefRepository
+{
     public function save($data);
-     public function getDetail($appID);
+
+    public function getDetail($appID);
+
+    public function deleteByApplicationId($applicationId);
 }

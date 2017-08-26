@@ -132,7 +132,7 @@
                                     <div class="mt-radio-inline">
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="apply_method" value="1"
-                                                   @if(!empty($curriculum) && $curriculum->apply_method == 1) checked @endif
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->apply_method == 1)) checked @endif
                                             > รับผ่านบัณฑิต
                                             <span></span>
                                         </label>
@@ -168,7 +168,13 @@
                                 </div>
                             </div>
                           </div>
-                          <div class="row">
+
+                    <div class="panel panel-success">
+                    	<div class="panel-heading">
+                    		<h3 class="panel-title">เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
+                    	</div>
+                      <div class="panel-body">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
@@ -189,7 +195,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                          </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -237,12 +243,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label offset-col-md-3 col-md-2"
-                                           for="degree_id"><strong>ชื่อหลักสูตร</strong>
+                                           for="degree_id"><strong>ชื่อปริญญา</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-8">
@@ -260,31 +265,35 @@
                                 </div>
                             </div>
                         </div>
-                          <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                       id="currProgramTbl">
-                                    <thead>
-                                    <tr>
-                                        <th style="width:50px">
-                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                <input type="checkbox" class="group-checkable"
-                                                       data-set="#currProgramTbl .checkboxes"/>
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th style="width:60px"> รหัสหลักสูตร</th>
-                                        <th style="width:170px"> ชื่อหลักสูตร</th>
-                                        <th style="width:50px"> แผน</th>
-                                        <th> ประเภท</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <hr>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                     id="currProgramTbl">
+                                  <thead>
+                                  <tr>
+                                      <th style="width:50px">
+                                          <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                              <input type="checkbox" class="group-checkable"
+                                                     data-set="#currProgramTbl .checkboxes"/>
+                                              <span></span>
+                                          </label>
+                                      </th>
+                                      <th style="width:60px"> รหัสหลักสูตร</th>
+                                      <th style="width:170px"> ชื่อหลักสูตร</th>
+                                      <th style="width:50px"> แผน</th>
+                                      <th> ประเภท</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+
+
                         <hr>
                     </div>
                     {{--Section1 END--}}
@@ -484,7 +493,7 @@
                                         </label>
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="status" value="2"
-                                                   @if(!empty($curriculum) && $curriculum->status == 2) checked @endif
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 2)) checked @endif
                                             > ไม่เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
@@ -496,7 +505,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3"
-                                           for="project_id"><strong>Special User</strong>
+                                           for="project_id"><strong>ผู้มีสิทธิ์จัดการ</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-9">
@@ -513,22 +522,23 @@
                 </div>
                 <div class="form-actions">
                     <div class="row">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-md-offset-2 col-md-3">
                             <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
                                 ยกเลิก
                             </a>
-                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
-                            </a>
-                            <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
-                               class="btn blue">
-                                ส่งอนุมัติ
-                            </a>
-                            <a id="apprBtn" onclick="prepareModal('APPR')" class="btn green">อนุมัติ</a>
-                            <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn yellow">ส่งกลับแก้ไข</a>
-                            <a id="delBtn" onclick="doDelete()" class="btn red">ลบ
+
+                            <a id="delBtn" onclick="doDelete()" class="btn red" style="display:none;">ลบข้อมูล
                             </a>
 
+                            <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
+                            </a>
                         </div>
+                        <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
+                          <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal" class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
+                          <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow" style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
+                          <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green" style="display:none;"> <i class="fa fa-check"></i> อนุมัติ </a>
+                        </div>
+
                     </div>
                 </div>
             </form>
