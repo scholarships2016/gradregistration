@@ -171,7 +171,7 @@
 
                     <div class="panel panel-info">
                     	<div class="panel-heading">
-                    		<h3 class="panel-title">เลือก เพื่อค้นหาหลักสูตร</h3>
+                    		<h3 class="panel-title">เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
                     	</div>
                       <div class="panel-body">
                         <div class="row">
