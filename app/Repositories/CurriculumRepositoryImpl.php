@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements CurriculumRepository {
-
+class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements CurriculumRepository
+{
     protected $projectPassRepo;
     protected $currActRepo;
     protected $currProgRepo;
@@ -26,7 +26,11 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     protected $auditRepo;
     private $pagings = 10;
 
-    public function __construct(CurriculumActivityRepository $currActRepo, CurriculumProgramRepository $currProgRepo, FileRepository $fileRepo, CurriculumSubMajorRepository $currSubMajorRepo, CurriculumWorkflowTransactionRepository $currWFTransRepo, AudittrailRepository $auditRepo) {
+    public function __construct(CurriculumActivityRepository $currActRepo, CurriculumProgramRepository $currProgRepo,
+                                FileRepository $fileRepo, CurriculumSubMajorRepository $currSubMajorRepo,
+                                CurriculumWorkflowTransactionRepository $currWFTransRepo,
+                                AudittrailRepository $auditRepo)
+    {
         parent::setModelClassName(Curriculum::class);
         $this->currActRepo = $currActRepo;
         $this->currProgRepo = $currProgRepo;
@@ -36,7 +40,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         $this->auditRepo = $auditRepo;
     }
 
-    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null) {
+    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null)
+    {
         $result = null;
         try {
             DB::statement(DB::raw('set @rownum=0'));
@@ -334,11 +339,13 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function duplicateCurriculumSetting($id) {
-// TODO: Implement duplicateCurriculumSetting() method.
+    public function duplicateCurriculumSetting($id)
+    {
+        // TODO: Implement duplicateCurriculumSetting() method.
     }
 
-    public function saveCurriculumSetting(array $datas) {
+    public function saveCurriculumSetting(array $datas)
+    {
         DB::beginTransaction();
         try {
 
@@ -456,7 +463,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function getCurriculumInfoById($id) {
+    public function getCurriculumInfoById($id)
+    {
         try {
             $query = DB::table('curriculum as curr')
                     ->select(DB::raw('curr.*,f.*'))
@@ -478,7 +486,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function changeTransactionStatus(array $datas) {
+    public function changeTransactionStatus(array $datas)
+    {
         DB::beginTransaction();
         try {
             if (!isset($datas['curriculum_id'])) {
@@ -496,7 +505,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function deleteCurriculumInfoByCurriculumId($id) {
+    public function deleteCurriculumInfoByCurriculumId($id)
+    {
         DB::beginTransaction();
         try {
             $currAct = DB::table('curriculum_activity')->where('curriculum_id', '=', $id)->delete();
@@ -512,7 +522,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function doPaging1($criteria = null) {
+    public function doPaging1($criteria = null)
+    {
         try {
             $columnMap = array(
                 1 => "curr.curriculum_id",
@@ -527,36 +538,46 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $data = null;
 
             $query = DB::table('curriculum as curr')
-                    ->select('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full', 'dep.department_id', 'dep.department_name', 'dep.department_name_en', 'maj.major_id', 'maj.major_name', 'maj.major_name_en', DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as curriculum_progs"),
+                ->select('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                    'dep.department_id', 'dep.department_name', 'dep.department_name_en',
+                    'maj.major_id', 'maj.major_name', 'maj.major_name_en',
+                    DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as curriculum_progs"),
 //                    DB::raw("GROUP_CONCAT(course.thai SEPARATOR ',') as program_name_thai"),
 //                    DB::raw("GROUP_CONCAT(course.english SEPARATOR ',') as program_name_eng"),
-                            'de.degree_name', 'curr.apply_method', 'curr.is_approve')
-                    ->leftJoin('tbl_faculty as fac', function ($join) {
-                        $join->on('fac.faculty_id', '=', 'curr.faculty_id');
-                    })
-                    ->leftJoin('tbl_department as dep', function ($join) {
-                        $join->on('dep.department_id', '=', 'curr.department_id');
-                    })
-                    ->leftJoin('tbl_major as maj', function ($join) {
-                        $join->on('maj.major_id', '=', 'curr.major_id');
-                    })
-                    ->leftJoin('curriculum_program as curr_prog', function ($join) {
-                        $join->on('curr_prog.curriculum_id', '=', 'curr.curriculum_id');
-                    })
-                    ->leftJoin('tbl_degree as de', function ($join) {
-                        $join->on('de.degree_id', '=', 'curr.degree_id');
-                    })
-                    ->groupBy('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full', 'dep.department_id', 'dep.department_name', 'dep.department_name_en', 'maj.major_id', 'maj.major_name', 'maj.major_name_en', 'de.degree_name', 'curr.apply_method', 'curr.is_approve');
+                    'de.degree_name',
+                    'curr.apply_method',
+                    'curr.is_approve')
+                ->leftJoin('tbl_faculty as fac', function ($join) {
+                    $join->on('fac.faculty_id', '=', 'curr.faculty_id');
+                })
+                ->leftJoin('tbl_department as dep', function ($join) {
+                    $join->on('dep.department_id', '=', 'curr.department_id');
+                })
+                ->leftJoin('tbl_major as maj', function ($join) {
+                    $join->on('maj.major_id', '=', 'curr.major_id');
+                })
+                ->leftJoin('curriculum_program as curr_prog', function ($join) {
+                    $join->on('curr_prog.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->leftJoin('tbl_degree as de', function ($join) {
+                    $join->on('de.degree_id', '=', 'curr.degree_id');
+
+                })
+                ->groupBy('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                    'dep.department_id', 'dep.department_name', 'dep.department_name_en',
+                    'maj.major_id', 'maj.major_name', 'maj.major_name_en', 'de.degree_name',
+                    'curr.apply_method',
+                    'curr.is_approve');
 
             $recordsTotal = $query->get()->count();
 
             if (isset($criteria['academic_year']) || isset($criteria['semester'])) {
                 $query->whereIn('curr.curriculum_id', function ($query) use ($criteria) {
                     $query->select(DB::raw('distinct curr_act.curriculum_id'))
-                            ->from('curriculum_activity as curr_act')
-                            ->join('apply_setting as app_set', function ($join) {
-                                $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
-                            });
+                        ->from('curriculum_activity as curr_act')
+                        ->join('apply_setting as app_set', function ($join) {
+                            $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                        });
                     if (isset($criteria['academic_year'])) {
                         $query->where('app_set.academic_year', '=', $criteria['academic_year']);
                     }
@@ -591,9 +612,88 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             );
 
             return $result;
+
         } catch (\Exception $ex) {
             throw $ex;
         }
     }
 
+    public function doToDoListPaging($criteria = null)
+    {
+        try {
+            $columnMap = array(
+                1 => "sub_act.semester",
+                2 => "sub_act.academic_year",
+                3 => "program_ids",
+                4 => "deg.degree_name",
+                5 => "sub_trans.comment",
+                6 => "sub_trans.created",
+                7 => "curr.is_approve");
+            $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
+            $data = null;
+
+            $subTransQuery = DB::table('curriculum_workflow_transaction as trans_')
+                ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id',
+                    'trans_.workflow_status_id', 'status_.status_name',
+                    DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"),
+                    'trans_.creator', 'trans_.comment')
+                ->join('tbl_curriculum_workflow_status as status_', function ($join) {
+                    $join->on('status_.curr_wf_status_id', '=', 'trans_.workflow_status_id');
+                })
+                ->orderBy('trans_.curr_wf_tran_id', 'desc')
+                ->limit(1);
+
+            $subActQuery = DB::table('curriculum_activity as curr_act')
+                ->select('curr_act.curriculum_id', 'app_set.semester', 'app_set.academic_year')
+                ->join('apply_setting as app_set', function ($join) {
+                    $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                })
+                ->groupBy('curr_act.curriculum_id', 'app_set.semester', 'app_set.academic_year');
+
+            $mainQuery = DB::table('curriculum as curr')
+                ->select(
+                    'curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year',
+                    DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as program_ids"),
+                    'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve',
+                    'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment'
+                )
+                ->leftJoin('tbl_degree as deg', function ($join) {
+                    $join->on('deg.degree_id', '=', 'curr.degree_id');
+                })
+                ->leftJoin(DB::raw("({$subTransQuery->toSql()}) as sub_trans"), function ($join) {
+                    $join->on('sub_trans.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->leftJoin('curriculum_program as curr_prog', function ($join) {
+                    $join->on('curr_prog.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->leftJoin(DB::raw("({$subActQuery->toSql()}) as sub_act"), function ($join) {
+                    $join->on('sub_act.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->where('curr.is_approve', '!=', 4) // Appoved Status
+                ->groupBy('curr.curriculum_id', 'sub_act.semester',
+                    'sub_act.academic_year', 'deg.degree_name',
+                    'deg.degree_name_en', 'curr.is_approve',
+                    'sub_trans.status_name', 'sub_trans.created',
+                    'sub_trans.creator', 'sub_trans.comment');
+
+            $recordsTotal = $mainQuery->get()->count();
+
+            $recordsFiltered = $mainQuery->get()->count();
+            $mainQuery->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+            $data = $mainQuery->get();
+
+            $result = array('draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data
+            );
+
+            return $result;
+
+        } catch (\Exception $ex) {
+            throw $ex;
         }
+    }
+
+}
