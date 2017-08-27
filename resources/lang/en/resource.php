@@ -99,7 +99,7 @@ return [
     'lbReset' => 'Reset',
     'lbSAdvanced' => 'Advanced',
     'lbUpdateDoc' => 'Document Apply',
-    'lbUpdateDocApply' => 'Update related apply documents',
+    'lbUpdateDocApply' => 'Upload related apply documents',
     'lbdocMyCourse' => 'Application Form',
     'lbdocPayMyCourse' => 'Payment Invoice Form',
     'lbdocEnvelop' => 'Applicant\'s address form',

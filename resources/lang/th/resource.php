@@ -100,7 +100,7 @@ return [
     'lbReset' => 'ยกเลิก',
     'lbSAdvanced' => 'การค้นหาขั้นสูง',
     'lbUpdateDoc' => 'เอกสารสำหรับสมัคร',
-    'lbUpdateDocApply' => 'ปรับปรุงเอกสารประกอบการสมัคร ',
+    'lbUpdateDocApply' => 'Upload เอกสารประกอบการสมัคร ',
     'lbdocMyCourse' => 'ใบสมัคร',
     'lbdocPayMyCourse' => 'ใบแจ้งชำระค่าธรรมเนียม',
     'lbdocEnvelop' => 'ใบแจ้งที่อยู่ของผู้สมัคร',
