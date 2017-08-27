@@ -77,8 +77,8 @@
 
    <div class="row">
      <div class="col-md-12">
-           <div class="alert alert-info">
-               <p><span class="badge badge-info">1</span>  {{Lang::get('resource.lbConfirmPaymentBank')}}     </p>
+           <div class="note note-pink">
+               <span class="badge badge-info">1</span>  {{Lang::get('resource.lbConfirmPaymentBank')}}
            </div>
 
        </div>
@@ -101,8 +101,8 @@
    @foreach ($Qus as $Q)
    <div class="row">
      <div class="col-md-12">
-       <div class="alert alert-info">
-          <p><span class="badge badge-info">2</span>   {{Lang::get('resource.lbQuestionAsk')}}      </p>
+       <div class="note note-pink">
+         <span class="badge badge-info">2</span>   {{Lang::get('resource.lbQuestionAsk')}}
       </div>
       </div>
     </div>
@@ -130,8 +130,8 @@
     <div class="search-container ">
       <div class="row">
         <div class="col-md-12">
-          <div class="alert alert-info">
-            <p><span class="badge badge-info">3</span> {{Lang::get('resource.lbConfirmReferencePerson')}}
+          <div class="note note-pink">
+            <span class="badge badge-info">3</span> {{Lang::get('resource.lbConfirmReferencePerson')}}
          </div>
          </div>
        </div>
@@ -231,8 +231,9 @@
           <div class="search-container ">
             <div class="row">
               <div class="col-md-12">
-                <div class="alert alert-info">
-                  <p><span class="badge badge-info">4</span> {{Lang::get('resource.lbConfirmTSurveyTopic')}}
+                <div class="note note-pink">
+                  <span class="badge badge-info">4</span> {{Lang::get('resource.lbConfirmTSurveyTopic')}}
+
 
                </div>
                </div>

@@ -220,8 +220,9 @@ return [
     'lbDownload' => 'Download',
     'lbSemester' => 'Semester',
     'lbHomeYear' => 'Academic Year',
-    'lbroundNo' => 'Round No',
-    'lbStartDate' => 'Since',
+    'lbroundNo' => 'Round No.',
+    'lbStartDate' => 'is available from',
+    'lbFromTo' => 'to',
     //Login
     'lbLoginCopyright' => '2017 &copy; Graduate School, Chulalongkorn University',
     'lbLoginToptic' => 'Login to your account',

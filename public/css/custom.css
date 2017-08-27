@@ -74,7 +74,8 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 #page-program-detail .form-control-static{
   /*color: #c3788c;*/
-  color: #3598dc!important;
+  color: #87486b!important;
+
 }
 #page-program-detail .form-group{
   margin-bottom: 0px;
@@ -161,4 +162,30 @@ border-bottom: 1px dotted #cccccc;
   border: 0px;
   background-color: #ffffff;
   font-weight: bold;
+}
+.about-header h3,.about-header h4 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+text-transform: unset;
+}
+.panel-success>.panel-heading {
+    color: #FFFFFF;
+    background-color: #d293a5;
+    border-color: #d293a5;
+}
+.note.note-pink {
+    background-color: #d293a5;
+    border-color: #87486b;
+    color: #FFFFFF;
+}
+.todo-tasklist-item-border-pink{
+  border-left: #d293a5 2px solid;
+}
+
+.font-pink-chula{
+  color:#87486b;
 }

@@ -102,7 +102,7 @@
                         <div class="caption">
                             <i class="icon-bar-chart font-green-sharp hide"></i>
 
-                            <span class="caption-subject font-green-sharp bold uppercase"> {{Lang::get('resource.lbManageCouse')}}</span>
+                            <span class="caption-subject font-pink-chula bold uppercase"> {{Lang::get('resource.lbManageCouse')}}</span>
                         </div>
 
                     </div>
@@ -185,7 +185,7 @@
                                           <div class="portlet-title">
                                           <div class="caption">
                                           <i class="icon-clock font-green"></i>
-                                          <span class="caption-subject font-green bold uppercase">{{Lang::get('resource.lbWTodo')}}</span>
+                                          <span class="caption-subject font-pink-chula bold uppercase">{{Lang::get('resource.lbWTodo')}}</span>
                                           </div>
 
                                           </div>
