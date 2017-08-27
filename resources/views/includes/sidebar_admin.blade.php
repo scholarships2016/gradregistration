@@ -1,7 +1,7 @@
 <div class="page-sidebar-wrapper">
     <!-- BEGIN SIDEBAR -->
     <div class="page-sidebar navbar-collapse collapse">
-       
+
         <!-- BEGIN SIDEBAR MENU for admin -->
         <ul id="admin_menu" class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
             <li class="sidebar-toggler-wrapper hide">
@@ -122,14 +122,14 @@
                 <h3 class="uppercase">Settings</h3>
             </li>
             <li class="nav-item  "data-index="17">
-                <a href="apply-setting.html" class="nav-link nav-toggle">
+                <a href="/admin/setting/applysetting/manage" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
                     <span class="title">ตั้งค่าการสมัคร</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="apply-setting.html" class="nav-link ">
+                        <a href="/admin/setting/applysetting/manage" class="nav-link ">
                             <span class="title">รายการเปิดรับสมัคร</span>
                         </a>
                     </li>
@@ -180,17 +180,13 @@
                             <span class="title">ขั้นตอนการสมัคร</span>
                         </a>
                     </li>
-                    <li class="nav-item  ">
-                        <a href="form_controls_md.html" class="nav-link ">
-                            <span class="title">ถามตอบ</span>
-                        </a>
-                    </li>
+                  <!--
                     <li class="nav-item  ">
                         <a href="form_controls_md.html" class="nav-link ">
                             <span class="title">ติดต่อเรา</span>
                         </a>
                     </li>
-
+                  -->
 
                 </ul>
             </li>
@@ -209,56 +205,47 @@
                     </li>
             -->
 
-
-
-
-            <li class="nav-item  "data-index="20">
+            <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class=" icon-wrench"></i>
-                    <span class="title">Extra Feature</span>
+                    <i class="icon-wrench"></i>
+                    <span class="title">จัดการข้อมูล Master</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="form_controls.html" class="nav-link ">
-                            <span class="title">ให้สิทธิ์การสมัคร เป็นกรณีพิเศษ</span>
+                        <a href="manage-program.html" class="nav-link ">
+                            <span class="title">ข้อมูลหลักสูตร</span>
                         </a>
                     </li>
 
-                    <li class="nav-item  ">
-                        <a href="form_controls_md.html" class="nav-link ">
-                            <span class="title">เพิ่มผู้สอบได้ หลักสูตรนอกเวลาราชการ/หลักสูตรนานาชาติ</span>
-                        </a>
-                    </li>
-                    <li class="nav-item  ">
-                        <a href="form_controls_md.html" class="nav-link ">
-                            <span class="title">การสมัครวิธีพิเศษ</span>
-                        </a>
-                    </li>
-                    <li class="nav-item  ">
-                        <a href="form_controls_md.html" class="nav-link ">
-                            <span class="title">ออกหนังสือรับรอง</span>
-                        </a>
-                    </li>
+
 
                 </ul>
+            </li>
+            <li class="nav-item  ">
+                <a href="report-export-to-reg.html" class="nav-link nav-toggle">
+                    <i class="icon-briefcase"></i>
+                    <span class="title">ข้อมูลส่งสำนักทะเบียน</span>
+                    <span class="arrow"></span>
+                </a>
+
             </li>
 
             <li class="nav-item  "data-index="21">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
-                    <span class="title">Logs</span>
+                    <span class="title">Logs & Stat</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
                         <a href="form_controls_md.html" class="nav-link ">
-                            <span class="title">Audit Logs</span>
+                            <span class="title">Transactions Logs</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
                         <a href="form_controls.html" class="nav-link ">
-                            <span class="title">Transactions logs</span>
+                            <span class="title">Google Analytics</span>
                         </a>
                     </li>
 
@@ -280,7 +267,7 @@
             $str1 = $(this).find('a:first').attr('href');
             $str2 = window.location.pathname;
             $selectTag = '<span class="selected"></span>';
-           
+
             if ($str1.substr($str1.lastIndexOf("/") + 1) == $str2.substr($str2.lastIndexOf("/") + 1) ||($str1.substr($str1.lastIndexOf("/") + 1) =='home' &&$str2.substr($str2.lastIndexOf("/") + 1)=='')) {
                 $(this).addClass("active");
                 $(this).find('a:first').append($selectTag);
