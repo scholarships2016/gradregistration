@@ -68,7 +68,7 @@
 @endpush
 
 @push('pageJs')
-<script src="{{asset('assets/pages/scripts/login-4.min.js')}}"></script>
+
 <script type="application/javascript">
 
 
