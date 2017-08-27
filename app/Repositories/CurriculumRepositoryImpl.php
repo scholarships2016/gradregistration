@@ -136,11 +136,13 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     }
 
     public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null, $ajaxpage = null) {
-   
+
         $result = null;
         try {
-            
+
             $cur = DB::table('curriculum')
+                    ->distinct()
+                    ->select(DB::raw('curriculum.curriculum_id,curriculum_activity.curr_act_id ,apply_method ,responsible_person  ,additional_detail  ,apply_fee ,additional_question  ,mailing_address ,document_file  ,comm_appr_name  ,comm_appr_no ,comm_appr_date  ,contact_tel ,is_approve ,expected_amount ,curriculum.status  ,  tbl_program_type.program_type_id  ,curr_act_id ,apply_setting.apply_setting_id ,exam_schedule ,announce_exam_date ,announce_admission_date ,orientation_date ,orientation_location ,tbl_project.project_id ,project_name ,project_name_en ,prog_type_name ,prog_type_name_en ,cond_id ,degree_level_name ,office_time ,office_time_en,  degreethai ,degreeenglish ,  semester ,academic_year ,round_no ,start_date ,end_date ,is_active  ,tbl_major.major_id ,major_name ,major_name_en ,tbl_department.department_id ,tbl_degree.degree_id ,degree_name ,degree_name_en ,tbl_faculty.faculty_id ,faculty_name, faculty_eng ,fac_sort ,faculty_full ,   department_name ,department_name_en  '))
                     ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
                     ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
                     ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
@@ -160,91 +162,78 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     ->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                     ->where('apply_setting.is_active', 'like', '%' . $status . '%')
                     ->where('apply_setting.status', 'like', '%' . $status . '%')
-                    ->Where(function ($query) use ($curriculum_id) {
-                        if ($curriculum_id) {
-                            $query->where('curriculum.curriculum_id', $curriculum_id);
-                        }
-                    })
-                    ->Where(function ($query) use ($curr_act_id) {
-                        if ($curr_act_id != null || $curr_act_id != '') {
-                            $query->where('curriculum_activity.curr_act_id', $curr_act_id);
-                        }
-                    })
-                    ->Where(function ($query) use ($degree_id) {
-                        if ($degree_id != null || $degree_id != '') {
-                            $query->where('tbl_Degree.degree_id', $degree_id);
-                        }
-                    })
-                    ->Where(function ($query) use ($faculty_id) {
-                        if ($faculty_id != null || $faculty_id != '') {
-                            $query->where('tbl_faculty.faculty_id', $faculty_id);
-                        }
-                    })
-                    ->Where(function ($query) use ($program_id) {
-                        if ($program_id != null || $program_id != '') {
-                            $query->where('curriculum_program.program_id', $program_id);
-                        }
-                    })
                     ->Where(function ($query) use ($inTime) {
                         if ($inTime) {
                             $query->where('apply_setting.start_date', '<=', Carbon::now())
                             ->where('apply_setting.end_date', '>=', Carbon::now());
                         }
                     })
-                    ->Where(function ($query) use ($semester) {
-                        if ($semester != null || $semester != '') {
-                            $query->where('apply_setting.semester', $semester);
-                        }
-                    })
-                    ->Where(function ($query) use ($academic_year) {
-                        if ($academic_year != null || $academic_year != '') {
-                            $query->where('apply_setting.academic_year', $academic_year);
-                        }
-                    })
-                    ->Where(function ($query) use ($round_no) {
-                        if ($round_no != null || $round_no != '') {
-                            $query->where('apply_setting.round_no', $round_no);
-                        }
-                    })
-                    ->Where(function ($query) use ($program_type) {
-                        if ($program_type) {
-                            $query->where('curriculum_program.program_type_id', $program_type);
-                        }
-                    })
                     ->Where(function ($query) use ($criteria) {
-                        if($criteria){
-                        $query->where('degree_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
-                        ->orwhere('department_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('department_name_en', 'like', '%' . $criteria . '%')
-                        ->orwhere('faculty_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('faculty_full', 'like', '%' . $criteria . '%')
-                        ->orwhere('major_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('major_name_en', 'like', '%' . $criteria . '%')
-                        ->orwhere('project_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('project_name_en', 'like', '%' . $criteria . '%')
-                        ->orwhere('prog_type_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('prog_type_name_en', 'like', '%' . $criteria . '%')
-                        ->orwhere('degree_level_name', 'like', '%' . $criteria . '%')
-                        ->orwhere('office_time', 'like', '%' . $criteria . '%')
-                        ->orwhere('academic_year', 'like', '%' . $criteria . '%')
-                        ->orwhere('academic_year', 'like', '%' . $criteria . '%')
-                        ->orwhere('academic_year', 'like', '%' . $criteria . '%');
-                        }
-                    })
-                    ->distinct()
-                    ->select( DB::raw('curriculum.curriculum_id,curriculum_activity.curr_act_id ,apply_method ,responsible_person  ,additional_detail  ,apply_fee ,additional_question  ,mailing_address ,document_file  ,comm_appr_name  ,comm_appr_no ,comm_appr_date  ,contact_tel ,is_approve ,expected_amount ,curriculum.status  ,  tbl_program_type.program_type_id  ,curr_act_id ,apply_setting.apply_setting_id ,exam_schedule ,announce_exam_date ,announce_admission_date ,orientation_date ,orientation_location ,tbl_project.project_id ,project_name ,project_name_en ,prog_type_name ,prog_type_name_en ,cond_id ,degree_level_name ,office_time ,office_time_en,  degreethai ,degreeenglish ,  semester ,academic_year ,round_no ,start_date ,end_date ,is_active  ,tbl_major.major_id ,major_name ,major_name_en ,tbl_department.department_id ,tbl_degree.degree_id ,degree_name ,degree_name_en ,tbl_faculty.faculty_id ,faculty_name, faculty_eng ,fac_sort ,faculty_full ,   department_name ,department_name_en  ') )
-                    ->orderBy('curriculum.curriculum_id') ;
+                if ($criteria != null) {
+                    $query->where('degree_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
+                    ->orwhere('department_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('department_name_en', 'like', '%' . $criteria . '%')
+                    ->orwhere('faculty_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('faculty_full', 'like', '%' . $criteria . '%')
+                    ->orwhere('major_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('major_name_en', 'like', '%' . $criteria . '%')
+                    ->orwhere('project_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('project_name_en', 'like', '%' . $criteria . '%')
+                    ->orwhere('prog_type_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('prog_type_name_en', 'like', '%' . $criteria . '%')
+                    ->orwhere('degree_level_name', 'like', '%' . $criteria . '%')
+                    ->orwhere('office_time', 'like', '%' . $criteria . '%')
+                    ->orwhere('academic_year', 'like', '%' . $criteria . '%')
+                    ->orwhere('academic_year', 'like', '%' . $criteria . '%')
+                    ->orwhere('academic_year', 'like', '%' . $criteria . '%');
+                }
+            });
+            if ($curriculum_id != null) {
+                $cur->where('curriculum.curriculum_id', $curriculum_id);
+            }
+            if ($curr_act_id != null || $curr_act_id != '') {
 
-                   dd($cur->toSql());
-                   return;
+                $cur->where('curriculum_activity.curr_act_id', $curr_act_id);
+            }
+            if ($degree_id != null || $degree_id != '') {
+
+                $cur->where('tbl_Degree.degree_id', $degree_id);
+            }
+            if ($faculty_id != null || $faculty_id != '') {
+
+                $cur->where('tbl_faculty.faculty_id', $faculty_id);
+            }
+            if ($program_id != null || $program_id != '') {
+                $cur->where('curriculum_program.program_id', $program_id);
+            }
+
+            if ($semester != null || $semester != '') {
+                $cur->where('apply_setting.semester', $semester);
+            }
+            if ($academic_year != null || $academic_year != '') {
+
+                $cur->where('apply_setting.academic_year', $academic_year);
+            }
+            if ($round_no != null || $round_no != '') {
+
+                $cur->where('apply_setting.round_no', $round_no);
+            }
+            if ($program_type != null) {
+
+                $cur->where('curriculum_program.program_type_id', $program_type);
+            }
+            $cur->orderBy('curriculum.curriculum_id');
+
+
 
             if ($paging) {
+ 
                 $draw = empty($ajaxpage['draw']) ? 1 : $ajaxpage['draw'];
                 $recordsTotal = $cur->get()->count();
-                $cur->offset($ajaxpage['start'])->limit($ajaxpage['length'])
-                        ;            
-                
+                $cur->offset($ajaxpage['start'])
+                        ->limit($ajaxpage['length']);
+
                 $data = $cur->get();
                 $result = array('draw' => $draw,
                     'recordsTotal' => $recordsTotal,
@@ -330,7 +319,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 $currObj->expected_amount = $data['expected_amount'];
             }
 
-            //Creator and Editor
+//Creator and Editor
             if (array_key_exists('creator', $data)) {
                 $currObj->creator = $data['creator'];
             }
@@ -346,7 +335,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     }
 
     public function duplicateCurriculumSetting($id) {
-        // TODO: Implement duplicateCurriculumSetting() method.
+// TODO: Implement duplicateCurriculumSetting() method.
     }
 
     public function saveCurriculumSetting(array $datas) {
@@ -367,7 +356,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 $datas['document_file'] = $file->file_id;
             }
 
-            //Draft Step
+//Draft Step
             if (!isset($datas['curriculum_id'])) {
                 $datas['is_approve'] = 1;
             }
