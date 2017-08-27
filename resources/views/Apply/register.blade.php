@@ -118,7 +118,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="search" placeholder="{{Lang::get('resource.lbSearchPlaceHolder')}}">
                     <span class="input-group-btn">
-                        <button class="btn green-soft uppercase bold" onclick="getData();" type="button">{{Lang::get('resource.lbSearch')}} <i class="fa fa-search"></i></button>
+                        <a class="btn green-soft uppercase bold" id="btSearch"   >{{Lang::get('resource.lbSearch')}} <i class="fa fa-search"></i></a>
                     </span>
                 </div>
             </div>
@@ -184,11 +184,20 @@
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
  <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
+        type="text/javascript"></script>
 <script type="application/javascript">
 
 //
 $(document).ready(function(){
+       $("#btSearch").on('click', function () {
+            reloadTable();
+        });
+      
+   initDatatable();
+     reloadTable();
     $("#btnAdvanced").click(function(){
         $("#filterSearch").toggle(250);
     });
@@ -198,74 +207,123 @@ $(document).ready(function(){
 
 //reset background-color
 $(".page-content").css("background-color","#eef1f5");
-
-
+ 
   });
 
-  $(function() {
-  getData();
+ 
 
-});
-
-
-function getData(){
+    var grid;
      
-    var table = $('#tblcurr').DataTable({
-        ajax:{ url: '{!! route('manageMyCourse.data') !!}',type:"GET", data: function(d) {
-         d.search = $("#search").val();
-         d.faculty_id = $("#faculty_id").val();
-         d.degree_id = $("#degree_id").val();
-         d.program_id = $("#program_id").val();               
-        }}
-    , 
     
-columnDefs: [{ 
+    function initDatatable() {
+        grid = new Datatable();
+        grid.init({
+            src: $("#tblcurr"),
+            onSuccess: function (grid, response) {
+                // grid:        grid object
+                // response:    json object of server side ajax response
+                // execute some code after table records loaded
+
+            },
+            onError: function (grid) {
+                // execute some code on network or other general error
+            },
+            onDataLoad: function (grid) {
+                // execute some code on ajax data load
+            },
+            loadingMessage: 'กำลังโหลด...',
+            dataTable: {
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "แสดง _START_ - _END_ ของ _TOTAL_ รายการ",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(กรอง 1 จาก _MAX_ รายการทั้งหมด)",
+                    "lengthMenu": "_MENU_ รายการ&nbsp;",
+                    "search": "Search:",
+                    "zeroRecords": "ไม่พบรายการ"
+                },
+ 
+                "bStateSave": true,
+
+                
+                "fnStateSaveParams": function (oSettings, sValue) {
+                  
+                },
+ 
+                "fnStateLoadParams": function (oSettings, oData) {
+ 
+                },
+
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 50, // default record count per page
+                "ajax": {
+                    "url": '{!! route('manageMyCourse.data') !!}', // ajax source
+                    "method": 'get'
+                },
+                "ordering": true,
+                     
+                "order": [
+                    [1, "asc"]
+                ],
+                "columnDefs": [{ 
 targets: [0], 
 orderable: false, 
 className: 'table-status',
-name: 'rownum',
+ 
 render: function (data, type, full, meta) { 
 return meta.settings._iDisplayStart + meta.row + 1;
 } },{ 
 targets: [1],
 orderable: true,
 className: 'table-desc font-blue',
-name: 'degree_name',
+ 
 render: function (data, type, full, meta) {
 return (('{{session('locale')}}'=='th')? full.degreethai:full.degreeenglish) ;
 } },{
 targets: [2],
 orderable: true,
 className: 'table-desc',
-name: 'prog_type_name',
+ 
 render: function (data, type, full, meta) {
-return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</b>'+'<br/>'+ full.office_time+'' ;
+return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</b>'+'<br/>'+(('{{session('locale')}}'=='th')? full.office_time:full.office_time_en)+'' ;
 } },{
 targets: [3],
 orderable: true,
 className: 'table-desc',
-name: 'prog_type_name',
+ 
 render: function (data, type, full, meta) {
 return ('{{Lang::get('resource.lbSearchResultMajor')}}'+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)+'<br/>'+ ''+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) + '<br/>'+'{{Lang::get('resource.lbSearchResultFaculty')}}'+(('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) ) ;
 }},{
 targets: [4], 
 orderable: true, 
 className: 'table-download',
-name: 'apply', 
+ 
 render: function (data, type, full, meta) { 
 return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P'+full.program_type_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
-} }] ,   
-     destroy: true,
-    filter: true,
-    info: true,
-    ordering: true,
-    processing: true,
-    retrieve: false  ,
-    pagingType : "full_numbers", 
-     
+} }] ,
+            }
+        });
+
+    }
     
-    });   
-       $('#tblcurr_paginate').addClass('search-pagination pagination-rounded');
-}
+     
+
+ 
+ function reloadTable() {
+        grid.setAjaxParam("searchs", $('#search').val());
+        grid.setAjaxParam("faculty_id", $('#faculty_id').val());
+        grid.setAjaxParam("degree_id", $('#degree_id').val());
+        grid.setAjaxParam("program_id", $('#program_id').val());        
+        grid.getDataTable().ajax.reload();
+        grid.clearAjaxParams();
+    }
+
 </script>
   @endpush
