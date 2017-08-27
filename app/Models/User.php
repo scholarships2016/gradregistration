@@ -65,6 +65,11 @@ class User extends Eloquent
         'modified'
     ];
 
+    public function role()
+    {
+        return $this->hasOne(TblRole::class, 'role_id', 'role_id');
+    }
+
     public function userPermission()
     {
         return $this->hasMany(UserPermission::class, 'user_id', 'user_id');
