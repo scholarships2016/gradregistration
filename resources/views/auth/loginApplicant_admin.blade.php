@@ -15,32 +15,38 @@
 
     <form class="login-form" action="{{ url('/login_admin')}}" method="post">
         {{csrf_field()}}
-        <h3 class="form-title">Login to your account     </h3>
-        <div class="alert al                                       ert-danger display-hide">
+        <h3 class="form-title">เข้าสู่ระบบ สำหรับผู้ดูแลระบบ    </h3>
+        <div class="alert alert-info display">
             <button class="close" data-close="alert"></button>
-            <span> Enter any user and password.     </span>
+            <i class="icon-info"></i> <span> กรอกรหัสผู้ใช้ และรหัสผ่าน ชุดเดียวกับ Chula Web Mail     </span>
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">User-Name</label>
+            <label class="control-label visible-ie8 visible-ie9">รหัสผู้ใช้</label>
             <div class="input-icon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control placeholder-no-fix"   type="text" autocomplete="off" placeholder="Username"
+                <input class="form-control placeholder-no-fix"   type="text" autocomplete="off" placeholder="กรอกรหัสผู้ใช้"
                        name="user_name"/></div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            <label class="control-label visible-ie8 visible-ie9">รหัสผ่าน</label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                       placeholder="Password" name="user_password"/></div>
+                       placeholder="กรอกรหัสผ่าน" name="user_password"/></div>
+        </div>
+        <div class="formm-group">
+          <div class="g-recaptcha" data-sitekey="6LdTciwUAAAAAIghJhuM4wf8Dnzc-eadlLikCWiR"></div>
         </div>
         <div class="form-actions">
-
-            <button type="submit" class="btn green pull-right"> Login</button>
+            <button type="submit" class="btn green pull-right"> เข้าสู่ระบบ</button>
         </div>
 
-
+        <div class="forget-password">
+            <h4>กรณีลืมรหัสผ่าน</h4>
+            <p>
+                <a href="http://www.it.chula.ac.th/" target="_blank" >โปรดติดต่อสำนักบริหารเทคโนโลยีสารสนเทศ </a>  </p>
+        </div>
     </form>
 
 </div>
@@ -56,6 +62,7 @@
 <script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @endpush
 
 @push('pageJs')
