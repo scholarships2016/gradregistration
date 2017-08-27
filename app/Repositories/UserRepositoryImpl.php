@@ -90,7 +90,7 @@ class UserRepositoryImpl extends AbstractRepositoryImpl implements UserRepositor
     {
         try {
             $query = DB::table('user as u')
-                ->select('u.user_id', 'u.user_name', 'u.name',
+                ->select('u.user_id', 'u.user_name', 'u.name', 'u.nickname',
                     'u.role_id',
                     DB::raw("GROUP_CONCAT(tblp.permission_name order by tblp.permission_id asc SEPARATOR ',' ) as permission"),
                     DB::raw("date_format(u.last_login,'%d/%m/%Y %H:%i') as last_login")
@@ -101,7 +101,7 @@ class UserRepositoryImpl extends AbstractRepositoryImpl implements UserRepositor
                 ->leftJoin('tbl_permission as tblp', function ($join) {
                     $join->on('tblp.permission_id', '=', 'up.permission_id');
                 })
-                ->groupBy('u.user_id', 'u.user_name', 'u.name', 'u.role_id', 'u.last_login');
+                ->groupBy('u.user_id', 'u.user_name', 'u.name','u.nickname', 'u.role_id', 'u.last_login');
             return $query->get();
         } catch (\Exception $ex) {
             throw $ex;

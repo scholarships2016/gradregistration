@@ -54,7 +54,6 @@ Route::get('/download', function () {
 });
 
 
-
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
 
@@ -94,7 +93,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
     Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
     Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
-
 
 
 //GS05
@@ -139,6 +137,8 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
+    Route::get('toDoList', 'BackOffice\BackOfficeController@showToDoListPage')->name('admin.backoffice.showToDoListPage');
+    Route::get('doPaging', 'BackOffice\BackOfficeController@doPaging')->name('admin.backoffice.doPaging');
 
     Route::group(['prefix' => 'management', 'middleware' => []], function () {
         Route::group(['prefix' => 'curriculum', 'middleware' => []], function () {

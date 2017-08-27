@@ -171,7 +171,7 @@
 
                     <div class="panel panel-success">
                     	<div class="panel-heading">
-                    		<h3 class="panel-title">เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
+                    		<h3 class="panel-title"><i class="icon-info"></i> เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
                     	</div>
                       <div class="panel-body">
                         <div class="row">
@@ -410,6 +410,7 @@
                                                    class="input-group-addon btn green fileinput-exists"
                                                    onclick="downloadFile(this)" target="_blank" download> ดาวน์โหลด </a>
                                             </div>
+                                            <span class="help-block">เป็นไฟล์ Microsoft Word (.doc,.docx) เท่านั้น</span>
                                         </div>
 
                                     </div>
@@ -492,8 +493,8 @@
                                             <span></span>
                                         </label>
                                         <label class="mt-radio mt-radio-outline">
-                                            <input type="radio" name="status" value="2"
-                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 2)) checked @endif
+                                            <input type="radio" name="status" value="0"
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 0)) checked @endif
                                             > ไม่เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
@@ -914,7 +915,7 @@
                             var listCheckBox = '';
                             $.each(result, function (index, value) {
                                 listCheckBox += '<label class="mt-checkbox mt-checkbox-outline">';
-                                listCheckBox += '<input type="checkbox" name="sub_major_id[]" value="' + index + '"';
+                                listCheckBox += '<input type="checkbox" name="sub_major_id[]" value="' + value.sub_major_id + '"';
                                 if (value.curr_sub_major_id !== null) {
                                     listCheckBox += 'checked'
                                 }
@@ -1180,7 +1181,7 @@
         roundHtml += '<div class="portlet green-meadow box">';
         roundHtml += '<div class="portlet-title">';
         roundHtml += '<div class="caption">';
-        roundHtml += '<i class="fa fa-cogs"></i>รอบที่ ' + obj.round_no;
+        roundHtml += '<i class="fa fa-table"></i>ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
         roundHtml += '</div>';
         roundHtml += '<div class="actions">';
 //        roundHtml += '<a href="javascript:;" class="btn btn-default btn-sm">';

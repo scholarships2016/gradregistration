@@ -21,4 +21,6 @@ interface CurriculumRepository {
     public function deleteCurriculumInfoByCurriculumId($id);
 
     public function doPaging1($criteria = null);
+
+    public function doToDoListPaging($criteria = null);
 }

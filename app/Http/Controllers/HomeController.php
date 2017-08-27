@@ -55,6 +55,10 @@ class HomeController extends Controller {
     }
 
     public function viewHome() {
+        if (!session('locale'))
+            session()->put('locale', 'th');
+
+
         if (!session('locale'))  session()->put('locale', 'th');       
         
         $Newslist = $this->NewsRepo->getNewsNow();

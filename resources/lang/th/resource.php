@@ -270,6 +270,7 @@ return [
     'lbHomeYear'=>'ปีการศึกษา',
     'lbroundNo'=>'รอบที่',
     'lbStartDate' => 'ตั้งแต่วันที่',
+    'lbFromTo' => 'ถึง',
     //Login
     'lbLoginCopyright' => '2560 &copy; บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
     'lbLoginToptic' => 'เข้าสู่ระบบรับสมัคร',
