@@ -33,7 +33,13 @@ class BackOfficeController extends Controller
     public function doPaging(Request $request)
     {
         try {
-            return response()->json($this->curriculumRepo->doToDoListPaging($request->all()));
+            $who = 'test';
+            $param = $request->all();
+            $isAdmin = true;
+            if (!$isAdmin) {
+                $param['creator'] = $who;
+            }
+            return response()->json($this->curriculumRepo->doToDoListPaging($param));
         } catch (\Exception $ex) {
             throw $ex;
         }
