@@ -149,7 +149,7 @@ class ApplyController extends Controller {
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
         $pic = $this->FileRepo->getImageFileAsBase64ById($applicantProfile['applicant']->stu_img);
         $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
- 
+
         return view($this->part_doc . 'docMyCourse', ['apps' => $dataApplication,
             'applicant' => $applicantProfile['applicant']
             , 'appEdus' => $applicantProfile['applicantEdu']
@@ -427,6 +427,16 @@ class ApplyController extends Controller {
     public function delete($id) {
         $this->degreeRepo->delete($id);
         return redirect('degree');
+    }
+
+    public function checkApplicantProfile() {
+        $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id)->first();
+        $applicanteEdu = DB::table('applicant_edu')->where('applicant_id', session('Applicant')->applicant_id)->Count();
+
+        if ($applicant->stu_first_name != null && $applicant->stu_first_name_en != null && $applicant->stu_addr_pcode != null && $applicant->stu_img != null && $applicant->eng_test_id != null && $applicant->eng_test_score != null && $applicanteEdu > 0) {
+            return true;
+        }
+        return false;
     }
 
 }
