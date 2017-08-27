@@ -118,7 +118,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="search" placeholder="{{Lang::get('resource.lbSearchPlaceHolder')}}">
                     <span class="input-group-btn">
-                        <a class="btn green-soft uppercase bold" id="btSearch"   >{{Lang::get('resource.lbSearch')}} <i class="fa fa-search"></i></a>
+                        <button class="btn green-soft uppercase bold" id="btSearch"   >{{Lang::get('resource.lbSearch')}} <i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </div>
@@ -133,7 +133,7 @@
 <!-- END SEARCH BOX -->
 
 
-    <div class="search-table table-responsive">
+    <div class="search-table ">
 
           <table id="tblcurr" class="table table-bordered table-striped table-condensed">
             <thead style="background: #c3788c!important;">
@@ -231,20 +231,20 @@ $(".page-content").css("background-color","#eef1f5");
             onDataLoad: function (grid) {
                 // execute some code on ajax data load
             },
-            loadingMessage: 'กำลังโหลด...',
+            loadingMessage: '{{Lang::get('resource.lbBtnDownload')}}...',
             dataTable: {
                 "language": {
                     "aria": {
                         "sortAscending": ": activate to sort column ascending",
                         "sortDescending": ": activate to sort column descending"
                     },
-                    "emptyTable": "No data available in table",
-                    "info": "แสดง _START_ - _END_ ของ _TOTAL_ รายการ",
-                    "infoEmpty": "No entries found",
-                    "infoFiltered": "(กรอง 1 จาก _MAX_ รายการทั้งหมด)",
-                    "lengthMenu": "_MENU_ รายการ&nbsp;",
+                    "emptyTable": "{{Lang::get('resource.lbNoItems')}}",
+                    "info": "{{Lang::get('resource.lbShow')}} _START_ - _END_ {{Lang::get('resource.lbShow2')}} _TOTAL_ {{Lang::get('resource.lbItems')}}",
+                    "infoEmpty": "{{Lang::get('resource.lbNoItems')}}",
+                    "infoFiltered": "(  _MAX_ {{Lang::get('resource.lbItemsTotal')}})",
+                    "lengthMenu": "_MENU_ {{Lang::get('resource.lbItems')}}&nbsp;",
                     "search": "Search:",
-                    "zeroRecords": "ไม่พบรายการ"
+                    "zeroRecords": "{{Lang::get('resource.lbNoItems')}}"
                 },
  
                 "bStateSave": true,
