@@ -596,4 +596,4 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-}
+        }
