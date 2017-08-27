@@ -15,7 +15,7 @@
                                            <form class="login-form" action="{{route('postLoginApplicant')}}" method="post">
             {{csrf_field()}}
             <h3 class="form-title">Login to your account</h3>
-            <div class="alert al                                       ert-danger display-hide">
+            <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
                                            <span> Enter any e-mail and password. </span>
                                </div>
@@ -161,7 +161,7 @@
                     <script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
                     <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}"></script>
                     <script src="{{asset('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
-                  
+
                     @endpush
 
                     @push('pageJs')

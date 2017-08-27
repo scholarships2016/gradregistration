@@ -1178,7 +1178,7 @@
         }
         roundHtml += '<input type="hidden" id="apply_setting_id" name="apply_setting_id" value="' + obj.apply_setting_id + '"/>';
         roundHtml += '<div class="col-md-12">';
-        roundHtml += '<div class="portlet green-meadow box">';
+        roundHtml += '<div class="portlet pink-chula box">';
         roundHtml += '<div class="portlet-title">';
         roundHtml += '<div class="caption">';
         roundHtml += '<i class="fa fa-table"></i>ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
