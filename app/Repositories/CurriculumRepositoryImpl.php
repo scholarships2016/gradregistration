@@ -140,7 +140,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
         return $result;
     }
-    public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null,$program_type = null)
+
+    public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null)
     {
         $result = null;
         try {
@@ -163,7 +164,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->where('curriculum.status', 'like', '%' . $status . '%')
                 ->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
-                ->where('apply_setting.status', 'like', '%' . $status . '%')        
+                ->where('apply_setting.status', 'like', '%' . $status . '%')
                 ->Where(function ($query) use ($curriculum_id) {
                     if ($curriculum_id) {
                         $query->where('curriculum.curriculum_id', $curriculum_id);
@@ -210,12 +211,11 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                         $query->where('apply_setting.round_no', $round_no);
                     }
                 })
-                 ->Where(function ($query) use ($program_type) {
+                ->Where(function ($query) use ($program_type) {
                     if ($program_type) {
                         $query->where('curriculum_program.program_type_id', $program_type);
                     }
                 })
-                
                 ->Where(function ($query) use ($criteria) {
                     $query->where('degree_name', 'like', '%' . $criteria . '%')
                         ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
@@ -238,7 +238,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->distinct()
                 ->select([DB::raw('curriculum.curriculum_id,curriculum_activity.curr_act_id ,apply_method ,responsible_person  ,additional_detail  ,apply_fee ,additional_question  ,mailing_address ,document_file  ,comm_appr_name  ,comm_appr_no ,comm_appr_date  ,contact_tel ,is_approve ,expected_amount ,curriculum.status  ,  tbl_program_type.program_type_id  ,curr_act_id ,apply_setting.apply_setting_id ,exam_schedule ,announce_exam_date ,announce_admission_date ,orientation_date ,orientation_location ,tbl_project.project_id ,project_name ,project_name_en ,prog_type_name ,prog_type_name_en ,cond_id ,degree_level_name ,office_time ,  degreethai ,degreeenglish ,  semester ,academic_year ,round_no ,start_date ,end_date ,is_active  ,tbl_major.major_id ,major_name ,major_name_en ,tbl_department.department_id ,tbl_degree.degree_id ,degree_name ,degree_name_en ,tbl_faculty.faculty_id ,faculty_name, faculty_eng ,fac_sort ,faculty_full ,   department_name ,department_name_en  ')])
                 ->orderBy('curriculum.curriculum_id');
- 
+
             $result = ($paging) ? $cur->offset($paging['start'])->limit($paging['length']) : $cur->get();
         } catch (\Exception $ex) {
             throw $ex;
@@ -625,16 +625,23 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
             $data = null;
 
+            $lastTransQuery = DB::table('curriculum_workflow_transaction as trans_buff')
+                ->select('trans_buff.curriculum_id',
+                    DB::raw('max(trans_buff.curr_wf_tran_id) as last_curr_wf_tran_id')
+                )->groupBy('trans_buff.curriculum_id');
+
             $subTransQuery = DB::table('curriculum_workflow_transaction as trans_')
                 ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id',
                     'trans_.workflow_status_id', 'status_.status_name',
                     DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"),
                     'trans_.creator', 'trans_.comment')
+                ->join(DB::raw("({$lastTransQuery->toSql()}) as last_trans"), function ($join) {
+                    $join->on('last_trans.last_curr_wf_tran_id', '=', 'trans_.curr_wf_tran_id');
+                })
                 ->join('tbl_curriculum_workflow_status as status_', function ($join) {
                     $join->on('status_.curr_wf_status_id', '=', 'trans_.workflow_status_id');
                 })
-                ->orderBy('trans_.curr_wf_tran_id', 'desc')
-                ->limit(1);
+                ->orderBy('trans_.curr_wf_tran_id', 'desc');
 
             $subActQuery = DB::table('curriculum_activity as curr_act')
                 ->select('curr_act.curriculum_id', 'app_set.semester', 'app_set.academic_year')
@@ -662,14 +669,23 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->leftJoin(DB::raw("({$subActQuery->toSql()}) as sub_act"), function ($join) {
                     $join->on('sub_act.curriculum_id', '=', 'curr.curriculum_id');
                 })
-                ->where('curr.is_approve', '!=', 4) // Appoved Status
+                ->where('curr.is_approve', '!=', 4)// Appoved Status
                 ->groupBy('curr.curriculum_id', 'sub_act.semester',
                     'sub_act.academic_year', 'deg.degree_name',
                     'deg.degree_name_en', 'curr.is_approve',
                     'sub_trans.status_name', 'sub_trans.created',
                     'sub_trans.creator', 'sub_trans.comment');
 
+            if (isset($criteria['creator'])) {
+                $mainQuery->where('curr.creator', '=', $criteria['creator']);
+            }
+
             $recordsTotal = $mainQuery->get()->count();
+
+            if (isset($criteria['flow_status']) && $criteria['flow_status'] !== '') {
+                $ids = explode(',', $criteria['flow_status']);
+                $mainQuery->whereIn('curr.is_approve', $ids);
+            }
 
             $recordsFiltered = $mainQuery->get()->count();
             $mainQuery->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
