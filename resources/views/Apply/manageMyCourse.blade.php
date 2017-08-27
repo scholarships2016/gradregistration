@@ -284,7 +284,7 @@
                                                   </h3>
                                                   <div style="margin:10px 0px 10px 0px">
                                                     @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
-                                                    <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPayMyCourse')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
+                                                    <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPaymentEnvidence')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
                                                     <br/>
                                                   @endif
                                                     <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>

@@ -103,7 +103,8 @@ return [
     'lbUpdateDocApply' => 'ปรับปรุงเอกสารประกอบการสมัคร ',
     'lbdocMyCourse' => 'ใบสมัคร',
     'lbdocPayMyCourse' => 'ใบแจ้งชำระค่าธรรมเนียม',
-    'lbdocEnvelop' => 'ใบปะหน้าซอง',
+    'lbdocEnvelop' => 'ใบแจ้งที่อยู่ของผู้สมัคร',
+    'lbdocPaymentEnvidence' => 'หลักฐานการชำระเงิน',
     'lbRegisterbtn' => 'สมัคร',
     'lbSearchPlaceHolder' => 'ค้นหาจากคณะ รหัสหลักสูตร ประเภทหลักสูตร หรือชื่อหลักสูตร',
     //Search Label
