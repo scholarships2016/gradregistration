@@ -70,9 +70,9 @@
                     <div class="invoice-content-2">
     <div class="row">
         <div class="col-xs-12">
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>
+<!--            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>-->
               
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >PDF</a>
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >Download PDF</a>
     
         
         
