@@ -66,34 +66,6 @@
                             <p>
                             </p>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>คณะ</label>
-                                        <select id="faculty_id" name="faculty_id" class="form-control select2">
-                                            @if(!empty($facList))
-                                                @foreach($facList as $fac)
-                                                    <option value="{{$fac->faculty_id}}">{{$fac->faculty_name.' ('.$fac->faculty_full.')'}}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>ประเภทหลักสูตร</label>
-                                        <select id="program_type_id" name="program_type_id"
-                                                class="form-control select2">
-                                            @if(!empty($progTypeList))
-                                                @foreach($progTypeList as $prog)
-                                                    <option value="{{$prog->program_type_id}}">{{$prog->prog_type_name}}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>ภาคการศึกษา</label>
@@ -134,12 +106,40 @@
                                         <label>สถานะ</label>
                                         <select id="is_approve" name="is_approve"
                                                 class="form-control select2">
-                                            <option value="1">Draft</option>
-                                            <option value="2">Pending</option>
-                                            <option value="3">Rejected</option>
-                                            <option value="4">Approved</option>
+                                            <option value="1">ฉบับร่าง-Draft</option>
+                                            <option value="2">รออนุมัติ-Pending</option>
+                                            <option value="3">ส่งกลับให้แก้ไข-Rejected</option>
+                                            <option value="4">อนุมัติ-Approved</option>
                                         </select>
                                         <!-- /input-group -->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>คณะ</label>
+                                        <select id="faculty_id" name="faculty_id" class="form-control select2">
+                                            @if(!empty($facList))
+                                                @foreach($facList as $fac)
+                                                    <option value="{{$fac->faculty_id}}">{{$fac->faculty_name.' ('.$fac->faculty_full.')'}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>ประเภทหลักสูตร</label>
+                                        <select id="program_type_id" name="program_type_id"
+                                                class="form-control select2">
+                                            @if(!empty($progTypeList))
+                                                @foreach($progTypeList as $prog)
+                                                    <option value="{{$prog->program_type_id}}">{{$prog->prog_type_name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="padding-top:20px;">
@@ -148,6 +148,8 @@
                                     </a>
                                 </div>
                             </div>
+
+
 
 
                             <p></p>
@@ -163,8 +165,8 @@
                                 <th>คณะ</th>
                                 <th>ภาควิชา</th>
                                 <th>สาขาวิชา</th>
-                                <th>รหัสโปรแกรม</th>
-                                <th>ชื่อโปรแกรม</th>
+                                <th>รหัสหลักสูตร</th>
+                                <th>ชื่อปริญญา</th>
                                 <th>วิธีรับสมัคร</th>
                                 <th>สถานะ</th>
                                 <th>Actions</th>

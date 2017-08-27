@@ -47,6 +47,9 @@
 body, h1, h2, h3, h4, h5, h6 {
 	font-family: 'THSarabunNew', sans-serif;
 }
+.dropdown-menu,.select2-container--bootstrap .select2-selection{
+ font-family: 'THSarabunNew', sans-serif;
+}
 .login .content h3, .login .content h4{
   color : rgb(84, 28, 48);
 }
@@ -96,17 +99,18 @@ body, h1, h2, h3, h4, h5, h6 {
 #select-program-area .md-radio{
   border-bottom: 1px solid;
   border-color: #e7ecf1;
+  margin-bottom: 10px;
 }
 .about-header h1 {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .about-header{
   height: 300px;
 }
 .about-text>h4{
     background: #c3788c!important;
-        padding: 0.5em 20px;
-            font-size: 20px;
+    padding: 15px 10px 5px 10px;
+    font-size: 20px;
 }
 .about-text{
   height: auto;
@@ -138,4 +142,23 @@ table.dataTable thead .sorting:after {
 }
 table.dataTable thead .sorting_desc:after {
     content: none;
+}
+.btn-group, .btn-group-vertical {
+    position: sticky;
+}
+#page-program-detail .todo-inline{
+  margin-bottom: 10px;
+border-bottom: 1px dotted #cccccc;
+}
+.form-control[disabled], fieldset[disabled] .form-control {
+    cursor: not-allowed;
+    border: 0px;
+    background-color: #ffffff;
+    font-weight: bold;
+}
+.select2-container--bootstrap.select2-container--disabled .select2-selection, .select2-container--bootstrap.select2-container--disabled .select2-selection--multiple .select2-selection__choice{
+  cursor: not-allowed;
+  border: 0px;
+  background-color: #ffffff;
+  font-weight: bold;
 }

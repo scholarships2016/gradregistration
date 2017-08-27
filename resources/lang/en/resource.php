@@ -109,7 +109,7 @@ return [
     'lbSearchProgramType' => 'Program Type',
     'lbSearchProgramId' => 'Program ID',
     'lbSearchPageTopic' => 'Search & Apply',
-    'lbSearchResultDegreeName' => 'Program Name',
+    'lbSearchResultDegreeName' => 'Degree Name',
     'lbSearchResultProgramType' => 'Program Type',
     'lbSearchResultDetail' => 'Detail',
     'lbSearchResultAction' => 'View/Apply',
@@ -142,7 +142,7 @@ return [
     'lbConfApp' => 'Confirm',
     'lbRegisterbtn' => 'Apply',
     'lbSubMajor' => 'Sub-Major',
-    'lbAppNo' => 'Application No.',
+    'lbAppNo' => 'Application No',
 //ApplicantInfo
     'appctInfoPageTitle' => 'Applicant Information',
     //ProfilePage

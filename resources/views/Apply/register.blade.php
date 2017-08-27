@@ -207,6 +207,7 @@ $(".page-content").css("background-color","#eef1f5");
 
 });
 
+
 function getData(){
 
     var table = $('#tblcurr').DataTable({
@@ -217,27 +218,28 @@ function getData(){
          d.program_id = $("#program_id").val();
         }}
     ,
+
 columnDefs: [{
 targets: [0],
 orderable: false,
 className: 'table-status',
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [1],
 orderable: true,
 className: 'table-desc font-blue',
 name: 'degree_name',
 render: function (data, type, full, meta) {
-return (('{{session('locale')}}'=='th')? full.thai:full.english) ;
+return (('{{session('locale')}}'=='th')? full.degreethai:full.degreeenglish) ;
 } },{
 targets: [2],
 orderable: true,
 className: 'table-desc',
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name:full.prog_type_name_en)+'</b>'+'<br/>'+ full.office_time+'' ;
+return '<b>'+(('{{session('locale')}}'=='th')? full.prog_type_name+'</b><br/>'+full.office_time:full.prog_type_name_en+'</b><br/>'+full.office_time_en) ;
 } },{
 targets: [3],
 orderable: true,
@@ -247,22 +249,22 @@ render: function (data, type, full, meta) {
 return ('{{Lang::get('resource.lbSearchResultMajor')}}'+ (('{{session('locale')}}'=='th')? full.major_name :full.major_name_en)+'<br/>'+ ''+ (('{{session('locale')}}'=='th')? full.department_name :full.department_name_en) + '<br/>'+'{{Lang::get('resource.lbSearchResultFaculty')}}'+(('{{session('locale')}}'=='th')? full.faculty_name : full.faculty_full) ) ;
 }},{
 targets: [4],
-orderable: false,
+orderable: true,
 className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
+return ('<a href="{{  url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P'+full.program_type_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
 } }] ,
      destroy: true,
     filter: true,
     info: true,
     ordering: true,
     processing: true,
-    retrieve: true  ,
+    retrieve: false  ,
     pagingType : "full_numbers",
 
+
     });
-    console.log(table);
        $('#tblcurr_paginate').addClass('search-pagination pagination-rounded');
 }
 </script>

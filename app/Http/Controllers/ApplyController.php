@@ -85,9 +85,9 @@ class ApplyController extends Controller {
 
     public function getRegisterCourse(Request $request = null) {
 
-        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, false);
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, null, $request->search, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, false);
 
-        return ['data' => $curDiss, 'iDisplayLength' =>  $curDiss->count(), 'iDisplayStart' => 0];
+        return ['data' => $curDiss, 'iDisplayLength' => $curDiss->count(), 'iDisplayStart' => 0];
     }
 
     public function registerCourse($id) {
@@ -130,9 +130,11 @@ class ApplyController extends Controller {
     }
 
     public function registerDetailForapply($id) {
-        $curDiss = $this->CurriculumRepo->searchByCriteria($id, null, null, null, null, 1, 4, null, true, false);
+        $id = explode("P", $id);
+
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1]);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
-        $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id);
+        $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
     }
 
@@ -201,7 +203,7 @@ class ApplyController extends Controller {
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
 
-        $page = view($this->part_doc . 'docApplicationFee', ['apps' => $dataApplication,'applicant' => $applicantProfile['applicant']]);
+        $page = view($this->part_doc . 'docApplicationFee', ['apps' => $dataApplication, 'applicant' => $applicantProfile['applicant']]);
 
         $options = new Options();
         $options->setIsRemoteEnabled(true);
@@ -243,19 +245,19 @@ class ApplyController extends Controller {
     }
 
     public function submitregisterDetailForapply(Request $data) {
- 
+
         $gdata = $data->all();
         $gdata['flow_id'] = 1;
         $gdata['creator'] = session('user_id');
         $gdata['modifier'] = session('user_id');
         $gdata['applicant_id'] = session('Applicant')->applicant_id;
         $gdata['stu_citizen_card'] = session('Applicant')->stu_citizen_card;
-        $program = explode('|',$data->program_data);
-        if(count($program) > 0){
-           $gdata['program_id']  =  $program[0];
+        $program = explode('|', $data->program_data);
+        if (count($program) > 0) {
+            $gdata['program_id'] = $program[0];
         }
-         if(count($program) > 1){
-           $gdata['curr_prog_id']  =  $program[1];
+        if (count($program) > 1) {
+            $gdata['curr_prog_id'] = $program[1];
         }
 
         $res = $this->ApplicationRepo->saveApplication($gdata);
@@ -276,8 +278,6 @@ class ApplyController extends Controller {
         return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus]);
     }
 
-    
-
     public function actionCourse($action, $id) {
 
         $gdata = ['modifier' => session('user_id'),
@@ -293,6 +293,53 @@ class ApplyController extends Controller {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
+    }
+
+    public function sentMailRegister(Request $request) {
+ try {
+            if ($request) {
+                $curr_act_id = $request->curr_act_id;
+                $applications = json_decode($request->application);
+
+                $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null) ;
+                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+
+                foreach ($currs as $curr) {
+
+
+                    foreach ($apps as $app) {
+
+                        $data = [
+                            'stu_name' => $app->stu_first_name . ' ' . $app->stu_last_name,
+                            'thai' => $curr->thai,
+                            'coursecodeno' => $curr->coursecodeno,
+                            'sub_major_name' => $curr->sub_major_name,
+                            'sub_major_id' => $curr->sub_major_id,
+                            'major_name' => $curr->major_name,
+                            'major_id' => $curr->major_id,
+                            'department_name' => $curr->department_name,
+                            'department_id' => $curr->department_id,
+                            'faculty_name' => $curr->stu_email,
+                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                'year' => $curr->academic_year,
+                'statusExam' => $app->exam_name
+                ];
+                Mail::send('email.register', $data, function($message)use ($app) {
+                $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                });
+                Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                return;
+                }
+                }
+                }
+                } catch (Exception $e) {
+                Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
+                }
+        
     }
 
     public function confDocApply($id) {
