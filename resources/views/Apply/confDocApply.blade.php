@@ -49,13 +49,13 @@
                     // print_r($Data);
                      ?>
                      <div class="row static-info">
-                    		<div class="col-md-3 name"> {{Lang::get('resource.lbSearchResultDegreeName')}}: </div>
+                    		<div class="col-md-3 name"> {{Lang::get('resource.lbMajor')}}: </div>
                     		<div class="col-md-9 value">   {{(session('locale') =='th')? $Data->program_id : $Data->program_id }} {{(session('locale') =='th')? $Data->thai:$Data->english}}
                           <br/>
                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$Data->prog_plan_name : $Data->prog_plan_name_en }}
                             <br/>
                           <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$Data->prog_type_name : $Data->prog_type_name_en }}
-                          ({{$Data->office_time}})
+                          ({{ (session('locale')=='th')?$Data->office_time : $Data->office_time_en }})
 
                         </div>
                     	</div>
@@ -68,7 +68,7 @@
                      		<div class="col-md-3 name"> {{Lang::get('resource.lbSubject')}}: </div>
                      		<div class="col-md-9 value">
 
-                           {{(session('locale') =='th')?'สาขาวิชา'. $Data->major_name : $Data->major_name_en.','}}
+                           {{(session('locale') =='th')?'สาขาวิชา'. $Data->major_name :'Major in '. $Data->major_name_en.','}}
 
                            {{(session('locale') =='th')?''. $Data->department_name : $Data->department_name_en.','}}
 
@@ -130,7 +130,7 @@
                                                  <label for="checkbox{{$Doc->doc_apply_id}}">
                                                      <span class="inc"></span>
                                                      <span class="check"></span>
-                                                     <span class="box"></span>   {{ (session('locale')=='th')? $Doc->doc_apply_detail:$Doc->doc_apply_detail_en}}  </label>            {!!($Doc->doc_apply_id == 1)? "<a href='".url('apply/docMyCourse/').'/'.$programID. "' target='_blank'>  ดูใบสมัคร </a>"  : "" !!}
+                                                     <span class="box"></span>   {{ (session('locale')=='th')? $Doc->doc_apply_detail:$Doc->doc_apply_detail_en}}  </label>            {!!($Doc->doc_apply_id == 1)? "<a href='".url('apply/docMyCourse/').'/'.$programID. "' class='btn btn-circle green btn-outline' target='_blank'> <i class='fa fa-file-pdf-o'></i>  Download </a>"  : "" !!}
                                              </div><br>
                                              @if( $Doc->flag_upload == 1)
                                              <div id="divFile{{$Doc->doc_apply_id}}"  {!! (!$val)? 'style="display:none"' :'' !!}  class="btn btn-default btn-file">

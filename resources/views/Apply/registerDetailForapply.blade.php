@@ -64,7 +64,14 @@
 
 
 @section('maincontent')
-
+  <div class="alert alert-block alert-danger fade in">
+      <button type="button" class="close" data-dismiss="alert"></button>
+      <h4 class="alert-heading"><i class="icon-close"></i> คำเตือน</h4>
+      <p>โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)</p>
+      <p>
+          <a class="btn red" href="javascript:;"> ปรับปรุงข้อมูลส่วนตัว </a>
+      </p>
+  </div>
 <div class="invoice" id="page-program-detail">
     @if($curDiss->count()>0)
      @foreach ($curDiss as $curDis)
