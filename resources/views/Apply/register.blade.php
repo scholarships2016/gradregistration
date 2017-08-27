@@ -133,7 +133,7 @@
 <!-- END SEARCH BOX -->
 
 
-    <div class="search-table table-responsive">
+    <div class="search-table ">
 
           <table id="tblcurr" class="table table-bordered table-striped table-condensed">
             <thead style="background: #c3788c!important;">
