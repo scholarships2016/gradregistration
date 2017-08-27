@@ -66,7 +66,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->where('curriculum.status', 'like', '%' . $status . '%')
                 ->where('curriculum.is_approve', 'like', '%' . $is_approve . '%')
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
-                ->where('apply_setting.status', 'like', '%' . $status . '%')        
+                ->where('apply_setting.status', 'like', '%' . $status . '%')
                 ->Where(function ($query) use ($curriculum_id) {
                     if ($curriculum_id) {
                         $query->where('curriculum.curriculum_id', $curriculum_id);
@@ -436,7 +436,6 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     'de.degree_name',
                     'curr.apply_method',
                     'curr.is_approve')
-
                 ->leftJoin('tbl_faculty as fac', function ($join) {
                     $join->on('fac.faculty_id', '=', 'curr.faculty_id');
                 })
@@ -494,6 +493,84 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
             $query->offset($criteria['start'])->limit($criteria['length']);
             $data = $query->get();
+
+            $result = array('draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data
+            );
+
+            return $result;
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function doToDoListPaging($criteria = null)
+    {
+        try {
+            $columnMap = array(
+                1 => "sub_act.semester",
+                2 => "sub_act.academic_year",
+                3 => "program_ids",
+                4 => "deg.degree_name",
+                5 => "sub_trans.comment",
+                6 => "sub_trans.created",
+                7 => "curr.is_approve");
+            $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
+            $data = null;
+
+            $subTransQuery = DB::table('curriculum_workflow_transaction as trans_')
+                ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id',
+                    'trans_.workflow_status_id', 'status_.status_name',
+                    DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"),
+                    'trans_.creator', 'trans_.comment')
+                ->join('tbl_curriculum_workflow_status as status_', function ($join) {
+                    $join->on('status_.curr_wf_status_id', '=', 'trans_.workflow_status_id');
+                })
+                ->orderBy('trans_.curr_wf_tran_id', 'desc')
+                ->limit(1);
+
+            $subActQuery = DB::table('curriculum_activity as curr_act')
+                ->select('curr_act.curriculum_id', 'app_set.semester', 'app_set.academic_year')
+                ->join('apply_setting as app_set', function ($join) {
+                    $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                })
+                ->groupBy('curr_act.curriculum_id', 'app_set.semester', 'app_set.academic_year');
+
+            $mainQuery = DB::table('curriculum as curr')
+                ->select(
+                    'curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year',
+                    DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as program_ids"),
+                    'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve',
+                    'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment'
+                )
+                ->leftJoin('tbl_degree as deg', function ($join) {
+                    $join->on('deg.degree_id', '=', 'curr.degree_id');
+                })
+                ->leftJoin(DB::raw("({$subTransQuery->toSql()}) as sub_trans"), function ($join) {
+                    $join->on('sub_trans.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->leftJoin('curriculum_program as curr_prog', function ($join) {
+                    $join->on('curr_prog.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->leftJoin(DB::raw("({$subActQuery->toSql()}) as sub_act"), function ($join) {
+                    $join->on('sub_act.curriculum_id', '=', 'curr.curriculum_id');
+                })
+                ->where('curr.is_approve', '!=', 4) // Appoved Status
+                ->groupBy('curr.curriculum_id', 'sub_act.semester',
+                    'sub_act.academic_year', 'deg.degree_name',
+                    'deg.degree_name_en', 'curr.is_approve',
+                    'sub_trans.status_name', 'sub_trans.created',
+                    'sub_trans.creator', 'sub_trans.comment');
+
+            $recordsTotal = $mainQuery->get()->count();
+
+            $recordsFiltered = $mainQuery->get()->count();
+            $mainQuery->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+            $data = $mainQuery->get();
 
             $result = array('draw' => $draw,
                 'recordsTotal' => $recordsTotal,
