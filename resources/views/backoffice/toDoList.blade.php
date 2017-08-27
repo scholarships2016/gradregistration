@@ -60,25 +60,25 @@
                                         <div class="mt-checkbox-inline">
 
                                             <label class="mt-checkbox has-success">
-                                                <input type="checkbox" name="is_approve[]" value="1"/>
+                                                <input type="checkbox" name="is_approve[]" value="1" checked/>
                                                 Draft
                                                 <span></span>
                                             </label>
 
                                             <label class="mt-checkbox">
-                                                <input type="checkbox" name="is_approve[]" value="2"/>
+                                                <input type="checkbox" name="is_approve[]" value="2" checked/>
                                                 Pending
                                                 <span></span>
                                             </label>
 
                                             <label class="mt-checkbox">
-                                                <input type="checkbox" name="is_approve[]" value="3"/>
+                                                <input type="checkbox" name="is_approve[]" value="3" checked/>
                                                 Rejected
                                                 <span></span>
                                             </label>
 
                                             <label class="mt-checkbox" style="display:none">
-                                                <input type="checkbox" name="is_approve[]" value="4"/>
+                                                <input type="checkbox" name="is_approve[]" value="4" checked/>
                                                 Approved
                                                 <span></span>
                                             </label>
@@ -259,7 +259,7 @@
                         targets: 5,
                         render: function (data, type, full, meta) {
                             var html = '';
-                            if (full.comment !== null || full.comment.length !== 0) {
+                            if (full.comment !== null && full.comment.length !== 0) {
                                 html += '<a class="popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="' + full.comment + '" data-original-title="Comment">'
                                 html += '<i class="icon-speech font-green"></i>';
                                 html += '</a>&nbsp;';
