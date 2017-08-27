@@ -41,7 +41,7 @@
 <div class="search-page search-content-2">
   <div class="row">
        <div class="col-md-12">
-             <div class="note bg-red-pink bg-font-red-pink">
+             <div class="note note-pink">
 
                <p>
                    @foreach ($Datas as $Data)

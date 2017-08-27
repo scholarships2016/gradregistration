@@ -19,7 +19,7 @@ class DocumentsApplyRepositoryImpl extends AbstractRepositoryImpl implements Doc
     public function getDetail(){
          $result = null;
         try {
-            $result = TblDocumentsApply::where('active', 0)->get();
+            $result = TblDocumentsApply::where('active', 1)->get();
               } catch (\Exception $ex) {
             throw $ex;
         }
@@ -28,7 +28,7 @@ class DocumentsApplyRepositoryImpl extends AbstractRepositoryImpl implements Doc
      public function getGroup(){
          $result = null;
         try {
-            $result = TblDocumentsApply::where('active', 0)->groupBy('doc_apply_group','doc_apply_group_en') ->select('doc_apply_group','doc_apply_group_en')->orderby('doc_apply_id')->get();
+            $result = TblDocumentsApply::where('active', 1)->groupBy('doc_apply_group','doc_apply_group_en') ->select('doc_apply_group','doc_apply_group_en')->orderby('doc_apply_id')->get();
              } catch (\Exception $ex) {
             throw $ex;
         }

@@ -391,7 +391,7 @@
             }
         });
 
-    }
+    } 
 
     function reloadTable() {
         grid.setAjaxParam("faculty_id", $('#faculty_id').val());

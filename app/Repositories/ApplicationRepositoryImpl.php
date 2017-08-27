@@ -68,8 +68,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                 ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
                 ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
                 ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
-                ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
-                ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
+                
+                ->leftJoin('tbl_sub_major', 'application.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
                 ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
                 ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
                 ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
@@ -95,7 +95,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                         $query->where('application.applicant_id', $applicantID);
                     }
                 })
-                ->orderBy('application.application_id', 'desc')->get();
+//                ->select(DB::raw('program_id,thai,english'))
+                 ->orderBy('application.application_id', 'desc')->get();
+                
         } catch (\Exception $ex) {
             throw $ex;
         }
