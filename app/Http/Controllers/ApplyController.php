@@ -149,8 +149,7 @@ class ApplyController extends Controller {
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
         $pic = $this->FileRepo->getImageFileAsBase64ById($applicantProfile['applicant']->stu_img);
         $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
-
-
+ 
         return view($this->part_doc . 'docMyCourse', ['apps' => $dataApplication,
             'applicant' => $applicantProfile['applicant']
             , 'appEdus' => $applicantProfile['applicantEdu']
