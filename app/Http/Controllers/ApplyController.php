@@ -84,10 +84,10 @@ class ApplyController extends Controller {
     }
 
     public function getRegisterCourse(Request $request = null) {
- 
-        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, null, $request->searchs, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, true,null,null,null,null,$request->all());
 
-        return response()->json($curDiss); 
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, null, $request->searchs, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, true, null, null, null, null, $request->all());
+
+        return response()->json($curDiss);
     }
 
     public function registerCourse($id) {
@@ -122,6 +122,7 @@ class ApplyController extends Controller {
         if ($people) {
             $this->actionCourse('conf', $request->application_id);
             Controller::WLog('Confirmation People Reference', 'Enroll', null);
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
             return redirect('apply/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
@@ -296,12 +297,12 @@ class ApplyController extends Controller {
     }
 
     public function sentMailRegister(Request $request) {
- try {
+        try {
             if ($request) {
                 $curr_act_id = $request->curr_act_id;
                 $applications = json_decode($request->application);
 
-                $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null) ;
+                $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
                 $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
 
                 foreach ($currs as $curr) {
@@ -321,25 +322,24 @@ class ApplyController extends Controller {
                             'department_id' => $curr->department_id,
                             'faculty_name' => $curr->stu_email,
                             'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
-                'year' => $curr->academic_year,
-                'statusExam' => $app->exam_name
-                ];
-                Mail::send('email.register', $data, function($message)use ($app) {
-                $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
-                });
-                Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                            'year' => $curr->academic_year,
+                            'statusExam' => $app->exam_name
+                        ];
+                        Mail::send('email.register', $data, function($message)use ($app) {
+                            $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                        });
+                        Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
 
-                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-                return;
+                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                        return;
+                    }
                 }
-                }
-                }
-                } catch (Exception $e) {
-                Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+            }
+        } catch (Exception $e) {
+            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
 
-                session()->flash('errorMsg', Lang::get('resource.lbError'));
-                }
-        
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
     }
 
     public function confDocApply($id) {

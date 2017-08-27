@@ -433,6 +433,7 @@ $(function() {
                                                 _token:     '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
+                                            toastr.success('ดำเนินการเรียบร้อย');
                                  	window.location.href = '{!! Route('manageMyCourse') !!}';
 
 					}

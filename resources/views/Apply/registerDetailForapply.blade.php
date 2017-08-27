@@ -119,7 +119,7 @@
                                                              @foreach($subMajors as $subMajor)
 
                                                             <div class="md-radio">
-                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" name="sub_major_id" class="md-radiobtn">
+                                                                <input type="radio" id="checkbox_{{ $loop->iteration}}" value="{{ $subMajor->sub_major_id }}" {{ ($loop->iteration == 1)?'checked="checked"':''}} name="sub_major_id" class="md-radiobtn">
                                                                 <label for="checkbox_{{ $loop->iteration}}">
                                                                     <span class="inc"></span>
                                                                     <span class="check"></span>
