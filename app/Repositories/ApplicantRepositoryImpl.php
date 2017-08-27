@@ -443,11 +443,11 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             $recordsTotal = $mainQuery->get()->count();
 
             if (isset($criteria['from_date'])) {
-                $mainQuery->whereDate('created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
+                $mainQuery->whereDate('appt.created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
             }
 
             if (isset($criteria['to_date'])) {
-                $mainQuery->whereDate('created', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
+                $mainQuery->whereDate('appt.created', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
             }
 
             if (isset($criteria['emailCitizenFullname'])) {
@@ -464,6 +464,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             $recordsFiltered = $mainQuery->get()->count();
 //            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
             $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+
             $data = $mainQuery->get();
 
             $result = array('draw' => $draw,
