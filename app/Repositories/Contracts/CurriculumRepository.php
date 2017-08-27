@@ -20,4 +20,5 @@ interface CurriculumRepository
 
     public function doPaging1($criteria = null);
 
+    public function doToDoListPaging($criteria = null);
 }
