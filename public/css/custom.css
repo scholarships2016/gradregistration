@@ -60,15 +60,15 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 
 .page-sidebar .page-sidebar-menu>li.active.open>a, .page-sidebar .page-sidebar-menu>li.active>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active.open>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a {
-  background: #c3788c!important;
+  background: #E885B6!important;
 }
 
 .page-header.navbar .top-menu .navbar-nav>li.dropdown .dropdown-toggle .badge.badge-default {
-  background: #c3788c!important;
+  background: #E885B6!important;
 }
 
 #page-program-detail .form-control-static {
-  /*color: #c3788c;*/
+  /*color: #E498B1;*/
   color: #87486b!important;
 }
 
@@ -111,7 +111,7 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 
 .about-text>h4 {
-  background: #c3788c!important;
+  background: #E498B1!important;
   padding: 15px 10px 5px 10px;
   font-size: 20px;
   -webkit-border-radius: 2px;
@@ -197,8 +197,8 @@ table.dataTable thead .sorting_desc:after {
 
 .panel-success>.panel-heading {
   color: #FFFFFF;
-  background-color: #d293a5;
-  border-color: #d293a5;
+  background-color: #E498B1;
+  border-color: #E498B1;
 }
 
 .note.note-pink {
@@ -208,7 +208,7 @@ table.dataTable thead .sorting_desc:after {
 }
 
 .todo-tasklist-item-border-pink {
-  border-left: #d293a5 2px solid;
+  border-left: #ffbbd6 2px solid;
 }
 
 .todo-tasklist-item {
@@ -216,7 +216,7 @@ table.dataTable thead .sorting_desc:after {
 }
 
 div .todo-tasklist-item:hover {
-  background-color: #fde5eb;
+  background-color: #f5e6ee;
 }
 
 .font-pink-chula {

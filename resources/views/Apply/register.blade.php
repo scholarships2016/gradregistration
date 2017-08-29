@@ -126,7 +126,7 @@
   <div class="search-table ">
 
     <table id="tblcurr" class="table table-bordered table-striped table-condensed">
-      <thead style="background: #c3788c!important;">
+      <thead style="background: #E498B1!important;">
         <tr>
           <th width="25px">
             <a href="javascript:;">#</a>
