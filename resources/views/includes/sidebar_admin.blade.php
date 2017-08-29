@@ -245,7 +245,7 @@
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="form_controls.html" class="nav-link ">
+                        <a href="https://analytics.google.com/analytics/web/" target="_bank" class="nav-link ">
                             <span class="title">Google Analytics</span>
                         </a>
                     </li>
