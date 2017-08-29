@@ -105,7 +105,7 @@ class LoginUserController extends Controller {
         } else {
             Controller::WLog('Staff Not Login', 'Staff_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
-            return redirect('login/admin');
+            return redirect('admin/login');
         }
     }
 
