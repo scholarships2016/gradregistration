@@ -100,7 +100,7 @@
                                                                     <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
                                                                       <br/>
                                                                     <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
-                                                                    ({{$program->office_time}})
+                                                                    ({{ (session('locale')=='th')?$program->office_time : $program->office_time_en }})
                                                                  </label>
                 </div>
                 @endforeach
@@ -209,7 +209,7 @@
                                                                            <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
                                                                              <br/>
                                                                            <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
-                                                                           ({{$program->office_time}})
+                                                                           ({{ (session('locale')=='th')?$program->office_time : $program->office_time_en }})
                                                                         </div>
                                                                   		</li>
                                                                       @endforeach
