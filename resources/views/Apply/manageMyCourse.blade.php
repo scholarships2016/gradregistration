@@ -417,8 +417,7 @@
       showLoaderOnConfirm: true
     }, function() {
       setTimeout(function() {
-        window.location.href = '{{ url('
-        apply / actionCourse / cancel ') }}' + '/' + $id
+        window.location.href = '{{url('apply/actionCourse/cancel') }}' + '/' + $id
       }, 100);
     });
   }
