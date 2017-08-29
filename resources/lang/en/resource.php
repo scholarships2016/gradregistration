@@ -351,5 +351,9 @@ return [
     'lbItems' => 'Records',
      'lbItemsTotal' => 'Total Records',
     'lbNoItems' => 'No Records',
+    //Curriculum Detail
+    'lbApproveBy' => 'Approved by',
+    'lbApproveNo' => ', No.',
+    'lbApproveDate' => ', Date',
 
 ];

@@ -329,7 +329,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailCommAppr')}}</label>
                 <div class="col-md-8">
-                  <span class="form-control-static">{{$curDis->comm_appr_name}} ครั้งที่ {{$curDis->comm_appr_no}} วันที่ {{date('d-m-Y', strtotime($curDis->comm_appr_date))}} </span>
+                  <span class="form-control-static">{{Lang::get('resource.lbApproveBy')}} {{$curDis->comm_appr_name}} {{Lang::get('resource.lbApproveNo')}} {{$curDis->comm_appr_no}} {{Lang::get('resource.lbApproveDate')}} {{date('d-m-Y', strtotime($curDis->comm_appr_date))}} </span>
                 </div>
               </div>
               <div class="form-group">
