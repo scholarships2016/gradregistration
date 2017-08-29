@@ -106,7 +106,7 @@
                       <label for="checkbox{{$Doc->doc_apply_id}}">
                                                      <span class="inc"></span>
                                                      <span class="check"></span>
-                                                     <span class="box"></span>   {{ (session('locale')=='th')? $Doc->doc_apply_detail:$Doc->doc_apply_detail_en}}  </label> {!!($Doc->doc_apply_id == 1)? "<a href='".url('apply/docMyCourse/').'/ '.$programID. "' class='btn btn-circle green btn-outline' target='_blank'> <i class='fa fa-file-pdf-o'></i>  Download </a>" : "" !!}
+                                                     <span class="box"></span>   {{ (session('locale')=='th')? $Doc->doc_apply_detail:$Doc->doc_apply_detail_en}}  </label> {!!($Doc->doc_apply_id == 1)? "<a href='".url('apply/docMyCourse/').'/'.$programID."' class='btn btn-circle green btn-outline' target='_blank'> <i class='fa fa-file-pdf-o'></i>  Download </a>" : "" !!}
                     </div><br> @if( $Doc->flag_upload == 1)
                     <div id="divFile{{$Doc->doc_apply_id}}" {!! (!$val)? 'style="display:none"' : '' !!} class="btn btn-default btn-file">
                       @if( $Doc->doc_apply_id == 16)
