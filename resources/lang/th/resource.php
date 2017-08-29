@@ -358,4 +358,8 @@ return [
     'lbItems' => 'รายการ',
     'lbItemsTotal' => 'รายการทั้งหมด',
     'lbNoItems' => 'ไม่พบรายการ',
+    //Curriculum Detail
+    'lbApproveBy' => 'อนุมัติโดย',
+    'lbApproveNo' => 'ครั้งที่',
+    'lbApproveDate' => 'วันที่',
 ];
