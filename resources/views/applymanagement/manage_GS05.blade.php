@@ -519,7 +519,7 @@ orderable: false,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
 orderable: false,
@@ -574,7 +574,7 @@ return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle"
 
     }
 
- setInterval(function(){FormEditable.init(); }, 2000);
+ setInterval(function(){FormEditable.init(); }, 3000);
     return {
      init: function () {
              handle1();
@@ -645,10 +645,11 @@ jQuery(document).ready(function() {
 
 
     $('#search_select').click(function(){
+        $('#search-application-result').fadeIn( "slow", "linear" );
       TableDatatablesAjax.init();
       //Show serach application result
 
-      $('#search-application-result').fadeIn( "slow", "linear" );
+      
     });
 
 
@@ -779,17 +780,13 @@ jQuery(document).ready(function() {
             async: false,
             source: EngTest,
             display: function(value, sourceData) {
-                var colors = {
-                        "": "gray",
-                        1: "green",
-                        2: "blue"
-                    },
+                
                     elem = $.grep(sourceData, function(o) {
                         return o.value == value;
                     });
 
                 if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
+                    $(this).text(elem[0].text).css("color", "bule");
                 } else {
                     $(this).empty();
                 }

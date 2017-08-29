@@ -193,7 +193,7 @@
                   <hr>
                    <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
-                       <div ><input type="hidden" value="2" id="idsave"> <input type="hidden" value="1" id="applicantid">
+                       <div ><input type="hidden"   id="idsave"> <input type="hidden" value="1" id="applicantid">
                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="datatable_ajax">
                     <thead>
                       <tr>
@@ -523,38 +523,38 @@ orderable: false,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
-orderable: true,
+orderable: false,
 
 name: 'app_id',
 render: function (data, type, full, meta) {
 return  full.app_ida   ;
 } },{
 targets: [3],
-orderable: true,
+orderable: false,
 
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
 return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
 }},{
 targets: [4],
-orderable: true,
+orderable: false,
 className: 'sorting_1',
 name: 'program_id',
 render: function (data, type, full, meta) {
 return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'+'<input type="hidden" value="'+full.application_id+'">'  ;
 } },{
 targets: [5],
-orderable: true,
+orderable: false,
 
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
 return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ;
 } },{
 targets: [6],
-orderable: true,
+
 name: 'bank_name',
 render: function (data, type, full, meta) {
 return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
@@ -568,9 +568,9 @@ render: function (data, type, full, meta) {
 return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li></ul></div>') ;
 } }],
                 "bDestroy": true,
-                "ordering": true,
+                "ordering": false,
                 "order": [
-                    [2, "asc"]
+                    [1, "asc"]
                 ]
             }
         });
@@ -578,7 +578,7 @@ return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle"
 
     }
 
- setInterval(function(){FormEditable.init(); }, 2000);
+ setInterval(function(){FormEditable.init(); }, 3000);
     return {
      init: function () {
              handle1();
@@ -649,9 +649,10 @@ jQuery(document).ready(function() {
 
 
     $('#search_Select').click(function(){
+         $('#search-application-result').fadeIn( "slow", "linear" );
       TableDatatablesAjax.init();
     //Show serach application result
-      $('#search-application-result').fadeIn( "slow", "linear" );
+     
     });
 
 
@@ -674,7 +675,7 @@ jQuery(document).ready(function() {
 
  var FormEditable = function() {
 
-    $.mockjaxSettings.responseTime = 500;
+    $.mockjaxSettings.responseTime = 800;
 
     var log = function(settings, response) {
         var s = [],
@@ -783,17 +784,13 @@ jQuery(document).ready(function() {
             async: false,
             source: EngTest,
             display: function(value, sourceData) {
-                var colors = {
-                        "": "gray",
-                        1: "green",
-                        2: "blue"
-                    },
+                 
                     elem = $.grep(sourceData, function(o) {
                         return o.value == value;
                     });
 
                 if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
+                    $(this).text(elem[0].text).css("color", "blue");
                 } else {
                     $(this).empty();
                 }

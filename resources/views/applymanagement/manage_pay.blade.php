@@ -345,7 +345,7 @@ orderable: false,
 className: 'table-status',
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [1],
 orderable: true,
@@ -366,7 +366,7 @@ orderable: true,
 className: 'table-desc',
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
-return (  full.stu_first_name + '['+full.stu_first_name_en+']   ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
+return ( full.name_title+ full.stu_first_name+'  ' +  full.stu_last_name + '  <br>  '+full.name_title_en+full.stu_first_name_en+'  ' + full.stu_last_name_en ) ;
 }},{
 targets: [4],
 orderable: true,
@@ -380,7 +380,7 @@ orderable: true,
 className: 'table-title',
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return    full.prog_type_name ;
+return    full.degree_name ;
 } },{
 targets: [6],
 orderable: true,
@@ -409,7 +409,7 @@ orderable: false,
 className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<a href="#responsive"  hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   id="edit"  data-toggle="modal" data-original-title="จัดการยื่นยันการชำระเงิน"  class="btn btn-icon-only blue tooltips"><i class="fa fa-dollar"></i></a>'+
+return ('<a href="#responsive"  hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยื่นยันการชำระเงิน"  class="btn btn-icon-only blue tooltips"><i class="fa fa-dollar"></i></a>'+
    '<a href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ปรับเอกสาร" class="btn btn-icon-only blue tooltips"><i class="fa fa-file-o"></i></a>') ;
 } }],
                 "bDestroy": true,
@@ -439,9 +439,10 @@ jQuery(document).ready(function() {
 
 
    $('#datatable_ajax tbody').on( 'click', 'a', function () {
-          if($(this).attr('id')=="edit"){
+          if($(this).attr('ids')=="edit"){
+            
                 $('#application_id').val($(this).attr('hid'));
-               $('#payment_date').val($(this).attr('hidd')) ;
+               $('#payment_date').val(($(this).attr('hidd') == 'null')? Date().format('y-m-d'):$(this).attr('hidd')) ;
                $('#receipt_book').val($(this).attr('hidb'));
                $('#receipt_no').val($(this).attr('hidn'));
                $('#bank_id').val($(this).attr('bak'));

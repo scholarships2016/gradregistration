@@ -24,6 +24,7 @@ use Dompdf\Dompdf;
 use Carbon\Carbon;
 //use PhpOffice\PhpWord\Writer\PDF\DomPDF;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class ApplyController extends Controller {
 
@@ -136,7 +137,8 @@ class ApplyController extends Controller {
         $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1]);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
-        return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
+ 
+        return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program,'checkProfile' => $this->checkApplicantProfile()]);
     }
 
     public function docMyCourse($id) {
@@ -430,9 +432,9 @@ class ApplyController extends Controller {
     }
 
     public function checkApplicantProfile() {
-        $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id)->first();
+        $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id);
         $applicanteEdu = DB::table('applicant_edu')->where('applicant_id', session('Applicant')->applicant_id)->Count();
-
+ 
         if ($applicant->stu_first_name != null && $applicant->stu_first_name_en != null && $applicant->stu_addr_pcode != null && $applicant->stu_img != null && $applicant->eng_test_id != null && $applicant->eng_test_score != null && $applicanteEdu > 0) {
             return true;
         }

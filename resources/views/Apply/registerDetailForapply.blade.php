@@ -64,7 +64,8 @@
 
 
 @section('maincontent')
-  <div class="alert alert-block alert-danger fade in">
+   @if(!$checkProfile)
+  <div id="boxCheckProfile" class="alert alert-block alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert"></button>
       <h4 class="alert-heading"><i class="icon-close"></i> คำเตือน</h4>
       <p>โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)</p>
@@ -72,6 +73,7 @@
           <a class="btn red" href="javascript:;"> ปรับปรุงข้อมูลส่วนตัว </a>
       </p>
   </div>
+@endif
 <div class="invoice" id="page-program-detail">
     @if($curDiss->count()>0)
      @foreach ($curDiss as $curDis)
@@ -144,7 +146,7 @@
 
                                      <input type="hidden" name="curr_act_id" value='{{$curDis->curr_act_id}}'  >
                                      <input type="hidden" name="curriculum_id" value='{{$curDis->curriculum_id}}' >
-                                    <button  class="btn btn-lg blue  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"  onclick='test();'   href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
 
@@ -386,6 +388,7 @@
 
 
                                                                           <script type="application/javascript">
+                                                                            function test(){return false;}
   function getLogin() {
     swal({
   title:  '{{Lang::get('resource.lbMessageBeforLogin_title')}}',
