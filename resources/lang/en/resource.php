@@ -99,10 +99,11 @@ return [
     'lbReset' => 'Reset',
     'lbSAdvanced' => 'Advanced',
     'lbUpdateDoc' => 'Document Apply',
-    'lbUpdateDocApply' => 'Update related apply documents',
+    'lbUpdateDocApply' => 'Upload related apply documents',
     'lbdocMyCourse' => 'Application Form',
     'lbdocPayMyCourse' => 'Payment Invoice Form',
-    'lbdocEnvelop' => 'Envelop',
+    'lbdocEnvelop' => 'Applicant\'s address form',
+    'lbdocPaymentEnvidence' => 'Envidence of payment',
     'lbSearchPlaceHolder' => 'Search for faculty, program ID or program name',
 //Search Label
     'lbSearchFaculty' => 'Faculty',
@@ -350,5 +351,5 @@ return [
     'lbItems' => 'Records',
      'lbItemsTotal' => 'Total Records',
     'lbNoItems' => 'No Records',
- 
+
 ];
