@@ -203,4 +203,3 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
     });
 
 });
-
