@@ -11,7 +11,7 @@
 <div class="content">
   <!-- BEGIN LOGIN FORM -->
 
-  <form class="login-form" action="{{ url('/login_admin')}}" method="post">
+  <form class="login-form" action="{{url('/login_admin')}}" method="post">
     {{csrf_field()}}
     <h3 class="form-title">เข้าสู่ระบบ สำหรับผู้ดูแลระบบ    </h3>
     <div class="alert alert-info display">
@@ -22,7 +22,7 @@
       <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
       <label class="control-label visible-ie8 visible-ie9">รหัสผู้ใช้</label>
       <div class="input-icon">
-        <i class="fa fa-envelope"></i>
+        <i class="fa fa-user"></i>
         <input class="form-control placeholder-no-fix" id="user_name" type="text" autocomplete="off" placeholder="กรอกรหัสผู้ใช้" name="user_name" /></div>
     </div>
     <div class="form-group">
