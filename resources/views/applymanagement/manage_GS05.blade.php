@@ -26,6 +26,10 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
+          <span>จัดการข้อมูลผู้สมัคร</span>
+          <i class="fa fa-circle"></i>
+        </li>
+        <li>
             <span>ปรับปรุงผู้มีสิทธิ์เข้าศึกษา [GS05]</span>
         </li>
     </ul>
@@ -533,7 +537,7 @@ orderable: true,
 
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
-return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
+return (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' + full.name_title_en+full.stu_first_name_en + ' ' + full.stu_last_name_en + ' ') ;
 }},{
 targets: [4],
 orderable: true,
@@ -649,7 +653,7 @@ jQuery(document).ready(function() {
       TableDatatablesAjax.init();
       //Show serach application result
 
-      
+
     });
 
 
@@ -780,7 +784,7 @@ jQuery(document).ready(function() {
             async: false,
             source: EngTest,
             display: function(value, sourceData) {
-                
+
                     elem = $.grep(sourceData, function(o) {
                         return o.value == value;
                     });

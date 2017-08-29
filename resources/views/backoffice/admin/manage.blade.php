@@ -18,11 +18,11 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">User Management</a>
+                <a href="#">ผู้ใช้งาน</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">ผู้ใช้งานระบบ</a>
+                <a href="#">จัดการผู้ใช้งานระบบ</a>
                 <i class="fa fa-circle"></i>
             </li>
         </ul>

@@ -22,6 +22,10 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
+                <a href="#">ผู้ใช้งาน</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
                 <span>{{Lang::get('resource.lbMProfile')}}</span>
             </li>
         </ul>
