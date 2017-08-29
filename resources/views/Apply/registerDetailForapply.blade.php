@@ -363,17 +363,15 @@
 <script type="application/javascript">
   function getLogin() {
     swal({
-      title: '{{Lang::get('
-      resource.lbMessageBeforLogin_title ')}}',
-      text: '{{Lang::get('
-      resource.lbMessageBeforLogin_text ')}}',
+      title: '{{Lang::get('resource.lbMessageBeforLogin_title')}}',
+      text: '{{Lang::get('resource.lbMessageBeforLogin_text')}}',
       type: "warning",
       showCancelButton: true,
       closeOnConfirm: false,
       showLoaderOnConfirm: true
     }, function() {
       setTimeout(function() {
-        window.location.href = '{{ url(' / login ') }}'
+        window.location.href = '{{ url('/login') }}'
       }, 100);
     });
   }
