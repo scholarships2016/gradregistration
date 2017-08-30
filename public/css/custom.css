@@ -202,7 +202,7 @@ table.dataTable thead .sorting_desc:after {
 }
 
 .note.note-pink {
-  background-color: #d293a5;
+  background-color: #E498B1;
   border-color: #87486b;
   color: #FFFFFF;
 }
@@ -233,4 +233,11 @@ div .todo-tasklist-item:hover {
 }
 table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
     padding-right: 5px;
+}
+.portlet.box.red-pink {
+    border: 1px solid #eaabac;
+
+}
+.portlet.box.red-pink>.portlet-title, .portlet.red-pink, .portlet>.portlet-body.red-pink {
+    background-color: #E498B1;
 }
