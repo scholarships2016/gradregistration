@@ -547,7 +547,7 @@ orderable: true,
 
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ;
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="กรอกหมายเหตุ" data-original-title="กรอกหมายเหตุ" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ;
 } },{
 targets: [6],
 orderable: true,
