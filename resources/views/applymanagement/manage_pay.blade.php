@@ -375,7 +375,7 @@ orderable: true,
 className: 'table-title',
 name: 'stu_citizen_card',
 render: function (data, type, full, meta) {
-return  full.program_id+'-'+full.curriculum_num;
+return  full.program_id+'-'+full.curriculum_numa;
 } },{
 targets: [3],
 orderable: true,
