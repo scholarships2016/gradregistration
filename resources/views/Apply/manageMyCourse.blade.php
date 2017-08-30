@@ -303,6 +303,7 @@
                                     <h3 class="uppercase">
                             <a href="javascript:;"> {{(session('locale')=='th')? $curDis->exam_name:$curDis->exam_name_en}}</a>
                         </h3>
+                          @if($curDis->exam_id==2)
                                     <div style="margin:10px 0px 10px 0px">
 
                                       <a class="btn btn-circle blue btn-outline" id="examshow" exam="{{$curDis->exam_schedule}}" href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
@@ -310,16 +311,19 @@
                           </a>
 
                                     </div>
+                            @endif
                                   </div>
                                 </li>
                               </ul>
                             </div>
                           </div>
                           <br/>
+                            @if($curDis->exam_id==2 || $curDis->exam_id==3)
                           <div class="alert alert-info">
 
                             <i class="icon-info"></i> {{($curDis->exam_remark)?$curDis->exam_remark:''}}
                           </div>
+                          @endif
                           <!-- Exam Table -->
                           <div id="exam-schedule-data" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                             <div class="modal-dialog">
