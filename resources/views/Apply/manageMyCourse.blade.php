@@ -286,7 +286,7 @@
                           @endif
 
                           <!-- รอพิจารณาสิทธิ์การสอบ-->
-                          @if($curDis->flow_id==3)
+                          @if($curDis->flow_id==4)
                           <h4 class=" text-center alert alert-success">{{Lang::get('resource.lbTodolistExamRightResultTitle')}}</h4>
                           <div class="mt-element-list">
 
@@ -340,7 +340,7 @@
                           @endif
 
                           <!-- รอพิจารณาสิทธิ์การเข้าศึกษา-->
-                          @if($curDis->flow_id==4)
+                          @if($curDis->flow_id==5)
                           <h4 class=" text-center alert alert-success">{{Lang::get('resource.lbTodolistAdmissionRightResultTitle')}}</h4>
                           <div class="mt-element-list">
 
