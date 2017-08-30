@@ -89,6 +89,7 @@ class ManageApplyController extends Controller {
             if (!$curDiss[0]['payment_date']) {
                 $gdata = ['application_id' => $request->application_id,
                     'payment_date' => Carbon::now(),
+                    'exam_status'=>1,
                     'flow_id' => 3];
                 $res = $this->ApplicationRepo->saveApplication($gdata);
             } else {
@@ -120,6 +121,7 @@ class ManageApplyController extends Controller {
             'receipt_book' => $request->receipt_book,
             'receipt_no' => $request->receipt_no,
             'bank_id' => $request->bank_id,
+            'exam_status' => 1,
             'flow_id' => $request->flow_id];
         $res = $this->ApplicationRepo->saveApplication($gdata);
         if ($res) {
