@@ -191,20 +191,18 @@
 
                                   <div class="list-item-content">
                                     <h3 class="uppercase">
-                             <a href="javascript:;">{{Lang::get('resource.lbConfirmApply')}}</a>
-                         </h3>
+                                      <a href="javascript:;">{{Lang::get('resource.lbConfirmApply')}}</a>
+                                    </h3>
                                     <div style="margin:10px 0px 10px 0px">
                                       <a class="btn  green" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
-                               <i class="fa fa-check"></i>
-                           </a>
+                                        <i class="fa fa-check"></i>
+                                      </a>
                                       <a class="btn btn-danger mt-sweetalert sweet-8" href="javascript:cancel({{$curDis->application_id}});">  {{Lang::get('resource.lbButtonRemoveApplication')}}
-                               <i class="fa fa-times"></i>
-                           </a>
+                                         <i class="fa fa-times"></i>
+                                     </a>
                                     </div>
                                   </div>
                                 </li>
-
-
                               </ul>
                             </div>
                           </div>
@@ -286,7 +284,7 @@
                           @endif
 
                           <!-- รอพิจารณาสิทธิ์การสอบ-->
-                          @if($curDis->flow_id==4)
+                          @if($curDis->flow_id==3 || $curDis->flow_id==4)
                           <h4 class=" text-center alert alert-success">{{Lang::get('resource.lbTodolistExamRightResultTitle')}}</h4>
                           <div class="mt-element-list">
 
@@ -301,26 +299,24 @@
                                   <div class="list-item-content">
 
                                     <h3 class="uppercase">
-                            <a href="javascript:;"> {{(session('locale')=='th')? $curDis->exam_name:$curDis->exam_name_en}}</a>
-                        </h3>
-                          @if($curDis->exam_id==2)
+                                      <a href="javascript:;"> {{(session('locale')=='th')? $curDis->exam_name:$curDis->exam_name_en}}</a>
+                                  </h3>
+                                  @if($curDis->exam_id==2)
                                     <div style="margin:10px 0px 10px 0px">
-
                                       <a class="btn btn-circle blue btn-outline" id="examshow" exam="{{$curDis->exam_schedule}}" href="#exam-schedule-data" data-toggle="modal"> {{Lang::get('resource.lbTodolistViewExamTable')}}
-                              <i class="fa fa-table"></i>
-                          </a>
-
+                                        <i class="fa fa-table"></i>
+                                      </a>
                                     </div>
-                            @endif
+                                    @endif
                                   </div>
                                 </li>
                               </ul>
                             </div>
                           </div>
                           <br/>
-                            @if($curDis->exam_id==2 || $curDis->exam_id==3)
-                          <div class="alert alert-info">
 
+                          @if($curDis->exam_id==2 || $curDis->exam_id==3)
+                          <div class="alert alert-info">
                             <i class="icon-info"></i> {{($curDis->exam_remark)?$curDis->exam_remark:''}}
                           </div>
                           @endif
@@ -356,7 +352,8 @@
                                   <div class="list-icon-container">
 
                                     {!! ($curDis->admission_status_id=='0')? '<i class="icon-hourglass font-blue"></i>':''!!} {!! ($curDis->admission_status_id!='0' && $curDis->admission_status_id!='X')?'<i class="icon-check font-green"></i>':''!!} {!!
-                                    ($curDis->admission_status_id=='X')?'<i class="icon-close font-red"></i>':''!!}
+                                    ($curDis->admission_status_id=='X')?'
+                                    <i class="icon-close font-red"></i>':''!!}
                                   </div>
                                   <div class="list-item-content">
 
@@ -421,7 +418,7 @@
       showLoaderOnConfirm: true
     }, function() {
       setTimeout(function() {
-        window.location.href = '{{url('apply/actionCourse/cancel') }}' + '/' + $id
+        window.location.href = '{{url('apply/actionCourse/cancel')}}' + '/' + $id
       }, 100);
     });
   }

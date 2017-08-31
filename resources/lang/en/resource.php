@@ -355,5 +355,7 @@ return [
     'lbApproveBy' => 'Approved by',
     'lbApproveNo' => ', No.',
     'lbApproveDate' => ', Date',
-
+    'lbProfileVerifyWarning' => 'Warning',
+    'lbProfileVerifyMessage' => 'Please update your personal informations before apply.',
+    'lbProfileVerifyButton' => 'Update Profile',
 ];

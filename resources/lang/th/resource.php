@@ -362,4 +362,7 @@ return [
     'lbApproveBy' => 'อนุมัติโดย',
     'lbApproveNo' => 'ครั้งที่',
     'lbApproveDate' => 'วันที่',
+    'lbProfileVerifyWarning' => 'คำเตือน',
+    'lbProfileVerifyMessage' => 'โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)',
+    'lbProfileVerifyButton' => 'ปรับปรุงข้อมูลส่วนตัว',
 ];
