@@ -137,6 +137,10 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
+    //Notice
+    Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
+
+
     Route::get('toDoList', 'BackOffice\BackOfficeController@showToDoListPage')->name('admin.backoffice.showToDoListPage');
     Route::get('doPaging', 'BackOffice\BackOfficeController@doPaging')->name('admin.backoffice.doPaging');
 
