@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ApplicantRepository;
@@ -11,7 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-  
+
 use App\Repositories\UserRepositoryImpl;
 
 class LoginUserController extends Controller {
@@ -38,7 +36,7 @@ class LoginUserController extends Controller {
     }
 
     public function showLoginForm() {
-      
+
         return view('auth.loginApplicant_admin');
     }
 
@@ -88,7 +86,7 @@ class LoginUserController extends Controller {
             $role->user_type = 'Staff';
             session()->put('user_tyep', $role);
             session()->put('locale','th');
-            
+
 
 //            $app = new \stdClass();
 //            $app->applicant_id = 1;
@@ -105,7 +103,7 @@ class LoginUserController extends Controller {
         } else {
             Controller::WLog('Staff Not Login', 'Staff_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
-            return redirect('login/admin');
+            return redirect('admin/login');
         }
     }
 

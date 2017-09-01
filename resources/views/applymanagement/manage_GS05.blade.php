@@ -26,6 +26,10 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
+          <span>จัดการข้อมูลผู้สมัคร</span>
+          <i class="fa fa-circle"></i>
+        </li>
+        <li>
             <span>ปรับปรุงผู้มีสิทธิ์เข้าศึกษา [GS05]</span>
         </li>
     </ul>
@@ -519,7 +523,7 @@ orderable: false,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
 orderable: false,
@@ -533,7 +537,7 @@ orderable: true,
 
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
-return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
+return (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' + full.name_title_en+full.stu_first_name_en + ' ' + full.stu_last_name_en + ' ') ;
 }},{
 targets: [4],
 orderable: true,
@@ -553,7 +557,7 @@ targets: [6],
 orderable: true,
 name: 'bank_name',
 render: function (data, type, full, meta) {
-return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
+return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+  ((full.eng_test_id_admin)? full.eng_test_id_admin:((full.eng_test_id)?full.eng_test_id:0))  +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
 }},{
 
 targets: [7],
@@ -574,7 +578,7 @@ return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle"
 
     }
 
- setInterval(function(){FormEditable.init(); }, 2000);
+ setInterval(function(){FormEditable.init(); }, 3000);
     return {
      init: function () {
              handle1();
@@ -645,10 +649,11 @@ jQuery(document).ready(function() {
 
 
     $('#search_select').click(function(){
+        $('#search-application-result').fadeIn( "slow", "linear" );
       TableDatatablesAjax.init();
       //Show serach application result
 
-      $('#search-application-result').fadeIn( "slow", "linear" );
+
     });
 
 
@@ -779,17 +784,13 @@ jQuery(document).ready(function() {
             async: false,
             source: EngTest,
             display: function(value, sourceData) {
-                var colors = {
-                        "": "gray",
-                        1: "green",
-                        2: "blue"
-                    },
+
                     elem = $.grep(sourceData, function(o) {
                         return o.value == value;
                     });
 
                 if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
+                    $(this).text(elem[0].text).css("color", "bule");
                 } else {
                     $(this).empty();
                 }

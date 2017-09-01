@@ -20,7 +20,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">User Management</a>
+                <a href="#">ผู้ใช้งาน</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
@@ -196,7 +196,7 @@
                     "url": "{{route('admin.applicantManage.doPaging')}}", // ajax source
                     "method": "get"
                 },
-                "ordering": false,
+                "ordering": true,
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -210,12 +210,14 @@
                     },
                     {
                         targets: 1,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             return full.stu_citizen_card;
                         }
                     },
                     {
                         targets: 2,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             var html = '';
                             if (full.fullname_th !== null) {
@@ -231,6 +233,7 @@
                         }
                     }, {
                         targets: 3,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             var html = full.stu_email == null ? '' : full.stu_email;
                             if (full.stu_phone !== null) {
@@ -241,6 +244,7 @@
                         }
                     }, {
                         targets: 4,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             var html = '';
                             if (full.curriculum_progs !== null) {
@@ -254,11 +258,13 @@
                         }
                     }, {
                         targets: 5,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             return full.register_date;
                         }
                     }, {
                         targets: 6,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             return (full.login_datetime == null ? '' : full.login_datetime) + ' - ' + (full.login_ip == null ? '' : full.login_ip);
                         }

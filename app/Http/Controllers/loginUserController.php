@@ -11,11 +11,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use \Illuminate\Support\Facades\Crypt;
-use App\Repositories\FileRepositoryImpl;
+  
+use App\Repositories\UserRepositoryImpl;
 
-
-class LoginApplicantController extends Controller {
+class LoginUserController extends Controller {
 
     protected $redirectTo = '/seller_home';
 
@@ -23,31 +22,39 @@ class LoginApplicantController extends Controller {
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
-     protected $FileRepo;
+    protected $userRepo;
 
-    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, FileRepositoryImpl $FileRepo) {
+    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, UserRepositoryImpl $userRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
-        $this->FileRepo = $FileRepo;
-        
-        Auth::setDefaultDriver( 'web' );
+        $this->userRepo = $userRepo;
+
+        Auth::setDefaultDriver('admins');
     }
 
     //Authen
     protected function guard() {
-        return Auth::guard('web');
+        return Auth::guard('admins');
     }
 
     public function showLoginForm() {
-        $titles = $this->nametitleRepo->getAll();
-        return view('auth.loginApplicant', ['titles' => $titles]);
+      
+        return view('auth.loginApplicant_admin');
     }
 
     protected function validator(array $data) {
         return Validator::make($data, [
-                    'stu_email' => 'required|max:255|unique:users',
-                    'stu_password' => 'required|confirmed|min:6',
+                    'user_name' => 'required|max:255|unique:users',
+                    'user_password' => 'required|confirmed|min:6',
         ]);
+    }
+
+    public function checkuserldap() {
+        // $client = new Client();
+//        $res = $client->request('POST', 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")');
+
+        $response = Request::create('https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")', 'POST');
+        echo $response;
     }
 
     public function language(Request $request) {
@@ -62,38 +69,43 @@ class LoginApplicantController extends Controller {
     }
 
     public function postLogin(Request $request) {
-        if (Auth::attempt(['stu_email' => $request->stu_email, 'password' => $request->stu_password])) {
+
+        if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
             $user_data = Auth::user();
             $pic = null;
+
             if ($user_data->stu_img) {
                 $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
             }
 
-            session()->put('user_id', $user_data->applicant_id);
-            session()->put('first_name', $user_data->stu_first_name_en);
-            session()->put('last_name', $user_data->stu_last_name_en);
-            session()->put('email_address', $user_data->stu_email);
-            session()->put('stu_img', $pic);         
+            session()->put('user_id', $user_data->user_id);
+            session()->put('first_name', $user_data->user_name);
+            session()->put('last_name', '');
+            session()->put('email_address', $user_data->user_name);
+            session()->put('stu_img', $pic);
             $role = new \stdClass();
-            $role->user_role= '';
-            $role->user_type= 'applicant';
+            $role->user_role = '1';
+            $role->user_type = 'Staff';
             session()->put('user_tyep', $role);
+            session()->put('locale','th');
             
-            
-            $app = new \stdClass();
-            $app->applicant_id = $user_data->applicant_id;
-            $app->stu_citizen_card = $user_data->stu_citizen_card;
-            $app->stu_email = $user_data->stu_email;
-            $app->nation_id = $user_data->nation_id;
-            session()->put('Applicant', $app);
-            Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
-            session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
-            
+
+//            $app = new \stdClass();
+//            $app->applicant_id = 1;
+//            $app->stu_citizen_card = '123456789';
+//            $app->stu_email = 'pacusm128@gmail.com';
+//            $app->nation_id = 1;
+//            session()->put('Applicant', $app);
+
+
+            $this->userRepo->save(['user_id' => $user_data->user_id, 'user_name', 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
+            Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
+            session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
             return redirect('/home');
         } else {
-            Controller::WLog('User Applicant Not Login', 'User_Login', null);
+            Controller::WLog('Staff Not Login', 'Staff_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
-            return redirect('login');
+            return redirect('login/admin');
         }
     }
 

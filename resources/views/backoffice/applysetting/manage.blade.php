@@ -18,12 +18,12 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">จัดการข้อมูลหลักสูตร</a>
+                <a href="#">ตั้งค่าการสมัคร</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">รายการหลักสูตร</a>
-                <i class="fa fa-circle"></i>
+                <a href="#">รายการการเปิดรับสมัคร</a>
+
             </li>
         </ul>
     </div>
@@ -31,7 +31,7 @@
 
 @section('pagetitle')
     <h1 class="page-title">
-        จัดการข้อมูลหลักสูตร
+        รายการการเปิดรับสมัคร
     </h1>
 @stop
 

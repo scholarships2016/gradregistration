@@ -15,7 +15,12 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>User Management</span>
+                <a href="#">ผู้ใช้งาน</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="#">เพิ่ม/แก้ไข ผู้ใช้งานระบบ</a>
+                <i class="fa fa-circle"></i>
             </li>
         </ul>
     </div>
