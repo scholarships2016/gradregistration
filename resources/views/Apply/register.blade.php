@@ -293,10 +293,10 @@ return ('{{Lang::get('resource.lbSearchResultMajor')}}'+ (('{{session('locale')}
 }},{
 targets: [4],
 orderable: false,
-className: 'table-download',
+className: 'table-downloads',
 
 render: function (data, type, full, meta) {
-return ('<a title="Click to View Detail and Apply" href="{{url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P'+full.program_type_id+'"><i class="icon-doc font-green-soft"></i></a>') ;
+return ('<a href="{{url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P'+full.program_type_id+'" class="btn btn-circle green-haze btn-outline ">'+'{{Lang::get('resource.lbSearchResultAction') }}'+ ' <i class="fa fa-arrow-circle-right"></i></a>') ;
 } }] ,
             }
         });
