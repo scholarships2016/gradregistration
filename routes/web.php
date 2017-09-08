@@ -42,7 +42,7 @@ Route::get('apply/registerDetailForapply/{id}', 'ApplyController@registerDetailF
 
 //PageMain
 Route::get('/home', 'HomeController@viewHome')->name('viewHome');
- Route::get('/', 'HomeController@viewHome');
+Route::get('/', 'HomeController@viewHome');
 Route::get('/contact', function () {
     return view('contact');
 });
@@ -53,44 +53,12 @@ Route::get('/download', function () {
     return view('download');
 });
 
-//payment
-
-Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
-Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
-Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
-Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
-
-//GS03
-
-Route::get('admin/ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
-Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCourse');
-Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
-Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
-Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
-Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
-Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
- Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
-  Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
-
-
-
-//GS05
-Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
-Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
-Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
-Route::get('admin/showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
-Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
-Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
-Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
-Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
-
- 
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-//Apply 
+//Apply
     Route::get('apply', 'ApplyController@showAnnouncement');
     Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
     Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
@@ -105,6 +73,37 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
     Route::get('apply/docAppEnvelopPDF/{id}', 'ApplyController@docApplicationEnvelop')->name('docAppEnvelopPDF');
     Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
+
+
+//payment
+
+    Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
+    Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
+    Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
+    Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
+
+//GS03
+
+    Route::get('admin/ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
+    Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCourse');
+    Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
+    Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
+    Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
+    Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
+    Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
+    Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
+    Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
+
+
+//GS05
+    Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
+    Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
+    Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
+    Route::get('admin/showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
+    Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
+    Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
+    Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
+    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
 });
 
 
@@ -138,6 +137,12 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
+    //Notice
+    Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
+
+
+    Route::get('toDoList', 'BackOffice\BackOfficeController@showToDoListPage')->name('admin.backoffice.showToDoListPage');
+    Route::get('doPaging', 'BackOffice\BackOfficeController@doPaging')->name('admin.backoffice.doPaging');
 
     Route::group(['prefix' => 'management', 'middleware' => []], function () {
         Route::group(['prefix' => 'curriculum', 'middleware' => []], function () {
@@ -170,15 +175,28 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
         });
 
         Route::group(['prefix' => 'applicantManage', 'middleware' => []], function () {
+            Route::get('view/{id}', 'BackOffice\ApplicantManagementController@showViewPage')->name('admin.applicantManage.showViewPage');
+            Route::get('edit/{id}', 'BackOffice\ApplicantManagementController@showEditPage')->name('admin.applicantManage.showEditPage');
             Route::get('manage', 'BackOffice\ApplicantManagementController@showManagePage')->name('admin.applicantManage.showManagePage');
             Route::get('doPaging', 'BackOffice\ApplicantManagementController@doPaging')->name('admin.applicantManage.doPaging');
+            Route::post('doDelete', 'BackOffice\ApplicantManagementController@doDelete')->name('admin.applicantManage.doDelete');
 
+            Route::post('/doSavePersInfo', 'BackOffice\ApplicantManagementController@doSavePersonalInfomation')->name('admin.applicantManage.doSavePersInfo');
+            Route::post('/doSavePretAddr', 'BackOffice\ApplicantManagementController@doSavePresentAddress')->name('admin.applicantManage.doSavePretAddr');
+            Route::post('/doSaveKnowSkill', 'BackOffice\ApplicantManagementController@doSaveKnowledgeSkill')->name('admin.applicantManage.doSaveKnowSkill');
+            Route::post('/doSaveEduBak', 'BackOffice\ApplicantManagementController@doSaveEduBackground')->name('admin.applicantManage.doSaveEduBak');
+            Route::post('/doSaveWorkExp', 'BackOffice\ApplicantManagementController@doSaveWorkExp')->name('admin.applicantManage.doSaveWorkExp');
+            Route::post('/doChangePassword', 'BackOffice\ApplicantManagementController@doChangePassword')->name('admin.applicantManage.doChangePassword');
+
+            //Application
+            Route::get('getApplicationAndProgramInfo', 'BackOffice\ApplicantManagementController@getApplicationAndProgramInfo')->name('admin.applicantManage.getApplicationAndProgramInfo');
+            Route::post('doDeleteApplication', 'BackOffice\ApplicantManagementController@doDeleteApplication')->name('admin.applicantManage.doDeleteApplication');
         });
 
         Route::group(['prefix' => 'adminManage', 'middleware' => []], function () {
             Route::get('manage', 'BackOffice\AdminManagementController@showManagePage')->name('admin.adminManage.showManagePage');
             Route::get('add', 'BackOffice\AdminManagementController@showAddPage')->name('admin.adminManage.showAdd');
-            Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEdit');
+            Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEditPage');
             Route::post('save', 'BackOffice\AdminManagementController@doSave')->name('admin.adminManage.doSave');
             Route::post('doDelete', 'BackOffice\AdminManagementController@doDelete')->name('admin.adminManage.doDelete');
 
@@ -189,4 +207,3 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
     });
 
 });
-

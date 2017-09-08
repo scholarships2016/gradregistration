@@ -79,6 +79,47 @@
                         </div>
                     </div>
                 </div>
+                <div id="adminScoreDiv">
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Admin&nbsp;{{Lang::get('resource.lbEnglish')}}
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="hidden" id="eng_test_id_admin_hidden" name="eng_test_id_admin_hidden"
+                                           value="{{$applicant->eng_test_id_admin}}"/>
+                                    <select class="form-control input-small select2" id="eng_test_id_admin" name="eng_test_id_admin">
+                                        @if(!empty($engTestList))
+                                            @foreach ($engTestList as $engTest)
+                                                <option value="{{$engTest->eng_test_id}}">{{$engTest->eng_test_name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select> <span class="help-block"><a
+                                                href="http://www.eurogates.nl/en-TOEFL-IELTS-score-conversion/"
+                                                target="_">{{Lang::get('resource.lbExScoreTest')}}</a></span>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <label class="control-label">{{Lang::get('resource.lbScore')}}
+                                                </label>
+                                                <input type="text" class="form-control input-small" id="eng_test_score_admin"
+                                                       name="eng_test_score_admin" value="{{$applicant->eng_test_score_admin}}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="control-label">{{Lang::get('resource.lbDateTaken')}}
+                                                </label>
+                                                <input type="text" class="form-control input-small" id="eng_date_taken_admin"
+                                                       name="eng_date_taken_admin"
+                                                       value="@if(!empty($applicant->eng_date_taken_admin)){{$applicant->eng_date_taken_admin->format('d/m/Y')}}@endif">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="form-actions">
                 <div class="row">

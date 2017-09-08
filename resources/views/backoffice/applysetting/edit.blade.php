@@ -19,7 +19,11 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>{{Lang::get('resource.lbMProfile')}}</span>
+                <a href="#">ตั้งค่าการสมัคร</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>เพิ่ม/แก้ไข การเปิดรับสมัคร</span>
             </li>
         </ul>
     </div>

@@ -1,302 +1,298 @@
-@extends('layouts.default')
-
-@push('pageCss')
+@extends('layouts.default') @push('pageCss')
 
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css">
- <link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/layouts/layout/css/themes/light2.min.css')}}" rel="stylesheet" type="text/css" id="style_color">
-<link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
-      type="text/css"/>
+<link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css">
 
-   <link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
-      type="text/css"/>
+<link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" type="text/css" />
 <style type="text/css">
 
 </style>
-@endpush
-
-@section('pagebar')
+@endpush @section('pagebar')
 <div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="/">{{Lang::get('resource.lbMain')}}</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <span>ปรับปรุงผู้มีสิทธิ์สอบ [GS03]</span>
-        </li>
-    </ul>
-    {{--<div class="page-tool    bar">--}}
-                  {{--<div class="btn-group pull-right">--}}
-        {{--<button type="button" class="btn green btn-sm btn-outline dropdown-toggle"--}}
-        {{--data-toggle="dropdown"> Actions--}}
+  <ul class="page-breadcrumb">
+    <li>
+      <a href="/">{{Lang::get('resource.lbMain')}}</a>
+      <i class="fa fa-circle"></i>
+    </li>
+    <li>
+      <span>จัดการข้อมูลผู้สมัคร</span>
+      <i class="fa fa-circle"></i>
+    </li>
+    <li>
+      <span>ปรับปรุงผู้มีสิทธิ์สอบ [GS03]</span>
+    </li>
+  </ul>
+  {{--
+  <div class="page-tool    bar">--}} {{--
+    <div class="btn-group pull-right">--}} {{--
+      <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" --}} {{--data-toggle="dropdown"> Actions--}}
         {{--<i class="fa fa-angle-down"></i>--}}
-                  {{--</button>--}}
-                                  {{--<ul class="dropdown-menu pull-right" role="menu">--}}
-        {{--<li>--}}
-        {{--<a href="#">--}}
-        {{--<i class="icon-bell"></i> Action</a>--}}
-                                  {{--</li>--}}
-        {{--<li>--}}
-        {{--<a href="#">--}}
-        {{--<i class="icon-shield"></i> Another action</a>--}}
-                                                  {{--</li>--}}
-                                                          {{--<li>--}}
-        {{--<a href="#">--}}
-        {{--<i class="icon-user"></i> Something else here</a>--}}
-                                                          {{--</li>--}}
-                                                                          {{--<li class="divider"></li>--}}
-        {{--<li>--}}
-        {{--<a href="#">--}}
-        {{--<i class="icon-bag"></i> Separated link</a>--}}
-                                                                          {{--</li>--}}
-                   {{--</ul>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-    </div>
-@stop
-
-@section('pagetitle')
+                  {{--</button>--}} {{--
+      <ul class="dropdown-menu pull-right" role="menu">--}} {{--
+        <li>--}} {{--
+          <a href="#">--}}
+        {{--<i class="icon-bell"></i> Action</a>--}} {{--
+        </li>--}} {{--
+        <li>--}} {{--
+          <a href="#">--}}
+        {{--<i class="icon-shield"></i> Another action</a>--}} {{--
+        </li>--}} {{--
+        <li>--}} {{--
+          <a href="#">--}}
+        {{--<i class="icon-user"></i> Something else here</a>--}} {{--
+        </li>--}} {{--
+        <li class="divider"></li>--}} {{--
+        <li>--}} {{--
+          <a href="#">--}}
+        {{--<i class="icon-bag"></i> Separated link</a>--}} {{--
+        </li>--}} {{--
+      </ul>--}} {{--
+    </div>--}} {{--
+  </div>--}}
+</div>
+@stop @section('pagetitle')
 <h1 class="page-title">ปรับปรุงผู้มีสิทธิ์สอบ [GS03]
 
-</h1>
-@stop
-
-
-@section('maincontent')
- <div class="row">
-            <div class="col-md-12">
-              <!-- BEGIN EXAMPLE TABLE PORTLET-->
-              <div class="portlet light bordered">
-                <div class="portlet-title">
-                  <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
-                  </div>
-                  <div class="actions">
-                    <div class="btn-group pull-right">
-                      <button class="btn blue-steel  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+</h1> @stop @section('maincontent')
+<div class="row">
+  <div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-dark">
+          <i class="icon-settings font-dark"></i>
+          <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
+        </div>
+        <div class="actions">
+          <div class="btn-group pull-right">
+            <button class="btn blue-steel  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
                                                   <i class="fa fa-angle-down"></i>
                                               </button>
-                      <ul class="dropdown-menu pull-right">
-                        <li>
-                          <a href="javascript:window.print();">
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="javascript:window.print();">
                                                           <i class="fa fa-print"></i> Print </a>
-                        </li>
+              </li>
 
-                        <li>
-                          <a href="javascript:;">
+              <li>
+                <a href="javascript:;">
                                                           <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="portlet-body">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="portlet-body">
 
-                  <div class="table-toolbar">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="m-heading-1 border-green m-bordered">
-                          <h3><span class="badge badge-success">1</span> ค้นหาหลักสูตร</h3>
-                          <p>
-                            </p><div class="row">
-                              <div class="col-md-2">
-                                <div class="form-group">
-                                  <label>ภาคการศึกษา</label>
-                                <select id="semester" name="semester" class="form-control input-small">
+        <div class="table-toolbar">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="m-heading-1 border-green m-bordered">
+                <h3><span class="badge badge-success">1</span> ค้นหาหลักสูตร</h3>
+                <p>
+                </p>
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>ภาคการศึกษา</label>
+                      <select id="semester" name="semester" class="form-control input-small">
 
                                         <option value="1">ภาคต้น</option>
                                         <option value="2">ภาคปลาย</option>
 
                                     </select>
-                                </div>
-                              </div>
-                              <div class="col-md-2">
-                                <div class="form-group">
-                                  <label>ปีการศึกษา</label>
-                                   <select id="year" name="year" class="form-control input-small">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>ปีการศึกษา</label>
+                      <select id="year" name="year" class="form-control input-small">
 
                                         @for ($i = date('Y'); $i >= date('Y')-10; $i--)
                                         <option value="{{ $i+543 }}"  >{{ $i+543 }}</option>
                                         @endfor
                                     </select>
-                                </div>
-                              </div>
-                              <div class="col-md-2">
-                                <div class="form-group">
-                                  <label>รอบที่</label>
-                                 <select id="roundNo" name="roundNo" class="form-control input-small">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>รอบที่</label>
+                      <select id="roundNo" name="roundNo" class="form-control input-small">
 
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                     </select>
-                                </div>
-                              </div>
-                              <div class="col-md-2">
-                                <div class="form-group" style="padding-top:25px;">
-                                    <button id="btnSearch1" href="javascript:;" class="btn btn yellow"> ค้นหา
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group" style="padding-top:25px;">
+                      <button id="btnSearch1" href="javascript:;" class="btn btn yellow"> ค้นหา
                                                                                               <i class="fa fa-search"></i>
                                       </button>
-                                    </div>
-                              </div>
+                    </div>
+                  </div>
 
 
-                            </div>
+                </div>
 
-                          <p></p>
-                        </div>
-                        <div id="search-program-result" class="m-heading-1 border-blue m-bordered" style="display:none;">
-                          <h3><span class="badge badge-info">2</span> เลือกหลักสูตร</h3>
-                          <p>
+                <p></p>
+              </div>
+              <div id="search-program-result" class="m-heading-1 border-blue m-bordered" style="display:none;">
+                <h3><span class="badge badge-info">2</span> เลือกหลักสูตร</h3>
+                <p>
 
-                            </p>
+                </p>
 
-                            <div class="row">
+                <div class="row">
 
-                          <div class="col-md-11">
-                            <div class="form-group">
-                                <label for="single" class="control-label">เลือกหลักสูตรเพื่อดำเนินการ</label>
-                                <select id="single" class="form-control select2">
+                  <div class="col-md-11">
+                    <div class="form-group">
+                      <label for="single" class="control-label">เลือกหลักสูตรเพื่อดำเนินการ</label>
+                      <select id="single" class="form-control select2">
                                     <option></option>
 
                                 </select>
-                            </div>
-                          </div>
-                              <div class="cold-md-1">
-                                <div class="form-group" style="padding-top:25px;">
-                                  <a id="search_Select" href="javascript:;"  class="btn btn-small blue"> เลือก
+                    </div>
+                  </div>
+                  <div class="cold-md-1">
+                    <div class="form-group" style="padding-top:25px;">
+                      <a id="search_Select" href="javascript:;" class="btn btn-small blue"> เลือก
                                                                             <i class="fa fa-mouse-pointer"></i>
                                                                         </a>
-                                </div>
-                              </div>
-
-
-                            </div>
-
-                          <p></p>
-                        </div>
-                      </div>
                     </div>
-
                   </div>
-                  <div id="search-application-result" style="display:none;">
-                  <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
-                  <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
+
+
+                </div>
+
+                <p></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div id="search-application-result" style="display:none;">
+          <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
+          <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal">
 <i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
 </a>
-                  <hr>
-                   <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
+          <hr>
+          <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
-                       <div ><input type="hidden" value="2" id="idsave"> <input type="hidden" value="1" id="applicantid">
-                       <table class="table table-striped table-bordered table-hover table-checkable order-column" id="datatable_ajax">
-                    <thead>
-                      <tr>
-                        <th>อีเมล์?<br/>
-                          <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+            <div><input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
+              <table class="table table-striped table-bordered table-hover table-checkable order-column" id="datatable_ajax">
+                <thead>
+                  <tr>
+                    <th>อีเมล์?<br/>
+                      <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                             <input type="checkbox" class="group-checkable" data-set="#datatable_ajax .checkboxes" />
                                                             <span></span>
                                                         </label>
-                        </th>
-                        <th> No. </th>
-                        <th> เลขที่ใบสมัคร </th>
-                        <th> ชื่อ-สกุล </th>
-                        <th> ผลการพิจารณา </th>
-                        <th> หมายเหตุ </th>
-                        <th> คะแนนภาษาอังกฤษ </th>
-                        <th> Actions </th>
-                      </tr>
-                      </thead>
+                    </th>
+                    <th> No. </th>
+                    <th> เลขที่ใบสมัคร </th>
+                    <th> ชื่อ-สกุล </th>
+                    <th> ผลการพิจารณา </th>
+                    <th> หมายเหตุ </th>
+                    <th> คะแนนภาษาอังกฤษ </th>
+                    <th> Actions </th>
+                  </tr>
+                </thead>
 
-                    </table>
+              </table>
 
-                </div>
-              </div>
-
-                  <div class="form-actions">
-                    <div class="row">
-                      <div class="col-md-offset-4 col-md-8">
-                        <a type="button" class="btn grey-steel">ยกเลิก</a>
-                        <a id="sentmailall" type="submit" class="btn green"><i class="fa fa-envelope-o"></i> ส่งอีเมล์ แจ้งผลพิจารณา</a>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-              <!-- END EXAMPLE TABLE PORTLET-->
             </div>
+          </div>
 
-<div class="col-md-12">
- <div class="portlet light ">
-     <div class="portlet-body">
- <div tabindex="-1" class="modal fade in" id="responsive" aria-hidden="true"   >
-     <div class="modal-dialog">
-                                            <div class="modal-content">
-                                      <form id="addData">
-                                          <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button class="close" aria-hidden="true" type="button" data-dismiss="modal"></button>
-                                                    <h4 class="modal-title">เพิ่มผู้สมัคร เป็นกรณีพิเศษ</h4>
-                                                </div>
-                                                <div class="modal-body">
+          <div class="form-actions">
+            <div class="row">
+              <div class="col-md-offset-4 col-md-8">
+                <a type="button" class="btn grey-steel">ยกเลิก</a>
+                <a id="sentmailall" type="submit" class="btn green"><i class="fa fa-envelope-o"></i> ส่งอีเมล์ แจ้งผลพิจารณา</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+  </div>
 
-                                                            <div class="row">
-                                                             <div class="col-md-12">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">
+  <div class="col-md-12">
+    <div class="portlet light ">
+      <div class="portlet-body">
+        <div tabindex="-1" class="modal fade in" id="responsive" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form id="addData">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button class="close" aria-hidden="true" type="button" data-dismiss="modal"></button>
+                      <h4 class="modal-title">เพิ่มผู้สมัคร เป็นกรณีพิเศษ</h4>
+                    </div>
+                    <div class="modal-body">
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group">
+                            <span class="input-group-addon">
                                                                     <i class="fa fa-user"></i>
                                                                 </span>
-                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">
-                                                                <span class="input-group-btn">
+                            <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">
+                            <span class="input-group-btn">
                                                             <a class="btn blue" id="userSearch" type="button">ตรวจสอบ</a>
                                                         </span>
-                                                            </div> </div></div>
+                          </div>
+                        </div>
+                      </div>
 
-                                   <div class="row">
-                                       <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                               <div class="dashboard-stat green">
-                                    <div class="visual">
-                                        <i class="fa fa-group fa-icon-medium"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="number">ชื่อ :<label id="show_name"></label></div>
-                                        <div class="desc"> เลขประจำตัวประชาชน/Passport :<label id="idCard"></label> </div>
-                                    </div>
-
-                                </div>
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                          <div class="dashboard-stat green">
+                            <div class="visual">
+                              <i class="fa fa-group fa-icon-medium"></i>
                             </div>
-                                   </div>
-                                                    <div class="form-group">
-                                                    <label>หมายเหตุ</label>
-                                                    <textarea class="form-control" id="apply_comment" rows="3"></textarea>
-                                                </div>
-                                                    <br>
+                            <div class="details">
+                              <div class="number">ชื่อ :<label id="show_name"></label></div>
+                              <div class="desc"> เลขประจำตัวประชาชน/Passport :<label id="idCard"></label> </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>หมายเหตุ</label>
+                        <textarea class="form-control" id="apply_comment" rows="3"></textarea>
+                      </div>
+                      <br>
 
 
-                                                <div class="modal-footer">
-                                                    <input type="hidden" id="appcantid">
-                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">ยกเลิก</button>
-                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">บันทึก</button>
-                                                </div>
+                      <div class="modal-footer">
+                        <input type="hidden" id="appcantid">
+                        <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">ยกเลิก</button>
+                        <button class="btn green" type="button" id="btSave" data-dismiss="modal">บันทึก</button>
+                      </div>
 
-                                          </div>
+                    </div>
 
-</div>
-                                          </div>  </form>
-
- </div>
-     </div>
- </div>
-     </div>
- </div>
+                  </div>
                 </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 @stop
 
@@ -523,7 +519,7 @@ orderable: false,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
 orderable: false,
@@ -533,42 +529,42 @@ render: function (data, type, full, meta) {
 return  full.app_ida   ;
 } },{
 targets: [3],
-orderable: false,
+orderable: true,
 
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
-return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
+return (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' + full.name_title_en+full.stu_first_name_en + ' ' + full.stu_last_name_en + ' ') ;
 }},{
 targets: [4],
-orderable: false,
+orderable: true,
 className: 'sorting_1',
 name: 'program_id',
 render: function (data, type, full, meta) {
 return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.exam_status + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.exam_name +' </a>'+'<input type="hidden" value="'+full.application_id+'">'  ;
 } },{
 targets: [5],
-orderable: false,
+orderable: true,
 
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ;
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="กรอกหมายเหตุ" data-original-title="กรอกหมายเหตุ" class="editable editable-pre-wrapped editable-click">'+ (( full.exam_remark !== null )? full.exam_remark : '') +' </a>' ;
 } },{
 targets: [6],
-
+orderable: true,
 name: 'bank_name',
 render: function (data, type, full, meta) {
-return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
+return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ ((full.eng_test_id_admin)? full.eng_test_id_admin:((full.eng_test_id)?full.eng_test_id:0)) +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
 }},{
 
 targets: [7],
-orderable: false,
+orderable: true,
 
 name: 'apply',
 render: function (data, type, full, meta) {
 return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li></ul></div>') ;
 } }],
                 "bDestroy": true,
-                "ordering": false,
+                "ordering": true,
                 "order": [
                     [1, "asc"]
                 ]
@@ -578,7 +574,7 @@ return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle"
 
     }
 
- setInterval(function(){FormEditable.init(); }, 2000);
+ setInterval(function(){FormEditable.init(); }, 3000);
     return {
      init: function () {
              handle1();
@@ -649,9 +645,10 @@ jQuery(document).ready(function() {
 
 
     $('#search_Select').click(function(){
+         $('#search-application-result').fadeIn( "slow", "linear" );
       TableDatatablesAjax.init();
     //Show serach application result
-      $('#search-application-result').fadeIn( "slow", "linear" );
+
     });
 
 
@@ -674,7 +671,7 @@ jQuery(document).ready(function() {
 
  var FormEditable = function() {
 
-    $.mockjaxSettings.responseTime = 500;
+    $.mockjaxSettings.responseTime = 800;
 
     var log = function(settings, response) {
         var s = [],
@@ -783,17 +780,13 @@ jQuery(document).ready(function() {
             async: false,
             source: EngTest,
             display: function(value, sourceData) {
-                var colors = {
-                        "": "gray",
-                        1: "green",
-                        2: "blue"
-                    },
+
                     elem = $.grep(sourceData, function(o) {
                         return o.value == value;
                     });
 
                 if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
+                    $(this).text(elem[0].text).css("color", "blue");
                 } else {
                     $(this).empty();
                 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\ApplicantDeleteException;
 use App\Repositories\Contracts\ApplicantEduRepository;
 use App\Repositories\Contracts\ApplicantNewsSourceRepository;
 use App\Repositories\Contracts\ApplicantRepository;
@@ -418,23 +419,35 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                     DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"),
                     DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
                     'appt.stu_email',
-//                    "0 as special_auth",
+                    'appt.stu_phone',
+                    DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"),
                     DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"),
                     DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"),
                     'appt.ipaddress as login_ip'
                 )
                 ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
                     $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
-                });
+                })
+                ->leftJoin('application as app', function ($join) {
+                    $join->on('app.applicant_id', '=', 'appt.applicant_id');
+                })
+                ->leftJoin('curriculum_program as curr_prog', function ($join) {
+                    $join->on('curr_prog.curr_prog_id', '=', 'app.curr_prog_id');
+                })
+                ->groupBy('appt.applicant_id', 'appt.stu_citizen_card',
+                    'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name',
+                    'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en',
+                    'appt.stu_email', 'appt.stu_phone',
+                    'appt.created', 'appt.last_login', 'appt.ipaddress');
 
             $recordsTotal = $mainQuery->get()->count();
 
             if (isset($criteria['from_date'])) {
-                $mainQuery->whereDate('created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
+                $mainQuery->whereDate('appt.created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
             }
 
             if (isset($criteria['to_date'])) {
-                $mainQuery->whereDate('created', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
+                $mainQuery->whereDate('appt.created', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
             }
 
             if (isset($criteria['emailCitizenFullname'])) {
@@ -451,6 +464,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             $recordsFiltered = $mainQuery->get()->count();
 //            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
             $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+
             $data = $mainQuery->get();
 
             $result = array('draw' => $draw,
@@ -461,6 +475,26 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             return $result;
 
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function doDelete($applicant_id)
+    {
+        try {
+            $query = DB::table('applicant as appt')
+                ->join('application as app', function ($join) {
+                    $join->on('app.applicant_id', '=', 'appt.applicant_id');
+                })
+                ->where('appt.applicant_id', '=', $applicant_id);
+
+            if ($query->count() > 0) {
+                throw new ApplicantDeleteException('Cannot Delete');
+            } else {
+                $applicant = $this->find($applicant_id);
+                return $applicant->delete();
+            }
         } catch (\Exception $ex) {
             throw $ex;
         }

@@ -88,6 +88,7 @@ class LoginApplicantController extends Controller {
             session()->put('Applicant', $app);
             Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
+            
             return redirect('/home');
         } else {
             Controller::WLog('User Applicant Not Login', 'User_Login', null);

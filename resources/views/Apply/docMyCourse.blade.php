@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.defaultNoMenu')
 
 @push('pageCss')
 
@@ -70,9 +70,9 @@
                     <div class="invoice-content-2">
     <div class="row">
         <div class="col-xs-12">
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>
+<!--            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>-->
               
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >PDF</a>
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >Download PDF</a>
     
         
         
@@ -149,7 +149,7 @@
                                     <td colspan="2" rowspan="2">หมายเลขบัตรประชาชน/พาสปอร์ต <br>[ Citizen ID / Passport ID]
                                         <br>{{$applicant->stu_citizen_card}}</td>
                                     <td width="618" colspan="2">วัน/เดือน/ปีเกิด [ Date of Birth]
-                                        {{$applicant->stu_birthdate->format('Y-m-d') }}   อายุ [Age]
+                                        {{$applicant->stu_birthdate->format('d-m-YYYY') }}   อายุ [Age]
                                        {{ $age }}   </td>
                                 </tr>
                                 <tr>

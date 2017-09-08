@@ -111,7 +111,7 @@
                     <td rowspan="2">หมายเลขบัตรประชาชน/พาสปอร์ต <br>[ Citizen ID / Passport ID]
                         <br>{{$applicant->stu_citizen_card}}</td>
                     <td width="400px" colspan="4"   >วัน/เดือน/ปีเกิด [ Date of Birth]
-                        {{$applicant->stu_birthdate->format('Y-m-d') }}  อายุ [Age]
+                        {{$applicant->stu_birthdate->format('d-m-Y') }}  อายุ [Age]
                         {{ $age }}    </td>
                 </tr>
                 <tr>

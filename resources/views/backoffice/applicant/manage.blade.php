@@ -6,7 +6,9 @@
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet"
       type="text/css"/>
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css"/>
 <style type="text/css">
+
 </style>
 @endpush
 
@@ -18,7 +20,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">User Management</a>
+                <a href="#">ผู้ใช้งาน</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
@@ -38,6 +40,8 @@
 
 
 @section('maincontent')
+    @include('includes.applicant.applicantAuth')
+    @include('includes.applicant.applicantProgramInfoActionRemove')
     <div class="row">
         <div class="col-md-12">
 
@@ -86,23 +90,22 @@
                             </div>
                         </div>
                         <table class="table table-striped table-bordered table-hover table-checkable"
-                               id="applicantTbl">
+                               id="applicantTbl" style="width:100%">
                             <thead>
                             <tr role="row" class="heading">
                                 <th width="2%">
                                     ลำดับ
                                 </th>
-                                <th width="5%"> เลขประจำตัวประชาชน</th>
-                                <th width="15%"> ชื่อ-นามสกุล</th>
-                                <th width="200"> อีเมล์</th>
-                                <th width="10%"> สิทธิ์พิเศษ</th>
-                                <th width="10%"> วันที่ลงทะเบียน</th>
-                                <th width="10%"> ข้อมูล Login</th>
+                                <th width=""> เลขประจำตัวประชาชน</th>
+                                <th width="25%"> ชื่อ-นามสกุล</th>
+                                <th> อีเมล์&หมายเลขโทรศัพท์</th>
+                                <th> หลักสูตรที่สมัคร</th>
+                                <th> วันที่ลงทะเบียน</th>
+                                <th> ข้อมูล Login</th>
                                 <th width="10%"> Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-
                             </tbody>
                         </table>
                     </div>
@@ -122,6 +125,8 @@
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -191,7 +196,7 @@
                     "url": "{{route('admin.applicantManage.doPaging')}}", // ajax source
                     "method": "get"
                 },
-                "ordering": false,
+                "ordering": true,
                 "order": [
                     [1, "asc"]
                 ],// set first column as a default sort by asc
@@ -205,32 +210,61 @@
                     },
                     {
                         targets: 1,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             return full.stu_citizen_card;
                         }
                     },
                     {
                         targets: 2,
+                        orderable: true,
                         render: function (data, type, full, meta) {
-                            return full.fullname_th + "<br>" + full.fullname_en;
+                            var html = '';
+                            if (full.fullname_th !== null) {
+                                html += full.fullname_th + "<br>";
+                            }
+
+                            if (full.fullname_en !== null) {
+                                html += full.fullname_en
+                            }
+
+                            return html;
+
                         }
                     }, {
                         targets: 3,
+                        orderable: true,
                         render: function (data, type, full, meta) {
-                            return full.stu_email;
+                            var html = full.stu_email == null ? '' : full.stu_email;
+                            if (full.stu_phone !== null) {
+                                html += "<br>";
+                                html += full.stu_phone;
+                            }
+                            return html;
                         }
                     }, {
                         targets: 4,
+                        orderable: true,
                         render: function (data, type, full, meta) {
-                            return '-';
+                            var html = '';
+                            if (full.curriculum_progs !== null) {
+                                var currProg = full.curriculum_progs.split(',');
+                                currProg.forEach(function (item, index) {
+                                    var progInfos = item.split('|');
+                                    html += '<a onclick="prepareProgramInfo(this)" data-application_id="' + progInfos[0] + '" data-curr_prog_id="' + progInfos[1] + '"><span class="badge badge-info">' + progInfos[2] + '</span></a>';
+                                });
+                            }
+                            return html;
                         }
                     }, {
                         targets: 5,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             return full.register_date;
                         }
                     }, {
                         targets: 6,
+                        orderable: true,
                         render: function (data, type, full, meta) {
                             return (full.login_datetime == null ? '' : full.login_datetime) + ' - ' + (full.login_ip == null ? '' : full.login_ip);
                         }
@@ -238,6 +272,8 @@
                         targets: 7,
                         orderable: false,
                         render: function (data, type, full, meta) {
+                            var editLink = '{{url("admin/setting/applicantManage/edit")}}'
+                            var viewLink = '{{url("admin/setting/applicantManage/view")}}';
                             var html = '';
                             html += '<div class="btn-group">';
                             html += '<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions';
@@ -245,20 +281,20 @@
                             html += '</button>';
                             html += '<ul class="dropdown-menu pull-left" role="menu">';
                             html += '<li>';
-                            html += '<a href="javascript:;">';
+                            html += '<a href="' + viewLink + '/' + full.applicant_id + '">';
                             html += '<i class="fa fa-file-o"></i> View </a>';
                             html += '</li>';
                             html += '<li>';
-                            html += '<a href="javascript:;">';
+                            html += '<a href="' + editLink + '/' + full.applicant_id + '">';
                             html += '<i class="fa fa-edit"></i> Edit Profile </a>';
                             html += '</li>';
                             html += '<li>';
-                            html += '<a href="javascript:;">';
+                            html += '<a onclick="doDelete(\'' + full.applicant_id + '\')">';
                             html += '<i class="fa fa-trash-o"></i> Delete </a>';
                             html += '</li>';
                             html += '<li class="divider"> </li>';
                             html += '<li>';
-                            html += '<a href="javascript:;">';
+                            html += '<a href="javascript:;" onclick="prepareApplicantAuth(\'' + full.applicant_id + '\')">';
                             html += '<i class="icon-flag"></i> ให้สิทธิ์สมัครกรณีพิเศษ';
                             html += '</a>';
                             html += '</li>';
@@ -293,11 +329,11 @@
 
     function doDelete(id) {
         var formData = new FormData();
-        formData.append('curriculum_id', id);
+        formData.append('applicant_id', id);
         $.ajax({
-            url: '{{route('admin.curriculum.doDelete')}}',
+            url: '{{route('admin.applicantManage.doDelete')}}',
             headers: {
-                'X-CSRF-Token': $("#searchForm").find("input[name='_token']").val()
+                'X-CSRF-Token': '{{csrf_token()}}'
             },
             method: "POST",
             data: formData,
@@ -312,6 +348,95 @@
                 }
             }
         });
+    }
+
+    function prepareProgramInfo(obj) {
+        //Clear Data
+        var modalInfo = $("#applicationProgramInfoActionRemoveModal");
+        modalInfo.find("#application_id").val(null);
+        modalInfo.find("#curr_prog_id").val(null);
+        modalInfo.find("#flow_name_p").text('');
+        modalInfo.find("#program_id_p").text('');
+        modalInfo.find("#prog_name_p").text('');
+        modalInfo.find("#plan_p").text('');
+        modalInfo.find("#prog_type_name_p").text('');
+
+        modalInfo.find("#ajaxLoading").show();
+        modalInfo.find("#applicationInfoForm").hide();
+        modalInfo.find("#deleteBtn").attr('disabled', 'disabled');
+        modalInfo.modal('show');
+
+        var param = $(obj).data();
+        $.ajax({
+            url: '{{route('admin.applicantManage.getApplicationAndProgramInfo')}}',
+            method: "GET",
+            data: param,
+            success: function (result) {
+                if (result.status == 'success') {
+                    var data = result.data;
+                    var modalInfo = $("#applicationProgramInfoActionRemoveModal");
+                    modalInfo.find("#application_id").val(data.application_id);
+                    modalInfo.find("#curr_prog_id").val(data.curr_prog_id);
+                    modalInfo.find("#flow_name_p").text(data.flow_name == null ? '-' : data.flow_name);
+                    modalInfo.find("#program_id_p").text(data.program_id == null ? '-' : data.program_id);
+                    modalInfo.find("#prog_name_p").text(data.prog_name == null ? '-' : data.prog_name);
+                    modalInfo.find("#plan_p").text(data.plan == null ? '-' : data.plan);
+                    modalInfo.find("#prog_type_name_p").text(data.prog_type_name == null ? '-' : data.prog_type_name);
+                    modalInfo.find("#ajaxLoading").hide();
+                    modalInfo.find("#deleteBtn").removeAttr('disabled', 'disabled');
+                    modalInfo.find("#applicationInfoForm").show();
+                }
+            }
+        });
+    }
+
+    function deleteApplication(event) {
+        var modalInfo = $("#applicationProgramInfoActionRemoveModal");
+        modalInfo.modal('hide');
+
+        swal({
+                html: true,
+                title: "ต้องการจะลบใบสมัคร ?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: "#E7505A",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
+            },
+            function (isConfirm) {
+                if (!isConfirm) {
+//                    modalInfo.modal('show');
+                    return;
+                }
+
+                var data = $("#applicationProgramInfoActionRemoveModal #applicationInfoForm").serializeArray();
+                $.ajax({
+                    url: '{{route('admin.applicantManage.doDeleteApplication')}}',
+                    method: "POST",
+                    data: data,
+                    success: function (result) {
+                        swal({
+                            html: true,
+                            title: result.message,
+                            text: "",
+                            type: result.status
+                        });
+                        if (result.status == 'success') {
+                            reloadTable();
+                        }
+                    }
+                });
+
+            }
+        );
+
+    }
+
+    function prepareApplicantAuth($id) {
+        $("#applicantAuthModal").modal('show');
     }
 
 

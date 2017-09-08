@@ -26,6 +26,10 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
+          <span>จัดการข้อมูลผู้สมัคร</span>
+          <i class="fa fa-circle"></i>
+        </li>
+        <li>
             <span>ปรับปรุงผู้มีสิทธิ์เข้าศึกษา [GS05]</span>
         </li>
     </ul>
@@ -186,7 +190,7 @@
                   <div id="search-application-result" style="display:none;">
                   <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
         <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
-<i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
+<i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ
 </a>
                   <hr>
                   <hr>
@@ -239,7 +243,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button class="close" aria-hidden="true" type="button" data-dismiss="modal"></button>
-                                                    <h4 class="modal-title">เพิ่มผู้สมัคร เป็นกรณีพิเศษ</h4>
+                                                    <h4 class="modal-title">เพิ่มผู้สอบได้ เป็นกรณีพิเศษ</h4>
                                                 </div>
                                                 <div class="modal-body">
 
@@ -249,13 +253,13 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-user"></i>
                                                                 </span>
-                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">  
+                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">
                                                                 <span class="input-group-btn">
                                                             <a class="btn blue" id="userSearch" type="button">ตรวจสอบ</a>
                                                         </span>
                                                             </div> </div></div>
-                                                    
-                                   <div class="row">                  
+
+                                   <div class="row">
                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                                <div class="dashboard-stat green">
                                     <div class="visual">
@@ -265,7 +269,7 @@
                                         <div class="number">ชื่อ :<label id="show_name"></label></div>
                                         <div class="desc"> Passport/บัตรประชาชน :<label id="idCard"></label> </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                                    </div>
@@ -274,8 +278,8 @@
                                                     <textarea class="form-control" id="apply_comment" rows="3"></textarea>
                                                 </div>
                                                     <br>
-                                                    
-                                                    
+
+
                                                 <div class="modal-footer">
                                                     <input type="hidden" id="appcantid">
                                                     <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">Close</button>
@@ -320,14 +324,14 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-     
+
     $('#btcloss').click(function() {
       $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
-      
+
   });
     $('#btSave').click(function() {
                                 $.ajax({
@@ -338,8 +342,8 @@
                                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                                 sub_major_id : $('option:selected','#single').attr('smj'),
                                                 program_id : $('option:selected','#single').attr('pg'),
-                                                program_type_id : $('option:selected','#single').attr('pt'), 
-                                                curriculum_id : $('option:selected','#single').attr('cu'), 
+                                                program_type_id : $('option:selected','#single').attr('pt'),
+                                                curriculum_id : $('option:selected','#single').attr('cu'),
                                                 applicant_ID  : $("#appcantid").val(),
                                                  idCard  : $("#idCard").text(),
                                                  apply_comment:  $("#apply_comment").val(),
@@ -348,8 +352,8 @@
 					success : function(data){
                                            toastr.success('ดำเนินการเรียบร้อย');
                                             $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
        TableDatatablesAjax.init();
@@ -392,42 +396,42 @@
 				},"json");
               }
 
-  $('#userSearch').click(function(){  
+  $('#userSearch').click(function(){
                                     $.ajax({
 					type: "get",
                                          async: false,
 					url: '{!! Route('applicantGS03') !!}',
-					data :{ 
+					data :{
                                                 citiz  : $('#citiz').val(),
                                                 curr_act_id: ($('#single').val())? $('#single').val():'-1' ,
                                                 sub_major_id : $('option:selected','#single').attr('smj'),
                                                 program_id : $('option:selected','#single').attr('pg'),
-                                                program_type_id : $('option:selected','#single').attr('pt'), 
+                                                program_type_id : $('option:selected','#single').attr('pt'),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
-					success : function(data){ 
+					success : function(data){
                                             if(data.stu_first_name != null){
                                               $("#show_name").text(data.stu_first_name+' '+data.stu_last_name);
-                                              $("#idCard").text(data.stu_citizen_card);                                             
-                                              $("#appcantid").val(data.applicant_id);      
+                                              $("#idCard").text(data.stu_citizen_card);
+                                              $("#appcantid").val(data.applicant_id);
                                          }else if(data.mess !=null){ toastr.warning(data.mess);
                                           $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
-        
+
         }
                                          else{
                                              toastr.warning('ไม่มีข้อมูลของผู้สมัคร');
                                               $("#show_name").text('');
-      $("#idCard").text('');                                             
-      $("#appcantid").val(''); 
+      $("#idCard").text('');
+      $("#appcantid").val('');
       $("#citiz").val('');
       $("#apply_comment").val('');
                                          }
                                         }
-				},"json");  });  
+				},"json");  });
                   $('#btnSearch1').click(function() {
                                     $.ajax({
 					type: "get",
@@ -519,7 +523,7 @@ orderable: false,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
-return full.rownum;
+return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
 orderable: false,
@@ -529,31 +533,31 @@ render: function (data, type, full, meta) {
 return  full.app_ida   ;
 } },{
 targets: [3],
-orderable: false,
+orderable: true,
 
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
-return (  full.stu_first_name + '['+full.stu_first_name_en+']<br>  ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
+return (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' + full.name_title_en+full.stu_first_name_en + ' ' + full.stu_last_name_en + ' ') ;
 }},{
 targets: [4],
-orderable: false,
+orderable: true,
 className: 'sorting_1',
 name: 'program_id',
 render: function (data, type, full, meta) {
 return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="examSel"   data-type="select" data-pk="'+ full.app_id +'" data-value="' + full.admission_status_id + '" data-source="/exam-results" data-original-title="เลือกผลการพิจารณา"> '+ full.admission_status_name_th +' </a>'+'<input type="hidden" value="'+full.application_id+'">'  ;
 } },{
 targets: [5],
-orderable: false,
+orderable: true,
 
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
 return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.admission_remark !== null )? full.admission_remark : '') +' </a>' ;
 } },{
 targets: [6],
-
+orderable: true,
 name: 'bank_name',
 render: function (data, type, full, meta) {
-return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+ full.eng_test_id_admin +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
+return  '<i title="'+((full.examDiffYear>2)?'(คะแนนหมดอายุ (เกิน 2 ปีแล้ว)':'คะแนนยังไม่หมดอายุ (2 ปี)')+'" class="'+((full.examDiffYear>2)?'font-red-thunderbird fa fa-close':'font-green-jungle fa fa-check')+'"></i> <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');"  class="scoreExam" data-type="text" data-pk="1" data-original-title="กรอกคะแนนภาษาอังกฤษ" class="editable editable-click"> '+ ((full.eng_test_score_admin)? full.eng_test_score_admin : full.eng_test_score)+' </a><br>  <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="typeExam" data-type="select" data-pk="1" data-value="'+  ((full.eng_test_id_admin)? full.eng_test_id_admin:((full.eng_test_id)?full.eng_test_id:0))  +'" data-original-title="เลือก ประเภทคะแนน" class="editable editable-click" style="color: gray;">'+((full.eng_test_score_admin)? full.engTAdmin : full.engT)+'</a> <br>เมื่อ <a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="vacation" data-type="date" data-viewformat="yyyy/mm/dd" data-pk="1" data-value="'+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'" data-placement="right" data-original-title="วันที่คะแนนมีผล" class="editable editable-click"> '+((full.eng_date_taken_admin)? full.eng_date_taken_admin : full.eng_date_taken)+'</a>'  ;
 }},{
 
 targets: [7],
@@ -564,9 +568,9 @@ render: function (data, type, full, meta) {
 return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li>  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li></ul></div>') ;
 } }],
                 "bDestroy": true,
-                "ordering": false,
+                "ordering": true,
                 "order": [
-                    [1, "asc"]
+                    [2, "asc"]
                 ]
             }
         });
@@ -574,7 +578,7 @@ return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle"
 
     }
 
- setInterval(function(){FormEditable.init(); }, 2000);
+ setInterval(function(){FormEditable.init(); }, 3000);
     return {
      init: function () {
              handle1();
@@ -645,10 +649,11 @@ jQuery(document).ready(function() {
 
 
     $('#search_select').click(function(){
+        $('#search-application-result').fadeIn( "slow", "linear" );
       TableDatatablesAjax.init();
       //Show serach application result
-    
-      $('#search-application-result').fadeIn( "slow", "linear" );
+
+
     });
 
 
@@ -779,17 +784,13 @@ jQuery(document).ready(function() {
             async: false,
             source: EngTest,
             display: function(value, sourceData) {
-                var colors = {
-                        "": "gray",
-                        1: "green",
-                        2: "blue"
-                    },
+
                     elem = $.grep(sourceData, function(o) {
                         return o.value == value;
                     });
 
                 if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
+                    $(this).text(elem[0].text).css("color", "bule");
                 } else {
                     $(this).empty();
                 }

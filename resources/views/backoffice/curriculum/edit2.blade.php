@@ -132,7 +132,7 @@
                                     <div class="mt-radio-inline">
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="apply_method" value="1"
-                                                   @if(!empty($curriculum) && $curriculum->apply_method == 1) checked @endif
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->apply_method == 1)) checked @endif
                                             > รับผ่านบัณฑิต
                                             <span></span>
                                         </label>
@@ -168,7 +168,13 @@
                                 </div>
                             </div>
                           </div>
-                          <div class="row">
+
+                    <div class="panel panel-success">
+                    	<div class="panel-heading">
+                    		<h3 class="panel-title"><i class="icon-info"></i> เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
+                    	</div>
+                      <div class="panel-body">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
@@ -189,7 +195,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                          </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -237,12 +243,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label offset-col-md-3 col-md-2"
-                                           for="degree_id"><strong>ชื่อหลักสูตร</strong>
+                                           for="degree_id"><strong>ชื่อปริญญา</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-8">
@@ -260,31 +265,35 @@
                                 </div>
                             </div>
                         </div>
-                          <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                       id="currProgramTbl">
-                                    <thead>
-                                    <tr>
-                                        <th style="width:50px">
-                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                <input type="checkbox" class="group-checkable"
-                                                       data-set="#currProgramTbl .checkboxes"/>
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th style="width:60px"> รหัสหลักสูตร</th>
-                                        <th style="width:170px"> ชื่อหลักสูตร</th>
-                                        <th style="width:50px"> แผน</th>
-                                        <th> ประเภท</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <hr>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                     id="currProgramTbl">
+                                  <thead>
+                                  <tr>
+                                      <th style="width:50px">
+                                          <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                              <input type="checkbox" class="group-checkable"
+                                                     data-set="#currProgramTbl .checkboxes"/>
+                                              <span></span>
+                                          </label>
+                                      </th>
+                                      <th style="width:60px"> รหัสหลักสูตร</th>
+                                      <th style="width:170px"> ชื่อหลักสูตร</th>
+                                      <th style="width:50px"> แผน</th>
+                                      <th> ประเภท</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+
+
                         <hr>
                     </div>
                     {{--Section1 END--}}
@@ -401,6 +410,7 @@
                                                    class="input-group-addon btn green fileinput-exists"
                                                    onclick="downloadFile(this)" target="_blank" download> ดาวน์โหลด </a>
                                             </div>
+                                            <span class="help-block">เป็นไฟล์ Microsoft Word (.doc,.docx) เท่านั้น</span>
                                         </div>
 
                                     </div>
@@ -483,8 +493,8 @@
                                             <span></span>
                                         </label>
                                         <label class="mt-radio mt-radio-outline">
-                                            <input type="radio" name="status" value="2"
-                                                   @if(!empty($curriculum) && $curriculum->status == 2) checked @endif
+                                            <input type="radio" name="status" value="0"
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 0)) checked @endif
                                             > ไม่เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
@@ -496,7 +506,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3"
-                                           for="project_id"><strong>Special User</strong>
+                                           for="project_id"><strong>ผู้มีสิทธิ์จัดการ</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-9">
@@ -513,22 +523,23 @@
                 </div>
                 <div class="form-actions">
                     <div class="row">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-md-offset-2 col-md-3">
                             <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
                                 ยกเลิก
                             </a>
-                            <a id="saveBtn" onclick="submit_form()" class="btn blue">บันทึก
-                            </a>
-                            <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
-                               class="btn blue">
-                                ส่งอนุมัติ
-                            </a>
-                            <a id="apprBtn" onclick="prepareModal('APPR')" class="btn green">อนุมัติ</a>
-                            <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn yellow">ส่งกลับแก้ไข</a>
-                            <a id="delBtn" onclick="doDelete()" class="btn red">ลบ
+
+                            <a id="delBtn" onclick="doDelete()" class="btn red" style="display:none;">ลบข้อมูล
                             </a>
 
+                            <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
+                            </a>
                         </div>
+                        <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
+                          <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal" class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
+                          <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow" style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
+                          <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green" style="display:none;"> <i class="fa fa-check"></i> อนุมัติ </a>
+                        </div>
+
                     </div>
                 </div>
             </form>
@@ -904,7 +915,7 @@
                             var listCheckBox = '';
                             $.each(result, function (index, value) {
                                 listCheckBox += '<label class="mt-checkbox mt-checkbox-outline">';
-                                listCheckBox += '<input type="checkbox" name="sub_major_id[]" value="' + index + '"';
+                                listCheckBox += '<input type="checkbox" name="sub_major_id[]" value="' + value.sub_major_id + '"';
                                 if (value.curr_sub_major_id !== null) {
                                     listCheckBox += 'checked'
                                 }
@@ -1167,10 +1178,10 @@
         }
         roundHtml += '<input type="hidden" id="apply_setting_id" name="apply_setting_id" value="' + obj.apply_setting_id + '"/>';
         roundHtml += '<div class="col-md-12">';
-        roundHtml += '<div class="portlet green-meadow box">';
+        roundHtml += '<div class="portlet pink-chula box">';
         roundHtml += '<div class="portlet-title">';
         roundHtml += '<div class="caption">';
-        roundHtml += '<i class="fa fa-cogs"></i>รอบที่ ' + obj.round_no;
+        roundHtml += '<i class="fa fa-table"></i>ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
         roundHtml += '</div>';
         roundHtml += '<div class="actions">';
 //        roundHtml += '<a href="javascript:;" class="btn btn-default btn-sm">';

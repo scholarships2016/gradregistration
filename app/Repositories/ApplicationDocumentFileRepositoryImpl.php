@@ -4,50 +4,51 @@ namespace App\Repositories;
 
 use App\Repositories\Contracts\ApplicationDocumentFileRepository;
 use App\Models\ApplicationDocumentFile;
-use App\Utils\Util;
-use Illuminate\Support\Facades\DB;
-use App\Repositories\FileRepositoryImpl;
 use App\Http\Controllers\Controller;
 
-class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl implements ApplicationDocumentFileRepository {
+class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl implements ApplicationDocumentFileRepository
+{
 
     protected $ApplicationDocumentFileRepo;
     protected $fileRepo;
     private $paging = 10;
-    
+
     private $controllers;
 
-    public function __construct(FileRepositoryImpl $fileRepo,Controller $controllors) {
+    public function __construct(FileRepositoryImpl $fileRepo, Controller $controllors)
+    {
         parent::setModelClassName(ApplicationDocumentFile::class);
         $this->fileRepo = $fileRepo;
-        $this->controllers =$controllors;
+        $this->controllers = $controllors;
     }
 
-    public function GetData($application_ID) {
+    public function GetData($application_ID)
+    {
         $result = null;
         try {
             $result = ApplicationDocumentFile::leftJoin('file', 'file.file_id', 'application_document_file.file_id')
-                    ->Where('application_id', $application_ID)
-                    ->get();
+                ->Where('application_id', $application_ID)
+                ->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
 
-    public function DeleteNOTIN($application_ID, $doc_apply_id) {
+    public function DeleteNOTIN($application_ID, $doc_apply_id)
+    {
         $result = null;
         $resFile = null;
         try {
             $resFile = ApplicationDocumentFile::Where('application_id', $application_ID)
-                            ->whereNotIn('doc_apply_id', $doc_apply_id)->select('file_id')->get();
+                ->whereNotIn('doc_apply_id', $doc_apply_id)->select('file_id')->get();
             foreach ($resFile as $resf) {
                 $this->fileRepo->forceRemoveById($resf->file_id);
             }
 
             $result = ApplicationDocumentFile::Where('application_id', $application_ID)
-                    ->whereNotIn('doc_apply_id', $doc_apply_id)
-                    ->delete();
+                ->whereNotIn('doc_apply_id', $doc_apply_id)
+                ->delete();
             $this->controllers->WLog(' Edit update file upload [application ID:' . $application_ID . ']', 'Enroll', null);
         } catch (\Exception $ex) {
             $this->controllers->WLog(' Edit file upload for enroll Error [application ID:' . $application_ID . ']', 'Enroll', $ex->getMessage());
@@ -56,7 +57,8 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
         return $result;
     }
 
-    public function saveApplicationDocumentFile($data) {
+    public function saveApplicationDocumentFile($data)
+    {
         $result = false;
         $resFile = null;
         try {
@@ -64,13 +66,13 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
             $curObj = new ApplicationDocumentFile;
 
             $resFile = ApplicationDocumentFile::Where('application_id', $data['application_id'])
-                            ->Where('doc_apply_id', $data['doc_apply_id'])->get();
+                ->Where('doc_apply_id', $data['doc_apply_id'])->get();
             foreach ($resFile as $resf) {
                 $this->fileRepo->forceRemoveById($resf->file_id);
             }
             ApplicationDocumentFile::Where('application_id', $data['application_id'])
-                    ->Where('doc_apply_id', $data['doc_apply_id'])
-                    ->delete();
+                ->Where('doc_apply_id', $data['doc_apply_id'])
+                ->delete();
 
             $curObj->application_id = $data['application_id'];
 
@@ -91,5 +93,21 @@ class ApplicationDocumentFileRepositoryImpl extends AbstractRepositoryImpl imple
 
         return $result;
     }
+
+    public function deleteByApplicationId($applicationId)
+    {
+        try {
+            $docs = ApplicationDocumentFile::where('application_id', '=', $applicationId)->get();
+            foreach ($docs as $index => $value) {
+                if (!empty($value->docFile)) {
+                    $this->fileRepo->forceRemoveById($value->docFile->file_id);
+                }
+                $value->delete();
+            }
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
 
 }
