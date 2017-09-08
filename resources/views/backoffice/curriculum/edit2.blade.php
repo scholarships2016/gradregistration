@@ -555,7 +555,7 @@
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
-<script src="{{asset('assets/global/plugins/ckeditor/ckeditor_4.7.1_standard/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/ckeditor/ckeditor_standard/ckeditor.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">

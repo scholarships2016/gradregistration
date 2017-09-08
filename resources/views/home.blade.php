@@ -41,9 +41,9 @@
                             <div class="col-md-8">
                                 <div class="row margin-bottom-20 about-header">
                                     <div class="col-md-12">
-                                        <h1>{{Lang::get('resource.lbHomeOpenRegister')}}</h1> 
-                                         <h2>{!!(session('locale')=='th')?(Lang::get('resource.lbSemester').' '.(($Applys->semester==1)?'ต้น':'ปลาย')):('<span style="text-transform: lowercase;">'.(($Applys->semester==1)?'1st ':'2nd').'</span>'.Lang::get('resource.lbSemester'))!!}  {{Lang::get('resource.lbHomeYear').' '.$Applys->academic_year}}  </h2>
-                                        <h2>{{Lang::get('resource.lbroundNo').' '.$Applys->round_no.' '.Lang::get('resource.lbStartDate').' '. $Applys->start_date->format('d-m-Y') .' - '.$Applys->end_date->format('d-m-Y')}} </h2>
+                                        <h1>{{Lang::get('resource.lbHomeOpenRegister')}}</h1>
+                                         <h2>{!!(session('locale')=='th')?(Lang::get('resource.lbSemester').''.(($Applys->semester==1)?'ต้น':'ปลาย')):('<span style="text-transform: lowercase;">'.(($Applys->semester==1)?'1st ':'2nd').'</span>'.Lang::get('resource.lbSemester'))!!}  {{Lang::get('resource.lbHomeYear').' '.$Applys->academic_year}}  </h2>
+                                        <h2>{{Lang::get('resource.lbroundNo').' '.$Applys->round_no.' '.Lang::get('resource.lbStartDate').' '. $Applys->start_date->format('d/m/Y') .' - '.$Applys->end_date->format('d/m/Y')}} </h2>
                                           @if(session('user_id'))
                                             <a href="apply"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.lbSelect')}}  </button></a>
                                           @endif
@@ -59,7 +59,7 @@
                                         <div class="portlet light about-text">
                                             <h4>
                                                 <i class="fa fa-check icon-info"></i>  {{(session('locale')=='th')?$news->news_title :$news->news_title_en}}</h4>
-                                            
+
                                             <p class="margin-top-20">
                                             {{(session('locale')=='th')?$news->news_detail:$news->news_detail_en}}
                                             </p>
@@ -67,7 +67,7 @@
                                             <div class="about-quote">
                                                 <p class="about-author">{{$news->modified}}<br> </p>
                                             </div>
-                                         
+
                                         </div>
                                     </div>
 

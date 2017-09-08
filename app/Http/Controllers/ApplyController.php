@@ -130,7 +130,7 @@ class ApplyController extends Controller {
     }
 
     public function registerDetailForapply($id) {
-        $curDiss = $this->CurriculumRepo->searchByCriteria($id, null, null, null, null, 1, 4, null, true, false);
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, $id, null, null, null, 1, 4, null, true, false);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id);
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program]);
@@ -159,7 +159,7 @@ class ApplyController extends Controller {
 
     public function docMyCourserintPDF($id) {
 
-//        
+//
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);
@@ -243,7 +243,7 @@ class ApplyController extends Controller {
     }
 
     public function submitregisterDetailForapply(Request $data) {
- 
+
         $gdata = $data->all();
         $gdata['flow_id'] = 1;
         $gdata['creator'] = session('user_id');
@@ -276,7 +276,7 @@ class ApplyController extends Controller {
         return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus]);
     }
 
-    
+
 
     public function actionCourse($action, $id) {
 
