@@ -241,3 +241,6 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 .portlet.box.red-pink>.portlet-title, .portlet.red-pink, .portlet>.portlet-body.red-pink {
     background-color: #E498B1;
 }
+.mt-element-list .list-simple.mt-list-container {
+    border-top: 3px solid #e7ecf1; 
+}
