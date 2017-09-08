@@ -75,10 +75,11 @@
                                 <th>
                                     No.
                                 </th>
-                                <th> รหัสหลักสูตร</th>
+                                <th class="text-center"> รหัสหลักสูตร</th>
                                 <th> ชื่อหลักสูตร</th>
-                                <th> แผน</th>
+                                <th class="text-center"> แผน</th>
                                 <th> สังกัด</th>
+                                <th class="text-center"> สถานะ</th>
                                 <th> Actions</th>
                             </tr>
                             <tr role="row" class="filter">
@@ -94,6 +95,9 @@
                                 </td>
                                 <td>
                                     <input type="text" class="form-control form-filter input-sm" name="owner">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="status">
                                 </td>
                                 <td>
                                     <div class="margin-bottom-5">
@@ -224,11 +228,18 @@
                         }
                     }, {
                         targets: 4,
+                        class: 'text-left',
                         render: function (data, type, full, meta) {
                             return full.full_owner;
                         }
                     }, {
                         targets: 5,
+                        class: 'text-center',
+                        render: function (data, type, full, meta) {
+                            return full.status;
+                        }
+                    }, {
+                        targets: 6,
                         orderable: false,
                         render: function (data, type, full, meta) {
                                     {{--var editLink = '{{url("admin/management/curriculum/edit")}}';--}}
@@ -255,17 +266,17 @@
         });
 
     }
-//
-//    function reloadTable() {
-////        var ids = [];
-////        var statusIds = $("input[name='is_approve[]']:checked").serializeArray();
-////        statusIds.forEach(function (item, index) {
-////            ids.push(item.value);
-////        });
-////        grid.setAjaxParam("flow_status", ids.toString());
-//        grid.getDataTable().ajax.reload();
-//        grid.clearAjaxParams();
-//    }
+    //
+    //    function reloadTable() {
+    ////        var ids = [];
+    ////        var statusIds = $("input[name='is_approve[]']:checked").serializeArray();
+    ////        statusIds.forEach(function (item, index) {
+    ////            ids.push(item.value);
+    ////        });
+    ////        grid.setAjaxParam("flow_status", ids.toString());
+    //        grid.getDataTable().ajax.reload();
+    //        grid.clearAjaxParams();
+    //    }
 
     function doDelete(id) {
         var formData = new FormData();
