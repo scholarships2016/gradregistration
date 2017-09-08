@@ -6,4 +6,7 @@ interface McourseStudyRepository
 {
     public function getMcourseStudyByMajorIdAndDegreeId($majorId, $degreeId);
 
+    public function getMcourseStudyPaging1($criteria = null);
+
+    public function updateAllCourse();
 }

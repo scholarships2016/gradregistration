@@ -204,6 +204,11 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
             Route::get('doPaging', 'BackOffice\AdminManagementController@doPaging')->name('admin.adminManage.doPaging');
         });
 
+        Route::group(['prefix' => 'masterInfo', 'middleware' => []], function () {
+            Route::get('courseManage', 'BackOffice\MasterInfoController@showManageCoursePage')->name('admin.masterInfo.showManageCoursePage');
+            Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
+        });
+
     });
 
 });
