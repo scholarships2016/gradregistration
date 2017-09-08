@@ -33,7 +33,8 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
                 1 => "mc.coursecodeno",
                 2 => "mc.thai",
                 3 => "mc.coursecodeno",
-                4 => "full_owner");
+                4 => "full_owner",
+                5 => "mc.status");
             $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
             $data = null;
 
@@ -67,6 +68,9 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             }
             if (isset($criteria['plan']) && !empty($criteria['plan'])) {
                 $query->orWhere("mc.plan", "like", '%' . trim($criteria['plan']) . '%');
+            }
+            if (isset($criteria['status']) && !empty($criteria['status'])) {
+                $query->orWhere("mc.status", "=", trim($criteria['status']));
             }
             if (isset($criteria['owner']) && !empty($criteria['owner'])) {
                 $query->orWhere(function ($query) use ($criteria) {
