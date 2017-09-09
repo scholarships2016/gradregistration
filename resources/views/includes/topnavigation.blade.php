@@ -61,10 +61,12 @@
                                         <li class="dropdown dropdown-user">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                                data-close-others="true">
-                                                <img alt="" class="img-circle" id='userimg' src="{{   (session('stu_img'))?session('stu_img'):url('/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
+                                                <img alt="" class="img-circle" id='userimg' src="{{   (session('stu_img'))?session('stu_img'):url('/assets/layouts/layout/img/avatar.png')}}"/>
                                                 <span class="username username-hide-on-mobile">  {{ session('first_name').' '.session('last_name')  }} </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
+
+                                            @if(!session('user_tyep') || (session('user_tyep')->user_type=='applicant'))
                                             <ul class="dropdown-menu dropdown-menu-default">
                                                 <li>
                                                     <a href="{{route('profile.showProfilePage')}}">
@@ -77,10 +79,27 @@
                                                         <i class="icon-key"></i> {{Lang::get('resource.lbMLogout')}} </a>
                                                 </li>
                                             </ul>
+                                              @endif
+                                          @if(session('user_tyep')) @if(session('user_tyep')->user_type=='Staff')
+                                            <ul class="dropdown-menu dropdown-menu-default">
+                                                <li>
+                                                    <a href="{{url('admin/setting/adminManage/edit/'.session('user_id'))}}">
+                                                        <i class="icon-user"></i> {{Lang::get('resource.lbMProfile')}} </a>
+                                                </li>
+                                                <li class="divider"></li>
+
+                                                <li>
+                                                    <a href="{{ url('/admin/logout') }}">
+                                                        <i class="icon-key"></i> {{Lang::get('resource.lbMLogout')}} </a>
+                                                </li>
+                                            </ul>
+                                            @endif
+                                          @endif
+
                                         </li>
                                         <!-- END USER LOGIN DROPDOWN -->
                                         @endif
-  
+
                                         </ul>
   </div>
 

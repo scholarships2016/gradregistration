@@ -112,7 +112,7 @@ class LoginUserController extends Controller {
         Controller::WLog('User Logout[' . session('email_address') . ']', 'User_Logout', null);
 
         session()->flush('successMsg', 'LogOut');
-        return redirect('/login');
+        return redirect('admin/login');
     }
 
     public function reLogin(Request $request) {

@@ -26,7 +26,7 @@ Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginAppli
 //Route::get('login/admin', 'Auth\LoginUserController@checkuserldap');
 Route::get('admin/login/', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
 Route::post('login_admin', 'Auth\LoginUserController@postLogin')->name('adminlogin');
-
+Route::get('admin/logout', 'Auth\LoginUserController@getLogout')->name('logout');
 
 //SetLangues just call function
 Route::get('language', 'Auth\LoginApplicantController@language');

@@ -110,16 +110,88 @@
         <ul class="sub-menu">
           <li class=" nav-item  menuitem   ">
             <a href="components_date_time_pickers.html" class="nav-link ">
-                            <span class="title">รายงานการ</span>
+                            <span class="title">สรุปยอดการชำระเงิน</span>
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
             <a href="components_color_pickers.html" class="nav-link ">
-                            <span class="title">รายงานการ</span>
+                            <span class="title">ผู้สมัครเข้าศึกษา (GS01)</span>
+
+                        </a>
+          </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">สรุปยอดผู้สมัครเข้าศึกษา </span>
+
+                        </a>
+          </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
 
                         </a>
           </li>
 
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ผู้สมัครเข้าศึกษา (GS03)</span>
+
+                        </a>
+          </li>
+
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ผู้มีสิทธิ์เข้าศึกษา (GS05)</span>
+
+                        </a>
+          </li>
+
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ผู้มีสิทธิ์เข้าศึกษา แบบ บ.21</span>
+
+                        </a>
+          </li>
+
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ผู้สอบได้มากกว่า 1 สาขาขึ้นไป</span>
+
+                        </a>
+          </li>
+
+
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">คะแนนภาษาอังกฤษ</span>
+
+                        </a>
+          </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ผู้สมัครชาวต่างชาติ  </span>
+
+                        </a>
+          </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">แหล่งข่าว</span>
+
+                        </a>
+          </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ความสนใจรับทุน </span>
+
+                        </a>
+          </li>
+
+          <li class=" nav-item  menuitem   ">
+            <a href="components_color_pickers.html" class="nav-link ">
+                            <span class="title">ความพึงพอใจการใช้งานระบบ  </span>
+
+                        </a>
+          </li>
         </ul>
       </li>
       <li class="heading">
@@ -199,7 +271,7 @@
 
         </ul>
       </li>
-      <li class="nav-item "  data-index="20">
+      <li class="nav-item " data-index="20">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-wrench"></i>
                     <span class="title">จัดการข้อมูล Master</span>
@@ -216,7 +288,7 @@
 
         </ul>
       </li>
-      <li class="nav-item  "  data-index="21">
+      <li class="nav-item  " data-index="21">
         <a href="report-export-to-reg.html" class="nav-link nav-toggle">
                     <i class="icon-briefcase"></i>
                     <span class="title">ข้อมูลส่งสำนักทะเบียน</span>
