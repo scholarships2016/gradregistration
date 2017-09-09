@@ -5,7 +5,9 @@ namespace App\Repositories;
 
 use App\Models\Mcoursestudy;
 use App\Repositories\Contracts\McourseStudyRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements McourseStudyRepository
 {
@@ -61,19 +63,19 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
 
 
             if (isset($criteria['mcoursecode']) && !empty($criteria['mcoursecode'])) {
-                $query->orWhere('mc.coursecodeno', 'like', '%' . trim($criteria['mcoursecode']) . '%');
+                $query->where('mc.coursecodeno', 'like', '%' . trim($criteria['mcoursecode']) . '%');
             }
             if (isset($criteria['thai']) && !empty($criteria['thai'])) {
-                $query->orWhere('mc.thai', 'like', '%' . trim($criteria['thai']) . '%');
+                $query->where('mc.thai', 'like', '%' . trim($criteria['thai']) . '%');
             }
             if (isset($criteria['plan']) && !empty($criteria['plan'])) {
-                $query->orWhere("mc.plan", "like", '%' . trim($criteria['plan']) . '%');
+                $query->where("mc.plan", "like", '%' . trim($criteria['plan']) . '%');
             }
             if (isset($criteria['status']) && !empty($criteria['status'])) {
-                $query->orWhere("mc.status", "=", trim($criteria['status']));
+                $query->where("mc.status", "=", trim($criteria['status']));
             }
             if (isset($criteria['owner']) && !empty($criteria['owner'])) {
-                $query->orWhere(function ($query) use ($criteria) {
+                $query->where(function ($query) use ($criteria) {
                     $query->orWhere("maj.major_name", "like", "%" . trim($criteria['owner']) . "%")
                         ->orWhere("tbl_dep.department_name", "like", "%" . trim($criteria['owner']) . "%")
                         ->orWhere("tbl_fac.faculty_name", "like", "%" . trim($criteria['owner']) . "%");
@@ -124,6 +126,82 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
 
             DB::statement($queryStr);
             return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getAllDistinctStudyPlans()
+    {
+        try {
+            $query = DB::table('mcoursestudy as mc')
+                ->select(DB::raw('distinct mc.plan'))
+                ->whereNotNull('mc.plan')
+                ->whereRaw("trim(mc.plan) <> '' ")
+                ->orderBy('mc.plan', 'asc');
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getMcourseStudyByCoursecodeno($coursecodeno)
+    {
+        try {
+            return $this->where('coursecodeno', '=', $coursecodeno)->first();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function saveMcourse(array $data)
+    {
+        try {
+            if (!isset($data['coursecodeno']) || empty($data['coursecodeno'])) {
+                throw new \Exception('required coursecodeno');
+            }
+            $obj = $this->find($data['coursecodeno']);
+            if (empty($obj)) {
+                $obj = new Mcoursestudy();
+            }
+
+            if (array_key_exists('coursecodeno', $data)) {
+                $obj->coursecodeno = trim($data['coursecodeno']);
+            }
+            if (array_key_exists('thai', $data)) {
+                $obj->thai = trim($data['thai']);
+            }
+            if (array_key_exists('english', $data)) {
+                $obj->english = trim($data['english']);
+            }
+            if (array_key_exists('plan', $data)) {
+                $obj->plan = trim($data['plan']);
+            }
+            if (array_key_exists('degree', $data)) {
+                $obj->degree = $data['degree'];
+            }
+            if (array_key_exists('depcode', $data)) {
+                $obj->depcode = $data['depcode'];
+            }
+            if (array_key_exists('majorcode', $data)) {
+                $obj->majorcode = $data['majorcode'];
+            }
+
+            if (array_key_exists('status', $data) && !empty($data['status'])) {
+                $obj->status = $data['status'];
+            } else {
+                $obj->status = null;
+            }
+
+            if (array_key_exists('sync_creator', $data)) {
+                $obj->sync_creator = $data['sync_creator'];
+            }
+            if (array_key_exists('sync_modifier', $data)) {
+                $obj->sync_modifier = $data['sync_modifier'];
+            }
+
+            $obj->save();
+            return $obj;
         } catch (\Exception $ex) {
             throw $ex;
         }
