@@ -37,9 +37,27 @@ class Controller extends BaseController {
 
             return response()->download($path, $file->file_origi_name);
         } catch (\Exception $ex) {
-            
+
         }
     }
+
+    public function doDownloadMediaFile(Request $request) {
+        try {
+
+            $data = $request->all();
+            if (!array_key_exists('file_gen_name', $data) || empty($data['file_gen_name'])) {
+                return;
+            }
+
+            $file = $this->FileRepo->getFileByGenName($data['file_gen_name']);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
+            $this->WLog("{$data['file_gen_name']}",'download','');
+            return response()->download($path, $file->file_origi_name);
+        } catch (\Exception $ex) {
+
+        }
+    }
+
 
     public function doPDFImg($id) {
         try {
@@ -48,7 +66,7 @@ class Controller extends BaseController {
 
             return $path;
         } catch (\Exception $ex) {
-            
+
         }
     }
 
@@ -85,6 +103,6 @@ class Controller extends BaseController {
 
         return $res;
     }
- 
+
 
 }

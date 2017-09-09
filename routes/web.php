@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
     Route::get('apply/docAppEnvelopPDF/{id}', 'ApplyController@docApplicationEnvelop')->name('docAppEnvelopPDF');
     Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
-
+    Route::get('util/downloadMediaFile', 'Controller@doDownloadMediaFile')->name('downloadMediaFile');
 
 //payment
 
