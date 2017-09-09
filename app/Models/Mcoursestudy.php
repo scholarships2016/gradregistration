@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Mcoursestudy
- * 
+ *
  * @property string $programsystem
  * @property string $studyprogramsystem
  * @property string $calendar
@@ -38,7 +38,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $status
  * @property string $usercode
  * @property string $updatedate
- * @property string $changestame
+ * @property string $changestamp
  *
  * @package App\Models
  */
@@ -75,6 +75,6 @@ class Mcoursestudy extends Eloquent
 		'status',
 		'usercode',
 		'updatedate',
-		'changestame'
+		'changestamp'
 	];
 }
