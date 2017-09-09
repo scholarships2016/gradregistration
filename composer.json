@@ -18,7 +18,8 @@
         "niklasravnsborg/laravel-pdf": "^1.5",
         "phenx/php-font-lib": "0.5.*",
         "phpoffice/phpword": "^0.13.0",
-        "reliese/laravel": "^0.0.13"
+        "reliese/laravel": "^0.0.13",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

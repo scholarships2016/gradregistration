@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Mail;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ManageApplyController extends Controller {
 
@@ -131,6 +132,26 @@ class ManageApplyController extends Controller {
         }
     }
 
+    public function importApplicationShow() {
+        return view($this->part_doc . 'manage_importApplication');
+    }
+
+    public function deleteCourse($id) {
+
+        $gdata = ['modifier' => session('user_id'),
+            'application_id' => $id,
+            'flow_id' => 0];
+
+        $res = $this->ApplicationRepo->saveApplication($gdata);
+
+        if ($res) {
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+        return back();
+    }
+
     public function getRegisterCourse(Request $request = null) {
 
         $status = explode(',', $request->flow);
@@ -141,7 +162,12 @@ class ManageApplyController extends Controller {
         $curr_act_id = $request->curr_act_id;
         $exam_status = $request->exams;
         $program_id = $request->program_id;
-        $sub_major_id = $request->sub_major_id;
+        if (isset($request->sub_major_id)) {
+            $sub_major_id = ($request->sub_major_id != null) ? $request->sub_major_id : '-1';
+        } else {
+            $sub_major_id = null;
+        }
+
         $program_type_id = $request->program_type_id;
 
         $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
@@ -180,7 +206,7 @@ class ManageApplyController extends Controller {
         $academic_year = $request->year;
         $semester = $request->semester;
         $round_no = $request->roundNo;
-        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, true, false, $academic_year, $semester, $round_no);
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, false, false, $academic_year, $semester, $round_no);
         return response()->json($curDiss->sortBy('faculty_name'));
     }
 
@@ -209,7 +235,7 @@ class ManageApplyController extends Controller {
         }
         if ($request->exam_status) {
             $flow_id = ($request->exam_status == 2 || $request->exam_status == 3 ) ? 4 : 3;
-            
+
             $data = ['exam_status' => $request->exam_status, 'admission_status_id' => 0, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
         }
         if ($request->exam_remark || $request->exam_status) {
@@ -466,6 +492,102 @@ class ManageApplyController extends Controller {
 
             session()->flash('errorMsg', Lang::get('resource.lbError'));
         }
+    }
+
+    public function importApplicant() {
+        return view($this->part_doc . 'manageImportApplicant');
+    }
+
+    public function importApplicantSave(Request $request) {
+        try {
+            $datas = json_decode($request->values, true);
+
+            foreach ($datas as $data) {
+
+                $applicant = null;
+                $applicanData = $this->ApplicantRepo->getByCitizenOrEmail($data['id_card'], null);
+
+                if (count($applicanData) == 0) {
+                    $applicante = ["stu_citizen_card" => $data['id_card'],
+                        "stu_first_name" => $data['name_th'],
+                        "stu_last_name" => $data['lname_th'],
+                        "stu_first_name_en" => $data['name_en'],
+                        "stu_last_name_en " => $data['lname_en'],
+                        "stu_sex" => $data['sexID'],
+                        "nation_id" => $data['nationalityID'],
+                        "name_title_id" => $data['title_nameID'],
+                        "stu_birthdate" => ($data['birth_day']) ? strtotime($data['birth_day']) : '',
+                        "stu_phone" => " ",
+                        "stu_religion" => $data['religionID'],
+                        "stu_password" => "",
+                        "stu_email" => "",
+                        "stu_addr_no " => $data['address_no'],
+                        "stu_addr_village " => $data['address_moo'],
+                        "stu_addr_soi" => $data['address_soi'],
+                        "stu_addr_road " => $data['address_str'],
+                        "district_code " => $data['address_distID'],
+                        "Admission_Status" => $data['Admission_StatusID'],
+                        "creator" => session('user_id'),
+                        "province_id" => $data['address_provID']];
+
+                    $result = $this->ApplicantRepo->saveApplicant($applicante, true);
+
+                    if ($result > -1) {
+
+                        $applicant = $result;
+                        $applicanteWork = ["work_stu_position" => $data['work_position'],
+                            "work_status_id" => $data['work_statusID'],
+                            "app_work_status" => 1,
+                            "work_stu_detail" => $data['work_place_name'],
+                            "creator" => session('user_id'),
+                            "applicant_id" => $applicant];
+                        $result = $this->ApplicantRepo->saveWorkApplicant($applicanteWork);
+                    }
+                } else {
+                    $applicant = $applicanData->applicant_id;
+                }
+                if ($applicant != null) {
+
+                    $application = ["applicant_id" => $applicant,
+                        "stu_citizen_card" => $data['id_card'],
+                        "curr_act_id" => $request->curr_act_id,
+                        "curriculum_id" => $request->curriculum_id,
+                        "program_id" => $request->program_id,
+                        "exam_status" => 2,
+                        "admission_status_id" => $data['Admission_StatusID'],
+                        "curr_prog_id" => $request->program_type_id,
+                        "sub_major_id" => $request->sub_major_id,
+                        "creator" => session('user_id'),
+                        "modifier" => session('user_id')
+                    ];
+
+                    DB::table('application')->where('curr_act_id', $request->curr_act_id)
+                            ->where('applicant_id', $applicant)
+                            ->where('curriculum_id', $request->curriculum_id)
+                            ->where('program_id', $request->program_id)
+                            ->where('sub_major_id', $request->sub_major_id)
+                            ->delete();
+
+                    $result = $this->ApplicationRepo->saveApplication($application);
+
+                    $application2 = ["application_id" => $result->application_id,
+                        "modifier" => session('user_id'),
+                        "flow_id" => 5
+                    ];
+                    $result = $this->ApplicationRepo->saveApplication($application2);
+                }
+            }
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+            return "true";
+        } catch (Exception $e) {
+            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return "false";
+        }
+    }
+
+    public function manageNews() {
+        return view('backoffice.news_announcement.news_management');
     }
 
 }

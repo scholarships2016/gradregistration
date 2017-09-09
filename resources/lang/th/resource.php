@@ -362,4 +362,8 @@ return [
     'lbApproveBy' => 'อนุมัติโดย',
     'lbApproveNo' => 'ครั้งที่',
     'lbApproveDate' => 'วันที่',
+    
+    'lbNewsTitle' =>'ข่าว & ประกาศ',
+         'lbSetting' =>'ตั้งค่า',
+     'lbApplicationSame' =>'มีการสมัครในระบบแล้ว',
 ];

@@ -295,7 +295,7 @@
 
       </li>
 
-      <li class=" nav-item  menuitem   menuitem " data-index="3">
+      <li class=" nav-item  menuitem   " data-index="3">
         <a class="nav-link  nav-toggle" href="{{url('apply')}}">
                     <i class="icon-book-open"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculumLogedin')}}</span>

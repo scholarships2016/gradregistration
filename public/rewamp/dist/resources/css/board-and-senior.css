@@ -1,0 +1,682 @@
+/*----------------------------- Font Standard -------------------------------------------*/
+/**/
+/*----------------------------- Color -------------------------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------- for Button by BOH --------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------------------------------------------------------------------*/
+/* line 6, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block1 .hdtitleblock1 {
+  width: 50%;
+}
+/* line 9, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 13, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block1 .imgc {
+  position: relative;
+}
+/* line 19, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar {
+  padding-top: 60px;
+  padding-bottom: 35px;
+  margin: 0 auto;
+}
+/* line 23, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul {
+  width: 100%;
+  margin: 0;
+  -webkit-padding-start: 0;
+  padding: 0;
+  border-radius: 50px;
+}
+/* line 29, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul li {
+  display: table-cell;
+  position: relative;
+  width: 1%;
+  text-align: center;
+}
+/* line 34, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul li a {
+  border-right: 1px solid #03A5E4;
+  border-top: 1px solid #03A5E4;
+  border-bottom: 1px solid #03A5E4;
+  position: relative;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  text-decoration: none;
+  font-family: 'db_adman_xregular';
+  color: #394866;
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 47, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul li a.first {
+  border-left: 1px solid #03A5E4;
+  border-radius: 20px 0 0 20px;
+}
+/* line 51, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul li a.last {
+  border-right: 1px solid #03A5E4;
+  border-radius: 0 20px 20px 0;
+}
+/* line 55, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul li a:hover, .brd-of-dirctrs .block2 #tabnavbar ul li a.active {
+  color: #fff;
+  background-color: #00A4E4;
+  background-image: -webkit-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: -o-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: linear-gradient(to right, #2CC3F1 0%, #6C5AF5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC3F1', endColorstr='#FF6C5AF5', GradientType=1);
+}
+/* line 60, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #tabnavbar ul li a.active:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-top: 10px solid #4F87F6;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+}
+/* line 78, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu {
+  margin-bottom: 30px;
+}
+/* line 81, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu #menulist {
+  width: 100%;
+  color: #fff;
+  background-color: #00A4E4;
+  background-image: -webkit-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: -o-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: linear-gradient(to right, #2CC3F1 0%, #6C5AF5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC3F1', endColorstr='#FF6C5AF5', GradientType=1);
+  height: 50px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 92, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -20px;
+}
+/* line 98, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu .dropdown-menu {
+  width: 100%;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 105, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu2 {
+  margin-bottom: 30px;
+}
+/* line 108, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu2 #menulist {
+  width: 100%;
+  background-color: transparent;
+  height: 50px;
+  outline: none;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 116, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu2 .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -20px;
+}
+/* line 122, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 #selectmenu2 .dropdown-menu {
+  width: 100%;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 129, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .selectboxwrapper {
+  padding-top: 30px;
+}
+/* line 132, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .selectbox {
+  width: 100%;
+  /* min-height: 40px;*/
+  line-height: 1;
+  padding: 10px 0;
+}
+/* line 139, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .textblock2 {
+  padding-bottom: 40px;
+}
+/* line 142, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .item {
+  margin: 0 15px;
+}
+/* line 145, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .nametext {
+  padding-top: 20px;
+}
+/* line 148, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .textblock {
+  min-height: 170px;
+}
+/* line 151, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .readmoretext {
+  padding-bottom: 30px;
+  padding-top: 10px;
+}
+/* line 155, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 .pagingbrand {
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+/* line 159, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block2 a.brandarrowlink:link, .brd-of-dirctrs .block2 a.brandarrowlink:visited, .brd-of-dirctrs .block2 a.brandarrowlink:focus {
+  padding: 0 30px 0 40px;
+}
+/* line 163, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 166, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block3 .bdrtop {
+  border-top: 1px solid #EEEEEE;
+}
+/* line 169, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block3 .padhdtitle {
+  padding-top: 55px;
+}
+/* line 172, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block3 .subhead {
+  padding-top: 20px;
+}
+/* line 175, ../../../assets/sass/board-and-senior.scss */
+.brd-of-dirctrs .block3 .slickblock12 {
+  padding-top: 30px;
+}
+
+/**/
+/* line 184, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block1 .hdtitleblock1 {
+  width: 50%;
+}
+/* line 187, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 191, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block1 .imgc {
+  position: relative;
+}
+/* line 197, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar {
+  padding-top: 60px;
+  padding-bottom: 35px;
+  margin: 0 auto;
+}
+/* line 201, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul {
+  width: 100%;
+  margin: 0;
+  -webkit-padding-start: 0;
+  padding: 0;
+  border-radius: 50px;
+}
+/* line 207, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul li {
+  display: table-cell;
+  position: relative;
+  width: 1%;
+  text-align: center;
+}
+/* line 212, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul li a {
+  border-right: 1px solid #03A5E4;
+  border-top: 1px solid #03A5E4;
+  border-bottom: 1px solid #03A5E4;
+  position: relative;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  text-decoration: none;
+  font-family: 'db_adman_xregular';
+  color: #394866;
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 225, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul li a.first {
+  border-left: 1px solid #03A5E4;
+  border-radius: 20px 0 0 20px;
+}
+/* line 229, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul li a.last {
+  border-right: 1px solid #03A5E4;
+  border-radius: 0 20px 20px 0;
+}
+/* line 233, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul li a:hover, .rl-of-brd-nd-snr .block2 #tabnavbar ul li a.active {
+  color: #fff;
+  background-color: #00A4E4;
+  background-image: -webkit-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: -o-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: linear-gradient(to right, #2CC3F1 0%, #6C5AF5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC3F1', endColorstr='#FF6C5AF5', GradientType=1);
+}
+/* line 238, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #tabnavbar ul li a.active:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-top: 10px solid #4F87F6;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+}
+/* line 256, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #selectmenu {
+  margin-bottom: 30px;
+}
+/* line 259, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #selectmenu #menulist {
+  width: 100%;
+  color: #fff;
+  background-color: #00A4E4;
+  background-image: -webkit-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: -o-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: linear-gradient(to right, #2CC3F1 0%, #6C5AF5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC3F1', endColorstr='#FF6C5AF5', GradientType=1);
+  height: 50px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 270, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #selectmenu .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -20px;
+}
+/* line 276, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 #selectmenu .dropdown-menu {
+  width: 100%;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 283, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 .content-desc2 {
+  padding-bottom: 25px;
+}
+/* line 286, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 .content-title-1.hdlist {
+  padding-bottom: 25px;
+}
+/* line 289, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 .panel-group {
+  margin-bottom: 10px;
+}
+/* line 292, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 .panel-body {
+  padding: 45px 15px 20px 15px;
+}
+/* line 295, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 .padlist {
+  padding-left: 10px;
+}
+/* line 298, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block2 .sublist {
+  padding-left: 30px;
+}
+/* line 302, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 305, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block3 .padhdtitle {
+  padding-top: 55px;
+}
+/* line 308, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block3 .subhead {
+  padding-top: 20px;
+}
+/* line 311, ../../../assets/sass/board-and-senior.scss */
+.rl-of-brd-nd-snr .block3 .slickblock12 {
+  padding-top: 30px;
+}
+
+/**/
+/* line 318, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 {
+  background: #FFF url(../images/board-and-senior/bg-block1.jpg) no-repeat top center;
+  background-size: 100%;
+}
+/* line 321, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .picpeople {
+  position: relative;
+  display: inline-block;
+  padding-top: 50px;
+}
+/* line 326, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .previous-btn {
+  position: absolute;
+  left: -50%;
+  top: 50%;
+}
+/* line 331, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .next-btn {
+  position: absolute;
+  right: -50%;
+  top: 50%;
+}
+/* line 337, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .textblock {
+  padding-top: 25px;
+}
+/* line 341, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .page-title {
+  line-height: 0.95;
+}
+/* line 344, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .pfpeople {
+  padding: 40px 0 80px 0;
+}
+/* line 346, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .pfpeople ul {
+  padding-left: 20px;
+}
+/* line 349, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .pfpeople .pfhd {
+  padding-bottom: 20px;
+}
+/* line 352, ../../../assets/sass/board-and-senior.scss */
+.prfile .block1 .pfpeople .pfdt {
+  padding-bottom: 30px;
+}
+/* line 357, ../../../assets/sass/board-and-senior.scss */
+.prfile .block2 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 360, ../../../assets/sass/board-and-senior.scss */
+.prfile .block2 .padhdtitle {
+  padding-top: 55px;
+}
+/* line 363, ../../../assets/sass/board-and-senior.scss */
+.prfile .block2 .subhead {
+  padding-top: 20px;
+}
+/* line 366, ../../../assets/sass/board-and-senior.scss */
+.prfile .block2 .slickblock12 {
+  padding-top: 30px;
+}
+
+/*------------------------------------------------------------------------- Media Query -----------------------------------------------------------*/
+/*==========  Non-Mobile First Method  ==========*/
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  /* line 381, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 .nametext {
+    font-size: 26px;
+    font-size: 2.6rem;
+    padding-top: 20px;
+  }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  /* line 394, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block1 .page-title {
+    margin: 30px auto;
+  }
+  /* line 397, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block1 .teaser-headline-light {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 401, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block1 .content-desc4 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 406, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /* line 413, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block1 .page-title {
+    margin: 30px auto;
+  }
+  /* line 416, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block1 .teaser-headline-light {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 420, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block1 .content-desc4 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 425, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /* line 431, ../../../assets/sass/board-and-senior.scss */
+  .prfile .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+  /* line 442, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 445, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 454, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 .selectbox {
+    width: 100%;
+  }
+  /* line 457, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 .textblock {
+    min-height: 180px;
+  }
+
+  /* line 464, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 467, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 477, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .selectbox {
+    width: 100%;
+  }
+  /* line 480, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .textblock {
+    min-height: 180px;
+  }
+  /* line 483, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .panel-title a {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  /* line 487, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .content-title-1 {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  /* line 491, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 495, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .twoline.panel-title a {
+    line-height: 1;
+    min-height: 60px;
+    padding: 16px 50px;
+  }
+
+  /* line 503, ../../../assets/sass/board-and-senior.scss */
+  .prfile .stbreadcrumb .wrapper {
+    width: 100%;
+  }
+  /* line 506, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 {
+    background: none;
+  }
+  /* line 508, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 .wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 512, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 .w100p.picmb {
+    max-width: 290px;
+  }
+  /* line 515, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 .previous-btn {
+    position: absolute;
+    left: -25%;
+    top: 50%;
+  }
+  /* line 520, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 .next-btn {
+    position: absolute;
+    right: -25%;
+    top: 50%;
+  }
+  /* line 526, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 .pfpeople {
+    padding: 30px 0 20px 0;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  /* line 538, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 544, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 a.brandarrowlink:link, .brd-of-dirctrs .block2 a.brandarrowlink:visited, .brd-of-dirctrs .block2 a.brandarrowlink:focus {
+    padding: 0 10px 0 20px;
+  }
+  /* line 547, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 .textblock {
+    min-height: 190px;
+  }
+  /* line 551, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 #selectmenu #menulist {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 557, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 #selectmenu2 #menulist {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 562, ../../../assets/sass/board-and-senior.scss */
+  .brd-of-dirctrs .block2 .nametext {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+
+  /* line 570, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 576, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 a.brandarrowlink:link, .rl-of-brd-nd-snr .block2 a.brandarrowlink:visited, .rl-of-brd-nd-snr .block2 a.brandarrowlink:focus {
+    padding: 0 20px 0 30px;
+  }
+  /* line 579, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .textblock {
+    min-height: 190px;
+  }
+  /* line 583, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 #selectmenu #menulist {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 589, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 #selectmenu2 #menulist {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 594, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .panel-title a {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 598, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 602, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 606, ../../../assets/sass/board-and-senior.scss */
+  .rl-of-brd-nd-snr .block2 .twoline.panel-title a {
+    padding: 12px 60px;
+  }
+
+  /* line 614, ../../../assets/sass/board-and-senior.scss */
+  .prfile .block1 .w100p.picmb {
+    max-width: 215px;
+  }
+}
+/* Custom, iPhone Retina */

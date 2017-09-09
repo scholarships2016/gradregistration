@@ -355,5 +355,7 @@ return [
     'lbApproveBy' => 'Approved by',
     'lbApproveNo' => ', No.',
     'lbApproveDate' => ', Date',
-
+ 'lbNewsTitle' =>'News.',
+     'lbSetting' =>'Setting',
+    'lbApplicationSame' =>'Application has in system',
 ];

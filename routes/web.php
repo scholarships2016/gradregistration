@@ -52,6 +52,11 @@ Route::get('/faq', function () {
 Route::get('/download', function () {
     return view('download');
 });
+Route::get('admin/importApplicant','ManageApplyController@importApplicant')->name('importApplicant');
+Route::get('importExport', 'Controller@importExport');
+Route::post('importExcel', 'Controller@importExcel')->name('importExcel');
+Route::post('admin/importApplicantSave','ManageApplyController@importApplicantSave')->name('importApplicantSave');
+Route::get('admin/manageNews', 'ManageApplyController@manageNews');
 
 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
@@ -103,7 +108,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
     Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
     Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
-    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
+    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');    
+     Route::get('admin/deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+     
+     //importApplication
+      Route::get('admin/importApplication', 'ManageApplyController@importApplicationShow')->name('importApplication');
+   
+     
+   
 });
 
 
