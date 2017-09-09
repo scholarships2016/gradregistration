@@ -260,7 +260,7 @@
                    <span class="box"></span> {{Lang::get('resource.lbConfirmTSurveyLevel2')}} </label>
                    </div>
                                      <div class="md-radio">
-                   <input type="radio" id="radio3"  value="3"  name="radioB" class="md-radiobtn">
+                   <input type="radio" id="radio3"  value="3"  name="radioB" checked class="md-radiobtn">
                    <label for="radio3">
                    <span class="inc"></span>
                    <span class="check"></span>

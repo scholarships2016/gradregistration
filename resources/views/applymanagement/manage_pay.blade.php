@@ -214,6 +214,7 @@
                                 <div class="form-group form-md-line-input">
 
                                   <select id="bank_id" class="form-control">
+                                      <option value="">-- เลือก --</option>
                                                                 @foreach ($banks as $bank)
                                                                 <option value="{{$bank->bank_id}}" >{{$bank->bank_name}}</option>
                                                                 @endforeach
@@ -228,6 +229,7 @@
                                 <div class="form-group form-md-line-input">
                                   <input type="hidden" id="flow">
                                   <select id="status" class="form-control">
+                                      <option value="" >-- เลือก --</option>
                                         <option value="3" >ชำระเงินแล้ว</option>
                                                                 <option value="2" >ยังไม่ชำระเงิน</option>
 

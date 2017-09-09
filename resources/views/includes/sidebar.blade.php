@@ -207,7 +207,7 @@
                 </a>
         <ul class="sub-menu">
           <li class="nav-item  ">
-            <a href="manage-program.html" class="nav-link ">
+            <a href="{{url('admin/setting/masterInfo/courseManage')}}" class="nav-link ">
                             <span class="title">ข้อมูลหลักสูตร</span>
                         </a>
           </li>

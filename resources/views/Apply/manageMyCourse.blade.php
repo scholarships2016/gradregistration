@@ -126,9 +126,10 @@
                     </div>
 
                     <hr/>
+                     @if($curDis->flow_id>=2)
                     <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbDocID')}} <span class="label label-warning">{{ str_pad($curDis->app_id, 5, '0', STR_PAD_LEFT) }} </span> </div>
                     <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}} <span class="label label-warning">{{$curDis->program_id.' - '.str_pad($curDis->curriculum_num, 4, '0', STR_PAD_LEFT)}}</span> </div>
-
+                    @endif
 
                     <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}} <span class="label label-info">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
 
@@ -150,7 +151,8 @@
                               <a target="_blank" href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
 
                             </li>
-                            @endif @if($curDis->flow_id==2&& $curDis->is_active==1)
+                            @endif
+                            @if($curDis->flow_id==2&& $curDis->is_active==1)
                             <li>
 
                               <a target="_blank" href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> <i class="fa fa-envelope"></i> {{Lang::get('resource.lbdocEnvelop')}} </a>
@@ -278,7 +280,7 @@
                           </div>
                           <br/>
                           <div class="alert alert-danger">
-                            <i class="icon-info"></i> {{Lang::get('resource.lbProcessTime')}} {{$curDis->end_date}}
+                            <i class="icon-info"></i> {{Lang::get('resource.lbProcessTime')}} {{date('d-m-Y', strtotime($curDis->end_date )) }}
                           </div>
 
                           @endif
