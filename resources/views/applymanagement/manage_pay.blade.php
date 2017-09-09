@@ -190,7 +190,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button class="close" aria-hidden="true" type="button" data-dismiss="modal"></button>
-                        <h4 class="modal-title">รายละเอียดการชำระเงิน</h4>
+                        <h4 class="modal-title">รายละเอียดการชำระเงินและตรวจสอบเอกสาร</h4>
                       </div>
                       <div class="modal-body">
                         <div class="slimScrollDiv" style="width: auto; height: auto; overflow: hidden; position: relative;">
@@ -207,11 +207,11 @@
                                                                     <i class="fa fa-calendar"></i>
                                                                 </button>
                                                             </span>
-                                  <label for="form_control_1">วันที่ชำระเงิน</label>
-                                  <span class="help-block">วันที่ชำระเงิน</span>
+                                  <label for="form_control_1">วันที่ดำเนินการ</label>
+                                  <span class="help-block">วันที่ดำเนินการ</span>
                                 </div>
                                 <br>
-                                <div class="form-group form-md-line-input">
+                                <div id="bankList" class="form-group form-md-line-input">
 
                                   <select id="bank_id" class="form-control">
                                                                 @foreach ($banks as $bank)
@@ -220,19 +220,19 @@
                                                             </select>
                                   <label for="form_control_1">ธนาคารที่ชำระเงิน</label>
                                   <span class="help-block">ธนาคารที่ชำระเงิน</span>
-                                </div>
+                              
                                 <div class="form-group form-md-line-input">
                                   <span class="label label-sm label-info"> จำนวนเงินที่ชำระ [<label id="fee"></label> บาท]</span>
                                   <span class="label label-sm label-success"> ค่าธรรมเนียมธนาคาร [<label id="Bfee"></label> บาท]</span>
-                                </div>
+                                </div>  </div>
                                 <div class="form-group form-md-line-input">
                                   <input type="hidden" id="flow">
                                   <select id="status" class="form-control">
-                                        <option value="3" >ชำระเงินแล้ว</option>
-                                                                <option value="2" >ยังไม่ชำระเงิน</option>
+                                        <option value="3" >ชำระเงินแล้ว/ตรวจเอกสารเรียบร้อย</option>
+                                        <option value="2" >ยังไม่ชำระเงิน/เอกสารยังไม่ผ่านการตรวจสอบ</option>
 
                                                             </select>
-                                  <label for="form_control_1">สถานะการชำระเงิน </label>
+                                  <label for="form_control_1">สถานะการชำระเงินและตรวจสอบเอกสาร </label>
 
                                 </div>
 
@@ -345,7 +345,7 @@ var TableDatatablesAjax = function () {
                     "url": "{!! route('admin.getRegisterCourse') !!}",
                     "type":"GET",
                     "data" : {
-                               flow : '1,2,3',
+                               flow : '2,3',
                                semester  : $('#semester').val(),
                                year   :$('#year').val(),
                                roundNo :$('#roundNo').val(),
@@ -425,7 +425,7 @@ orderable: false,
 className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<a href="#responsive"  hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน"  class="btn btn-xs green tooltips"><i class="fa fa-dollar"></i>ชำระเงิน</a>'+
+return ('<a href="#responsive" apm="'+full.apply_method+'" culn="'+full.nation_id+'"   hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน"  class="btn btn-xs green tooltips"><i class="fa fa-dollar"></i>ปรับปรุงสถานะ</a>'+
    '<a target="_blank" href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ปรับเอกสาร" class="btn btn-xs blue "><i class="fa fa-file-o"></i>เอกสาร</a>') ;
 } }],
                 "bDestroy": true,
@@ -456,17 +456,23 @@ jQuery(document).ready(function() {
 
    $('#datatable_ajax tbody').on( 'click', 'a', function () {
           if($(this).attr('ids')=="edit"){
-
+ 
                 $('#application_id').val($(this).attr('hid'));
-               $('#payment_date').val(($(this).attr('hidd') == 'null')? Date().format('y-m-d'):$(this).attr('hidd')) ;
+               $('#payment_date').val(($(this).attr('hidd') == 'null')? ((new Date()).toISOString().split('T')[0]):$(this).attr('hidd')) ;
                $('#receipt_book').val($(this).attr('hidb'));
                $('#receipt_no').val($(this).attr('hidn'));
                $('#bank_id').val($(this).attr('bak'));
                $('#status').val($(this).attr('flo'));
                $('#flow').val($(this).attr('flo'));
                $('#fee').text($(this).attr('fee'));
-                $('#Bfee').text($(this).attr('Bfee'));
-         }
+               $('#Bfee').text($(this).attr('Bfee'));
+               
+               if($(this).attr('apm')=='1'  && $(this).attr('culn')=='1' ){
+                   $('#bankList').show();
+               }else{
+            $('#bankList').hide();   
+            }
+         } 
     } );
 });
 
