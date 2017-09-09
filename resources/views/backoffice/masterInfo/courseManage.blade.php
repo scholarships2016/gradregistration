@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col-md-12">
             <!-- Begin: Demo Datatable 1 -->
-            <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet light portlet-fit portlet-datatable bordered" id="mcourseBox">
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-settings font-dark"></i>
@@ -52,7 +52,7 @@
                             <div class="col-md-6">
                                 <div class="btn-group">
 
-                                    <a href="manage-program-form.html"
+                                    <a href="{{route('admin.masterInfo.showMCourseAddPage')}}"
                                        class="btn btn-circle green btn-outline sbold uppercase">
                                         <i class="fa fa-plus"></i> เพิ่มข้อมูล
                                     </a>
@@ -242,13 +242,13 @@
                         targets: 6,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                                    {{--var editLink = '{{url("admin/management/curriculum/edit")}}';--}}
-
+                            var editLink = '{{url("admin/setting/masterInfo/edit")}}';
 
                             var html = '';
                             html += '<div class="btn-group btn-group-sm btn-group-solid">';
                             html += '<a class="btn btn-xs red" onclick="doDelete(this)">ลบ<i class="fa fa-trash-o"></i></a>';
-                            html += '<a href="" class="btn btn-xs blue">แก้ไข<i class="fa fa-edit"></i></a>';
+                            html += '<a href="' + editLink + '/' + full.coursecodeno +
+                                '" class="btn btn-xs blue">แก้ไข<i class="fa fa-edit"></i></a>';
                             html += '</div>';
                             return html;
                         }
@@ -304,6 +304,20 @@
 
     $(document).ready(function () {
         initDatatable();
+
+        $('#btn-syn-data').click(function () {
+            App.blockUI({
+                target: '#mcourseBox',
+                animate: true
+            });
+
+            window.setTimeout(function() {
+                App.unblockUI('#mcourseBox');
+            }, 2000);
+
+        });
+
+
     });
 </script>
 @endpush
