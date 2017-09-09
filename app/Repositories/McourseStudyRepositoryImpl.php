@@ -83,7 +83,15 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             }
 
             $recordsFiltered = $query->get()->count();
-            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+
+            if(isset($criteria['order'][0]['column'])){
+              $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            }else{
+                $query->orderBy('status','desc');
+            }
+            
+
+
             $query->offset($criteria['start'])->limit($criteria['length']);
             $data = $query->get();
 
