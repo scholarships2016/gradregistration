@@ -413,6 +413,7 @@
       closeOnConfirm: false,
       showLoaderOnConfirm: true
     }, function() {
+      
 
       setTimeout(function() {
         window.location.href = '{{url('profile#tab_1_3')}}'

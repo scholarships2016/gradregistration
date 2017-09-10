@@ -10,13 +10,22 @@ class AnnouncementRepositoryImpl extends AbstractRepositoryImpl implements Annou
     private $paging = 10;
 
     public function __construct() {
-        parent::setModelClassName(TblDistrict::class);
+        parent::setModelClassName(Announcement::class);
     }
 
     public function getAnnouncementAll() {
         $res = null;
         try {
-            $res = Announcement::orderBy('anno_seq')->get();
+            $res = Announcement::orderBy('anno_seq')->orderBy('modified','desc')->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $res;
+    }
+    public function getAnnouncementActive() {
+        $res = null;
+        try {
+            $res = Announcement::where('anno_flag','1')->orderBy('anno_seq')->orderBy('modified','desc')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -26,7 +35,7 @@ class AnnouncementRepositoryImpl extends AbstractRepositoryImpl implements Annou
     public function delete($id) {
         $result = false;
         try {
-            $result = TblDegree::where('anno_id', $id)->delete();
+            $result = Announcement::where('anno_id', $id)->delete();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -47,9 +56,14 @@ class AnnouncementRepositoryImpl extends AbstractRepositoryImpl implements Annou
                 $curObj->anno_title = $data['anno_title'];
             if (array_key_exists('anno_detail', $data))
                 $curObj->anno_detail = $data['anno_detail'];
+            if (array_key_exists('anno_title_en', $data))
+                $curObj->anno_title_en = $data['anno_title_en'];
+            if (array_key_exists('anno_detail_en', $data))
+                $curObj->anno_detail_en = $data['anno_detail_en'];
             if (array_key_exists('anno_flag', $data))
                 $curObj->anno_flag = $data['anno_flag'];
-
+            if (array_key_exists('anno_seq', $data))
+                $curObj->anno_seq = $data['anno_seq'];
 
             if (!$chk) {
 //                if (array_key_exists('stu_citizen_card', $data))
@@ -62,6 +76,11 @@ class AnnouncementRepositoryImpl extends AbstractRepositoryImpl implements Annou
 //                $curObj->modifier = $data['modifier'];
 
             $curObj->modifier = \Carbon\Carbon::now()->timestamp;
+             if (!$chk){
+                $curObj->creator = session('user_id');
+            }else{
+                $curObj->modifier = session('user_id');
+            }
             $result = $curObj->save();
         } catch (\Exception $ex) {
             throw $ex;
