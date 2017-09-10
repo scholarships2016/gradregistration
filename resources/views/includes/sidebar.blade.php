@@ -92,15 +92,7 @@
                 </a>
 
       </li>
-      <li class=" nav-item  menuitem  " data-index="15">
-        <a href="" class="nav-link nav-toggle">
-                    <i class="icon-check"></i>
-                    <span class="title">ออกหนังสือรับรอง</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
-                </a>
-
-      </li>
+    
       <li class=" nav-item  menuitem   " data-index="16">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-bar-chart"></i>

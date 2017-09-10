@@ -141,6 +141,8 @@
                                                     @endif
                                             >
                                             {{$value->permission_name}}
+                                            <br clear="all"/>
+                                            <small>{{$value->permission_description}}</small>
                                             <span></span>
                                         </label>
                                     @endforeach
