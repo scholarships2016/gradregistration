@@ -132,7 +132,6 @@
 <script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
-
 <script src="{{asset('assets/global/plugins/jquery.pulsate.min.js" type="text/javascript')}}"></script>
 <script src="{{asset('assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/holder.js')}}" type="text/javascript"></script>
@@ -246,7 +245,7 @@
 
                             var html = '';
                             html += '<div class="btn-group btn-group-sm btn-group-solid">';
-                            html += '<a class="btn btn-xs red" onclick="doDelete(this)">ลบ<i class="fa fa-trash-o"></i></a>';
+                            html += '<a class="btn btn-xs red" onclick="doDelete(\'' + full.coursecodeno + '\')">ลบ<i class="fa fa-trash-o"></i></a>';
                             html += '<a href="' + editLink + '/' + full.coursecodeno +
                                 '" class="btn btn-xs blue">แก้ไข<i class="fa fa-edit"></i></a>';
                             html += '</div>';
@@ -266,37 +265,58 @@
         });
 
     }
-    //
-    //    function reloadTable() {
-    ////        var ids = [];
-    ////        var statusIds = $("input[name='is_approve[]']:checked").serializeArray();
-    ////        statusIds.forEach(function (item, index) {
-    ////            ids.push(item.value);
-    ////        });
-    ////        grid.setAjaxParam("flow_status", ids.toString());
-    //        grid.getDataTable().ajax.reload();
-    //        grid.clearAjaxParams();
-    //    }
 
     function doDelete(id) {
-        var formData = new FormData();
-        formData.append('curriculum_id', id);
+
+        swal({
+                html: true,
+                title: "ต้องการจะลบข้อมูล ?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: "#E7505A",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
+            },
+            function (isConfirm) {
+                if (!isConfirm) {
+                    return;
+                }
+                $.ajax({
+                    url: '{{route('admin.masterInfo.doDelete')}}',
+                    headers: {
+                        'X-CSRF-Token': '{{csrf_token()}}'
+                    },
+                    method: "POST",
+                    data: 'coursecodeno=' + id,
+                    success: function (result) {
+                        swal({
+                            html: true,
+                            title: result.message,
+                            text: "",
+                            type: result.status
+                        });
+                        if (result.status == 'success') {
+                            grid.getDataTable().ajax.reload();
+                        }
+                    }
+                });
+            }
+        );
+    }
+
+    function updateMcourse() {
         $.ajax({
-            url: '',
+            url: '{{route('admin.masterInfo.updateMcourse')}}',
             headers: {
-                'X-CSRF-Token': $("#searchForm").find("input[name='_token']").val()
+                'X-CSRF-Token': '{{csrf_token()}}'
             },
             method: "POST",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
             success: function (result) {
                 var data = showToastFromAjaxResponse(result);
-                if (result.status == 'success') {
-                    reloadTable();
-                }
+                App.unblockUI('#mcourseBox');
             }
         });
     }
@@ -310,13 +330,8 @@
                 target: '#mcourseBox',
                 animate: true
             });
-
-            window.setTimeout(function() {
-                App.unblockUI('#mcourseBox');
-            }, 2000);
-
+            updateMcourse();
         });
-
 
     });
 </script>
