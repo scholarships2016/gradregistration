@@ -222,6 +222,7 @@
                                   <label for="form_control_1">ธนาคารที่ชำระเงิน</label>
                                   <span class="help-block">ธนาคารที่ชำระเงิน</span>
                               
+
                                 <div class="form-group form-md-line-input">
                                   <span class="label label-sm label-info"> จำนวนเงินที่ชำระ [<label id="fee"></label> บาท]</span>
                                   <span class="label label-sm label-success"> ค่าธรรมเนียมธนาคาร [<label id="Bfee"></label> บาท]</span>

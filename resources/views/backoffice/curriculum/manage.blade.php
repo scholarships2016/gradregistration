@@ -6,6 +6,7 @@
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet"
       type="text/css"/>
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css"/>
 <style type="text/css">
 </style>
 @endpush
@@ -150,8 +151,6 @@
                             </div>
 
 
-
-
                             <p></p>
                         </form>
                     </div>
@@ -191,6 +190,7 @@
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -391,7 +391,7 @@
             }
         });
 
-    } 
+    }
 
     function reloadTable() {
         grid.setAjaxParam("faculty_id", $('#faculty_id').val());
@@ -405,26 +405,50 @@
     }
 
     function doDelete(id) {
-        var formData = new FormData();
-        formData.append('curriculum_id', id);
-        $.ajax({
-            url: '{{route('admin.curriculum.doDelete')}}',
-            headers: {
-                'X-CSRF-Token': $("#searchForm").find("input[name='_token']").val()
+        swal({
+                html: true,
+                title: "ต้องการจะลบข้อมูล ?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: "#E7505A",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
             },
-            method: "POST",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
-            success: function (result) {
-                var data = showToastFromAjaxResponse(result);
-                if (result.status == 'success') {
-                    reloadTable();
+            function (isConfirm) {
+                if (!isConfirm) {
+                    return;
                 }
+
+                var formData = new FormData();
+                formData.append('curriculum_id', id);
+                $.ajax({
+                    url: '{{route('admin.curriculum.doDelete')}}',
+                    headers: {
+                        'X-CSRF-Token': $("#searchForm").find("input[name='_token']").val()
+                    },
+                    method: "POST",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    enctype: 'multipart/form-data',
+                    success: function (result) {
+                        swal({
+                            html: true,
+                            title: result.message,
+                            text: "",
+                            type: result.status
+                        });
+                        if (result.status == 'success') {
+                            reloadTable();
+                        }
+                    }
+                });
             }
-        });
+        );
     }
 
 

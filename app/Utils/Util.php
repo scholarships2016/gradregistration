@@ -37,6 +37,7 @@ class Util
     const ERROR_OCCUR = 'เกิดข้อผิดพลาด<br/>Error';
     const CHANGE_PASS_SUCCESS = 'เปลี่ยนรหัสผ่านสำเร็จ<br/>Changing password is successful.';
     const CHANGE_PASS_ERROR = 'เปลี่ยนรหัสผ่านไม่สำเร็จ<br/>Changing password failed.';
+    const UPDATE_SUCCESS = 'ปรับปรุงข้อมูลสำเร็จ<br/>Updating is successful.';
 
 
     const SUCCESS_DELETE = 'ลบข้อมูลสำเร็จ';
@@ -169,5 +170,16 @@ class Util
             throw $ex;
         }
     }
-
+    public static function prepareDataForDropdownListDistrict($datas, $keyName, $valueName, $valueNameEn)
+    {
+        $result = array();
+        try {
+            foreach ($datas as $data) {
+                $result = array_add($result, $data[$keyName], $data[$valueName].' - '.$data[$valueNameEn]);
+            }
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
 }

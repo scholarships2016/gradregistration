@@ -293,4 +293,7 @@ return [
     'lbProfileVerifyMessage' => 'Please update your personal informations before apply.',
     'lbProfileVerifyButton' => 'Update Profile',
     'lbAnnouncementTitle' =>'Announcement',
+    'lbProfileVerifyWarning' => 'Warning',
+    'lbProfileVerifyMessage' => 'Please update your personal informations before apply.',
+    'lbProfileVerifyButton' => 'Update Profile',
 ];

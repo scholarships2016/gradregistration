@@ -286,7 +286,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                     return $rs;
                 }
             }
- 
+
             $chk = $this->find($id);
             $curObj = $chk ? $chk : new Application;
 

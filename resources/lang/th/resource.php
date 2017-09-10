@@ -298,4 +298,7 @@ return [
     'lbProfileVerifyMessage' => 'โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)',
     'lbProfileVerifyButton' => 'ปรับปรุงข้อมูลส่วนตัว',
     'lbAnnouncementTitle' =>'ขั้นตอนการสมัคร',
+    'lbProfileVerifyWarning' => 'คำเตือน',
+    'lbProfileVerifyMessage' => 'โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)',
+    'lbProfileVerifyButton' => 'ปรับปรุงข้อมูลส่วนตัว',
 ];

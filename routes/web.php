@@ -26,7 +26,7 @@ Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginAppli
 //Route::get('login/admin', 'Auth\LoginUserController@checkuserldap');
 Route::get('admin/login/', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
 Route::post('login_admin', 'Auth\LoginUserController@postLogin')->name('adminlogin');
-
+Route::get('admin/logout', 'Auth\LoginUserController@getLogout')->name('logout');
 
 //SetLangues just call function
 Route::get('language', 'Auth\LoginApplicantController@language');
@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('apply/docAppfeePDF/{id}', 'ApplyController@docApplicationFee')->name('docAppfeePDF');
     Route::get('apply/docAppEnvelopPDF/{id}', 'ApplyController@docApplicationEnvelop')->name('docAppEnvelopPDF');
     Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
-
+    Route::get('util/downloadMediaFile', 'Controller@doDownloadMediaFile')->name('downloadMediaFile');
 
 //payment
 
@@ -227,6 +227,8 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
             Route::get('add', 'BackOffice\MasterInfoController@showMCourseAddPage')->name('admin.masterInfo.showMCourseAddPage');
             Route::get('edit/{id}', 'BackOffice\MasterInfoController@showMCourseEditPage')->name('admin.masterInfo.showMCourseEditPage');
             Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
+            Route::post('updateMcourse', 'BackOffice\MasterInfoController@updateMcourseTable')->name('admin.masterInfo.updateMcourse');
+            Route::post('doDelete', 'BackOffice\MasterInfoController@doDelete')->name('admin.masterInfo.doDelete');
 
             Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
         });

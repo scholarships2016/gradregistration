@@ -144,6 +144,15 @@ class FileRepositoryImpl extends AbstractRepositoryImpl implements FileRepositor
             throw $ex;
         }
     }
-
+    public function getFileByGenName($file_gen_name)
+    {
+        $result = null;
+        try {
+            $result = File::where('file_gen_name', $file_gen_name)->first();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
 
 }

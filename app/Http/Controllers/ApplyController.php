@@ -137,7 +137,7 @@ class ApplyController extends Controller {
         $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1]);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
- 
+
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program,'checkProfile' => $this->checkApplicantProfile()]);
     }
 
@@ -163,7 +163,7 @@ class ApplyController extends Controller {
 
     public function docMyCourserintPDF($id) {
 
-//        
+//
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);
@@ -439,13 +439,17 @@ class ApplyController extends Controller {
     }
 
     public function checkApplicantProfile() {
+      if(isset(session('Applicant')->applicant_id) && session('Applicant')->applicant_id != ""){
         $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id);
         $applicanteEdu = DB::table('applicant_edu')->where('applicant_id', session('Applicant')->applicant_id)->Count();
- 
+
         if ($applicant->stu_first_name != null && $applicant->stu_first_name_en != null && $applicant->stu_addr_pcode != null && $applicant->stu_img != null && $applicant->eng_test_id != null && $applicant->eng_test_score != null && $applicanteEdu > 0) {
             return true;
         }
         return false;
+      }else{
+        return true;
+      }
     }
 
 }

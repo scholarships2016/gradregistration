@@ -97,4 +97,29 @@ class MasterInfoController extends Controller
         }
     }
 
+    public function updateMcourseTable(Request $request)
+    {
+        try {
+            $this->mcStudyRepo->updateAllCourse();
+            return response()->json(Util::jsonResponseFormat(1, null, Util::UPDATE_SUCCESS));
+        } catch (\Exception $ex) {
+            throw $ex;
+            return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
+        }
+    }
+
+    public function doDelete(Request $request)
+    {
+        try {
+            $codeno = $request->input('coursecodeno');
+            if (empty($codeno)) {
+                return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+            }
+            $this->mcStudyRepo->deleteMcourseStudyByCoursecodeno($codeno);
+            return response()->json(Util::jsonResponseFormat(1, null, Util::SUCCESS_DELETE));
+        } catch (\Exception $ex) {
+            return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+        }
+    }
+
 }

@@ -9,4 +9,6 @@ interface McourseStudyRepository
     public function getMcourseStudyPaging1($criteria = null);
 
     public function updateAllCourse();
+
+    public function deleteMcourseStudyByCoursecodeno($coursecodeno);
 }

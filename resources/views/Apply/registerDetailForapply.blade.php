@@ -60,6 +60,7 @@
 
 
 @section('maincontent')
+   @if(session('user_id'))
    @if(!$checkProfile)
   <div id="boxCheckProfile" class="alert alert-block alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert"></button>
@@ -69,6 +70,7 @@
           <a class="btn red" href="{{url('/profile#tab_1_3')}}"> {{Lang::get('resource.lbProfileVerifyButton')}} </a>
       </p>
   </div>
+@endif
 @endif
 <div class="invoice" id="page-program-detail">
   @if($curDiss->count()>0) @foreach ($curDiss as $curDis)
@@ -103,6 +105,7 @@
                                                                     ({{ (session('locale')=='th')?$program->office_time : $program->office_time_en }})
                                                                  </label>
                 </div>
+                <br/>
                 @endforeach
               </div>
             </div>
@@ -335,7 +338,7 @@
                 <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailDocument')}}</label>
                 <div class="col-md-8">
                   <span class="form-control-static">
-                                                      <a href="javascript:DownloadFile({{$curDis->document_file}});" class="btn btn-circle btn-xs blue btn-outline">
+                                                      <a target="_blank" href="{{route('downloadFile').'?file_id='.$curDis->document_file}}" class="btn btn-circle btn-xs blue btn-outline">
                                                                                 <i class="fa fa-file-word-o"></i> Download </a>
                                                      </span>
                 </div>
@@ -411,6 +414,7 @@
       showLoaderOnConfirm: true
     }, function() {
       
+
       setTimeout(function() {
         window.location.href = '{{url('profile#tab_1_3')}}'
       }, 100);
