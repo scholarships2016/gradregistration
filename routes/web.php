@@ -209,6 +209,8 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
             Route::get('add', 'BackOffice\MasterInfoController@showMCourseAddPage')->name('admin.masterInfo.showMCourseAddPage');
             Route::get('edit/{id}', 'BackOffice\MasterInfoController@showMCourseEditPage')->name('admin.masterInfo.showMCourseEditPage');
             Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
+            Route::post('updateMcourse', 'BackOffice\MasterInfoController@updateMcourseTable')->name('admin.masterInfo.updateMcourse');
+            Route::post('doDelete', 'BackOffice\MasterInfoController@doDelete')->name('admin.masterInfo.doDelete');
 
             Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
         });
