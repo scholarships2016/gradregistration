@@ -64,9 +64,9 @@
             <label class="control-label col-md-3">{{ Lang::get('resource.lbSearchFaculty')}}</label>
             <div class="col-md-9">
               <select id="faculty_id" class="form-control input-lg">
-                              <option value="" selected="">--Select--</option>
+                              <option value="" selected="">-- Select --</option>
                               @foreach ($facultys as $faculty)
-                              <option value="{{$faculty->faculty_id}}">{{$faculty->faculty_name}}</option>
+                              <option value="{{$faculty->faculty_id}}">{{ (session('locale')=='th'?$faculty->faculty_name:$faculty->faculty_full)}}</option>
                               @endforeach
                           </select>
               <span class="help-block"> </span>
@@ -80,9 +80,9 @@
             <label class="control-label col-md-3">{{ Lang::get('resource.lbSearchProgramType')}}</label>
             <div class="col-md-9">
               <select id="degree_id" class="form-control input-lg">
-                         <option value="" selected="" >--Select--</option>
+                         <option value="" selected="" >-- Select --</option>
                          @foreach ($typeofRecs as $typeofRec)
-                         <option value="{{$typeofRec-> program_type_id}}">{{$typeofRec->prog_type_name}}</option>
+                         <option value="{{$typeofRec-> program_type_id}}">{{ (session('locale')=='th'?$typeofRec->prog_type_name:$typeofRec->prog_type_name_en)}}</option>
                          @endforeach
 
                          </select>

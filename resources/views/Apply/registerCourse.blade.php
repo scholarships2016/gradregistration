@@ -91,7 +91,7 @@
             <select id="bank_id" class="form-control">
               <option value="">-- Select --</option>
                 @foreach ($banks as $bank)
-                <option value="{{$bank->bank_id}}" {{ $Datas->bank_id == $bank->bank_id ? 'selected="selected"' : '' }}>{{$bank->bank_name}} - {{$bank->bank_name_en}}</option>
+                <option value="{{$bank->bank_id}}" {{ $Datas->bank_id == $bank->bank_id ? 'selected="selected"' : '' }}>{{ (session('locale')=='th'?$bank->bank_name:$bank->bank_name_en)}}</option>
                 @endforeach
             </select>
           </div>
