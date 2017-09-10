@@ -229,10 +229,12 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
             Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
             Route::post('updateMcourse', 'BackOffice\MasterInfoController@updateMcourseTable')->name('admin.masterInfo.updateMcourse');
             Route::post('doDelete', 'BackOffice\MasterInfoController@doDelete')->name('admin.masterInfo.doDelete');
-
             Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
         });
 
+        Route::group(['prefix' => 'audit', 'middleware' => []], function () {
+            Route::get('manage', 'BackOffice\AuditController@showAuditManagePage')->name('admin.audit.showManagePage');
+            Route::get('doPaging', 'BackOffice\AuditController@doPaging')->name('admin.audit.doPaging');
+        });
     });
-
 });
