@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Mail;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\NewsRepositoryImpl;
 
 class ManageApplyController extends Controller {
 
@@ -47,12 +49,13 @@ class ManageApplyController extends Controller {
     protected $ApplicantRepo;
     protected $ExamStatus;
     protected $AdmissionStatus;
+    protected $NewsRepo;
 
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
     , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo
     , SatisfactionRepositoryImpl $SatisfactionRepo, ApplicantRepositoryImpl $ApplicantRepo, TblExamStatusRepositoryImpl $ExamStatus
-    , TblAdmissionStatusRepositoryImpl $AdmissionStatus) {
+    , TblAdmissionStatusRepositoryImpl $AdmissionStatus, NewsRepositoryImpl $NewsRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -70,6 +73,7 @@ class ManageApplyController extends Controller {
         $this->ApplicantRepo = $ApplicantRepo;
         $this->ExamStatus = $ExamStatus;
         $this->AdmissionStatus = $AdmissionStatus;
+        $this->NewsRepo = $NewsRepo;
     }
 
     public function showManagePay() {
@@ -131,6 +135,26 @@ class ManageApplyController extends Controller {
         }
     }
 
+    public function importApplicationShow() {
+        return view($this->part_doc . 'manage_importApplication');
+    }
+
+    public function deleteCourse($id) {
+
+        $gdata = ['modifier' => session('user_id'),
+            'application_id' => $id,
+            'flow_id' => 0];
+
+        $res = $this->ApplicationRepo->saveApplication($gdata);
+
+        if ($res) {
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+        return back();
+    }
+
     public function getRegisterCourse(Request $request = null) {
 
         $status = explode(',', $request->flow);
@@ -141,7 +165,12 @@ class ManageApplyController extends Controller {
         $curr_act_id = $request->curr_act_id;
         $exam_status = $request->exams;
         $program_id = $request->program_id;
-        $sub_major_id = $request->sub_major_id;
+        if (isset($request->sub_major_id)) {
+            $sub_major_id = ($request->sub_major_id != null) ? $request->sub_major_id : '-1';
+        } else {
+            $sub_major_id = null;
+        }
+
         $program_type_id = $request->program_type_id;
 
         $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
@@ -180,7 +209,7 @@ class ManageApplyController extends Controller {
         $academic_year = $request->year;
         $semester = $request->semester;
         $round_no = $request->roundNo;
-        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, true, false, $academic_year, $semester, $round_no);
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, false, false, $academic_year, $semester, $round_no);
         return response()->json($curDiss->sortBy('faculty_name'));
     }
 
@@ -209,7 +238,7 @@ class ManageApplyController extends Controller {
         }
         if ($request->exam_status) {
             $flow_id = ($request->exam_status == 2 || $request->exam_status == 3 ) ? 4 : 3;
-            
+
             $data = ['exam_status' => $request->exam_status, 'admission_status_id' => 0, 'flow_id' => $flow_id, 'application_id' => $request->application_id];
         }
         if ($request->exam_remark || $request->exam_status) {
@@ -465,6 +494,210 @@ class ManageApplyController extends Controller {
             Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
 
             session()->flash('errorMsg', Lang::get('resource.lbError'));
+        }
+    }
+
+    public function importApplicant() {
+        return view($this->part_doc . 'manageImportApplicant');
+    }
+
+    public function importApplicantSave(Request $request) {
+        try {
+            $datas = json_decode($request->values, true);
+
+            foreach ($datas as $data) {
+
+                $applicant = null;
+                $applicanData = $this->ApplicantRepo->getByCitizenOrEmail($data['id_card'], null);
+
+                if (count($applicanData) == 0) {
+                    $applicante = ["stu_citizen_card" => $data['id_card'],
+                        "stu_first_name" => $data['name_th'],
+                        "stu_last_name" => $data['lname_th'],
+                        "stu_first_name_en" => $data['name_en'],
+                        "stu_last_name_en " => $data['lname_en'],
+                        "stu_sex" => $data['sexID'],
+                        "nation_id" => $data['nationalityID'],
+                        "name_title_id" => $data['title_nameID'],
+                        "stu_birthdate" => ($data['birth_day']) ? strtotime($data['birth_day']) : '',
+                        "stu_phone" => " ",
+                        "stu_religion" => $data['religionID'],
+                        "stu_password" => "",
+                        "stu_email" => "",
+                        "stu_addr_no " => $data['address_no'],
+                        "stu_addr_village " => $data['address_moo'],
+                        "stu_addr_soi" => $data['address_soi'],
+                        "stu_addr_road " => $data['address_str'],
+                        "district_code " => $data['address_distID'],
+                        "Admission_Status" => $data['Admission_StatusID'],
+                        "creator" => session('user_id'),
+                        "province_id" => $data['address_provID']];
+
+                    $result = $this->ApplicantRepo->saveApplicant($applicante, true);
+
+                    if ($result > -1) {
+
+                        $applicant = $result;
+                        $applicanteWork = ["work_stu_position" => $data['work_position'],
+                            "work_status_id" => $data['work_statusID'],
+                            "app_work_status" => 1,
+                            "work_stu_detail" => $data['work_place_name'],
+                            "creator" => session('user_id'),
+                            "applicant_id" => $applicant];
+                        $result = $this->ApplicantRepo->saveWorkApplicant($applicanteWork);
+                    }
+                } else {
+                    $applicant = $applicanData->applicant_id;
+                }
+                if ($applicant != null) {
+
+                    $application = ["applicant_id" => $applicant,
+                        "stu_citizen_card" => $data['id_card'],
+                        "curr_act_id" => $request->curr_act_id,
+                        "curriculum_id" => $request->curriculum_id,
+                        "program_id" => $request->program_id,
+                        "exam_status" => 2,
+                        "admission_status_id" => $data['Admission_StatusID'],
+                        "curr_prog_id" => $request->program_type_id,
+                        "sub_major_id" => $request->sub_major_id,
+                        "creator" => session('user_id'),
+                        "modifier" => session('user_id')
+                    ];
+
+                    DB::table('application')->where('curr_act_id', $request->curr_act_id)
+                            ->where('applicant_id', $applicant)
+                            ->where('curriculum_id', $request->curriculum_id)
+                            ->where('program_id', $request->program_id)
+                            ->where('sub_major_id', $request->sub_major_id)
+                            ->delete();
+
+                    $result = $this->ApplicationRepo->saveApplication($application);
+
+                    $application2 = ["application_id" => $result->application_id,
+                        "modifier" => session('user_id'),
+                        "flow_id" => 5
+                    ];
+                    $result = $this->ApplicationRepo->saveApplication($application2);
+                }
+            }
+            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+            return "true";
+        } catch (Exception $e) {
+            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return "false";
+        }
+    }
+
+    public function manageNews() {
+        $data = $this->NewsRepo->getNewsAll(); 
+        return view('backoffice.news_announcement.news_management', ['datas' => $data]);
+    }
+
+    public function DeleteNews(Request $request) {
+        $res = $this->NewsRepo->DeleteNews($request->id);
+        return ($res) ? 'true' : 'false';
+    }
+
+    public function editNews($id) {
+        $news_id = null;
+        $news_title = null;
+        $news_detail = null;
+        $news_title_en = null;
+        $news_detail_en = null;
+        $news_seq = null;
+        $news_is_active = null;
+        if ($id != 0) {
+            $data = $this->NewsRepo->find($id);
+            $news_id = $id;
+            $news_title = $data->news_title;
+            $news_detail = $data->news_detail;
+            $news_title_en = $data->news_title_en;
+            $news_detail_en = $data->news_detail_en;
+            $news_seq = $data->news_seq;
+            $news_is_active = $data->news_is_active;
+        }
+        return view('backoffice.news_announcement.news_edit', ['news_id' => $news_id
+            , 'news_title' => $news_title
+            , 'news_detail' => $news_detail
+            , 'news_title_en' => $news_title_en
+            , 'news_detail_en' => $news_detail_en
+            , 'news_seq' => $news_seq
+            , 'news_is_active' => $news_is_active]);
+    }
+
+    public function SaveNews(Request $request) {
+        
+        if ($request->news_title != '' && $request->news_title_en != '') {
+           
+            $res = $this->NewsRepo->save($request->all());
+            if ($res) {
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                return redirect('admin/manageNews');
+            } else {
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
+                return back();
+            }
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
+        }
+    }
+    
+    
+     public function manageAnnounc() {
+      
+        $data = $this->AnnouncementRepo->getAnnouncementAll(); 
+        return view('backoffice.news_announcement.announcement_management', ['datas' => $data]);
+    }
+
+    public function DeleteAnnounc(Request $request) {
+        $res = $this->AnnouncementRepo->delete($request->id);
+        return ($res) ? 'true' : 'false';
+    }
+
+    public function editAnnounc($id) {
+        $anno_id = null;
+        $anno_title  = null;
+        $anno_detail = null;
+        $anno_title_en = null;
+        $anno_detail_en = null;
+        $anno_seq = null;
+        $anno_flag  = null;
+        if ($id != 0) {
+            $data = $this->AnnouncementRepo->find($id);
+            $anno_id = $id;
+            $anno_title  = $data->anno_title;
+            $anno_detail = $data->anno_detail;
+            $anno_title_en = $data->anno_title_en;
+            $anno_detail_en = $data->anno_detail_en;
+            $anno_seq = $data->anno_seq;
+            $anno_flag = $data->anno_flag;
+        }
+        return view('backoffice.news_announcement.announcement_edit', ['anno_id' => $anno_id
+            , 'anno_title' => $anno_title
+            , 'anno_detail' => $anno_detail
+            , 'anno_title_en' => $anno_title_en
+            , 'anno_detail_en' => $anno_detail_en
+            , 'anno_seq' => $anno_seq
+            , 'anno_flag' => $anno_flag ]);
+    }
+
+    public function SaveAnnounc(Request $request) {
+        
+        if ($request->anno_title != '' && $request->anno_title_en != '') {
+           
+            $res = $this->AnnouncementRepo->saveAnnouncement($request->all());
+            if ($res) {
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                return redirect('admin/manageAnnounc');
+            } else {
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
+                return back();
+            }
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
         }
     }
 

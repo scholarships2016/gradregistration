@@ -1,0 +1,569 @@
+/*----------------------------- Font Standard -------------------------------------------*/
+/**/
+/*----------------------------- Color -------------------------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------- for Button by BOH --------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------------------------------------------------------------------*/
+/* line 3, ../../../assets/sass/investment.scss */
+.kt-zmico-indx {
+  /**/
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+}
+/* line 9, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .custom-layout .row {
+  width: 100%;
+  display: table;
+}
+/* line 12, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .custom-layout .row > div {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+/* line 18, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .custom-layout .col-md-5 {
+  padding-right: 30px;
+}
+/* line 23, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .maintitle {
+  margin-bottom: 25px;
+}
+/* line 26, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block1, .kt-zmico-indx .block11 {
+  position: relative;
+}
+/* line 28, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block1 .blocktitle, .kt-zmico-indx .block11 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+/* line 34, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block1 .brdbuttonlong, .kt-zmico-indx .block11 .brdbuttonlong {
+  margin-top: 30px;
+}
+/* line 37, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block1 .content-desc, .kt-zmico-indx .block11 .content-desc {
+  font-size: 30px;
+}
+/* line 40, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block1 .content-thum-desc, .kt-zmico-indx .block11 .content-thum-desc {
+  font-size: 24px;
+}
+/* line 47, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block2 .kt-zmico-logo {
+  padding-bottom: 40px;
+}
+/* line 50, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block2 .outerbox {
+  height: 500px;
+  width: 100%;
+  display: table;
+  background: #fff url(../images/share/trans-bg.png) no-repeat center center;
+}
+/* line 56, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block2 .innerbox {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 60, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block2 .content-desc {
+  width: 80%;
+  margin: 0 auto;
+}
+/* line 64, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block2 .content-thum-desc {
+  width: 80%;
+  margin: 0 auto;
+}
+/* line 69, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block4, .kt-zmico-indx .block8, .kt-zmico-indx .block10 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg2.png) #FFF center bottom no-repeat;
+}
+/* line 74, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block3, .kt-zmico-indx .block5, .kt-zmico-indx .block7, .kt-zmico-indx .block9 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 78, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block3 .spaceleft, .kt-zmico-indx .block5 .spaceleft, .kt-zmico-indx .block7 .spaceleft, .kt-zmico-indx .block9 .spaceleft {
+  padding-left: 8%;
+}
+/* line 82, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block6 {
+  position: relative;
+}
+/* line 84, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block6 .blocktitle {
+  position: absolute;
+  top: 15%;
+}
+/* line 90, ../../../assets/sass/investment.scss */
+.kt-zmico-indx .block11 .txt {
+  text-align: center;
+}
+
+/* line 98, ../../../assets/sass/investment.scss */
+.kt-zmico-indx.en .block1 .brdbuttonlong {
+  width: 300px;
+}
+/* line 103, ../../../assets/sass/investment.scss */
+.kt-zmico-indx.en .block11 .brdbuttonlong {
+  width: 300px;
+}
+
+/* line 109, ../../../assets/sass/investment.scss */
+.ktam-indx {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 114, ../../../assets/sass/investment.scss */
+.ktam-indx .custom-layout .row {
+  width: 100%;
+  display: table;
+}
+/* line 117, ../../../assets/sass/investment.scss */
+.ktam-indx .custom-layout .row > div {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+/* line 124, ../../../assets/sass/investment.scss */
+.ktam-indx .custom-layout .col-md-5 {
+  padding-right: 30px;
+}
+/* line 129, ../../../assets/sass/investment.scss */
+.ktam-indx .brdbuttonlong {
+  margin-top: 25px;
+}
+/* line 132, ../../../assets/sass/investment.scss */
+.ktam-indx .block1, .ktam-indx .block6 {
+  position: relative;
+}
+/* line 134, ../../../assets/sass/investment.scss */
+.ktam-indx .block1 .blocktitle, .ktam-indx .block6 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+/* line 140, ../../../assets/sass/investment.scss */
+.ktam-indx .block1 .brdbuttonlong, .ktam-indx .block6 .brdbuttonlong {
+  margin-top: 30px;
+}
+/* line 143, ../../../assets/sass/investment.scss */
+.ktam-indx .block1 .content-desc, .ktam-indx .block6 .content-desc {
+  font-size: 30px;
+}
+/* line 146, ../../../assets/sass/investment.scss */
+.ktam-indx .block1 .content-thum-desc, .ktam-indx .block6 .content-thum-desc {
+  font-size: 24px;
+}
+/* line 153, ../../../assets/sass/investment.scss */
+.ktam-indx .block2 .kt-logo {
+  padding-bottom: 40px;
+}
+/* line 156, ../../../assets/sass/investment.scss */
+.ktam-indx .block2 .outerbox {
+  height: 500px;
+  width: 100%;
+  display: table;
+  background: #fff url(../images/share/trans-bg.png) no-repeat center center;
+}
+/* line 162, ../../../assets/sass/investment.scss */
+.ktam-indx .block2 .innerbox {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 166, ../../../assets/sass/investment.scss */
+.ktam-indx .block2 .content-desc {
+  width: 80%;
+  margin: 0 auto;
+}
+/* line 170, ../../../assets/sass/investment.scss */
+.ktam-indx .block2 .content-thum-desc {
+  width: 80%;
+  margin: 0 auto;
+}
+/* line 175, ../../../assets/sass/investment.scss */
+.ktam-indx .block4 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg2.png) #FFF center bottom no-repeat;
+}
+/* line 180, ../../../assets/sass/investment.scss */
+.ktam-indx .block3, .ktam-indx .block5 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 184, ../../../assets/sass/investment.scss */
+.ktam-indx .block3 .spaceleft, .ktam-indx .block5 .spaceleft {
+  padding-left: 8%;
+}
+/* line 189, ../../../assets/sass/investment.scss */
+.ktam-indx .block6 .txt {
+  text-align: center;
+}
+
+/* line 197, ../../../assets/sass/investment.scss */
+.ktam-indx.en .block1 .teaser-headline-light {
+  font-size: 65px;
+  font-size: 6.5rem;
+}
+
+/*------------------------------------------------------------------------- Media Query -----------------------------------------------------------*/
+/*==========  Non-Mobile First Method  ==========*/
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  /* line 210, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .brdbuttonlong, .kt-zmico-indx .block11 .brdbuttonlong {
+    width: 100%;
+    max-width: 300px;
+  }
+  /* line 214, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .blocktitle, .kt-zmico-indx .block11 .blocktitle {
+    top: 12%;
+  }
+  /* line 216, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .blocktitle .teaser-headline-light, .kt-zmico-indx .block11 .blocktitle .teaser-headline-light {
+    font-size: 5rem;
+    font-size: 50px;
+  }
+  /* line 223, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block6 .content-desc {
+    width: 50%;
+  }
+
+  /* line 230, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle {
+    top: 20%;
+  }
+  /* line 232, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 240, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .brdbuttonlong, .ktam-indx .block6 .brdbuttonlong {
+    width: 100%;
+    max-width: 300px;
+  }
+  /* line 245, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle .teaser-headline-light, .ktam-indx .block6 .blocktitle .teaser-headline-light {
+    font-size: 5rem;
+    font-size: 50px;
+  }
+  /* line 252, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .blocktitle {
+    top: 12%;
+  }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  /**/
+  /* line 262, ../../../assets/sass/investment.scss */
+  .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /* line 266, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx {
+    /**/
+    /*.sttitle{
+        margin-bottom: 0;
+        border:none;
+    }*/
+    /**/
+    /**/
+  }
+  /* line 269, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .custom-layout .row > div {
+    display: block;
+  }
+  /* line 274, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .maintitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  /* line 284, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block2 .outerbox {
+    height: 300px;
+    margin-top: 40px;
+  }
+  /* line 290, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block3, .kt-zmico-indx .block4, .kt-zmico-indx .block5, .kt-zmico-indx .block6, .kt-zmico-indx .block7, .kt-zmico-indx .block8, .kt-zmico-indx .block9, .kt-zmico-indx .block10 {
+    background: none;
+    padding-bottom: 0;
+    margin-top: 40px;
+  }
+  /* line 294, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block3 .spaceleft, .kt-zmico-indx .block4 .spaceleft, .kt-zmico-indx .block5 .spaceleft, .kt-zmico-indx .block6 .spaceleft, .kt-zmico-indx .block7 .spaceleft, .kt-zmico-indx .block8 .spaceleft, .kt-zmico-indx .block9 .spaceleft, .kt-zmico-indx .block10 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 301, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block6 .blocktitle, .kt-zmico-indx .block11 .blocktitle {
+    position: static;
+    margin-top: 0;
+  }
+  /* line 308, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block11 .txt {
+    text-align: left;
+    margin-top: 20px;
+  }
+  /* line 312, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block11 .brdbuttonlong {
+    margin-top: 10px;
+  }
+
+  /**/
+  /* line 322, ../../../assets/sass/investment.scss */
+  .ktam-indx .custom-layout .row > div {
+    display: block;
+  }
+  /* line 328, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle {
+    top: 12%;
+  }
+  /* line 330, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 335, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 340, ../../../assets/sass/investment.scss */
+  .ktam-indx .block3, .ktam-indx .block4, .ktam-indx .block5, .ktam-indx .block6 {
+    background: none;
+    padding-bottom: 0;
+  }
+  /* line 343, ../../../assets/sass/investment.scss */
+  .ktam-indx .block3 .spaceleft, .ktam-indx .block4 .spaceleft, .ktam-indx .block5 .spaceleft, .ktam-indx .block6 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 347, ../../../assets/sass/investment.scss */
+  .ktam-indx .maintitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  /* line 352, ../../../assets/sass/investment.scss */
+  .ktam-indx .block2 .innerbox {
+    padding: 10px;
+  }
+  /* line 355, ../../../assets/sass/investment.scss */
+  .ktam-indx .block2 .outerbox {
+    height: 300px;
+    margin-top: 40px;
+  }
+  /* line 361, ../../../assets/sass/investment.scss */
+  .ktam-indx .block3 .brdbuttonlong {
+    width: 100%;
+    max-width: 300px;
+  }
+  /* line 367, ../../../assets/sass/investment.scss */
+  .ktam-indx .block4 .bullet-info {
+    padding-left: 0%;
+  }
+  /* line 371, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 {
+    margin-top: 40px;
+  }
+  /* line 373, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .blocktitle {
+    position: static;
+    margin-top: 20px;
+  }
+  /* line 376, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .blocktitle .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 381, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .txt {
+    text-align: left;
+    padding-left: 0%;
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+  /* line 392, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx {
+    /*.sttitle{
+        padding:10px 0;
+    }*/
+  }
+  /* line 397, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block2 .innerbox {
+    padding: 0 15px;
+  }
+  /* line 400, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block2 .content-thum-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 407, ../../../assets/sass/investment.scss */
+  .ktam-indx {
+    /*.sttitle{
+        padding:10px 0;
+    }*/
+  }
+  /* line 409, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .txt {
+    margin-top: 20px;
+  }
+  /* line 417, ../../../assets/sass/investment.scss */
+  .ktam-indx .block2 .content-thum-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  /* line 429, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .blocktitle {
+    top: 6%;
+  }
+  /* line 431, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .blocktitle .teaser-headline-light {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 436, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .brdbuttonlong {
+    width: 80%;
+    margin-top: 10px;
+  }
+  /* line 439, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block1 .brdbuttonlong span {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 446, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block2 .outerbox {
+    margin-top: 20px;
+  }
+  /* line 449, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block2 .content-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 453, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block2 .content-thum-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 459, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block3 .spaceleft, .kt-zmico-indx .block5 .spaceleft, .kt-zmico-indx .block7 .spaceleft, .kt-zmico-indx .block9 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 465, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block11 .brdbuttonlong {
+    width: 80%;
+  }
+  /* line 467, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block11 .brdbuttonlong span {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 473, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .block11 .blocktitle .teaser-headline-light {
+    font-size: 43px;
+    font-size: 4.3rem;
+  }
+  /* line 479, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx .decor-headline {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+
+  /* line 487, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx.en .block1 .brdbuttonlong {
+    width: 250px;
+  }
+  /* line 492, ../../../assets/sass/investment.scss */
+  .kt-zmico-indx.en .block11 .brdbuttonlong {
+    width: 250px;
+  }
+
+  /* line 500, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle {
+    top: 6%;
+  }
+  /* line 502, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .blocktitle .teaser-headline-light {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 507, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .brdbuttonlong {
+    width: 80%;
+    margin-top: 10px;
+  }
+  /* line 510, ../../../assets/sass/investment.scss */
+  .ktam-indx .block1 .brdbuttonlong span {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 517, ../../../assets/sass/investment.scss */
+  .ktam-indx .block2 .outerbox {
+    margin-top: 20px;
+  }
+  /* line 520, ../../../assets/sass/investment.scss */
+  .ktam-indx .block2 .content-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 524, ../../../assets/sass/investment.scss */
+  .ktam-indx .block2 .content-thum-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 530, ../../../assets/sass/investment.scss */
+  .ktam-indx .block3 .brdbuttonlong {
+    margin-top: 10px;
+    width: 250px;
+  }
+  /* line 533, ../../../assets/sass/investment.scss */
+  .ktam-indx .block3 .brdbuttonlong span {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 540, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .brdbuttonlong {
+    width: 250px;
+    margin-top: 10px;
+  }
+  /* line 543, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .brdbuttonlong span {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 549, ../../../assets/sass/investment.scss */
+  .ktam-indx .block6 .blocktitle .teaser-headline-light {
+    font-size: 43px;
+    font-size: 4.3rem;
+  }
+}
+/* Custom, iPhone Retina */

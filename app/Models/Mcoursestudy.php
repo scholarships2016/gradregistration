@@ -80,7 +80,7 @@ class Mcoursestudy extends Eloquent
         'status',
         'usercode',
         'updatedate',
-        'changestame',
+        'changestamp',
         'sync_creator',
         'sync_modifier'
     ];

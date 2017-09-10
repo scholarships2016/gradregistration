@@ -84,12 +84,11 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
 
             $recordsFiltered = $query->get()->count();
 
-            if(isset($criteria['order'][0]['column'])){
-              $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
-            }else{
-                $query->orderBy('status','desc');
+            if (isset($criteria['order'][0]['column'])) {
+                $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
+            } else {
+                $query->orderBy('status', 'desc');
             }
-            
 
 
             $query->offset($criteria['start'])->limit($criteria['length']);
@@ -210,6 +209,15 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
 
             $obj->save();
             return $obj;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function deleteMcourseStudyByCoursecodeno($coursecodeno)
+    {
+        try {
+            return $this->findOrFail($coursecodeno)->delete();
         } catch (\Exception $ex) {
             throw $ex;
         }

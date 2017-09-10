@@ -1,0 +1,2901 @@
+/*----------------------------- Font Standard -------------------------------------------*/
+/**/
+/*----------------------------- Color -------------------------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------- for Button by BOH --------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------------------------------------------------------------------*/
+/* line 5, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx {
+  /***/
+  /***/
+}
+/* line 7, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block1 {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  background: #fff url(../images/loan/indx-bg.jpg) no-repeat bottom center;
+  background-size: cover;
+}
+/* line 13, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block1 .wrapper {
+  position: relative;
+}
+/* line 16, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block1 .textblock1 {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+}
+/* line 21, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block1 .content-desc {
+  margin: 20px auto;
+}
+/* line 24, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block1 .shadow-pic {
+  box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -webkit-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -moz-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -ms-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -o-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+}
+/* line 30, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block1 .slickblock1 .item .textblock1 {
+  padding-left: 0;
+}
+/* line 37, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 {
+  background: #fff url(../images/cash-management/indx2-bg.jpg) no-repeat center top;
+  background-size: 100%;
+}
+/* line 40, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar {
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
+/* line 43, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul {
+  width: 100%;
+  margin: 0;
+  -webkit-padding-start: 0;
+  padding: 0;
+  border-radius: 50px;
+}
+/* line 49, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul li {
+  display: table-cell;
+  position: relative;
+  width: 1%;
+  text-align: center;
+}
+/* line 54, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul li a {
+  border-right: 1px solid #03A5E4;
+  border-top: 1px solid #03A5E4;
+  border-bottom: 1px solid #03A5E4;
+  position: relative;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  text-decoration: none;
+  font-family: 'db_adman_xregular';
+  color: #394866;
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 67, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul li a.first {
+  border-left: 1px solid #03A5E4;
+  border-radius: 20px 0 0 20px;
+}
+/* line 71, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul li a.last {
+  border-right: 1px solid #03A5E4;
+  border-radius: 0 20px 20px 0;
+}
+/* line 75, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul li a:hover, .pay-topup-indx .block2 #tabnavbar ul li a.active {
+  color: #fff;
+  background-color: #00A4E4;
+  background-image: -webkit-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: -o-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: linear-gradient(to right, #2CC3F1 0%, #6C5AF5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC3F1', endColorstr='#FF6C5AF5', GradientType=1);
+}
+/* line 80, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #tabnavbar ul li a.active:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-top: 10px solid #4F87F6;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+}
+/* line 98, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #selectmenu {
+  margin: 60px auto 40px;
+}
+/* line 101, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #selectmenu #menulist {
+  width: 100%;
+  color: #fff;
+  background-color: #00A4E4;
+  background-image: -webkit-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: -o-linear-gradient(left, #2CC3F1 0%, #6C5AF5 100%);
+  background-image: linear-gradient(to right, #2CC3F1 0%, #6C5AF5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC3F1', endColorstr='#FF6C5AF5', GradientType=1);
+  height: 50px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 112, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #selectmenu .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -20px;
+}
+/* line 118, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 #selectmenu .dropdown-menu {
+  width: 100%;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 125, ../../../assets/sass/cash-management.scss */
+.pay-topup-indx .block2 .imagetag2 {
+  padding: 10px;
+}
+
+/* line 132, ../../../assets/sass/cash-management.scss */
+.direct-debit {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 136, ../../../assets/sass/cash-management.scss */
+.direct-debit .block1 {
+  position: relative;
+}
+/* line 138, ../../../assets/sass/cash-management.scss */
+.direct-debit .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 144, ../../../assets/sass/cash-management.scss */
+.direct-debit .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 148, ../../../assets/sass/cash-management.scss */
+.direct-debit .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 155, ../../../assets/sass/cash-management.scss */
+.direct-debit .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 159, ../../../assets/sass/cash-management.scss */
+.direct-debit .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 162, ../../../assets/sass/cash-management.scss */
+.direct-debit .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 165, ../../../assets/sass/cash-management.scss */
+.direct-debit .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 167, ../../../assets/sass/cash-management.scss */
+.direct-debit .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 171, ../../../assets/sass/cash-management.scss */
+.direct-debit .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 176, ../../../assets/sass/cash-management.scss */
+.direct-debit .block3 {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+/* line 179, ../../../assets/sass/cash-management.scss */
+.direct-debit .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 182, ../../../assets/sass/cash-management.scss */
+.direct-debit .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 185, ../../../assets/sass/cash-management.scss */
+.direct-debit .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 188, ../../../assets/sass/cash-management.scss */
+.direct-debit .block3 .panel {
+  box-shadow: none;
+}
+/* line 192, ../../../assets/sass/cash-management.scss */
+.direct-debit .block3 ul.sub-ul li {
+  list-style-type: disc;
+}
+/* line 197, ../../../assets/sass/cash-management.scss */
+.direct-debit .block4 {
+  padding-bottom: 30px;
+}
+/* line 199, ../../../assets/sass/cash-management.scss */
+.direct-debit .block4 .readmore {
+  padding-top: 10px;
+}
+
+/* line 205, ../../../assets/sass/cash-management.scss */
+.pay-land-fee {
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+}
+/* line 209, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block1 {
+  position: relative;
+}
+/* line 211, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 217, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 221, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 228, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 232, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 235, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 238, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 240, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 244, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 249, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+/* line 252, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 255, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 258, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 261, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .panel {
+  box-shadow: none;
+}
+/* line 264, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .sub-content {
+  padding-top: 35px;
+}
+/* line 267, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .leftside {
+  float: left;
+  width: 50%;
+}
+/* line 271, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block3 .rightside {
+  float: right;
+  width: 50%;
+}
+/* line 276, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block4 {
+  padding-bottom: 30px;
+}
+/* line 278, ../../../assets/sass/cash-management.scss */
+.pay-land-fee .block4 .readmore {
+  padding-top: 10px;
+}
+
+/* line 284, ../../../assets/sass/cash-management.scss */
+.tax-pay {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 288, ../../../assets/sass/cash-management.scss */
+.tax-pay .block1 {
+  position: relative;
+}
+/* line 290, ../../../assets/sass/cash-management.scss */
+.tax-pay .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 296, ../../../assets/sass/cash-management.scss */
+.tax-pay .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 300, ../../../assets/sass/cash-management.scss */
+.tax-pay .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 307, ../../../assets/sass/cash-management.scss */
+.tax-pay .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 311, ../../../assets/sass/cash-management.scss */
+.tax-pay .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 314, ../../../assets/sass/cash-management.scss */
+.tax-pay .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 317, ../../../assets/sass/cash-management.scss */
+.tax-pay .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 319, ../../../assets/sass/cash-management.scss */
+.tax-pay .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+  width: 90%;
+}
+/* line 324, ../../../assets/sass/cash-management.scss */
+.tax-pay .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 329, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+/* line 332, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 335, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 338, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 341, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 .panel {
+  box-shadow: none;
+}
+/* line 345, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 ul li.stylenone {
+  list-style: none;
+}
+/* line 348, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 ul li.havegap {
+  margin-top: 20px;
+}
+/* line 352, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 ul.dash {
+  list-style: none;
+  padding-left: 0;
+}
+/* line 355, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 ul.dash li {
+  margin-left: 15px;
+}
+/* line 358, ../../../assets/sass/cash-management.scss */
+.tax-pay .block3 ul.dash li::before {
+  content: "- ";
+  margin-left: -15px;
+}
+/* line 364, ../../../assets/sass/cash-management.scss */
+.tax-pay .block4 {
+  padding-bottom: 30px;
+}
+/* line 366, ../../../assets/sass/cash-management.scss */
+.tax-pay .block4 .readmore {
+  padding-top: 10px;
+}
+
+/* line 372, ../../../assets/sass/cash-management.scss */
+.online-fine-pay {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 376, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block1 {
+  position: relative;
+}
+/* line 378, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 384, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 48px;
+  font-size: 4.8rem;
+}
+/* line 390, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 397, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 401, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 404, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 407, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 409, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 413, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 418, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+/* line 421, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 424, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 427, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 430, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 .panel {
+  box-shadow: none;
+}
+/* line 433, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 ul.star {
+  list-style: none;
+  padding-left: 0;
+}
+/* line 436, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 ul.star li {
+  margin-left: -5px;
+}
+/* line 439, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 ul.star li::before {
+  content: "* ";
+  margin-left: -15px;
+}
+/* line 445, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block3 ul li.stylenone {
+  list-style: none;
+}
+/* line 450, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block4 {
+  padding-bottom: 30px;
+}
+/* line 452, ../../../assets/sass/cash-management.scss */
+.online-fine-pay .block4 .readmore {
+  padding-top: 10px;
+}
+
+/* line 458, ../../../assets/sass/cash-management.scss */
+.easy-pass {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 462, ../../../assets/sass/cash-management.scss */
+.easy-pass .block1 {
+  position: relative;
+}
+/* line 464, ../../../assets/sass/cash-management.scss */
+.easy-pass .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 470, ../../../assets/sass/cash-management.scss */
+.easy-pass .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 474, ../../../assets/sass/cash-management.scss */
+.easy-pass .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 481, ../../../assets/sass/cash-management.scss */
+.easy-pass .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 485, ../../../assets/sass/cash-management.scss */
+.easy-pass .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 488, ../../../assets/sass/cash-management.scss */
+.easy-pass .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 491, ../../../assets/sass/cash-management.scss */
+.easy-pass .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 493, ../../../assets/sass/cash-management.scss */
+.easy-pass .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 497, ../../../assets/sass/cash-management.scss */
+.easy-pass .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 502, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+/* line 505, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 508, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 511, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 514, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 .panel {
+  box-shadow: none;
+}
+/* line 518, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 ul.sub-ul li {
+  list-style-type: disc;
+}
+/* line 523, ../../../assets/sass/cash-management.scss */
+.easy-pass .block3 ol li.stylenone {
+  list-style: none;
+}
+/* line 528, ../../../assets/sass/cash-management.scss */
+.easy-pass .block4 {
+  padding-bottom: 30px;
+}
+/* line 530, ../../../assets/sass/cash-management.scss */
+.easy-pass .block4 .readmore {
+  padding-top: 10px;
+}
+
+/* line 536, ../../../assets/sass/cash-management.scss */
+.m-pass-topup {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 540, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block1 {
+  position: relative;
+}
+/* line 542, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 548, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 552, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 559, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 563, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 566, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 569, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 571, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 575, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 580, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block3 {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+/* line 583, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 586, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 589, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 592, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block3 .panel {
+  box-shadow: none;
+}
+/* line 596, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block3 ul.sub-ul li {
+  list-style-type: disc;
+}
+/* line 601, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block4 {
+  padding-bottom: 30px;
+}
+/* line 603, ../../../assets/sass/cash-management.scss */
+.m-pass-topup .block4 .readmore {
+  padding-top: 10px;
+}
+
+/* line 609, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 613, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block1 {
+  position: relative;
+}
+/* line 615, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 621, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 625, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 632, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 636, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 639, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 642, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 644, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 648, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 653, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 {
+  padding: 60px 0 70px;
+  background-color: #E6ECF5;
+}
+/* line 656, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .inside-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+}
+/* line 660, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .step-head {
+  margin-bottom: 20px;
+}
+/* line 664, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description {
+  position: relative;
+}
+/* line 666, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description .title {
+  background: #fff;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 15px 0;
+  box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -webkit-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -moz-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -ms-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -o-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+}
+/* line 675, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description .number {
+  color: #00A4E4;
+  background: #6C5AF5;
+  background: -webkit-linear-gradient(transparent, transparent), url(../images/share/text-gradient-bg.png) 100% no-repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  position: absolute;
+  bottom: -25px;
+  left: -10px;
+  padding: 20px;
+}
+/* line 696, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description .number .page-title {
+  color: #fff;
+  font-size: 60px;
+  font-size: 6rem;
+}
+/* line 703, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description-pic {
+  display: table;
+  margin: 40px auto;
+}
+/* line 706, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description-pic .images {
+  display: table-cell;
+}
+/* line 708, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description-pic .images div {
+  margin-top: 15px;
+}
+/* line 712, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description-pic .images.cover {
+  padding: 0 20px;
+}
+/* line 714, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description-pic .images.cover img {
+  width: 180px;
+}
+/* line 718, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .description-pic i {
+  font-size: 25px;
+  color: #198AD8;
+}
+/* line 723, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .desc-pic {
+  display: table;
+  margin: 40px auto;
+}
+/* line 726, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .desc-pic .desc-sub {
+  display: table;
+  float: left;
+}
+/* line 729, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover {
+  display: table-cell;
+  padding: 0 20px;
+}
+/* line 732, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover div {
+  margin-top: 15px;
+}
+/* line 735, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover img {
+  width: 180px;
+}
+/* line 739, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block3 .steps .desc-pic .desc-sub i {
+  font-size: 25px;
+  color: #198AD8;
+}
+/* line 747, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+}
+/* line 751, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 754, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 757, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 760, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 .panel {
+  box-shadow: none;
+}
+/* line 764, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 ul.sub-ul li {
+  list-style-type: disc;
+}
+/* line 769, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block4 ol li.stylenone {
+  list-style: none;
+}
+/* line 774, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block5 {
+  padding-bottom: 30px;
+}
+/* line 776, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block5 .readmore {
+  padding-top: 10px;
+}
+/* line 780, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 {
+  padding-top: 2%;
+}
+/* line 782, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .star-icon {
+  display: inline-block;
+  padding-right: 15px;
+}
+/* line 785, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .star-icon a.starlink:link, .m-pay-wallet .block6 .star-icon a.starlink:visited, .m-pay-wallet .block6 .star-icon a.starlink:focus {
+  background: transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  transition: all .35s ease-in-out;
+  -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .35s ease-in-out;
+  -ms-transition: all .35s ease-in-out;
+  -o-transition: all .35s ease-in-out;
+  text-decoration: none;
+  background: url(../images/share/gray-star.png) center center no-repeat;
+  background-size: cover;
+}
+/* line 802, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .star-icon a.starlink:hover, .m-pay-wallet .block6 .star-icon a.starlink.active {
+  background: url(../images/share/blue-star.png) center center no-repeat;
+  width: 20px;
+  height: 20px;
+}
+/* line 808, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .hdtitle {
+  position: relative;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #EEE;
+}
+/* line 813, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .hdtitle .line-gradient {
+  background: url(../images/share/short-line-gradient.png) left bottom no-repeat;
+  width: 100%;
+  height: 4px;
+}
+/* line 820, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .score-rate {
+  padding-top: 20px;
+}
+/* line 823, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .score-rate .txt-dscrb-star {
+  display: inline-block;
+}
+/* line 828, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvname {
+  padding: 25px 0;
+}
+/* line 830, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvname .review-date {
+  padding: 3% 0;
+}
+/* line 834, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #CCC;
+  padding: 25px 0;
+}
+/* line 839, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment .star-icon {
+  display: inline-block;
+}
+/* line 841, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment .star-icon a.star-point {
+  background: url(../images/share/gray-star.png) left bottom no-repeat;
+  height: 20px;
+  width: 20px;
+}
+/* line 845, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment .star-icon a.star-point .active {
+  background: url(../images/share/blue-star.png) left bottom no-repeat;
+  height: 20px;
+  width: 20px;
+}
+/* line 852, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment .review-comment {
+  display: inline-block;
+}
+/* line 855, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment .review-dscrb {
+  padding: 3% 0;
+}
+/* line 858, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment .score-rate {
+  padding-top: 0;
+}
+/* line 861, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvcomment.rvlast {
+  border-bottom: none;
+}
+/* line 866, ../../../assets/sass/cash-management.scss */
+.m-pay-wallet .block6 .rvbutton .brdbuttonlong {
+  max-width: 250px;
+  width: 100%;
+}
+
+/* line 877, ../../../assets/sass/cash-management.scss */
+.rabbit-line {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+}
+/* line 881, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block1 {
+  position: relative;
+}
+/* line 883, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 889, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block1 .teaser-headline-light {
+  font-size: 65px;
+  font-size: 6.5rem;
+}
+/* line 893, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 87%;
+}
+/* line 898, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 905, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 909, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 912, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 915, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 917, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 921, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 926, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 {
+  padding: 60px 0 70px;
+  background-color: #E6ECF5;
+}
+/* line 929, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .inside-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+}
+/* line 933, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .step-head {
+  margin-bottom: 20px;
+}
+/* line 937, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description {
+  position: relative;
+}
+/* line 939, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description .title {
+  background: #fff;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 15px 0;
+  box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -webkit-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -moz-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -ms-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -o-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+}
+/* line 948, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description .number {
+  color: #00A4E4;
+  background: #6C5AF5;
+  background: -webkit-linear-gradient(transparent, transparent), url(../images/share/text-gradient-bg.png) 100% no-repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  position: absolute;
+  bottom: -25px;
+  left: -10px;
+  padding: 20px;
+}
+/* line 969, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description .number .page-title {
+  color: #fff;
+  font-size: 60px;
+  font-size: 6rem;
+}
+/* line 976, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description-pic {
+  display: table;
+  margin: 40px auto;
+}
+/* line 979, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description-pic .images {
+  display: table-cell;
+}
+/* line 981, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description-pic .images div {
+  margin-top: 15px;
+}
+/* line 985, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description-pic .images.cover {
+  padding: 0 20px;
+}
+/* line 988, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block3 .steps .description-pic i {
+  font-size: 25px;
+  color: #198AD8;
+}
+/* line 995, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+}
+/* line 999, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 1002, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 1005, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 1008, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 .panel {
+  box-shadow: none;
+}
+/* line 1012, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 ul.sub-ul li {
+  list-style-type: disc;
+}
+/* line 1017, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block4 ol li.stylenone {
+  list-style: none;
+}
+/* line 1022, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block5 {
+  padding-bottom: 30px;
+}
+/* line 1024, ../../../assets/sass/cash-management.scss */
+.rabbit-line .block5 .readmore {
+  padding-top: 10px;
+}
+
+/* line 1030, ../../../assets/sass/cash-management.scss */
+.border-bl {
+  border-bottom-left-radius: 8px;
+}
+
+/* line 1034, ../../../assets/sass/cash-management.scss */
+.border-br {
+  border-bottom-right-radius: 8px;
+}
+
+/*------------------------------------------------------------------- Global Share Box-------------------------------------------------------------------*/
+/* line 1039, ../../../assets/sass/cash-management.scss */
+.blocklast2 {
+  background-color: #455879;
+}
+/* line 1041, ../../../assets/sass/cash-management.scss */
+.blocklast2 .border-l {
+  border-left: 1px solid #FFF;
+  display: table;
+  width: 80%;
+  margin: 0 auto;
+}
+/* line 1047, ../../../assets/sass/cash-management.scss */
+.blocklast2 .border-r {
+  border-right: 1px solid #FFF;
+  padding: 20px 0 20px 0;
+  display: table-cell;
+  text-align: center;
+}
+/* line 1053, ../../../assets/sass/cash-management.scss */
+.blocklast2 .itemimg {
+  vertical-align: top;
+  display: inline-block;
+  width: 50px;
+}
+/* line 1058, ../../../assets/sass/cash-management.scss */
+.blocklast2 .itemtxt {
+  display: inline-block;
+  text-align: left;
+  padding-left: 30px;
+}
+/* line 1062, ../../../assets/sass/cash-management.scss */
+.blocklast2 .itemtxt .hidden-xs {
+  margin-top: 5px;
+  margin-left: -10px;
+}
+
+/*------------------------------------------------------------------------- Media Query -----------------------------------------------------------*/
+/*==========  Non-Mobile First Method  ==========*/
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  /**/
+  /* line 1076, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1080, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .content-desc {
+    width: 80%;
+    margin: 10px 0 20px;
+  }
+  /* line 1089, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block2 #tabnavbar ul li a {
+    font-size: 17px;
+    font-size: 1.7rem;
+  }
+
+  /* line 1101, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1105, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1109, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1114, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1117, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 1126, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1130, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1134, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1139, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1142, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 1151, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1155, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1159, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1164, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1167, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 1172, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .itembox .txt1 {
+    width: 85%;
+  }
+
+  /* line 1181, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1185, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1189, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1194, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1197, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 1206, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1210, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1214, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1219, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1222, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 1231, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1235, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1239, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1244, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1247, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 1256, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1260, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1264, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1269, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1272, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 1280, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic .images.cover {
+    padding: 0 15px;
+  }
+  /* line 1286, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover {
+    padding: 0 15px;
+  }
+
+  /* line 1297, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 1301, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1305, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1310, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 1313, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 1321, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover {
+    padding: 0 15px;
+  }
+
+  /**/
+  /* line 1331, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .itemimg {
+    width: 30px;
+  }
+  /* line 1334, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .itemtxt {
+    padding-left: 5px;
+  }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  /**/
+  /* line 1343, ../../../assets/sass/cash-management.scss */
+  .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /* line 1350, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .content-desc {
+    width: 65%;
+  }
+  /* line 1353, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1357, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .brdbuttonlong {
+    width: 225px;
+  }
+
+  /* line 1365, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1369, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 1375, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+  /* line 1381, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .leftside {
+    float: none;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  /* line 1386, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .rightside {
+    float: none;
+    width: 100%;
+  }
+
+  /* line 1395, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1399, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 1405, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+  /* line 1414, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic .images.cover img {
+    width: 120px;
+  }
+  /* line 1417, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic .images.cover .content-desc4 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 1426, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover img {
+    width: 120px;
+  }
+  /* line 1429, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover .content-desc4 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 1438, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 {
+    padding-bottom: 0;
+  }
+
+  /* line 1445, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teaser-headline-light {
+    font-size: 31px;
+    font-size: 3.1rem;
+  }
+  /* line 1449, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teasershortdesc {
+    font-size: 29px;
+    font-size: 2.9rem;
+  }
+  /* line 1455, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+  /* line 1464, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover img {
+    width: 170px;
+  }
+  /* line 1467, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover img.mb-style {
+    width: 220px;
+  }
+  /* line 1470, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover .content-desc4 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 1482, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1486, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 1492, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+
+  /* line 1501, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1505, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teasershortdesc {
+    font-size: 32px;
+    font-size: 3.2rem;
+  }
+  /* line 1511, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+
+  /* line 1520, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1524, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 1530, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+
+  /* line 1539, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1543, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teasershortdesc {
+    font-size: 34px;
+    font-size: 3.4rem;
+  }
+  /* line 1549, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+
+  /* line 1558, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1562, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 1568, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .spaceleft {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+  /* line 1578, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx {
+    /***/
+  }
+  /* line 1580, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 {
+    /*.sttitle{
+        padding:10px 0;
+    }*/
+  }
+  /* line 1584, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .page-title {
+    margin: 0;
+  }
+  /* line 1587, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .textblock1 {
+    position: static;
+    margin: 0 auto;
+  }
+  /* line 1591, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .brdbuttonlong {
+    max-width: 290px;
+  }
+  /* line 1595, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .slickblock1 .slick-dots {
+    left: 5%;
+  }
+  /* line 1599, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .slickblock1 .item .textblock1 {
+    padding-left: 7%;
+  }
+  /* line 1604, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .content-desc {
+    width: 100%;
+    margin: 10px 0 20px;
+  }
+  /* line 1608, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+
+  /* line 1615, ../../../assets/sass/cash-management.scss */
+  .direct-debit {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 1621, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 1626, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1630, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 1635, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1640, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 1643, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 1646, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 1649, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 1652, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 1655, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 1659, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 1663, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 1666, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 1669, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 1673, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 .panel-body {
+    padding: 15px 0;
+  }
+
+  /* line 1679, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 1685, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 1690, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teaser-headline-light {
+    font-size: 58px;
+    font-size: 5.8rem;
+  }
+  /* line 1694, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 1699, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1704, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 1707, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 1710, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 1713, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 1716, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 1719, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 1723, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 1727, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 1730, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 1733, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 1737, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .panel-body {
+    padding: 15px 0;
+  }
+
+  /* line 1743, ../../../assets/sass/cash-management.scss */
+  .tax-pay {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 1749, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 1754, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1758, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 1763, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1768, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 1771, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 1774, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 1777, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 1779, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 1783, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 1786, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 1790, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 1794, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 1797, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 1800, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 1804, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 .panel-body {
+    padding: 15px 0;
+  }
+
+  /* line 1810, ../../../assets/sass/cash-management.scss */
+  .easy-pass {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 1816, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 1821, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1825, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 1830, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1835, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 1838, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 1841, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 1844, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 1847, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 1850, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 1854, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 1858, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 1861, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 1864, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 1868, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 .panel-body {
+    padding: 15px 0;
+  }
+
+  /* line 1874, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 1880, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 1885, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1889, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 1894, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1899, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 1902, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 1905, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 1908, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 1911, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 1914, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 1918, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 1922, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 1925, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 1928, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 1932, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 .panel-body {
+    padding: 15px 0;
+  }
+
+  /* line 1938, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 1944, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 1949, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1953, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 1958, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1963, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* line 1966, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 1969, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 1972, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 1975, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 1978, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 1982, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 1986, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 1989, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 1992, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 1996, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 .panel-body {
+    padding: 15px 0;
+  }
+
+  /* line 2002, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 2008, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 2013, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 2017, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+  }
+  /* line 2022, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 2027, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 2030, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 2033, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 2036, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 2039, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 2042, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 2046, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 {
+    position: relative;
+    padding: 40px 0 0;
+  }
+  /* line 2051, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description .title {
+    padding: 5px 0;
+  }
+  /* line 2053, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description .title .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2058, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description .number {
+    width: 60px;
+    height: 60px;
+    padding: 7px;
+    bottom: -15px;
+  }
+  /* line 2063, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description .number .page-title {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 2069, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic {
+    width: 100%;
+  }
+  /* line 2072, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic .images.cover img {
+    width: 170px;
+  }
+  /* line 2078, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub {
+    width: 100%;
+    display: table;
+    margin: 30px auto;
+  }
+  /* line 2082, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover {
+    padding: 0 15px;
+  }
+  /* line 2084, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover img {
+    width: 170px;
+  }
+  /* line 2091, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .step-head {
+    margin-bottom: 30px;
+  }
+  /* line 2094, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .zoom-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    background: rgba(58, 73, 102, 0.75);
+    padding: 20px;
+  }
+  /* line 2101, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .zoom-btn i {
+    font-size: 50px;
+    color: #fff;
+  }
+  /* line 2107, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 2111, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 2114, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 2117, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 2121, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 .panel-body {
+    padding: 15px 0;
+  }
+  /* line 2126, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block6 .rvbutton {
+    padding: 30px 0 5px 0;
+  }
+  /* line 2129, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block6 .brdbuttonlong {
+    width: 60%;
+  }
+  /* line 2132, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block6 .rvname {
+    padding: 25px 0 0 0;
+  }
+  /* line 2135, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block6 .rvcomment {
+    padding: 0 0 25px 0;
+  }
+
+  /* line 2141, ../../../assets/sass/cash-management.scss */
+  .rabbit-line {
+    /*.sttitle{
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }*/
+  }
+  /* line 2147, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 2152, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+    width: 95%;
+    margin: 0 auto;
+  }
+  /* line 2158, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teasershortdesc {
+    font-size: 55px;
+    font-size: 5.5rem;
+    padding-top: 10px;
+    width: 95%;
+    margin: 0 auto;
+  }
+  /* line 2165, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 2170, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 2173, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 2176, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 2179, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 2182, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 2185, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 2189, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 {
+    position: relative;
+    padding: 40px 0 0;
+  }
+  /* line 2194, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description .title {
+    padding: 5px 0;
+  }
+  /* line 2196, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description .title .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2201, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description .number {
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    bottom: -15px;
+  }
+  /* line 2206, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description .number .page-title {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 2214, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover img {
+    width: 90px;
+  }
+  /* line 2217, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover img.mb-style {
+    width: 120px;
+  }
+  /* line 2223, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .step-head {
+    margin-bottom: 30px;
+  }
+  /* line 2226, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .zoom-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    background: rgba(58, 73, 102, 0.75);
+    padding: 20px;
+  }
+  /* line 2233, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .zoom-btn i {
+    font-size: 50px;
+    color: #fff;
+  }
+  /* line 2239, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 2243, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 2246, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 2249, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 2253, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 .panel-body {
+    padding: 15px 0;
+  }
+
+  /**/
+  /* line 2261, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .wrapper {
+    width: 100%;
+  }
+  /* line 2264, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .border-l {
+    width: 100%;
+  }
+  /* line 2267, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .border-r {
+    padding: 10px 0;
+  }
+  /* line 2270, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .itemimg {
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+  }
+  /* line 2275, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .itemtxt {
+    padding-top: 10px;
+    display: block;
+    text-align: center;
+    padding-left: 0;
+  }
+  /* line 2280, ../../../assets/sass/cash-management.scss */
+  .blocklast2 .itemtxt span.forcebreakline {
+    display: block;
+    line-height: 1;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  /* line 2294, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .slickblock1 .item .textblock1 {
+    padding-left: 8%;
+  }
+  /* line 2299, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2305, ../../../assets/sass/cash-management.scss */
+  .pay-topup-indx .block2 .imagetag2 {
+    margin-bottom: 20px;
+  }
+
+  /* line 2313, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2317, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2321, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2327, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2331, ../../../assets/sass/cash-management.scss */
+  .direct-debit .block3 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2340, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2344, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2348, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2354, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2358, ../../../assets/sass/cash-management.scss */
+  .pay-land-fee .block3 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2367, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+    width: 100%;
+  }
+  /* line 2372, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2376, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2382, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2386, ../../../assets/sass/cash-management.scss */
+  .tax-pay .block3 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2395, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2399, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2403, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2409, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2413, ../../../assets/sass/cash-management.scss */
+  .online-fine-pay .block3 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2422, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2426, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2430, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2436, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2440, ../../../assets/sass/cash-management.scss */
+  .easy-pass .block3 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2449, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2453, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2457, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2463, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2467, ../../../assets/sass/cash-management.scss */
+  .m-pass-topup .block3 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2476, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2480, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2484, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2489, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 {
+    padding-bottom: 62px;
+  }
+  /* line 2494, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description .title .content-title-3 {
+    font-size: 16px;
+    font-size: 1.6rem;
+    padding-left: 40px;
+  }
+  /* line 2503, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic .images.cover img {
+    width: 100px;
+  }
+  /* line 2506, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .description-pic .images.cover .content-desc4 {
+    font-size: 15px;
+    font-size: 1.5rem;
+  }
+  /* line 2515, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover img {
+    width: 100px;
+  }
+  /* line 2518, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .steps .desc-pic .desc-sub .images.cover .content-desc4 {
+    font-size: 15px;
+    font-size: 1.5rem;
+  }
+  /* line 2526, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .zoom-btn {
+    padding: 15px;
+  }
+  /* line 2528, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block3 .zoom-btn i {
+    font-size: 30px;
+  }
+  /* line 2534, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2538, ../../../assets/sass/cash-management.scss */
+  .m-pay-wallet .block4 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 2547, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2551, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2555, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2560, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 {
+    padding-bottom: 70px;
+  }
+  /* line 2565, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description .title .content-title-3 {
+    font-size: 16px;
+    font-size: 1.6rem;
+    padding-left: 40px;
+  }
+  /* line 2572, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic {
+    margin: 20px auto;
+  }
+  /* line 2574, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover {
+    padding: 0 10px;
+  }
+  /* line 2576, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover img {
+    width: 60px;
+  }
+  /* line 2579, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover img.mb-style {
+    width: 80px;
+  }
+  /* line 2582, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic .images.cover .content-desc4 {
+    font-size: 15px;
+    font-size: 1.5rem;
+  }
+  /* line 2587, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .steps .description-pic i {
+    font-size: 15px;
+  }
+  /* line 2592, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .zoom-btn {
+    padding: 15px;
+  }
+  /* line 2594, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block3 .zoom-btn i {
+    font-size: 30px;
+  }
+  /* line 2600, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 2604, ../../../assets/sass/cash-management.scss */
+  .rabbit-line .block4 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+}
+/* Custom, iPhone Retina */

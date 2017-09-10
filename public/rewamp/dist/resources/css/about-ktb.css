@@ -1,0 +1,2578 @@
+/*----------------------------- Font Standard -------------------------------------------*/
+/**/
+/*----------------------------- Color -------------------------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------- for Button by BOH --------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------------------------------------------------------------------*/
+/* line 4, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block1 {
+  background: url("../images/about-ktb/indx-bg-block1.jpg") center top no-repeat;
+  background-size: cover;
+  padding-bottom: 70px;
+}
+/* line 8, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block1 .item {
+  position: relative;
+  box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -webkit-box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -moz-box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -ms-box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -o-box-shadow: 1px 0px 40px 0px #9a9a9a;
+}
+/* line 15, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block1 .item .textblock1 {
+  position: absolute;
+  top: 10%;
+  padding-left: 4%;
+  width: 60%;
+}
+/* line 21, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block1 .item .content-desc {
+  margin: 20px auto;
+}
+/* line 26, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block2 {
+  background: url("../images/about-ktb/indx-bg-block2.jpg") center top no-repeat;
+  background-size: 100%;
+}
+/* line 29, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block2 .ctblock12 {
+  padding: 0 15px;
+}
+/* line 32, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block2 .txt2 {
+  padding: 4% 0 2% 0;
+}
+/* line 35, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block2 .imagetag3 .tag span {
+  min-height: 70px;
+}
+/* line 38, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block2 .subtitle2 {
+  padding-top: 1.1%;
+}
+/* line 41, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block2 .hdtitle2 {
+  width: 80%;
+}
+/* line 46, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .blocktitle {
+  position: absolute;
+  width: 100%;
+  top: 14%;
+}
+/* line 51, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .imgc {
+  position: relative;
+}
+/* line 54, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .icon {
+  position: relative;
+  display: inline-block;
+  padding: 8px 6px 8px 6px;
+  width: 15%;
+}
+/* line 60, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .btnblock2 {
+  padding-top: 2%;
+}
+/* line 63, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .pic-icon {
+  padding-top: 1.5%;
+}
+/* line 66, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .iconpic {
+  position: relative;
+  z-index: 2;
+}
+/* line 70, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .outterframe2 {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  z-index: 1;
+}
+/* line 76, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block3 .mainsubtitleblock1 {
+  padding-top: 1%;
+}
+/* line 81, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .dttitle,
+.abt-ktb-indx .block4 .hititle {
+  padding-top: 2%;
+}
+/* line 85, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .readmore {
+  padding: 4% 0;
+}
+/* line 88, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .ctblock4 {
+  padding: 5% 0;
+}
+/* line 91, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .txt {
+  padding: 0 15px;
+}
+/* line 94, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .txtct {
+  width: 100%;
+  min-height: 275px;
+}
+/* line 98, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .beautyline {
+  height: 10px;
+}
+/* line 101, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block4 .page-title2 {
+  font-size: 45px;
+  font-size: 4.5rem;
+}
+/* line 106, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up {
+  background: #FFF url("../images/about-ktb/indx-bg-block5up.jpg") center bottom no-repeat;
+  position: relative;
+}
+/* line 109, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .texttitle {
+  padding-top: 12%;
+}
+/* line 112, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .subtitle2 {
+  width: 63%;
+  margin: 0 auto;
+  padding-top: 1%;
+}
+/* line 117, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .dtmeaning {
+  padding-top: 15px;
+}
+/* line 120, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .txtcolor {
+  padding-top: 5.5%;
+}
+/* line 123, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .hdcolorth,
+.abt-ktb-indx .block5up .dtcolor {
+  padding-top: 20px;
+}
+/* line 127, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .imgct1 {
+  position: relative;
+}
+/* line 130, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .picct1 {
+  position: relative;
+  z-index: 2;
+}
+/* line 134, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .txtct1 {
+  padding-bottom: 5.5%;
+}
+/* line 137, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .logo-kt {
+  width: 50%;
+  margin: 0 auto;
+}
+/* line 141, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5up .btnblock {
+  padding-top: 5%;
+}
+/* line 145, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw {
+  background: #FFF url("../images/about-ktb/indx-bg-block5dw.jpg") center bottom no-repeat;
+  position: relative;
+  margin-top: 5%;
+}
+/* line 149, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .texttitle {
+  padding-top: 12%;
+}
+/* line 152, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .subtitle2 {
+  width: 63%;
+  margin: 0 auto;
+  padding-top: 1%;
+}
+/* line 157, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .dtmeaning {
+  padding-top: 15px;
+}
+/* line 160, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .txtcolor {
+  padding-top: 5.5%;
+}
+/* line 163, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .hdcolorth,
+.abt-ktb-indx .block5dw .dtcolor {
+  padding-top: 20px;
+}
+/* line 167, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .imgct2 {
+  position: relative;
+}
+/* line 170, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .picct2 {
+  position: relative;
+  z-index: 2;
+}
+/* line 174, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .txtct2 {
+  padding-bottom: 5%;
+}
+/* line 177, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .logo-kt {
+  width: 50%;
+  margin: 0 auto;
+}
+/* line 181, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block5dw .btnblock {
+  padding-top: 5%;
+}
+/* line 185, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block6 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+  margin-top: 8%;
+}
+/* line 189, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block6 .subhead {
+  padding-top: 2%;
+}
+/* line 192, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block6 .slickblock12 {
+  padding-top: 2%;
+}
+/* line 195, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-indx .block6 .btnblock {
+  padding: 0 0 4% 0;
+}
+
+/* line 203, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block1 .hdtitleblock1 {
+  width: 50%;
+}
+/* line 206, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 210, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block1 .imgc {
+  position: relative;
+}
+/* line 214, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 {
+  background: #FFF url(../images/about-ktb/logo-bg-block2.jpg) no-repeat center top;
+  background-size: 100%;
+  position: relative;
+}
+/* line 218, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .texttitle {
+  padding-top: 12%;
+}
+/* line 221, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .subtitle2 {
+  width: 63%;
+  margin: 0 auto;
+  padding-top: 1%;
+}
+/* line 226, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .pic-logo,
+.cpr-idf .block2 .txt-meaning,
+.cpr-idf .block2 .txtct1 {
+  padding-top: 6.5%;
+}
+/* line 231, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .dtmeaning {
+  padding-top: 15px;
+}
+/* line 234, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .txtcolor {
+  padding-top: 5.5%;
+}
+/* line 237, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .hdcolorth,
+.cpr-idf .block2 .dtcolor {
+  padding-top: 20px;
+}
+/* line 241, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .imgct1,
+.cpr-idf .block2 .imgct2 {
+  position: relative;
+}
+/* line 245, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .picct1,
+.cpr-idf .block2 .picct2 {
+  position: relative;
+  z-index: 2;
+}
+/* line 250, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .picdotct1 {
+  position: absolute;
+  top: 25%;
+  left: -8.5%;
+  z-index: 1;
+}
+/* line 256, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .picdotct2 {
+  position: absolute;
+  top: 30%;
+  right: -6%;
+  z-index: 1;
+}
+/* line 262, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .txtct2 {
+  padding-top: 125px;
+  padding-bottom: 150px;
+}
+/* line 266, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .piccloud {
+  width: 25%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+/* line 272, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block2 .logo-kt {
+  width: 50%;
+  margin: 0 auto;
+}
+/* line 277, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 280, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block3 .bdrtop {
+  border-top: 1px solid #EEEEEE;
+}
+/* line 283, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block3 .padhdtitle {
+  padding-top: 6%;
+}
+/* line 286, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block3 .subhead {
+  padding-top: 2%;
+}
+/* line 289, ../../../assets/sass/about-ktb.scss */
+.cpr-idf .block3 .slickblock12 {
+  padding-top: 2%;
+}
+
+/* line 297, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block1 .hdtitleblock1 {
+  width: 50%;
+}
+/* line 300, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 304, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block1 .imgc {
+  position: relative;
+}
+/* line 308, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block2 {
+  background: url("../images/about-ktb/bg-frame-and-dot.jpg") center top no-repeat;
+  background-size: contain;
+  position: relative;
+}
+/* line 312, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block2 .level-org-pic {
+  position: relative;
+  padding: 9% 0 5% 0;
+  width: 96%;
+  margin: 0 auto;
+}
+/* line 319, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 322, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block3 .bdrtop {
+  border-top: 1px solid #EEEEEE;
+}
+/* line 325, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block3 .padhdtitle {
+  padding-top: 6%;
+}
+/* line 328, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block3 .subhead {
+  padding-top: 2%;
+}
+/* line 331, ../../../assets/sass/about-ktb.scss */
+.org-chrt .block3 .slickblock12 {
+  padding-top: 2%;
+}
+
+/**/
+/* line 338, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block1 {
+  background: url("../images/about-ktb/hstry-teaser-block1.jpg") center top no-repeat;
+  background-size: cover;
+}
+/* line 341, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block1 .item {
+  padding: 8%;
+}
+/* line 343, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block1 .item .text-block1 {
+  padding: 10% 0% 10% 0%;
+}
+/* line 346, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block1 .item .content-desc {
+  padding: 2% 0% 2% 0% !important;
+}
+/* line 350, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block1 .item .break-line {
+  display: inline-block;
+}
+/* line 353, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block1 .item a.play-btn {
+  background: transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+  width: 125px;
+  height: 125px;
+  display: inline-block;
+  text-decoration: none;
+  background: url("../images/share/play_button.png") center center no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+/* line 368, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 {
+  background: url("../images/about-ktb/hstry-bg-block2.png") center top no-repeat;
+  background-size: 100%;
+  position: relative;
+}
+/* line 373, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .wrapper {
+  width: 95%;
+  margin: 0 auto;
+}
+/* line 376, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .wrapper .text-block2-1 {
+  padding-top: 10%;
+  width: 79%;
+  margin: 0 auto;
+}
+/* line 382, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .pic-top2 {
+  margin-top: 10%;
+}
+/* line 386, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-0 {
+  margin-top: 10%;
+}
+/* line 388, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-0 .wrapper {
+  position: relative;
+}
+/* line 390, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-0 .wrapper .pic-dot-1 {
+  z-index: 0;
+  position: absolute;
+  margin: 13% 0% 0% -2%;
+  display: block;
+  width: 52%;
+  left: 0;
+}
+/* line 398, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-0 .wrapper .pic-dot-2-lg {
+  z-index: 0;
+  position: absolute;
+  display: block;
+  width: 50%;
+  right: 0;
+  bottom: -15%;
+}
+/* line 410, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-1 .top-2525 {
+  margin-top: 20%;
+}
+/* line 414, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-2 {
+  margin-top: 13%;
+}
+/* line 416, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-2 .wrapper {
+  position: relative;
+}
+/* line 418, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-2 .wrapper .pic-dot-3-lg {
+  z-index: 0;
+  position: absolute;
+  margin: 148px 0px 0px -41px;
+  display: block;
+  width: 52%;
+}
+/* line 425, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-2 .wrapper .pic-dot-4-lg {
+  z-index: 0;
+  position: absolute;
+  margin: 13% 0% 0% 50%;
+  display: block;
+  width: 52%;
+}
+/* line 435, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-3 .text-2525 {
+  top: 30px !important;
+}
+/* line 438, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .block2-3 .text-last {
+  margin-top: 8%;
+}
+/* line 442, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .bg {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+/* line 447, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .bg-2 {
+  position: relative;
+  z-index: 2;
+  margin-top: 18%;
+}
+/* line 452, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .content-title-1 {
+  padding: 3.5% 0% 4% 0%;
+}
+/* line 455, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .bg-line {
+  background: url("../images/about-ktb/hstry-bg-line.png") 50% 24% repeat-y;
+  z-index: 1;
+}
+/* line 459, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .pic-top-padding {
+  padding-top: 9%;
+}
+/* line 462, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .pic-ab {
+  position: absolute;
+}
+/* line 465, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .line-m-z {
+  position: absolute;
+  z-index: -1 !important;
+  width: 100%;
+}
+/* line 470, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .wrapper {
+  width: 95%;
+  margin: 0 auto;
+}
+/* line 473, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .wrapper .text-block2-1 {
+  padding-top: 10%;
+  width: 79%;
+  margin: 0 auto;
+}
+/* line 479, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block2 .pic-top {
+  margin-top: 10%;
+}
+/* line 492, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+  position: relative;
+  margin-top: 12%;
+}
+/* line 498, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block3 .padhdtitle {
+  padding-top: 6%;
+}
+/* line 501, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block3 .subhead {
+  padding-top: 2%;
+}
+/* line 504, ../../../assets/sass/about-ktb.scss */
+.abt-ktb-hstry .block3 .slickblock12 {
+  padding-top: 2%;
+}
+
+/**/
+/* line 512, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block1 .hdtitleblock1, .awrd-achv .block1 .mainsubtitleblock1 {
+  width: 80%;
+}
+/* line 515, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 519, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block1 .imgc {
+  position: relative;
+}
+/* line 524, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 #selectmenu2 {
+  margin: 20px 0 15px 0;
+  position: relative;
+}
+/* line 527, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 #selectmenu2 #menulist {
+  width: 100%;
+  background-color: transparent;
+  height: 50px;
+  outline: none;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 535, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 #selectmenu2 .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -20px;
+}
+/* line 541, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 #selectmenu2 .dropdown-menu {
+  width: 100%;
+  font-size: 2.4rem;
+  font-size: 24px;
+}
+/* line 548, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .selectboxwrapper {
+  padding-top: 30px;
+}
+/* line 551, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .selectbox {
+  width: 100%;
+  /* min-height: 40px;*/
+  line-height: 1;
+  padding: 10px 0;
+}
+/* line 558, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .textblock2 {
+  padding-top: 30px;
+}
+/* line 561, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .award-dt {
+  padding: 15px 0;
+}
+/* line 563, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .award-dt .award-pic {
+  padding: 0 15px;
+}
+/* line 566, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .award-dt .txt {
+  padding: 15px 15px;
+}
+/* line 568, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .award-dt .txt .hddttxt {
+  font-weight: bold;
+}
+/* line 571, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .award-dt .txt .dttxt {
+  padding: 10px 0;
+}
+/* line 576, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .dropdown-menu > li > a {
+  white-space: normal;
+  line-height: 1;
+  padding: 10px 0;
+}
+/* line 581, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block2 .divpagingbrand {
+  padding: 55px 0 20px 0;
+}
+/* line 585, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 588, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block3 .bdrtop {
+  border-top: 1px solid #EEE;
+  margin-top: 30px;
+}
+/* line 593, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block3 .padhdtitle {
+  padding-top: 55px;
+}
+/* line 596, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block3 .subhead {
+  padding-top: 20px;
+}
+/* line 599, ../../../assets/sass/about-ktb.scss */
+.awrd-achv .block3 .slickblock12 {
+  padding-top: 30px;
+}
+
+/* line 607, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block1 .hdtitleblock1 {
+  width: 50%;
+}
+/* line 610, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 614, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block1 .imgc {
+  position: relative;
+}
+/* line 617, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block1 .txt {
+  width: 70%;
+}
+/* line 621, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block2 {
+  background: #FFF url(../images/about-ktb/logo-bg-block2.jpg) no-repeat center top;
+  background-size: contain;
+  position: relative;
+}
+/* line 625, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block2 .img-orgchrt {
+  position: relative;
+  padding: 30px 0 30px 0;
+  width: 96%;
+  margin: 0 auto;
+}
+/* line 631, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block2 .titletxt {
+  padding-top: 8%;
+  width: 77%;
+  margin: 0 auto;
+}
+/* line 637, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block3 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 640, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block3 .bdrtop {
+  border-top: 1px solid #EEEEEE;
+}
+/* line 643, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block3 .padhdtitle {
+  padding-top: 6%;
+}
+/* line 646, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block3 .subhead {
+  padding-top: 2%;
+}
+/* line 649, ../../../assets/sass/about-ktb.scss */
+.grp-shrhd .block3 .slickblock12 {
+  padding-top: 2%;
+}
+
+/* line 656, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block1 .hdtitleblock1 {
+  width: 50%;
+}
+/* line 659, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block1 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 663, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block1 .imgc {
+  position: relative;
+}
+/* line 667, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block2 {
+  background: #FFF url(../images/about-ktb/vision-mission-bgdot.jpg) no-repeat center 70%;
+  padding-bottom: 10%;
+}
+/* line 670, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block2 .titletxt {
+  padding: 2% 0 2% 0;
+  width: 74%;
+  margin: 0 auto;
+}
+/* line 675, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block2 .dttxt2 {
+  width: 86%;
+}
+/* line 678, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block2 .hdtxt2 {
+  padding-bottom: 4%;
+}
+/* line 682, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block4 {
+  margin-top: 3%;
+}
+/* line 684, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block4 .blocktitle {
+  position: absolute;
+  top: 20%;
+}
+/* line 688, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block4 .imgc {
+  position: relative;
+}
+/* line 691, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block4 .hdtitleblock1 {
+  width: 50%;
+  padding-top: 1%;
+}
+/* line 695, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block4 .page-title {
+  line-height: 0.95;
+}
+/* line 698, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block4 .mainsubtitleblock1 {
+  width: 40%;
+}
+/* line 702, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block5 {
+  background: #FFF url(../images/about-ktb/vision-mission-bgblock4.jpg) no-repeat center top;
+}
+/* line 704, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block5 .padlist {
+  padding-left: 10px;
+}
+/* line 707, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block5 .hddttxt {
+  padding-top: 1%;
+}
+/* line 710, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block5 .pic {
+  padding-right: 15px;
+}
+/* line 713, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block5 .txt {
+  padding-left: 15px;
+  padding-top: 15%;
+}
+/* line 717, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block5 .ctblock5 {
+  padding: 50px 0;
+}
+/* line 721, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block6 {
+  background: #E6ECF5;
+}
+/* line 723, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block6 .ctblock {
+  padding: 9% 0;
+}
+/* line 726, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block6 .page-title {
+  line-height: 0.95;
+}
+/* line 729, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block6 .hdtxt, .impt-pl-drt .block6 .hdslicktxt {
+  padding-top: 1%;
+}
+/* line 732, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block6 .txt {
+  padding: 0 15px;
+}
+/* line 735, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block6 .slickwrapper16 {
+  padding: 0 15px;
+}
+/* line 739, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block7 {
+  background: #FFF url(../images/board-and-senior/bg-block3.jpg) no-repeat left top;
+  background-size: contain;
+}
+/* line 742, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block7 .bdrtop {
+  border-top: 1px solid #EEEEEE;
+}
+/* line 745, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block7 .padhdtitle {
+  padding-top: 6%;
+}
+/* line 748, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block7 .subhead {
+  padding-top: 2%;
+}
+/* line 751, ../../../assets/sass/about-ktb.scss */
+.impt-pl-drt .block7 .slickblock12 {
+  padding-top: 2%;
+}
+
+/* line 757, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block1 {
+  background: url("../images/about-ktb/csr-bg-block1.jpg") center top no-repeat;
+  background-size: cover;
+  padding-bottom: 70px;
+}
+/* line 761, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block1 .item {
+  position: relative;
+  box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -webkit-box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -moz-box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -ms-box-shadow: 1px 0px 40px 0px #9a9a9a;
+  -o-box-shadow: 1px 0px 40px 0px #9a9a9a;
+}
+/* line 768, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block1 .item .textblock1 {
+  position: absolute;
+  top: 10%;
+  padding-left: 4%;
+  width: 60%;
+}
+/* line 774, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block1 .item .content-desc {
+  margin: 20px auto;
+}
+/* line 779, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block2 {
+  background-image: -webkit-linear-gradient(top, #EEE 0%, #FFF 10%);
+  background-image: -o-linear-gradient(top, #EEE 0%, #FFF 10%);
+  background-image: linear-gradient(to bottom, #EEE 0%, #FFF 10%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#FFFFFFFF', GradientType=0);
+}
+/* line 781, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block2 .ctblock12 {
+  padding: 0 15px;
+}
+/* line 784, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block2 .txt2 {
+  padding: 4% 0 2% 0;
+}
+/* line 787, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block2 .imagetag3 .tag span {
+  min-height: 70px;
+}
+/* line 790, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block2 .subtitle2 {
+  padding-top: 1.1%;
+}
+/* line 793, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block2 .cloud-bg {
+  position: absolute;
+  right: 0;
+  top: 90%;
+}
+/* line 799, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 {
+  position: relative;
+  background: url("../../../dist/resources/images/personal/bglandingblock33.jpg") #FFF center top no-repeat;
+  background-size: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+/* line 805, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .slickwrapper {
+  margin-top: -147px;
+}
+/* line 808, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .textblock3 {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #FFF;
+  left: 50%;
+  transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  -o-transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+  box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -webkit-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -moz-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -ms-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+  -o-box-shadow: 0px 0px 20px 8px rgba(66, 66, 81, 0.2);
+}
+/* line 820, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .textpadtop3 {
+  padding: 15px 15px 5px 15px;
+}
+/* line 823, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .textpadbottom3 {
+  padding: 0 15px 20px 15px;
+}
+/* line 826, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .bgtextblock3 {
+  position: absolute;
+  left: 0;
+  top: 6%;
+  padding-top: 3%;
+  padding-bottom: 16%;
+  max-width: 900px;
+  width: 50%;
+  display: inline-block;
+  background: -webkit-linear-gradient(left, #64D3F4, #2CC3F1, #6C5AF5);
+  background: -moz-linear-gradient(left, #64D3F4, #2CC3F1, #6C5AF5);
+  background: -o-linear-gradient(left, #64D3F4, #2CC3F1, #6C5AF5);
+  background: linear-gradient(to right, #64D3F4, #2CC3F1, #6C5AF5);
+}
+/* line 840, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .hdtextblock3 {
+  position: relative;
+  padding-top: 85px;
+}
+/* line 845, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .padtitleblock3 {
+  padding-top: 15px;
+}
+/* line 848, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block3 .imagetag .tag {
+  position: absolute;
+  text-align: center;
+  bottom: -80px;
+  min-height: 120px;
+}
+/* line 855, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 {
+  background: #E6ECF5;
+  background-size: contain;
+  margin-top: 2%;
+}
+/* line 859, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 .padhdtitle {
+  padding-top: 4%;
+}
+/* line 862, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 .subhead {
+  padding-top: 2%;
+}
+/* line 865, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 .slickblock12 {
+  padding-top: 2%;
+}
+/* line 868, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 .btnblock {
+  padding: 0 0 4% 0;
+}
+/* line 872, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 .slickblock4 {
+  padding-top: 1%;
+}
+/* line 874, ../../../assets/sass/about-ktb.scss */
+.sstnablty .block4 .slickblock4 .slick-dots {
+  bottom: 5%;
+}
+
+/*------------------------------------------------------------------------- Media Query -----------------------------------------------------------*/
+/*==========  Non-Mobile First Method  ==========*/
+@media only screen and (max-width: 1500px) {
+  /* line 887, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 894, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .decor-headline {
+    font-size: 85px;
+    font-size: 8.5rem;
+  }
+  /* line 898, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 902, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .brdbuttonlong {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 906, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .blocktitle {
+    top: 8%;
+  }
+  /* line 911, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .page-title2 {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 915, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .dttitle {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 919, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 a.brandarrowlink:link,
+  .abt-ktb-indx .block4 a.brandarrowlink:visited,
+  .abt-ktb-indx .block4 a.brandarrowlink:focus {
+    font-size: 20px;
+    font-size: 2.2rem;
+  }
+  /* line 925, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .content-title-2 {
+    font-size: 26px;
+    font-size: 2.6rem;
+  }
+  /* line 932, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .decor-headline,
+  .abt-ktb-indx .block5dw .decor-headline {
+    font-size: 85px;
+    font-size: 8.5rem;
+  }
+
+  /**/
+  /* line 941, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .level-org-pic {
+    padding: 7% 0 5% 0;
+  }
+
+  /**/
+  /* line 950, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .bg-2 .text-2525 {
+    padding-top: 0%;
+  }
+  /* line 955, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-1 .top-2525 {
+    margin-top: 12%;
+  }
+  /* line 959, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 {
+    margin-top: 75px;
+  }
+  /* line 961, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 .text-last {
+    margin-top: 8%;
+  }
+  /* line 964, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 .w100p {
+    height: 550px;
+  }
+  /* line 968, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block3 {
+    margin-top: 6%;
+  }
+
+  /**/
+  /* line 976, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+}
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  /* line 990, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 996, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .blocktitle {
+    top: 6%;
+  }
+  /* line 999, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .decor-headline {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 1003, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .content-title-1 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1010, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .decor-headline,
+  .abt-ktb-indx .block5dw .decor-headline {
+    font-size: 70px;
+    font-size: 7rem;
+  }
+
+  /* line 1018, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1024, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .level-org-pic {
+    padding: 6% 0 5% 0;
+  }
+
+  /**/
+  /* line 1033, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-top2 .w100p {
+    height: 370px;
+  }
+  /* line 1037, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .txtcolor {
+    padding-top: 7%;
+  }
+  /* line 1040, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 {
+    margin-top: auto;
+  }
+  /* line 1042, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 .text-last {
+    margin-top: 3%;
+  }
+  /* line 1046, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-bottom {
+    height: 450px;
+  }
+  /* line 1073, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .cd-content {
+    width: auto;
+  }
+
+  /**/
+  /* line 1081, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .dropdown-menu > li > a {
+    font-size: 2.2rem;
+  }
+
+  /* line 1088, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+
+  /* line 1096, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 1102, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .decor-headline, .impt-pl-drt .block4 .headline-w {
+    font-size: 75px;
+    font-size: 7.5rem;
+  }
+  /* line 1106, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .page-title {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1110, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .content-desc4 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1114, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .blocktitle {
+    top: 15%;
+  }
+  /* line 1120, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .decor-headline, .impt-pl-drt .block5 .headline-w {
+    font-size: 75px;
+    font-size: 7.5rem;
+  }
+  /* line 1124, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .content-desc {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1130, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .decor-headline, .impt-pl-drt .block6 .headline-w {
+    font-size: 75px;
+    font-size: 7.5rem;
+  }
+  /* line 1134, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .content-desc {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1138, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .page-title {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+
+  /* line 1147, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1153, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .headline-w {
+    font-size: 75px;
+    font-size: 7.5rem;
+  }
+  /* line 1158, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .section-title-white {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1163, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 1168, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-thum-desc {
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
+  /* line 1172, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .slickwrapper {
+    margin-top: -110px;
+  }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  /* line 1184, ../../../assets/sass/about-ktb.scss */
+  .sharepanel2 {
+    height: 37px;
+    margin-bottom: 20px;
+  }
+
+  /* line 1191, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1197, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .blocktitle {
+    position: inherit;
+    padding-top: 6%;
+  }
+  /* line 1201, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .decor-headline {
+    font-size: 95px;
+    font-size: 9.5rem;
+  }
+  /* line 1205, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .content-title-1 {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1209, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .btnblock2 {
+    padding-top: 4%;
+    padding-bottom: 5%;
+  }
+  /* line 1213, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .brdbuttonlong {
+    width: 60%;
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  /* line 1220, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .page-title2 {
+    font-size: 27px;
+    font-size: 2.7rem;
+  }
+  /* line 1224, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .dttitle {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 1228, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 a.brandarrowlink:link,
+  .abt-ktb-indx .block4 a.brandarrowlink:visited,
+  .abt-ktb-indx .block4 a.brandarrowlink:focus {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 1234, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .content-title-2 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1238, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .ctblock4 {
+    padding: 2% 0;
+  }
+  /* line 1242, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background-position: right 12%;
+  }
+  /* line 1244, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .txtct1 {
+    padding-bottom: 0;
+  }
+  /* line 1248, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background-position: left 21%;
+  }
+  /* line 1251, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up,
+  .abt-ktb-indx .block5dw {
+    position: relative;
+    padding-top: 6%;
+  }
+  /* line 1255, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .pull-right,
+  .abt-ktb-indx .block5dw .pull-right {
+    clear: right;
+  }
+  /* line 1258, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .decor-headline,
+  .abt-ktb-indx .block5dw .decor-headline {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1262, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .content-title-1,
+  .abt-ktb-indx .block5dw .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 1266, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .txt-meaning,
+  .abt-ktb-indx .block5dw .txt-meaning {
+    text-align: left;
+  }
+  /* line 1269, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .txtcolor,
+  .abt-ktb-indx .block5dw .txtcolor {
+    padding-top: 10%;
+    width: 100%;
+  }
+  /* line 1273, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .brdbuttonlong,
+  .abt-ktb-indx .block5dw .brdbuttonlong {
+    width: 60%;
+  }
+  /* line 1276, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .txtct2,
+  .abt-ktb-indx .block5dw .txtct2 {
+    padding-bottom: 10%;
+  }
+  /* line 1279, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .logo-kt,
+  .abt-ktb-indx .block5dw .logo-kt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1283, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up .subtitle2,
+  .abt-ktb-indx .block5dw .subtitle2 {
+    width: 100%;
+  }
+  /* line 1288, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block6 .brdbuttonlong {
+    width: 60%;
+  }
+
+  /**/
+  /* line 1296, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block1 .teaser-headline-light {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1301, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /**/
+  /* line 1309, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block1 .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1314, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 {
+    position: relative;
+  }
+  /* line 1316, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .zoom-btn {
+    position: absolute;
+    bottom: 25%;
+    right: 0;
+    border-radius: 50%;
+    background: rgba(58, 73, 102, 0.75);
+    padding: 20px;
+  }
+  /* line 1323, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .zoom-btn i {
+    font-size: 50px;
+    color: #fff;
+  }
+  /* line 1328, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .padzooming {
+    position: relative;
+    padding: 3% 0;
+  }
+  /* line 1333, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /**/
+  /* line 1341, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .bg-2 {
+    position: initial;
+    margin-top: 0 !important;
+  }
+  /* line 1345, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .txtcolor {
+    padding-top: 0%;
+  }
+  /* line 1348, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .bg-line {
+    background: url("../images/about-ktb/hstry-bg-line-m.png") 10% 83% repeat-y;
+  }
+  /* line 1351, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-2 {
+    margin-top: 0%;
+  }
+  /* line 1355, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 .text-2525 {
+    top: 200px !important;
+  }
+  /* line 1358, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .block2-3 .text-last {
+    padding-left: 19%;
+    margin-top: 9%;
+  }
+  /* line 1364, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .bg-line-2 {
+    background: none;
+  }
+  /* line 1367, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-bottom {
+    width: 100% !important;
+    height: 200px !important;
+  }
+  /* line 1371, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .line-m-z-1 {
+    position: relative;
+    z-index: -1;
+  }
+  /* line 1375, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-top2 {
+    margin-top: unset !important;
+  }
+  /* line 1381, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .wrapper .txtcolor {
+    margin-top: 8%;
+    padding-left: 19%;
+  }
+  /* line 1384, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .wrapper .txtcolor .forcebreakline {
+    padding-left: 18px;
+  }
+  /* line 1390, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block3 {
+    padding-top: 0;
+  }
+  /* line 1393, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block3 .bdrtop {
+    border-top: 1px solid #EEEEEE;
+  }
+
+  /**/
+  /* line 1402, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block1 .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1406, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block1 .mainsubtitleblock1 {
+    width: 70%;
+  }
+
+  /**/
+  /* line 1414, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1419, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 {
+    position: relative;
+  }
+  /* line 1421, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 .zoom-btn {
+    position: absolute;
+    bottom: 25%;
+    right: 0;
+    border-radius: 50%;
+    background: rgba(58, 73, 102, 0.75);
+    padding: 20px;
+  }
+  /* line 1428, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 .zoom-btn i {
+    font-size: 50px;
+    color: #fff;
+  }
+  /* line 1433, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 .padzooming {
+    position: relative;
+    padding: 3% 0;
+  }
+  /* line 1438, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /**/
+  /* line 1446, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 1452, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .decor-headline, .impt-pl-drt .block4 .headline-w {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1456, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .page-title {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 1460, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .content-desc4 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 1464, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .blocktitle {
+    top: 10%;
+  }
+  /* line 1470, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .decor-headline, .impt-pl-drt .block5 .headline-w {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1474, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .content-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 1479, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 {
+    position: relative;
+  }
+  /* line 1481, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .decor-headline, .impt-pl-drt .block6 .headline-w {
+    font-size: 75px;
+    font-size: 7.5rem;
+  }
+  /* line 1485, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .content-desc {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 1489, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .page-title {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1493, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .hdslicktxt {
+    text-align: center;
+  }
+  /* line 1496, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .dtslicktxt {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  /* line 1501, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 {
+    position: relative;
+    padding: 0;
+    padding-top: 5%;
+  }
+  /* line 1506, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .slickblock16 .slick-dots {
+    bottom: -12%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  /* line 1513, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav {
+    top: 35%;
+  }
+  /* line 1515, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav .prev-slide16 {
+    left: 15%;
+  }
+  /* line 1518, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav .next-slide16 {
+    right: 15%;
+  }
+
+  /**/
+  /* line 1528, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1534, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .headline-w {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1539, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .section-title-white {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 1544, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-desc {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  /* line 1549, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-thum-desc {
+    font-size: 12px;
+    font-size: 1.2rem;
+  }
+  /* line 1554, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .imagetag .tag {
+    min-height: 95px;
+  }
+  /* line 1558, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .btnblock3 {
+    padding-top: 20px;
+  }
+  /* line 1562, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .hdtextblock3 {
+    padding-top: 60px;
+  }
+  /* line 1565, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .slickwrapper {
+    margin-top: -90px;
+  }
+
+  /**/
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+  /* line 1580, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 {
+    background: none;
+    padding-bottom: 0;
+  }
+  /* line 1583, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .item {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+  }
+  /* line 1589, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .item .textblock1 {
+    position: static;
+    padding: 20px 0 80px 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1595, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .item .hdblock1,
+  .abt-ktb-indx .block1 .item .subhdblock1 {
+    width: 60%;
+  }
+  /* line 1599, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .item .content-desc {
+    margin: 20px 0;
+  }
+  /* line 1602, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .item .brdbuttonlong {
+    width: 60%;
+  }
+  /* line 1607, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block2 {
+    background: url("../images/about-ktb/indx-bg-block2-m.jpg") center top no-repeat;
+    background-size: 100%;
+  }
+  /* line 1610, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block2 .txt2 {
+    padding: 9% 0 2% 0;
+  }
+  /* line 1615, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .icon {
+    width: 20%;
+  }
+  /* line 1620, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .ctblock4 {
+    padding: 5% 0;
+  }
+  /* line 1623, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .page-title2 {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1627, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .dttitle {
+    font-size: 32px;
+    font-size: 3.2rem;
+  }
+  /* line 1631, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 a.brandarrowlink:link,
+  .abt-ktb-indx .block4 a.brandarrowlink:visited,
+  .abt-ktb-indx .block4 a.brandarrowlink:focus {
+    font-size: 32px;
+    font-size: 3.2rem;
+  }
+  /* line 1637, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .content-title-2 {
+    font-size: 32px;
+    font-size: 3.2rem;
+  }
+  /* line 1641, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .txtct {
+    width: 100%;
+    min-height: auto;
+  }
+  /* line 1646, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right 11% no-repeat;
+  }
+  /* line 1649, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left 9% no-repeat;
+  }
+  /* line 1653, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block6 .brdbuttonlong {
+    width: 60%;
+  }
+  /* line 1656, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block6 .btnblock {
+    padding: 4% 0 4% 0;
+  }
+
+  /**/
+  /* line 1664, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 1667, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1674, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 1679, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 {
+    background: #FFF url(../images/about-ktb/logo-bg-block2-m.jpg) no-repeat left top;
+    background-size: 100%;
+    position: relative;
+  }
+  /* line 1683, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 .picdotct1,
+  .cpr-idf .block2 .picdotct2 {
+    position: absolute;
+    top: 15%;
+    left: -8.5%;
+    right: 0;
+    z-index: 1;
+  }
+  /* line 1691, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 .txt-meaning {
+    text-align: left;
+  }
+  /* line 1694, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 .txtcolor {
+    padding-top: 10%;
+  }
+  /* line 1697, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 .txtct2 {
+    padding-top: 6.5%;
+    padding-bottom: 90px;
+  }
+  /* line 1701, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 .logo-kt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1705, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block2 .subtitle2 {
+    width: 100%;
+  }
+
+  /**/
+  /* line 1713, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 1716, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1723, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1728, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 {
+    background: #FFF url(../images/about-ktb/bg-frame-and-dot-m.jpg) no-repeat left top;
+    background-size: 100%;
+  }
+  /* line 1731, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .level-org-pic {
+    padding: 8% 0 5% 0;
+  }
+  /* line 1735, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block3 {
+    margin-top: 12%;
+  }
+
+  /**/
+  /* line 1741, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 {
+    background: url("../images/about-ktb/hstry-bg-block2-m.png") center top no-repeat;
+    background-size: 100%;
+  }
+  /* line 1745, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .wrapper .txtcolor {
+    margin-top: 11%;
+    padding-left: 19%;
+  }
+  /* line 1750, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .forcebreakline {
+    padding-left: 0px !important;
+  }
+  /* line 1754, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-top2 .w100p {
+    height: auto;
+  }
+  /* line 1759, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-dot-1-m {
+    position: absolute;
+    margin: 13% 0% 0% -11%;
+    width: 92%;
+    height: 58%;
+  }
+
+  /**/
+  /* line 1770, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 1773, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1780, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1785, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 {
+    border-top: 1px solid #EEE;
+  }
+  /* line 1787, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 .award-dt {
+    padding: 0;
+  }
+  /* line 1790, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 #selectmenu2 {
+    padding: 20px 0 40px 0;
+  }
+  /* line 1793, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 .divpagingbrand {
+    padding: 25px 0 20px 0;
+  }
+
+  /**/
+  /* line 1801, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 1804, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1811, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1815, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .txt {
+    width: 100%;
+  }
+  /* line 1819, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 {
+    background: #FFF url(../images/about-ktb/logo-bg-block2-m.jpg) no-repeat left top;
+    background-size: 100%;
+  }
+  /* line 1822, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 .titletxt {
+    width: 100%;
+  }
+  /* line 1826, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block3 {
+    margin-top: 12%;
+  }
+
+  /**/
+  /* line 1833, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 1836, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1843, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1847, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .txt {
+    width: 100%;
+  }
+  /* line 1851, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 {
+    background: #FFF url(../images/about-ktb/logo-bg-block2-m.jpg) no-repeat left top;
+    background-size: 100%;
+  }
+  /* line 1854, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 .dttxt2 {
+    width: 86%;
+  }
+  /* line 1857, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 .hdtxt2 {
+    padding-bottom: 4%;
+  }
+  /* line 1860, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 .titletxt {
+    padding: 8% 0 4% 0;
+    width: 100%;
+  }
+  /* line 1864, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 .txt2 {
+    text-align: center;
+  }
+  /* line 1867, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 .dttxt2 {
+    width: 100%;
+  }
+  /* line 1870, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block2 .picdt {
+    padding-top: 5%;
+    text-align: center;
+  }
+  /* line 1876, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .hdtitleblock1 {
+    width: 100%;
+  }
+  /* line 1879, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .blocktitle {
+    position: relative;
+    padding: 5% 0 10% 0;
+    max-width: 1360px;
+  }
+  /* line 1884, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 1888, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block4 .txt, .impt-pl-drt .block4 .mainsubtitleblock1 {
+    width: 100%;
+  }
+  /* line 1892, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 {
+    background: none;
+  }
+  /* line 1894, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .decor-headline, .impt-pl-drt .block5 .headline-w {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1898, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .content-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 1902, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .ctblock5 {
+    padding-top: 0;
+  }
+  /* line 1905, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block5 .txt {
+    padding: 5% 0 10% 0;
+  }
+  /* line 1910, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .decor-headline, .impt-pl-drt .block6 .headline-w {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 1914, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .content-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 1919, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav {
+    display: block;
+    top: 33%;
+  }
+  /* line 1924, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .ctblock {
+    padding: 12% 0;
+  }
+
+  /**/
+  /* line 1932, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 {
+    background: none;
+    padding-bottom: 0;
+  }
+  /* line 1935, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .item {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+  }
+  /* line 1941, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .item .textblock1 {
+    position: static;
+    padding: 20px 0 80px 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 1947, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .item .hdblock1,
+  .sstnablty .block1 .item .subhdblock1 {
+    width: 60%;
+  }
+  /* line 1951, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .item .content-desc {
+    margin: 20px 0;
+  }
+  /* line 1954, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .item .brdbuttonlong {
+    width: 60%;
+  }
+  /* line 1959, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 {
+    top: 0;
+    background: url("../../../dist/resources/images/personal/bglandingblock3mb.jpg") #FFF left top no-repeat;
+    background-size: 100%;
+  }
+  /* line 1963, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .headline-w {
+    font-size: 95px;
+    font-size: 9.5rem;
+  }
+  /* line 1967, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .slickwrapper {
+    margin-top: 3%;
+  }
+  /* line 1969, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .slickwrapper .slickblock3 {
+    padding-bottom: 2%;
+  }
+  /* line 1971, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .slickwrapper .slickblock3 .item {
+    padding: 0;
+  }
+  /* line 1977, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .picframe3 {
+    display: block;
+    height: auto !important;
+  }
+  /* line 1982, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .piccell3 {
+    display: block;
+  }
+  /* line 1986, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .hdtextblock3 {
+    position: relative;
+    padding-top: 15%;
+  }
+  /* line 1991, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .section-title-white {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 1996, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-desc {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  /* line 2001, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-thum-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 2006, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .brdbuttonlong {
+    width: 60%;
+  }
+  /* line 2010, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .btnblock3 {
+    padding-top: 5%;
+  }
+  /* line 2014, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-thum-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 2019, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-desc {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 2027, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block4 .brdbuttonlong {
+    width: 60%;
+  }
+}
+/**/
+@media only screen and (max-width: 600px) {
+  /* line 2040, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right 2% no-repeat;
+  }
+  /* line 2043, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -2% no-repeat;
+  }
+}
+@media only screen and (max-width: 580px) {
+  /* line 2051, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -11% no-repeat;
+  }
+  /* line 2054, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -15% no-repeat;
+  }
+}
+@media only screen and (max-width: 535px) {
+  /* line 2062, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -30% no-repeat;
+  }
+  /* line 2065, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -34% no-repeat;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  /* line 2078, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block1 .teaser-headline-light {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2084, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .decor-headline {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 2088, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .content-title-1 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 2092, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .brdbuttonlong {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 2096, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block3 .icon {
+    width: 23.7%;
+  }
+  /* line 2101, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .ctblock4 {
+    padding: 5% 0;
+  }
+  /* line 2104, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .page-title2 {
+    font-size: 33px;
+    font-size: 3.3rem;
+  }
+  /* line 2108, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .dttitle {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 2112, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 a.brandarrowlink:link,
+  .abt-ktb-indx .block4 a.brandarrowlink:visited,
+  .abt-ktb-indx .block4 a.brandarrowlink:focus {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 2118, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block4 .content-title-2 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 2123, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -60% no-repeat;
+  }
+  /* line 2126, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -46% no-repeat;
+  }
+
+  /**/
+  /* line 2133, ../../../assets/sass/about-ktb.scss */
+  .cpr-idf .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+
+  /**/
+  /* line 2142, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2148, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .zoom-btn {
+    padding: 15px;
+  }
+  /* line 2150, ../../../assets/sass/about-ktb.scss */
+  .org-chrt .block2 .zoom-btn i {
+    font-size: 30px;
+  }
+
+  /**/
+  /* line 2160, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block1 .item .text-block1 {
+    padding: 25% 0% 25% 0%;
+  }
+  /* line 2162, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block1 .item .text-block1 .break-line {
+    display: inline-block;
+  }
+  /* line 2165, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block1 .item .text-block1 a.play-btn {
+    width: 80px;
+    height: 80px;
+  }
+  /* line 2174, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .wrapper .text-bolck2-1 {
+    width: 93%;
+  }
+  /* line 2179, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .bg-line {
+    background: url("../images/about-ktb/hstry-bg-line-m.png") 5% 78% no-repeat;
+  }
+  /* line 2182, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-hstry .block2 .pic-dot-1-m {
+    z-index: 0;
+    position: absolute;
+    margin: 13% 0% 0% -11%;
+    width: 92%;
+    height: 58%;
+  }
+
+  /**/
+  /* line 2194, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2201, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 #selectmenu2 #menulist {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /**/
+  /* line 2211, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2217, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 .zoom-btn {
+    padding: 15px;
+  }
+  /* line 2219, ../../../assets/sass/about-ktb.scss */
+  .grp-shrhd .block2 .zoom-btn i {
+    font-size: 30px;
+  }
+
+  /**/
+  /* line 2228, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 2235, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .slickblock16 {
+    padding-bottom: 5%;
+  }
+  /* line 2237, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .slickblock16 .slick-dots {
+    bottom: -5%;
+  }
+  /* line 2241, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav {
+    display: block;
+    top: 28%;
+  }
+  /* line 2244, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav .prev-slide16 {
+    left: 0;
+  }
+  /* line 2247, ../../../assets/sass/about-ktb.scss */
+  .impt-pl-drt .block6 .slickwrapper16 .custom-nav .next-slide16 {
+    right: 0;
+  }
+
+  /**/
+  /* line 2257, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block1 .teaser-headline-light {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 2263, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-desc {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 2268, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-thum-desc {
+    font-size: 19px;
+    font-size: 1.9rem;
+  }
+  /* line 2274, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .swiperblock3 .swiper-pagination {
+    padding-top: 83px;
+  }
+  /* line 2280, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .imagetag .tag {
+    position: absolute;
+    text-align: center;
+    bottom: -79px;
+    min-height: 120px;
+  }
+  /* line 2287, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .headline-w {
+    font-size: 55px;
+    font-size: 5.5rem;
+  }
+  /* line 2292, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .section-title-white {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /**/
+}
+@media only screen and (max-width: 450px) {
+  /* line 2304, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -120% no-repeat;
+  }
+  /* line 2307, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -70% no-repeat;
+  }
+}
+@media only screen and (max-width: 400px) {
+  /* line 2315, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -135% no-repeat;
+  }
+  /* line 2318, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -93% no-repeat;
+  }
+}
+@media only screen and (max-width: 370px) {
+  /* line 2326, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -175% no-repeat;
+  }
+  /* line 2329, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -115% no-repeat;
+  }
+}
+@media only screen and (max-width: 350px) {
+  /* line 2337, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -235% no-repeat;
+  }
+  /* line 2340, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -145% no-repeat;
+  }
+
+  /* line 2347, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 #selectmenu2 #menulist {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2351, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 #selectmenu2 .dropdowntxt {
+    width: 90%;
+  }
+  /* line 2354, ../../../assets/sass/about-ktb.scss */
+  .awrd-achv .block2 #selectmenu2 .select-arrow {
+    right: 10px;
+  }
+}
+@media only screen and (max-width: 330px) {
+  /* line 2365, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -280% no-repeat;
+  }
+  /* line 2368, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -162% no-repeat;
+  }
+}
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+  /* line 2379, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5up {
+    background: #FFF url("../images/about-ktb/indx-bg-block5up-m.jpg") right -293% no-repeat;
+  }
+  /* line 2382, ../../../assets/sass/about-ktb.scss */
+  .abt-ktb-indx .block5dw {
+    background: #FFF url("../images/about-ktb/indx-bg-block5dw-m.jpg") left -169% no-repeat;
+  }
+
+  /**/
+  /* line 2389, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2394, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .content-thum-desc {
+    font-size: 17px;
+    font-size: 1.7rem;
+  }
+  /* line 2399, ../../../assets/sass/about-ktb.scss */
+  .sstnablty .block3 .imagetag .tag {
+    position: absolute;
+    text-align: center;
+    bottom: -79px;
+    min-height: 110px;
+  }
+
+  /**/
+}

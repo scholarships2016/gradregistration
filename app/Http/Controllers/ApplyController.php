@@ -71,7 +71,7 @@ class ApplyController extends Controller {
     }
 
     public function showAnnouncement() {
-        $data = $this->AnnouncementRepo->getAnnouncementAll();
+        $data = $this->AnnouncementRepo->getAnnouncementActive();
         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
         return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1, 'appCount' => $dataApplication->count()]);
     }
@@ -262,7 +262,14 @@ class ApplyController extends Controller {
             $gdata['curr_prog_id'] = $program[1];
         }
 
+     $chks =  DB::table('application')->where('applicant_id',session('Applicant')->applicant_id)->where('program_id',$gdata['program_id'])->where('curr_prog_id',$gdata['curr_prog_id'])->where('curr_act_id',$gdata['curr_act_id'])->where('sub_major_id',$gdata['sub_major_id'])->get();
+        
+     if(count($chks)==0){
         $res = $this->ApplicationRepo->saveApplication($gdata);
+     }else{
+         session()->flash('errorMsg', Lang::get('resource.lbApplicationSame'));
+          return back();
+     }
 
         if ($res) {
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));

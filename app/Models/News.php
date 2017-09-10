@@ -26,31 +26,33 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class News extends Eloquent
-{
-	protected $primaryKey = 'news_id';
-	public $timestamps = false;
+class News extends Eloquent {
 
-	protected $casts = [
-		'news_seq' => 'int',
-		'news_is_active' => 'int'
-	];
+    protected $primaryKey = 'news_id';
+    public $timestamps = true;
 
-	protected $dates = [
-		'created',
-		'modified'
-	];
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+ 
+    protected $casts = [
+        'news_seq' => 'int',
+        'news_is_active' => 'int'
+    ];
+    protected $dates = [
+        'created',
+        'modified'
+    ];
+    protected $fillable = [
+        'news_title',
+        'news_detail',
+        'news_title_en',
+        'news_detail_en',
+        'news_seq',
+        'news_is_active',
+        'creator',
+        'created',
+        'modifier',
+        'modified'
+    ];
 
-	protected $fillable = [
-		'news_title',
-		'news_detail',
-		'news_title_en',
-		'news_detail_en',
-		'news_seq',
-		'news_is_active',
-		'creator',
-		'created',
-		'modifier',
-		'modified'
-	];
 }

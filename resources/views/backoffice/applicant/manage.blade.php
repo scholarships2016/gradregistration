@@ -328,26 +328,51 @@
     }
 
     function doDelete(id) {
-        var formData = new FormData();
-        formData.append('applicant_id', id);
-        $.ajax({
-            url: '{{route('admin.applicantManage.doDelete')}}',
-            headers: {
-                'X-CSRF-Token': '{{csrf_token()}}'
+
+        swal({
+                html: true,
+                title: "ต้องการจะลบข้อมูล ?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: "#E7505A",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
             },
-            method: "POST",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
-            success: function (result) {
-                var data = showToastFromAjaxResponse(result);
-                if (result.status == 'success') {
-                    reloadTable();
+            function (isConfirm) {
+                if (!isConfirm) {
+                    return;
                 }
+
+                var formData = new FormData();
+                formData.append('applicant_id', id);
+                $.ajax({
+                    url: '{{route('admin.applicantManage.doDelete')}}',
+                    headers: {
+                        'X-CSRF-Token': '{{csrf_token()}}'
+                    },
+                    method: "POST",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    enctype: 'multipart/form-data',
+                    success: function (result) {
+                        swal({
+                            html: true,
+                            title: result.message,
+                            text: "",
+                            type: result.status
+                        });
+                        if (result.status == 'success') {
+                            reloadTable();
+                        }
+                    }
+                });
             }
-        });
+        );
     }
 
     function prepareProgramInfo(obj) {

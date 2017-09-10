@@ -171,7 +171,7 @@ return [
         Reliese\Coders\CodersServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 //          niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------
@@ -219,6 +219,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
          'PDF' => Barryvdh\DomPDF\Facade::class,
         'Conutil' => \App\Http\Controllers\Controller::class,
+        'Excel' =>  Maatwebsite\Excel\Facades\Excel::class ,
 //        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
     ],
 ];

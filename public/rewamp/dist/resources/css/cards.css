@@ -1,0 +1,6222 @@
+/*----------------------------- Font Standard -------------------------------------------*/
+/**/
+/*----------------------------- Color -------------------------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------- for Button by BOH --------------------------*/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*------------------------------------------------------------------------------------------------*/
+/* line 4, ../../../assets/sass/cards.scss */
+.debit-crd-prvl {
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+  /**/
+}
+/* line 8, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block1 {
+  background: #fff url(../../../dist/resources/images/cards/dc-landing-bg-block1.jpg) no-repeat bottom center;
+  background-size: cover;
+}
+/* line 11, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block1 .imgc {
+  z-index: 5;
+}
+/* line 14, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block1 .wrapper {
+  position: relative;
+}
+/* line 17, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block1 .textblock1 {
+  padding-top: 0px;
+  position: absolute;
+  top: 12%;
+  left: 0;
+  text-align: left;
+}
+/* line 24, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block1 .content-desc {
+  margin: 20px auto;
+}
+/* line 27, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block1 .slickblock1 {
+  box-shadow: 3px 4px 6px 0px #8a8585;
+  -webkit-box-shadow: 3px 4px 6px 0px #8a8585;
+  -moz-box-shadow: 3px 4px 6px 0px #8a8585;
+  -ms-box-shadow: 3px 4px 6px 0px #8a8585;
+  -o-box-shadow: 3px 4px 6px 0px #8a8585;
+}
+/* line 33, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 {
+  background: #2CC3F1;
+  background: -webkit-linear-gradient(left, #64D3F4, #2CC3F1, #6C5AF5);
+  background: -moz-linear-gradient(left, #64D3F4, #2CC3F1, #6C5AF5);
+  background: -o-linear-gradient(left, #64D3F4, #2CC3F1, #6C5AF5);
+  background: linear-gradient(to right, #64D3F4, #2CC3F1, #6C5AF5);
+  max-height: 500px;
+  position: relative;
+  margin-top: -30px;
+}
+/* line 42, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .slickwrapper {
+  position: relative;
+  z-index: 120;
+}
+/* line 46, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .spacing {
+  padding: 20px 0;
+}
+/* line 49, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .txt-title {
+  min-height: 140px;
+}
+/* line 52, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .txt-box {
+  padding: 0 10px;
+}
+/* line 55, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .txt-box:first-child {
+  padding-left: 0;
+}
+/* line 58, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .txt-info {
+  padding: 25px 33px 33px 33px;
+  background: #F0F0F0;
+  box-shadow: 3px 4px 6px 0px #8a8585;
+  -webkit-box-shadow: 3px 4px 6px 0px #8a8585;
+  -moz-box-shadow: 3px 4px 6px 0px #8a8585;
+  -ms-box-shadow: 3px 4px 6px 0px #8a8585;
+  -o-box-shadow: 3px 4px 6px 0px #8a8585;
+}
+/* line 63, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .havepadding {
+  padding-bottom: 20px;
+}
+/* line 66, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .slickblock7 {
+  padding: 0 0 40px;
+}
+/* line 70, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .txt-stat .row:first-child {
+  border-width: 1px 0;
+  border-color: #D7D7D7;
+  border-style: solid;
+}
+/* line 75, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .txt-stat .row:last-child {
+  border-width: 0 0 1px 0;
+  border-color: #D7D7D7;
+  border-style: solid;
+}
+/* line 81, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .exp-more {
+  padding-top: 30px;
+}
+/* line 83, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .exp-more a {
+  width: 100%;
+}
+/* line 88, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .head {
+  padding-top: 50px;
+}
+/* line 92, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .padthhead {
+  padding-top: 25px;
+}
+/* line 96, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .pic-card {
+  padding-bottom: 25px;
+}
+/* line 101, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .swiperblock2 .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 100%;
+  border-style: solid;
+  border-width: thin;
+  border-color: #394866;
+  background: transparent;
+  opacity: 1;
+}
+/* line 113, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .swiperblock2 .swiper-pagination-bullet-active {
+  background: #394866;
+  opacity: 1;
+}
+/* line 118, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block2 .swiperblock2 .swiper-pagination {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  padding-top: 35px;
+}
+/* line 128, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 {
+  background: #fff url(../../../dist/resources/images/cards/dc-cloud-bg-block3.jpg) center center no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
+  margin-top: -90px;
+}
+/* line 134, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .topspace {
+  padding-top: 400px;
+}
+/* line 137, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .cloud {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* line 142, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .header-box {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+/* line 146, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .spacediv {
+  padding: 0 15px;
+}
+/* line 149, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .spacediv.clearleft {
+  padding: 0 15px 0 0;
+}
+/* line 153, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .box-content img {
+  width: 100%;
+}
+/* line 156, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .box-content .content-desc {
+  margin-top: 30px;
+}
+/* line 160, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .circle-box {
+  padding: 100px 0 40px;
+}
+/* line 163, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .content-desc {
+  padding: 20px 0 60px;
+}
+/* line 167, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .subhead {
+  padding-top: 10px;
+}
+/* line 171, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block3 .padbtn {
+  padding-bottom: 45px;
+}
+/* line 176, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block4 {
+  position: relative;
+}
+/* line 178, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block4 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+/* line 184, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block4 .brdbuttonlong {
+  margin-top: 30px;
+}
+/* line 187, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block4 .content-thum-desc {
+  font-size: 24px;
+}
+/* line 190, ../../../assets/sass/cards.scss */
+.debit-crd-prvl .block4 .teaser-headline-light {
+  font-size: 60px;
+  font-size: 6rem;
+}
+
+/* line 197, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd {
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 201, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block1 {
+  position: relative;
+}
+/* line 203, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 209, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 213, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 221, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 225, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 228, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 231, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 234, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 237, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 240, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 244, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 249, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 {
+  background-color: #E6ECF5;
+}
+/* line 251, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 254, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 257, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 260, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 264, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 271, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 274, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 278, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 284, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 287, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 292, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 296, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 300, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 306, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 312, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url("../images/share/dot-bg-2.png") #FFF center top no-repeat;
+}
+/* line 317, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 ol {
+  padding-left: 19px;
+}
+/* line 320, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 323, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 326, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 .panel {
+  box-shadow: none;
+}
+/* line 329, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 332, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block4 .panel-heading {
+  border-radius: 8px;
+}
+/* line 338, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .divclick {
+  width: 82%;
+}
+/* line 341, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 348, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .faqdiv {
+  padding-top: 20px;
+}
+/* line 352, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .left {
+  padding-right: 12.5px;
+}
+/* line 356, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .right {
+  padding-left: 12.5px;
+}
+/* line 360, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .decor-50 {
+  line-height: 1.2;
+}
+/* line 363, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .readmore {
+  padding-bottom: 55px;
+}
+/* line 366, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd .block5 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 375, ../../../assets/sass/cards.scss */
+.smrt-clssc-debit-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 380, ../../../assets/sass/cards.scss */
+.crystal-debit-crd {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 384, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block1 {
+  position: relative;
+}
+/* line 386, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 392, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 396, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 404, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 408, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 411, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 414, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 417, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 420, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 423, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 427, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 432, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 {
+  background-color: #E6ECF5;
+}
+/* line 434, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 437, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 440, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 443, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 447, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 454, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 457, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 461, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 467, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 470, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 475, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 479, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 483, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 489, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 494, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block3 .remarkblock3 {
+  padding: 30px 0 30px 0;
+  width: 80%;
+}
+/* line 500, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+}
+/* line 504, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 508, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 511, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 514, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 521, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 527, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 532, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 536, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxtabs {
+  width: 1025px;
+  margin: 0 auto;
+}
+/* line 540, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 543, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 551, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 554, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 559, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 562, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .panel-group {
+  padding-top: 50px;
+}
+/* line 566, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block4 .margincell {
+  margin: 0 auto;
+  width: 90%;
+}
+/* line 572, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 {
+  padding-top: 0;
+  padding-bottom: 30px;
+}
+/* line 576, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 ol {
+  padding-left: 19px;
+}
+/* line 579, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 582, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 .panel-default {
+  border-color: #FFF;
+}
+/* line 585, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 .panel {
+  box-shadow: none;
+}
+/* line 588, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 591, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block5 .panel-heading {
+  border-radius: 8px;
+}
+/* line 597, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .divclick {
+  width: 82%;
+}
+/* line 600, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 607, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .faqdiv {
+  padding-top: 20px;
+}
+/* line 611, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .left {
+  padding-right: 12.5px;
+}
+/* line 615, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .right {
+  padding-left: 12.5px;
+}
+/* line 619, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .decor-50 {
+  line-height: 1.2;
+}
+/* line 622, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 626, ../../../assets/sass/cards.scss */
+.crystal-debit-crd .block6 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 634, ../../../assets/sass/cards.scss */
+.crystal-debit-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 639, ../../../assets/sass/cards.scss */
+.prl-debit-crd {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 643, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block1 {
+  position: relative;
+}
+/* line 645, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 651, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 655, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 663, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 667, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 670, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 673, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 676, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 678, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .itembox .txt1 {
+  width: 90%;
+}
+/* line 682, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 685, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 689, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 694, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 {
+  background-color: #E6ECF5;
+}
+/* line 696, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 699, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 702, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 705, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 709, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 716, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 719, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 723, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 729, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 732, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 737, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 741, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 745, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 751, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 756, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block3 .remarkblock3 {
+  padding: 30px 0 30px 0;
+  width: 80%;
+}
+/* line 762, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+}
+/* line 766, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 769, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 772, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 775, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 782, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 788, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 793, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 797, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxtabs {
+  width: 1025px;
+  margin: 0 auto;
+}
+/* line 801, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 804, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 812, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 815, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 820, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 824, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block4 .margincell {
+  margin: 0 auto;
+  width: 90%;
+}
+/* line 830, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 {
+  padding-top: 0;
+  padding-bottom: 30px;
+}
+/* line 834, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 ol {
+  padding-left: 19px;
+}
+/* line 837, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 840, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 .panel-default {
+  border-color: #FFF;
+}
+/* line 843, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 .panel {
+  box-shadow: none;
+}
+/* line 846, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 849, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block5 .panel-heading {
+  border-radius: 8px;
+}
+/* line 855, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .divclick {
+  width: 82%;
+}
+/* line 858, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 865, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .faqdiv {
+  padding-top: 20px;
+}
+/* line 869, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .left {
+  padding-right: 12.5px;
+}
+/* line 873, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .right {
+  padding-left: 12.5px;
+}
+/* line 877, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .decor-50 {
+  line-height: 1.2;
+}
+/* line 880, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 884, ../../../assets/sass/cards.scss */
+.prl-debit-crd .block6 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 892, ../../../assets/sass/cards.scss */
+.prl-debit-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 897, ../../../assets/sass/cards.scss */
+.blue-diam {
+  /* .sttitle{
+       padding: 0 0 30px;
+   }*/
+  /**/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 901, ../../../assets/sass/cards.scss */
+.blue-diam .block1 {
+  position: relative;
+}
+/* line 903, ../../../assets/sass/cards.scss */
+.blue-diam .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 909, ../../../assets/sass/cards.scss */
+.blue-diam .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 913, ../../../assets/sass/cards.scss */
+.blue-diam .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 921, ../../../assets/sass/cards.scss */
+.blue-diam .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 925, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 928, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 931, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 934, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 937, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 940, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 944, ../../../assets/sass/cards.scss */
+.blue-diam .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 949, ../../../assets/sass/cards.scss */
+.blue-diam .block3 {
+  background-color: #E6ECF5;
+}
+/* line 951, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 954, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 957, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 960, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 964, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 971, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 974, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 978, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 984, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 987, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 992, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 996, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 1000, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1006, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 1011, ../../../assets/sass/cards.scss */
+.blue-diam .block3 .remarkblock3 {
+  padding: 30px 0 30px 0;
+  width: 80%;
+}
+/* line 1017, ../../../assets/sass/cards.scss */
+.blue-diam .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+}
+/* line 1021, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 1024, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 1027, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 1030, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 1037, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 1043, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1048, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 1052, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxtabs {
+  width: 1025px;
+  margin: 0 auto;
+}
+/* line 1056, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1059, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 1067, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1070, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 1075, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 1079, ../../../assets/sass/cards.scss */
+.blue-diam .block4 .margincell {
+  margin: 0 auto;
+  width: 90%;
+}
+/* line 1085, ../../../assets/sass/cards.scss */
+.blue-diam .block5 {
+  padding-top: 0;
+  padding-bottom: 30px;
+}
+/* line 1089, ../../../assets/sass/cards.scss */
+.blue-diam .block5 ol {
+  padding-left: 19px;
+}
+/* line 1092, ../../../assets/sass/cards.scss */
+.blue-diam .block5 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 1095, ../../../assets/sass/cards.scss */
+.blue-diam .block5 .panel-default {
+  border-color: #FFF;
+}
+/* line 1098, ../../../assets/sass/cards.scss */
+.blue-diam .block5 .panel {
+  box-shadow: none;
+}
+/* line 1101, ../../../assets/sass/cards.scss */
+.blue-diam .block5 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 1104, ../../../assets/sass/cards.scss */
+.blue-diam .block5 .panel-heading {
+  border-radius: 8px;
+}
+/* line 1110, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .divclick {
+  width: 82%;
+}
+/* line 1113, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 1120, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .faqdiv {
+  padding-top: 20px;
+}
+/* line 1124, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .left {
+  padding-right: 12.5px;
+}
+/* line 1128, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .right {
+  padding-left: 12.5px;
+}
+/* line 1132, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .decor-50 {
+  line-height: 1.2;
+}
+/* line 1135, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 1139, ../../../assets/sass/cards.scss */
+.blue-diam .block6 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 1147, ../../../assets/sass/cards.scss */
+.blue-diam.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 1152, ../../../assets/sass/cards.scss */
+.plldm-debit-crd {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 1156, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block1 {
+  position: relative;
+}
+/* line 1158, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 1164, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 1168, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 1176, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 1180, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 1183, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1186, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 1189, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 1192, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 1195, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 1199, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 1204, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 {
+  background-color: #E6ECF5;
+}
+/* line 1206, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 1209, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1212, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 1215, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1219, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 1226, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1229, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 1233, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 1239, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 1242, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 1247, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 1251, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 1255, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1261, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 1266, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block3 .remarkblock3 {
+  padding: 30px 0 30px 0;
+  width: 80%;
+}
+/* line 1272, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+}
+/* line 1276, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 1279, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 1282, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 1285, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxhead .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 1292, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 1298, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1303, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 1307, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxtabs {
+  width: 1130px;
+  margin: 0 auto;
+}
+/* line 1311, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1314, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 15px 30px;
+  background: none;
+}
+/* line 1321, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol .contentcol-bottom ol {
+  margin: 0;
+}
+/* line 1326, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol-1 {
+  width: 100%;
+  display: table;
+}
+/* line 1329, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol-1 .contentcol {
+  padding: 0;
+}
+/* line 1332, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol-1 .contentcol-top {
+  padding: 25px 10px;
+}
+/* line 1335, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol-1 .contentcol-bottom {
+  padding: 25px 10px;
+}
+/* line 1339, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .contentcol-2 {
+  padding: 20px 0 20px 30px;
+}
+/* line 1342, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 1346, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent .havegap {
+  margin-top: 35px;
+}
+/* line 1349, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent ul.dash {
+  list-style: none;
+  padding-left: 0;
+}
+/* line 1352, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent ul.dash li {
+  margin-left: 45px;
+}
+/* line 1355, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .boxcontent ul.dash li::before {
+  content: "- ";
+  margin-left: -15px;
+}
+/* line 1361, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1364, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 1367, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block4 .terms {
+  max-width: 1130px;
+  text-align: left;
+  margin: 20px auto 0;
+}
+/* line 1374, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 {
+  padding-top: 0;
+  padding-bottom: 30px;
+}
+/* line 1378, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 ol {
+  padding-left: 19px;
+}
+/* line 1381, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 1384, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 .panel-default {
+  border-color: #FFF;
+}
+/* line 1387, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 .panel {
+  box-shadow: none;
+}
+/* line 1390, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 1393, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block5 .panel-heading {
+  border-radius: 8px;
+}
+/* line 1399, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .divclick {
+  width: 82%;
+}
+/* line 1402, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 1409, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .faqdiv {
+  padding-top: 20px;
+}
+/* line 1413, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .left {
+  padding-right: 12.5px;
+}
+/* line 1417, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .right {
+  padding-left: 12.5px;
+}
+/* line 1421, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .decor-50 {
+  line-height: 1.2;
+}
+/* line 1424, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 1428, ../../../assets/sass/cards.scss */
+.plldm-debit-crd .block6 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 1436, ../../../assets/sass/cards.scss */
+.plldm-debit-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 1441, ../../../assets/sass/cards.scss */
+.chip-crd {
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 1445, ../../../assets/sass/cards.scss */
+.chip-crd .block1 {
+  position: relative;
+}
+/* line 1447, ../../../assets/sass/cards.scss */
+.chip-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 1453, ../../../assets/sass/cards.scss */
+.chip-crd .block1 .teaser-headline-light {
+  font-size: 69px;
+  font-size: 6.9rem;
+}
+/* line 1457, ../../../assets/sass/cards.scss */
+.chip-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 1461, ../../../assets/sass/cards.scss */
+.chip-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 1469, ../../../assets/sass/cards.scss */
+.chip-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 1473, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 1476, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1479, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 1482, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 1485, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 1488, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 1492, ../../../assets/sass/cards.scss */
+.chip-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 1497, ../../../assets/sass/cards.scss */
+.chip-crd .block3 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: #E6ECF5;
+}
+/* line 1501, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 1504, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 1507, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 1510, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 1517, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 1523, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1527, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxtabs {
+  width: 700px;
+  margin: 0 auto;
+}
+/* line 1531, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 1535, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1538, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 1546, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1549, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 1554, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 1558, ../../../assets/sass/cards.scss */
+.chip-crd .block3 .remarktitle {
+  padding-bottom: 30px;
+}
+/* line 1563, ../../../assets/sass/cards.scss */
+.chip-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url("../images/share/dot-bg-2.png") #FFF center top no-repeat;
+}
+/* line 1568, ../../../assets/sass/cards.scss */
+.chip-crd .block4 ol {
+  padding-left: 19px;
+}
+/* line 1571, ../../../assets/sass/cards.scss */
+.chip-crd .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 1574, ../../../assets/sass/cards.scss */
+.chip-crd .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 1577, ../../../assets/sass/cards.scss */
+.chip-crd .block4 .panel {
+  box-shadow: none;
+}
+/* line 1580, ../../../assets/sass/cards.scss */
+.chip-crd .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 1583, ../../../assets/sass/cards.scss */
+.chip-crd .block4 .panel-heading {
+  border-radius: 8px;
+}
+/* line 1589, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .divclick {
+  width: 82%;
+}
+/* line 1592, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 1599, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .faqdiv {
+  padding-top: 20px;
+}
+/* line 1603, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .left {
+  padding-right: 12.5px;
+}
+/* line 1607, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .right {
+  padding-left: 12.5px;
+}
+/* line 1611, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .decor-50 {
+  line-height: 1.2;
+}
+/* line 1614, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .readmore {
+  padding-bottom: 55px;
+}
+/* line 1617, ../../../assets/sass/cards.scss */
+.chip-crd .block5 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 1626, ../../../assets/sass/cards.scss */
+.chip-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 1631, ../../../assets/sass/cards.scss */
+.e-mny-crd {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 1635, ../../../assets/sass/cards.scss */
+.e-mny-crd .block1 {
+  position: relative;
+}
+/* line 1637, ../../../assets/sass/cards.scss */
+.e-mny-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 1643, ../../../assets/sass/cards.scss */
+.e-mny-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 1647, ../../../assets/sass/cards.scss */
+.e-mny-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 1655, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 1659, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 1662, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1665, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 1668, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 1671, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 1674, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 1678, ../../../assets/sass/cards.scss */
+.e-mny-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 1683, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 {
+  background-color: #E6ECF5;
+}
+/* line 1685, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 1688, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1691, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 1694, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1698, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 1705, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1708, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 1712, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 1718, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 1721, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 1726, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 1730, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 1734, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1740, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 1745, ../../../assets/sass/cards.scss */
+.e-mny-crd .block3 .remarkblock3 {
+  padding: 30px 0 30px 0;
+  width: 80%;
+}
+/* line 1751, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+  padding-top: 106px;
+  padding-bottom: 50px;
+}
+/* line 1755, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 1758, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 1761, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 1764, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 1771, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 1777, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1782, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 1786, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxtabs {
+  width: 1025px;
+  margin: 0 auto;
+}
+/* line 1790, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1793, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 1801, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 1804, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 1809, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 1813, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .margincell {
+  margin: 0 auto;
+  width: 90%;
+}
+/* line 1821, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 ol {
+  padding-left: 19px;
+}
+/* line 1824, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 1827, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 1830, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .panel {
+  box-shadow: none;
+}
+/* line 1833, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 1836, ../../../assets/sass/cards.scss */
+.e-mny-crd .block4 .panel-heading {
+  border-radius: 8px;
+}
+/* line 1842, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .divclick {
+  width: 82%;
+}
+/* line 1845, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 1852, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .faqdiv {
+  padding-top: 20px;
+}
+/* line 1856, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .left {
+  padding-right: 12.5px;
+}
+/* line 1860, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .right {
+  padding-left: 12.5px;
+}
+/* line 1864, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .decor-50 {
+  line-height: 1.2;
+}
+/* line 1867, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 1871, ../../../assets/sass/cards.scss */
+.e-mny-crd .block5 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/* line 1878, ../../../assets/sass/cards.scss */
+.e-mny-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 1883, ../../../assets/sass/cards.scss */
+.m-pass-crd {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 1887, ../../../assets/sass/cards.scss */
+.m-pass-crd .block1 {
+  position: relative;
+}
+/* line 1889, ../../../assets/sass/cards.scss */
+.m-pass-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 1895, ../../../assets/sass/cards.scss */
+.m-pass-crd .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 1899, ../../../assets/sass/cards.scss */
+.m-pass-crd .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 1907, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 1911, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 1914, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1917, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 1920, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 1923, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 1926, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 1930, ../../../assets/sass/cards.scss */
+.m-pass-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 1935, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 {
+  background-color: #E6ECF5;
+}
+/* line 1937, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 1940, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 1943, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 1946, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 1950, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 1957, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1960, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 1964, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .calendarbox {
+  width: 65%;
+  margin: 0 auto;
+  display: table;
+  padding-bottom: 30px;
+}
+/* line 1970, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .calendarbox .txt > div {
+  padding-left: 25px;
+}
+/* line 1973, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .calendarbox .imgc {
+  display: table-cell;
+  width: 30%;
+  vertical-align: middle;
+}
+/* line 1978, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .calendarbox .txt {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 1982, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 1986, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 1992, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 1997, ../../../assets/sass/cards.scss */
+.m-pass-crd .block3 .remarkblock3 {
+  padding: 30px 0 30px 0;
+  width: 80%;
+}
+/* line 2003, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url(../images/share/dot-bg-2.png) #FFF center top no-repeat;
+  padding-top: 106px;
+  padding-bottom: 50px;
+}
+/* line 2007, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 2010, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 2013, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 2016, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 2023, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 2029, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 2034, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 2038, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxtabs {
+  width: 1025px;
+  margin: 0 auto;
+}
+/* line 2042, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 2045, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 2053, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 2056, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 2061, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 2064, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .margincell {
+  margin: 0 auto;
+  width: 90%;
+}
+/* line 2072, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 ol {
+  padding-left: 19px;
+}
+/* line 2075, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 2078, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 2081, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .panel {
+  box-shadow: none;
+}
+/* line 2084, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 2087, ../../../assets/sass/cards.scss */
+.m-pass-crd .block4 .panel-heading {
+  border-radius: 8px;
+}
+/* line 2093, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .divclick {
+  width: 82%;
+}
+/* line 2096, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 2103, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .faqdiv {
+  padding-top: 20px;
+}
+/* line 2107, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .left {
+  padding-right: 12.5px;
+}
+/* line 2111, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .right {
+  padding-left: 12.5px;
+}
+/* line 2115, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .decor-50 {
+  line-height: 1.2;
+}
+/* line 2118, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 2122, ../../../assets/sass/cards.scss */
+.m-pass-crd .block5 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/* line 2129, ../../../assets/sass/cards.scss */
+.m-pass-crd.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 2134, ../../../assets/sass/cards.scss */
+.vrf-visa-crd {
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+}
+/* line 2138, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block1 {
+  position: relative;
+}
+/* line 2140, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+/* line 2146, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block1 .brdbuttonlong {
+  margin-top: 30px;
+}
+/* line 2149, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block1 .content-desc {
+  font-size: 30px;
+}
+/* line 2152, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block1 .content-thum-desc {
+  font-size: 24px;
+}
+/* line 2155, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block1 .brdbuttonlong {
+  width: 300px;
+}
+/* line 2161, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 2165, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 2168, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 2171, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 2174, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 2177, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 2180, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 2184, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 2189, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: none;
+}
+/* line 2193, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .content-title-1 {
+  padding: 20px 0 20px 0;
+}
+/* line 2196, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .content-desc2 span.bold {
+  font-weight: bold;
+}
+/* line 2199, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 2202, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 2209, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 2215, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 2220, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 2224, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxtabs {
+  width: 1025px;
+  margin: 0 auto;
+}
+/* line 2228, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 2231, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 2239, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 2242, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 2247, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 2251, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .margincell {
+  margin: 0 auto;
+  width: 90%;
+}
+/* line 2256, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 ol {
+  padding-left: 19px;
+}
+/* line 2259, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 2262, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .panel-default {
+  border-color: #FFF;
+}
+/* line 2265, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .panel {
+  box-shadow: none;
+}
+/* line 2268, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 2271, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block3 .panel-heading {
+  border-radius: 8px;
+}
+/* line 2277, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .divclick {
+  width: 82%;
+}
+/* line 2280, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 2287, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .faqdiv {
+  padding-top: 20px;
+}
+/* line 2291, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .left {
+  padding-right: 12.5px;
+}
+/* line 2295, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .right {
+  padding-left: 12.5px;
+}
+/* line 2299, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .decor-50 {
+  line-height: 1.2;
+}
+/* line 2302, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .readmore {
+  padding-top: 20px;
+  padding-bottom: 55px;
+}
+/* line 2306, ../../../assets/sass/cards.scss */
+.vrf-visa-crd .block4 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/**/
+/* line 2313, ../../../assets/sass/cards.scss */
+.crdt-crd {
+  /*.sttitle{
+      padding: 0 0 30px;
+  }*/
+}
+/* line 2317, ../../../assets/sass/cards.scss */
+.crdt-crd .block1, .crdt-crd .block6 {
+  position: relative;
+}
+/* line 2319, ../../../assets/sass/cards.scss */
+.crdt-crd .block1 .blocktitle, .crdt-crd .block6 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+/* line 2325, ../../../assets/sass/cards.scss */
+.crdt-crd .block1 .brdbuttonlong, .crdt-crd .block6 .brdbuttonlong {
+  margin-top: 30px;
+  width: 300px;
+}
+/* line 2329, ../../../assets/sass/cards.scss */
+.crdt-crd .block1 .content-desc, .crdt-crd .block6 .content-desc {
+  font-size: 30px;
+}
+/* line 2332, ../../../assets/sass/cards.scss */
+.crdt-crd .block1 .content-thum-desc, .crdt-crd .block6 .content-thum-desc {
+  font-size: 24px;
+}
+/* line 2336, ../../../assets/sass/cards.scss */
+.crdt-crd .block2 {
+  padding: 80px 0;
+}
+/* line 2338, ../../../assets/sass/cards.scss */
+.crdt-crd .block2 .images {
+  padding: 40px 40px 0;
+}
+/* line 2342, ../../../assets/sass/cards.scss */
+.crdt-crd .block3 {
+  position: relative;
+}
+/* line 2344, ../../../assets/sass/cards.scss */
+.crdt-crd .block3 .blocktitle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+/* line 2349, ../../../assets/sass/cards.scss */
+.crdt-crd .block3 .blocktitle .txt {
+  padding-top: 20px;
+}
+/* line 2354, ../../../assets/sass/cards.scss */
+.crdt-crd .block4 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg2.png) #FFF center bottom no-repeat;
+}
+/* line 2358, ../../../assets/sass/cards.scss */
+.crdt-crd .block4 .maintitle {
+  padding-top: 100px;
+}
+/* line 2362, ../../../assets/sass/cards.scss */
+.crdt-crd .block5 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url(../images/share/dot-bg.png) #FFF center bottom no-repeat;
+}
+/* line 2366, ../../../assets/sass/cards.scss */
+.crdt-crd .block5 .spaceleft {
+  padding-left: 8%;
+}
+/* line 2369, ../../../assets/sass/cards.scss */
+.crdt-crd .block5 .maintitle {
+  padding-top: 100px;
+}
+/* line 2373, ../../../assets/sass/cards.scss */
+.crdt-crd .block6 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+/* line 2376, ../../../assets/sass/cards.scss */
+.crdt-crd .block6 .txt {
+  text-align: center;
+}
+/* line 2381, ../../../assets/sass/cards.scss */
+.crdt-crd .blocktitle ul {
+  padding-left: 20px;
+}
+
+/* line 2387, ../../../assets/sass/cards.scss */
+.ipac {
+  /*.sttitle{
+      padding:0 0 30px;
+  }*/
+  /**/
+  /**/
+  /**/
+  /**/
+}
+/* line 2391, ../../../assets/sass/cards.scss */
+.ipac .block1 {
+  position: relative;
+}
+/* line 2393, ../../../assets/sass/cards.scss */
+.ipac .block1 .blocktitle {
+  padding-top: 0px;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+}
+/* line 2399, ../../../assets/sass/cards.scss */
+.ipac .block1 .teasershortdesc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 90%;
+}
+/* line 2404, ../../../assets/sass/cards.scss */
+.ipac .block1 .txt {
+  font-size: 10px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+/* line 2412, ../../../assets/sass/cards.scss */
+.ipac .block2 {
+  margin-top: 48px;
+  padding-bottom: 76px;
+  background: url("../images/share/dot-bg.png") #FFF center bottom no-repeat;
+}
+/* line 2416, ../../../assets/sass/cards.scss */
+.ipac .block2 .maintitle {
+  padding-top: 0;
+}
+/* line 2419, ../../../assets/sass/cards.scss */
+.ipac .block2 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 2422, ../../../assets/sass/cards.scss */
+.ipac .block2 .spaceleft {
+  padding-left: 16%;
+}
+/* line 2425, ../../../assets/sass/cards.scss */
+.ipac .block2 .itembox {
+  padding-bottom: 20px;
+}
+/* line 2428, ../../../assets/sass/cards.scss */
+.ipac .block2 .itembox .imgc {
+  width: 39px;
+}
+/* line 2431, ../../../assets/sass/cards.scss */
+.ipac .block2 .itembox .txt1 {
+  padding-top: 6px;
+  padding-left: 10px;
+}
+/* line 2435, ../../../assets/sass/cards.scss */
+.ipac .block2 .itembox .txt2 {
+  padding-left: 51px;
+}
+/* line 2440, ../../../assets/sass/cards.scss */
+.ipac .block3 {
+  background-color: #E6ECF5;
+}
+/* line 2442, ../../../assets/sass/cards.scss */
+.ipac .block3 .maintitle {
+  padding-top: 40px;
+}
+/* line 2445, ../../../assets/sass/cards.scss */
+.ipac .block3 .mainsubtitle {
+  padding: 10px 0 30px 0;
+}
+/* line 2448, ../../../assets/sass/cards.scss */
+.ipac .block3 .tablecontainer {
+  width: 80%;
+}
+/* line 2451, ../../../assets/sass/cards.scss */
+.ipac .block3 .boxcontent {
+  display: table;
+  width: 100%;
+}
+/* line 2455, ../../../assets/sass/cards.scss */
+.ipac .block3 .boxcontent .contentcol {
+  width: 50%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 0;
+}
+/* line 2462, ../../../assets/sass/cards.scss */
+.ipac .block3 .boxcontent .contentcol.vline {
+  border-right: 1px solid #DDDDDD;
+}
+/* line 2465, ../../../assets/sass/cards.scss */
+.ipac .block3 .txtcomment {
+  text-align: center;
+  padding: 14px 0 20px 0;
+}
+/* line 2469, ../../../assets/sass/cards.scss */
+.ipac .block3 .imgcright {
+  padding: 75px 0 30px 0;
+}
+/* line 2472, ../../../assets/sass/cards.scss */
+.ipac .block3 .boxtabs .boxhd1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #DDDDDD;
+}
+/* line 2477, ../../../assets/sass/cards.scss */
+.ipac .block3 .boxtabs .boxhd2 {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+/* line 2481, ../../../assets/sass/cards.scss */
+.ipac .block3 .remarkblock3 {
+  padding: 10px 0;
+  width: 80%;
+}
+/* line 2487, ../../../assets/sass/cards.scss */
+.ipac .block4 {
+  padding-top: 106px;
+  padding-bottom: 50px;
+  background: url("../images/share/dot-bg-2.png") #FFF center top no-repeat;
+}
+/* line 2492, ../../../assets/sass/cards.scss */
+.ipac .block4 ol {
+  padding-left: 19px;
+}
+/* line 2495, ../../../assets/sass/cards.scss */
+.ipac .block4 .content-title-1 {
+  padding: 30px 0 10px 0;
+}
+/* line 2498, ../../../assets/sass/cards.scss */
+.ipac .block4 .panel-default {
+  border-color: #FFF;
+}
+/* line 2501, ../../../assets/sass/cards.scss */
+.ipac .block4 .panel {
+  box-shadow: none;
+}
+/* line 2504, ../../../assets/sass/cards.scss */
+.ipac .block4 .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: none;
+}
+/* line 2507, ../../../assets/sass/cards.scss */
+.ipac .block4 .panel-heading {
+  border-radius: 8px;
+}
+/* line 2510, ../../../assets/sass/cards.scss */
+.ipac .block4 li.havegap {
+  margin-top: 20px;
+}
+/* line 2513, ../../../assets/sass/cards.scss */
+.ipac .block4 ul.sub-ul {
+  padding: 0;
+  margin-top: 10px;
+}
+/* line 2516, ../../../assets/sass/cards.scss */
+.ipac .block4 ul.sub-ul li {
+  list-style-type: disc;
+}
+/* line 2520, ../../../assets/sass/cards.scss */
+.ipac .block4 ul.sub-ul2 {
+  padding-left: 20px;
+}
+/* line 2523, ../../../assets/sass/cards.scss */
+.ipac .block4 .havemargintop {
+  margin-top: 10px;
+}
+/* line 2526, ../../../assets/sass/cards.scss */
+.ipac .block4 .content-sub {
+  padding-top: 10px;
+}
+/* line 2529, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxhead {
+  display: table;
+  width: 100%;
+}
+/* line 2532, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxhead .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  line-height: 0.95;
+}
+/* line 2539, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxhead .contentcol span.subhead {
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+/* line 2545, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxhead .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 2549, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxtabs {
+  width: 700px;
+  margin: 0 auto;
+}
+/* line 2553, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxtabs.deepblue {
+  border: 1px solid #3A4966;
+  background-color: #FCFCFC;
+}
+/* line 2557, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxcontent {
+  display: table;
+  width: 100%;
+  text-align: center;
+}
+/* line 2561, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxcontent .contentcol {
+  width: 33.33%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px 10px;
+  background: none;
+}
+/* line 2569, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxcontent .contentcol.vline {
+  border-right: 2px solid #DDDDDD;
+}
+/* line 2572, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxcontent .content-title-1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+/* line 2577, ../../../assets/sass/cards.scss */
+.ipac .block4 .boxcontent.bline {
+  border-bottom: 2px solid #DDDDDD;
+}
+/* line 2580, ../../../assets/sass/cards.scss */
+.ipac .block4 .margintable {
+  margin: 10px 0;
+}
+/* line 2586, ../../../assets/sass/cards.scss */
+.ipac .block5 .divclick {
+  width: 82%;
+}
+/* line 2589, ../../../assets/sass/cards.scss */
+.ipac .block5 .itemclick {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  padding-top: 35px;
+  vertical-align: top;
+}
+/* line 2596, ../../../assets/sass/cards.scss */
+.ipac .block5 .faqdiv {
+  padding-top: 20px;
+}
+/* line 2600, ../../../assets/sass/cards.scss */
+.ipac .block5 .left {
+  padding-right: 12.5px;
+}
+/* line 2604, ../../../assets/sass/cards.scss */
+.ipac .block5 .right {
+  padding-left: 12.5px;
+}
+/* line 2608, ../../../assets/sass/cards.scss */
+.ipac .block5 .decor-50 {
+  line-height: 1.2;
+}
+/* line 2611, ../../../assets/sass/cards.scss */
+.ipac .block5 .readmore {
+  padding-bottom: 55px;
+}
+/* line 2614, ../../../assets/sass/cards.scss */
+.ipac .block5 .itemclick .content-desc {
+  padding-top: 10px;
+}
+
+/* line 2622, ../../../assets/sass/cards.scss */
+.ipac.en .content-title-1 {
+  width: 80%;
+}
+
+/**/
+/* line 2627, ../../../assets/sass/cards.scss */
+.border-bl {
+  border-bottom-left-radius: 8px;
+}
+
+/* line 2630, ../../../assets/sass/cards.scss */
+.border-br {
+  border-bottom-right-radius: 8px;
+}
+
+/*------------------------------------------------------------------------- Media Query -----------------------------------------------------------*/
+/*==========  Non-Mobile First Method  ==========*/
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  /* line 2642, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .content-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 2647, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .teaser-headline-light {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 2654, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .txt-title {
+    min-height: 160px;
+  }
+  /* line 2657, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .content-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2662, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .section-title {
+    font-size: 24.5px;
+    font-size: 2.45rem;
+  }
+  /* line 2668, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .header-box {
+    margin-top: 0;
+  }
+  /* line 2673, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .blocktitle {
+    top: 20%;
+    width: 100%;
+  }
+  /* line 2678, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2683, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .brdbuttonlong {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2688, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .content-desc {
+    font-size: 17px;
+    font-size: 1.7rem;
+  }
+
+  /* line 2695, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd {
+    /**/
+    /**/
+  }
+  /* line 2697, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2701, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2705, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 2711, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 2715, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2720, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2725, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .itembox .txt1 {
+    width: 85%;
+  }
+  /* line 2733, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2738, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 2746, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd {
+    /**/
+    /**/
+  }
+  /* line 2748, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2752, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2756, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 2762, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 2766, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2771, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2779, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2784, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2791, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 2800, ../../../assets/sass/cards.scss */
+  .prl-debit-crd {
+    /**/
+    /**/
+  }
+  /* line 2802, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2806, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2810, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 2816, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 2820, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2825, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2830, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .itembox .txt1 {
+    width: 80%;
+  }
+  /* line 2838, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2843, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2850, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 2859, ../../../assets/sass/cards.scss */
+  .blue-diam {
+    /**/
+    /**/
+    /**/
+  }
+  /* line 2861, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2865, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2869, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 2875, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 2879, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2884, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2891, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2895, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2902, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 2911, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd {
+    /**/
+    /**/
+    /**/
+  }
+  /* line 2913, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2917, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2921, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 2927, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 2931, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2936, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 2941, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .itembox .txt1 {
+    width: 80%;
+  }
+  /* line 2949, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2954, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 2961, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+  /* line 2966, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxcontent .content-title-1 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+
+  /* line 2976, ../../../assets/sass/cards.scss */
+  .chip-crd {
+    /**/
+    /**/
+  }
+  /* line 2978, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 2982, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 2986, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 2992, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 2996, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3001, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3009, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3013, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+
+  /* line 3020, ../../../assets/sass/cards.scss */
+  .e-mny-crd {
+    /**/
+    /**/
+    /**/
+  }
+  /* line 3022, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 3026, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 3030, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 3036, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 3040, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3045, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3053, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 3058, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .content-title-3 {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 3065, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 3073, ../../../assets/sass/cards.scss */
+  .m-pass-crd {
+    /**/
+    /**/
+    /**/
+  }
+  /* line 3075, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 3079, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 3083, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 3089, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 3093, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3098, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3106, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 3111, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .content-title-3 {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+  /* line 3118, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 3126, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd {
+    /**/
+  }
+  /* line 3129, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle .teaser-headline-light {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 3134, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .content-title-1 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 3140, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 3144, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3149, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3156, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 3167, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .brdbuttonlong, .crdt-crd .block6 .brdbuttonlong {
+    width: 100%;
+    max-width: 300px;
+  }
+  /* line 3171, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .blocktitle, .crdt-crd .block6 .blocktitle {
+    top: 12%;
+  }
+  /* line 3173, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .blocktitle .teaser-headline-light, .crdt-crd .block6 .blocktitle .teaser-headline-light {
+    font-size: 5rem;
+    font-size: 50px;
+  }
+  /* line 3181, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .blocktitle .txt {
+    padding-top: 10px;
+  }
+  /* line 3185, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .maintitle {
+    font-size: 70px;
+    font-size: 7rem;
+  }
+  /* line 3191, ../../../assets/sass/cards.scss */
+  .crdt-crd .block5 .maintitle {
+    padding-top: 50px;
+  }
+
+  /* line 3197, ../../../assets/sass/cards.scss */
+  .ipac {
+    /**/
+    /**/
+  }
+  /* line 3199, ../../../assets/sass/cards.scss */
+  .ipac .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 3203, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 3207, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teasershortdesc {
+    font-size: 45px;
+    font-size: 4.5rem;
+  }
+  /* line 3213, ../../../assets/sass/cards.scss */
+  .ipac .block2 {
+    padding-bottom: 48px;
+    background: none;
+  }
+  /* line 3217, ../../../assets/sass/cards.scss */
+  .ipac .block2 .content-title-1 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3222, ../../../assets/sass/cards.scss */
+  .ipac .block2 .content-desc2 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3230, ../../../assets/sass/cards.scss */
+  .ipac .block3 .boxtabs.deepblue .boxhead {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3235, ../../../assets/sass/cards.scss */
+  .ipac .block3 .content-title-3 {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  /**/
+  /* line 3249, ../../../assets/sass/cards.scss */
+  .sharepanel2 {
+    height: 37px;
+    margin: 20px 0;
+  }
+
+  /* line 3256, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 3261, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .brdbuttonlong {
+    width: 230px;
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3269, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .section-title {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  /* line 3273, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .content-desc {
+    font-size: 17.5px;
+    font-size: 1.75rem;
+  }
+  /* line 3280, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .teaser-headline-light {
+    font-size: 50px;
+    font-size: 3rem;
+  }
+  /* line 3284, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .content-desc {
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
+  /* line 3288, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .brdbuttonlong {
+    width: 230px;
+    margin-top: 10px;
+  }
+
+  /* line 3297, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3301, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3307, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3310, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3315, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3322, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block5 .right {
+    padding-left: 0;
+  }
+  /* line 3326, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block5 .left {
+    padding-right: 0;
+  }
+  /* line 3330, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block5 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3334, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block5 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3342, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3346, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3352, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3355, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3360, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3366, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block6 .right {
+    padding-left: 0;
+  }
+  /* line 3369, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block6 .left {
+    padding-right: 0;
+  }
+  /* line 3372, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block6 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3376, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block6 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3384, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3388, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3394, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3397, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3402, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3408, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block6 .right {
+    padding-left: 0;
+  }
+  /* line 3411, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block6 .left {
+    padding-right: 0;
+  }
+  /* line 3414, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block6 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3418, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block6 .faqdiv.right {
+    padding-top: 0;
+  }
+  /* line 3421, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block6 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3429, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3433, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3439, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3442, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3447, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3452, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 .content-title-1 {
+    padding: 15px 0 10px;
+  }
+  /* line 3457, ../../../assets/sass/cards.scss */
+  .blue-diam .block6 .right {
+    padding-left: 0;
+  }
+  /* line 3460, ../../../assets/sass/cards.scss */
+  .blue-diam .block6 .left {
+    padding-right: 0;
+  }
+  /* line 3463, ../../../assets/sass/cards.scss */
+  .blue-diam .block6 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3467, ../../../assets/sass/cards.scss */
+  .blue-diam .block6 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3475, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3479, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3485, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3488, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3493, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3499, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxcontent .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3503, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxcontent .contentcol {
+    padding: 10px 30px;
+  }
+  /* line 3510, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block6 .right {
+    padding-left: 0;
+  }
+  /* line 3514, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block6 .left {
+    padding-right: 0;
+  }
+  /* line 3518, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block6 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3522, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block6 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3530, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3534, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3540, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .spaceleft {
+    padding-left: 0;
+    padding-top: 20px;
+  }
+  /* line 3546, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3549, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .content-title-1 {
+    padding: 15px 0 10px;
+  }
+  /* line 3555, ../../../assets/sass/cards.scss */
+  .chip-crd .block5 .right {
+    padding-left: 0;
+  }
+  /* line 3559, ../../../assets/sass/cards.scss */
+  .chip-crd .block5 .left {
+    padding-right: 0;
+  }
+  /* line 3563, ../../../assets/sass/cards.scss */
+  .chip-crd .block5 .readmore {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  /* line 3567, ../../../assets/sass/cards.scss */
+  .chip-crd .block5 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3575, ../../../assets/sass/cards.scss */
+  .chip-crd.en .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+
+  /* line 3584, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3588, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3594, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3597, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3602, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3608, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block5 .right {
+    padding-left: 0;
+  }
+  /* line 3611, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block5 .left {
+    padding-right: 0;
+  }
+  /* line 3614, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block5 .readmore {
+    padding-top: 15px;
+  }
+  /* line 3617, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block5 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3625, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3629, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3635, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3638, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3643, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3648, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block5 .right {
+    padding-left: 0;
+  }
+  /* line 3651, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block5 .left {
+    padding-right: 0;
+  }
+  /* line 3654, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block5 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3658, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block5 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3666, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .brdbuttonlong {
+    width: 100%;
+    max-width: 260px;
+    font-size: 20px;
+    font-size: 2rem;
+    margin-top: 18px;
+  }
+  /* line 3673, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle {
+    top: 22%;
+  }
+  /* line 3675, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3680, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .content-title-1 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 3686, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3689, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3695, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block4 .right {
+    padding-left: 0;
+  }
+  /* line 3699, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block4 .left {
+    padding-right: 0;
+  }
+  /* line 3703, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block4 .readmore {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  /* line 3707, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block4 .faqdiv {
+    padding-top: 0;
+  }
+
+  /* line 3713, ../../../assets/sass/cards.scss */
+  .crdt-crd {
+    /**/
+    /*.sttitle{
+        margin-bottom: 0;
+        border:none;
+    }*/
+    /**/
+    /**/
+  }
+  /* line 3721, ../../../assets/sass/cards.scss */
+  .crdt-crd .block2 .images img {
+    width: 100%;
+  }
+  /* line 3727, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .blocktitle {
+    position: absolute;
+  }
+  /* line 3729, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .blocktitle .txt {
+    padding-top: 10px;
+  }
+  /* line 3733, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .content-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 3737, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .maintitle {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 3743, ../../../assets/sass/cards.scss */
+  .crdt-crd .block4, .crdt-crd .block5 {
+    background: none;
+    padding-bottom: 0;
+  }
+  /* line 3746, ../../../assets/sass/cards.scss */
+  .crdt-crd .block4 .maintitle, .crdt-crd .block5 .maintitle {
+    margin-top: 20px;
+    padding-top: 0;
+  }
+  /* line 3752, ../../../assets/sass/cards.scss */
+  .crdt-crd .block5 .spaceleft {
+    padding: 0;
+  }
+  /* line 3758, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .blocktitle {
+    position: static;
+    margin-top: 10px;
+  }
+  /* line 3762, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .txt {
+    text-align: left;
+  }
+  /* line 3765, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .brdbuttonlong {
+    width: 80%;
+  }
+
+  /* line 3773, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 3777, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teasershortdesc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 3783, ../../../assets/sass/cards.scss */
+  .ipac .block2 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 3786, ../../../assets/sass/cards.scss */
+  .ipac .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 3791, ../../../assets/sass/cards.scss */
+  .ipac .block3 .tablecontainer {
+    width: 100%;
+  }
+  /* line 3796, ../../../assets/sass/cards.scss */
+  .ipac .block4 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+  /* line 3802, ../../../assets/sass/cards.scss */
+  .ipac .block5 .right {
+    padding-left: 0;
+  }
+  /* line 3806, ../../../assets/sass/cards.scss */
+  .ipac .block5 .left {
+    padding-right: 0;
+  }
+  /* line 3810, ../../../assets/sass/cards.scss */
+  .ipac .block5 .readmore {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  /* line 3814, ../../../assets/sass/cards.scss */
+  .ipac .block5 .faqdiv {
+    padding-top: 0;
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+  /* line 3823, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl {
+    /*.sttitle{
+        padding:10px 0;
+    }*/
+  }
+  /* line 3827, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 {
+    background: none;
+  }
+  /* line 3829, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .wrapper {
+    width: 100%;
+  }
+  /* line 3832, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .textblock1 {
+    position: static;
+    margin: 30px auto;
+    width: 100%;
+  }
+  /* line 3837, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .page-title {
+    margin-bottom: 0;
+  }
+  /* line 3840, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .slickblock1 {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+  }
+  /* line 3847, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .textblock1 {
+    padding: 0 5% 50px;
+  }
+  /* line 3850, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block1 .slick-dots {
+    left: 20px;
+  }
+  /* line 3854, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 {
+    margin-top: 0;
+  }
+  /* line 3856, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .wrapper {
+    width: 100%;
+  }
+  /* line 3860, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .hdtitle {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 3864, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .txt-title {
+    min-height: 180px;
+  }
+  /* line 3868, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .head {
+    padding-top: 15px;
+  }
+  /* line 3873, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .swiperblock2 .swiper-slide {
+    padding-top: 30px;
+    width: 68%;
+  }
+  /* line 3878, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .swiperblock2 .swiper-wrapper {
+    width: 95%;
+    float: right;
+  }
+  /* line 3884, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .section-title {
+    font-size: 25.5px;
+    font-size: 2.55rem;
+  }
+  /* line 3889, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .content-desc {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
+  /* line 3895, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 {
+    background: none;
+    margin-top: -86px;
+  }
+  /* line 3898, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .header-box {
+    margin-top: 20px;
+  }
+  /* line 3901, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .spacediv {
+    padding: 0;
+  }
+  /* line 3904, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .spacediv.clearleft {
+    padding: 0;
+  }
+  /* line 3908, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .box-content .content-desc {
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+  /* line 3916, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .blocktitle {
+    padding-top: 0px;
+    position: relative;
+    top: 25%;
+    width: 100%;
+  }
+  /* line 3923, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .txt {
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  /* line 3929, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .content-desc {
+    font-size: 32px;
+    font-size: 3.2rem;
+  }
+  /* line 3934, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 3939, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .brdbuttonlong {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+
+  /* line 3947, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 3954, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 3959, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 3962, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 3966, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 3970, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 3976, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 3979, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 3982, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 3985, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 3988, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 3994, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 3997, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4000, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4004, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4007, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4013, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4017, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4020, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+
+  /* line 4028, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4035, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4040, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4043, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4047, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4051, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+    width: 85%;
+    margin: 0 auto;
+  }
+  /* line 4059, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4062, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4065, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4068, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4071, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4077, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 4080, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4083, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4087, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4090, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4094, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .remarkblock3 {
+    padding: 30px 0 15px 0;
+    width: 100%;
+  }
+  /* line 4101, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4105, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4108, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4111, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4115, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 .boxcontent.head {
+    padding: 10px 0;
+    background: #65788E;
+  }
+  /* line 4119, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 .boxcontent.subhead {
+    padding: 10px 0;
+    background: #DDDDDD;
+  }
+  /* line 4123, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 .secondbox {
+    margin-top: 20px;
+  }
+  /* line 4126, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block4 hr.whiteline {
+    border: 1px solid #fff;
+    width: 40px;
+    margin: 10px auto 0;
+  }
+  /* line 4134, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block5 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4138, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block5 ol {
+    padding-left: 15px;
+  }
+  /* line 4141, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block5 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4144, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block5 .panel-body {
+    padding: 0;
+  }
+  /* line 4147, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block5 ul {
+    padding-left: 20px;
+  }
+
+  /* line 4153, ../../../assets/sass/cards.scss */
+  .prl-debit-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4160, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4165, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4168, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4172, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4176, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+    width: 85%;
+    margin: 0 auto;
+  }
+  /* line 4184, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4187, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4190, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4193, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4196, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4202, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 4205, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4208, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4212, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4215, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4219, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .remarkblock3 {
+    padding: 30px 0 15px 0;
+    width: 100%;
+  }
+  /* line 4226, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4230, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4233, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4236, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4240, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 .boxcontent.subhead {
+    padding: 10px 0;
+    background: #DDDDDD;
+  }
+  /* line 4244, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 .secondbox {
+    margin-top: 20px;
+  }
+  /* line 4247, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block4 hr.whiteline {
+    border: 1px solid #fff;
+    width: 40px;
+    margin: 10px auto 0;
+  }
+  /* line 4255, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block5 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4259, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block5 ol {
+    padding-left: 15px;
+  }
+  /* line 4262, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block5 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4265, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block5 .panel-body {
+    padding: 0;
+  }
+  /* line 4268, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block5 ul {
+    padding-left: 20px;
+  }
+
+  /**/
+  /* line 4274, ../../../assets/sass/cards.scss */
+  .blue-diam {
+    /* .sttitle{
+             padding-top: 10px;
+             padding-bottom: 10px;
+         }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4281, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4286, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4289, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4293, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4297, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 4303, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4306, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4309, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4312, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4315, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4321, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 4324, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4327, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4331, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4334, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4338, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .remarkblock3 {
+    padding: 30px 0 15px 0;
+    width: 100%;
+  }
+  /* line 4345, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4349, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4352, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4355, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4359, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 .boxcontent.subhead {
+    padding: 10px 0;
+    background: #DDDDDD;
+  }
+  /* line 4363, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 .secondbox {
+    margin-top: 20px;
+  }
+  /* line 4366, ../../../assets/sass/cards.scss */
+  .blue-diam .block4 hr.whiteline {
+    border: 1px solid #fff;
+    width: 40px;
+    margin: 10px auto 0;
+  }
+  /* line 4374, ../../../assets/sass/cards.scss */
+  .blue-diam .block5 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4378, ../../../assets/sass/cards.scss */
+  .blue-diam .block5 ol {
+    padding-left: 15px;
+  }
+  /* line 4381, ../../../assets/sass/cards.scss */
+  .blue-diam .block5 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4384, ../../../assets/sass/cards.scss */
+  .blue-diam .block5 .panel-body {
+    padding: 0;
+  }
+
+  /**/
+  /* line 4390, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4397, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4402, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4405, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4409, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4413, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 4419, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4422, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4425, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4428, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4431, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4437, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 4440, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4443, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4447, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4450, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4454, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .remarkblock3 {
+    padding: 30px 0 15px 0;
+    width: 100%;
+  }
+  /* line 4461, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4465, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4468, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4471, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4475, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxcontent.subhead {
+    padding: 10px;
+    background: #DDDDDD;
+  }
+  /* line 4479, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .boxcontent.head {
+    width: 50%;
+    display: table-cell;
+    background: #65788E;
+    padding: 10px;
+  }
+  /* line 4485, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block4 .contentcol.desc {
+    width: 50%;
+    display: table-cell;
+  }
+  /* line 4492, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block5 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4496, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block5 ol {
+    padding-left: 15px;
+  }
+  /* line 4499, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block5 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4502, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block5 .panel-body {
+    padding: 0;
+  }
+  /* line 4505, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block5 ul {
+    padding-left: 20px;
+  }
+
+  /* line 4511, ../../../assets/sass/cards.scss */
+  .chip-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4518, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4523, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4526, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4530, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4534, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 4540, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4543, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .maintitle {
+    padding-top: 0;
+  }
+  /* line 4546, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 4549, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4552, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4555, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4558, ../../../assets/sass/cards.scss */
+  .chip-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4563, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 {
+    padding-top: 15px;
+  }
+  /* line 4565, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .maintitle {
+    padding-top: 20px;
+  }
+  /* line 4568, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4571, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4574, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+  /* line 4578, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .boxcontent.head {
+    width: 50%;
+    display: table-cell;
+    background: #65788E;
+    padding: 10px;
+  }
+  /* line 4584, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .boxcontent.subhead {
+    padding: 10px;
+    background: #DDDDDD;
+  }
+  /* line 4589, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .contentcol.desc .content-title-3 {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 4596, ../../../assets/sass/cards.scss */
+  .chip-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4600, ../../../assets/sass/cards.scss */
+  .chip-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4603, ../../../assets/sass/cards.scss */
+  .chip-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+
+  /* line 4613, ../../../assets/sass/cards.scss */
+  .chip-crd.en .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+
+  /**/
+  /* line 4621, ../../../assets/sass/cards.scss */
+  .e-mny-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4628, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4633, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4636, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4640, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4644, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 4650, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4653, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4656, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4659, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4662, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4668, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 4671, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4674, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4678, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4681, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4685, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .remarkblock3 {
+    padding: 30px 0 15px 0;
+    width: 100%;
+  }
+  /* line 4692, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4696, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4699, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4702, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4706, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .boxcontent.subhead {
+    padding: 10px 0;
+    background: #DDDDDD;
+  }
+  /* line 4710, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .secondbox {
+    margin-top: 20px;
+  }
+  /* line 4713, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 hr.whiteline {
+    border: 1px solid #fff;
+    width: 40px;
+    margin: 10px auto 0;
+  }
+  /* line 4718, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .boxcontent {
+    text-align: center;
+  }
+  /* line 4721, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 .panel-body {
+    padding: 0;
+  }
+  /* line 4724, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block4 ul {
+    padding-left: 20px;
+  }
+  /* line 4729, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block5 .readmore {
+    padding-bottom: 20px;
+  }
+
+  /**/
+  /* line 4735, ../../../assets/sass/cards.scss */
+  .m-pass-crd {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4742, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4747, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4750, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4754, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4758, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  /* line 4764, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 4767, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4770, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4773, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4776, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4782, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 4785, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 4788, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .calendarbox {
+    width: 60%;
+    padding-bottom: 0;
+  }
+  /* line 4792, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .calendarbox .txt > div {
+    padding-left: 10px;
+  }
+  /* line 4795, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 4799, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .remarkblock3 {
+    padding: 30px 0 15px 0;
+    width: 100%;
+  }
+  /* line 4806, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4810, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 4813, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4816, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4820, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .boxcontent.subhead {
+    padding: 10px 0;
+    background: #DDDDDD;
+  }
+  /* line 4824, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .secondbox {
+    margin-top: 20px;
+  }
+  /* line 4827, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 hr.whiteline {
+    border: 1px solid #fff;
+    width: 40px;
+    margin: 10px auto 0;
+  }
+  /* line 4833, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .boxcontent {
+    text-align: center;
+  }
+  /* line 4836, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 .panel-body {
+    padding: 0;
+  }
+  /* line 4839, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block4 ul {
+    padding-left: 20px;
+  }
+
+  /**/
+  /* line 4845, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd {
+    /*.sttitle{
+        padding:10px 0;
+    }*/
+    /**/
+  }
+  /* line 4850, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .brdbuttonlong {
+    max-width: 370px;
+    font-size: 32px;
+    font-size: 3.2rem;
+    margin-top: 18px;
+  }
+  /* line 4857, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4862, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .content-title-1 {
+    font-size: 32px;
+    font-size: 3.2rem;
+  }
+  /* line 4867, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle {
+    top: 10%;
+  }
+  /* line 4873, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 {
+    padding-bottom: 15px;
+  }
+  /* line 4875, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 4878, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 4881, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 4884, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 4889, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 4893, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 ol {
+    padding-left: 15px;
+  }
+  /* line 4896, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 4899, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .boxtabs {
+    width: 100%;
+    margin: 0;
+  }
+  /* line 4903, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .boxtabs .boxhead.line2 {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+  /* line 4907, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .boxcontent.subhead {
+    padding: 10px 0;
+    background: #DDDDDD;
+  }
+  /* line 4911, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .secondbox {
+    margin-top: 20px;
+  }
+  /* line 4914, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 hr.whiteline {
+    border: 1px solid #fff;
+    width: 40px;
+    margin: 10px auto 0;
+  }
+  /* line 4919, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .boxcontent {
+    text-align: center;
+  }
+  /* line 4922, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block3 .panel-body {
+    padding: 0;
+  }
+
+  /* line 4928, ../../../assets/sass/cards.scss */
+  .crdt-crd {
+    /*.sttitle{
+        padding:10px 0;
+    }*/
+  }
+  /* line 4932, ../../../assets/sass/cards.scss */
+  .crdt-crd .block2 {
+    padding: 30px 0;
+  }
+  /* line 4935, ../../../assets/sass/cards.scss */
+  .crdt-crd .block2 .images img {
+    width: auto;
+  }
+  /* line 4941, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .blocktitle {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+  /* line 4946, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .maintitle {
+    font-size: 75px;
+    font-size: 7.5rem;
+  }
+  /* line 4950, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .content-desc {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 4955, ../../../assets/sass/cards.scss */
+  .crdt-crd .maintitle {
+    margin-top: 20px;
+  }
+  /* line 4958, ../../../assets/sass/cards.scss */
+  .crdt-crd .block4, .crdt-crd .block5 {
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* line 4962, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 {
+    margin-top: 10px;
+  }
+  /* line 4964, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .brdbuttonlong {
+    margin-top: 10px;
+  }
+
+  /* line 4970, ../../../assets/sass/cards.scss */
+  .ipac {
+    /*.sttitle{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+  }
+  /* line 4977, ../../../assets/sass/cards.scss */
+  .ipac .block1 .blocktitle {
+    padding-top: 20px;
+    position: inherit;
+    text-align: center;
+  }
+  /* line 4982, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teasershortdesc {
+    padding-top: 10px;
+  }
+  /* line 4985, ../../../assets/sass/cards.scss */
+  .ipac .block1 .txt {
+    width: 90%;
+    margin: 0 auto;
+  }
+  /* line 4989, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teaser-headline-light {
+    font-size: 65px;
+    font-size: 6.5rem;
+  }
+  /* line 4993, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teasershortdesc {
+    font-size: 60px;
+    font-size: 6rem;
+    width: 100%;
+  }
+  /* line 5000, ../../../assets/sass/cards.scss */
+  .ipac .block2 {
+    margin-top: 0;
+    padding-bottom: 15px;
+  }
+  /* line 5003, ../../../assets/sass/cards.scss */
+  .ipac .block2 .mainsubtitle {
+    padding: 10px 0 15px 0;
+  }
+  /* line 5006, ../../../assets/sass/cards.scss */
+  .ipac .block2 .itembox {
+    padding-bottom: 10px;
+  }
+  /* line 5009, ../../../assets/sass/cards.scss */
+  .ipac .block2 .itembox .imgc {
+    width: 24px;
+  }
+  /* line 5012, ../../../assets/sass/cards.scss */
+  .ipac .block2 .itembox .txt2 {
+    padding-left: 0;
+  }
+  /* line 5017, ../../../assets/sass/cards.scss */
+  .ipac .block3 {
+    padding-top: 15px;
+  }
+  /* line 5019, ../../../assets/sass/cards.scss */
+  .ipac .block3 .maintitle {
+    padding-top: 31px;
+  }
+  /* line 5022, ../../../assets/sass/cards.scss */
+  .ipac .block3 .mainsubtitle {
+    padding: 8px 0 15px 0;
+  }
+  /* line 5025, ../../../assets/sass/cards.scss */
+  .ipac .block3 .imgcright {
+    padding: 25px 0;
+  }
+  /* line 5028, ../../../assets/sass/cards.scss */
+  .ipac .block3 .boxtabs {
+    width: 100%;
+    margin: 0 auto;
+  }
+  /* line 5034, ../../../assets/sass/cards.scss */
+  .ipac .block4 {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    background: none;
+  }
+  /* line 5038, ../../../assets/sass/cards.scss */
+  .ipac .block4 ol {
+    padding-left: 15px;
+  }
+  /* line 5041, ../../../assets/sass/cards.scss */
+  .ipac .block4 .content-title-1 {
+    padding: 15px 0 10px 0;
+  }
+  /* line 5044, ../../../assets/sass/cards.scss */
+  .ipac .block4 .boxcontent.head {
+    width: 50%;
+    display: table-cell;
+    background: #65788E;
+    padding: 10px;
+  }
+  /* line 5050, ../../../assets/sass/cards.scss */
+  .ipac .block4 .boxcontent.subhead {
+    padding: 10px;
+    background: #DDDDDD;
+  }
+  /* line 5055, ../../../assets/sass/cards.scss */
+  .ipac .block4 .contentcol.desc .content-title-3 {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 5060, ../../../assets/sass/cards.scss */
+  .ipac .block4 .panel-body {
+    padding: 0;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  /* line 5073, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .section-title {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  /* line 5078, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .content-desc {
+    font-size: 19px;
+    font-size: 1.9rem;
+  }
+  /* line 5083, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .brdbuttonlong {
+    font-size: 21px;
+    font-size: 2.1rem;
+  }
+  /* line 5087, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .txt-info {
+    padding: 25px 20px 33px;
+  }
+  /* line 5092, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 {
+    margin-top: -245px;
+  }
+  /* line 5096, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .imagetag .tag span {
+    padding: 4px 25px 0;
+  }
+  /* line 5102, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .header-box {
+    margin-top: 50px;
+  }
+  /* line 5108, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .brdbuttonlong {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  /* line 5112, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5117, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block4 .content-desc {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5127, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5131, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5135, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5142, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 5148, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 21px;
+    font-size: 2.1rem;
+  }
+  /* line 5152, ../../../assets/sass/cards.scss */
+  .smrt-clssc-debit-crd .block3 .content-title-3 {
+    font-size: 21px;
+    font-size: 2.1rem;
+  }
+
+  /* line 5161, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5165, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5169, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5176, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 5182, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5186, ../../../assets/sass/cards.scss */
+  .crystal-debit-crd .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5195, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5199, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5203, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5210, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 5216, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5220, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5229, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5233, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5237, ../../../assets/sass/cards.scss */
+  .blue-diam .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5243, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5247, ../../../assets/sass/cards.scss */
+  .blue-diam .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5256, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5260, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5264, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5271, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 5277, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5281, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5290, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5294, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5298, ../../../assets/sass/cards.scss */
+  .chip-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5305, ../../../assets/sass/cards.scss */
+  .chip-crd .block3 .contentcol.desc .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5315, ../../../assets/sass/cards.scss */
+  .chip-crd.en .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+
+  /* line 5324, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5328, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5332, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5338, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5342, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5351, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5355, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5359, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5366, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 5372, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5376, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+
+  /* line 5385, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .brdbuttonlong {
+    width: 100%;
+    max-width: 240px;
+    font-size: 19px;
+    font-size: 1.9rem;
+    margin-top: 12px;
+  }
+  /* line 5392, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle {
+    top: 6%;
+  }
+  /* line 5394, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 5400, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .content-title-1 {
+    font-size: 19px;
+    font-size: 1.9rem;
+  }
+  /* line 5407, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .itembox .txt1 {
+    width: 90%;
+  }
+
+  /* line 5416, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .blocktitle {
+    top: 6%;
+  }
+  /* line 5418, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .blocktitle .teaser-headline-light {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5423, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .brdbuttonlong {
+    margin-top: 10px;
+    width: 250px;
+  }
+  /* line 5426, ../../../assets/sass/cards.scss */
+  .crdt-crd .block1 .brdbuttonlong span {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  /* line 5434, ../../../assets/sass/cards.scss */
+  .crdt-crd .block2 .images img {
+    width: 100%;
+  }
+  /* line 5440, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .maintitle {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 5444, ../../../assets/sass/cards.scss */
+  .crdt-crd .block3 .content-desc {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5450, ../../../assets/sass/cards.scss */
+  .crdt-crd .block4 .spaceleft {
+    padding-left: 0;
+  }
+  /* line 5454, ../../../assets/sass/cards.scss */
+  .crdt-crd .decor-headline {
+    font-size: 50px;
+    font-size: 5rem;
+  }
+  /* line 5459, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .blocktitle {
+    margin-top: 20px;
+  }
+  /* line 5461, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .blocktitle .teaser-headline-light {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  /* line 5466, ../../../assets/sass/cards.scss */
+  .crdt-crd .block6 .brdbuttonlong {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5475, ../../../assets/sass/cards.scss */
+  .crdt-crd.en .block6 .brdbuttonlong {
+    width: 250px;
+  }
+
+  /* line 5483, ../../../assets/sass/cards.scss */
+  .ipac .block1 .txt {
+    font-size: 6px;
+    font-size: 0.6rem;
+  }
+  /* line 5487, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teaser-headline-light {
+    font-size: 35px;
+    font-size: 3.5rem;
+  }
+  /* line 5491, ../../../assets/sass/cards.scss */
+  .ipac .block1 .teasershortdesc {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5498, ../../../assets/sass/cards.scss */
+  .ipac .block2 .itembox .txt1 {
+    width: 90%;
+  }
+  /* line 5505, ../../../assets/sass/cards.scss */
+  .ipac .block4 .contentcol.desc .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5512, ../../../assets/sass/cards.scss */
+  .ipac .block3 .boxtabs.deepblue .boxhead {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  /* line 5516, ../../../assets/sass/cards.scss */
+  .ipac .block3 .content-title-3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+}
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+  /* line 5528, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .section-title {
+    font-size: 19px;
+    font-size: 1.9rem;
+  }
+  /* line 5532, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block2 .content-desc {
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
+  /* line 5537, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 {
+    margin-top: -215px;
+  }
+  /* line 5539, ../../../assets/sass/cards.scss */
+  .debit-crd-prvl .block3 .header-box {
+    margin-top: 20px;
+  }
+
+  /* line 5548, ../../../assets/sass/cards.scss */
+  .prl-debit-crd .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5558, ../../../assets/sass/cards.scss */
+  .blue-diam .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5567, ../../../assets/sass/cards.scss */
+  .plldm-debit-crd .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5577, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .content-title-1 {
+    font-size: 22px;
+    font-size: 2rem;
+  }
+  /* line 5582, ../../../assets/sass/cards.scss */
+  .e-mny-crd .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5592, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .content-title-1 {
+    font-size: 22px;
+    font-size: 2rem;
+  }
+  /* line 5596, ../../../assets/sass/cards.scss */
+  .m-pass-crd .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5605, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .brdbuttonlong {
+    width: 100%;
+    font-size: 19px;
+    font-size: 1.9rem;
+    margin-top: 12px;
+  }
+  /* line 5612, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .blocktitle .teaser-headline-light {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  /* line 5618, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block1 .content-title-1 {
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
+  /* line 5625, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .content-title-1 {
+    font-size: 22px;
+    font-size: 2rem;
+  }
+  /* line 5630, ../../../assets/sass/cards.scss */
+  .vrf-visa-crd .block2 .content-desc2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  /* line 5638, ../../../assets/sass/cards.scss */
+  .crdt-crd .block2 {
+    padding: 30px 0;
+  }
+}

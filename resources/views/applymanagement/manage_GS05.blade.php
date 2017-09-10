@@ -12,6 +12,7 @@
 <link href="{{asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css">
 
 <link href="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 
@@ -322,6 +323,9 @@
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
+
 
 <script type="application/javascript">
 
@@ -565,7 +569,7 @@ orderable: false,
 
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li>  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li></ul></div>') ;
+return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li>  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_tyep")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  Edit Profile  </a></li>':'')+'</ul></div>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,
@@ -901,6 +905,20 @@ jQuery(document).ready(function() {
 
 }();
 
+ function cancel($id) {
+    swal({
+      title: "คุณยืนยันที่จะทำรายการหรือไม่?",
+      text: "คุณยืนยันที่จะลบรายการนี้ใช่หรือไม่!",
+      type: "warning",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      showLoaderOnConfirm: true
+    }, function() {
+      setTimeout(function() {
+        window.location.href = '{{url('admin/deleteCourse') }}' + '/' + $id
+      }, 100);
+    });
+  }
 
 
 </script>

@@ -221,6 +221,7 @@
                                                             </select>
                                   <label for="form_control_1">ธนาคารที่ชำระเงิน</label>
                                   <span class="help-block">ธนาคารที่ชำระเงิน</span>
+                              
 
                                 <div class="form-group form-md-line-input">
                                   <span class="label label-sm label-info"> จำนวนเงินที่ชำระ [<label id="fee"></label> บาท]</span>
@@ -457,7 +458,7 @@ jQuery(document).ready(function() {
 
    $('#datatable_ajax tbody').on( 'click', 'a', function () {
           if($(this).attr('ids')=="edit"){
-
+ 
                 $('#application_id').val($(this).attr('hid'));
                $('#payment_date').val(($(this).attr('hidd') == 'null')? ((new Date()).toISOString().split('T')[0]):$(this).attr('hidd')) ;
                $('#receipt_book').val($(this).attr('hidb'));
@@ -467,13 +468,13 @@ jQuery(document).ready(function() {
                $('#flow').val($(this).attr('flo'));
                $('#fee').text($(this).attr('fee'));
                $('#Bfee').text($(this).attr('Bfee'));
-
+               
                if($(this).attr('apm')=='1'  && $(this).attr('culn')=='1' ){
                    $('#bankList').show();
                }else{
-            $('#bankList').hide();
+            $('#bankList').hide();   
             }
-         }
+         } 
     } );
 });
 

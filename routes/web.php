@@ -52,8 +52,19 @@ Route::get('/faq', function () {
 Route::get('/download', function () {
     return view('download');
 });
-
-
+Route::get('admin/importApplicant','ManageApplyController@importApplicant')->name('importApplicant');
+Route::get('importExport', 'Controller@importExport');
+Route::post('importExcel', 'Controller@importExcel')->name('importExcel');
+Route::post('admin/importApplicantSave','ManageApplyController@importApplicantSave')->name('importApplicantSave');
+Route::get('admin/manageNews', 'ManageApplyController@manageNews');
+ Route::post('DeleteNews', 'ManageApplyController@DeleteNews')->name('DNews');
+  Route::post('postNews', 'ManageApplyController@SaveNews')->name('postNews');
+ Route::get('admin/editAnnounc/{id}', 'ManageApplyController@editAnnounc')->name('editAnnounc');
+ Route::get('admin/manageAnnounc', 'ManageApplyController@manageAnnounc');
+ Route::post('DeleteAnnounc', 'ManageApplyController@DeleteAnnounc')->name('DAnnounc');
+  Route::post('postAnnounc', 'ManageApplyController@SaveAnnounc')->name('postAnnounc');
+ Route::get('admin/editAnnounc/{id}', 'ManageApplyController@editAnnounc')->name('editAnnounc');
+ 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
 
@@ -103,7 +114,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
     Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
     Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
-    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
+    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');    
+     Route::get('admin/deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+     
+     //importApplication
+      Route::get('admin/importApplication', 'ManageApplyController@importApplicationShow')->name('importApplication');
+   
+     
+   
 });
 
 
@@ -209,6 +227,8 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
             Route::get('add', 'BackOffice\MasterInfoController@showMCourseAddPage')->name('admin.masterInfo.showMCourseAddPage');
             Route::get('edit/{id}', 'BackOffice\MasterInfoController@showMCourseEditPage')->name('admin.masterInfo.showMCourseEditPage');
             Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
+            Route::post('updateMcourse', 'BackOffice\MasterInfoController@updateMcourseTable')->name('admin.masterInfo.updateMcourse');
+            Route::post('doDelete', 'BackOffice\MasterInfoController@doDelete')->name('admin.masterInfo.doDelete');
 
             Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
         });
