@@ -6,6 +6,7 @@
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet"
       type="text/css"/>
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css"/>
 <style type="text/css">
 </style>
 @endpush
@@ -112,6 +113,7 @@
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -276,7 +278,7 @@
         userTbl.fnAddData({
             'user_id': obj.hasOwnProperty('user_id') ? obj.user_id : null,
             'user_name': obj.hasOwnProperty('user_name') ? obj.user_name : null,
-            'name': obj.hasOwnProperty('name') ? obj.name +' ('+obj.nickname+')' : null,
+            'name': obj.hasOwnProperty('name') ? obj.name + ' (' + obj.nickname + ')' : null,
             'role_id': obj.hasOwnProperty('role_id') ? obj.role_id : null,
             'permission': obj.hasOwnProperty('permission') ? obj.permission : null,
             'last_login': obj.hasOwnProperty('last_login') ? obj.last_login : null
@@ -303,22 +305,48 @@
     }
 
     function doDelete(obj) {
-        var tr = $(obj).closest('tr');
-        var data = userTbl.fnGetData(tr);
-        $.ajax({
-            url: '{{route('admin.adminManage.doDelete')}}',
-            headers: {
-                'X-CSRF-Token': '{{csrf_token()}}'
+
+        swal({
+                html: true,
+                title: "ต้องการจะลบข้อมูล ?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: "#E7505A",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
             },
-            method: "POST",
-            data: 'user_id=' + data.user_id,
-            success: function (result) {
-                var data = showToastFromAjaxResponse(result);
-                if (result.status == 'success') {
-                    doLoadData();
+            function (isConfirm) {
+                if (!isConfirm) {
+                    return;
                 }
+
+                var tr = $(obj).closest('tr');
+                var data = userTbl.fnGetData(tr);
+                $.ajax({
+                    url: '{{route('admin.adminManage.doDelete')}}',
+                    headers: {
+                        'X-CSRF-Token': '{{csrf_token()}}'
+                    },
+                    method: "POST",
+                    data: 'user_id=' + data.user_id,
+                    success: function (result) {
+                        swal({
+                            html: true,
+                            title: result.message,
+                            text: "",
+                            type: result.status
+                        });
+                        if (result.status == 'success') {
+                            doLoadData();
+                        }
+                    }
+                });
             }
-        });
+        );
+
     }
 
     $(document).ready(function () {
