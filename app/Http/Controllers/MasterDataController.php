@@ -70,7 +70,7 @@ class MasterDataController extends Controller
             $param = $request->all();
             try {
                 if (array_key_exists('province_id', $param)) {
-                    $result = Util::prepareDataForDropdownList($this->districtRepo->getDistrictByProvinceId($param['province_id']), 'district_code', 'district_name');
+                    $result = Util::prepareDataForDropdownListDistrict($this->districtRepo->getDistrictByProvinceId($param['province_id']), 'district_code', 'district_name', 'district_name_en');
                     return response()->json($result);
                 }
             } catch (\Exception $ex) {
