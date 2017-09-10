@@ -2,6 +2,7 @@
   <!-- BEGIN SIDEBAR for applicant -->
   <div class="page-sidebar navbar-collapse collapse">
     <!-- BEGIN SIDEBAR MENU for admin -->
+    @php ($curr_url=Request::url())
     @if(session('user_tyep')) @if(session('user_tyep')->user_type=='Staff')
 
     <ul class="page-sidebar-menu  page-header-fixed " style="padding-top: 20px" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
@@ -92,7 +93,7 @@
                 </a>
 
       </li>
-    
+
       <li class=" nav-item  menuitem   " data-index="16">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-bar-chart"></i>
@@ -210,19 +211,20 @@
 
         </ul>
       </li>
-      <li class=" nav-item  menuitem   " data-index="18">
+      <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/setting/applicantManage/manage') !== false || strpos($curr_url, 'admin/setting/adminManage/manage') !== false) open active @endif " data-index="18">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-user"></i>
                     <span class="title">ผู้ใช้งาน</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/setting/applicantManage/manage') !== false) open active @endif ">
             <a href="{{url('admin/setting/applicantManage/manage')}}" class="nav-link ">
                             <span class="title">จัดการผู้สมัคร</span>
                         </a>
           </li>
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/setting/adminManage/manage') !== false) open active @endif  ">
             <a href="{{url('admin/setting/adminManage/manage')}}" class="nav-link ">
                             <span class="title">จัดการผู้ดูแลระบบ</span>
                         </a>
@@ -263,17 +265,22 @@
 
         </ul>
       </li>
-      <li class="nav-item " data-index="20">
+
+
+
+      <li class="nav-item @if(strpos($curr_url, 'admin/setting/masterInfo') !== false) open active @endif" data-index="20">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-wrench"></i>
                     <span class="title">จัดการข้อมูล Master</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
-          <li class="nav-item  ">
-            <a href="{{url('admin/setting/masterInfo/courseManage')}}" class="nav-link ">
+          <li class="nav-item  @if(strpos($curr_url, 'admin/setting/masterInfo/courseManage') !== false) open active @endif ">
+            <a href="{{url('admin/setting/masterInfo/courseManage')}}" class="nav-link">
                             <span class="title">ข้อมูลหลักสูตร</span>
-                        </a>
+                            <span class="selected"></span>
+            </a>
           </li>
 
 
@@ -399,8 +406,9 @@
 
 </div>
 <script>
+/*
   window.onload = function() {
-    $('.menuitem').each(function(index, item) {
+    $('li.menuitem').each(function(index, item) {
       $(this).removeClass("active");
       $str1 = $(this).find('a:first').attr('href');
       $str2 = window.location.pathname;
@@ -416,4 +424,5 @@
 
 
   };
+  */
 </script>
