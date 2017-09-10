@@ -12,6 +12,7 @@
 @endpush
 
 @section('pagebar')
+@php ($count=1)
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -78,7 +79,7 @@
    <div class="row">
      <div class="col-md-12">
            <div class="note note-pink">
-               <span class="badge badge-info">1</span>  {{Lang::get('resource.lbConfirmPaymentBank')}}
+               <span class="badge badge-info">{{$count++}}</span>  {{Lang::get('resource.lbConfirmPaymentBank')}}
            </div>
 
        </div>
@@ -88,9 +89,9 @@
           <label class="col-md-1  col-md-offset-1 control-label">{{Lang::get('resource.lbConfirmPaymentBank-1')}} </label>
           <div class="col-md-3">
             <select id="bank_id" class="form-control">
-              <option value="">--Select--</option>
+              <option value="">-- Select --</option>
                 @foreach ($banks as $bank)
-                <option value="{{$bank->bank_id}}" {{ $Datas->bank_id == $bank->bank_id ? 'selected="selected"' : '' }}>{{$bank->bank_name}}</option>
+                <option value="{{$bank->bank_id}}" {{ $Datas->bank_id == $bank->bank_id ? 'selected="selected"' : '' }}>{{$bank->bank_name}} - {{$bank->bank_name_en}}</option>
                 @endforeach
             </select>
           </div>
@@ -98,11 +99,13 @@
 
    </div>
 <br/>
+
    @foreach ($Qus as $Q)
-   <div class="row">
+     @if($Q->additional_question !="")
+   <div class="row" style="display:block;">
      <div class="col-md-12">
        <div class="note note-pink">
-         <span class="badge badge-info">2</span>   {{Lang::get('resource.lbQuestionAsk')}}
+         <span class="badge badge-info">{{$count++}}</span>   {{Lang::get('resource.lbQuestionAsk')}}
       </div>
       </div>
     </div>
@@ -122,7 +125,10 @@
       </div>
     </div>
   </div>
+  @endif
 @endforeach
+
+
 
 
 <div class="row">
@@ -131,7 +137,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="note note-pink">
-            <span class="badge badge-info">3</span> {{Lang::get('resource.lbConfirmReferencePerson')}}
+            <span class="badge badge-info">{{$count++}}</span> {{Lang::get('resource.lbConfirmReferencePerson')}}
          </div>
          </div>
        </div>
@@ -232,7 +238,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="note note-pink">
-                  <span class="badge badge-info">4</span> {{Lang::get('resource.lbConfirmTSurveyTopic')}}
+                  <span class="badge badge-info">{{$count++}}</span> {{Lang::get('resource.lbConfirmTSurveyTopic')}}
 
 
                </div>
@@ -418,8 +424,8 @@ $(function() {
                 var valdata = [];
                 table.rows().every(function(){
                 valdata.push(this.data());
-
             });
+
 
   $.ajax({
 					type: "POST",
