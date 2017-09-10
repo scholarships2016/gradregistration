@@ -22,7 +22,7 @@
 
             </li>
           -->
-      <li class="nav-item  menuitem  start open active" data-index="11">
+      <li class="nav-item  menuitem  start @if(strpos($curr_url, 'admin/toDoList') !== false) open active @endif" data-index="11">
         <a href="{{url('admin/toDoList')}}" class="nav-link nav-toggle">
                     <i class="icon-calendar"></i>
                     <span class="title">To-Do List</span>
@@ -35,20 +35,21 @@
       <li class="heading">
         <h3 class="uppercase">Management</h3>
       </li>
-      <li class=" nav-item  menuitem   " data-index="12">
+      <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/management/curriculum') !== false) open active @endif " data-index="12">
         <a href="{{url('admin/management/curriculum/manage')}}" class="nav-link nav-toggle">
                     <i class="fa fa-book"></i>
                     <span class="title">จัดการหลักสูตร</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/management/curriculum/manage') !== false) open active @endif ">
             <a href="{{url('admin/management/curriculum/manage')}}" class="nav-link ">
                             <span class="title">รายการหลักสูตร</span>
                         </a>
           </li>
 
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem    @if(strpos($curr_url, 'admin/management/curriculum/add') !== false) open active @endif">
             <a href="{{url('admin/management/curriculum/add')}}" class="nav-link ">
                             <span class="title">กรอกฟอร์มขอเปิดหลักสูตร</span>
                         </a>
@@ -84,8 +85,8 @@
           </li>
         </ul>
       </li>
-      <li class=" nav-item  menuitem  " data-index="14">
-        <a href="่" class="nav-link nav-toggle">
+      <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/importApplicant') !== false) open active @endif" data-index="14">
+        <a href="่{{url('admin/importApplicant')}}" class="nav-link nav-toggle">
                     <i class="icon-user-follow"></i>
                     <span class="title">เพิ่มผู้สอบได้</span>
                     <span class="selected"></span>
@@ -190,19 +191,20 @@
       <li class="heading">
         <h3 class="uppercase">Settings</h3>
       </li>
-      <li class=" nav-item  menuitem   " data-index="17">
+      <li class=" nav-item  menuitem    @if(strpos($curr_url, 'admin/setting/applysetting/manage') !== false || strpos($curr_url, 'admin/setting/applysetting/add') !== false) open active @endif" data-index="17">
         <a href="{{url('admin/setting/applysetting/manage')}}" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
                     <span class="title">ตั้งค่าการสมัคร</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/setting/applysetting/manage') !== false) open active @endif ">
             <a href="{{url('admin/setting/applysetting/manage')}}" class="nav-link ">
                             <span class="title">รายการเปิดรับสมัคร</span>
                         </a>
           </li>
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/setting/applysetting/add') !== false) open active @endif ">
             <a href="{{url('admin/setting/applysetting/add')}}" class="nav-link ">
                             <span class="title">ตั้งค่าการเปิดรับสมัคร</span>
                         </a>
@@ -232,21 +234,21 @@
 
         </ul>
       </li>
-      <li class=" nav-item  menuitem   " data-index="19">
+      <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/manageNews') !== false || strpos($curr_url, 'admin/manageAnnounc') !== false) open active @endif " data-index="19">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-note"></i>
                     <span class="title">จัดการเนื้อหา</span>
                     <span class="arrow"></span>
                 </a>
         <ul class="sub-menu">
-          <li class=" nav-item  menuitem   ">
-            <a href="form_controls.html" class="nav-link ">
+          <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/manageNews') !== false) open active @endif">
+            <a href="{{url('admin/manageNews')}}" class="nav-link ">
                             <span class="title">ข่าว &amp; ประกาศ</span>
                         </a>
           </li>
 
-          <li class=" nav-item  menuitem   ">
-            <a href="form_controls_md.html" class="nav-link ">
+          <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/manageAnnounc') !== false) open active @endif">
+            <a href="{{url('admin/manageAnnounc')}}" class="nav-link ">
                             <span class="title">ขั้นตอนการสมัคร</span>
                         </a>
           </li>
