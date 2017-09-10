@@ -113,7 +113,7 @@
                                             <tbody>@foreach ($datas as $data)    
                                                 <tr class="odd gradeX">
                                                   
-                                                    <td> {{ $loop->iteration }}  </td>
+                                                    <td> {{ $data->news_seq  }}  </td>
                                                     <td>
                                                         {{ $data->news_title }} <br> {{ $data->news_title_en }}
                                                     </td>
