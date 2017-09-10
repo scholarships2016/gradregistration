@@ -298,15 +298,16 @@
 
       </li>
 
-      <li class="nav-item  " data-index="22">
+      <li class="nav-item @if(strpos($curr_url, 'admin/setting/audit/manage') !== false) open active @endif" data-index="22">
         <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-line-chart"></i>
                     <span class="title">Logs & Stat</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
-          <li class="nav-item  ">
-            <a href="form_controls_md.html" class="nav-link ">
+          <li class="nav-item  @if(strpos($curr_url, 'admin/setting/audit/manage') !== false) open active @endif">
+            <a href="{{url('admin/setting/audit/manage')}}" class="nav-link ">
                             <span class="title">Transactions Logs</span>
                         </a>
           </li>
