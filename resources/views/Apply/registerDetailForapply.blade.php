@@ -63,10 +63,10 @@
    @if(!$checkProfile)
   <div id="boxCheckProfile" class="alert alert-block alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert"></button>
-      <h4 class="alert-heading"><i class="icon-close"></i> คำเตือน</h4>
-      <p>โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)</p>
+      <h4 class="alert-heading"><i class="icon-close"></i> {{Lang::get('resource.lbProfileVerifyWarning')}}</h4>
+      <p>{{Lang::get('resource.lbProfileVerifyMessage')}}</p>
       <p>
-          <a class="btn red" href="javascript:;"> ปรับปรุงข้อมูลส่วนตัว </a>
+          <a class="btn red" href="{{url('/profile#tab_1_3')}}"> {{Lang::get('resource.lbProfileVerifyButton')}} </a>
       </p>
   </div>
 @endif
@@ -136,11 +136,25 @@
 
                                      <input type="hidden" name="curr_act_id" value='{{$curDis->curr_act_id}}'  >
                                      <input type="hidden" name="curriculum_id" value='{{$curDis->curriculum_id}}' >
-                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"  onclick='test();'   href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+
+                                     @if(!$checkProfile)
+                                       <a class="btn btn-lg blue mt-sweetalert  margin-bottom-5"   href="javascript:showUpdateProfileWarning();"> {{Lang::get('resource.lbSelect')}}
+                                         <i class="fa fa-check"></i>
+                                       </a>
+                                       @endif
+                                       @if($checkProfile)
+                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"   onclick="test();"   href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
+                                      @endif
 
-          <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('apply/register/')}}">  {{Lang::get('resource.lbCancel')}}
+
+
+
+            <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('apply/register/')}}">
+
+
+             {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </a>
 
@@ -369,15 +383,6 @@
 <script src="{{asset('/assets/pages/scripts/registerDetailForapply.validate.js')}}" type="text/javascript"></script>
 
 
-                                                                          @push('pageJs')
-                                                                          <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-                                                                          <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
-                                                                         <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
-                                                                         <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
-                                                                          <script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
-
-                                                                          <script src="{{asset('/assets/global/plugins/jquery-validation/js/jquery.validate.min.js')}}" type="text/javascript"></script>
-                                                                          <script src="{{asset('/assets/pages/scripts/registerDetailForapply.validate.js')}}" type="text/javascript"></script>
 
 
                                                                           <script type="application/javascript">
@@ -392,7 +397,22 @@
       showLoaderOnConfirm: true
     }, function() {
       setTimeout(function() {
-        window.location.href = '{{ url('/login') }}'
+        window.location.href = '{{url('/login')}}'
+      }, 100);
+    });
+  }
+  function showUpdateProfileWarning() {
+    swal({
+      title: '{{Lang::get('resource.lbProfileVerifyWarning')}}',
+      text: '{{Lang::get('resource.lbProfileVerifyMessage')}}',
+      type: "warning",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      showLoaderOnConfirm: true
+    }, function() {
+      
+      setTimeout(function() {
+        window.location.href = '{{url('profile#tab_1_3')}}'
       }, 100);
     });
   }

@@ -71,7 +71,7 @@ class ApplyController extends Controller {
     }
 
     public function showAnnouncement() {
-        $data = $this->AnnouncementRepo->getAnnouncementAll();
+        $data = $this->AnnouncementRepo->getAnnouncementActive();
         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
         return view($this->part_doc . 'announcement', ['announcements' => $data, 'startstep' => 1, 'appCount' => $dataApplication->count()]);
     }

@@ -3,7 +3,8 @@
 return [
     'lbWelcome' => 'ยินดีต้อนรับ คุณ',
     'lbCannotLogin' => 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password',
-    'lbMain' => 'หน้าหลัก',
+	'lbMain' => 'หน้าหลัก',
+
     'lbProfile' => 'ข้อมูลประวัติ',
     'lbTitle' => 'คำนำหน้าชื่อ',
     'lbName' => 'ชื่อ',
@@ -22,6 +23,7 @@ return [
     'lbInteresting' => 'สนใจ',
     'lbNot interesting' => 'ไม่สนใจ',
     'lbHowNews' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
+
     'lbDetailFund' => 'ดูรายละเอียดเกี่ยวกับทุน',
     'lbSave' => 'บันทึก',
     'lbCancel' => 'ยกเลิก',
@@ -36,7 +38,7 @@ return [
     'lbZipcode' => 'รหัสไปรษณีย์',
     'lbEnglish' => 'คะแนนการทดสอบภาษาอังกฤษ',
     'lbExScoreTest' => '(ตัวอย่างการเทียบคะแนน)',
-    'lbScore' => 'คะแนน',
+	'lbScore' => 'คะแนน',
     'lbDateTaken' => 'เมื่อวันที่',
     'lbThai' => 'คะแนนภาษาไทย',
     'lbCUBEST' => 'ความถนัดทางธุรกิจ(CU-BEST)',
@@ -76,6 +78,7 @@ return [
     'lbContacts' => 'ติดต่อ',
     'lbAddress' => 'ที่อยู่',
     'lbTelContact' => '02-218-3502 ถึง 5',
+
     //Menu
     'lbMHome' => 'หน้าหลัก',
     'lbMCurriculum' => 'หลักสูตรที่เปิด',
@@ -85,10 +88,11 @@ return [
     'lbMDownlods' => 'ดาวน์โหลดฟอร์ม',
     'lbMContactsUs' => 'ติดต่อเรา',
     'lbManageCouse' => 'หลักสูตรที่สมัคร',
-    'lbMProfile' => 'ข้อมูลส่วนตัว',
+	'lbMProfile' => 'ข้อมูลส่วนตัว',
     'lbConfirmationDoc' => 'ปรับปรุงเอกสารที่ต้องส่ง',
     'lbConfirmApply' => 'ยืนยันการสมัคร',
     'lbMLogout' => 'ออกจากระบบ',
+
     //button
     'lbNext' => 'ถัดไป',
     'lbSkip' => 'ข้าม',
@@ -107,7 +111,8 @@ return [
     'lbdocPaymentEnvidence' => 'หลักฐานการชำระเงิน',
     'lbRegisterbtn' => 'สมัคร',
     'lbSearchPlaceHolder' => 'ค้นหาจากคณะ รหัสหลักสูตร ประเภทหลักสูตร หรือชื่อหลักสูตร',
-    //Search Label
+
+	//Search Label
     'lbSearchFaculty' => 'คณะ',
     'lbSearchProgramType' => 'ประเภทหลักสูตร',
     'lbSearchProgramId' => 'รหัสโปรแกรม',
@@ -129,13 +134,13 @@ return [
     'lbProgarmID' => 'รหัสหลักสูตร',
     'lbAnswer' => 'คำตอบ',
     'lbQuestionAsk' => 'โปรดตอบคำถามเหล่านี้เพิ่มเติม สำหรับหลักสูตรที่สมัครนี้ โดยระบุข้อที่ตอบไว้ด้วย ',
-    //register Detail Page
+	//register Detail Page
     'lbRegDetail' => 'รายละเอียดหลักสูตร',
     'lbSelProgram' => 'เลือกหลักสูตร',
     'lbSelSubMajor' => 'เลือกแขนงวิชา',
     'lbExam_schedule' => 'ตารางสอบ',
-    'lbExpectation' => 'จำนวนที่คาดว่าจะรับ (คน)',
     'lbStartExam' => 'รับสมัคร วันที่',
+    'lbExpectation' => 'จำนวนที่คาดว่าจะรับ (คน)',
     'lbMoreInformation' => 'รายละเอียดเพิ่มเติม',
     'lbFee' => 'ค่าธรรมเนียม',
     'lbTimeExam' => 'ระยะเวลาที่เปิดรับสมัคร',
@@ -145,6 +150,7 @@ return [
     'lbConfApp' => 'สิ่งที่ต้องดำเนินการ',
     'lbSubMajor' => 'แขนงวิชา',
     'lbAppNo' => 'เลขประจำตัวผู้สมัคร',
+
     //ApplicantInfo
     'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
     //ProfilePage
@@ -169,52 +175,9 @@ return [
     'perInfoNotInterest' => 'ไม่สนใจ',
     'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
     'perInfoFundInterestSeeMore' => 'ดูรายละเอียดเกี่ยวกับทุน',
-    //ApplicantInfo
-    'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
-    //ProfilePage
-    'perInfoSectionTitle' => 'ข้อมูลทั่วไปผู้สมัคร',
-    'perInfoTitle' => 'คำนำหน้าชื่อ',
-    'perInfoName' => 'ชื่อ',
-    'perInfoSurname' => 'นามสกุล',
-    'perInfoNameEn' => 'ชื่อ (ภาษาอังกฤษ)',
-    'perInfoSurnameEn' => 'นามสกุล (ภาษาอังกฤษ)',
-    'perInfoSex' => 'เพศ',
-    'perInfoCitizenship' => 'สัญชาติ',
-    'perInfoReligion' => 'ศาสนา',
-    'perInfoMaritalStatus' => 'สถานภาพสมรส',
-    'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
-    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
-    'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
-    'perInfoEmail' => 'อีเมล',
-    'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
-    'perInfoPhoto' => 'รูปถ่าย',
-    'perInfoFundInterest' => 'ท่านสนใจสมัครทุนอุดหนุนการศึกษาเฉพาะค่าเล่าเรียนหรือไม่?',
-    'perInfoInterest' => 'สนใจ',
-    'perInfoNotInterest' => 'ไม่สนใจ',
-    'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
-    //ApplicantInfo
-    'appctInfoPageTitle' => 'ข้อมูลประวัติผู้สมัคร',
-    //ProfilePage
-    'perInfoSectionTitle' => 'ข้อมูลทั่วไปผู้สมัคร',
-    'perInfoTitle' => 'คำนำหน้าชื่อ',
-    'perInfoName' => 'ชื่อ',
-    'perInfoSurname' => 'นามสกุล',
-    'perInfoNameEn' => 'ชื่อ (ภาษาอังกฤษ)',
-    'perInfoSurnameEn' => 'นามสกุล (ภาษาอังกฤษ)',
-    'perInfoSex' => 'เพศ',
-    'perInfoCitizenship' => 'สัญชาติ',
-    'perInfoReligion' => 'ศาสนา',
-    'perInfoMaritalStatus' => 'สถานภาพสมรส',
-    'perInfoBirthdate' => 'วัน/เดือน/ปี&nbsp;เกิด',
-    'perInfoBirthdateEx' => 'วัน/เดือน/ปี&nbsp;คศ.&nbsp;ตัวอย่างการกรอก&nbsp;เช่น&nbsp;20&nbsp;มกราคม&nbsp;2520',
-    'perInfoPlaceOfBirth' => 'สถานที่เกิด&nbsp;(จังหวัด)',
-    'perInfoEmail' => 'อีเมล',
-    'perInfoEmailNotice' => 'ต้องกรอกอีเมล์ที่สามารถติดต่อได้จริง บัณฑิตวิทยาลัยจะแจ้งผลการสมัครทางอีเมล์นี้',
-    'perInfoPhoto' => 'รูปถ่าย',
-    'perInfoFundInterest' => 'ท่านสนใจสมัครทุนอุดหนุนการศึกษาเฉพาะค่าเล่าเรียนหรือไม่?',
-    'perInfoInterest' => 'สนใจ',
-    'perInfoNotInterest' => 'ไม่สนใจ',
-    'perInfoMedia' => 'ท่านทราบข้อมูลการรับสมัครจากสื่อใด?',
+
+
+
     //boxMessage
     // ต้องการจะสมัครแต่ติด Login
     'lbMessageBeforLogin_title' => 'คุณต้องการที่จะสมัครหรือไม่?',
@@ -223,8 +186,8 @@ return [
     'lbProgDetailCommAppr' => 'ผ่านมติ',
     'lbProgDetailContactTel' => 'ติดต่อเจ้าหน้าที่ โทร.',
     'lbButtonRemoveApplication' => 'ยกเลิกการสมัคร',
-    'lbMessageBeforLogin_text' => 'เนื่องจากก่อนคุณจะสมัคร คุณจะต้องทำการลงทะเบียนและเข้าสู่ระบบก่อน จะดำเนินการเข้าระบบหรือไม่',
-    //Confirmation
+
+	//Confirmation
     'lbConfirmInstructions' => 'กรุณากรอกข้อมูลเพิ่มเติม',
     'lbConfirmPaymentBank' => 'ธนาคารที่ต้องการชำระเงิน',
     'lbConfirmPaymentBank-1' => 'ธนาคาร',
@@ -245,7 +208,7 @@ return [
     'lbProcessTime' => 'ต้องดำเนินการภายในวันที่ ',
     'lbBtnDownload' => 'ดาวน์โหลด',
     'lbTodolistPayment' => 'ชำระค่าธรรมเนียมการสมัคร',
-    'lbTodolistDocument' => 'ส่งเอกสารที่บัณฑิตวิทยาลัย',
+    'lbTodolistDocument' => 'ส่งเอกสารทางไปรษณีย์ให้บัณฑิตวิทยาลัย',
     'lbTodolistPaymentBank' => 'ที่ประทับตราธนาคาร',
     'lbTodolistViewExamTable' => 'ดูตารางสอบ',
     'lbTodolistExamRightResultTitle' => 'ผลการพิจารณาสิทธิ์การเข้าสอบ',
@@ -273,6 +236,7 @@ return [
     'lbStartDate' => 'ตั้งแต่วันที่',
     'lbFromTo' => 'ถึง',
     //Login
+
     'lbLoginCopyright' => '2560 &copy; บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
     'lbLoginToptic' => 'เข้าสู่ระบบรับสมัคร',
     'lbLoginButton' => 'Login',
@@ -294,46 +258,7 @@ return [
     'lbLoginSignupPassword' => 'รหัสผ่าน',
     'lbLoginSignupPasswordDesc' => 'รหัสผ่านความยาวอย่างน้อย 6 ตัวอักษร',
     'lbLoginSignupPasswordReType' => 'กรอกรหัสผ่านอีกครั้ง',
-    //profile
-    'lbBtnChangeImage' => 'เลือก',
-    'lbBtnChangeImage' => 'เปลี่ยนรูป',
-    'lbBtnDeleteImage' => 'ลบ',
-    'lbCurrentWorkStatusTitle' => 'สถานะการทำงาน',
-    'lbCurrentWorkStatus' => 'เป็นที่ทำงานปัจจุบัน/ล่าสุด?',
-    'lbTabOverview' => 'ทั่วไป',
-    'lbTabProfileInfo' => 'ข้อมูลส่วนตัว',
-    'lbTabChangePassword' => 'เปลี่ยนรหัสผ่าน',
-    'lbCurrentPassword' => 'รหัสผ่านปัจจุบัน',
-    'lbNewPassword' => 'รหัสผ่านใหม่',
-    'lbConfirmNewPassword' => 'ยืนยันรหัสผ่านใหม่',
-    'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
-    'lbEduRemark' => 'โปรดกรอกข้อมูลทุกระดับการศึกษา',
-    'lbHomeContactus' => 'ติดต่อเรา',
-    'lbHomeContactusDesc' => 'ติดต่อ โทร. 0-2218-3502-5',
-    'lbHomeOpenRegister' => 'เปิดรับสมัคร',
-    'lbHeaderLogin' => 'เข้าสู่ระบบ',
-    //Login
-    'lbLoginCopyright' => '2560 &copy; บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย',
-    'lbLoginToptic' => 'เข้าสู่ระบบรับสมัคร',
-    'lbLoginButton' => 'Login',
-    'lbLoginForgetPassword' => 'ลืมรหัสผ่าน?',
-    'lbLoginForgetPasswordDesc' => 'กรอกอีเมล์ ที่ได้ลงทะเบียนไว้',
-    'lbLoginForgetPasswordButton' => 'คลิกที่นี่',
-    'lbLoginForgetPasswordButtonDesc' => 'เพื่อขอรหัสผ่าน',
-    'lbLoginRegisterToptic' => 'ลงทะเบียนสำหรับครั้งแรก',
-    'lbLoginRegisterButton' => 'สร้างบัญชีผู้ใช้',
-    'lbLoginSignup' => 'สร้างบัญชีผู้ใช้',
-    'lbLoginSignupDesc' => 'กรอกข้อมูลส่วนตัว',
-    'lbLoginSignupCitizen' => 'หมายเลขประจำตัวประชาชน 13 หลัก',
-    'lbLoginSignupNameTitle' => 'คำนำหน้าชื่อ',
-    'lbLoginSignupFirstname' => 'ชื่อภาษาอังกฤษ',
-    'lbLoginSignupLastname' => 'นามสกุลภาษาอังกฤษ',
-    'lbLoginSignupTel' => 'หมายเลขโทรศัพท์',
-    'lbLoginSignupLogin' => 'กรอกข้อมูลการเข้าสู่ระบบ',
-    'lbLoginEmail' => 'อีเมล์',
-    'lbLoginSignupPassword' => 'รหัสผ่าน',
-    'lbLoginSignupPasswordDesc' => 'รหัสผ่านความยาวอย่างน้อย 6 ตัวอักษร',
-    'lbLoginSignupPasswordReType' => 'กรอกรหัสผ่านอีกครั้ง',
+
     //profile
     'lbBtnSelectImage' => 'เลือก',
     'lbBtnChangeImage' => 'เปลี่ยนรูป',
@@ -348,22 +273,29 @@ return [
     'lbConfirmNewPassword' => 'ยืนยันรหัสผ่านใหม่',
     'lbBtnChangePassword' => 'เปลี่ยนรหัสผ่าน',
     'lbEduRemark' => 'โปรดกรอกข้อมูลทุกระดับการศึกษา',
+
     //Curriculum Detail
     'lbBaht' => 'บาท',
     'lbAdditionalInfo' => 'ข้อมูลเพิ่มเติม',
     'lbInfo' => 'ข้อมูลหลักสูตร',
+
     //Table Grid
     'lbShow' => 'แสดง',
     'lbShow2' => 'ของ',
     'lbItems' => 'รายการ',
     'lbItemsTotal' => 'รายการทั้งหมด',
     'lbNoItems' => 'ไม่พบรายการ',
+
     //Curriculum Detail
     'lbApproveBy' => 'อนุมัติโดย',
     'lbApproveNo' => 'ครั้งที่',
     'lbApproveDate' => 'วันที่',
     
     'lbNewsTitle' =>'ข่าว & ประกาศ',
-         'lbSetting' =>'ตั้งค่า',
-     'lbApplicationSame' =>'มีการสมัครในระบบแล้ว',
+    'lbSetting' =>'ตั้งค่า',
+    'lbApplicationSame' =>'มีการสมัครในระบบแล้ว',
+    'lbProfileVerifyWarning' => 'คำเตือน',
+    'lbProfileVerifyMessage' => 'โปรดกรอกข้อมูลส่วนตัวให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)',
+    'lbProfileVerifyButton' => 'ปรับปรุงข้อมูลส่วนตัว',
+    'lbAnnouncementTitle' =>'ขั้นตอนการสมัคร',
 ];

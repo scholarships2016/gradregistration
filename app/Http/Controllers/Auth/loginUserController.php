@@ -99,7 +99,7 @@ class LoginUserController extends Controller {
             $this->userRepo->save(['user_id' => $user_data->user_id, 'user_name', 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
             Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
-            return redirect('/home');
+            return redirect('/admin/toDoList');
         } else {
             Controller::WLog('Staff Not Login', 'Staff_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));

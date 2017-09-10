@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TblDepartment
- * 
+ *
  * @property string $department_id
  * @property string $department_name
  * @property string $department_name_en
@@ -21,14 +21,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class TblDepartment extends Eloquent
 {
-	protected $table = 'tbl_department';
-	protected $primaryKey = 'department_id';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'tbl_department';
+    protected $primaryKey = 'department_id';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $fillable = [
-		'department_name',
-		'department_name_en',
-		'faculty_id'
-	];
+    protected $fillable = [
+        'department_name',
+        'department_name_en',
+        'faculty_id'
+    ];
+
+    public function faculty()
+    {
+        return $this->hasOne(TblFaculty::class, 'faculty_id', 'faculty_id');
+    }
 }

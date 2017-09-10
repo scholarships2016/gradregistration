@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Mcoursestudy
- * 
+ *
  * @property string $programsystem
  * @property string $studyprogramsystem
  * @property string $calendar
@@ -44,37 +44,50 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Mcoursestudy extends Eloquent
 {
-	protected $table = 'mcoursestudy';
-	public $incrementing = false;
-	public $timestamps = false;
 
-	protected $fillable = [
-		'programsystem',
-		'studyprogramsystem',
-		'calendar',
-		'coursecodeno',
-		'degree',
-		'depcode',
-		'majorcode',
-		'noyear',
-		'minperiod',
-		'maxperiod',
-		'credittot',
-		'plan',
-		'language',
-		'beginacadyear',
-		'beginsemester',
-		'lastacadyear',
-		'lastsemester',
-		'stopacadyear',
-		'stopsemester',
-		'thai',
-		'english',
-		'degreethai',
-		'degreeenglish',
-		'status',
-		'usercode',
-		'updatedate',
-		'changestame'
-	];
+    const CREATED_AT = 'sync_created';
+    const UPDATED_AT = 'sync_modified';
+
+    protected $table = 'mcoursestudy';
+    public $incrementing = false;
+    public $timestamps = false;
+    protected $primaryKey = 'coursecodeno';
+
+    protected $fillable = [
+        'programsystem',
+        'studyprogramsystem',
+        'calendar',
+        'coursecodeno',
+        'degree',
+        'depcode',
+        'majorcode',
+        'noyear',
+        'minperiod',
+        'maxperiod',
+        'credittot',
+        'plan',
+        'language',
+        'beginacadyear',
+        'beginsemester',
+        'lastacadyear',
+        'lastsemester',
+        'stopacadyear',
+        'stopsemester',
+        'thai',
+        'english',
+        'degreethai',
+        'degreeenglish',
+        'status',
+        'usercode',
+        'updatedate',
+        'changestame',
+        'sync_creator',
+        'sync_modifier'
+    ];
+
+
+    public function department()
+    {
+        return $this->hasOne(TblDepartment::class, 'department_id', 'depcode');
+    }
 }

@@ -36,7 +36,7 @@
       </li>
       <li class=" nav-item  menuitem   " data-index="12">
         <a href="{{url('admin/management/curriculum/manage')}}" class="nav-link nav-toggle">
-                    <i class="icon-briefcase"></i>
+                    <i class="fa fa-book"></i>
                     <span class="title">จัดการหลักสูตร</span>
                     <span class="arrow"></span>
                 </a>
@@ -207,7 +207,7 @@
                 </a>
         <ul class="sub-menu">
           <li class="nav-item  ">
-            <a href="manage-program.html" class="nav-link ">
+            <a href="{{url('admin/setting/masterInfo/courseManage')}}" class="nav-link ">
                             <span class="title">ข้อมูลหลักสูตร</span>
                         </a>
           </li>
@@ -227,7 +227,7 @@
 
       <li class="nav-item  " data-index="22">
         <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-settings"></i>
+                    <i class="fa fa-line-chart"></i>
                     <span class="title">Logs & Stat</span>
                     <span class="arrow"></span>
                 </a>

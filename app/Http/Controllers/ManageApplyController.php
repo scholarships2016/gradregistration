@@ -27,6 +27,7 @@ use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\NewsRepositoryImpl;
 
 class ManageApplyController extends Controller {
 
@@ -48,12 +49,13 @@ class ManageApplyController extends Controller {
     protected $ApplicantRepo;
     protected $ExamStatus;
     protected $AdmissionStatus;
+    protected $NewsRepo;
 
     public function __construct(AnnouncementRepositoryImpl $AnnouncementRepo, FacultyRepositoryImpl $FacultyRepo, DepartmentRepositoryImpl $DepRepo, ProgramTypeRepositoryImpl $ProgramType, BankRepositoryImpl $BankRepo, DocumentsApplyRepositoryImpl $DocumentApply, ApplicationPeopleRefRepositoryImpl $ApplicationPeopleRef
     , CurriculumRepositoryImpl $CurriculumRepo, CurriculumSubMajorRepositoryImpl $SubCurriculumRepo, CurriculumProgramRepositoryImpl $CurriculumProgramRepo
     , ApplicationRepositoryImpl $ApplicationRepo, ApplicationDocumentFileRepositoryImpl $ApplicationDocumentFileRepo, FileRepositoryImpl $FileRepo
     , SatisfactionRepositoryImpl $SatisfactionRepo, ApplicantRepositoryImpl $ApplicantRepo, TblExamStatusRepositoryImpl $ExamStatus
-    , TblAdmissionStatusRepositoryImpl $AdmissionStatus) {
+    , TblAdmissionStatusRepositoryImpl $AdmissionStatus, NewsRepositoryImpl $NewsRepo) {
         $this->AnnouncementRepo = $AnnouncementRepo;
         $this->FacultyRepo = $FacultyRepo;
         $this->DepRepo = $DepRepo;
@@ -71,6 +73,7 @@ class ManageApplyController extends Controller {
         $this->ApplicantRepo = $ApplicantRepo;
         $this->ExamStatus = $ExamStatus;
         $this->AdmissionStatus = $AdmissionStatus;
+        $this->NewsRepo = $NewsRepo;
     }
 
     public function showManagePay() {
@@ -587,7 +590,115 @@ class ManageApplyController extends Controller {
     }
 
     public function manageNews() {
-        return view('backoffice.news_announcement.news_management');
+        $data = $this->NewsRepo->getNewsAll(); 
+        return view('backoffice.news_announcement.news_management', ['datas' => $data]);
+    }
+
+    public function DeleteNews(Request $request) {
+        $res = $this->NewsRepo->DeleteNews($request->id);
+        return ($res) ? 'true' : 'false';
+    }
+
+    public function editNews($id) {
+        $news_id = null;
+        $news_title = null;
+        $news_detail = null;
+        $news_title_en = null;
+        $news_detail_en = null;
+        $news_seq = null;
+        $news_is_active = null;
+        if ($id != 0) {
+            $data = $this->NewsRepo->find($id);
+            $news_id = $id;
+            $news_title = $data->news_title;
+            $news_detail = $data->news_detail;
+            $news_title_en = $data->news_title_en;
+            $news_detail_en = $data->news_detail_en;
+            $news_seq = $data->news_seq;
+            $news_is_active = $data->news_is_active;
+        }
+        return view('backoffice.news_announcement.news_edit', ['news_id' => $news_id
+            , 'news_title' => $news_title
+            , 'news_detail' => $news_detail
+            , 'news_title_en' => $news_title_en
+            , 'news_detail_en' => $news_detail_en
+            , 'news_seq' => $news_seq
+            , 'news_is_active' => $news_is_active]);
+    }
+
+    public function SaveNews(Request $request) {
+        
+        if ($request->news_title != '' && $request->news_title_en != '') {
+           
+            $res = $this->NewsRepo->save($request->all());
+            if ($res) {
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                return redirect('admin/manageNews');
+            } else {
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
+                return back();
+            }
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
+        }
+    }
+    
+    
+     public function manageAnnounc() {
+      
+        $data = $this->AnnouncementRepo->getAnnouncementAll(); 
+        return view('backoffice.news_announcement.announcement_management', ['datas' => $data]);
+    }
+
+    public function DeleteAnnounc(Request $request) {
+        $res = $this->AnnouncementRepo->delete($request->id);
+        return ($res) ? 'true' : 'false';
+    }
+
+    public function editAnnounc($id) {
+        $anno_id = null;
+        $anno_title  = null;
+        $anno_detail = null;
+        $anno_title_en = null;
+        $anno_detail_en = null;
+        $anno_seq = null;
+        $anno_flag  = null;
+        if ($id != 0) {
+            $data = $this->AnnouncementRepo->find($id);
+            $anno_id = $id;
+            $anno_title  = $data->anno_title;
+            $anno_detail = $data->anno_detail;
+            $anno_title_en = $data->anno_title_en;
+            $anno_detail_en = $data->anno_detail_en;
+            $anno_seq = $data->anno_seq;
+            $anno_flag = $data->anno_flag;
+        }
+        return view('backoffice.news_announcement.announcement_edit', ['anno_id' => $anno_id
+            , 'anno_title' => $anno_title
+            , 'anno_detail' => $anno_detail
+            , 'anno_title_en' => $anno_title_en
+            , 'anno_detail_en' => $anno_detail_en
+            , 'anno_seq' => $anno_seq
+            , 'anno_flag' => $anno_flag ]);
+    }
+
+    public function SaveAnnounc(Request $request) {
+        
+        if ($request->anno_title != '' && $request->anno_title_en != '') {
+           
+            $res = $this->AnnouncementRepo->saveAnnouncement($request->all());
+            if ($res) {
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                return redirect('admin/manageAnnounc');
+            } else {
+                session()->flash('errorMsg', Lang::get('resource.lbError'));
+                return back();
+            }
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
+        }
     }
 
 }

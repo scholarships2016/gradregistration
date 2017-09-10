@@ -57,8 +57,14 @@ Route::get('importExport', 'Controller@importExport');
 Route::post('importExcel', 'Controller@importExcel')->name('importExcel');
 Route::post('admin/importApplicantSave','ManageApplyController@importApplicantSave')->name('importApplicantSave');
 Route::get('admin/manageNews', 'ManageApplyController@manageNews');
-
-
+ Route::post('DeleteNews', 'ManageApplyController@DeleteNews')->name('DNews');
+  Route::post('postNews', 'ManageApplyController@SaveNews')->name('postNews');
+ Route::get('admin/editAnnounc/{id}', 'ManageApplyController@editAnnounc')->name('editAnnounc');
+ Route::get('admin/manageAnnounc', 'ManageApplyController@manageAnnounc');
+ Route::post('DeleteAnnounc', 'ManageApplyController@DeleteAnnounc')->name('DAnnounc');
+  Route::post('postAnnounc', 'ManageApplyController@SaveAnnounc')->name('postAnnounc');
+ Route::get('admin/editAnnounc/{id}', 'ManageApplyController@editAnnounc')->name('editAnnounc');
+ 
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
 
@@ -149,6 +155,10 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
+    //Notice
+    Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
+
+
     Route::get('toDoList', 'BackOffice\BackOfficeController@showToDoListPage')->name('admin.backoffice.showToDoListPage');
     Route::get('doPaging', 'BackOffice\BackOfficeController@doPaging')->name('admin.backoffice.doPaging');
 
@@ -210,6 +220,15 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function () {
 
             //Paging
             Route::get('doPaging', 'BackOffice\AdminManagementController@doPaging')->name('admin.adminManage.doPaging');
+        });
+
+        Route::group(['prefix' => 'masterInfo', 'middleware' => []], function () {
+            Route::get('courseManage', 'BackOffice\MasterInfoController@showManageCoursePage')->name('admin.masterInfo.showManageCoursePage');
+            Route::get('add', 'BackOffice\MasterInfoController@showMCourseAddPage')->name('admin.masterInfo.showMCourseAddPage');
+            Route::get('edit/{id}', 'BackOffice\MasterInfoController@showMCourseEditPage')->name('admin.masterInfo.showMCourseEditPage');
+            Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
+
+            Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
         });
 
     });

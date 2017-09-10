@@ -214,6 +214,7 @@
                                 <div id="bankList" class="form-group form-md-line-input">
 
                                   <select id="bank_id" class="form-control">
+                                      <option value="">-- เลือก --</option>
                                                                 @foreach ($banks as $bank)
                                                                 <option value="{{$bank->bank_id}}" >{{$bank->bank_name}}</option>
                                                                 @endforeach

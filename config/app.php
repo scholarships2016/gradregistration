@@ -24,16 +24,19 @@ return [
      */
     'env' => env('APP_ENV', 'production'),
     /*
-      |--------------------------------------------------------------------------
-      | Application Debug Mode
-      |--------------------------------------------------------------------------
-      |
-      | When your application is in debug mode, detailed error messages with
-      | stack traces will be shown on every error that occurs within your
-      | application. If disabled, a simple generic error page is shown.
-      |
-     */
-    'debug' => env('APP_DEBUG', false),
+
+    |--------------------------------------------------------------------------
+    | Application Debug Mode
+    |--------------------------------------------------------------------------
+    |
+    | When your application is in debug mode, detailed error messages with
+    | stack traces will be shown on every error that occurs within your
+    | application. If disabled, a simple generic error page is shown.
+    |
+    */
+
+    'debug' => env('APP_DEBUG', true),
+
     /*
       |--------------------------------------------------------------------------
       | Application URL
@@ -94,20 +97,24 @@ return [
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
     /*
-      |--------------------------------------------------------------------------
-      | Logging Configuration
-      |--------------------------------------------------------------------------
-      |
-      | Here you may configure the log settings for your application. Out of
-      | the box, Laravel uses the Monolog PHP logging library. This gives
-      | you a variety of powerful log handlers / formatters to utilize.
-      |
-      | Available Settings: "single", "daily", "syslog", "errorlog"
-      |
-     */
+<<<<<<< HEAD
+    |--------------------------------------------------------------------------
+    | Logging Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the log settings for your application. Out of
+    | the box, Laravel uses the Monolog PHP logging library. This gives
+    | you a variety of powerful log handlers / formatters to utilize.
+    |
+    | Available Settings: "single", "daily", "syslog", "errorlog"
+    |
+    */
+
     'log' => env('APP_LOG', 'daily'),
-    'log_level' => env('APP_LOG_LEVEL', 'info'),
+
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
     'log_max_files' => 30,
+
     /*
       |--------------------------------------------------------------------------
       | Autoloaded Service Providers

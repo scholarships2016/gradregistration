@@ -25,11 +25,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-          <span>{{Lang::get('resource.lbNewsTitle')}}</span>
+          <span>{{Lang::get('resource.lbAnnouncementTitle')}}</span>
           <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>{{Lang::get('resource.lbSetting').Lang::get('resource.lbNewsTitle')}}</span>
+            <span>{{Lang::get('resource.lbSetting').Lang::get('resource.lbAnnouncementTitle')}}</span>
         </li>
     </ul>
     {{--<div class="page-tool    bar">--}}
@@ -63,7 +63,7 @@
 @stop
 
 @section('pagetitle')
-<h1 class="page-title">{{Lang::get('resource.lbSetting').' '.Lang::get('resource.lbNewsTitle')}}
+<h1 class="page-title">{{Lang::get('resource.lbSetting').' '.Lang::get('resource.lbAnnouncementTitle')}}
 </h1>
 @stop
 
@@ -76,7 +76,7 @@
                 <div class="portlet-title">
                   <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">{{Lang::get('resource.lbNewsTitle')}}</span>
+                    <span class="caption-subject bold uppercase">{{Lang::get('resource.lbAnnouncementTitle')}}</span>
                   </div>
                   <div class="actions">
 
@@ -89,7 +89,7 @@
                                                 <div class="col-md-6">
                                                     <div class="btn-group">
 
-                                                        <a href="{{url('admin/editNews/0')}}" class="btn btn-circle green btn-outline sbold uppercase">
+                                                        <a href="{{url('admin/editAnnounc/0')}}" class="btn btn-circle green btn-outline sbold uppercase">
       <i class="fa fa-plus"></i> เพิ่มข้อมูล
     </a>
                                                     </div>
@@ -115,10 +115,10 @@
                                                   
                                                     <td> {{ $loop->iteration }}  </td>
                                                     <td>
-                                                        {{ $data->news_title }} <br> {{ $data->news_title_en }}
+                                                        {{ $data->anno_title }} <br> {{ $data->anno_title_en }}
                                                     </td>
                                                     <td>
-                                                      {{ ($data->news_is_active =="1")?"ใช่":"ไม่แสดง" }}
+                                                      {{ ($data->anno_flag =="1")?"ใช่":"ไม่แสดง" }}
                                                           </td>
                                                     <td class="center">
                                                        {{ ($data->modified)?$data->modified:$data->created }}
@@ -126,10 +126,10 @@
                                                     <td class="center">  {{ ($data->modifier)?$data->modifier:$data->creator }}</td>
                                                     <td>
 
-                                                          <a href="{{url('admin/editNews/').'/'.$data->news_id}}" class="btn btn-xs blue"> Edit
+                                                          <a href="{{url('admin/editAnnounc/').'/'.$data->anno_id}}" class="btn btn-xs blue"> Edit
                                                                             <i class="fa fa-edit"></i>
                                                                         </a>
-                                                                        <a href="javascript:cancel({{$data->news_id}});;" class="btn btn-xs red"> Delete
+                                                                        <a href="javascript:cancel({{$data->anno_id}});;" class="btn btn-xs red"> Delete
                                                                                           <i class="fa fa-trash-o"></i>
                                                                                       </a>
 
@@ -261,7 +261,7 @@ function cancel($id) {
         
 $.ajax({
 					type: "POST",
-					url: '{!! Route('DNews') !!}',
+					url: '{!! Route('DAnnounc') !!}',
                                          async: false,
 					data :{
                                                 id : $id, 
@@ -270,7 +270,7 @@ $.ajax({
 					success : function(data){
                                             if(data=="true"){
                                            toastr.success('ดำเนินการเรียบร้อย');
-                                           setTimeout(function() { window.location.href = '{{url('admin/manageNews')}}'  }, 200);
+                                           setTimeout(function() { window.location.href = '{{url('admin/manageAnnounc')}}'  }, 200);
                                             }else{
                                               toastr.error('ไม่สามารถทำรายการได้');  
         }
