@@ -515,7 +515,7 @@ class ManageApplyController extends Controller {
                         "stu_first_name" => $data['name_th'],
                         "stu_last_name" => $data['lname_th'],
                         "stu_first_name_en" => $data['name_en'],
-                        "stu_last_name_en " => $data['lname_en'],
+                        "stu_last_name_en" => $data['lname_en'],
                         "stu_sex" => $data['sexID'],
                         "nation_id" => $data['nationalityID'],
                         "name_title_id" => $data['title_nameID'],
