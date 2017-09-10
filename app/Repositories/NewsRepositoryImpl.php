@@ -70,9 +70,9 @@ class NewsRepositoryImpl extends AbstractRepositoryImpl implements NewsRepositor
                 $curObj->news_is_active = $data['news_is_active'];
             
             if (!$chk){
-                $curObj->creator = session('user_id');
+                $curObj->creator =session('first_name').' '.session('last_name');
             }else{
-                $curObj->modifier = session('user_id');
+                $curObj->modifier =session('first_name').' '.session('last_name');
             }
 
             $result = $curObj->save();
