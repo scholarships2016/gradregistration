@@ -69,8 +69,8 @@
 
 
 @section('maincontent')
- 
-                    
+
+
 
                         <div class="portlet light bordered">
                           <div class="portlet-title">
@@ -88,7 +88,7 @@
                             <div class="portlet-body form">
                                 <div class="form-body">
                                   <form action="{!! Route('postAnnounc') !!}" id="form_sample_1" class="form-horizontal" method='post' novalidate="novalidate">
-                                      <input type='hidden' id='_token' name='_token' value='{{ csrf_token() }}'> 
+                                      <input type='hidden' id='_token' name='_token' value='{{ csrf_token() }}'>
                                       <div class="form-body">
                                               <div class="alert alert-danger display-hide">
                                                   <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
@@ -141,8 +141,8 @@
                                                         @for ($i = 0; $i < 20; $i++)
                                                             <option {{($anno_seq == ($i+1))?'selected':''}} value="{{$i+1}}">{{$i+1}}</option>
                                                         @endfor
-                                                            
-                                                             
+
+
                                                         </select>
                                                      </div>
                                               </div>
@@ -186,9 +186,9 @@
                             </div>
                         </div>
 
-                 
 
-     
+
+
 
 @stop
 
@@ -214,10 +214,10 @@
 <script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
  <script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
-        <script src="{{asset('/assets/global/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+        <script src="{{asset('/assets/global/plugins/ckeditor/ckeditor_full/ckeditor.js')}}" type="text/javascript"></script>
         <script src="{{asset('/assets/pages/scripts/components-date-time-pickers.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('/assets/pages/scripts/form-validation.min.js')}}" type="text/javascript"></script>
  <script type="application/javascript">
- 
+
      </script>
 @endpush
