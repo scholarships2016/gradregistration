@@ -66,7 +66,7 @@
                                             </p>
 
                                             <div class="about-quote">
-                                                <p class="about-author">{{($news->modified)?$news->modified->format('d-m-Y h:m'):$news->created->format('d-m-Y h:m')}}<br> </p>
+                                                <p class="about-author">{{($news->modified)?$news->modified->format('d-m-Y H:i'):$news->created->format('d-m-Y H:i')}}<br> </p>
 
                                             </div>
 
