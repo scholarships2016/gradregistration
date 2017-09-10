@@ -59,6 +59,7 @@
                             <input type="text" name="user_name" class="form-control"
                                    placeholder="รหัสผู้ใช้ชุดเดียว Chula LDAP"
                                    value="@if(!empty($user)){{$user->user_name}}@endif"
+                                      @if(!empty($user)) disabled @endif
                             >
                         </div>
                     </div>
