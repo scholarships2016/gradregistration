@@ -37,6 +37,7 @@ class Util
     const ERROR_OCCUR = 'เกิดข้อผิดพลาด<br/>Error';
     const CHANGE_PASS_SUCCESS = 'เปลี่ยนรหัสผ่านสำเร็จ<br/>Changing password is successful.';
     const CHANGE_PASS_ERROR = 'เปลี่ยนรหัสผ่านไม่สำเร็จ<br/>Changing password failed.';
+    const UPDATE_SUCCESS = 'ปรับปรุงข้อมูลสำเร็จ<br/>Updating is successful.';
 
 
     const SUCCESS_DELETE = 'ลบข้อมูลสำเร็จ';
