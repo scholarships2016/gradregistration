@@ -169,5 +169,16 @@ class Util
             throw $ex;
         }
     }
-
+    public static function prepareDataForDropdownListDistrict($datas, $keyName, $valueName, $valueNameEn)
+    {
+        $result = array();
+        try {
+            foreach ($datas as $data) {
+                $result = array_add($result, $data[$keyName], $data[$valueName].' - '.$data[$valueNameEn]);
+            }
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
 }
