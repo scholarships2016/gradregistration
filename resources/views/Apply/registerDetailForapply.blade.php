@@ -146,7 +146,7 @@
                                        </a>
                                        @endif
                                        @if($checkProfile)
-                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"   onclick="test();"   href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"   onclick="test();"   href="{{url('application/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
                                       @endif

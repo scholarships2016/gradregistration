@@ -125,7 +125,7 @@
                             </div>
                             <!--end row-->
                             <div class="tabbable-line tabbable-custom-profile">
-                                <a title="{{Lang::get('resource.lbManageCouse')}}" href="apply/manageMyCourse"
+                                <a title="{{Lang::get('resource.lbManageCouse')}}" href="application/manageMyCourse"
                                    class="btn btn-circle red-pink btn-outline">
                                     <i class="icon-briefcase"></i> {{Lang::get('resource.lbManageCouse')}}</a>
                                 <ul class="nav nav-tabs">

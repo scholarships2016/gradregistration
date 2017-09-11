@@ -124,7 +124,7 @@ class ApplyController extends Controller {
             $this->actionCourse('conf', $request->application_id);
             Controller::WLog('Confirmation People Reference', 'Enroll', null);
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
@@ -263,7 +263,7 @@ class ApplyController extends Controller {
         }
 
      $chks =  DB::table('application')->where('applicant_id',session('Applicant')->applicant_id)->where('program_id',$gdata['program_id'])->where('curr_prog_id',$gdata['curr_prog_id'])->where('curr_act_id',$gdata['curr_act_id'])->where('sub_major_id',$gdata['sub_major_id'])->get();
-        
+
      if(count($chks)==0){
         $res = $this->ApplicationRepo->saveApplication($gdata);
      }else{
@@ -273,7 +273,7 @@ class ApplyController extends Controller {
 
         if ($res) {
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
@@ -297,7 +297,7 @@ class ApplyController extends Controller {
 
         if ($res) {
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();

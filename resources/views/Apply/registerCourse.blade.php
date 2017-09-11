@@ -318,7 +318,7 @@
                                                                            <a class="btn btn-lg blue  margin-bottom-5" id="pageSave"> {{Lang::get('resource.lbSave')}}
                                       <i class="fa fa-check"></i>
                                     </a>
-                                  <a class="btn btn-lg grey-steel  margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  {{Lang::get('resource.lbCancel')}}
+                                  <a class="btn btn-lg grey-steel  margin-bottom-5" href="{{url('application/manageMyCourse/')}}">  {{Lang::get('resource.lbCancel')}}
                                         <i class="fa fa-times"></i>
                                     </a>
                                                                        </div>  </li>

@@ -97,7 +97,7 @@
                                 </div>
                                       @endif
                                 @if(session('user_id'))
-                                <div class="row margin-bottom-20"><a href="{{url('apply/manageMyCourse')}}">
+                                <div class="row margin-bottom-20"><a href="{{url('application/manageMyCourse')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">
                                             <div class="card-icon">

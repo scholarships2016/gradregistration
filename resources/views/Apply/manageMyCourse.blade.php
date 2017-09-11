@@ -116,7 +116,7 @@
 
                       <i class="fa fa-book"></i>
                        {!! (session('locale')=='th')?$curDis->prog_plan_name.' <small>'.$curDis->prog_plan_desc1.'</small>' : $curDis->prog_plan_name_en.' <small>'.$curDis->prog_plan_desc2.'</small>' !!}
-                    
+
                       <br/>
                       <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$curDis->prog_type_name : $curDis->prog_type_name_en }} ({{ (session('locale')=='th')?$curDis->office_time : $curDis->office_time_en }})
                     </div>
@@ -198,7 +198,7 @@
                                       <a href="javascript:;">{{Lang::get('resource.lbConfirmApply')}}</a>
                                     </h3>
                                     <div style="margin:10px 0px 10px 0px">
-                                      <a class="btn  green" href="{{url('apply/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
+                                      <a class="btn  green" href="{{url('application/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
                                         <i class="fa fa-check"></i>
                                       </a>
                                       <a class="btn btn-danger mt-sweetalert sweet-8" href="javascript:cancel({{$curDis->application_id}});">  {{Lang::get('resource.lbButtonRemoveApplication')}}
@@ -232,7 +232,7 @@
                                                       <a href="javascript:;">{{Lang::get('resource.lbUpdateDocApply')}}</a>
                                                   </h3>
                                     <div style="margin:10px 0px 10px 0px">
-                                      <a class="btn btn-circle blue btn-outline" href="{{url('apply/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
+                                      <a class="btn btn-circle blue btn-outline" href="{{url('application/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                     </div>
