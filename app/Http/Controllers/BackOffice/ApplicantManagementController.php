@@ -100,7 +100,6 @@ class ApplicantManagementController extends Controller
             $eduPassList = $this->eduPassRepo->all();
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
-
             return view('backoffice.applicant.edit', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
                 'newSrcList' => $newSrcList, 'nationList' => $nationList,

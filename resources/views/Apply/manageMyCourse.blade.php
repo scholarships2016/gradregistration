@@ -114,7 +114,9 @@
                                          {{  ($curDis->major_name != '')?(session('locale')=='th')? ' - สาขาวิชา'.$curDis->major_name:' - Major in '.$curDis->major_name_en :'-'}}
                                         </h4>
 
-                      <i class="fa fa-book"></i> {{ (session('locale')=='th')?$curDis->prog_plan_name : $curDis->prog_plan_name_en }}
+                      <i class="fa fa-book"></i>
+                       {!! (session('locale')=='th')?$curDis->prog_plan_name.' <small>'.$curDis->prog_plan_desc1.'</small>' : $curDis->prog_plan_name_en.' <small>'.$curDis->prog_plan_desc2.'</small>' !!}
+                    
                       <br/>
                       <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$curDis->prog_type_name : $curDis->prog_type_name_en }} ({{ (session('locale')=='th')?$curDis->office_time : $curDis->office_time_en }})
                     </div>
