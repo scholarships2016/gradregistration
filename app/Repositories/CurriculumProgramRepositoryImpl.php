@@ -20,7 +20,7 @@ class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements 
 
         $result = null;
         try {
-
+/*
             $result = CurriculumProgram::leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
                     ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
                     ->leftJoin('mcoursestudy', 'curriculum_program.program_id', 'mcoursestudy.coursecodeno')
@@ -35,6 +35,21 @@ class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements 
                         }
                     })
                     ->get();
+                    */
+                    $result = CurriculumProgram::leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
+                            ->leftJoin('mcoursestudy', 'curriculum_program.program_id', 'mcoursestudy.coursecodeno')
+                            ->leftJoin('tbl_program_plan', 'mcoursestudy.plan', '=', 'tbl_program_plan.prog_plan_name')
+                            ->Where(function ($query) use ($cur) {
+                                if ($cur) {
+                                    $query->where('curriculum_id', $cur);
+                                }
+                            })
+                            ->Where(function ($query) use ($tid) {
+                                if ($tid) {
+                                    $query->where('tbl_program_type.program_type_id', $tid);
+                                }
+                            })
+                            ->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
