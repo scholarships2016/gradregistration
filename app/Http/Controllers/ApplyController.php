@@ -332,7 +332,7 @@ class ApplyController extends Controller {
                             'year' => $curr->academic_year,
                             'statusExam' => $app->exam_name
                         ];
-                        Mail::send('email.register', $data, function($message)use ($app) {
+                        Mail::send('email.confirm-apply', $data, function($message)use ($app) {
                             $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
                         });
                         Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
