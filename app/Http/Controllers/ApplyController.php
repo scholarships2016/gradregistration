@@ -354,66 +354,73 @@ class ApplyController extends Controller {
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
         $Datas = $this->ApplicationRepo->getData(null, $id);
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
-        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id,'Year'=>$Datas[0]->academic_year]);
+        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
     }
 
     public function submitDocApply(Request $data) {
-        $res = null;
-        $checkbox = [];
-        $file = [];
-        $fileData = [];
-        $docID = [];
+        if ($data->Flo <= 3) {
+            $res = null;
+            $checkbox = [];
+            $file = [];
+            $fileData = [];
+            $docID = [];
 
-        foreach ($data->all() as $key => $value) {
+            foreach ($data->all() as $key => $value) {
 
-            if (strpos($key, 'box') > 0) {
-                array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
-                array_push($docID, $value);
-            }
+                if (strpos($key, 'box') > 0) {
+                    array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
+                    array_push($docID, $value);
+                }
 
-            if (strpos($key, 'file') > 0) {
-                array_push($file, ['doc_apply_id' => str_replace('pfile_ID', '', $key), 'uploadedFile' => $value]);
-            }
-        }
-
-        foreach ($file as $key) {
-            $dFile = null;
-
-            if (strpos($key['uploadedFile']->getClientMimeType(), 'mage') > 0) {
-                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG.'/'.$data->Year);
-            } else {
-                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC.'/'.$data->Year);
-            }
-
-            foreach ($checkbox as $chkKey) {
-
-                if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
-                    array_push($fileData, ['application_id' => $data->application_id, 'doc_apply_id' => $chkKey['doc_apply_id'], 'file_id' => $dFile->file_id, 'other_val' => ($chkKey['doc_apply_id'] == 16) ? $data->other_val : '']);
+                if (strpos($key, 'file') > 0) {
+                    array_push($file, ['doc_apply_id' => str_replace('pfile_ID', '', $key), 'uploadedFile' => $value]);
                 }
             }
-        }
 
-        $res = $this->ApplicationDocumentFileRepo->DeleteNOTIN($data->application_id, $docID);
+            foreach ($file as $key) {
+                $dFile = null;
 
-        foreach ($fileData as $val) {
-            $res = $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
-            if (!$res) {
+                if (strpos($key['uploadedFile']->getClientMimeType(), 'mage') > 0) {
+                    $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG . '/' . $data->Year);
+                } else {
+                    $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC . '/' . $data->Year);
+                }
+
+                foreach ($checkbox as $chkKey) {
+
+                    if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
+                        array_push($fileData, ['application_id' => $data->application_id, 'doc_apply_id' => $chkKey['doc_apply_id'], 'file_id' => $dFile->file_id, 'other_val' => ($chkKey['doc_apply_id'] == 16) ? $data->other_val : '']);
+                    }
+                }
+            }
+
+            $res = $this->ApplicationDocumentFileRepo->DeleteNOTIN($data->application_id, $docID);
+
+            foreach ($fileData as $val) {
+                $res = $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
+                if (!$res) {
+                    session()->flash('errorMsg', Lang::get('resource.lbError'));
+                    return back();
+                }
+            }
+
+            if ($res) {
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                if (session('user_tyep')->user_type == 'applicant') {
+                    return redirect()->route('manageMyCourse');
+                } else {
+                    return redirect()->route('showManagePay');
+                }
+            } else {
                 session()->flash('errorMsg', Lang::get('resource.lbError'));
                 return back();
             }
+        }else
+        {
+             session()->flash('errorMsg', Lang::get('resource.lbError'));
+             return back();
         }
-
-        if ($res) {
-            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            if (session('user_tyep')->user_type == 'applicant') {
-                return redirect()->route('manageMyCourse');
-            } else {
-                return redirect()->route('showManagePay');
-            }
-        } else {
-            session()->flash('errorMsg', Lang::get('resource.lbError'));
-            return back();
-        }
+        
     }
 
     public function getForm($id = 0) {
