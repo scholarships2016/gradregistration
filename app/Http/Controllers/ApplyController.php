@@ -354,7 +354,7 @@ class ApplyController extends Controller {
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
         $Datas = $this->ApplicationRepo->getData(null, $id);
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
-        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id]);
+        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id,'Year'=>$Datas[0]->academic_year]);
     }
 
     public function submitDocApply(Request $data) {
@@ -380,9 +380,9 @@ class ApplyController extends Controller {
             $dFile = null;
 
             if (strpos($key['uploadedFile']->getClientMimeType(), 'mage') > 0) {
-                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG);
+                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG.'/'.$data->Year);
             } else {
-                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC);
+                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC.'/'.$data->Year);
             }
 
             foreach ($checkbox as $chkKey) {

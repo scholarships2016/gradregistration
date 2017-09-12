@@ -89,6 +89,7 @@
       <div class="search-container ">
         <form action="{!! Route('submitDocApply') !!}" method="post" enctype="multipart/form-data" id="addData"> {{csrf_field()}}
           <input type="hidden" name="application_id" value="{{ $programID }}">
+           <input type="hidden" name="Year" value="{{ $Year }}">
           <div class="row">
 
             <div class="col-md-9">
@@ -122,7 +123,7 @@
                       <p class="help-block">
 
                         @foreach($Files as $file) @if($Doc->doc_apply_id == $file->doc_apply_id) {{ $file->file_origi_name }}
-                        <a href="{{route('downloadMediaFile').'?file_gen_name='.$file->file_gen_name}}" target="_blank" class="btn btn-xs green" download>
+                        <a href="{{route('downloadFile').'?file_id='.$file->file_id}}" target="_blank" class="btn btn-xs green" download>
                                                               Download
                                                              <i class="fa fa-download"></i>
                                                             </a> @endif @endforeach
