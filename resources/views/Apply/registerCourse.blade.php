@@ -426,7 +426,7 @@ $(function() {
                 valdata.push(this.data());
             });
  
-               if(valdata.length>0){
+               if(valdata.length > 0 && $("#bank_id option:selected").index()>0){
                              $.ajax({
 					type: "POST",
 					url: '{!! Route('datatables.savePeopoleRef') !!}',
@@ -446,7 +446,7 @@ $(function() {
 					}
 				},"json");
                                 }else{
-                              toastr.warning('Reference Person Information?');  
+                              toastr.warning('plz,Reference Person Information Or Bank?');  
                         }
 
           });
