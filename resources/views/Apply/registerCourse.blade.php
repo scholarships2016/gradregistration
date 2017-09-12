@@ -420,14 +420,14 @@ $(function() {
 
      });
         $('#pageSave').click(function() {
-
+       
                 var valdata = [];
                 table.rows().every(function(){
                 valdata.push(this.data());
             });
-
-
-  $.ajax({
+ 
+               if(valdata.length>0){
+                             $.ajax({
 					type: "POST",
 					url: '{!! Route('datatables.savePeopoleRef') !!}',
 					data :{
@@ -440,17 +440,20 @@ $(function() {
                                                 _token:     '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
-                                            toastr.success('ดำเนินการเรียบร้อย');
+                                        toastr.success('ดำเนินการเรียบร้อย');
                                  	window.location.href = '{!! Route('manageMyCourse') !!}';
 
 					}
 				},"json");
+                                }else{
+                              toastr.warning('Reference Person Information?');  
+                        }
 
           });
 
 
 
-       });
+        });  
 
  function cleardata(){
         $('#app_people_id').val(null);
