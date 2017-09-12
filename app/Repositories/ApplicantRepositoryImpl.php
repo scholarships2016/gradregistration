@@ -184,7 +184,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->sys_activate_code = $data['sys_activate_code'];
             if (array_key_exists('stu_img', $data))
                 $curObj->stu_img = $data['stu_img'];
-
+            if (array_key_exists('last_login', $data))
+                $curObj->last_login = $data['last_login'];
 
             if (array_key_exists('creator', $data))
                 $curObj->creator = $data['creator'];
@@ -234,8 +235,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->work_place_name = $data['work_place_name'];
             if (array_key_exists('app_work_status', $data))
                 $curObj->app_work_status = $data['app_work_status'];
-            
-            
+
+
 
             if (array_key_exists('creator', $data))
                 $curObj->creator = $data['creator'];
