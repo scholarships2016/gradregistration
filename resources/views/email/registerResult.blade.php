@@ -6,9 +6,9 @@
         <span style="color:red;font-size: 18px">[{{$stu_password}}]</span>
     </div>
 </div>
-Dear PIYARACH SRIMARA,
+Dear {{$stu_name}},
 
-   ผลการพิจารณาใบสมัคร หลักสูตรวิศวกรรมศาสตรมหาบัณฑิต - Master of Engineering(รหัส 2921) สาขาวิชาวิศวกรรมเคมี 21050 ภาควิชาวิศวกรรมเคมี คณะวิศวกรรมศาสตร์ (Faculty of Engineering)    ประจำภาคการศึกษา ต้น [First] ปีการศึกษา 2560
+   ผลการพิจารณาใบสมัคร {{ $thai.'['.$coursecodeno.']'}} แขนงวิชา {{$sub_major_name}} [{{$sub_major_id}}]  สาขาวิชา{{$major_name}}[{{$major_id}}]  ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}} ประจำภาคการศึกษา {{$semester}} ปีการศึกษา {{$year}}
 
         คุณ มีสิทธิ์สอบ
 Valid
