@@ -167,7 +167,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->Where(function ($query)use ($user) {
                                 if ($user) {
                                     $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
-                                        $query->select('doc_id')
+                                        $query->select('curriculum_id')
                                         ->from('curriculum_user')
                                         ->where('curriculum_user.user_id', $user);
                                     })
