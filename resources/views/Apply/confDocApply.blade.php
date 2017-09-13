@@ -89,6 +89,8 @@
       <div class="search-container ">
         <form action="{!! Route('submitDocApply') !!}" method="post" enctype="multipart/form-data" id="addData"> {{csrf_field()}}
           <input type="hidden" name="application_id" value="{{ $programID }}">
+           <input type="hidden" name="Year" value="{{ $Year }}">
+           <input type="hidden" name="Flo" value="{{ $Flo }}">
           <div class="row">
 
             <div class="col-md-9">
@@ -122,7 +124,7 @@
                       <p class="help-block">
 
                         @foreach($Files as $file) @if($Doc->doc_apply_id == $file->doc_apply_id) {{ $file->file_origi_name }}
-                        <a href="{{route('downloadMediaFile').'?file_gen_name='.$file->file_gen_name}}" target="_blank" class="btn btn-xs green" download>
+                        <a href="{{route('downloadFile').'?file_id='.$file->file_id}}" target="_blank" class="btn btn-xs green" download>
                                                               Download
                                                              <i class="fa fa-download"></i>
                                                             </a> @endif @endforeach
@@ -140,10 +142,10 @@
 
 
           <div style=" text-align: center;">
-            <button type="submit" class="btn btn-lg blue  margin-bottom-5"> {{Lang::get('resource.lbSave')}}
+            <button type="submit"  {{ ($Flo > 3)?'disabled':'' }} class="btn btn-lg blue  margin-bottom-5"> {{Lang::get('resource.lbSave')}}
                                 <i class="fa fa-check"></i></button>
 
-            <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('apply/manageMyCourse/')}}">  {{Lang::get('resource.lbCancel')}}
+            <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('application/manageMyCourse/')}}">  {{Lang::get('resource.lbCancel')}}
                                 <i class="fa fa-times"></i>
                             </a>
           </div>

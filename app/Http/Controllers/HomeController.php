@@ -38,7 +38,7 @@ class HomeController extends Controller {
             $cval = 0;
             foreach ($countStatus as $cStatus) {
                 $val .= ' <li> ';
-                $val .= ' <a href="' . url('apply/manageMyCourse') . '"> ';
+                $val .= ' <a href="' . url('application/manageMyCourse') . '"> ';
                 $val .= '  <span class="time">' . $cStatus->numc . '</span> ';
                 $val .= '  <span class="details"> ';
                 $val .= '  <span class="label label-sm label-icon label-success"> ';

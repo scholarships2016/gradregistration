@@ -77,9 +77,9 @@ class AnnouncementRepositoryImpl extends AbstractRepositoryImpl implements Annou
 
             $curObj->modifier = \Carbon\Carbon::now()->timestamp;
              if (!$chk){
-                $curObj->creator = session('user_id');
+                $curObj->creator = session('first_name').' '.session('last_name');
             }else{
-                $curObj->modifier = session('user_id');
+                $curObj->modifier = session('first_name').' '.session('last_name');
             }
             $result = $curObj->save();
         } catch (\Exception $ex) {

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Lang;
 use \Illuminate\Support\Facades\Crypt;
 use App\Repositories\FileRepositoryImpl;
 
-
 class LoginApplicantController extends Controller {
 
     protected $redirectTo = '/seller_home';
@@ -23,14 +22,14 @@ class LoginApplicantController extends Controller {
 
     protected $loginapplicantRepo;
     protected $nametitleRepo;
-     protected $FileRepo;
+    protected $FileRepo;
 
     public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, FileRepositoryImpl $FileRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
         $this->FileRepo = $FileRepo;
-        
-        Auth::setDefaultDriver( 'web' );
+
+        Auth::setDefaultDriver('web');
     }
 
     //Authen
@@ -65,21 +64,26 @@ class LoginApplicantController extends Controller {
         if (Auth::attempt(['stu_email' => $request->stu_email, 'password' => $request->stu_password])) {
             $user_data = Auth::user();
             $pic = null;
-            if ($user_data->stu_img) {
-                $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
+            try {
+                $app = ['last_login' => \Carbon\Carbon::now()->toDateTimeString(), 'applicant_id' => $user_data->applicant_id];
+                $this->loginapplicantRepo->saveApplicant($app);
+                if ($user_data->stu_img) {
+                    $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
+                }
+            } catch (Exception $e) {
+                
             }
-
             session()->put('user_id', $user_data->applicant_id);
             session()->put('first_name', $user_data->stu_first_name_en);
             session()->put('last_name', $user_data->stu_last_name_en);
             session()->put('email_address', $user_data->stu_email);
-            session()->put('stu_img', $pic);         
+            session()->put('stu_img', $pic);
             $role = new \stdClass();
-            $role->user_role= '';
-            $role->user_type= 'applicant';
+            $role->user_role = '';
+            $role->user_type = 'applicant';
             session()->put('user_tyep', $role);
-            
-            
+
+
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;
             $app->stu_citizen_card = $user_data->stu_citizen_card;
@@ -88,7 +92,7 @@ class LoginApplicantController extends Controller {
             session()->put('Applicant', $app);
             Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
-            
+
             return redirect('/home');
         } else {
             Controller::WLog('User Applicant Not Login', 'User_Login', null);

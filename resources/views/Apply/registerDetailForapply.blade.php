@@ -99,7 +99,7 @@
                                                                    <span class="box"></span>
                                                                    <b>{{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}</b>
                                                                     <br/>
-                                                                    <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
+                                                                    <i class="fa fa-book"></i> {!! (session('locale')=='th')?$program->prog_plan_name.' <small>'.$program->prog_plan_desc1.'</small>' : $program->prog_plan_name_en.' <small>'.$program->prog_plan_desc2.'</small>' !!}
                                                                       <br/>
                                                                     <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
                                                                     ({{ (session('locale')=='th')?$program->office_time : $program->office_time_en }})
@@ -146,7 +146,7 @@
                                        </a>
                                        @endif
                                        @if($checkProfile)
-                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"   onclick="test();"   href="{{url('apply/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
+                                    <button id='btsubmit' class="btn btn-lg blue  margin-bottom-5"   onclick="test();"   href="{{url('application/manageMyCourse/')}}"> {{Lang::get('resource.lbSelect')}}
                                       <i class="fa fa-check"></i>
                                     </button>
                                       @endif
@@ -223,7 +223,7 @@
                                                                   			<div class="todo-inline">
                                                                   				 {{$program->program_id}} {{ (session('locale')=='th')?$program->thai : $program->english }}
                                                                            <br/>
-                                                                           <i class="fa fa-book"></i> {{ (session('locale')=='th')?$program->prog_plan_name.' ('.$program->prog_plan_desc1.')' : $program->prog_plan_name_en.' ('.$program->prog_plan_desc2.')' }}
+                                                                           <i class="fa fa-book"></i> {!! (session('locale')=='th')?$program->prog_plan_name.' <small>'.$program->prog_plan_desc1.'</small>' : $program->prog_plan_name_en.' <small>'.$program->prog_plan_desc2.'</small>' !!}
                                                                              <br/>
                                                                            <i class="fa fa-mortar-board"></i> {{ (session('locale')=='th')?$program->prog_type_name : $program->prog_type_name_en }}
                                                                            ({{ (session('locale')=='th')?$program->office_time : $program->office_time_en }})
@@ -413,7 +413,7 @@
       closeOnConfirm: false,
       showLoaderOnConfirm: true
     }, function() {
-      
+
 
       setTimeout(function() {
         window.location.href = '{{url('profile#tab_1_3')}}'

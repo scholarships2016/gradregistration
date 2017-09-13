@@ -25,6 +25,7 @@ use Carbon\Carbon;
 //use PhpOffice\PhpWord\Writer\PDF\DomPDF;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ApplyController extends Controller {
 
@@ -110,7 +111,7 @@ class ApplyController extends Controller {
 
         $datas = json_decode($request->values, true);
         $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id, 'additional_answer' => $request->additional_answer];
-        $this->ApplicationRepo->saveApplication($data);
+        $res = $this->ApplicationRepo->saveApplication($data);
         if ($request->SATI_LEVEL != "") {
             $SData = ['SATI_LEVEL' => $request->SATI_LEVEL, 'SATI_SUGGESTION' => $request->SATI_SUGGESTION, 'stu_citizen_card' => session('Applicant')->stu_citizen_card];
             $this->SatisfactionRepo->save($SData);
@@ -124,7 +125,8 @@ class ApplyController extends Controller {
             $this->actionCourse('conf', $request->application_id);
             Controller::WLog('Confirmation People Reference', 'Enroll', null);
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            $this->sentMailRegister($res->curr_act_id, $res->application);
+            return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
@@ -138,7 +140,7 @@ class ApplyController extends Controller {
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
 
-        return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program,'checkProfile' => $this->checkApplicantProfile()]);
+        return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program, 'checkProfile' => $this->checkApplicantProfile()]);
     }
 
     public function docMyCourse($id) {
@@ -262,18 +264,18 @@ class ApplyController extends Controller {
             $gdata['curr_prog_id'] = $program[1];
         }
 
-     $chks =  DB::table('application')->where('applicant_id',session('Applicant')->applicant_id)->where('program_id',$gdata['program_id'])->where('curr_prog_id',$gdata['curr_prog_id'])->where('curr_act_id',$gdata['curr_act_id'])->where('sub_major_id',$gdata['sub_major_id'])->get();
-        
-     if(count($chks)==0){
-        $res = $this->ApplicationRepo->saveApplication($gdata);
-     }else{
-         session()->flash('errorMsg', Lang::get('resource.lbApplicationSame'));
-          return back();
-     }
+        $chks = DB::table('application')->where('applicant_id', session('Applicant')->applicant_id)->where('program_id', $gdata['program_id'])->where('curr_prog_id', $gdata['curr_prog_id'])->where('curr_act_id', $gdata['curr_act_id'])->where('sub_major_id', $gdata['sub_major_id'])->get();
+
+        if (count($chks) == 0) {
+            $res = $this->ApplicationRepo->saveApplication($gdata);
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbApplicationSame'));
+            return back();
+        }
 
         if ($res) {
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
@@ -297,24 +299,21 @@ class ApplyController extends Controller {
 
         if ($res) {
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            return redirect('apply/manageMyCourse');
+            return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
         }
     }
 
-    public function sentMailRegister(Request $request) {
+    public function sentMailRegister($curr_act_id, $applications) {
         try {
-            if ($request) {
-                $curr_act_id = $request->curr_act_id;
-                $applications = json_decode($request->application);
+            if ($curr_act_id) {
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
                 $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
 
                 foreach ($currs as $curr) {
-
 
                     foreach ($apps as $app) {
 
@@ -333,7 +332,7 @@ class ApplyController extends Controller {
                             'year' => $curr->academic_year,
                             'statusExam' => $app->exam_name
                         ];
-                        Mail::send('email.register', $data, function($message)use ($app) {
+                        Mail::send('email.confirm-apply', $data, function($message)use ($app) {
                             $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
                         });
                         Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
@@ -355,66 +354,73 @@ class ApplyController extends Controller {
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
         $Datas = $this->ApplicationRepo->getData(null, $id);
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
-        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id]);
+        return view($this->part_doc . 'confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $id, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
     }
 
     public function submitDocApply(Request $data) {
-        $res = null;
-        $checkbox = [];
-        $file = [];
-        $fileData = [];
-        $docID = [];
+        if ($data->Flo <= 3) {
+            $res = null;
+            $checkbox = [];
+            $file = [];
+            $fileData = [];
+            $docID = [];
 
-        foreach ($data->all() as $key => $value) {
+            foreach ($data->all() as $key => $value) {
 
-            if (strpos($key, 'box') > 0) {
-                array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
-                array_push($docID, $value);
-            }
+                if (strpos($key, 'box') > 0) {
+                    array_push($checkbox, ['application_id' => '', 'doc_apply_id' => $value]);
+                    array_push($docID, $value);
+                }
 
-            if (strpos($key, 'file') > 0) {
-                array_push($file, ['doc_apply_id' => str_replace('pfile_ID', '', $key), 'uploadedFile' => $value]);
-            }
-        }
-
-        foreach ($file as $key) {
-            $dFile = null;
-
-            if (strpos($key['uploadedFile']->getClientMimeType(), 'mage') > 0) {
-                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG);
-            } else {
-                $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC);
-            }
-
-            foreach ($checkbox as $chkKey) {
-
-                if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
-                    array_push($fileData, ['application_id' => $data->application_id, 'doc_apply_id' => $chkKey['doc_apply_id'], 'file_id' => $dFile->file_id, 'other_val' => ($chkKey['doc_apply_id'] == 16) ? $data->other_val : '']);
+                if (strpos($key, 'file') > 0) {
+                    array_push($file, ['doc_apply_id' => str_replace('pfile_ID', '', $key), 'uploadedFile' => $value]);
                 }
             }
-        }
 
-        $res = $this->ApplicationDocumentFileRepo->DeleteNOTIN($data->application_id, $docID);
+            foreach ($file as $key) {
+                $dFile = null;
 
-        foreach ($fileData as $val) {
-            $res = $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
-            if (!$res) {
+                if (strpos($key['uploadedFile']->getClientMimeType(), 'mage') > 0) {
+                    $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_IMG . '/' . $data->Year);
+                } else {
+                    $dFile = $this->FileRepo->upload($key['uploadedFile'], \App\Utils\Util::APPLY_DOC . '/' . $data->Year);
+                }
+
+                foreach ($checkbox as $chkKey) {
+
+                    if ($chkKey['doc_apply_id'] == $key['doc_apply_id']) {
+                        array_push($fileData, ['application_id' => $data->application_id, 'doc_apply_id' => $chkKey['doc_apply_id'], 'file_id' => $dFile->file_id, 'other_val' => ($chkKey['doc_apply_id'] == 16) ? $data->other_val : '']);
+                    }
+                }
+            }
+
+            $res = $this->ApplicationDocumentFileRepo->DeleteNOTIN($data->application_id, $docID);
+
+            foreach ($fileData as $val) {
+                $res = $this->ApplicationDocumentFileRepo->saveApplicationDocumentFile($val);
+                if (!$res) {
+                    session()->flash('errorMsg', Lang::get('resource.lbError'));
+                    return back();
+                }
+            }
+
+            if ($res) {
+                session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                if (session('user_tyep')->user_type == 'applicant') {
+                    return redirect()->route('manageMyCourse');
+                } else {
+                    return redirect()->route('showManagePay');
+                }
+            } else {
                 session()->flash('errorMsg', Lang::get('resource.lbError'));
                 return back();
             }
+        }else
+        {
+             session()->flash('errorMsg', Lang::get('resource.lbError'));
+             return back();
         }
-
-        if ($res) {
-            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            if (session('user_tyep')->user_type == 'applicant') {
-                return redirect()->route('manageMyCourse');
-            } else {
-                return redirect()->route('showManagePay');
-            }
-        } else {
-            session()->flash('errorMsg', Lang::get('resource.lbError'));
-            return back();
-        }
+        
     }
 
     public function getForm($id = 0) {
@@ -439,17 +445,17 @@ class ApplyController extends Controller {
     }
 
     public function checkApplicantProfile() {
-      if(isset(session('Applicant')->applicant_id) && session('Applicant')->applicant_id != ""){
-        $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id);
-        $applicanteEdu = DB::table('applicant_edu')->where('applicant_id', session('Applicant')->applicant_id)->Count();
+        if (isset(session('Applicant')->applicant_id) && session('Applicant')->applicant_id != "") {
+            $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id);
+            $applicanteEdu = DB::table('applicant_edu')->where('applicant_id', session('Applicant')->applicant_id)->Count();
 
-        if ($applicant->stu_first_name != null && $applicant->stu_first_name_en != null && $applicant->stu_addr_pcode != null && $applicant->stu_img != null && $applicant->eng_test_id != null && $applicant->eng_test_score != null && $applicanteEdu > 0) {
+            if ($applicant->stu_first_name != null && $applicant->stu_first_name_en != null && $applicant->stu_addr_pcode != null && $applicant->stu_img != null && $applicant->eng_test_id != null && $applicant->eng_test_score != null && $applicanteEdu > 0) {
+                return true;
+            }
+            return false;
+        } else {
             return true;
         }
-        return false;
-      }else{
-        return true;
-      }
     }
 
 }

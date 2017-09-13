@@ -60,33 +60,34 @@
         </ul>
       </li>
 
-      <li class=" nav-item  menuitem   " data-index="13">
+      <li class=" nav-item  menuitem  @if(strpos($curr_url, 'admin/Manage') !== false) open active @endif " data-index="13">
         <a href="{{url('admin/ManagePay')}}" class="nav-link nav-toggle">
                     <i class="icon-layers"></i>
                     <span class="title">จัดการข้อมูลการสมัคร</span>
                     <span class="arrow"></span>
+                        <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem    @if(strpos($curr_url, 'admin/ManagePay') !== false) open active @endif">
             <a class="nav-link " href="{{url('admin/ManagePay')}}">
                             <span class="title">ปรับปรุงการชำระเงิน และส่งเอกสาร</span>
                         </a>
           </li>
 
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/ManageGS03') !== false) open active @endif ">
             <a class="nav-link " href="{{url('admin/ManageGS03')}}">
                             <span class="title">ปรับปรุงผู้มีสิทธิ์สอบ (GS03)</span>
                         </a>
           </li>
-          <li class=" nav-item  menuitem   ">
+          <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/ManageGS05') !== false) open active @endif ">
             <a class="nav-link " href="{{url('admin/ManageGS05')}}">
                             <span class="title">ปรับปรุงผู้มีสิทธิ์เข้าศึกษา (GS05)</span>
                         </a>
           </li>
         </ul>
       </li>
-      <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/importApplicant') !== false) open active @endif" data-index="14">
-        <a href="่{{url('admin/importApplicant')}}" class="nav-link nav-toggle">
+      <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/importApplication') !== false) open active @endif" data-index="14">
+        <a href="{{url('admin/importApplication')}}" class="nav-link nav-toggle">
                     <i class="icon-user-follow"></i>
                     <span class="title">เพิ่มผู้สอบได้</span>
                     <span class="selected"></span>
@@ -239,6 +240,7 @@
                     <i class="icon-note"></i>
                     <span class="title">จัดการเนื้อหา</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
         <ul class="sub-menu">
           <li class=" nav-item  menuitem   @if(strpos($curr_url, 'admin/manageNews') !== false) open active @endif">
@@ -341,63 +343,70 @@
       <!-- END SIDEBAR TOGGLER BUTTON -->
       <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
 
-      <li class=" nav-item    start menuitem active open" data-index="1">
+      <li class=" nav-item    start menuitem @if(strpos($curr_url, 'home') !== false) open active @endif" data-index="1">
         <a class="nav-link nav-toggle" href="{{url('home/')}}">
                     <i class="icon-home"></i>
                     <span class="title">{{Lang::get('resource.lbMHome')}}</span>
 
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
       </li>
 
       @if(!session('user_id'))
-      <li class=" nav-item    menuitem" data-index="2">
+      <li class=" nav-item menuitem @if(strpos($curr_url, 'apply/register') !== false) open active @endif" data-index="2">
         <a class="nav-link nav-toggle" href="{{url('apply/register/')}}">
                     <i class="icon-book-open"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculum')}}</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
 
       </li>
       @endif @if(session('user_id'))
-      <li class=" nav-item    menuitem" data-index="7">
-        <a class="nav-link nav-toggle" href="{{url('apply/manageMyCourse/')}}">
+      <li class=" nav-item    menuitem  @if(strpos($curr_url, '/application') !== false) open active @endif" data-index="7">
+        <a class="nav-link nav-toggle" href="{{url('application/manageMyCourse/')}}">
                     <i class="icon-briefcase"></i>
                     <span class="title">{{Lang::get('resource.lbManageCouse')}}</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
 
       </li>
 
-      <li class=" nav-item  menuitem   " data-index="3">
-        <a class="nav-link  nav-toggle" href="{{url('apply')}}">
+      <li class=" nav-item  menuitem    @if(strpos($curr_url, '/apply') !== false) open active @endif" data-index="3">
+        <a class="nav-link  nav-toggle" href="{{url('apply/')}}">
                     <i class="icon-book-open"></i>
                     <span class="title">{{Lang::get('resource.lbMCurriculumLogedin')}}</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
       </li>
       @endif
-      <li class=" nav-item    menuitem " data-index="4">
+      <li class=" nav-item    menuitem @if(strpos($curr_url, 'faq') !== false) open active @endif" data-index="4">
         <a class="nav-link nav-toggle" href="{{url('faq/')}}">
                     <i class="icon-question"></i>
                     <span class="title">{{Lang::get('resource.lbMFAQs')}}</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
 
       </li>
-      <li class=" nav-item    menuitem " data-index="5">
+      <li class=" nav-item    menuitem @if(strpos($curr_url, 'download') !== false) open active @endif" data-index="5">
         <a class="nav-link nav-toggle" href="{{url('download/')}}">
                     <i class="icon-cloud-download"></i>
                     <span class="title">{{Lang::get('resource.lbMDownlods')}}</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
 
       </li>
-      <li class=" nav-item     menuitem " data-index="6">
+      <li class=" nav-item     menuitem @if(strpos($curr_url, 'contact') !== false) open active @endif" data-index="6">
         <a class="nav-link nav-toggle" href="{{url('contact/')}}">
                     <i class="icon-pointer"></i>
                     <span class="title">{{Lang::get('resource.lbMContactsUs')}}</span>
                     <span class="arrow"></span>
+                    <span class="selected"></span>
                 </a>
 
       </li>

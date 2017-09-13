@@ -71,9 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
 //Apply
     Route::get('apply', 'ApplyController@showAnnouncement');
-    Route::get('apply/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
-    Route::get('apply/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
-    Route::get('apply/confDocApply/{id}', 'ApplyController@confDocApply')->name('confDocApply');
+    Route::get('application/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
+    Route::get('application/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
+    Route::get('application/confDocApply/{id}', 'ApplyController@confDocApply')->name('confDocApply');
     Route::get('apply/peopleData/{id}', 'ApplyController@getPeopoleRef')->name('datatables.data');
     Route::post('apply/savePeopoleRef', 'ApplyController@savePeopoleRef')->name('datatables.savePeopoleRef');
     Route::post('apply/submitregisterDetailForapply', 'ApplyController@submitregisterDetailForapply')->name('submitregisterDetailForapply');

@@ -242,5 +242,16 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     background-color: #E498B1;
 }
 .mt-element-list .list-simple.mt-list-container {
-    border-top: 3px solid #e7ecf1; 
+    border-top: 3px solid #e7ecf1;
+}
+.portlet.box.pink-chula {
+    border: 1px solid #E498B1;
+    border-top: 0;
+}
+
+.portlet.pink-chula , .portlet.box.pink-chula >.portlet-title, .portlet>.portlet-body.pink-chula  {
+    background-color: #E498B1;
+}
+.portlet.box.pink-chula>.portlet-title, .portlet.pink-chula, .portlet>.portlet-body.pink-chula {
+    background-color: #E498B1;
 }
