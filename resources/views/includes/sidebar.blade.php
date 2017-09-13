@@ -104,7 +104,7 @@
                 </a>
         <ul class="sub-menu">
           <li class=" nav-item  menuitem   ">
-            <a href="components_date_time_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-1.html" class="nav-link ">
                             <span class="title">สรุปยอดการชำระเงิน</span>
                         </a>
           </li>
