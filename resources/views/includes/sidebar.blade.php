@@ -109,13 +109,13 @@
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-2.html" class="nav-link ">
                             <span class="title">ผู้สมัครเข้าศึกษา (GS01)</span>
 
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-3.html" class="nav-link ">
                             <span class="title">สรุปยอดผู้สมัครเข้าศึกษา </span>
 
                         </a>
