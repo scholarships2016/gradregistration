@@ -121,7 +121,7 @@
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-4.html" class="nav-link ">
                             <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
 
                         </a>
@@ -149,7 +149,7 @@
           </li>
 
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-8.html" class="nav-link ">
                             <span class="title">ผู้สอบได้มากกว่า 1 สาขาขึ้นไป</span>
 
                         </a>
@@ -157,32 +157,32 @@
 
 
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-9.html" class="nav-link ">
                             <span class="title">คะแนนภาษาอังกฤษ</span>
 
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-10.html" class="nav-link ">
                             <span class="title">ผู้สมัครชาวต่างชาติ  </span>
 
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-11.html" class="nav-link ">
                             <span class="title">แหล่งข่าว</span>
 
                         </a>
           </li>
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-12.html" class="nav-link ">
                             <span class="title">ความสนใจรับทุน </span>
 
                         </a>
           </li>
 
           <li class=" nav-item  menuitem   ">
-            <a href="components_color_pickers.html" class="nav-link ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-13.html" class="nav-link ">
                             <span class="title">ความพึงพอใจการใช้งานระบบ  </span>
 
                         </a>
