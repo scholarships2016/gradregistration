@@ -114,18 +114,6 @@
 
                         </a>
           </li>
-          <li class=" nav-item  menuitem   ">
-            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-3.html" class="nav-link ">
-                            <span class="title">สรุปยอดผู้สมัครเข้าศึกษา </span>
-
-                        </a>
-          </li>
-          <li class=" nav-item  menuitem   ">
-            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-4.html" class="nav-link ">
-                            <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
-
-                        </a>
-          </li>
 
           <li class=" nav-item  menuitem   ">
             <a href="components_color_pickers.html" class="nav-link ">
@@ -162,6 +150,19 @@
 
                         </a>
           </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-3.html" class="nav-link ">
+                            <span class="title">สรุปยอดผู้สมัครเข้าศึกษา </span>
+
+                        </a>
+          </li>
+          <li class=" nav-item  menuitem   ">
+            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-4.html" class="nav-link ">
+                            <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
+
+                        </a>
+          </li>
+
           <li class=" nav-item  menuitem   ">
             <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-10.html" class="nav-link ">
                             <span class="title">ผู้สมัครชาวต่างชาติ  </span>

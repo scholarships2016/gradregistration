@@ -77,7 +77,7 @@
         <div class="col-xs-12">
 <!--            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>-->
 
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >Download PDF</a>
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  ><i class="fa fa-download"></i>Download PDF</a>
 
 
 
@@ -270,12 +270,12 @@
                                 <tr>
                                     <td> ({{$loop->iteration}})   {{ $appapplicantWork->work_status_name . ' - ' .  $appapplicantWork->work_status_name_en}}<br>
                                         @if($appapplicantWork->work_status_id > 1)
-                                                ตำแหน่ง/หน้าที่[Position] {{$appapplicantWork->work_stu_position}} สถานที่ทำงาน[Work place] {{$appapplicantWork->work_stu_detail}}   เบอร์โทรศัพท์[Telephone No]{{$appapplicantWork->work_stu_phone}}  
-                                                 <br>ระยะเวลาในการทำงาน[Period of Time Working] {{$appapplicantWork->work_stu_yr}} ปี[Year] {{$appapplicantWork->work_stu_mth}} เดือน[Month] เงินเดือนที่ได้รับ {{$appapplicantWork->work_stu_salary}} บาท[Baht]  
+                                                ตำแหน่ง/หน้าที่[Position] {{$appapplicantWork->work_stu_position}} สถานที่ทำงาน[Work place] {{$appapplicantWork->work_stu_detail}}   เบอร์โทรศัพท์[Telephone No]{{$appapplicantWork->work_stu_phone}}
+                                                 <br>ระยะเวลาในการทำงาน[Period of Time Working] {{$appapplicantWork->work_stu_yr}} ปี[Year] {{$appapplicantWork->work_stu_mth}} เดือน[Month] เงินเดือนที่ได้รับ {{$appapplicantWork->work_stu_salary}} บาท[Baht]
                                                 @endif     </td>
                                 </tr>
                                @endforeach
-                                
+
                                @endif
                                 <tr>
                                     <td>&nbsp;</td>
@@ -334,7 +334,7 @@
 
                                         <table width="100%" border="1" cellspacing="1" cellpadding="1">
                                             <tbody><tr>
-                                                    <td colspan="2" align="center"><strong> ให้นำหลักฐานและเอกสารประกอบการสมัครต่อไปนี้ส่งพร้อมใบสมัครทางไปรษณีย์<br>[Send all documents below]</strong></td>
+                                                    <td colspan="2" align="center"><strong> ให้นำหลักฐานและเอกสารประกอบการสมัครต่อไปนี้ส่งทางไปรษณีย์<br>[Send all documents below]</strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" align="center">ให้ผู้สมัครทำเครื่องหมาย / หน้าข้อความหลักฐานและเอกสารที่สมัคร ตามลำดับดังนี้<br>[Please check / in front of document sent to us]</td>
@@ -343,7 +343,7 @@
                                                 <tr>
                                                     <td width="6%" align="center"><span class="style1">{{$loop->iteration}}.</span></td>
                                                     <td align="left"><span class="style1">{{$Group->doc_apply_group.'  '.  $Group->doc_apply_group_en}} &nbsp;</span></td>
-                                                </tr> 
+                                                </tr>
                                                  @foreach ($Docs as $Doc)
                                                  @if(($Doc->doc_apply_id == 9 && $apps[0]->apply_method > 1 ) || ($Doc->doc_apply_id == 9 && $apps[0]->apply_method == 1 && $applicant->nation_id != 1) )
                                                  ''
@@ -365,7 +365,7 @@
                                                     <td width="94%" align="left"><span class="style1"><label for="checkbox{{$Doc->doc_apply_id}}">
                                                         <span class="inc"></span>
                                                         <span class="check"></span>
-                                                        <span class="box"></span> <label> {{ $Doc->doc_apply_detail}} @if( $Doc->doc_apply_id == 9)     @foreach($apps as $app) :  {{$app->bank_name}}     @endforeach   @endif  <br>{{ $Doc->doc_apply_detail_en}}  </label>    
+                                                        <span class="box"></span> <label> {{ $Doc->doc_apply_detail}} @if( $Doc->doc_apply_id == 9)     @foreach($apps as $app) :  {{$app->bank_name}}     @endforeach   @endif  <br>{{ $Doc->doc_apply_detail_en}}  </label>
                                                         @if( $Doc->doc_apply_id == 16)
                                                         <span style="border-bottom: 1px dotted;">
                                                           @foreach($Files as $file)
@@ -377,7 +377,7 @@
                                                 </tr>
                                                 @endif
                                                 @endif
-                                                 @endforeach                                                 
+                                                 @endforeach
                                               @endforeach
                                                 <tr>
                                                     <td colspan="2"><p>&nbsp;</p>

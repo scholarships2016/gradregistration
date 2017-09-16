@@ -76,9 +76,12 @@
       <div class="m-heading-1 border-yellow-lemon m-bordered">
         <h3>
                 <span class="item">
-                  <span aria-hidden="true" class="icon-info"></span> {{Lang::get('resource.lbUpdateDocApply')}}
+                  <span aria-hidden="true" class="icon-info"></span>
+                  {{Lang::get('resource.lbUpdateDocApply')}}
+
                 </span>
               </h3>
+                <p>  {!!Lang::get('resource.lbUpdateDocApplyInstructions')!!}</p>
       </div>
 
     </div>
