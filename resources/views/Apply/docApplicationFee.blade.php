@@ -1,4 +1,4 @@
-  
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,7 +47,7 @@
 
         </style>
     </head>
-    <body >   
+    <body >
          @foreach($apps as $app)
         <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
                 ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
@@ -72,11 +72,11 @@
                                         </td>
                                 </tr>
                                 <tr rowspan="4">
-                                    <td colspan="4">หมายเลขโทรศัพท์ (Ref. No1) 
+                                    <td colspan="4">หมายเลขโทรศัพท์ (Ref. No1)
                                       {{ $applicant->stu_phone}}</td>
                                 </tr>
                                 <tr rowspan="4">
-                                    <td colspan="4">รหัสหลักสูตร (Ref. No2) {{$app->program_id}} สาขาวิชา {{$app->major_name }} ({{$app->major_code  }}) {{$app->faculty_name}}</td>
+                                    <td colspan="4">รหัสหลักสูตร (Ref. No2) {{$app->program_id}} สาขาวิชา {{$app->major_name }} ({{$app->major_id  }}) {{$app->faculty_name}}</td>
                                 </tr>
                             </tbody></table>
                     </td>
@@ -91,8 +91,10 @@
                                 </tr>
                                 <tr>
                                     <td>ค่าธรรมเนียมการสมัครเข้าศึกษาระดับบัณฑิตศึกษา และค่าธรรมเนียมผ่านธนาคาร </td>
-                                    <td><div align="center">{{$app->apply_fee}}</div></td>
-                                    <td><p>&nbsp;</p>                                        
+                                    <td><div align="center">
+                                        {{number_format($app->apply_fee, 2)}}
+                                    </div></td>
+                                    <td><p>&nbsp;</p>
                                         <p>&nbsp;</p></td>
                                 </tr>
                             </tbody></table>
@@ -100,7 +102,7 @@
                 </tr>
             </tbody>
         </table><br>
-         <p style="margin-top: 5px;" align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน    <span style="font-family:IDAutomationHC39M;font-size: 12px;padding-left: 40px;" >*{{ str_pad($app->application_id, 10, '0', STR_PAD_LEFT) }}*</span> 
+         <p style="margin-top: 5px;" align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน    <span style="font-family:IDAutomationHC39M;font-size: 12px;padding-left: 40px;" >*{{ str_pad($app->application_id, 10, '0', STR_PAD_LEFT) }}*</span>
         </p><hr>
  <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
                 ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน   {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
@@ -125,11 +127,11 @@
                                         </td>
                                 </tr>
                                 <tr rowspan="4">
-                                    <td colspan="4">หมายเลขโทรศัพท์ (Ref. No1) 
+                                    <td colspan="4">หมายเลขโทรศัพท์ (Ref. No1)
                                       {{ $applicant->stu_phone}}</td>
                                 </tr>
                                 <tr rowspan="4">
-                                    <td colspan="4">รหัสหลักสูตร (Ref. No2) {{$app->program_id}} สาขาวิชา {{$app->major_name }} ({{$app->major_code  }}) {{$app->faculty_name}}</td>
+                                    <td colspan="4">รหัสหลักสูตร (Ref. No2) {{$app->program_id}} สาขาวิชา {{$app->major_name }} ({{$app->major_id  }}) {{$app->faculty_name}}</td>
                                 </tr>
                             </tbody></table>
                     </td>
@@ -144,17 +146,20 @@
                                 </tr>
                                 <tr>
                                     <td>ค่าธรรมเนียมการสมัครเข้าศึกษาระดับบัณฑิตศึกษา และค่าธรรมเนียมผ่านธนาคาร </td>
-                                    <td><div align="center">{{$app->apply_fee}}</div></td>
+                                    <td><div align="center">
+                                        {{number_format($app->apply_fee, 2)}}
+
+                                    </div></td>
                                     <td><p>&nbsp;</p>
-                                        
+
                                         <p>&nbsp;</p></td>
                                 </tr>
                             </tbody></table>
                     </td>
                 </tr>
             </tbody></table><br>
-          <p style="margin-top: 5px;" align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน    <span style="font-family:IDAutomationHC39M;font-size: 12px;padding-left: 40px; " >*{{ str_pad($app->application_id, 10, '0', STR_PAD_LEFT) }}*</span> 
-      
+          <p style="margin-top: 5px;" align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน    <span style="font-family:IDAutomationHC39M;font-size: 12px;padding-left: 40px; " >*{{ str_pad($app->application_id, 10, '0', STR_PAD_LEFT) }}*</span>
+
         </p><hr>
          <div align="center"><strong>ใบแจ้งการชำระค่าธรรมเนียมการสมัครระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย<br>
                 ชำระเงินตามที่ระบุไว้ทุกสาขาทั่วประเทศ ระหว่างวัน  {{ Conutil::ConvertDateThai($app->start_date) }} - {{ Conutil::ConvertDateThai($app->end_date) }}  </strong></div>
@@ -179,7 +184,7 @@
                                         </td>
                                 </tr>
                                 <tr rowspan="4">
-                                    <td colspan="4">หมายเลขโทรศัพท์ (Ref. No1) 
+                                    <td colspan="4">หมายเลขโทรศัพท์ (Ref. No1)
                                       {{ $applicant->stu_phone}}</td>
                                 </tr>
                                 <tr rowspan="4">
@@ -198,9 +203,11 @@
                                 </tr>
                                 <tr>
                                     <td>ค่าธรรมเนียมการสมัครเข้าศึกษาระดับบัณฑิตศึกษา และค่าธรรมเนียมผ่านธนาคาร </td>
-                                    <td><div align="center">{{$app->apply_fee}}</div></td>
+                                    <td><div align="center">
+                                        {{number_format($app->apply_fee, 2)}}
+                                    </div></td>
                                     <td><p>&nbsp;</p>
-                                      
+
                                         <p>&nbsp;</p></td>
                                 </tr>
                             </tbody></table>
@@ -209,9 +216,7 @@
             </tbody></table><br>
         <p align="center">(ต้องมีลายเซ็นต์ผู้รับเงินและประทับตราธนาคาร จึงถือว่าถูกต้องสมบูรณ์) โปรดตัดออกเป็นส่วนๆ ก่อนนำไปชำระเงิน
         </p><hr>
-        
+
         @endforeach
     </body>
 </html>
-
-
