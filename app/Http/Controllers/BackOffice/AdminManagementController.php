@@ -58,6 +58,12 @@ class AdminManagementController extends Controller
             $who = 'test';
             $data['modifier'] = $who;
             $data['creator'] = $who;
+            //Test
+                    if (empty($data['user_id'])) {
+                        $data['user_password'] = bcrypt('123456');
+                    }
+
+
             $result = $this->userRepo->doSave($data);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {

@@ -198,7 +198,7 @@
 	<div class="container">
     <div id="" style="border-bottom: 1px dotted #cccccc; padding: 5px 0px 20px 0px;">
       <span class="badge badge-warning">3.1</span> ดาวน์โหลด Excel Template เพื่อกรอกข้อมูลผู้สอบได้
-      <a href="{{url('admin/getMedia').'?path=excel-template\student-data.xlsx'}}" class="btn btn-circle green-haze btn-outline sbold " download><i class="fa fa-download"></i> ดาวน์โหลด Excel Template</a>
+      <a href="{{route('admin.getMedia',['path' => Crypt::encrypt('excel-template\student-data.xlsx') ])}}" class="btn btn-circle green-haze btn-outline sbold " download><i class="fa fa-download"></i> ดาวน์โหลด Excel Template</a>
     </div>
     <div id="" style="border-bottom: 1px dotted #cccccc; padding: 10px 0px 20px 0px;">
       <span class="badge badge-warning">3.2</span> Upload ไฟล์ Excel ข้อมูลผู้สอบได้ ที่กรอกใน Excel Template ตามข้อ 3.1 เท่านั้น

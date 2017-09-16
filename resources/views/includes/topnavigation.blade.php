@@ -61,7 +61,7 @@
                                         <li class="dropdown dropdown-user">
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                                data-close-others="true">
-                                                <img alt="" class="img-circle" id='userimg' src="{{   (session('stu_img'))?session('stu_img'):url('/assets/layouts/layout/img/avatar.png')}}"/>
+                                                <img alt="" class="img-circle" id='userimg' src="{{   (session('stu_img'))?route('profile.getProfileImg',['applicant_id' => Crypt::encrypt(session('Applicant')->applicant_id) ]):url('/assets/layouts/layout/img/avatar.png')}}"/>
                                                 <span class="username username-hide-on-mobile">  {{ session('first_name').' '.session('last_name')  }} </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Input;
-
+use \Crypt;
 class Controller extends BaseController {
 
     use AuthorizesRequests,
@@ -35,8 +35,8 @@ class Controller extends BaseController {
             if (!array_key_exists('file_id', $data) || empty($data['file_id'])) {
                 return;
             }
-
-            $file = $this->FileRepo->findOrFail($data['file_id']);
+            $id = Crypt::decrypt($data['file_id']);
+            $file = $this->FileRepo->findOrFail($id);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
 
             return response()->download($path, $file->file_origi_name);
@@ -51,8 +51,10 @@ class Controller extends BaseController {
             if (!array_key_exists('file_id', $data) || empty($data['file_id'])) {
                 return;
             }
+            $decrypt_file_id = Crypt::decrypt($data['file_id']);
+            //echo  $decrypt_file_id;
 
-            $file = $this->FileRepo->getFileByGenName($data['file_id']);
+            $file = $this->FileRepo->getFileByGenName($decrypt_file_id);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
 
             return response()->download($path, $file->file_origi_name);

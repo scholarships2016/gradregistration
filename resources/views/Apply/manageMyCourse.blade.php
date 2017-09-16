@@ -146,18 +146,18 @@
                                                                               </a>
                           <ul class="dropdown-menu">
                             <li>
-                              <a target="_blank" href="{{url('apply/docMyCourse/'.$curDis->application_id )}}"> <i class="fa fa-file-pdf-o"></i> {{Lang::get('resource.lbdocMyCourse')}}     </a>
+                              <a target="_blank" href="{{url('apply/docMyCourse/'.Crypt::encrypt($curDis->application_id))}}"> <i class="fa fa-file-pdf-o"></i> {{Lang::get('resource.lbdocMyCourse')}}     </a>
                             </li>
                             @if($curDis->flow_id==2&& $curDis->is_active==1 && $curDis->apply_method==1 && session('Applicant')->nation_id == '001')
                             <li>
-                              <a target="_blank" href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
+                              <a target="_blank" href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($curDis->application_id)) }}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
 
                             </li>
                             @endif
                             @if($curDis->flow_id==2&& $curDis->is_active==1)
                             <li>
 
-                              <a target="_blank" href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> <i class="fa fa-envelope"></i> {{Lang::get('resource.lbdocEnvelop')}} </a>
+                              <a target="_blank" href="{{url('apply/docAppEnvelopPDF/'.Crypt::encrypt($curDis->application_id))}}"> <i class="fa fa-envelope"></i> {{Lang::get('resource.lbdocEnvelop')}} </a>
                             </li>
                             @endif
 
@@ -198,7 +198,7 @@
                                       <a href="javascript:;">{{Lang::get('resource.lbConfirmApply')}}</a>
                                     </h3>
                                     <div style="margin:10px 0px 10px 0px">
-                                      <a class="btn  green" href="{{url('application/registerCourse/'.$curDis->application_id )}}"> {{Lang::get('resource.lbConfirmApply')}}
+                                      <a class="btn  green" href="{{url('application/registerCourse/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbConfirmApply')}}
                                         <i class="fa fa-check"></i>
                                       </a>
                                       <a class="btn btn-danger mt-sweetalert sweet-8" href="javascript:cancel({{$curDis->application_id}});">  {{Lang::get('resource.lbButtonRemoveApplication')}}
@@ -232,7 +232,7 @@
                                                       <a href="javascript:;">{{Lang::get('resource.lbUpdateDocApply')}}</a>
                                                   </h3>
                                     <div style="margin:10px 0px 10px 0px">
-                                      <a class="btn btn-circle blue btn-outline" href="{{url('application/confDocApply/'.$curDis->application_id )}}"> {{Lang::get('resource.lbUpdateDocApply')}}
+                                      <a class="btn btn-circle blue btn-outline" href="{{url('application/confDocApply/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbUpdateDocApply')}}
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                     </div>
@@ -251,7 +251,7 @@
                                     <div style="margin:10px 0px 10px 0px">
 
 
-                                      <span>   <i class="fa fa-money"></i><a target="_blank"  href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbBtnDownload')}} {{Lang::get('resource.lbdocPayMyCourse')}}   </a> </span>
+                                      <span>   <i class="fa fa-money"></i><a target="_blank"  href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbBtnDownload')}} {{Lang::get('resource.lbdocPayMyCourse')}}   </a> </span>
 
 
                                     </div>
@@ -268,9 +268,9 @@
                                                   </h3>
                                     <div style="margin:10px 0px 10px 0px">
                                       @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
-                                      <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocPaymentEnvidence')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
+                                      <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbdocPaymentEnvidence')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
                                       <br/> @endif
-                                      <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.$curDis->application_id )}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>
+                                      <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>
 
 
                                     </div>

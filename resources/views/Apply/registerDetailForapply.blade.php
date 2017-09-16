@@ -338,7 +338,7 @@
                 <label class="col-md-4 control-label">{{Lang::get('resource.lbProgDetailDocument')}}</label>
                 <div class="col-md-8">
                   <span class="form-control-static">
-                                                      <a target="_blank" href="{{route('downloadFile').'?file_id='.$curDis->document_file}}" class="btn btn-circle btn-xs blue btn-outline">
+                                                      <a target="_blank" href="{{route('downloadFile').'?file_id='.Crypt::encrypt($curDis->document_file)}}" class="btn btn-circle btn-xs blue btn-outline">
                                                                                 <i class="fa fa-file-word-o"></i> Download </a>
                                                      </span>
                 </div>
