@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Audittrail
- * 
+ *
  * @property int $audit_id
  * @property string $section
  * @property int $audit_action_id
@@ -23,23 +23,30 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Audittrail extends Eloquent
 {
-	protected $table = 'audittrail';
-	protected $primaryKey = 'audit_id';
-	public $timestamps = false;
+    protected $table = 'audittrail';
+    protected $primaryKey = 'audit_id';
+    public $timestamps = false;
+    const CREATED_AT = 'action_date';
 
-	protected $casts = [
-		'audit_action_id' => 'int'
-	];
 
-	protected $dates = [
-		'action_date'
-	];
+    protected $casts = [
+        'audit_action_id' => 'int'
+    ];
 
-	protected $fillable = [
-		'section',
-		'audit_action_id',
-		'detail',
-		'performer',
-		'action_date'
-	];
+    protected $dates = [
+        'action_date'
+    ];
+
+    protected $fillable = [
+        'section',
+        'audit_action_id',
+        'detail',
+        'performer',
+        'action_date'
+    ];
+
+    public function setCreatedAtAttribute($value)
+    {
+        $this->attributes['action_date'] = \Carbon\Carbon::now();
+    }
 }
