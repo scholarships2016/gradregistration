@@ -428,7 +428,8 @@ className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
 return ('<a href="#responsive" apm="'+full.apply_method+'" culn="'+full.nation_id+'"   hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน"  class="btn btn-xs green tooltips"><i class="fa fa-dollar"></i>ปรับปรุงสถานะ</a>'+
-   '<a target="_blank" href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ปรับเอกสาร" class="btn btn-xs blue "><i class="fa fa-file-o"></i>เอกสาร</a>') ;
+   '<a target="_blank" href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ปรับเอกสาร" class="btn btn-xs blue "><i class="fa fa-file-o"></i>เอกสาร</a>'+
+   '<a target="_blank" href="{{url("admin/docMyCourserintPDF/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ใบสมัคร" class="btn btn-xs blue "><i class="fa fa-file-o"></i>ใบสมัคร</a>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,
