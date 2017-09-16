@@ -158,7 +158,7 @@
           </li>
           <li class=" nav-item  menuitem   ">
             <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-4.html" class="nav-link ">
-                            <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
+                            <span class="title">Export ข้อมูลผู้สมัครตามสถานะ</span>
 
                         </a>
           </li>
