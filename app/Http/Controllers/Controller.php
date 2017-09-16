@@ -27,6 +27,7 @@ class Controller extends BaseController
 
     public function __construct(FileRepositoryImpl $FileRepo = null, Excel $excels = null, AudittrailRepository $auditRepo = null)
     {
+
         $this->FileRepo = $FileRepo;
         $this->excels = $excels;
         $this->auditRepo = $auditRepo;
