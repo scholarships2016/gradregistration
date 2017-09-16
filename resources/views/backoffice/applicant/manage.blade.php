@@ -402,7 +402,9 @@
                     var modalInfo = $("#applicationProgramInfoActionRemoveModal");
                     modalInfo.find("#application_id").val(data.application_id);
                     modalInfo.find("#curr_prog_id").val(data.curr_prog_id);
-                    modalInfo.find("#flow_name_p").text(data.flow_name == null ? '-' : data.flow_name);
+                    modalInfo.find("#flow_name_p").html(data.flow_name == null ? '-' : data.flow_name
+                    + (data.flow_id=='4'&&data.exam_status=='2'? ' : <b>มีสิทธิ์สอบ</b>' : (data.flow_id=='4'&&data.exam_status=='3'?' : <b>ไม่มีสิทธิ์สอบ</b>':''))
+                    + (data.flow_id=='5'&&data.admission_status_name_th != null ? ' : <b>'+data.admission_status_name_th +'</b>' : ''));
                     modalInfo.find("#program_id_p").text(data.program_id == null ? '-' : data.program_id);
                     modalInfo.find("#prog_name_p").text(data.prog_name == null ? '-' : data.prog_name);
                     modalInfo.find("#plan_p").text(data.plan == null ? '-' : data.plan);

@@ -437,7 +437,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getApplicationAndProgramInfoByApplicationId($applicationId) {
         try {
             $query = DB::table('application as app')
-                    ->select('app.application_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time'
+                    ->select('app.application_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time','adst.admission_status_name_th', 'app.exam_status'
                     )
                     ->leftJoin('tbl_flow_apply as flow_app', function ($join) {
                         $join->on('flow_app.flow_id', '=', 'app.flow_id');
@@ -450,6 +450,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                     })
                     ->leftJoin('tbl_program_type as progt', function ($join) {
                         $join->on('progt.program_type_id', '=', 'curr_prog.program_type_id');
+                    })
+                    ->leftJoin('tbl_admission_status as adst', function ($join) {
+                        $join->on('app.admission_status_id', '=', 'adst.admission_status_id');
                     })
                     ->where('app.application_id', '=', $applicationId);
 
