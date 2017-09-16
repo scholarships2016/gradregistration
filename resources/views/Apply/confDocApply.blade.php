@@ -76,9 +76,12 @@
       <div class="m-heading-1 border-yellow-lemon m-bordered">
         <h3>
                 <span class="item">
-                  <span aria-hidden="true" class="icon-info"></span> {{Lang::get('resource.lbUpdateDocApply')}}
+                  <span aria-hidden="true" class="icon-info"></span>
+                  {{Lang::get('resource.lbUpdateDocApply')}}
+
                 </span>
               </h3>
+                <p>  {!!Lang::get('resource.lbUpdateDocApplyInstructions')!!}</p>
       </div>
 
     </div>
@@ -124,7 +127,7 @@
                       <p class="help-block">
 
                         @foreach($Files as $file) @if($Doc->doc_apply_id == $file->doc_apply_id) {{ $file->file_origi_name }}
-                        <a href="{{route('downloadFile').'?file_id='.$file->file_id}}" target="_blank" class="btn btn-xs green" download>
+                        <a href="{{route('downloadMediaFile').'?file_id='.$file->file_gen_name}}" target="_blank" class="btn btn-xs green" download>
                                                               Download
                                                              <i class="fa fa-download"></i>
                                                             </a> @endif @endforeach

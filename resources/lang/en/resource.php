@@ -78,6 +78,7 @@ return [
     'lbContacts' => 'Contacts',
     'lbAddress' => 'Address',
     'lbTelContact' => '+662-218-3502 to 5',
+    'lbGradAddressOnPDF' => 'กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ<br/>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br/>ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน<br/>กรุงเทพฯ 10330',
 
     //Menu
     'lbMHome' => 'Home',
@@ -109,8 +110,9 @@ return [
     'lbdocPayMyCourse' => 'Payment Invoice Form',
     'lbdocEnvelop' => 'Applicant\'s address form',
     'lbdocPaymentEnvidence' => 'Envidence of payment',
-	'lbRegisterbtn' => 'Apply',
+	   'lbRegisterbtn' => 'Apply',
     'lbSearchPlaceHolder' => 'Search for faculty, program ID or program name',
+    'lbUpdateDocApplyInstructions' => 'All copy documents must have applicant\'s signature. I certify that the information given is complete and accurate. ',
 //Search Label
     'lbSearchFaculty' => 'Faculty',
     'lbSearchProgramType' => 'Program Type',

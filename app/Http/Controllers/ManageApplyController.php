@@ -193,7 +193,53 @@ class ManageApplyController extends Controller {
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
         $Datas = $this->ApplicationRepo->getData(null, $pid);
         $files = $this->ApplicationDocumentFileRepo->GetData($pid);
-        return view('Apply.confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $pid]);
+        return view('Apply.confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $pid, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
+    }
+
+    public function docMyCourserintPDF($id, $pid) {
+        $user_data = $this->ApplicantRepo->find($id);
+        $appc = new \stdClass();
+        $appc->applicant_id = $user_data->applicant_id;
+        $appc->stu_citizen_card = $user_data->stu_citizen_card;
+        $appc->stu_email = $user_data->stu_email;
+        $appc->nation_id = $user_data->nation_id;
+        session()->put('Applicant', $appc);
+
+        $dataApplication = $this->ApplicationRepo->getData(null, $pid);
+        $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
+        $people = $this->ApplicationPeopleRef->getDetail($pid);
+        $DocumentApplys = $this->DocumentApply->getDetailReport();
+        $DocumentApplyGroup = $this->DocumentApply->getGroupReport();
+        $files = $this->ApplicationDocumentFileRepo->GetData($pid);
+
+
+        $pic = $this->doPDFImg($applicantProfile['applicant']->stu_img);
+
+        $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
+
+        $page = View('Apply.docApplicationForm', ['apps' => $dataApplication,
+            'applicant' => $applicantProfile['applicant']
+            , 'appEdus' => $applicantProfile['applicantEdu']
+            , 'appapplicantWorks' => $applicantProfile['applicantWork']
+            , 'peoples' => $people
+            , 'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Files' => $files
+            , 'age' => $age, 'pictrue' => $pic])->render();
+
+
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $options->setIsPhpEnabled(true);
+        $options->setDebugKeepTemp(true);
+        $options->setIsHtml5ParserEnabled(true);
+
+        $options->set('defaultFont', 'THSarabunNew');
+        $pdf = new Dompdf($options);
+        $pdf->loadHtml((string) $page);
+        $pdf->setPaper('A4', 'portrait');
+
+        $pdf->render();
+
+        return $pdf->stream("CU_Application" .'_'. $user_data->stu_first_name_en . ".pdf");
     }
 
     //GS03
@@ -590,7 +636,7 @@ class ManageApplyController extends Controller {
     }
 
     public function manageNews() {
-        $data = $this->NewsRepo->getNewsAll(); 
+        $data = $this->NewsRepo->getNewsAll();
         return view('backoffice.news_announcement.news_management', ['datas' => $data]);
     }
 
@@ -627,9 +673,9 @@ class ManageApplyController extends Controller {
     }
 
     public function SaveNews(Request $request) {
-        
+
         if ($request->news_title != '' && $request->news_title_en != '') {
-           
+
             $res = $this->NewsRepo->save($request->all());
             if ($res) {
                 session()->flash('successMsg', Lang::get('resource.lbSuccess'));
@@ -643,11 +689,10 @@ class ManageApplyController extends Controller {
             return back();
         }
     }
-    
-    
-     public function manageAnnounc() {
-      
-        $data = $this->AnnouncementRepo->getAnnouncementAll(); 
+
+    public function manageAnnounc() {
+
+        $data = $this->AnnouncementRepo->getAnnouncementAll();
         return view('backoffice.news_announcement.announcement_management', ['datas' => $data]);
     }
 
@@ -658,16 +703,16 @@ class ManageApplyController extends Controller {
 
     public function editAnnounc($id) {
         $anno_id = null;
-        $anno_title  = null;
+        $anno_title = null;
         $anno_detail = null;
         $anno_title_en = null;
         $anno_detail_en = null;
         $anno_seq = null;
-        $anno_flag  = null;
+        $anno_flag = null;
         if ($id != 0) {
             $data = $this->AnnouncementRepo->find($id);
             $anno_id = $id;
-            $anno_title  = $data->anno_title;
+            $anno_title = $data->anno_title;
             $anno_detail = $data->anno_detail;
             $anno_title_en = $data->anno_title_en;
             $anno_detail_en = $data->anno_detail_en;
@@ -680,13 +725,13 @@ class ManageApplyController extends Controller {
             , 'anno_title_en' => $anno_title_en
             , 'anno_detail_en' => $anno_detail_en
             , 'anno_seq' => $anno_seq
-            , 'anno_flag' => $anno_flag ]);
+            , 'anno_flag' => $anno_flag]);
     }
 
     public function SaveAnnounc(Request $request) {
-        
+
         if ($request->anno_title != '' && $request->anno_title_en != '') {
-           
+
             $res = $this->AnnouncementRepo->saveAnnouncement($request->all());
             if ($res) {
                 session()->flash('successMsg', Lang::get('resource.lbSuccess'));
@@ -698,6 +743,48 @@ class ManageApplyController extends Controller {
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
             return back();
+        }
+    }
+
+    //Report
+    public function showReportGS03() {
+        return view('backoffice.reports.report_GS03');
+    }
+
+    public function getRegisterCourseReport(Request $request = null) {
+
+        $status = explode(',', $request->flow);
+        $semester = $request->semester;
+        $year = $request->year;
+        $roundNo = $request->roundNo;
+        $criteria = $request->criteria;
+        $curr_act_id = $request->curr_act_id;
+        $exam_status = $request->exams;
+        $program_id = $request->program_id;
+        $print = $request->print;
+        $filename = $request->filename;
+        if (isset($request->sub_major_id)) {
+            $sub_major_id = ($request->sub_major_id != null) ? $request->sub_major_id : '-1';
+        } else {
+            $sub_major_id = null;
+        }
+
+        $program_type_id = $request->program_type_id;
+
+        $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
+
+        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_tyep')->user_role);
+        if ($print == null) {
+            return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
+        } else if ($print == 'pdf') {
+            
+        } else if ($print == 'excel') {
+            $data = $curDiss->toArray();
+
+            $this->exportExcel($filename, $data);
+            retrun;
+        } else if ($print == 'text') {
+            
         }
     }
 

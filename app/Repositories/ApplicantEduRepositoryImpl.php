@@ -6,17 +6,13 @@ use App\Models\ApplicantEdu;
 use App\Repositories\Contracts\ApplicantEduRepository;
 use Illuminate\Support\Facades\DB;
 
+class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements ApplicantEduRepository {
 
-class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements ApplicantEduRepository
-{
-
-    public function __construct()
-    {
+    public function __construct() {
         parent::setModelClassName(ApplicantEdu::class);
     }
 
-    public function saveApplicantEduList(array $datas, $applicantId)
-    {
+    public function saveApplicantEduList(array $datas, $applicantId) {
         DB::beginTransaction();
         try {
             $ids = array();
@@ -38,7 +34,7 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
 
             if (!empty($ids) && sizeof($ids) > 0) {
                 $del = ApplicantEdu::where('applicant_id', '=', $applicantId)
-                    ->whereNotIn('app_edu_id', $ids)->delete();
+                                ->whereNotIn('app_edu_id', $ids)->delete();
             }
 
             DB::commit();
@@ -49,8 +45,7 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
         }
     }
 
-    public function getApplicantEduByApplicantId($applicantId)
-    {
+    public function getApplicantEduByApplicantId($applicantId) {
         try {
             return ApplicantEdu::where('applicant_id', '=', $applicantId)->get();
         } catch (\Exception $ex) {
@@ -58,19 +53,18 @@ class ApplicantEduRepositoryImpl extends AbstractRepositoryImpl implements Appli
         }
     }
 
-    public function getApplicantEduAllByApplicantId($applicantId)
-    {
+    public function getApplicantEduAllByApplicantId($applicantId) {
         try {
             return ApplicantEdu::leftjoin('tbl_university', 'tbl_university.university_id', 'applicant_edu.university_id')
-                ->leftjoin('tbl_education_pass', 'tbl_education_pass.edu_pass_id', 'applicant_edu.edu_pass_id')
-                ->where('applicant_id', '=', $applicantId)->get();
+                            ->leftjoin('tbl_education_pass', 'tbl_education_pass.edu_pass_id', 'applicant_edu.edu_pass_id')
+                            ->leftjoin('tbl_degree_level', 'tbl_degree_level.degree_level_ref', 'applicant_edu.grad_level')
+                            ->where('applicant_id', '=', $applicantId)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
     }
 
-    public function save(array $data)
-    {
+    public function save(array $data) {
         try {
             $id = null;
 
