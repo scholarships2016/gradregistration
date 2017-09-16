@@ -1,4 +1,4 @@
-  
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -54,10 +54,9 @@
                         <table border="0" cellpadding="0" cellspacing="0">
                             <tbody>
                                 <tr>
-                                    <td width="300px" align="left">กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ <br>
-                                        บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย <br>
-                                        ถนนพญาไท เขตปทุมวัน <br>
-                                        กรุงเทพฯ 10330</td>
+                                    <td width="300px" align="left">
+                                      {!!Lang::get('resource.lbGradAddressOnPDF')!!}
+                                    </td>
                                     <td width="220px" align="right"></td>
                                 </tr>
 
@@ -78,15 +77,15 @@
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td>เลขที่ {{$applicant->stu_addr_no}}
-                                                        หมู่บ้าน  {{$applicant->stu_addr_village}}  
-                                                        ตรอก/ซอย  {{$applicant->stu_addr_soi }} 
-                                                        ถนน  {{$applicant->stu_addr_road }} 
+                                                        หมู่บ้าน  {{$applicant->stu_addr_village}}
+                                                        ตรอก/ซอย  {{$applicant->stu_addr_soi }}
+                                                        ถนน  {{$applicant->stu_addr_road }}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td>แขวง/ตำบล  {{$applicant->stu_addr_tumbon }},
-                                                        เขต/อำเภอ  {{$applicant->district_name }} 
+                                                        เขต/อำเภอ  {{$applicant->district_name }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -105,9 +104,9 @@
                                             </tbody></table></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><div align="center">สมัครสาขาวิชา Subject: {{$app->major_name }} ( {{$app->major_code }} )[{{  strrpos($app->degree_name ,'ดุษฎีบัณฑิต')?  'ปริญญาเอก':'ปริญญาโท'}}] ระดับ Syllabus: {{$app->degree_name}} - {{$app->degree_name_en}} 
+                                    <td colspan="2"><div align="center">สมัครสาขาวิชา Subject: {{$app->major_name }} ( {{$app->program_id }} )[{{$app->degree_level_name }}] ระดับ Degree: {{$app->degree_name}} - {{$app->degree_name_en}}
                                             <br>
-                                            คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{   date('d-m-Y', strtotime($app->start_date )) }} - {{ date('d-m-Y', strtotime($app->end_date ))  }} )Application ID
+                                            คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{   date('d-m-Y', strtotime($app->start_date )) }} - {{ date('d-m-Y', strtotime($app->end_date ))  }} ) Application ID
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}             </div></td>
                                 </tr>
                             </tbody></table>
@@ -116,7 +115,7 @@
                         <br><hr>
                     </td>
                 <tr>
-                <tr><td> <div id="page1" style="  page-break-before: always; ">&nbsp;</div>  </td>  </tr> 
+                <tr><td> <div id="page1" style="  page-break-before: always; ">&nbsp;</div>  </td>  </tr>
                 <tr>
                     <td><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                         <hr>
@@ -129,8 +128,8 @@
                                 </tr>
                                 <tr>
                                     <td align="left">เลขที่ {{$applicant->stu_addr_no}}
-                                                        หมู่บ้าน  {{$applicant->stu_addr_village}}  
-                                                        ตรอก/ซอย  {{$applicant->stu_addr_soi }} 
+                                                        หมู่บ้าน  {{$applicant->stu_addr_village}}
+                                                        ตรอก/ซอย  {{$applicant->stu_addr_soi }}
                                                         ถนน  {{$applicant->stu_addr_road }} </td>
                                 </tr>
                                 <tr>
@@ -155,10 +154,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
-                                                    <td rowspan="5">กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ <br>
-                                                        บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย <br>
-                                                        ถนนพญาไท เขตปทุมวัน <br>
-                                                        กรุงเทพฯ 10330                    </td>
+                                                    <td rowspan="5">
+                                                      {!!Lang::get('resource.lbGradAddressOnPDF')!!}                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
@@ -174,7 +171,7 @@
                                             </tbody></table></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><div align="center">สมัครสาขาวิชา Subject: {{$app->major_name }} ( {{$app->major_code }} )[{{  strrpos($app->degree_name ,'ดุษฎีบัณฑิต')?  'ปริญญาเอก':'ปริญญาโท'}}] ระดับ Syllabus: {{$app->degree_name}} - {{$app->degree_name_en}} 
+                                    <td colspan="2"><div align="center">สมัครสาขาวิชา Subject: {{$app->major_name }} ( {{$app->program_id }} )[{{$app->degree_level_name }}] ระดับ Degree: {{$app->degree_name}} - {{$app->degree_name_en}}
                                             <br>
                                             คณะ Faculty:  {{$app->faculty_name}} - {{$app->faculty_full }}    ({{  date('d-m-Y', strtotime($app->start_date))}} - {{ date('d-m-Y', strtotime($app->end_date))}} )          </div></td>
                                 </tr>
@@ -190,5 +187,3 @@
       @endforeach
     </body>
 </html>
-
-

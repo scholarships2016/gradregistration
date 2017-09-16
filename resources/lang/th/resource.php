@@ -78,6 +78,7 @@ return [
     'lbContacts' => 'ติดต่อ',
     'lbAddress' => 'ที่อยู่',
     'lbTelContact' => '02-218-3502 ถึง 5',
+    'lbGradAddressOnPDF' => 'กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ<br/>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br/>ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน<br/>กรุงเทพฯ 10330',
 
     //Menu
     'lbMHome' => 'หน้าหลัก',
@@ -290,7 +291,7 @@ return [
     'lbApproveBy' => 'อนุมัติโดย',
     'lbApproveNo' => 'ครั้งที่',
     'lbApproveDate' => 'วันที่',
-    
+
     'lbNewsTitle' =>'ข่าว & ประกาศ',
     'lbSetting' =>'ตั้งค่า',
     'lbApplicationSame' =>'มีการสมัครในระบบแล้ว',

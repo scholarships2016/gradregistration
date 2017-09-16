@@ -4,7 +4,7 @@
 
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
-<link href="{{asset('assets/pages/css/invoice-2.min.css')}}" rel="stylesheet" type="text/css"> 
+<link href="{{asset('assets/pages/css/invoice-2.min.css')}}" rel="stylesheet" type="text/css">
 
 <style type="text/css">
     page[size="A4"] {
@@ -35,6 +35,11 @@
 
         <li>
             <span>{{Lang::get('resource.lbManageCouse')}}</span>
+              <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>{{Lang::get('resource.lbdocMyCourse')}}</span>
+
         </li>
     </ul>
     {{--<div class="page-tool    bar">--}}
@@ -52,7 +57,7 @@
                                             {{--<a href="#">--}}
         {{--<i class="icon-shield"></i> Another action</a>--}}
                 {{--</li>-                        -}}
-                {{--<li>--}}                                 
+                {{--<li>--}}
                 {{--<a hr                        ef="#">--}}
                     {{--<i class="ico                n-user"></i> Something else h                ere</a>--}}
                 {{--</li>--}}
@@ -71,11 +76,11 @@
     <div class="row">
         <div class="col-xs-12">
 <!--            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>-->
-              
+
             <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.$id)}}" target="_blank"  >Download PDF</a>
-    
-        
-        
+
+
+
         </div>
     </div>
 <table width="800" border="0"  cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center" height="100%" >
@@ -90,7 +95,7 @@
                                     <td width="226" rowspan="4" align="center">สำหรับเจ้าหน้าที่<br>For staff only<br>
                                         เลขประจำตัวผู้สมัคร<br>Application No.<br>
                                         {{$app->program_id }}-{{str_pad($app->curriculum_num, 4, '0', STR_PAD_LEFT)}}<br>
-                                        ปริญญาโท
+                                        {{$app->degree_level_name}}
                                         <hr>
                                         <div align="center">ใบสมัครเลขที่<br>Application ID<br>
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}            </div></td>
@@ -110,11 +115,12 @@
                                     <td></td>
                                 </tr>
                             </tbody></table>
+                            <br/>
 
                         <table width="856" border="0" cellpadding="0" cellspacing="1">
                             <tbody><tr>
                                     <td>สมัครสาขาวิชา[Field of Study]:
-                                        วิศวกรรมอุตสาหการ</td>
+                                        {{$app->major_name}} - {{$app->major_name_en}}</td>
                                 </tr>
                                 <tr>
                                     <td>หลักสูตร [Degree ]:
@@ -135,21 +141,20 @@
                             </tbody></table>
                         <br>
                         @endforeach
-                        
-                                    
-                         
+
+
                         <table width="800" border="1" cellpadding="1" cellspacing="1">
-                            <tbody><tr valign="bottom">
+                            <tbody><tr valign="middle">
                                     <td width="191">ชื่อ - นามสกุล [Name- Surname]</td>
                                     <td colspan="3">
-                                        {{ $applicant->name_titles .' '. $applicant->stu_first_name. ' '.$applicant->stu_last_name  }}[ {{$applicant->name_title_en.' '. $applicant->stu_first_name_en. ' '.$applicant->stu_last_name_en }}]เพศ[Sex]:
+                                        {{ $applicant->name_titles .' '. $applicant->stu_first_name. ' '.$applicant->stu_last_name  }}[ {{$applicant->name_title_en.' '. $applicant->stu_first_name_en. ' '.$applicant->stu_last_name_en }}]  เพศ[Sex]:
                                         {{($applicant->stu_sex=='1')?'ชาย':'หญิง'}} [{{($applicant->stu_sex=='1')?'Male':'FeMale'}}]</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" rowspan="2">หมายเลขบัตรประชาชน/พาสปอร์ต <br>[ Citizen ID / Passport ID]
                                         <br>{{$applicant->stu_citizen_card}}</td>
                                     <td width="618" colspan="2">วัน/เดือน/ปีเกิด [ Date of Birth]
-                                        {{$applicant->stu_birthdate->format('d-m-YYYY') }}   อายุ [Age]
+                                        {{$applicant->stu_birthdate->format('d-m-Y') }}   อายุ [Age]
                                        {{ $age }}   </td>
                                 </tr>
                                 <tr>
@@ -168,14 +173,14 @@
                                     <td>สถานที่ติดต่อ[ Address]:</td>
                                     <td colspan="4">
                                         {{$applicant->stu_addr_no}}
-                                        หมู่บ้าน[Village]:{{$applicant->stu_addr_village}} , 
+                                        หมู่บ้าน[Village]:{{$applicant->stu_addr_village}} ,
                                         ตรอก/ซอย[alley]:{{$applicant->stu_addr_soi }} ,
                                         ถนน[Road]:{{$applicant->stu_addr_road }} ,
                                         แขวง/ตำบล [Sub-District]:{{$applicant->stu_addr_tumbon }},
                                         เขต/อำเภอ [District]: {{$applicant->district_name }} ,
                                         จังหวัด [Province]:{{$applicant->province_name}},
                                         รหัสไปรษณีย์[Zip Code]:{{$applicant->stu_addr_pcode }}
-                                        โทรศัพท์[Telephone No]:{{$applicant->stu_phone }}  &nbsp;, {{$applicant->stu_phone2 }}  
+                                        โทรศัพท์[Telephone No]:{{$applicant->stu_phone }}  &nbsp;, {{$applicant->stu_phone2 }}
                                         อีเมล[E-mail]: {{$applicant->stu_email }}</td>
                                 </tr>
                                 <tr valign="bottom">
@@ -211,10 +216,10 @@
                                                     <td>
                                                         {{$appEdu->edu_year}}</td>
                                                     <td>
-                                                        {{$appEdu->edu_gpax}} 
+                                                        {{$appEdu->edu_gpax}}
 </td>
                                                     <td>
-                                                        {{$appEdu->edu_degree}} 
+                                                        {{$appEdu->edu_degree}}
 </td>
                                                     <td>
                                                         {{$appEdu->edu_faculty }}
@@ -261,7 +266,7 @@
                                           </td>
                                 </tr>
                                 @if($appapplicantWorks->count()  > 0)
-                               @foreach ($appapplicantWorks as $appapplicantWork)     
+                               @foreach ($appapplicantWorks as $appapplicantWork)
                                 <tr>
                                     <td> ({{$loop->iteration}}) {{$appapplicantWork->work_stu_detail}} {{$appapplicantWork->work_stu_position}}  {{$appapplicantWork->work_stu_yr}}  {{$appapplicantWork->work_stu_mth}}  {{$appapplicantWork->work_status_name}}        </td>
                                 </tr>
@@ -284,7 +289,7 @@
                                                     <td bgcolor="EEEEEE" align="center">สถานที่ติดต่อ/โทรศัพท์ [ Contact Address and Phone No. ]</td>
                                                     <td bgcolor="EEEEEE" align="center">ตำแหน่ง [Position]</td>
                                                 </tr>
-                                             @foreach ($peoples as $people)     
+                                             @foreach ($peoples as $people)
                                                 <tr>
                                                     <td style="text-align: center">{{$loop->iteration}}</td>
                                                     <td> {{$people->app_people_name}} </td>
@@ -295,7 +300,8 @@
                                             </tbody></table></td>
                                 </tr>
                                 <tr>
-                                    <td align="center">ข้าพเจ้าขอรับรองว่า ข้อความที่กรอกในใบสมัครข้างต้นเป็นความจริงทุกประการ<br>
+                                    <td align="center">
+                                      <br/>ข้าพเจ้าขอรับรองว่า ข้อความที่กรอกในใบสมัครข้างต้นเป็นความจริงทุกประการ<br>
                                         I certify that the information given is complete and accurate.</td>
                                 </tr>
                                 <tr>
@@ -339,32 +345,32 @@
                                                   @if($Group->doc_apply_group == $Doc->doc_apply_group   )
                                                 <tr>
                                                     <td align="center"><span class="style1">
-                                                           <input class="md-check"   type="checkbox"    
+                                                           <input class="md-check"   type="checkbox"
                                                             {{$val=false}}
                                                            @foreach($Files as $file)
                                                               @if($Doc->doc_apply_id == $file->doc_apply_id ||$Doc->doc_apply_id ==1 )
                                                               {{$val=true}}
                                                                @break
                                                               @endif
-                                                            @endforeach                                                              
+                                                            @endforeach
                                                            {{ ($val)? 'checked="checked"':''}}
                                                              disabled="disabled"    >
                                                         </span></td>
                                                     <td width="94%" align="left"><span class="style1"><label for="checkbox{{$Doc->doc_apply_id}}">
                                                         <span class="inc"></span>
                                                         <span class="check"></span>
-                                                        <span class="box"></span> <label> {{ $Doc->doc_apply_detail}}<br>{{ $Doc->doc_apply_detail_en}}  </label>    
+                                                        <span class="box"></span> <label> {{ $Doc->doc_apply_detail}}<br>{{ $Doc->doc_apply_detail_en}}  </label>
                                                         @if( $Doc->doc_apply_id == 16)
-                                                        <span style="border-bottom: 1px dotted;">  
+                                                        <span style="border-bottom: 1px dotted;">
                                                           @foreach($Files as $file)
                                                            {{($Doc->doc_apply_id == $file->doc_apply_id)? ' :           '. $file->other_val .'' :' '}}
-                                                           @endforeach 
+                                                           @endforeach
                                                       </span>
                                                         @endif
                                                              </span></td>
                                                 </tr>
                                                 @endif
-                                                 @endforeach                                                 
+                                                 @endforeach
                                               @endforeach
                                                 <tr>
                                                     <td colspan="2"><p>&nbsp;</p>
@@ -397,8 +403,8 @@
                                 </tr>
                                 <tr>
                                     <td align="center"><span class="style2"><strong>คณะ [Faculty]
-                                                {{$app->faculty_name}} - {{$app->faculty_full }}                       
-                                                สมัครสาขาวิชา[Field of Study] {{$app->department_name }} - {{$app->department_name_en }}                         (
+                                                {{$app->faculty_name}} - {{$app->faculty_full }}
+                                                สมัครสาขาวิชา[Field of Study] {{$app->major_name}} - {{$app->major_name_en}}                         (
                                                 [Program ID]  {{$app->program_id}}                        )
                                                 ระดับ[Degree]<strong>
                                                      {{$app->degree_name}} - {{$app->degree_name_en}}                   </strong></strong></span></td>
@@ -425,7 +431,7 @@
                                             </tbody></table>            </td>
                                 </tr>
                             </tbody></table>
- 
+
                     </div>
                 </td></tr>
 
@@ -433,7 +439,7 @@
     </table>
 
 
-</div> 
+</div>
 @stop
 
 
@@ -442,13 +448,10 @@
 <script src="{{asset('script/profileRepeatForm.js')}}" type="text/javascript"></script>
 <script src="../assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
 <script src="../assets/pages/scripts/ui-sweetalert.min.js" type="text/javascript"></script>
- 
- 
 
-<script type="application/javascript">    
- 
+
+
+<script type="application/javascript">
+
 </script>
 @endpush
-
-
-
