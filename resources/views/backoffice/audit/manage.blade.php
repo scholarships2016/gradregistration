@@ -257,7 +257,7 @@
                         targets: 2,
                         class: 'text-left',
                         render: function (data, type, full, meta) {
-                            return full.name;
+                            return full.performer;
                         }
                     }, {
                         targets: 3,
