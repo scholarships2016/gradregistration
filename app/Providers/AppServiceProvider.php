@@ -67,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\DepartmentRepository', 'App\Repositories\DepartmentRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\FacultyRepository', 'App\Repositories\FacultyRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\CourseRepository', 'App\Repositories\CourseRepositoryImpl');
-        $this->app->bind('App\Repositories\Contracts\CurriculaRepository', 'App\Repositories\CurriculaRepositoryImpl');
+//        $this->app->bind('App\Repositories\Contracts\CurriculaRepository', 'App\Repositories\CurriculaRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\BankRepository', 'App\Repositories\BankRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\DocumentsRepository', 'App\Repositories\DocumentsRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\ApplicationPeopleRefRepository', 'App\Repositories\ApplicationPeopleRefRepositoryImpl');
@@ -86,6 +86,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\UserPermissionRepository', 'App\Repositories\UserPermissionRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\NewsRepository', 'App\Repositories\NewsRepositoryImpl');
         $this->app->bind('App\Repositories\Contracts\BackOfficeNotificationRepository', 'App\Repositories\BackOfficeNotificationRepositoryImpl');
+        $this->app->bind('App\Repositories\Contracts\CurriculumUserRepository', 'App\Repositories\CurriculumUserRepositoryImpl');
 
     }
 
