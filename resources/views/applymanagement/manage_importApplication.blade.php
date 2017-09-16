@@ -25,10 +25,7 @@
             <a href="/">{{Lang::get('resource.lbMain')}}</a>
             <i class="fa fa-circle"></i>
         </li>
-        <li>
-          <span>จัดการข้อมูลผู้สมัคร</span>
-          <i class="fa fa-circle"></i>
-        </li>
+
         <li>
             <span>นำเข้าผู้สอบได้</span>
         </li>
@@ -78,7 +75,7 @@
                 <div class="portlet-title">
                   <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
+                    <span class="caption-subject bold uppercase">ข้อมูลผู้สอบได้</span>
                   </div>
                   <div class="actions">
                     <div class="btn-group pull-right">
@@ -188,24 +185,38 @@
 
                   </div>
                   <div id="search-application-result" style="display:none;">
-                  
+
                   <hr>
                   <div class="row">
       <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Import - Export in Excel and CSV Laravel 5</a>
+				<a class="navbar-brand" href="#"><span class="badge badge-warning">3</span> นำเข้าข้อมูลผู้สอบได้จากไฟล์ Microsoft Excel</a>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
-<!--		<a href="{{ URL::to('downloadExcel/xls') }}"><button class="btn btn-success">Download Excel xls</button></a>
-		<a href="{{ URL::to('downloadExcel/xlsx') }}"><button class="btn btn-success">Download Excel xlsx</button></a>
-		<a href="{{ URL::to('downloadExcel/csv') }}"><button class="btn btn-success">Download CSV</button></a>-->
-<form id="formImport" name="formImport" style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="#"  class="form-horizontal"   >
-                 <input type="file" id="import_file"  name="import_file" />
-		 <a id="btImport" class="btn btn-primary">Import File</a>
-		</form>
+    <div id="" style="border-bottom: 1px dotted #cccccc; padding: 5px 0px 20px 0px;">
+      <span class="badge badge-warning">3.1</span> ดาวน์โหลด Excel Template เพื่อกรอกข้อมูลผู้สอบได้
+      <a href="{{url('admin/getMedia').'?path=excel-template\student-data.xlsx'}}" class="btn btn-circle green-haze btn-outline sbold " download><i class="fa fa-download"></i> ดาวน์โหลด Excel Template</a>
+    </div>
+    <div id="" style="border-bottom: 1px dotted #cccccc; padding: 10px 0px 20px 0px;">
+      <span class="badge badge-warning">3.2</span> Upload ไฟล์ Excel ข้อมูลผู้สอบได้ ที่กรอกใน Excel Template ตามข้อ 3.1 เท่านั้น
+
+      <!--		<a href="{{ URL::to('downloadExcel/xls') }}"><button class="btn btn-success">Download Excel xls</button></a>
+      		<a href="{{ URL::to('downloadExcel/xlsx') }}"><button class="btn btn-success">Download Excel xlsx</button></a>
+      		<a href="{{ URL::to('downloadExcel/csv') }}"><button class="btn btn-success">Download CSV</button></a>-->
+      <form id="formImport" name="formImport" style="border: 1px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="#"  class="form-horizontal"   >
+                       <input type="file" id="import_file"  name="import_file" placeholder="เลือกไฟล์"/>
+
+      		</form>
+
+     </div>
+     <div id="" style="border-bottom: 1px dotted #cccccc; padding: 10px 0px 20px 0px;">
+       <span class="badge badge-warning">3.3</span> เริ่มต้นนำเข้าข้อมูล
+        <a id="btImport" class="btn btn-circle green-meadow"><i class="fa fa-angle-double-right"></i> โหลดข้อมูลผู้สอบได้</a>
+     </div>
+
 	</div>
 </div>
                   <hr>
@@ -247,7 +258,7 @@
                     <div class="row">
                       <div class="col-md-offset-4 col-md-8">
                         <a type="button" class="btn grey-steel">ยกเลิก</a>
-                        <a id="btSave" type="submit" class="btn green"><i class="fa fa-envelope-o"></i> บันทึก</a>
+                        <a id="btSave" type="submit" class="btn green"><i class="fa fa-check"></i> ยืนยันการนำเข้าข้อมูลผู้สอบได้</a>
                       </div>
                     </div>
                   </div>
@@ -256,7 +267,7 @@
               </div>
               <!-- END EXAMPLE TABLE PORTLET-->
             </div>
-     
+
 
 @stop
 
@@ -265,7 +276,7 @@
 <script src="{{asset('/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
- 
+
 <script src="{{asset('assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
@@ -284,8 +295,8 @@
 
 <script type="application/javascript">
 
-                        
-                            
+
+
                   $('#btnSearch1').click(function() {
                                     $.ajax({
 					type: "get",
@@ -319,16 +330,16 @@
         $('#search-application-result').fadeOut( "slow", "linear" );
        });
 
- 
+
     $('#search_select').click(function(){
         $('#search-application-result').fadeIn( "slow", "linear" );
-    
+
     });
 
 
- 
- 
- 
+
+
+
 $('#datatable_ajax').on( 'click', '.btn-info', function () {
      var table2=$("#datatable_ajax").DataTable();
      table2
@@ -337,12 +348,12 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
         .draw();
 } );
 
- $('#btSave').click(function() {  
+ $('#btSave').click(function() {
           var valdata = [];
           $("#datatable_ajax").DataTable().rows().every(function(){
                 valdata.push(this.data());
           });
-                             $.ajax({ 
+                             $.ajax({
 					type: "POST",
 					url: '{!! Route('importApplicantSave') !!}',
 					data :{
@@ -362,15 +373,15 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
 					}
 				},"json");
 
-       
-});   
-          
-          
+
+});
+
+
    $('#btImport').click(function() {
        var formData = new FormData();
        formData.append("import_file",   $("#import_file")[0].files[0]);
-            
-   var datas =   $("#formImport").serializeArray(); 
+
+   var datas =   $("#formImport").serializeArray();
             $.ajax({
                 url: '{{route('importExcel')}}',
                 headers: {
@@ -383,11 +394,11 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
                 processData: false,
                 enctype: 'multipart/form-data',
                  success: function (result) {
-                      
+
 table2 = $('#datatable_ajax').dataTable({
     "aaData": result,
      "bDestroy": true,
-        "columnDefs": [ 
+        "columnDefs": [
                          {
                     targets: [0], name : 'row',
                     render: function (data, type, full, meta) {
@@ -489,23 +500,23 @@ table2 = $('#datatable_ajax').dataTable({
                     targets: [19],name : 'work_position',
                     render: function (data, type, full, meta) {
                     return   full.work_position ;
-                    }},   
+                    }},
                      {
                     targets: [20],name : 'Admission_Status',
                     render: function (data, type, full, meta) {
                     return   full.Admission_Status ;
-                    }},            
-                        { 
-                      targets: [21], 
+                    }},
+                        {
+                      targets: [21],
                       render: function (data, type, full, meta) {
                       return ((' <a class="btn-info" > Delete </a>  ')) ;
                       } }    ]
 });
-                  } 
+                  }
             });
   });
-  
-  
+
+
 
 
 </script>

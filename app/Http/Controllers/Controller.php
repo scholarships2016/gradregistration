@@ -41,7 +41,7 @@ class Controller extends BaseController {
 
             return response()->download($path, $file->file_origi_name);
         } catch (\Exception $ex) {
-            
+
         }
     }
 
@@ -52,7 +52,7 @@ class Controller extends BaseController {
 
             return $path;
         } catch (\Exception $ex) {
-            
+
         }
     }
 
@@ -99,7 +99,7 @@ class Controller extends BaseController {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
             $data = $this->excels->load($path, function($reader) {
-                        
+
                     })->get()[0];
 
             if (!empty($data) && $data->count()) {
@@ -114,7 +114,7 @@ class Controller extends BaseController {
                     $address_dist = explode('_', $value->address_dist);
                     $work_status = explode('-', $value->work_status);
                     $Admission_Status = explode('-', $value->admission_status);
-                     
+
                         $insert[] = ['row' => $value->row,
                             'id_card' => $value->id_card,
                             'title_name' => trim($title_name[1]),
@@ -151,5 +151,6 @@ class Controller extends BaseController {
         }
         return response()->json($insert);
     }
+
 
 }
