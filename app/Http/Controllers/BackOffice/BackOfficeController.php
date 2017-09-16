@@ -7,6 +7,7 @@ use App\Repositories\Contracts\CurriculumRepository;
 use App\Utils\Util;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class BackOfficeController extends Controller
 {
@@ -37,7 +38,7 @@ class BackOfficeController extends Controller
     public function doPaging(Request $request)
     {
         try {
-            $who = 'test';
+            $who = session('user_id');
             $param = $request->all();
             $isAdmin = true;
             if (!$isAdmin) {

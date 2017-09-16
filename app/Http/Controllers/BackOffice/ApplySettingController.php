@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackOffice;
 
 use App\Repositories\Contracts\ApplySettingRepository;
+use App\Repositories\Contracts\AudittrailRepository;
 use App\Utils\Util;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,14 +11,16 @@ use App\Http\Controllers\Controller;
 
 class ApplySettingController extends Controller
 {
+    private static $SECTION_NAME = 'ApplySetting';
 
     protected $appSetRepo;
 
     /**
      * ApplySettingController constructor.
      */
-    public function __construct(ApplySettingRepository $appSetRepo)
+    public function __construct(ApplySettingRepository $appSetRepo, AudittrailRepository $auditRepo)
     {
+        parent::__construct(null, null, $auditRepo);
         $this->appSetRepo = $appSetRepo;
     }
 
@@ -26,6 +29,7 @@ class ApplySettingController extends Controller
         try {
             return view('backoffice.applysetting.manage');
         } catch (\Exception $ex) {
+            $this->WLog('func=showManagePage', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
@@ -36,6 +40,7 @@ class ApplySettingController extends Controller
             $result = $this->appSetRepo->getApplySettingPaging();
             return response()->json($result);
         } catch (\Exception $ex) {
+            $this->WLog('func=doPaging', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
@@ -48,6 +53,7 @@ class ApplySettingController extends Controller
             return view('backoffice.applysetting.edit', ['yearList' => $acaYearList, 'appSetList' => null,
                 'academic_year' => null, 'semester' => null, 'isEdit' => false]);
         } catch (\Exception $ex) {
+            $this->WLog('func=showAddPage', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
@@ -73,9 +79,12 @@ class ApplySettingController extends Controller
                 return redirect()->route('admin.applysetting.showManagePage');
             }
 
+            $this->WLog('func=showEditPage', self::$SECTION_NAME, null);
+
             return view('backoffice.applysetting.edit', ['yearList' => $yearList, 'appSetList' => $appSetList,
                 'academic_year' => $param['academic_year'], 'semester' => $param['semester'], 'isEdit' => true]);
         } catch (\Exception $ex) {
+            $this->WLog('func=showEditPage', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
@@ -84,10 +93,9 @@ class ApplySettingController extends Controller
     {
         try {
             $data = $request->all();
-            $modifier = 'test';
-            $creator = 'test';
-            $data['creator'] = $creator;
-            $data['modifier'] = $modifier;
+            $who = session('user_id');
+            $data['creator'] = $who;
+            $data['modifier'] = $who;
 
             if (!isset($data['semester']) || !isset($data['academic_year'])) {
                 $data['isEdit'] = true;
@@ -122,20 +130,35 @@ class ApplySettingController extends Controller
                     }
 
                     if (!isset($value['apply_setting_id'])) {
-                        $data['apply_setting_group'][$index]['creator'] = $creator;
-                        $data['apply_setting_group'][$index]['modifier'] = $modifier;
+                        $data['apply_setting_group'][$index]['creator'] = $who;
+                        $data['apply_setting_group'][$index]['modifier'] = $who;
                     } else {
-                        $data['apply_setting_group'][$index]['modifier'] = $modifier;
+                        $data['apply_setting_group'][$index]['modifier'] = $who;
                     }
                 }
                 $data['ids'] = $ids;
-
                 $result = $this->appSetRepo->saveApplySetting($data);
+
+                /*
+                 * Audit Info
+                 */
+
+                $audit = array();
+                $audit['section'] = self::$SECTION_NAME;
+                $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+                $audit['detail'] = 'createUpdate,semester=' . $data['semester'] . 'academic_year=' . $data['semester'];
+                $audit['performer'] = $who;
+                $this->auditRepo->save($audit);
+
+                $this->WLog('func=doSave', self::$SECTION_NAME, null);
+
                 return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
             }
 
+            $this->WLog('func=doSave', self::$SECTION_NAME, null);
 
         } catch (\Exception $ex) {
+            $this->WLog('func=doSave', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
@@ -144,6 +167,8 @@ class ApplySettingController extends Controller
     {
         try {
             $param = $request->all();
+            $who = session('user_id');
+
             if (!(isset($param['semester']) && isset($param['academic_year']))) {
                 return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
             }
@@ -151,11 +176,20 @@ class ApplySettingController extends Controller
 
             if ($canDel) {
                 $this->appSetRepo->deleteBySemesterAndAcademicYear($param['semester'], $param['academic_year']);
+                $this->WLog('func=doDelete', self::$SECTION_NAME, null);
+                $audit = array();
+                $audit['section'] = self::$SECTION_NAME;
+                $audit['audit_action_id'] = Util::AUDIT_ACT_DELETE;
+                $audit['detail'] = 'delete,semester=' . $param['semester'] . 'academic_year=' . $param['academic_year'];
+                $audit['performer'] = $who;
+                $this->auditRepo->save($audit);
+
                 return response()->json(Util::jsonResponseFormat(1, null, Util::SUCCESS_DELETE));
             } else {
                 return response()->json(Util::jsonResponseFormat(2, null, Util::CANNOT_DELETE));
             }
         } catch (\Exception $ex) {
+            $this->WLog('func=doDelete', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
