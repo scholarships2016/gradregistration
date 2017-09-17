@@ -41,7 +41,7 @@ class Controller extends BaseController {
 
             return response()->download($path, $file->file_origi_name);
         } catch (\Exception $ex) {
-            
+
         }
     }
 
@@ -52,7 +52,7 @@ class Controller extends BaseController {
 
             return $path;
         } catch (\Exception $ex) {
-            
+
         }
     }
 
@@ -99,7 +99,7 @@ class Controller extends BaseController {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
             $data = $this->excels->load($path, function($reader) {
-                        
+
                     })->get()[0];
 
             if (!empty($data) && $data->count()) {
