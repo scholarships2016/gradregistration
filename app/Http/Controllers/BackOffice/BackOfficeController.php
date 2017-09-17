@@ -40,11 +40,9 @@ class BackOfficeController extends Controller
         try {
             $who = session('user_id');
             $param = $request->all();
-            $isAdmin = true;
-            if (!$isAdmin) {
-                $param['creator'] = $who;
-            }
-            return response()->json($this->curriculumRepo->doToDoListPaging($param));
+            $isAdmin = (session('user_type')->user_type == 'Admin') ? true : false;
+            $param['creator'] = $who;
+            return response()->json($this->curriculumRepo->doToDoListPaging($param, $isAdmin));
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -53,8 +51,8 @@ class BackOfficeController extends Controller
     public function getWorkflowNotification(Request $request)
     {
         try {
-            $isAdmin = false;
-            $userId = null;
+            $isAdmin = (session('user_type')->user_type == 'Admin') ? true : false;
+            $userId = session('user_id');
             $result = $this->bakOffNoticeRepo->getWorkflowTaskDetailForBackOffice($isAdmin, $userId);
             return response()->json(Util::jsonResponseFormat(1, $result, null));
         } catch (\Exception $ex) {
