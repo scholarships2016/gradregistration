@@ -94,6 +94,12 @@
 <script src="{{asset('assets/layouts/global/scripts/quick-nav.min.js')}}" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
 <script src="{{asset('assets/global/plugins/bootstrap-toastr/toastr.min.js')}}" type="text/javascript"></script>
+@if(session('user_id') &&
+    (session('user_type')->user_type == 'Admin' ||
+    session('user_type')->user_type == 'GradStaff' ||
+    session('user_type')->user_type == 'FacStaff') )
+    <script src="{{asset('script/updateNotice.js')}}" type="text/javascript"></script>
+@endif
 <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -111,8 +117,18 @@
     ga('send', 'pageview');
 </script>
 <script>
+    var noticeUrl = '{{route('admin.backoffice.getWorkflowNotification')}}';
+    var editLink = '{{url("admin/management/curriculum/edit")}}';
+
     $(document).ready(function () {
         //Alert Message
+        @if(session('user_id') &&
+    (session('user_type')->user_type == 'Admin' ||
+    session('user_type')->user_type == 'GradStaff' ||
+    session('user_type')->user_type == 'FacStaff') )
+        getNotice(noticeUrl, editLink);
+        @endif
+
         @include('includes.toastr')
     });
 </script>
