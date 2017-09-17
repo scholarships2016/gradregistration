@@ -36,7 +36,7 @@ class Controller extends BaseController {
                 return;
             }
 
-            $file = $this->FileRepo->findOrFail($data['file_id']);
+            $file = $this->FileRepo->getFileByGenName($data['file_id']);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
 
             return response()->download($path, $file->file_origi_name);
