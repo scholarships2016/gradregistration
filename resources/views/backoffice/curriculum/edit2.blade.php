@@ -1468,7 +1468,7 @@
         var currFlowStatus = $("#curr_flow_status").val();
 
         //Hard Code
-        var isStaff = false;
+        var isStaff = '{{$isStaff}}';
 
 
         $("#cancelBtn").hide();
@@ -1478,7 +1478,7 @@
         $("#rejectBtn").hide();
         $("#sendToApprBtn").hide();
 
-        if (isStaff) {
+        if (isStaff == '1') {
             if (currFlowStatus == null || currFlowStatus == "") {
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
