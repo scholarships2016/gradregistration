@@ -195,6 +195,33 @@ class ManageApplyController extends Controller {
         $files = $this->ApplicationDocumentFileRepo->GetData($pid);
         return view('Apply.confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $pid, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
     }
+    public function docMyCourse($id, $pid) {
+        //$id = Crypt::decrypt($id);
+        $user_data = $this->ApplicantRepo->find($id);
+        $appc = new \stdClass();
+        $appc->applicant_id = $user_data->applicant_id;
+        $appc->stu_citizen_card = $user_data->stu_citizen_card;
+        $appc->stu_email = $user_data->stu_email;
+        $appc->nation_id = $user_data->nation_id;
+        session()->put('Applicant', $appc);
+
+        $dataApplication = $this->ApplicationRepo->getData(null, $pid);
+        $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
+        $people = $this->ApplicationPeopleRef->getDetail($pid);
+        $DocumentApplys = $this->DocumentApply->getDetailReport();
+        $DocumentApplyGroup = $this->DocumentApply->getGroupReport();
+        $files = $this->ApplicationDocumentFileRepo->GetData($pid);
+        $pic = $this->FileRepo->getImageFileAsBase64ById($applicantProfile['applicant']->stu_img);
+        $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
+
+        return view('Apply.docMyCourse', ['apps' => $dataApplication,
+            'applicant' => $applicantProfile['applicant']
+            , 'appEdus' => $applicantProfile['applicantEdu']
+            , 'appapplicantWorks' => $applicantProfile['applicantWork']
+            , 'peoples' => $people
+            , 'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Files' => $files
+            , 'age' => $age, 'id' => $id, 'pictrue' => $pic]);
+    }
 
     public function docMyCourserintPDF($id, $pid) {
         $user_data = $this->ApplicantRepo->find($id);
@@ -239,7 +266,11 @@ class ManageApplyController extends Controller {
 
         $pdf->render();
 
-        return $pdf->stream("CU_Application" .'_'. $user_data->stu_first_name_en . ".pdf");
+        //return $pdf->stream("CU_Application" .'_'. $user_data->stu_first_name_en . ".pdf");
+        $citizen = $applicantProfile['applicant']->stu_citizen_card;
+        $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
+        $app_no = $dataApplication[0]->program_id ."-" .str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
+        return $pdf->stream("ApplicationForm-{$app_id}-{$app_no}.pdf");
     }
 
     //GS03
@@ -247,7 +278,7 @@ class ManageApplyController extends Controller {
         return view($this->part_doc . 'manage_GS03');
     }
 
-    public function showManageGS05() { 
+    public function showManageGS05() {
            return view($this->part_doc . 'manage_GS05');
     }
 

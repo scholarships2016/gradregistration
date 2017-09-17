@@ -93,7 +93,7 @@ class ApplyController extends Controller {
 
     public function registerCourse($id) {
         $id = Crypt::decrypt($id);
-        
+
         $Bank = $this->BankRepo->getBank();
         $Qus = $this->ApplicationRepo->getData(null, $id);
         $Data = $this->ApplicationRepo->find($id)->first();
@@ -203,7 +203,8 @@ class ApplyController extends Controller {
         $pdf->render();
         $citizen = $applicantProfile['applicant']->stu_citizen_card;
         $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
-        return $pdf->stream("ApplicationForm-{$app_id}-{$citizen}.pdf");
+        $app_no = $dataApplication[0]->program_id ."-" .str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
+        return $pdf->stream("ApplicationForm-{$app_id}-{$app_no}.pdf");
     }
 
     public function docApplicationFee($id) {

@@ -109,8 +109,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
         Route::get('getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
 
-        Route::get('docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
 
+        Route::get('docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
+        Route::get('docMyCourse/{id}/{pid}', 'ManageApplyController@docMyCourse')->name('admin.docMyCourse');
         //GS03
 
         Route::get('ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
