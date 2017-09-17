@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Repositories\AnnouncementRepositoryImpl;
 use App\Repositories\FacultyRepositoryImpl;
@@ -22,6 +20,7 @@ use App\Repositories\ApplicantRepositoryImpl;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
+use \Crypt;
 //use PhpOffice\PhpWord\Writer\PDF\DomPDF;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -93,6 +92,9 @@ class ApplyController extends Controller {
     }
 
     public function registerCourse($id) {
+        $id = Crypt::decrypt($id);
+        $id = explode("P", $id);
+
 
         $Bank = $this->BankRepo->getBank();
         $Qus = $this->ApplicationRepo->getData(null, $id);
@@ -144,6 +146,7 @@ class ApplyController extends Controller {
     }
 
     public function docMyCourse($id) {
+        $id = Crypt::decrypt($id);
 
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
@@ -165,6 +168,7 @@ class ApplyController extends Controller {
 
     public function docMyCourserintPDF($id) {
 
+        $id = Crypt::decrypt($id);
 //
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
@@ -204,6 +208,9 @@ class ApplyController extends Controller {
     }
 
     public function docApplicationFee($id) {
+
+        $id = Crypt::decrypt($id);
+
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
 
@@ -217,6 +224,7 @@ class ApplyController extends Controller {
 
         $options->set('defaultFont', 'THSarabunNew');
         $pdf = new Dompdf($options);
+
         $pdf->loadHtml((string) $page);
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
@@ -225,6 +233,7 @@ class ApplyController extends Controller {
     }
 
     public function docApplicationEnvelop($id) {
+        $id = Crypt::decrypt($id);
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
 
@@ -350,6 +359,7 @@ class ApplyController extends Controller {
     }
 
     public function confDocApply($id) {
+        $id = Crypt::decrypt($id);
         $DocumentApplys = $this->DocumentApply->getDetail();
         $DocumentApplyGroup = $this->DocumentApply->getGroup();
         $Datas = $this->ApplicationRepo->getData(null, $id);
@@ -420,7 +430,7 @@ class ApplyController extends Controller {
              session()->flash('errorMsg', Lang::get('resource.lbError'));
              return back();
         }
-        
+
     }
 
     public function getForm($id = 0) {

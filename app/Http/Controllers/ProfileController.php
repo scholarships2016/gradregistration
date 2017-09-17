@@ -20,7 +20,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-
+use \Crypt;
 class ProfileController extends Controller
 {
 
@@ -266,6 +266,7 @@ class ProfileController extends Controller
     {
         try {
             $id = $request->input('applicant_id');
+            $id = Crypt::decrypt($id);
             $applicant = $this->applicantRepo->findOrFail($id);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($applicant->stuImgFile->file_path);
             return response()->file($path);
