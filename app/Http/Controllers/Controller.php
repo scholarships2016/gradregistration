@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Repositories\FileRepositoryImpl;
+use App\Repositories\Contracts\AudittrailRepository;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Excel;
@@ -15,18 +16,19 @@ use Illuminate\Support\Facades\Input;
 use \Crypt;
 class Controller extends BaseController {
 
-    use AuthorizesRequests,
-        DispatchesJobs,
-        ValidatesRequests;
+    use AuthorizesRequests,DispatchesJobs,ValidatesRequests;
 
     protected $FileRepo;
     protected $excels;
+    protected $auditRepo;
 
-    public function __construct(FileRepositoryImpl $FileRepo, Excel $excels) {
-
+    public function __construct(FileRepositoryImpl $FileRepo = null, Excel $excels = null, AudittrailRepository $auditRepo = null)
+    {
         $this->FileRepo = $FileRepo;
         $this->excels = $excels;
+        $this->auditRepo = $auditRepo;
     }
+
 
     public function doDownloadFile(Request $request) {
         try {

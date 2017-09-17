@@ -53,7 +53,15 @@ Route::get('/download', function () {
     return view('download');
 });
 
-
+//View file for visitor
+Route::get('util/viewFile', 'Controller@doDownloadFile')->name('viewFile');
+//download Files in Media folder for visotor
+Route::get('viewMedia', function(\Illuminate\Http\Request $request) {
+    $input_path = $request->input('path');
+    $real_path = Crypt::decrypt($input_path);
+    $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $real_path);
+    return response()->download($path);
+})->name('viewMedia');
 // หน้าในของ User ที่ต้องการ auth ให้ใส่ที่นี้ครับ
 Route::group(['middleware' => 'auth'], function () {
 
