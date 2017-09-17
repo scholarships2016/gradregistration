@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 //ไม่ล๊อกอินก็สามารถเห็นได้
 //login  User
-Route::post('/login/repass', 'Auth\LoginApplicantController@reLogin')->name('rePassLoginApplicant');
+Route::post('login/repass', 'Auth\LoginApplicantController@reLogin')->name('rePassLoginApplicant');
 Route::get('login', 'Auth\LoginApplicantController@showLoginForm')->name('showLogin');
 Route::post('login', 'Auth\LoginApplicantController@postLogin')->name('logins');
 Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginApplicantController@register']);
@@ -69,7 +69,8 @@ Route::get('admin/editAnnounc/{id}', 'ManageApplyController@editAnnounc')->name(
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('logout', 'Auth\LoginApplicantController@getLogout')->name('logout');
-//Apply
+
+    //Apply
     Route::get('apply', 'ApplyController@showAnnouncement');
     Route::get('application/manageMyCourse/', 'ApplyController@manageMyCourse')->name('manageMyCourse');
     Route::get('application/registerCourse/{id}', 'ApplyController@registerCourse')->name('registerCourse');
@@ -86,44 +87,133 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('util/downloadFile', 'Controller@doDownloadFile')->name('downloadFile');
     Route::get('util/downloadMediaFile', 'Controller@doDownloadMediaFile')->name('downloadMediaFile');
 
-//payment
-
-    Route::get('admin/ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
-    Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
-    Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
+    //payment
     Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
-    Route::get('admin/docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
+    Route::group(['prefix' => 'admin'], function () {
+        //Notice
+        Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
+
+
+        Route::get('toDoList', 'BackOffice\BackOfficeController@showToDoListPage')->name('admin.backoffice.showToDoListPage');
+        Route::get('doPaging', 'BackOffice\BackOfficeController@doPaging')->name('admin.backoffice.doPaging');
+
+
+        //P'M ROUTING START
+        //payment
+        Route::get('ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
+        Route::get('getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
+
+        Route::get('docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
 
 //GS03
 
-    Route::get('admin/ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
-    Route::get('admin/getCourse', 'ManageApplyController@getCourse')->name('getCourse');
-    Route::get('admin/getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
-    Route::get('admin/getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
-    Route::post('admin/updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
-    Route::post('admin/sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
-    Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
-    Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
-    Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
-//Report GS03
-
-    Route::get('admin/report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
-    Route::get('admin/getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
+        Route::get('ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
+        Route::get('getCourse', 'ManageApplyController@getCourse')->name('getCourse');
+        Route::get('getStatusExam', 'ManageApplyController@getStatusExam')->name('getStatusExam');
+        Route::get('getEngTest', 'ManageApplyController@getEngTest')->name('getEngTest');
+        Route::post('updateApplication', 'ManageApplyController@updateApplication')->name('updateApplication');
+        Route::post('sentMailGS03', 'ManageApplyController@sentMailGS03')->name('sentMailGS03');
+        Route::get('applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
+        Route::post('addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
+        Route::post('addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
 
 
-//GS05
-    Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
-    Route::post('admin/sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
-    Route::get('admin/getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
-    Route::get('admin/showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
-    Route::get('admin/getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
-    Route::post('admin/savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
-    Route::get('admin/ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
-    Route::get('admin/docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
-    Route::get('admin/deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+        Route::get('report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
+        Route::get('getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
 
-    //importApplication
-    Route::get('admin/importApplication', 'ManageApplyController@importApplicationShow')->name('importApplication');
+        //GS05
+        Route::get('ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
+        Route::post('sentMailGS05', 'ManageApplyController@sentMailGS05')->name('sentMailGS05');
+        Route::get('getStatusAdmission', 'ManageApplyController@getStatusAdmission')->name('getStatusAdmission');
+        Route::get('showMangePayBarcode', 'ManageApplyController@showMangePayBarcode')->name('showMangePayBarcode');
+        Route::get('getRegisterCourseBarcode', 'ManageApplyController@getRegisterCourseBarcode')->name('admin.getRegisterCourseBarcode');
+        Route::post('savePaymentBarcode', 'ManageApplyController@savePaymentBarcode')->name('savePaymentBarcode');
+        Route::get('ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
+        Route::get('docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
+        Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+
+        //importApplication
+        Route::get('importApplication', 'ManageApplyController@importApplicationShow')->name('importApplication');
+
+        //P'M ROUTING END
+
+
+        Route::group(['prefix' => 'management', 'middleware' => []], function () {
+            Route::group(['prefix' => 'curriculum', 'middleware' => ['backoffice:1']], function () {
+                Route::get('add', 'BackOffice\CurriculumController@showAddPage')->name('admin.curriculum.showAdd');
+                Route::get('edit/{id}', 'BackOffice\CurriculumController@showEditPage')->name('admin.curriculum.showEdit');
+                Route::post('save', 'BackOffice\CurriculumController@doSave')->name('admin.curriculum.doSave');
+                Route::get('getCurrProgListByCurriculumId', 'BackOffice\CurriculumController@getCurrProgListByCurriculumId')->name('admin.curriculum.getCurrProgListByCurriculumId');
+                Route::get('getCurrActByCurriculumId', 'BackOffice\CurriculumController@getCurrActByCurriculumId')->name('admin.curriculum.getCurrActByCurriculumId');
+                Route::get('getCurrSubMajorByCurriculumId', 'BackOffice\CurriculumController@getCurrSubMajorByCurriculumId')->name('admin.curriculum.getCurrSubMajorByCurriculumId');
+                Route::get('downloadCurriculumDoc', 'BackOffice\CurriculumController@downloadCurriculumDoc')->name('admin.curriculum.downloadCurriculumDoc');
+
+                Route::get('manage', 'BackOffice\CurriculumController@showManagePage')->name('admin.curriculum.showManagePage');
+                Route::get('paging1', 'BackOffice\CurriculumController@doCurriculumManagePaging')->name('admin.curriculum.doPaging1');
+
+                Route::post('doSendToApprove', 'BackOffice\CurriculumController@doSendToApprove')->name('admin.curriculum.doSendToApprove');
+                Route::post('doApprove', 'BackOffice\CurriculumController@doApprove')->name('admin.curriculum.doApprove');
+                Route::post('doReject', 'BackOffice\CurriculumController@doReject')->name('admin.curriculum.doReject');
+                Route::post('doDelete', 'BackOffice\CurriculumController@doDelete')->name('admin.curriculum.doDelete');
+            });
+        });
+
+        Route::group(['prefix' => 'setting', 'middleware' => []], function () {
+            Route::group(['prefix' => 'applysetting', 'middleware' => ['backoffice:11']], function () {
+                Route::get('add', 'BackOffice\ApplySettingController@showAddPage')->name('admin.applysetting.showAdd');
+                Route::get('edit', 'BackOffice\ApplySettingController@showEditPage')->name('admin.applysetting.showEdit');
+                Route::post('save', 'BackOffice\ApplySettingController@doSave')->name('admin.applysetting.doSave');
+                Route::get('manage', 'BackOffice\ApplySettingController@showManagePage')->name('admin.applysetting.showManagePage');
+                Route::get('paging', 'BackOffice\ApplySettingController@doPaging')->name('admin.applysetting.doPaging');
+                Route::post('doDelete', 'BackOffice\ApplySettingController@doDelete')->name('admin.applysetting.doDelete');
+            });
+
+            Route::group(['prefix' => 'applicantManage', 'middleware' => ['backoffice:9']], function () {
+                Route::get('view/{id}', 'BackOffice\ApplicantManagementController@showViewPage')->name('admin.applicantManage.showViewPage');
+                Route::get('edit/{id}', 'BackOffice\ApplicantManagementController@showEditPage')->name('admin.applicantManage.showEditPage');
+                Route::get('manage', 'BackOffice\ApplicantManagementController@showManagePage')->name('admin.applicantManage.showManagePage');
+                Route::get('doPaging', 'BackOffice\ApplicantManagementController@doPaging')->name('admin.applicantManage.doPaging');
+                Route::post('doDelete', 'BackOffice\ApplicantManagementController@doDelete')->name('admin.applicantManage.doDelete');
+
+                Route::post('/doSavePersInfo', 'BackOffice\ApplicantManagementController@doSavePersonalInfomation')->name('admin.applicantManage.doSavePersInfo');
+                Route::post('/doSavePretAddr', 'BackOffice\ApplicantManagementController@doSavePresentAddress')->name('admin.applicantManage.doSavePretAddr');
+                Route::post('/doSaveKnowSkill', 'BackOffice\ApplicantManagementController@doSaveKnowledgeSkill')->name('admin.applicantManage.doSaveKnowSkill');
+                Route::post('/doSaveEduBak', 'BackOffice\ApplicantManagementController@doSaveEduBackground')->name('admin.applicantManage.doSaveEduBak');
+                Route::post('/doSaveWorkExp', 'BackOffice\ApplicantManagementController@doSaveWorkExp')->name('admin.applicantManage.doSaveWorkExp');
+                Route::post('/doChangePassword', 'BackOffice\ApplicantManagementController@doChangePassword')->name('admin.applicantManage.doChangePassword');
+
+                //Application
+                Route::get('getApplicationAndProgramInfo', 'BackOffice\ApplicantManagementController@getApplicationAndProgramInfo')->name('admin.applicantManage.getApplicationAndProgramInfo');
+                Route::post('doDeleteApplication', 'BackOffice\ApplicantManagementController@doDeleteApplication')->name('admin.applicantManage.doDeleteApplication');
+            });
+
+            Route::group(['prefix' => 'adminManage', 'middleware' => ['backoffice']], function () {
+                Route::get('manage', 'BackOffice\AdminManagementController@showManagePage')->name('admin.adminManage.showManagePage');
+                Route::get('add', 'BackOffice\AdminManagementController@showAddPage')->name('admin.adminManage.showAdd');
+                Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEditPage');
+                Route::post('save', 'BackOffice\AdminManagementController@doSave')->name('admin.adminManage.doSave');
+                Route::post('doDelete', 'BackOffice\AdminManagementController@doDelete')->name('admin.adminManage.doDelete');
+
+                //Paging
+                Route::get('doPaging', 'BackOffice\AdminManagementController@doPaging')->name('admin.adminManage.doPaging');
+            });
+
+            Route::group(['prefix' => 'masterInfo', 'middleware' => ['backoffice:10']], function () {
+                Route::get('courseManage', 'BackOffice\MasterInfoController@showManageCoursePage')->name('admin.masterInfo.showManageCoursePage');
+                Route::get('add', 'BackOffice\MasterInfoController@showMCourseAddPage')->name('admin.masterInfo.showMCourseAddPage');
+                Route::get('edit/{id}', 'BackOffice\MasterInfoController@showMCourseEditPage')->name('admin.masterInfo.showMCourseEditPage');
+                Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
+                Route::post('updateMcourse', 'BackOffice\MasterInfoController@updateMcourseTable')->name('admin.masterInfo.updateMcourse');
+                Route::post('doDelete', 'BackOffice\MasterInfoController@doDelete')->name('admin.masterInfo.doDelete');
+                Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
+            });
+
+            Route::group(['prefix' => 'audit', 'middleware' => ['backoffice:7']], function () {
+                Route::get('manage', 'BackOffice\AuditController@showAuditManagePage')->name('admin.audit.showManagePage');
+                Route::get('doPaging', 'BackOffice\AuditController@doPaging')->name('admin.audit.doPaging');
+            });
+        });
+    });
 });
 
 
@@ -154,93 +244,3 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 });
 
 
-Route::group(['prefix' => 'admin', 'middleware' => []], function () {
-    //download Files
-    Route::get('getMedia', function(\Illuminate\Http\Request $request) {
-        $input_path = $request->input('path');
-        $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $input_path);
-        return response()->download($path);
-    })->name('admin.getMedia');
-    //Notice
-    Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
-
-
-    Route::get('toDoList', 'BackOffice\BackOfficeController@showToDoListPage')->name('admin.backoffice.showToDoListPage');
-    Route::get('doPaging', 'BackOffice\BackOfficeController@doPaging')->name('admin.backoffice.doPaging');
-
-    Route::group(['prefix' => 'management', 'middleware' => []], function () {
-        Route::group(['prefix' => 'curriculum', 'middleware' => []], function () {
-            Route::get('add', 'BackOffice\CurriculumController@showAddPage')->name('admin.curriculum.showAdd');
-            Route::get('edit/{id}', 'BackOffice\CurriculumController@showEditPage')->name('admin.curriculum.showEdit');
-            Route::post('save', 'BackOffice\CurriculumController@doSave')->name('admin.curriculum.doSave');
-            Route::get('getCurrProgListByCurriculumId', 'BackOffice\CurriculumController@getCurrProgListByCurriculumId')->name('admin.curriculum.getCurrProgListByCurriculumId');
-            Route::get('getCurrActByCurriculumId', 'BackOffice\CurriculumController@getCurrActByCurriculumId')->name('admin.curriculum.getCurrActByCurriculumId');
-            Route::get('getCurrSubMajorByCurriculumId', 'BackOffice\CurriculumController@getCurrSubMajorByCurriculumId')->name('admin.curriculum.getCurrSubMajorByCurriculumId');
-            Route::get('downloadCurriculumDoc', 'BackOffice\CurriculumController@downloadCurriculumDoc')->name('admin.curriculum.downloadCurriculumDoc');
-
-            Route::get('manage', 'BackOffice\CurriculumController@showManagePage')->name('admin.curriculum.showManagePage');
-            Route::get('paging1', 'BackOffice\CurriculumController@doCurriculumManagePaging')->name('admin.curriculum.doPaging1');
-
-            Route::post('doSendToApprove', 'BackOffice\CurriculumController@doSendToApprove')->name('admin.curriculum.doSendToApprove');
-            Route::post('doApprove', 'BackOffice\CurriculumController@doApprove')->name('admin.curriculum.doApprove');
-            Route::post('doReject', 'BackOffice\CurriculumController@doReject')->name('admin.curriculum.doReject');
-            Route::post('doDelete', 'BackOffice\CurriculumController@doDelete')->name('admin.curriculum.doDelete');
-        });
-    });
-
-    Route::group(['prefix' => 'setting', 'middleware' => []], function () {
-        Route::group(['prefix' => 'applysetting', 'middleware' => []], function () {
-            Route::get('add', 'BackOffice\ApplySettingController@showAddPage')->name('admin.applysetting.showAdd');
-            Route::get('edit', 'BackOffice\ApplySettingController@showEditPage')->name('admin.applysetting.showEdit');
-            Route::post('save', 'BackOffice\ApplySettingController@doSave')->name('admin.applysetting.doSave');
-            Route::get('manage', 'BackOffice\ApplySettingController@showManagePage')->name('admin.applysetting.showManagePage');
-            Route::get('paging', 'BackOffice\ApplySettingController@doPaging')->name('admin.applysetting.doPaging');
-            Route::post('doDelete', 'BackOffice\ApplySettingController@doDelete')->name('admin.applysetting.doDelete');
-        });
-
-        Route::group(['prefix' => 'applicantManage', 'middleware' => []], function () {
-            Route::get('view/{id}', 'BackOffice\ApplicantManagementController@showViewPage')->name('admin.applicantManage.showViewPage');
-            Route::get('edit/{id}', 'BackOffice\ApplicantManagementController@showEditPage')->name('admin.applicantManage.showEditPage');
-            Route::get('manage', 'BackOffice\ApplicantManagementController@showManagePage')->name('admin.applicantManage.showManagePage');
-            Route::get('doPaging', 'BackOffice\ApplicantManagementController@doPaging')->name('admin.applicantManage.doPaging');
-            Route::post('doDelete', 'BackOffice\ApplicantManagementController@doDelete')->name('admin.applicantManage.doDelete');
-
-            Route::post('/doSavePersInfo', 'BackOffice\ApplicantManagementController@doSavePersonalInfomation')->name('admin.applicantManage.doSavePersInfo');
-            Route::post('/doSavePretAddr', 'BackOffice\ApplicantManagementController@doSavePresentAddress')->name('admin.applicantManage.doSavePretAddr');
-            Route::post('/doSaveKnowSkill', 'BackOffice\ApplicantManagementController@doSaveKnowledgeSkill')->name('admin.applicantManage.doSaveKnowSkill');
-            Route::post('/doSaveEduBak', 'BackOffice\ApplicantManagementController@doSaveEduBackground')->name('admin.applicantManage.doSaveEduBak');
-            Route::post('/doSaveWorkExp', 'BackOffice\ApplicantManagementController@doSaveWorkExp')->name('admin.applicantManage.doSaveWorkExp');
-            Route::post('/doChangePassword', 'BackOffice\ApplicantManagementController@doChangePassword')->name('admin.applicantManage.doChangePassword');
-
-            //Application
-            Route::get('getApplicationAndProgramInfo', 'BackOffice\ApplicantManagementController@getApplicationAndProgramInfo')->name('admin.applicantManage.getApplicationAndProgramInfo');
-            Route::post('doDeleteApplication', 'BackOffice\ApplicantManagementController@doDeleteApplication')->name('admin.applicantManage.doDeleteApplication');
-        });
-
-        Route::group(['prefix' => 'adminManage', 'middleware' => []], function () {
-            Route::get('manage', 'BackOffice\AdminManagementController@showManagePage')->name('admin.adminManage.showManagePage');
-            Route::get('add', 'BackOffice\AdminManagementController@showAddPage')->name('admin.adminManage.showAdd');
-            Route::get('edit/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEditPage');
-            Route::post('save', 'BackOffice\AdminManagementController@doSave')->name('admin.adminManage.doSave');
-            Route::post('doDelete', 'BackOffice\AdminManagementController@doDelete')->name('admin.adminManage.doDelete');
-
-            //Paging
-            Route::get('doPaging', 'BackOffice\AdminManagementController@doPaging')->name('admin.adminManage.doPaging');
-        });
-
-        Route::group(['prefix' => 'masterInfo', 'middleware' => []], function () {
-            Route::get('courseManage', 'BackOffice\MasterInfoController@showManageCoursePage')->name('admin.masterInfo.showManageCoursePage');
-            Route::get('add', 'BackOffice\MasterInfoController@showMCourseAddPage')->name('admin.masterInfo.showMCourseAddPage');
-            Route::get('edit/{id}', 'BackOffice\MasterInfoController@showMCourseEditPage')->name('admin.masterInfo.showMCourseEditPage');
-            Route::post('save', 'BackOffice\MasterInfoController@doSaveMcourse')->name('admin.masterInfo.doSaveMcourse');
-            Route::post('updateMcourse', 'BackOffice\MasterInfoController@updateMcourseTable')->name('admin.masterInfo.updateMcourse');
-            Route::post('doDelete', 'BackOffice\MasterInfoController@doDelete')->name('admin.masterInfo.doDelete');
-            Route::get('getMCourseData', 'BackOffice\MasterInfoController@getMCourseData')->name('admin.masterInfo.getMCourseData');
-        });
-
-        Route::group(['prefix' => 'audit', 'middleware' => []], function () {
-            Route::get('manage', 'BackOffice\AuditController@showAuditManagePage')->name('admin.audit.showManagePage');
-            Route::get('doPaging', 'BackOffice\AuditController@doPaging')->name('admin.audit.doPaging');
-        });
-    });
-});
