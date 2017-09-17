@@ -167,6 +167,7 @@ class ApplyController extends Controller {
     public function docMyCourserintPDF($id) {
 
         $id = Crypt::decrypt($id);
+  
 //
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
