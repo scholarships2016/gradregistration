@@ -111,7 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
 
-//GS03
+        //GS03
 
         Route::get('ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
         Route::get('getCourse', 'ManageApplyController@getCourse')->name('getCourse');
@@ -137,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
         Route::get('docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
         Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
-//util M
+        //util M
         Route::get('importApplicant', 'ManageApplyController@importApplicant')->name('importApplicant');
         Route::get('importExport', 'Controller@importExport');
         Route::post('importExcel', 'Controller@importExcel')->name('importExcel');
