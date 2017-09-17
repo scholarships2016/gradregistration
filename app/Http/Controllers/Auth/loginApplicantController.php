@@ -81,8 +81,8 @@ class LoginApplicantController extends Controller {
             $role = new \stdClass();
             $role->user_role = '';
             $role->user_type = 'applicant';
-            session()->put('user_tyep', $role);
-            
+            session()->put('user_type', $role);
+
 
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;
