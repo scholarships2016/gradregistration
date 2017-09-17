@@ -254,7 +254,7 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-user"></i>
                                                                 </span>
-                                                                <input type="text" id="citiz" class="form-control" placeholder="รหัสบัตรประชาชน">
+                                                                <input type="text" id="citiz" class="form-control" placeholder="เลขประจำตัวประชาชน">
                                                                 <span class="input-group-btn">
                                                             <a class="btn blue" id="userSearch" type="button">ตรวจสอบ</a>
                                                         </span>
@@ -268,7 +268,7 @@
                                     </div>
                                     <div class="details">
                                         <div class="number">ชื่อ :<label id="show_name"></label></div>
-                                        <div class="desc"> Passport/บัตรประชาชน :<label id="idCard"></label> </div>
+                                        <div class="desc"> Passport/เลขประจำตัวประชาชน :<label id="idCard"></label> </div>
                                     </div>
 
                                 </div>

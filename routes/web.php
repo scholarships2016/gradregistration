@@ -154,6 +154,12 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
+  //download Files
+    Route::get('getMedia', function(\Illuminate\Http\Request $request){
+      $input_path = $request->input('path');
+      $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\'.$input_path);
+      return response()->download($path);
+    })->name('admin.getMedia');
     //Notice
     Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
 
