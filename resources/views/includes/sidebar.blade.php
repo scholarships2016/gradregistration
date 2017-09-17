@@ -15,20 +15,18 @@
                         </div>
                     </li>
 
-                    @if(session('user_type')->user_type == 'Admin' ||in_array("1",session('user_permission')))
-                        <li class="nav-item  menuitem  start @if(strpos($curr_url, 'admin/toDoList') !== false) open active @endif"
-                            data-index="11">
-                            <a href="{{url('admin/toDoList')}}" class="nav-link nav-toggle">
-                                <i class="icon-calendar"></i>
-                                <span class="title">
+                    <li class="nav-item  menuitem  start @if(strpos($curr_url, 'admin/toDoList') !== false) open active @endif"
+                        data-index="11">
+                        <a href="{{url('admin/toDoList')}}" class="nav-link nav-toggle">
+                            <i class="icon-calendar"></i>
+                            <span class="title">
                                     To-Do List
                                     <span id="menuToDolistAmt" class="badge badge-danger"></span>
                                 </span>
-                                <span class="selected"></span>
-                                <span class="arrow open"></span>
-                            </a>
-                        </li>
-                    @endif
+                            <span class="selected"></span>
+                            <span class="arrow open"></span>
+                        </a>
+                    </li>
 
                     @if(session('user_type')->user_type == 'Admin' ||
                     in_array("1",session('user_permission'))||
