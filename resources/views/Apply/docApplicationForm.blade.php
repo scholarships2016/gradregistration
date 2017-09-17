@@ -1,9 +1,7 @@
-  
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
         <style>
             @page { margin: 20px 30px; }
 
@@ -41,7 +39,7 @@
 
         </style>
     </head>
-    <body> 
+    <body>
         <table style="width:700px;" border="0">
             <tr>
                 <td  valign="top" align="center">
@@ -53,7 +51,7 @@
                                     <td style="width:140px" border="1px" valign="top"   align="center">สำหรับเจ้าหน้าที่<br>For staff only<br>
                                         เลขประจำตัวผู้สมัคร<br>Application No.<br>
                                         {{$app->program_id }}-{{str_pad($app->curriculum_num, 4, '0', STR_PAD_LEFT)}}<br>
-                                        ปริญญาโท
+                                        {{$app->degree_level_name}}
                                         <hr>
                                         <div align="center">ใบสมัครเลขที่<br>Application ID<br>
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}            </div></td>
@@ -61,12 +59,12 @@
                                         <div align="center">
                                             <img src="{{asset('images/bwpk.gif')}}" border="0">
                                             <br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย
-                                            <br>Graduate School, Chulalongkorn University 
+                                            <br>Graduate School, Chulalongkorn University
                                             <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา
                                             <br>Application Form
                                             <br>ประจำภาค[Term]:
-                                            {{($app->semester == 1)?'ต้น [First]':'ปลาย [Second]'}}             
-                                            <br> ปีการศึกษา[Year]:{{$app->academic_year}}            
+                                            {{($app->semester == 1)?'ต้น [First]':'ปลาย [Second]'}}
+                                            <br> ปีการศึกษา[Year]:{{$app->academic_year}}
                                         </div></td>
                                     <td style="widht:150px"   align="center"> <img src="{{ $pictrue }}"  style="width:120px;" border="0"></td>
                                 </tr>
@@ -76,7 +74,7 @@
                         <table style="width:700px" border="0" cellpadding="0" cellspacing="1">
                             <tbody><tr>
                                     <td>สมัครสาขาวิชา[Field of Study]:
-                                        วิศวกรรมอุตสาหการ</td>
+                                        {{$app->major_name}} - {{$app->major_name_en}}</td>
                                 </tr>
                                 <tr>
                                     <td>หลักสูตร [Degree ]:
@@ -98,13 +96,13 @@
                         @endforeach
                     </div>
                 </td>
-            </tr>  
+            </tr>
         </table>
         <table width="700px" border="1" cellpadding="1" cellspacing="1">
-            <tbody><tr valign="bottom">
+            <tbody><tr valign="middle">
                     <td width="191px">ชื่อ - นามสกุล [Name- Surname]</td>
                     <td colspan="4">
-                        {{ $applicant->name_titles .' '. $applicant->stu_first_name. ' '.$applicant->stu_last_name  }}[ {{$applicant->name_title_en.' '. $applicant->stu_first_name_en. ' '.$applicant->stu_last_name_en }}]เพศ[Sex]:
+                        {{ $applicant->name_titles .' '. $applicant->stu_first_name. ' '.$applicant->stu_last_name  }}[ {{$applicant->name_title_en.' '. $applicant->stu_first_name_en. ' '.$applicant->stu_last_name_en }}] เพศ[Sex]:
                         {{($applicant->stu_sex=='1')?'ชาย':'หญิง'}} [{{($applicant->stu_sex=='1')?'Male':'FeMale'}}]</td>
                 </tr>
                 <tr>
@@ -130,21 +128,21 @@
                     <td>สถานที่ติดต่อ[ Address]:</td>
                     <td colspan="4">
                         {{$applicant->stu_addr_no}}
-                        หมู่บ้าน[Village]:{{$applicant->stu_addr_village}} , 
+                        หมู่บ้าน[Village]:{{$applicant->stu_addr_village}} ,
                         ตรอก/ซอย[alley]:{{$applicant->stu_addr_soi }} ,
                         ถนน[Road]:{{$applicant->stu_addr_road }} ,
                         แขวง/ตำบล [Sub-District]:{{$applicant->stu_addr_tumbon }},
                         เขต/อำเภอ [District]: {{$applicant->district_name }} ,
                         จังหวัด [Province]:{{$applicant->province_name}},
                         รหัสไปรษณีย์[Zip Code]:{{$applicant->stu_addr_pcode }}
-                        โทรศัพท์[Telephone No]:{{$applicant->stu_phone }}  &nbsp;, {{$applicant->stu_phone2 }}  
+                        โทรศัพท์[Telephone No]:{{$applicant->stu_phone }}  &nbsp;, {{$applicant->stu_phone2 }}
                         อีเมล[E-mail]: {{$applicant->stu_email }}</td>
                 </tr>
                 <tr valign="bottom">
-                   
+
                     <td colspan="5">ชำระเงินผ่านธนาคาร[Pay the registration fee by Bank name ]: <img src="{{asset('images/'.$app->bank_logo)}}" style="width:15px;" border="0"> {{$app->bank_name}}[Total]:
                         {{$app->bank_fee }}บาท [Baht]</td>
-                    
+
                 </tr>
 
                 <tr>
@@ -171,10 +169,10 @@
                                     <td>
                                         {{$appEdu->edu_year}}</td>
                                     <td>
-                                        {{$appEdu->edu_gpax}} 
+                                        {{$appEdu->edu_gpax}}
                                     </td>
                                     <td>
-                                        {{$appEdu->edu_degree}} 
+                                        {{$appEdu->edu_degree}}
                                     </td>
                                     <td>
                                         {{$appEdu->edu_faculty }}
@@ -190,7 +188,7 @@
             </tbody>
         </table>
         <table width="700px" border="0" cellpadding="0" cellspacing="1">
-            <tbody> 
+            <tbody>
                 <tr>
                     <td colspan="2"><strong>การทดสอบความรู้ความสามารถ[Compentency ]</strong></td>
 
@@ -211,7 +209,7 @@
                     </td>
                 </tr>
                 @if($appapplicantWorks->count()  > 0)
-                @foreach ($appapplicantWorks as $appapplicantWork)     
+                @foreach ($appapplicantWorks as $appapplicantWork)
                 <tr>
                     <td> ({{$loop->iteration}})   {{ $appapplicantWork->work_status_name . ' - ' .  $appapplicantWork->work_status_name_en}}<br>
                                                @if($appapplicantWork->work_status_id > 1)
@@ -238,7 +236,7 @@
                                     <td bgcolor="EEEEEE" align="center">สถานที่ติดต่อ/โทรศัพท์ [ Contact Address and Phone No. ]</td>
                                     <td bgcolor="EEEEEE" align="center">ตำแหน่ง [Position]</td>
                                 </tr>
-                                @foreach ($peoples as $people)     
+                                @foreach ($peoples as $people)
                                 <tr>
                                     <td style="text-align: center">{{$loop->iteration}}</td>
                                     <td> {{$people->app_people_name}} </td>
@@ -269,8 +267,8 @@
                                         <td align="center">วันที่ Date................. เดือน Month................................... พ.ศ.Year.................</td>
                                     </tr>
                                 </tbody>
-                            </table>  
-                        </div>  
+                            </table>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -341,11 +339,11 @@
 
             </tbody>
         </table><br>
-        <table width="700px">   
+        <table width="700px">
             <tr>
-                <td  style="float: right" > 
+                <td  style="float: right" >
                     <div width="700px" style="float: right">
-                        <br>  
+                        <br>
                         <table border="0" cellspacing="0" cellpadding="0" style="width:480px;">
                             <tbody>
                                 <tr valign="top">
@@ -360,8 +358,8 @@
                                     <td align="center">วันที่ Date................. เดือน Month................................... พ.ศ.Year.................</td>
                                 </tr>
                             </tbody>
-                        </table>  
-                    </div>  
+                        </table>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -371,14 +369,14 @@
                 <td align="center">
                     <span >
                         <strong>คณะ [Faculty]
-                            {{$app->faculty_name}} - {{$app->faculty_full }}                       
+                            {{$app->faculty_name}} - {{$app->faculty_full }}
                             สมัครสาขาวิชา[Field of Study] {{$app->major_name }} - {{$app->major_name_en }}                         (
                             [Program ID]  {{$app->program_id}}                        )
                             ระดับ[Degree]
                             <strong>
-                                {{$app->degree_name}} - {{$app->degree_name_en}}                  
+                                {{$app->degree_name}} - {{$app->degree_name_en}}
                             </strong>
-                                
+
                         </strong>
                     </span>
                 </td>
@@ -411,9 +409,7 @@
                         </tbody>
                     </table>            </td>
             </tr>
-        </table>  
+        </table>
 
     </body>
 </html>
-
-

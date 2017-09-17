@@ -190,7 +190,7 @@
                 },
                 "ordering": true,
                 "order": [
-                    [1, "asc"]
+                    [5, "desc"]
                 ],// set first column as a default sort by asc
                 "language": {
                     "loadingRecords": "กำลังโหลด ...",

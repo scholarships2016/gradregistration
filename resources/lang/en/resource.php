@@ -71,13 +71,14 @@ return [
     'lbCitizen' => 'Citizen ID or Passport ID',
     'lbContactNo' => 'Contact No',
     'lbTopInfo' => 'Your Citizen ID or Passport ID will be used to login next time.',
-    'lbAppInfo' => 'Applicant Information',
+    'lbAppInfo' => 'Applicant Information',    
     'lbNameContact' => 'Graduate School, Chulalongkorn University',
     'lbAddress1Contact' => '254 Pathumwan,<br/> Bangkok Thailand. 10330',
     'lbAddress2Contact' => 'Chaloem Rajakumari 60 Building Phayathai Rd, Pathum Wan,<br/>  Bangkok 10330',
     'lbContacts' => 'Contacts',
     'lbAddress' => 'Address',
     'lbTelContact' => '+662-218-3502 to 5',
+    'lbGradAddressOnPDF' => 'กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ<br/>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br/>ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน<br/>กรุงเทพฯ 10330',
 
     //Menu
     'lbMHome' => 'Home',
