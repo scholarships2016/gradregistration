@@ -324,7 +324,7 @@
                                            for="mailing_address"><strong>ที่อยู่สำหรับส่งเอกสาร</strong></label>
                                     <div class="col-md-9">
                                 <textarea id="mailing_address" class="form-control" name="mailing_address"
-                                          rows="5">@if(!empty($curriculum)){{$curriculum->mailing_address}}@endif</textarea>
+                                          rows="5">@if(!empty($curriculum)){{$curriculum->mailing_address}}@else{{Lang::get('resource.lbGradAddressOnPDF')}}@endif</textarea>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
