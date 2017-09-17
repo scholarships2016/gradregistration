@@ -22,7 +22,9 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
     public function getMcourseStudyByMajorIdAndDegreeId($majorId, $degreeId)
     {
         try {
-            return Mcoursestudy::where('majorcode', '=', $majorId)->where('degree', '=', $degreeId)->get();
+            return Mcoursestudy::where('majorcode', '=', $majorId)
+                ->where('degree', '=', $degreeId)
+                ->where('status', '=', 'A')->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
