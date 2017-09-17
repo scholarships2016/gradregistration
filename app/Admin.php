@@ -2,17 +2,20 @@
 
 namespace App;
 
+use App\Models\TblRole;
+use App\Models\UserPermission;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable {
+class Admin extends Authenticatable
+{
 
     /**
      * The attributes that are mass assignable.
-     *  
+     *
      * @var array
      */
-   protected $table = 'user';
-	protected $primaryKey = 'user_id';
+    protected $table = 'user';
+    protected $primaryKey = 'user_id';
     protected $fillable = [
         'user_name',
         'user_password',
@@ -23,6 +26,7 @@ class Admin extends Authenticatable {
         'created',
         'modifier',
         'remember_token',
+        'role_id'
     ];
 
     /**
@@ -31,11 +35,23 @@ class Admin extends Authenticatable {
      * @var array
      */
     protected $hidden = [
-       'user_password'
+        'user_password'
     ];
 
-    public function getAuthPassword() {
+    public function getAuthPassword()
+    {
         return $this->user_password;
     }
+
+    public function role()
+    {
+        return $this->hasOne(TblRole::class, 'role_id', 'role_id');
+    }
+
+    public function userPermission()
+    {
+        return $this->hasMany(UserPermission::class, 'user_id', 'user_id');
+    }
+
 
 }

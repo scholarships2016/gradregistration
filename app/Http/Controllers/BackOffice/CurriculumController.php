@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackOffice;
 
 use App\Repositories\Contracts\ApplySettingRepository;
+use App\Repositories\Contracts\AudittrailRepository;
 use App\Repositories\Contracts\CurriculumActivityRepository;
 use App\Repositories\Contracts\CurriculumProgramRepository;
 use App\Repositories\Contracts\CurriculumRepository;
@@ -12,6 +13,7 @@ use App\Repositories\Contracts\DegreeRepository;
 use App\Repositories\Contracts\FacultyRepository;
 use App\Repositories\Contracts\ProgramTypeRepository;
 use App\Repositories\Contracts\TblProjectRepository;
+use App\Repositories\Contracts\UserRepository;
 use App\Utils\Util;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,6 +23,7 @@ use Illuminate\View\View;
 
 class CurriculumController extends Controller
 {
+    private static $SECTION_NAME = 'Curriculum';
     protected $projectRepo;
     protected $facultyRepo;
     protected $degreeRepo;
@@ -31,6 +34,7 @@ class CurriculumController extends Controller
     protected $currProgRepo;
     protected $currSubMRepo;
     protected $currWFTrans;
+    protected $userRepo;
 
 
     /**
@@ -45,8 +49,12 @@ class CurriculumController extends Controller
                                 CurriculumActivityRepository $currActRepo,
                                 CurriculumProgramRepository $currProgRepo,
                                 CurriculumSubMajorRepository $currSubMRepo,
-                                CurriculumWorkflowTransactionRepository $currWFTrans)
+                                CurriculumWorkflowTransactionRepository $currWFTrans,
+                                UserRepository $userRepo,
+                                AudittrailRepository $auditRepo)
     {
+
+        parent::__construct(null, null, $auditRepo);
         $this->projectRepo = $projectRepo;
         $this->facultyRepo = $facultyRepo;
         $this->degreeRepo = $degreeRepo;
@@ -57,6 +65,7 @@ class CurriculumController extends Controller
         $this->currProgRepo = $currProgRepo;
         $this->currSubMRepo = $currSubMRepo;
         $this->currWFTrans = $currWFTrans;
+        $this->userRepo = $userRepo;
     }
 
     public function showManagePage(Request $request)
@@ -65,20 +74,22 @@ class CurriculumController extends Controller
             $facList = $this->facultyRepo->all();
             $progTypeList = $this->progTypeRepo->getAllProgramTypeForDropdown();
             $acaYearList = $this->applyRepo->getDistinctAcademicYear();
+            $this->WLog('func=showManagePage', self::$SECTION_NAME, null);
             return view('backoffice.curriculum.manage',
                 ['facList' => $facList, 'progTypeList' => $progTypeList,
                     'acaYearList' => $acaYearList]);
         } catch (\Exception $ex) {
-
+            $this->WLog('func=showManagePage', self::$SECTION_NAME, $ex->getMessage());
         }
     }
 
     public function doCurriculumManagePaging(Request $request)
     {
         try {
+            $this->WLog('func=doCurriculumManagePaging', self::$SECTION_NAME, null);
             return response()->json($this->curriculumRepo->doPaging1($request->all()));
         } catch (\Exception $ex) {
-            throw $ex;
+            $this->WLog('func=doCurriculumManagePaging', self::$SECTION_NAME, $ex->getMessage());
         }
     }
 
@@ -89,14 +100,20 @@ class CurriculumController extends Controller
             $projList = $this->projectRepo->all();
             $facList = $this->facultyRepo->all();
             $degList = $this->degreeRepo->all();
+            $userList = $this->userRepo->all(['user_id', 'user_name', 'name']);
             $progTypeList = Util::prepareDataForDropdownList(json_decode($this->progTypeRepo->getAllProgramTypeForDropdown(), true), 'program_type_id', 'prog_type_name');
+
+            $this->WLog('func=showAddPage', self::$SECTION_NAME, null);
 
             return view('backoffice.curriculum.edit2',
                 ['projList' => $projList, 'facList' => $facList,
                     'degList' => $degList,
                     'progTypeList' => json_encode($progTypeList),
-                    'applySemesterList' => $applySemesterList, 'curriculum' => null]);
+                    'applySemesterList' => $applySemesterList,
+                    'curriculum' => null,
+                    'userList' => $userList]);
         } catch (\Exception $ex) {
+            $this->WLog('func=showAddPage', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
@@ -104,25 +121,39 @@ class CurriculumController extends Controller
     public function showEditPage(Request $request, $id)
     {
         try {
-
+            $who = session('user_id');
             $currInfo = $this->curriculumRepo->findOrFail($id);
             $semAcaYr = $this->currActRepo->getDistinctSemesterAndAcademicYearByCurriculumId($id);
             $applySemesterList = $this->applyRepo->getDistinctApplySettingSemesterByAcademicYear();
             $projList = $this->projectRepo->all();
             $facList = $this->facultyRepo->all();
             $degList = $this->degreeRepo->all();
+            $userList = $this->userRepo->all(['user_id', 'user_name', 'name']);
             $progTypeList = Util::prepareDataForDropdownList(json_decode($this->progTypeRepo->getAllProgramTypeForDropdown(), true), 'program_type_id', 'prog_type_name');
 
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_VIEW;
+            $audit['detail'] = 'view,curriculum_id=' . $id;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=showEditPage', self::$SECTION_NAME, null);
             return view('backoffice.curriculum.edit2',
                 ['projList' => $projList, 'facList' => $facList,
                     'degList' => $degList,
                     'progTypeList' => json_encode($progTypeList),
                     'applySemesterList' => $applySemesterList,
                     'semAcaYr' => $semAcaYr,
-                    'curriculum' => $currInfo
+                    'curriculum' => $currInfo,
+                    'userList' => $userList
                 ]);
         } catch (\Exception $ex) {
-            throw $ex;
+            $this->WLog('func=showEditPage', self::$SECTION_NAME, $ex->getMessage());
         }
     }
 
@@ -130,14 +161,28 @@ class CurriculumController extends Controller
     {
         try {
             $data = $request->all();
+            $who = session('user_id');
             $data['rounds'] = json_decode($data['rounds'], true);
             $data['programs'] = json_decode($data['programs'], true);
-            $data['creator'] = 'test';
-            $data['modifier'] = 'test';
+            $data['creator'] = $who;
+            $data['modifier'] = $who;
             $currObj = $this->curriculumRepo->saveCurriculumSetting($data);
             $result = $this->curriculumRepo->getCurriculumInfoById($currObj->curriculum_id);
+
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = empty($data['curriculum_id']) ? Util::AUDIT_ACT_CREATE : Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = (empty($data['curriculum_id']) ? 'create,' : 'update,') . 'curriculum_id=' . $currObj->curriculum_id;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+            $this->WLog('func=doSave', self::$SECTION_NAME, null);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSave', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
         }
     }
@@ -152,6 +197,7 @@ class CurriculumController extends Controller
             $result = $this->currProgRepo->getCurrProgListByCurriculumId($param['curriculum_id']);
             return response()->json($result);
         } catch (\Exception $ex) {
+            $this->WLog('func=getCurrProgListByCurriculumId', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(null);
         }
     }
@@ -166,6 +212,7 @@ class CurriculumController extends Controller
             $result = $this->currActRepo->getCurrActListByCurriculumId($param['curriculum_id']);
             return response()->json($result);
         } catch (\Exception $ex) {
+            $this->WLog('func=getCurrActByCurriculumId', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(null);
         }
     }
@@ -180,6 +227,7 @@ class CurriculumController extends Controller
             $result = $this->currSubMRepo->getCurrSubMajorByCurriculumId($param['curriculum_id']);
             return response()->json($result);
         } catch (\Exception $ex) {
+            $this->WLog('func=getCurrSubMajorByCurriculumId', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(null);
         }
     }
@@ -197,6 +245,7 @@ class CurriculumController extends Controller
                 return response()->download($path, $curr->file->file_origi_name);
             }
         } catch (\Exception $ex) {
+            $this->WLog('func=downloadCurriculumDoc', self::$SECTION_NAME, $ex->getMessage());
         }
     }
 
@@ -204,13 +253,29 @@ class CurriculumController extends Controller
     {
         try {
             $data = $request->all();
+            $who = session('user_id');
             //Pending
             $data['workflow_status_id'] = 2;
-            $data['creator'] = 'test';
-            $data['modifier'] = 'test';
+            $data['creator'] = $who;
+            $data['modifier'] = $who;
             $result = $this->curriculumRepo->changeTransactionStatus($data);
+
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'sendToApprove,curriculum_id=' . $data['curriculum_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSendToApprove', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSendToApprove', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
         }
     }
@@ -219,13 +284,27 @@ class CurriculumController extends Controller
     {
         try {
             $data = $request->all();
+            $who = session('user_id');
             //Approve
             $data['workflow_status_id'] = 4;
-            $data['creator'] = 'test';
-            $data['modifier'] = 'test';
+            $data['creator'] = $who;
+            $data['modifier'] = $who;
             $result = $this->curriculumRepo->changeTransactionStatus($data);
+
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_APPROVE;
+            $audit['detail'] = 'doApprove,curriculum_id=' . $data['curriculum_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+            $this->WLog('func=doApprove', self::$SECTION_NAME, null);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doApprove', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
         }
     }
@@ -234,13 +313,29 @@ class CurriculumController extends Controller
     {
         try {
             $data = $request->all();
+            $who = session('user_id');
             //Reject
             $data['workflow_status_id'] = 3;
-            $data['creator'] = 'test';
-            $data['modifier'] = 'test';
+            $data['creator'] = $who;
+            $data['modifier'] = $who;
             $result = $this->curriculumRepo->changeTransactionStatus($data);
+
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_REJECT;
+            $audit['detail'] = 'doReject,curriculum_id=' . $data['curriculum_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doReject', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doReject', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::FAIL_SAVE));
         }
     }
@@ -249,12 +344,27 @@ class CurriculumController extends Controller
     {
         try {
             $data = $request->all();
+            $who = session('user_id');
             if (!isset($data['curriculum_id'])) {
                 return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
             }
             $result = $this->curriculumRepo->deleteCurriculumInfoByCurriculumId($data['curriculum_id']);
+
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_DELETE;
+            $audit['detail'] = 'doDelete,curriculum_id=' . $data['curriculum_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+            $this->WLog('func=doDelete', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_DELETE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doDelete', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }

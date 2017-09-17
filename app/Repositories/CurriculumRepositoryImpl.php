@@ -8,6 +8,7 @@ use App\Repositories\Contracts\CurriculumProgramRepository;
 use App\Repositories\Contracts\CurriculumRepository;
 use App\Models\Curriculum;
 use App\Repositories\Contracts\CurriculumSubMajorRepository;
+use App\Repositories\Contracts\CurriculumUserRepository;
 use App\Repositories\Contracts\CurriculumWorkflowTransactionRepository;
 use App\Repositories\Contracts\FileRepository;
 use App\Utils\Util;
@@ -24,12 +25,13 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     protected $currSubMajorRepo;
     protected $currWFTransRepo;
     protected $auditRepo;
+    protected $currUserRepo;
     private $pagings = 10;
 
     public function __construct(CurriculumActivityRepository $currActRepo, CurriculumProgramRepository $currProgRepo,
                                 FileRepository $fileRepo, CurriculumSubMajorRepository $currSubMajorRepo,
                                 CurriculumWorkflowTransactionRepository $currWFTransRepo,
-                                AudittrailRepository $auditRepo)
+                                AudittrailRepository $auditRepo, CurriculumUserRepository $currUserRepo)
     {
         parent::setModelClassName(Curriculum::class);
         $this->currActRepo = $currActRepo;
@@ -38,6 +40,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         $this->currSubMajorRepo = $currSubMajorRepo;
         $this->currWFTransRepo = $currWFTransRepo;
         $this->auditRepo = $auditRepo;
+        $this->currUserRepo = $currUserRepo;
     }
 
     public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null)
@@ -454,6 +457,17 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 }
                 $datas['programs'][$index]['curriculum_id'] = $currObj->curriculum_id;
                 $this->currProgRepo->save($datas['programs'][$index]);
+            }
+
+            $this->currUserRepo->removeCurrUserByCurriculumId($currObj->curriculum_id);
+            if (!empty($datas['curriculum_user'])) {
+                foreach ($datas['curriculum_user'] as $value) {
+                    $currUserBuff = array();
+                    $currUserBuff['user_id'] = $value;
+                    $currUserBuff['curriculum_id'] = $currObj->curriculum_id;
+                    $currUserBuff['creator'] = $creator;
+                    $this->currUserRepo->save($currUserBuff);
+                }
             }
 
             DB::commit();

@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ApplicantRepository;
@@ -12,7 +14,8 @@ use Illuminate\Support\Facades\Lang;
 
 use App\Repositories\UserRepositoryImpl;
 
-class LoginUserController extends Controller {
+class LoginUserController extends Controller
+{
 
     protected $redirectTo = '/seller_home';
 
@@ -22,7 +25,8 @@ class LoginUserController extends Controller {
     protected $nametitleRepo;
     protected $userRepo;
 
-    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, UserRepositoryImpl $userRepo) {
+    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, UserRepositoryImpl $userRepo)
+    {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
         $this->userRepo = $userRepo;
@@ -31,23 +35,27 @@ class LoginUserController extends Controller {
     }
 
     //Authen
-    protected function guard() {
+    protected function guard()
+    {
         return Auth::guard('admins');
     }
 
-    public function showLoginForm() {
+    public function showLoginForm()
+    {
 
         return view('auth.loginApplicant_admin');
     }
 
-    protected function validator(array $data) {
+    protected function validator(array $data)
+    {
         return Validator::make($data, [
-                    'user_name' => 'required|max:255|unique:users',
-                    'user_password' => 'required|confirmed|min:6',
+            'user_name' => 'required|max:255|unique:users',
+            'user_password' => 'required|confirmed|min:6',
         ]);
     }
 
-    public function checkuserldap() {
+    public function checkuserldap()
+    {
         // $client = new Client();
 //        $res = $client->request('POST', 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")');
 
@@ -55,21 +63,24 @@ class LoginUserController extends Controller {
         echo $response;
     }
 
-    public function language(Request $request) {
+    public function language(Request $request)
+    {
         $changeLocale = new ChangeLocale($request->input('lang'));
         $this->dispatch($changeLocale);
         return redirect()->back();
     }
 
-    public function showLoginPage(Request $request) {
+    public function showLoginPage(Request $request)
+    {
         $titles = $this->nametitleRepo->getAll();
         return view('loginApplicant', ['titles' => $titles]);
     }
 
-    public function postLogin(Request $request) {
-
-        if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
+    public function postLogin(Request $request)
+    {
+        if (Auth::attempt(['user_name' => $request->user_name, 'password' => $request->user_password])) {
             $user_data = Auth::user();
+
             $pic = null;
 
             if ($user_data->stu_img) {
@@ -81,11 +92,22 @@ class LoginUserController extends Controller {
             session()->put('last_name', '');
             session()->put('email_address', $user_data->user_name);
             session()->put('stu_img', $pic);
-            $role = new \stdClass();
-            $role->user_role = '1';
-            $role->user_type = 'Staff';
-            session()->put('user_tyep', $role);
-            session()->put('locale','th');
+            $role = null;
+            if (!empty($user_data->role) && $user_data->role->role_id == 1) {
+                $role = array("user_role" => $user_data->role->role_id, "user_type" => "Admin");
+            } else if (!empty($user_data->role) && $user_data->role->role_id == 2) {
+                $role = array("user_role" => $user_data->role->role_id, "user_type" => "GradStaff");
+            } else if (!empty($user_data->role) && $user_data->role->role_id == 3) {
+                $role = array("user_role" => $user_data->role->role_id, "user_type" => "FacStaff");
+            }
+            session()->put('user_type', (object)$role);
+            session()->put('locale', 'th');
+
+            $permMap = array();
+            foreach ($user_data->userPermission as $index => $value) {
+                array_push($permMap, $value->permission_id);
+            }
+            session()->put('user_permission', $permMap);
 
 
 //            $app = new \stdClass();
@@ -107,7 +129,8 @@ class LoginUserController extends Controller {
         }
     }
 
-    public function getLogout() {
+    public function getLogout()
+    {
         Auth::logout();
         Controller::WLog('User Logout[' . session('email_address') . ']', 'User_Logout', null);
 
@@ -115,7 +138,8 @@ class LoginUserController extends Controller {
         return redirect('admin/login');
     }
 
-    public function reLogin(Request $request) {
+    public function reLogin(Request $request)
+    {
         $result = $this->loginapplicantRepo->getByCitizenOrEmail('', $request->stu_email);
         if ($result) {
 
@@ -127,7 +151,7 @@ class LoginUserController extends Controller {
                 'stu_password' => $random_pass,
                 'email' => $result->stu_email
             ];
-            Mail::send('email.rePassword', $data, function($message)use ($result) {
+            Mail::send('email.rePassword', $data, function ($message) use ($result) {
                 $message->to($result->stu_email, $result->stu_first_name)->subject('Your new password!');
             });
             Controller::WLog('User Re-password[' . $result->stu_email . ']', 'User_Login', null);
@@ -141,7 +165,8 @@ class LoginUserController extends Controller {
         }
     }
 
-    public function register(request $request) {
+    public function register(request $request)
+    {
 
         if (count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, $request->stu_email)) == 0) {
             $result = $this->loginapplicantRepo->saveApplicant($request->all());

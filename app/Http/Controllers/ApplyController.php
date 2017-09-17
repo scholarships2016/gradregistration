@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Repositories\AnnouncementRepositoryImpl;
 use App\Repositories\FacultyRepositoryImpl;
@@ -210,11 +208,15 @@ class ApplyController extends Controller {
     }
 
     public function docApplicationFee($id) {
+<<<<<<< HEAD
         $id = Crypt::decrypt($id);
 
+=======
+       
+>>>>>>> 299ba030e6888e045ea22dc08e55fb2b6b5d0bf1
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
-
+ 
         $page = view($this->part_doc . 'docApplicationFee', ['apps' => $dataApplication, 'applicant' => $applicantProfile['applicant']]);
 
         $options = new Options();
@@ -225,10 +227,11 @@ class ApplyController extends Controller {
 
         $options->set('defaultFont', 'THSarabunNew');
         $pdf = new Dompdf($options);
+       
         $pdf->loadHtml((string) $page);
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
-
+ 
         return $pdf->stream("CU_ApplicationFee.pdf");
     }
 

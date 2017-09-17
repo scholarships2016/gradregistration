@@ -167,131 +167,129 @@
                                     </div>
                                 </div>
                             </div>
-                          </div>
-
-                    <div class="panel panel-success">
-                    	<div class="panel-heading">
-                    		<h3 class="panel-title"><i class="icon-info"></i> เลือกคณะ ภาควิชา สาขาวิชา และปริญญา เพื่อค้นหาหลักสูตร</h3>
-                    	</div>
-                      <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" id="faculty_id_hidden" name="faculty_id_hidden"
-                                               value="@if(!empty($curriculum)){{$curriculum->faculty_id}}@endif"/>
-                                        <select name="faculty_id" id="faculty_id" class="form-control">
-                                            @if(!empty($facList))
-                                                @foreach($facList as $fac)
-                                                    <option value="{{$fac->faculty_id}}">{{$fac->faculty_name.' ('.$fac->faculty_full.')'}}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                          </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3"
-                                           for="department_id"><strong>ภาควิชา/สหสาขา</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" id="department_id_hidden" name="department_id_hidden"
-                                               value="@if(!empty($curriculum)){{$curriculum->department_id}}@endif"/>
-                                        <select name="department_id" id="department_id" class="form-control">
-                                        </select>
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="major_id"><strong>สาขาวิชา</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" id="major_id_hidden" name="major_id_hidden"
-                                               value="@if(!empty($curriculum)){{$curriculum->major_id}}@endif"/>
-                                        <select name="major_id" id="major_id" class="form-control">
-                                        </select>
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3"
-                                           for="sub_major_id"><strong>แขนงวิชา</strong></label>
-                                    <div class="col-md-9">
-                                        <div id="sub_major" class="mt-checkbox-list">
 
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon-info"></i> เลือกคณะ ภาควิชา สาขาวิชา และปริญญา
+                                    เพื่อค้นหาหลักสูตร</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="faculty_id"><strong>คณะ</strong>
+                                                <span class="required" aria-required="true"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="hidden" id="faculty_id_hidden" name="faculty_id_hidden"
+                                                       value="@if(!empty($curriculum)){{$curriculum->faculty_id}}@endif"/>
+                                                <select name="faculty_id" id="faculty_id" class="form-control">
+                                                    @if(!empty($facList))
+                                                        @foreach($facList as $fac)
+                                                            <option value="{{$fac->faculty_id}}">{{$fac->faculty_name.' ('.$fac->faculty_full.')'}}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3"
+                                                   for="department_id"><strong>ภาควิชา/สหสาขา</strong>
+                                                <span class="required" aria-required="true"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="hidden" id="department_id_hidden"
+                                                       name="department_id_hidden"
+                                                       value="@if(!empty($curriculum)){{$curriculum->department_id}}@endif"/>
+                                                <select name="department_id" id="department_id" class="form-control">
+                                                </select>
+                                                <span class="help-block"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label offset-col-md-3 col-md-2"
-                                           for="degree_id"><strong>ชื่อปริญญา</strong>
-                                        <span class="required" aria-required="true"> * </span>
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="hidden" id="degree_id_hidden" name="degree_id_hidden"
-                                               value="@if(!empty($curriculum)){{$curriculum->degree_id}}@endif"/>
-                                        <select name="degree_id" id="degree_id" class="form-control">
-                                            {{--@if(!empty($degList))--}}
-                                            {{--@foreach($degList as $deg)--}}
-                                            {{--<option value="{{$deg->degree_id}}">{{$deg->degree_name.' ('.$deg->degree_name_en.')'}}</option>--}}
-                                            {{--@endforeach--}}
-                                            {{--@endif--}}
-                                        </select>
-                                        <span class="help-block"></span>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3"
+                                                   for="major_id"><strong>สาขาวิชา</strong>
+                                                <span class="required" aria-required="true"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="hidden" id="major_id_hidden" name="major_id_hidden"
+                                                       value="@if(!empty($curriculum)){{$curriculum->major_id}}@endif"/>
+                                                <select name="major_id" id="major_id" class="form-control">
+                                                </select>
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3"
+                                                   for="sub_major_id"><strong>แขนงวิชา</strong></label>
+                                            <div class="col-md-9">
+                                                <div id="sub_major" class="mt-checkbox-list">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label offset-col-md-3 col-md-2"
+                                                   for="degree_id"><strong>ชื่อปริญญา</strong>
+                                                <span class="required" aria-required="true"> * </span>
+                                            </label>
+                                            <div class="col-md-8">
+                                                <input type="hidden" id="degree_id_hidden" name="degree_id_hidden"
+                                                       value="@if(!empty($curriculum)){{$curriculum->degree_id}}@endif"/>
+                                                <select name="degree_id" id="degree_id" class="form-control">
+                                                </select>
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                               id="currProgramTbl">
+                                            <thead>
+                                            <tr>
+                                                <th style="width:50px">
+                                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                        <input type="checkbox" class="group-checkable"
+                                                               data-set="#currProgramTbl .checkboxes"/>
+                                                        <span></span>
+                                                    </label>
+                                                </th>
+                                                <th style="width:60px"> รหัสหลักสูตร</th>
+                                                <th style="width:170px"> ชื่อหลักสูตร</th>
+                                                <th style="width:50px"> แผน</th>
+                                                <th> ประเภท</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                      <div class="row">
-                          <div class="col-md-12">
-                              <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                     id="currProgramTbl">
-                                  <thead>
-                                  <tr>
-                                      <th style="width:50px">
-                                          <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                              <input type="checkbox" class="group-checkable"
-                                                     data-set="#currProgramTbl .checkboxes"/>
-                                              <span></span>
-                                          </label>
-                                      </th>
-                                      <th style="width:60px"> รหัสหลักสูตร</th>
-                                      <th style="width:170px"> ชื่อหลักสูตร</th>
-                                      <th style="width:50px"> แผน</th>
-                                      <th> ประเภท</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                      </div>
-                    </div>
 
 
                         <hr>
@@ -510,7 +508,19 @@
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
                                     <div class="col-md-9">
-                                        <select name="" id="" class="form-control">
+                                        <select id="curriculum_user" name="curriculum_user[]" class="form-control"
+                                                multiple>
+                                            @foreach($userList as $value)
+                                                <option value="{{$value->user_id}}"
+                                                @if(!empty($curriculum))
+                                                    @foreach($curriculum->curriculumUsers as $curUser)
+                                                        @if($curUser->user_id == $value->user_id)
+                                                            {{'selected'}}
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                >{{$value->user_name}}</option>
+                                            @endforeach
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
@@ -535,9 +545,12 @@
                             </a>
                         </div>
                         <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
-                          <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal" class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
-                          <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow" style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
-                          <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green" style="display:none;"> <i class="fa fa-check"></i> อนุมัติ </a>
+                            <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
+                               class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
+                            <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow"
+                               style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
+                            <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green"
+                               style="display:none;"> <i class="fa fa-check"></i> อนุมัติ </a>
                         </div>
 
                     </div>
@@ -1100,7 +1113,7 @@
             mainForm.validate().element($("input[name='program_id']"));
         }
 
-        for(var instanceName in CKEDITOR.instances) {
+        for (var instanceName in CKEDITOR.instances) {
             CKEDITOR.instances[instanceName].updateElement();
         }
 
