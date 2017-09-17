@@ -13,9 +13,8 @@ function getNotice(url, editLink) {
         url: url,
         method: "get",
         success: function (result) {
-            var data = showToastFromAjaxResponse(result);
-            if (data !== null) {
-                updateNotice(data, editLink);
+            if (result.data !== null) {
+                updateNotice(result.data, editLink);
             }
         }
     });
@@ -46,7 +45,7 @@ function genNoticeItem(obj, editLink) {
             spanLabel.innerText = 'Draft';
         }
         spanDetail.append(spanLabel);
-        spanDetail.append('' + obj.degree_name);
+        spanDetail.append(' ' + obj.degree_name);
         aLink.href = editLink + '/' + obj.curriculum_id;
         aLink.append(spanItem);
         aLink.append(spanDetail);
@@ -61,12 +60,17 @@ function genNoticeItem(obj, editLink) {
 
 
 function updateNotice(data, editLink) {
+    $("#noticeItems").hide();
     var totalAmt = data.length;
     $("#noticeList").empty();
     $.each(data, function (index, value) {
         $("#noticeList").append(genNoticeItem(value, editLink));
     });
+    if(totalAmt > 0){
+        $("#noticeItems").removeAttr("style");
+    }
     $("#noticeAmt1").text(totalAmt == 0 ? '' : totalAmt);
     $("#noticeAmt2").text(totalAmt == 0 ? '-' : totalAmt);
+    $("#menuToDolistAmt").text(totalAmt == 0 ? '' : totalAmt);
 }
 
