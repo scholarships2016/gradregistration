@@ -370,6 +370,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 //Draft Step
             if (!isset($datas['curriculum_id'])) {
                 $datas['is_approve'] = 1;
+                $datas['responsible_person'] = $creator;
             }
 
             $currObj = $this->save($datas);
@@ -749,6 +750,42 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
             return $result;
 
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function checkCreatableCurriculumByCriteria($applyMethod, array $programs, $semester, $academicYear, $curriculumId = null)
+    {
+        try {
+            $query = DB::table('curriculum as a')
+                ->select('a.curriculum_id')
+                ->join('curriculum_activity as b', function ($join) {
+                    $join->on('b.curriculum_id', '=', 'a.curriculum_id');
+                })
+                ->join('apply_setting as bb', function ($join) {
+                    $join->on('bb.apply_setting_id', '=', 'b.apply_setting_id');
+                })
+                ->leftJoin('curriculum_program as c', function ($join) {
+                    $join->on('c.curriculum_id', '=', 'a.curriculum_id');
+                })
+                ->where('a.apply_method', '=', $applyMethod)
+                ->where('bb.semester', '=', $semester)
+                ->where('bb.academic_year', '=', $academicYear);
+            if (!empty($programs)) {
+                $query->Where(function ($query) use ($programs) {
+                    foreach ($programs as $index => $value) {
+                        $query->orWhere(function ($query) use ($value) {
+                            $query->where('c.program_id', '=', $value['program_id'])
+                                ->where('c.program_type_id', '=', $value['program_type_id']);
+                        });
+                    }
+                });
+            }
+            if (!empty($curriculumId)) {
+                $query->where('a.curriculum_id', '<>', $curriculumId);
+            }
+            return ($query->count() > 0);
         } catch (\Exception $ex) {
             throw $ex;
         }
