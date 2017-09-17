@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
     Route::get('admin/manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
     Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
+    Route::get('admin/docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
 
 //GS03
 
@@ -105,10 +106,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
     Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
 //Report GS03
-    
-     Route::get('admin/report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
+
+    Route::get('admin/report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
     Route::get('admin/getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
-    
+
 
 //GS05
     Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
@@ -154,11 +155,11 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => []], function () {
-  //download Files
-    Route::get('getMedia', function(\Illuminate\Http\Request $request){
-      $input_path = $request->input('path');
-      $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\'.$input_path);
-      return response()->download($path);
+    //download Files
+    Route::get('getMedia', function(\Illuminate\Http\Request $request) {
+        $input_path = $request->input('path');
+        $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $input_path);
+        return response()->download($path);
     })->name('admin.getMedia');
     //Notice
     Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');

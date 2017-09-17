@@ -332,7 +332,7 @@
                 <tr>
                     <td colspan="2">
                         <p align="center"  >
-                            รวมที่ส่งมาทั้งสิ้น[Total] ..........{{$Docs->count()}}......... รายการ [Items]
+                            รวมที่ส่งมาทั้งสิ้น[Total] ..........{{$Files->count()}}......... รายการ [Items]
                         </p>
                         <p align="center">รายการที่เป็นเอกสารถ่ายสำเนา ให้ผู้สมัครลงนามรับรองสำเนาเอกสารด้วยตนเองทุกฉบับ<br>ข้าพเจ้าขอรับรองว่า หลักฐานและเอกสารต่างๆ ที่นำมาประกอบการสมัครข้างต้นเป็นเอกสารที่ถูกต้อง<br>All copy documents must have applicant's signature. I certify that the information given is complete and accurate. </p>     </td>
                 </tr>

@@ -196,6 +196,52 @@ class ManageApplyController extends Controller {
         return view('Apply.confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $pid, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
     }
 
+    public function docMyCourserintPDF($id, $pid) {
+        $user_data = $this->ApplicantRepo->find($id);
+        $appc = new \stdClass();
+        $appc->applicant_id = $user_data->applicant_id;
+        $appc->stu_citizen_card = $user_data->stu_citizen_card;
+        $appc->stu_email = $user_data->stu_email;
+        $appc->nation_id = $user_data->nation_id;
+        session()->put('Applicant', $appc);
+
+        $dataApplication = $this->ApplicationRepo->getData(null, $pid);
+        $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
+        $people = $this->ApplicationPeopleRef->getDetail($pid);
+        $DocumentApplys = $this->DocumentApply->getDetailReport();
+        $DocumentApplyGroup = $this->DocumentApply->getGroupReport();
+        $files = $this->ApplicationDocumentFileRepo->GetData($pid);
+
+
+        $pic = $this->doPDFImg($applicantProfile['applicant']->stu_img);
+
+        $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
+
+        $page = View('Apply.docApplicationForm', ['apps' => $dataApplication,
+            'applicant' => $applicantProfile['applicant']
+            , 'appEdus' => $applicantProfile['applicantEdu']
+            , 'appapplicantWorks' => $applicantProfile['applicantWork']
+            , 'peoples' => $people
+            , 'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Files' => $files
+            , 'age' => $age, 'pictrue' => $pic])->render();
+
+
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $options->setIsPhpEnabled(true);
+        $options->setDebugKeepTemp(true);
+        $options->setIsHtml5ParserEnabled(true);
+
+        $options->set('defaultFont', 'THSarabunNew');
+        $pdf = new Dompdf($options);
+        $pdf->loadHtml((string) $page);
+        $pdf->setPaper('A4', 'portrait');
+
+        $pdf->render();
+
+        return $pdf->stream("CU_Application" .'_'. $user_data->stu_first_name_en . ".pdf");
+    }
+
     //GS03
     public function showManageGS03() {
         return view($this->part_doc . 'manage_GS03');
@@ -735,8 +781,8 @@ class ManageApplyController extends Controller {
         } else if ($print == 'excel') {
             $data = $curDiss->toArray();
 
-              $this->exportExcel($filename, $data);
-         retrun;
+            $this->exportExcel($filename, $data);
+            retrun;
         } else if ($print == 'text') {
             
         }
