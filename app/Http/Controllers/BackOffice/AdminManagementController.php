@@ -80,19 +80,12 @@ class AdminManagementController extends Controller
             $who = session('user_id');
             $data['modifier'] = $who;
             $data['creator'] = $who;
-<<<<<<< HEAD
+
             //Test
                     if (empty($data['user_id'])) {
                         $data['user_password'] = bcrypt('123456');
                     }
 
-=======
-
-            //Test
-            if (empty($data['user_id'])) {
-                $data['user_password'] = bcrypt('123456');
-            }
->>>>>>> 299ba030e6888e045ea22dc08e55fb2b6b5d0bf1
 
             $result = $this->userRepo->doSave($data);
 
