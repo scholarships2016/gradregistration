@@ -271,6 +271,146 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
         return $results;
     }
+ public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null,$user_role=null) {
+        $results = null;
+        try {
+
+            $results = Application:: leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
+                            ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
+                            ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
+                            ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
+                            ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
+                            ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
+                            ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
+                            ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
+                            ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
+                            ->leftJoin('tbl_bank', 'application.bank_id', '=', 'tbl_bank.bank_id')
+                            ->leftJoin("tbl_major", function($join) {
+                                $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
+                                ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
+                            })
+                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                            ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
+                            ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
+                            ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
+                            ->leftJoin('applicant', 'applicant.applicant_id', 'application.applicant_id')
+                            ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
+                            ->leftJoin('tbl_eng_test as engTest', 'engTest.eng_test_id', '=', 'applicant.eng_test_id')
+                            ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')
+                            ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
+                            ->leftJoin('tbl_name_title', 'applicant.name_title_id', '=', 'tbl_name_title.name_title_id')
+                            ->Where(function ($query)use ($user) {
+                                if ($user) {
+                                    $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
+                                        $query->select('curriculum_id')
+                                        ->from('curriculum_user')
+                                        ->where('curriculum_user.user_id', $user);
+                                    })
+                                    ->orwhere('curriculum.responsible_person', $user);
+                                }
+                            })
+                            ->Where(function ($query)use ($user_role) {
+                                if ($user_role == 2) {
+                                    $query->orwhere('curriculum.apply_method', '1');
+                                }
+                            })
+                            ->Where(function ($query)use ($applicationID) {
+                                if ($applicationID) {
+                                    $query->where('application.application_id', $applicationID);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicationsArray) {
+                                if ($applicationsArray) {
+                                    $query->whereIn('application.application_id', $applicationsArray);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicantID) {
+                                if ($applicantID) {
+                                    $query->where('application.applicant_id', $applicantID);
+                                }
+                            })
+                            ->Where(function ($query)use ($program_type_id) {
+                                if ($program_type_id) {
+                                    $query->where('tbl_program_type.program_type_id', $program_type_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($status) {
+                                if ($status) {
+                                    $query->whereIn('application.flow_id', $status);
+                                }
+                            })
+                            ->Where(function ($query)use ($exam_status) {
+                                if ($exam_status) {
+                                    $query->where('tbl_exam_status.exam_id', $exam_status);
+                                }
+                            })
+                            ->Where(function ($query)use ($semester) {
+                                if ($semester) {
+                                    $query->where('apply_setting.semester', $semester);
+                                }
+                            })
+                            ->Where(function ($query)use ($year) {
+                                if ($year) {
+                                    $query->where('apply_setting.academic_year', $year);
+                                }
+                            })
+                            ->Where(function ($query)use ($curr_act_id) {
+                                if ($curr_act_id) {
+                                    $query->where('curriculum_activity.curr_act_id', $curr_act_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($roundNo) {
+                                if ($roundNo) {
+                                    $query->where('apply_setting.round_no', $roundNo);
+                                }
+                            })
+                            ->Where(function ($query)use ($program_id) {
+                                if ($program_id) {
+                                    $query->where('application.program_id', $program_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($sub_major_id) {
+                                if ($sub_major_id) {
+                                    if ($sub_major_id > 0) {
+                                        $query->where('application.sub_major_id', $sub_major_id);
+                                    } else {
+                                        $query->whereNull('application.sub_major_id');
+                                    }
+                                }
+                            })
+                            ->Where(function ($query)use ($criteria) {
+                                if ($criteria) {
+                                    $query->where('degree_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('degree_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('department_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('department_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('faculty_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('faculty_full', 'like', '%' . $criteria . '%')
+                                    ->orwhere('major_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('major_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('project_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('project_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('prog_type_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('prog_type_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('degree_level_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('app_id', 'like', '%' . $criteria . '%')
+                                    ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('stu_last_name', 'like', '%' . $criteria . '%')
+                                    ->orwhere('stu_first_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('stu_last_name_en', 'like', '%' . $criteria . '%')
+                                    ->orwhere('application.program_id', 'like', '%' . $criteria . '%')
+                                    ;
+                                }
+                            })
+                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,semester,application.creator user_create,nation_id,apply_method')])
+                            ->distinct()
+                            ->orderBy('application.application_id', 'desc')->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $results;
+    }
 
     public function getDatacountByStatusUse($applicantID) {
         $result = null;

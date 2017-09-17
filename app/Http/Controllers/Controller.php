@@ -105,16 +105,16 @@ class Controller extends BaseController {
             if (!empty($data) && $data->count()) {
 
                 foreach ($data as $key => $value) {
-                if ($value->row) {
-                    $title_name = explode('-', $value->title_name);
-                    $sex = explode('-', $value->sex);
-                    $nationality = explode('-', $value->nationality);
-                    $religion = explode('-', $value->religion);
-                    $address_prov = explode('_', $value->address_prov);
-                    $address_dist = explode('_', $value->address_dist);
-                    $work_status = explode('-', $value->work_status);
-                    $Admission_Status = explode('-', $value->admission_status);
-                     
+                    if ($value->row) {
+                        $title_name = explode('-', $value->title_name);
+                        $sex = explode('-', $value->sex);
+                        $nationality = explode('-', $value->nationality);
+                        $religion = explode('-', $value->religion);
+                        $address_prov = explode('_', $value->address_prov);
+                        $address_dist = explode('_', $value->address_dist);
+                        $work_status = explode('-', $value->work_status);
+                        $Admission_Status = explode('-', $value->admission_status);
+
                         $insert[] = ['row' => $value->row,
                             'id_card' => $value->id_card,
                             'title_name' => trim($title_name[1]),
@@ -150,6 +150,18 @@ class Controller extends BaseController {
             }
         }
         return response()->json($insert);
+    }
+
+    public function exportExcel($filname, $data) {
+
+        $this->excels->create($filname, function($excel) use($data) {
+            $excel->sheet('Sheet1', function($sheet) use($data) {
+                $sheet->fromArray($data);
+            });
+        })->export('xls');
+
+
+        return;
     }
 
 }

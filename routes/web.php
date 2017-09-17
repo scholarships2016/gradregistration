@@ -104,7 +104,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/applicantGS03', 'ManageApplyController@checkApplicant')->name('applicantGS03');
     Route::post('admin/addUserExamGS03', 'ManageApplyController@addUserExamGS03')->name('addUserExamGS03');
     Route::post('admin/addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
-
+//Report GS03
+    
+     Route::get('admin/report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
+    Route::get('admin/getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
+    
 
 //GS05
     Route::get('admin/ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
