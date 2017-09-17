@@ -148,8 +148,8 @@ class ApplyController extends Controller {
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);
-        $DocumentApplys = $this->DocumentApply->getDetail();
-        $DocumentApplyGroup = $this->DocumentApply->getGroup();
+        $DocumentApplys = $this->DocumentApply->getDetailReport();
+        $DocumentApplyGroup = $this->DocumentApply->getGroupReport();
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
         $pic = $this->FileRepo->getImageFileAsBase64ById($applicantProfile['applicant']->stu_img);
         $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
@@ -169,8 +169,8 @@ class ApplyController extends Controller {
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);
-        $DocumentApplys = $this->DocumentApply->getDetail();
-        $DocumentApplyGroup = $this->DocumentApply->getGroup();
+        $DocumentApplys = $this->DocumentApply->getDetailReport();
+        $DocumentApplyGroup = $this->DocumentApply->getGroupReport();
         $files = $this->ApplicationDocumentFileRepo->GetData($id);
 
 

@@ -165,7 +165,7 @@
                                 </tr>
                                 @foreach ($appEdus as $appEdu)
                                 <tr>
-                                    <td> {{$appEdu->grad_level}} </td>
+                                    <td> {{$appEdu->degree_level_name}} - {{$appEdu->degree_level_name_en}} </td>
                                     <td>
                                         {{$appEdu->university_name}} </td>
                                     <td>
@@ -213,11 +213,15 @@
                 @if($appapplicantWorks->count()  > 0)
                 @foreach ($appapplicantWorks as $appapplicantWork)     
                 <tr>
-                    <td> ({{$loop->iteration}}) {{$appapplicantWork->work_stu_detail}} {{$appapplicantWork->work_stu_position}}  {{$appapplicantWork->work_stu_yr}}  {{$appapplicantWork->work_stu_mth}}  {{$appapplicantWork->work_status_name}}        </td>
+                    <td> ({{$loop->iteration}})   {{ $appapplicantWork->work_status_name . ' - ' .  $appapplicantWork->work_status_name_en}}<br>
+                                               @if($appapplicantWork->work_status_id > 1)
+                                                ตำแหน่ง/หน้าที่[Position] {{$appapplicantWork->work_stu_position}} สถานที่ทำงาน[Work place] {{$appapplicantWork->work_stu_detail}}   เบอร์โทรศัพท์[Telephone No]{{$appapplicantWork->work_stu_phone}}  
+                                                 <br>ระยะเวลาในการทำงาน[Period of Time Working] {{$appapplicantWork->work_stu_yr}} ปี[Year] {{$appapplicantWork->work_stu_mth}} เดือน[Month] เงินเดือนที่ได้รับ {{$appapplicantWork->work_stu_salary}} บาท[Baht]  
+                                                @endif
+                    </td>
                 </tr>
                 @endforeach
-                @else
-                <tr><td> ไม่ได้ทำงาน - Not working</td></tr>
+                
                 @endif
                 <tr>
                     <td>&nbsp;</td>
@@ -292,44 +296,45 @@
                     <td  style="width: 25px" align="center"><span >{{$loop->iteration}}.</span></td>
                     <td width="550px" align="left"><span  >{{$Group->doc_apply_group.'  '.  $Group->doc_apply_group_en}} &nbsp;</span></td>
                 </tr>
-                @foreach ($Docs as $Doc)
-                @if($Group->doc_apply_group == $Doc->doc_apply_group   )
-                <tr>
-                    <td  align="center">
-                        <span >
-                            <input class="md-check"   type="checkbox"    
-                                   {{$val=false}}
-                                   @foreach($Files as $file)
-                                   @if($Doc->doc_apply_id == $file->doc_apply_id ||$Doc->doc_apply_id ==1 )
-                                   {{$val=true}}
-                                   @break
-                                   @endif
-                                   @endforeach                                                              
-                                   {{ ($val)? 'checked="checked"':''}}
-                                   disabled="disabled"    >
-                        </span>
-                    </td>
-                    <td   align="left">
-                        <span >
-                            <label for="checkbox{{$Doc->doc_apply_id}}">
-                                <span class="box"></span> <label> {{ $Doc->doc_apply_detail}} / {{ $Doc->doc_apply_detail_en}}  </label>    
-                                @if( $Doc->doc_apply_id == 16)
-                                <span style="border-bottom: 1px dotted;">  
-                                    @foreach($Files as $file)
-                                    {{($Doc->doc_apply_id == $file->doc_apply_id)? ' :           '. $file->other_val .'' :' '}}
-                                    @endforeach 
-                                </span>
-                                @endif
-                        </span>
-                    </td>
-                </tr>
-                @endif
-                @endforeach                                                 
-                @endforeach
+               @foreach ($Docs as $Doc)
+                                                 @if(($Doc->doc_apply_id == 9 && $apps[0]->apply_method > 1 ) || ($Doc->doc_apply_id == 9 && $apps[0]->apply_method == 1 && $applicant->nation_id != 1) )
+                                                 ''
+                                                 @else
+                                                  @if($Group->doc_apply_group == $Doc->doc_apply_group   )
+                                                <tr>
+                                                    <td align="center"><span class="style1">
+                                                           <input class="md-check"   type="checkbox"    
+                                                            {{$val=false}}
+                                                           @foreach($Files as $file)
+                                                              @if($Doc->doc_apply_id == $file->doc_apply_id ||$Doc->doc_apply_id ==1 )
+                                                              {{$val=true}}
+                                                               @break
+                                                              @endif
+                                                            @endforeach                                                              
+                                                           {{ ($val)? 'checked="checked"':''}}
+                                                             disabled="disabled"    >
+                                                        </span></td>
+                                                    <td width="94%" align="left"><span class="style1"><label for="checkbox{{$Doc->doc_apply_id}}">
+                                                        <span class="inc"></span>
+                                                        <span class="check"></span>
+                                                        <span class="box"></span> <label> {{ $Doc->doc_apply_detail}} @if( $Doc->doc_apply_id == 9)     @foreach($apps as $app) :  {{$app->bank_name}}     @endforeach   @endif  <br>{{ $Doc->doc_apply_detail_en}}  </label>    
+                                                        @if( $Doc->doc_apply_id == 16)
+                                                        <span style="border-bottom: 1px dotted;">  
+                                                          @foreach($Files as $file)
+                                                           {{($Doc->doc_apply_id == $file->doc_apply_id)? ' :           '. $file->other_val .'' :' '}}
+                                                           @endforeach 
+                                                      </span>
+                                                        @endif
+                                                             </span></td>
+                                                </tr>
+                                                @endif
+                                                @endif
+                                                 @endforeach                                                 
+                                              @endforeach
                 <tr>
                     <td colspan="2">
                         <p align="center"  >
-                            รวมที่ส่งมาทั้งสิ้น[Total] ..........{{$Files->count()}}......... รายการ [Items]
+                            รวมที่ส่งมาทั้งสิ้น[Total] ..........{{$Docs->count()}}......... รายการ [Items]
                         </p>
                         <p align="center">รายการที่เป็นเอกสารถ่ายสำเนา ให้ผู้สมัครลงนามรับรองสำเนาเอกสารด้วยตนเองทุกฉบับ<br>ข้าพเจ้าขอรับรองว่า หลักฐานและเอกสารต่างๆ ที่นำมาประกอบการสมัครข้างต้นเป็นเอกสารที่ถูกต้อง<br>All copy documents must have applicant's signature. I certify that the information given is complete and accurate. </p>     </td>
                 </tr>

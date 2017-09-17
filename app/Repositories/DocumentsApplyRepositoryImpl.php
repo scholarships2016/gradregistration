@@ -19,13 +19,32 @@ class DocumentsApplyRepositoryImpl extends AbstractRepositoryImpl implements Doc
     public function getDetail(){
          $result = null;
         try {
-            $result = TblDocumentsApply::where('active', 1)->get();
+            $result = TblDocumentsApply::where('flag_upload', 1)->get();
               } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
      public function getGroup(){
+         $result = null;
+        try {
+            $result = TblDocumentsApply::where('flag_upload', 1)->groupBy('doc_apply_group','doc_apply_group_en') ->select('doc_apply_group','doc_apply_group_en')->orderby('doc_apply_id')->get();
+             } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
+    
+       public function getDetailReport(){
+         $result = null;
+        try {
+            $result = TblDocumentsApply::where('active', 1)->get();
+              } catch (\Exception $ex) {
+            throw $ex;
+        }
+        return $result;
+    }
+     public function getGroupReport(){
          $result = null;
         try {
             $result = TblDocumentsApply::where('active', 1)->groupBy('doc_apply_group','doc_apply_group_en') ->select('doc_apply_group','doc_apply_group_en')->orderby('doc_apply_id')->get();

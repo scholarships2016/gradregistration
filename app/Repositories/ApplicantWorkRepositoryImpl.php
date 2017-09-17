@@ -6,17 +6,13 @@ use App\Models\ApplicantWork;
 use App\Repositories\Contracts\ApplicantWorkRepository;
 use Illuminate\Support\Facades\DB;
 
+class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements ApplicantWorkRepository {
 
-class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements ApplicantWorkRepository
-{
-
-    public function __construct()
-    {
+    public function __construct() {
         parent::setModelClassName(ApplicantWork::class);
     }
 
-    public function saveApplicantWorkList(array $datas, $applicantId)
-    {
+    public function saveApplicantWorkList(array $datas, $applicantId) {
         DB::beginTransaction();
         try {
             $ids = array();
@@ -36,7 +32,7 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
             }
             if (!empty($ids) && sizeof($ids) > 0) {
                 $del = ApplicantWork::where('applicant_id', '=', $applicantId)
-                    ->whereNotIn('app_work_id', $ids)->delete();
+                                ->whereNotIn('app_work_id', $ids)->delete();
             }
             DB::commit();
             return true;
@@ -46,29 +42,25 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
         }
     }
 
-    public function getApplicantWorkByApplicantId($applicantId)
-    {
-        try {
-            return ApplicantWork::where('applicant_id', '=', $applicantId)->get();
-        } catch (\Exception $ex) {
-            throw $ex;
-        }
-
-    }
-
-    public function getApplicantWorkAllByApplicantId($applicantId)
-    {
+    public function getApplicantWorkByApplicantId($applicantId) {
         try {
             return ApplicantWork::leftjoin('tbl_work_status', 'tbl_work_status.work_status_id', 'applicant_work.work_status_id')
-                ->where('applicant_id', '=', $applicantId)->get();
+                            ->where('applicant_id', '=', $applicantId)->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
-
     }
 
-    public function save(array $data)
-    {
+    public function getApplicantWorkAllByApplicantId($applicantId) {
+        try {
+            return ApplicantWork::leftjoin('tbl_work_status', 'tbl_work_status.work_status_id', 'applicant_work.work_status_id')
+                            ->where('applicant_id', '=', $applicantId)->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function save(array $data) {
         try {
             $id = null;
             if (array_key_exists('app_work_id', $data) || !empty($data['app_work_id']))
@@ -111,6 +103,5 @@ class ApplicantWorkRepositoryImpl extends AbstractRepositoryImpl implements Appl
             throw $ex;
         }
     }
-
 
 }
