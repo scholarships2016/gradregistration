@@ -271,7 +271,7 @@ class ManageApplyController extends Controller {
         $citizen = $applicantProfile['applicant']->stu_citizen_card;
         $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
         $app_no = $dataApplication[0]->program_id ."-" .str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
-        return $pdf->stream("ApplicationForm-{$app_id}-{$app_no}.pdf");
+        return $pdf->stream("{$app_id}_{$app_no}_ApplicationForm.pdf");
     }
 
     //GS03
@@ -438,7 +438,7 @@ class ManageApplyController extends Controller {
             $round_no = $curDiss->round_no;
             $name = $curDiss->stu_first_name . '  ' . $curDiss->stu_last_name;
             $title = $curDiss->name_title;
-            $detail = 'ได้ผ่านการสอบคัดเลือกให้เข้าศึกษา ในหลักสูตร' . $curDiss->major_name . ' สาขาวิชา' . $curDiss->degree_name . '  คณะ' . $curDiss->faculty_name . '  จุฬาลงกรณ์มหาวิทยาลัย   ภาคการศึกษา' . (($curDiss->semester == 1) ? 'ต้น' : 'ปลาย') . '   ปีการศึกษา  ' . $curDiss->academic_year;
+            $detail = 'ได้ผ่านการสอบคัดเลือกให้เข้าศึกษา ในหลักสูตร' . $curDiss->degree_name . ' สาขาวิชา' . $curDiss->degree_name . '  คณะ' . $curDiss->faculty_name . '  จุฬาลงกรณ์มหาวิทยาลัย   ภาคการศึกษา' . (($curDiss->semester == 1) ? 'ต้น' : 'ปลาย') . '   ปีการศึกษา  ' . $curDiss->academic_year;
             $dateMake = $this->ConvertDateThaiNotWeek(Carbon::now());
             $approve = TblCertificateApprover::all();
             return view($this->part_doc . 'manage_report_Recommentdation', ['year' => $year, 'round' => $round_no, 'name' => $name, 'detail' => $detail, 'dateMake' => $dateMake, 'title' => $title, 'approves' => $approve]);
