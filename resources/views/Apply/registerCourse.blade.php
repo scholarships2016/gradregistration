@@ -420,12 +420,12 @@ $(function() {
 
      });
         $('#pageSave').click(function() {
-       
+
                 var valdata = [];
                 table.rows().every(function(){
                 valdata.push(this.data());
             });
- 
+
                if(valdata.length > 0 && $("#bank_id option:selected").index()>0){
                              $.ajax({
 					type: "POST",
@@ -446,14 +446,14 @@ $(function() {
 					}
 				},"json");
                                 }else{
-                              toastr.warning('plz,Reference Person Information Or Bank?');  
+                              toastr.warning('plz,Reference Person Information Or Bank?');
                         }
 
           });
 
 
 
-        });  
+        });
 
  function cleardata(){
         $('#app_people_id').val(null);

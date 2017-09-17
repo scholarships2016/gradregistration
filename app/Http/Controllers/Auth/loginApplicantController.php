@@ -71,7 +71,7 @@ class LoginApplicantController extends Controller {
                     $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
             } catch (Exception $e) {
-                
+
             }
             session()->put('user_id', $user_data->applicant_id);
             session()->put('first_name', $user_data->stu_first_name_en);
@@ -82,7 +82,7 @@ class LoginApplicantController extends Controller {
             $role->user_role = '';
             $role->user_type = 'applicant';
             session()->put('user_tyep', $role);
-
+            
 
             $app = new \stdClass();
             $app->applicant_id = $user_data->applicant_id;

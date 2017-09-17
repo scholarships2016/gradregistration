@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Contracts\AudittrailRepository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Repositories\FileRepositoryImpl;
+use App\Repositories\Contracts\AudittrailRepository;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Input;
+use \Crypt;
+class Controller extends BaseController {
 
-class Controller extends BaseController
-{
-
-    use AuthorizesRequests,
-        DispatchesJobs,
-        ValidatesRequests;
+    use AuthorizesRequests,DispatchesJobs,ValidatesRequests;
 
     protected $FileRepo;
     protected $excels;
@@ -27,22 +24,39 @@ class Controller extends BaseController
 
     public function __construct(FileRepositoryImpl $FileRepo = null, Excel $excels = null, AudittrailRepository $auditRepo = null)
     {
-
         $this->FileRepo = $FileRepo;
         $this->excels = $excels;
         $this->auditRepo = $auditRepo;
     }
 
-    public function doDownloadFile(Request $request)
-    {
+
+    public function doDownloadFile(Request $request) {
         try {
 
             $data = $request->all();
             if (!array_key_exists('file_id', $data) || empty($data['file_id'])) {
                 return;
             }
+            $id = Crypt::decrypt($data['file_id']);
+            $file = $this->FileRepo->findOrFail($id);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
 
-            $file = $this->FileRepo->findOrFail($data['file_id']);
+            return response()->download($path, $file->file_origi_name);
+        } catch (\Exception $ex) {
+
+        }
+    }
+    public function doDownloadMediaFile(Request $request) {
+        try {
+
+            $data = $request->all();
+            if (!array_key_exists('file_id', $data) || empty($data['file_id'])) {
+                return;
+            }
+            $decrypt_file_id = Crypt::decrypt($data['file_id']);
+            //echo  $decrypt_file_id;
+
+            $file = $this->FileRepo->getFileByGenName($decrypt_file_id);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
 
             return response()->download($path, $file->file_origi_name);
@@ -51,26 +65,7 @@ class Controller extends BaseController
         }
     }
 
-    public function doDownloadMediaFile(Request $request)
-    {
-        try {
-
-            $data = $request->all();
-            if (!array_key_exists('file_id', $data) || empty($data['file_id'])) {
-                return;
-            }
-
-            $file = $this->FileRepo->getFileByGenName($data['file_id']);
-            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
-
-            return response()->download($path, $file->file_origi_name);
-        } catch (\Exception $ex) {
-
-        }
-    }
-
-    public function doPDFImg($id)
-    {
+    public function doPDFImg($id) {
         try {
             $file = $this->FileRepo->findOrFail($id);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
@@ -81,9 +76,8 @@ class Controller extends BaseController
         }
     }
 
-    public function WLog($message, $activity, $errorLog)
-    {
-        $log = '|User:' . ((session('user_id') != null) ? session('email_address') : 'unknowUser') . '|Activity:' . $activity . '|Message:' . $message;
+    public function WLog($message, $activity, $errorLog) {
+        $log = '|User:' . ((session('user_id') != null) ? session('email_address') : 'unknowUser' ) . '|Activity:' . $activity . '|Message:' . $message;
         $ip = request()->ip();
         if ($errorLog == null || $errorLog == '') {
             Log::info($log . '|IP:' . $ip . PHP_EOL);
@@ -92,22 +86,20 @@ class Controller extends BaseController
         }
     }
 
-    public static function ConvertDateThai($date)
-    {
+    public static function ConvertDateThai($date) {
 
 
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
 
-        $thaiweek = ["วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัส", "วันศุกร์", "วันเสาร์","วันอาทิตย์"];
+        $thaiweek = ["วันอาทิตย์", "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัส", "วันศุกร์", "วันเสาร์"];
         $thaimonth = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
- 
-        $res = $thaiweek[date('N', strtotime($date))-1] . " ที่ " . date('j', strtotime($date)) . " " . $thaimonth[date('m', strtotime($date)) - 1] . " พ.ศ. " . (date('Y', strtotime($date)) + 543);
+
+        $res = $thaiweek[date('N', strtotime($date))] . " ที่ " . date('j', strtotime($date)) . " " . $thaimonth[date('m', strtotime($date)) - 1] . " พ.ศ. " . (date('Y', strtotime($date)) + 543);
 
         return $res;
     }
 
-    public static function ConvertDateThaiNotWeek($date)
-    {
+    public static function ConvertDateThaiNotWeek($date) {
 
 
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
@@ -119,18 +111,16 @@ class Controller extends BaseController
         return $res;
     }
 
-    public function importExport()
-    {
+    public function importExport() {
         return view('importExport');
     }
 
-    public function importExcel()
-    {
+    public function importExcel() {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
-            $data = $this->excels->load($path, function ($reader) {
+            $data = $this->excels->load($path, function($reader) {
 
-            })->get()[0];
+                    })->get()[0];
 
             if (!empty($data) && $data->count()) {
 
@@ -182,11 +172,10 @@ class Controller extends BaseController
         return response()->json($insert);
     }
 
-    public function exportExcel($filname, $data)
-    {
+    public function exportExcel($filname, $data) {
 
-        $this->excels->create($filname, function ($excel) use ($data) {
-            $excel->sheet('Sheet1', function ($sheet) use ($data) {
+        $this->excels->create($filname, function($excel) use($data) {
+            $excel->sheet('Sheet1', function($sheet) use($data) {
                 $sheet->fromArray($data);
             });
         })->export('xls');
