@@ -167,7 +167,7 @@ class ApplyController extends Controller {
     public function docMyCourserintPDF($id) {
 
         $id = Crypt::decrypt($id);
-  
+
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);
@@ -204,7 +204,7 @@ class ApplyController extends Controller {
         $citizen = $applicantProfile['applicant']->stu_citizen_card;
         $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
         $app_no = $dataApplication[0]->program_id ."-" .str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
-        return $pdf->stream("ApplicationForm-{$app_id}-{$app_no}.pdf");
+        return $pdf->stream("{$app_id}-{$app_no}-ApplicationForm.pdf");
     }
 
     public function docApplicationFee($id) {
