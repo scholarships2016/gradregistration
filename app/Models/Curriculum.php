@@ -11,7 +11,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Curriculum
-
  *
  * @property int $curriculum_id
  * @property string $faculty_id
@@ -93,10 +92,9 @@ class Curriculum extends Eloquent
         return $this->hasOne(File::class, 'file_id', 'document_file');
     }
 
-
-
-
-
-
+    public function curriculumUsers()
+    {
+        return $this->hasMany(CurriculumUser::class, 'curriculum_id', 'curriculum_id');
+    }
 
 }

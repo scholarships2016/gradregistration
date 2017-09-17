@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Contracts\AudittrailRepository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Facades\Input;
 
-class Controller extends BaseController {
+class Controller extends BaseController
+{
 
     use AuthorizesRequests,
         DispatchesJobs,
@@ -21,14 +23,18 @@ class Controller extends BaseController {
 
     protected $FileRepo;
     protected $excels;
+    protected $auditRepo;
 
-    public function __construct(FileRepositoryImpl $FileRepo, Excel $excels) {
+    public function __construct(FileRepositoryImpl $FileRepo = null, Excel $excels = null, AudittrailRepository $auditRepo = null)
+    {
 
         $this->FileRepo = $FileRepo;
         $this->excels = $excels;
+        $this->auditRepo = $auditRepo;
     }
 
-    public function doDownloadFile(Request $request) {
+    public function doDownloadFile(Request $request)
+    {
         try {
 
             $data = $request->all();
@@ -44,7 +50,9 @@ class Controller extends BaseController {
 
         }
     }
-    public function doDownloadMediaFile(Request $request) {
+
+    public function doDownloadMediaFile(Request $request)
+    {
         try {
 
             $data = $request->all();
@@ -61,7 +69,8 @@ class Controller extends BaseController {
         }
     }
 
-    public function doPDFImg($id) {
+    public function doPDFImg($id)
+    {
         try {
             $file = $this->FileRepo->findOrFail($id);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
@@ -72,8 +81,9 @@ class Controller extends BaseController {
         }
     }
 
-    public function WLog($message, $activity, $errorLog) {
-        $log = '|User:' . ((session('user_id') != null) ? session('email_address') : 'unknowUser' ) . '|Activity:' . $activity . '|Message:' . $message;
+    public function WLog($message, $activity, $errorLog)
+    {
+        $log = '|User:' . ((session('user_id') != null) ? session('email_address') : 'unknowUser') . '|Activity:' . $activity . '|Message:' . $message;
         $ip = request()->ip();
         if ($errorLog == null || $errorLog == '') {
             Log::info($log . '|IP:' . $ip . PHP_EOL);
@@ -82,7 +92,8 @@ class Controller extends BaseController {
         }
     }
 
-    public static function ConvertDateThai($date) {
+    public static function ConvertDateThai($date)
+    {
 
 
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
@@ -95,7 +106,8 @@ class Controller extends BaseController {
         return $res;
     }
 
-    public static function ConvertDateThaiNotWeek($date) {
+    public static function ConvertDateThaiNotWeek($date)
+    {
 
 
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
@@ -107,16 +119,18 @@ class Controller extends BaseController {
         return $res;
     }
 
-    public function importExport() {
+    public function importExport()
+    {
         return view('importExport');
     }
 
-    public function importExcel() {
+    public function importExcel()
+    {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
-            $data = $this->excels->load($path, function($reader) {
+            $data = $this->excels->load($path, function ($reader) {
 
-                    })->get()[0];
+            })->get()[0];
 
             if (!empty($data) && $data->count()) {
 
@@ -168,10 +182,11 @@ class Controller extends BaseController {
         return response()->json($insert);
     }
 
-    public function exportExcel($filname, $data) {
+    public function exportExcel($filname, $data)
+    {
 
-        $this->excels->create($filname, function($excel) use($data) {
-            $excel->sheet('Sheet1', function($sheet) use($data) {
+        $this->excels->create($filname, function ($excel) use ($data) {
+            $excel->sheet('Sheet1', function ($sheet) use ($data) {
                 $sheet->fromArray($data);
             });
         })->export('xls');

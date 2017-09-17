@@ -7,6 +7,7 @@ use App\Repositories\Contracts\ApplicantEduRepository;
 use App\Repositories\Contracts\ApplicantRepository;
 use App\Repositories\Contracts\ApplicantWorkRepository;
 use App\Repositories\Contracts\ApplicationRepository;
+use App\Repositories\Contracts\AudittrailRepository;
 use App\Repositories\Contracts\EducationPassRepository;
 use App\Repositories\Contracts\EngTestRepository;
 use App\Repositories\Contracts\GaduateLevelRepository;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Log;
 
 class ApplicantManagementController extends Controller
 {
+
+    private static $SECTION_NAME = 'ApplicantManagement';
 
     protected $newSrcRepo;
     protected $applicantRepo;
@@ -50,8 +53,9 @@ class ApplicantManagementController extends Controller
                                 WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo,
                                 EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo,
                                 ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo,
-                                ApplicantWorkRepository $applicantWorkRepo, ApplicationRepository $applicationRepo)
+                                ApplicantWorkRepository $applicantWorkRepo, ApplicationRepository $applicationRepo, AudittrailRepository $auditRepo)
     {
+        parent::__construct(null, null, $auditRepo);
         $this->newSrcRepo = $newSrcRepo;
         $this->applicantRepo = $applicantRepo;
         $this->nationRepo = $nationRepo;
@@ -73,20 +77,24 @@ class ApplicantManagementController extends Controller
         try {
             return view('backoffice.applicant.manage');
         } catch (\Exception $ex) {
+            $this->WLog('func=showManagePage', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
 
     public function showAddPage(Request $request)
     {
+        try {
 
+        } catch (\Exception $ex) {
+            $this->WLog('func=showAddPage', self::$SECTION_NAME, $ex->getMessage());
+        }
     }
 
     public function showViewPage(Request $request, $id)
     {
-        Log::info('showViewPage');
-
         try {
+            $who = session('user_id');
             $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($id);
 
             //Master Data
@@ -100,6 +108,20 @@ class ApplicantManagementController extends Controller
             $eduPassList = $this->eduPassRepo->all();
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
+
+            /*
+                 * Audit Info
+                 */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_VIEW;
+            $audit['detail'] = 'showViewPage,aplicant_id=' . $id;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=showViewPage', self::$SECTION_NAME, null);
+
             return view('backoffice.applicant.edit', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
                 'newSrcList' => $newSrcList, 'nationList' => $nationList,
@@ -113,6 +135,7 @@ class ApplicantManagementController extends Controller
 
         } catch (\Exception $ex) {
             session()->flash('errorMsg', Util::ERROR_OCCUR);
+            $this->WLog('func=showViewPage', self::$SECTION_NAME, $ex->getMessage());
             return redirect()->route('admin.applicantManage.showManagePage');
         }
 
@@ -123,6 +146,7 @@ class ApplicantManagementController extends Controller
         Log::info('showPersonalProfilePage');
 
         try {
+            $who = session('user_id');
             $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($id);
 
             //Master Data
@@ -136,6 +160,20 @@ class ApplicantManagementController extends Controller
             $eduPassList = $this->eduPassRepo->all();
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
+
+
+            /*
+                 * Audit Info
+                 */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_VIEW;
+            $audit['detail'] = 'showEditPage,aplicant_id=' . $id;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=showEditPage', self::$SECTION_NAME, null);
 
             return view('backoffice.applicant.edit', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
@@ -150,6 +188,7 @@ class ApplicantManagementController extends Controller
 
         } catch (\Exception $ex) {
             session()->flash('errorMsg', Util::ERROR_OCCUR);
+            $this->WLog('func=showEditPage', self::$SECTION_NAME, $ex->getMessage());
             return redirect()->route('admin.applicantManage.showManagePage');
         }
     }
@@ -160,6 +199,7 @@ class ApplicantManagementController extends Controller
             $result = $this->applicantRepo->doApplicantPaging($request->all());
             return response()->json($result);
         } catch (\Exception $ex) {
+            $this->WLog('func=doPaging', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
         }
     }
@@ -170,7 +210,7 @@ class ApplicantManagementController extends Controller
         Log::info('doSavePersonalInfomation');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -180,26 +220,56 @@ class ApplicantManagementController extends Controller
                 $data['stu_birthdate'] = Carbon::createFromFormat('d/m/Y', $data['stu_birthdate'])->format('Y-m-d');
             }
             $result = $this->applicantRepo->saveApplicantPersonalInfo($data);
+
+            /*
+                 * Audit Info
+                 */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSavePersonalInfomation,aplicant_id=' . $data['applicant_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSavePersonalInfomation', self::$SECTION_NAME, null);
+
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSavePersonalInfomation', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
 
     public function doSavePresentAddress(Request $request)
     {
-        Log::info('doSavePresentAddress');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
             $data['creator'] = $creator;
             $data['modifier'] = $modifier;
             $result = $this->applicantRepo->saveApplicant($data);
+
+            /*
+               * Audit Info
+               */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSavePresentAddress,aplicant_id=' . $data['applicant_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSavePresentAddress', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSavePresentAddress', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
 
@@ -207,10 +277,9 @@ class ApplicantManagementController extends Controller
 
     public function doSaveKnowledgeSkill(Request $request)
     {
-        Log::info('doSaveKnowledgeSkill');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -227,18 +296,32 @@ class ApplicantManagementController extends Controller
             }
 
             $result = $this->applicantRepo->saveApplicant($data);
+
+            /*
+               * Audit Info
+               */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSaveKnowledgeSkill,aplicant_id=' . $data['applicant_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSaveKnowledgeSkill', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSaveKnowledgeSkill', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
 
     public function doSaveEduBackground(Request $request)
     {
-        Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -247,8 +330,23 @@ class ApplicantManagementController extends Controller
             if ($this->applicantEduRepo->saveApplicantEduList($data, $data['applicant_id'])) {
                 $result = $this->applicantEduRepo->getApplicantEduByApplicantId($data['applicant_id']);
             }
+
+            /*
+               * Audit Info
+               */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSaveEduBackground,aplicant_id=' . $data['applicant_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSaveEduBackground', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSaveEduBackground', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
@@ -256,10 +354,9 @@ class ApplicantManagementController extends Controller
 
     public function doSaveWorkExp(Request $request)
     {
-        Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -268,8 +365,23 @@ class ApplicantManagementController extends Controller
             if ($this->applicantWorkRepo->saveApplicantWorkList($data, $data['applicant_id'])) {
                 $result = $this->applicantWorkRepo->getApplicantWorkByApplicantId($data['applicant_id']);
             }
+
+            /*
+               * Audit Info
+               */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSaveWorkExp,aplicant_id=' . $data['applicant_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSaveWorkExp', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doSaveWorkExp', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
@@ -277,10 +389,9 @@ class ApplicantManagementController extends Controller
 
     public function doChangePassword(Request $request)
     {
-        Log::info('doChangePassword');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
             $data['creator'] = $creator;
@@ -290,7 +401,23 @@ class ApplicantManagementController extends Controller
             } else {
                 return response()->json(Util::jsonResponseFormat(3, null, Util::CHANGE_PASS_ERROR));
             }
+
+            /*
+              * Audit Info
+              */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doChangePassword,aplicant_id=' . $data['applicant_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+
+            $this->WLog('func=doChangePassword', self::$SECTION_NAME, null);
+
         } catch (\Exception $ex) {
+            $this->WLog('func=doChangePassword', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
@@ -303,18 +430,36 @@ class ApplicantManagementController extends Controller
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($applicant->stuImgFile->file_path);
             return response()->file($path);
         } catch (\Exception $ex) {
+            $this->WLog('func=getProfileImg', self::$SECTION_NAME, $ex->getMessage());
         }
     }
 
     public function doDelete(Request $request)
     {
         try {
+            $who = session('user_id');
             $id = $request->input('applicant_id');
             $this->applicantRepo->doDelete($id);
+
+            /*
+              * Audit Info
+              */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_DELETE;
+            $audit['detail'] = 'doDelete,aplicant_id=' . $id;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doDelete', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, null, Util::SUCCESS_DELETE));
         } catch (ApplicantDeleteException $ex) {
+            $this->WLog('func=doDelete', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(2, null, Util::CANNOT_DELETE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doDelete', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
@@ -329,6 +474,7 @@ class ApplicantManagementController extends Controller
             $result = $this->applicationRepo->getApplicationAndProgramInfoByApplicationId($param);
             return response()->json(Util::jsonResponseFormat(1, $result, null));
         } catch (\Exception $ex) {
+            $this->WLog('func=getApplicationAndProgramInfo', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
@@ -336,13 +482,29 @@ class ApplicantManagementController extends Controller
     public function doDeleteApplication(Request $request)
     {
         try {
+            $who = session('user_id');
             $param = $request->input('application_id');
             if (empty($param)) {
                 return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
             }
             $result = $this->applicationRepo->doDeleteApplicationByApplicationId($param);
+
+            /*
+              * Audit Info
+              */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_DELETE;
+            $audit['detail'] = 'doDeleteApplication,application_id=' . $param;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doDeleteApplication', self::$SECTION_NAME, null);
+
             return response()->json(Util::jsonResponseFormat(1, null, Util::SUCCESS_DELETE));
         } catch (\Exception $ex) {
+            $this->WLog('func=doDeleteApplication', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
