@@ -232,21 +232,24 @@ Route::group(['middleware' => 'auth'], function () {
             });
         });
     });
+
+    Route::group(['prefix' => 'profile', 'middleware' => []], function () {
+        Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
+        Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
+        Route::post('/doSavePretAddr', 'ProfileController@doSavePresentAddress')->name('profile.doSavePretAddr');
+        Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');
+        Route::post('/doSaveEduBak', 'ProfileController@doSaveEduBackground')->name('profile.doSaveEduBak');
+        Route::post('/doSaveWorkExp', 'ProfileController@doSaveWorkExp')->name('profile.doSaveWorkExp');
+        Route::post('/doChangePassword', 'ProfileController@doChangePassword')->name('profile.doChangePassword');
+
+        //ProfilePic
+        Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
+    });
+
 });
 
 
-Route::group(['prefix' => 'profile', 'middleware' => []], function () {
-    Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
-    Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
-    Route::post('/doSavePretAddr', 'ProfileController@doSavePresentAddress')->name('profile.doSavePretAddr');
-    Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');
-    Route::post('/doSaveEduBak', 'ProfileController@doSaveEduBackground')->name('profile.doSaveEduBak');
-    Route::post('/doSaveWorkExp', 'ProfileController@doSaveWorkExp')->name('profile.doSaveWorkExp');
-    Route::post('/doChangePassword', 'ProfileController@doChangePassword')->name('profile.doChangePassword');
 
-    //ProfilePic
-    Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
-});
 
 Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
     Route::get('/getDistrictListByProvinceId', 'MasterDataController@getDistrictByProvinceIdForDropdown')->name('masterdata.getDistrictListByProvinceId');

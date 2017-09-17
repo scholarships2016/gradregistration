@@ -80,6 +80,9 @@
                                                 </li>
                                             </ul>
                                               @endif
+                                              @php
+                                                print_r(session('user_type'));
+                                              @endphp
                                           @if(session('user_type')) @if(session('user_type')->user_type=='Staff')
                                             <ul class="dropdown-menu dropdown-menu-default">
                                                 <li>
