@@ -233,6 +233,8 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+
+
     Route::group(['prefix' => 'profile', 'middleware' => []], function () {
         Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
         Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
@@ -247,8 +249,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
-
-
 
 
 Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
