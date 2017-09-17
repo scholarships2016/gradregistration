@@ -4,7 +4,7 @@
 <!--[if IE 9]>
 <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
+<html lang="{{ app()->getLocale() }}"> <!--<![endif]-->
 
 @include('includes.head')
 <script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
