@@ -168,7 +168,6 @@ class ApplyController extends Controller {
 
         $id = Crypt::decrypt($id);
   
-//
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
         $people = $this->ApplicationPeopleRef->getDetail($id);

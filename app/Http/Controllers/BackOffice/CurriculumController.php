@@ -87,7 +87,11 @@ class CurriculumController extends Controller
     {
         try {
             $this->WLog('func=doCurriculumManagePaging', self::$SECTION_NAME, null);
-            return response()->json($this->curriculumRepo->doPaging1($request->all()));
+            $isAdmin = (session('user_type')->user_type == 'Admin') ? true : false;
+            $userId = session('user_id');
+            $param = $request->all();
+            $param['creator'] = $userId;
+            return response()->json($this->curriculumRepo->doPaging1($param, $isAdmin));
         } catch (\Exception $ex) {
             $this->WLog('func=doCurriculumManagePaging', self::$SECTION_NAME, $ex->getMessage());
         }
@@ -96,6 +100,7 @@ class CurriculumController extends Controller
     public function showAddPage(Request $request)
     {
         try {
+            $isStaff = (session('user_type')->user_type !== 'Admin') ? 1 : 0;
             $applySemesterList = $this->applyRepo->getDistinctApplySettingSemesterByAcademicYear();
             $projList = $this->projectRepo->all();
             $facList = $this->facultyRepo->all();
@@ -111,7 +116,8 @@ class CurriculumController extends Controller
                     'progTypeList' => json_encode($progTypeList),
                     'applySemesterList' => $applySemesterList,
                     'curriculum' => null,
-                    'userList' => $userList]);
+                    'userList' => $userList,
+                    'isStaff' => $isStaff]);
         } catch (\Exception $ex) {
             $this->WLog('func=showAddPage', self::$SECTION_NAME, $ex->getMessage());
             throw $ex;
@@ -121,6 +127,7 @@ class CurriculumController extends Controller
     public function showEditPage(Request $request, $id)
     {
         try {
+            $isStaff = (session('user_type')->user_type !== 'Admin') ? 1 : 0;
             $who = session('user_id');
             $currInfo = $this->curriculumRepo->findOrFail($id);
             $semAcaYr = $this->currActRepo->getDistinctSemesterAndAcademicYearByCurriculumId($id);
@@ -150,7 +157,8 @@ class CurriculumController extends Controller
                     'applySemesterList' => $applySemesterList,
                     'semAcaYr' => $semAcaYr,
                     'curriculum' => $currInfo,
-                    'userList' => $userList
+                    'userList' => $userList,
+                    'isStaff' => $isStaff
                 ]);
         } catch (\Exception $ex) {
             $this->WLog('func=showEditPage', self::$SECTION_NAME, $ex->getMessage());

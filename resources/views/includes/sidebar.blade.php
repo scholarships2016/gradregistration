@@ -20,9 +20,10 @@
                             data-index="11">
                             <a href="{{url('admin/toDoList')}}" class="nav-link nav-toggle">
                                 <i class="icon-calendar"></i>
-                                <span class="title">To-Do List</span>
-
-                                <span class="badge badge-danger">2</span>
+                                <span class="title">
+                                    To-Do List
+                                    <span id="menuToDolistAmt" class="badge badge-danger"></span>
+                                </span>
                                 <span class="selected"></span>
                                 <span class="arrow open"></span>
                             </a>
