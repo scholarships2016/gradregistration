@@ -80,7 +80,7 @@
                   </div>
                   <div class="actions">
 
-                    
+
                   </div>
                 </div>
                 <div class="portlet-body">
@@ -110,9 +110,9 @@
                                                     <th> Actions </th>
                                                 </tr>
                                             </thead>
-                                            <tbody>@foreach ($datas as $data)    
+                                            <tbody>@foreach ($datas as $data)
                                                 <tr class="odd gradeX">
-                                                  
+
                                                     <td> {{ $data->news_seq  }}  </td>
                                                     <td>
                                                         {{ $data->news_title }} <br> {{ $data->news_title_en }}
@@ -125,16 +125,15 @@
                                                       </td>
                                                     <td class="center">  {{ ($data->modifier)?$data->modifier:$data->creator }}</td>
                                                     <td>
+                                                      <div class="btn-group btn-group-sm btn-group-solid">
+                                                        <a href="javascript:cancel({{$data->news_id}});" class="btn btn-xs red" >ลบ<i class="fa fa-trash-o"></i></a>
+                                                        <a href="{{url('admin/editNews/').'/'.$data->news_id}}" class="btn btn-xs blue">แก้ไข<i class="fa fa-edit"></i></a>
+                                                      </div>
 
-                                                          <a href="{{url('admin/editNews/').'/'.$data->news_id}}" class="btn btn-xs blue"> Edit
-                                                                            <i class="fa fa-edit"></i>
-                                                                        </a>
-                                                                        <a href="javascript:cancel({{$data->news_id}});;" class="btn btn-xs red"> Delete
-                                                                                          <i class="fa fa-trash-o"></i>
-                                                                                      </a>
+
 
                                                     </td>
-                                                  
+
                                                 </tr>
   @endforeach
                                             </tbody>
@@ -171,7 +170,7 @@
 <script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
  <script type="application/javascript">
 
-      
+
 
 var TableDatatablesManaged = function () {
      var initTable1 = function () {
@@ -204,14 +203,14 @@ var TableDatatablesManaged = function () {
                 [5, 15, 20, "All"] // change per page values here
             ],
             // set the initial value
-            "pageLength": 5,            
+            "pageLength": 5,
             "pagingType": "bootstrap_full_number",
-             
+
             "order": [
                 [1, "asc"]
             ] // set first column as a default sort by asc
         });
-        
+
         var tableWrapper = jQuery('#sample_1_wrapper');
 
         table.find('.group-checkable').change(function () {
@@ -241,7 +240,7 @@ var TableDatatablesManaged = function () {
             }
 
             initTable1();
-             
+
         }
 
     };
@@ -258,13 +257,13 @@ function cancel($id) {
       showLoaderOnConfirm: true
     }, function() {
       setTimeout(function() {
-        
+
 $.ajax({
 					type: "POST",
 					url: '{!! Route('DNews') !!}',
                                          async: false,
 					data :{
-                                                id : $id, 
+                                                id : $id,
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
@@ -272,7 +271,7 @@ $.ajax({
                                            toastr.success('ดำเนินการเรียบร้อย');
                                            setTimeout(function() { window.location.href = '{{url('admin/manageNews')}}'  }, 200);
                                             }else{
-                                              toastr.error('ไม่สามารถทำรายการได้');  
+                                              toastr.error('ไม่สามารถทำรายการได้');
         }
                                         }
 				},"json");
@@ -281,7 +280,7 @@ $.ajax({
   }
 
 
-  
+
   jQuery(document).ready(function() {
         TableDatatablesManaged.init();
     });

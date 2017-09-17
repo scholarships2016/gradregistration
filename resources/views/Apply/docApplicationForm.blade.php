@@ -66,12 +66,14 @@
                                             {{($app->semester == 1)?'ต้น [First]':'ปลาย [Second]'}}
                                             <br> ปีการศึกษา[Year]:{{$app->academic_year}}
                                         </div></td>
-                                      
+
                                     <td style="widht:150px"   align="center"> <img src="{{$pictrue}}"  style="width:120px;" border="0"></td>
                                 </tr>
 
                             </tbody>
                         </table>
+                                         
+
                         <table style="width:700px" border="0" cellpadding="0" cellspacing="1">
                             <tbody><tr>
                                     <td>สมัครสาขาวิชา[Field of Study]:
