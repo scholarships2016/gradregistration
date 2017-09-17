@@ -329,7 +329,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             }
 
 //Creator and Editor
-            if (array_key_exists('creator', $data)) {
+            if (array_key_exists('creator', $data) && empty($currObj->curriculum_id)) {
                 $currObj->creator = $data['creator'];
             }
             if (array_key_exists('modifier', $data)) {
@@ -537,9 +537,10 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function doPaging1($criteria = null)
+    public function doPaging1($criteria = null, $isAdmin = false)
     {
         try {
+
             $columnMap = array(
                 1 => "curr.curriculum_id",
                 2 => "fac.faculty_name",
@@ -576,13 +577,18 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 })
                 ->leftJoin('tbl_degree as de', function ($join) {
                     $join->on('de.degree_id', '=', 'curr.degree_id');
+                });
 
-                })
-                ->groupBy('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
-                    'dep.department_id', 'dep.department_name', 'dep.department_name_en',
-                    'maj.major_id', 'maj.major_name', 'maj.major_name_en', 'de.degree_name',
-                    'curr.apply_method',
-                    'curr.is_approve');
+            if (!$isAdmin) {
+                $query->leftJoin('curriculum_user as curr_u', function ($join) {
+                    $join->on('curr_u.curriculum_id', '=', 'curr.curriculum_id');
+                });
+            }
+            $query->groupBy('curr.curriculum_id', 'fac.faculty_id', 'fac.faculty_name', 'fac.faculty_full',
+                'dep.department_id', 'dep.department_name', 'dep.department_name_en',
+                'maj.major_id', 'maj.major_name', 'maj.major_name_en', 'de.degree_name',
+                'curr.apply_method',
+                'curr.is_approve');
 
             $recordsTotal = $query->get()->count();
 
@@ -615,6 +621,14 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             if (isset($criteria['is_approve'])) {
                 $query->where('curr.is_approve', '=', $criteria['is_approve']);
             }
+
+            if (!$isAdmin) {
+                if (isset($criteria['creator'])) {
+                    $query->where('curr.creator', '=', $criteria['creator'])
+                        ->orWhere('curr_u.user_id', '=', $criteria['creator']);
+                }
+            }
+
             $recordsFiltered = $query->get()->count();
             $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
             $query->offset($criteria['start'])->limit($criteria['length']);
@@ -633,7 +647,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function doToDoListPaging($criteria = null)
+    public function doToDoListPaging($criteria = null, $isAdmin = false)
     {
         try {
             $columnMap = array(
@@ -698,8 +712,21 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     'sub_trans.status_name', 'sub_trans.created',
                     'sub_trans.creator', 'sub_trans.comment');
 
-            if (isset($criteria['creator'])) {
-                $mainQuery->where('curr.creator', '=', $criteria['creator']);
+            if ($isAdmin) {
+                $mainQuery->where('curr.is_approve', '=', 2);
+                if (array_key_exists('flow_status', $criteria) && !empty($criteria['flow_status'])) {
+                    $mainQuery->orWhere(function ($query) use ($criteria) {
+                        $query->where('curr.creator', '=', $criteria['creator']);
+                        $query->whereIn('curr.is_approve', isset($criteria['flow_status']) ? explode(',', $criteria['flow_status']) : []);
+                    });
+                }
+            } else {
+                if (isset($criteria['creator'])) {
+                    $mainQuery->where(function ($query) use ($criteria) {
+                        $query->where('curr.creator', '=', $criteria['creator']);
+                        $query->whereIn('curr.is_approve', isset($criteria['flow_status']) ? explode(',', $criteria['flow_status']) : []);
+                    });
+                }
             }
 
             $recordsTotal = $mainQuery->get()->count();
