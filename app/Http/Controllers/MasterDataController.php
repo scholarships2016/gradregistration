@@ -13,7 +13,6 @@ use App\Repositories\Contracts\NationRepository;
 use App\Repositories\Contracts\NewsSourceRepository;
 use App\Repositories\Contracts\ProvinceRepository;
 use App\Repositories\Contracts\DepartmentRepository;
-use App\Repositories\Contracts\CurriculaRepository;
 use App\Repositories\Contracts\TblMajorRepository;
 use App\Repositories\Contracts\TblSubMajorRepository;
 use App\Utils\Util;
@@ -29,7 +28,6 @@ class MasterDataController extends Controller
     protected $nameTitleRepo;
     protected $newSrcRepo;
     protected $departmentRepo;
-    protected $curriculaRepo;
     protected $facultyRepo;
     protected $majorRepo;
     protected $subMajorRepo;
@@ -43,7 +41,7 @@ class MasterDataController extends Controller
     public function __construct(DistrictRepository $districtRepo, ProvinceRepository $provinceRepo,
                                 EngTestRepository $engTestRepo, NationRepository $nationRepo,
                                 NameTitleRepository $nameTitleRepo, NewsSourceRepository $newSrcRepo,
-                                DepartmentRepository $departmentRepo, CurriculaRepository $curriculaRepo,
+                                DepartmentRepository $departmentRepo,
                                 FacultyRepository $facultyRepo, TblMajorRepository $majorRepo,
                                 TblSubMajorRepository $subMajorRepo, McourseStudyRepository $mcourseRepo,
                                 ApplySettingRepository $applySetRepo, DegreeRepository $degreeRepo)
@@ -55,7 +53,6 @@ class MasterDataController extends Controller
         $this->nameTitleRepo = $nameTitleRepo;
         $this->newSrcRepo = $newSrcRepo;
         $this->departmentRepo = $departmentRepo;
-        $this->curriculaRepo = $curriculaRepo;
         $this->facultyRepo = $facultyRepo;
         $this->majorRepo = $majorRepo;
         $this->subMajorRepo = $subMajorRepo;
