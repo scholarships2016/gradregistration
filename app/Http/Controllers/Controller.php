@@ -36,6 +36,22 @@ class Controller extends BaseController {
                 return;
             }
 
+            $file = $this->FileRepo->findOrFail($data['file_id']);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
+
+            return response()->download($path, $file->file_origi_name);
+        } catch (\Exception $ex) {
+
+        }
+    }
+    public function doDownloadMediaFile(Request $request) {
+        try {
+
+            $data = $request->all();
+            if (!array_key_exists('file_id', $data) || empty($data['file_id'])) {
+                return;
+            }
+
             $file = $this->FileRepo->getFileByGenName($data['file_id']);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($file->file_path);
 
