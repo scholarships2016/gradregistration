@@ -438,7 +438,7 @@ class ManageApplyController extends Controller {
             $round_no = $curDiss->round_no;
             $name = $curDiss->stu_first_name . '  ' . $curDiss->stu_last_name;
             $title = $curDiss->name_title;
-            $detail = 'ได้ผ่านการสอบคัดเลือกให้เข้าศึกษา ในหลักสูตร' . $curDiss->major_name . ' สาขาวิชา' . $curDiss->degree_name . '  คณะ' . $curDiss->faculty_name . '  จุฬาลงกรณ์มหาวิทยาลัย   ภาคการศึกษา' . (($curDiss->semester == 1) ? 'ต้น' : 'ปลาย') . '   ปีการศึกษา  ' . $curDiss->academic_year;
+            $detail = 'ได้ผ่านการสอบคัดเลือกให้เข้าศึกษา ในหลักสูตร' . $curDiss->degree_name . ' สาขาวิชา' . $curDiss->degree_name . '  คณะ' . $curDiss->faculty_name . '  จุฬาลงกรณ์มหาวิทยาลัย   ภาคการศึกษา' . (($curDiss->semester == 1) ? 'ต้น' : 'ปลาย') . '   ปีการศึกษา  ' . $curDiss->academic_year;
             $dateMake = $this->ConvertDateThaiNotWeek(Carbon::now());
             $approve = TblCertificateApprover::all();
             return view($this->part_doc . 'manage_report_Recommentdation', ['year' => $year, 'round' => $round_no, 'name' => $name, 'detail' => $detail, 'dateMake' => $dateMake, 'title' => $title, 'approves' => $approve]);

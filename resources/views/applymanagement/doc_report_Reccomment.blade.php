@@ -1,4 +1,4 @@
-  
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,33 +35,34 @@
                 font-family: "THSarabunNew";
                 line-height: 24px;
             }
- 
+
 
         </style>
     </head>
-    <body>  
+    <body>
         <table style="widht:700px" border="0" cellpadding="0" cellspacing="1">
 
             <tbody>
                 <tr border="1px">
-
-                    <td style="align:center;font-weight:bold;font-size: 24px;">
+                  <br/><br/>
+                    <td style="align:center;font-weight:bold;font-size:32px;">
                         <div align="center">
                             <img src="{{asset('images/bwpk.gif')}}" border="0">
                             <br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย
-                            <br>                                                
-                            <br>     <br>     <br>     <br>         
+                            <br>
+                            <br>     <br>     <br>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td style="align:left;font-size: 20px;">
-                        ที่  &nbsp;&nbsp;&nbsp;  {{$round}}  / &nbsp; {{$year}}  
+                        ที่  &nbsp;&nbsp;&nbsp;  {{$round}}  /  {{$year}}
                     </td>
                 </tr>
                 <tr>
                     <td style="align:center;font-weight:bold;font-size: 24px;">
                         <div align="center">
+                           <br>
                             หนังสือรับรอง<br>บัณฑิตวิทยาลัย ขอรับรองว่า<br>
                         </div>
                     </td>
@@ -69,13 +70,14 @@
                 <tr>
                     <td style="align:center; font-weight:bold;font-size: 24px;">
                         <div align="center"style="font-size: 22px;">
+                           <br>
                             {{$title}} {{$name}}<br><br>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td style="align:left;">
-                        <p style='font-size: 20px;text-justify: inter-word;'>  {{$detail}}</p>
+                        <p style='font-size: 20px;text-justify: inter-word;text-align:center;'>  {{$detail}}</p>
                     </td>
                 </tr>
                 <tr>
@@ -102,5 +104,3 @@
 
     </body>
 </html>
-
-
