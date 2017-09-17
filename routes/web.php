@@ -109,9 +109,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
         Route::get('getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
 
-        Route::get('docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
 
-//GS03
+        Route::get('docMyCourserintPDF/{id}/{pid}', 'ManageApplyController@docMyCourserintPDF')->name('admin.docMyCourserintPDF');
+        Route::get('docMyCourse/{id}/{pid}', 'ManageApplyController@docMyCourse')->name('admin.docMyCourse');
+        //GS03
 
         Route::get('ManageGS03', 'ManageApplyController@showManageGS03')->name('ManageGS03');
         Route::get('getCourse', 'ManageApplyController@getCourse')->name('getCourse');
@@ -137,7 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
         Route::get('docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
         Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
-//util M
+        //util M
         Route::get('importApplicant', 'ManageApplyController@importApplicant')->name('importApplicant');
         Route::get('importExport', 'Controller@importExport');
         Route::post('importExcel', 'Controller@importExcel')->name('importExcel');
@@ -233,6 +234,8 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+
+
     Route::group(['prefix' => 'profile', 'middleware' => []], function () {
         Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
         Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
@@ -247,8 +250,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
-
-
 
 
 Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {

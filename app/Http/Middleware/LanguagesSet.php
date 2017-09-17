@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use \Illuminate\Support\Facades\App;
 use Illuminate\Bus\Dispatcher as BusDispatcher;
- use App\Utils\SetLocale;
+use App\Utils\SetLocale;
 use Closure;
 
 class LanguagesSet {
@@ -18,7 +18,7 @@ class LanguagesSet {
     }
 
     public function handle($request, Closure $next) {
-        
+
         $this->bus->dispatch($this->setLocale);
         return $next($request);
     }

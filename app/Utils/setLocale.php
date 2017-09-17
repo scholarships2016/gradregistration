@@ -12,7 +12,7 @@ class setLocale {
 
     public function handle() {
         if (!session()->has('locale')) {
-            session()->put('locale', \Request::getPreferredLanguage($this->languages));
+            session()->put('locale', 'th');
         }
         app()->setLocale(session('locale'));
     }

@@ -4,7 +4,7 @@
 <!--[if IE 9]>
 <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 @include('includes.head2')

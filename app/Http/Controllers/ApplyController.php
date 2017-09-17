@@ -93,12 +93,10 @@ class ApplyController extends Controller {
 
     public function registerCourse($id) {
         $id = Crypt::decrypt($id);
-        $id = explode("P", $id);
-
 
         $Bank = $this->BankRepo->getBank();
         $Qus = $this->ApplicationRepo->getData(null, $id);
-        $Data = $this->ApplicationRepo->find($id);
+        $Data = $this->ApplicationRepo->find($id)->first();
         $Sat = $this->SatisfactionRepo->getById(session('Applicant')->stu_citizen_card);
 
         return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data, 'Sats' => $Sat, 'Qus' => $Qus->all()]);
@@ -169,6 +167,7 @@ class ApplyController extends Controller {
     public function docMyCourserintPDF($id) {
 
         $id = Crypt::decrypt($id);
+  
 //
         $dataApplication = $this->ApplicationRepo->getData(null, $id);
         $applicantProfile = $this->ApplicantRepo->getApplicantProfileAllByApplicantId(session('Applicant')->applicant_id);
@@ -203,8 +202,10 @@ class ApplyController extends Controller {
         $pdf->setPaper('A4', 'portrait');
 
         $pdf->render();
-
-        return $pdf->stream("CU_Application.pdf");
+        $citizen = $applicantProfile['applicant']->stu_citizen_card;
+        $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
+        $app_no = $dataApplication[0]->program_id ."-" .str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
+        return $pdf->stream("ApplicationForm-{$app_id}-{$app_no}.pdf");
     }
 
     public function docApplicationFee($id) {

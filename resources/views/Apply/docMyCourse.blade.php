@@ -77,7 +77,7 @@
         <div class="col-xs-12">
 <!--            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>-->
 
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.Crypt::encrypt($id))}}" target="_blank"  ><i class="fa fa-download"></i>Download PDF</a>
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.Crypt::encrypt($id))}}"  ><i class="fa fa-download"></i>Download PDF</a>
 
 
 
