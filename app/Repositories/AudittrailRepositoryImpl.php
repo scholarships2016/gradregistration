@@ -112,7 +112,8 @@ class AudittrailRepositoryImpl extends AbstractRepositoryImpl implements Audittr
     {
         try {
             $query = DB::table("audittrail as au")
-                ->distinct('au.section');
+                ->select('au.section')
+                ->distinct();
             return $query->get();
         } catch (\Exception $ex) {
             throw $ex;
