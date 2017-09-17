@@ -66,7 +66,7 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
 
-                                            @if(!session('user_tyep') || (session('user_tyep')->user_type=='applicant'))
+                                            @if(!session('user_type') || (session('user_type')->user_type=='applicant'))
                                             <ul class="dropdown-menu dropdown-menu-default">
                                                 <li>
                                                     <a href="{{route('profile.showProfilePage')}}">
@@ -80,7 +80,10 @@
                                                 </li>
                                             </ul>
                                               @endif
-                                          @if(session('user_tyep')) @if(session('user_tyep')->user_type=='Staff')
+                                              @php
+                                                print_r(session('user_type'));
+                                              @endphp
+                                          @if(session('user_type')) @if(session('user_type')->user_type=='Staff')
                                             <ul class="dropdown-menu dropdown-menu-default">
                                                 <li>
                                                     <a href="{{url('admin/setting/adminManage/edit/'.session('user_id'))}}">

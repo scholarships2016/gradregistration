@@ -26,7 +26,7 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-
+        session()->put('locale', 'th');
         return $this->viewHome();
     }
 
@@ -59,8 +59,8 @@ class HomeController extends Controller {
             session()->put('locale', 'th');
 
 
-        if (!session('locale'))  session()->put('locale', 'th');       
-        
+        if (!session('locale'))  session()->put('locale', 'th');
+
         $Newslist = $this->NewsRepo->getNewsNow();
         $Apply = $this->ApplySettingRepo->getApplySettingNow();
         return view('home', ['NewsList' => $Newslist, 'Applys' => $Apply]);

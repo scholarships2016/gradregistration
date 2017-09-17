@@ -87,13 +87,14 @@ Route::group(['middleware' => 'auth'], function () {
     //payment
     Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
     Route::group(['prefix' => 'admin'], function () {
-      //download Files
-      Route::get('getMedia', function(\Illuminate\Http\Request $request) {
-          $input_path = $request->input('path');
-          $real_path = Crypt::decrypt($input_path);
-          $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $real_path);
-          return response()->download($path);
-      })->name('admin.getMedia');
+        //download Files
+        Route::get('getMedia', function(\Illuminate\Http\Request $request) {
+            $input_path = $request->input('path');
+            $real_path = Crypt::decrypt($input_path);
+            $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $real_path);
+            return response()->download($path);
+        })->name('admin.getMedia');
+        Route::get('manageDocument/{id}/{pid}', 'ManageApplyController@manageApplicantDocument')->name('manageApplicantDocument');
 
         //Notice
         Route::get('getWorkflowNotification', 'BackOffice\BackOfficeController@getWorkflowNotification')->name('admin.backoffice.getWorkflowNotification');
@@ -231,21 +232,24 @@ Route::group(['middleware' => 'auth'], function () {
             });
         });
     });
+
+    Route::group(['prefix' => 'profile', 'middleware' => []], function () {
+        Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
+        Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
+        Route::post('/doSavePretAddr', 'ProfileController@doSavePresentAddress')->name('profile.doSavePretAddr');
+        Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');
+        Route::post('/doSaveEduBak', 'ProfileController@doSaveEduBackground')->name('profile.doSaveEduBak');
+        Route::post('/doSaveWorkExp', 'ProfileController@doSaveWorkExp')->name('profile.doSaveWorkExp');
+        Route::post('/doChangePassword', 'ProfileController@doChangePassword')->name('profile.doChangePassword');
+
+        //ProfilePic
+        Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
+    });
+
 });
 
 
-Route::group(['prefix' => 'profile', 'middleware' => []], function () {
-    Route::get('/', 'ProfileController@showPersonalProfilePage')->name('profile.showProfilePage');
-    Route::post('/doSavePersInfo', 'ProfileController@doSavePersonalInfomation')->name('profile.doSavePersInfo');
-    Route::post('/doSavePretAddr', 'ProfileController@doSavePresentAddress')->name('profile.doSavePretAddr');
-    Route::post('/doSaveKnowSkill', 'ProfileController@doSaveKnowledgeSkill')->name('profile.doSaveKnowSkill');
-    Route::post('/doSaveEduBak', 'ProfileController@doSaveEduBackground')->name('profile.doSaveEduBak');
-    Route::post('/doSaveWorkExp', 'ProfileController@doSaveWorkExp')->name('profile.doSaveWorkExp');
-    Route::post('/doChangePassword', 'ProfileController@doChangePassword')->name('profile.doChangePassword');
 
-    //ProfilePic
-    Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
-});
 
 Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
     Route::get('/getDistrictListByProvinceId', 'MasterDataController@getDistrictByProvinceIdForDropdown')->name('masterdata.getDistrictListByProvinceId');
@@ -258,5 +262,4 @@ Route::group(['prefix' => 'masterdata', 'middleware' => []], function () {
     Route::get('/getApplySettingByAcademicYear', 'MasterDataController@getApplySettingByAcademicYear')->name('masterdata.getApplySettingByAcademicYear');
     Route::get('/getApplySettingBySemesterAndAcademicYear', 'MasterDataController@getApplySettingBySemesterAndAcademicYear')->name('masterdata.getApplySettingBySemesterAndAcademicYear');
     Route::get('/getAllDegreeForDropdown', 'MasterDataController@getAllDegreeForDropdown')->name('masterdata.getAllDegreeForDropdown');
-
 });

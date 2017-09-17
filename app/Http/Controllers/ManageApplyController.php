@@ -173,7 +173,7 @@ class ManageApplyController extends Controller {
 
         $program_type_id = $request->program_type_id;
 
-        $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id);
 
@@ -771,20 +771,20 @@ class ManageApplyController extends Controller {
 
         $program_type_id = $request->program_type_id;
 
-        $user = (session('user_tyep')->user_role != 1) ? session('user_id') : null;
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_tyep')->user_role);
+        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role);
         if ($print == null) {
             return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
         } else if ($print == 'pdf') {
-            
+
         } else if ($print == 'excel') {
             $data = $curDiss->toArray();
 
             $this->exportExcel($filename, $data);
             retrun;
         } else if ($print == 'text') {
-            
+
         }
     }
 
