@@ -38,6 +38,8 @@ class Util
     const CHANGE_PASS_SUCCESS = 'เปลี่ยนรหัสผ่านสำเร็จ<br/>Changing password is successful.';
     const CHANGE_PASS_ERROR = 'เปลี่ยนรหัสผ่านไม่สำเร็จ<br/>Changing password failed.';
     const UPDATE_SUCCESS = 'ปรับปรุงข้อมูลสำเร็จ<br/>Updating is successful.';
+    const CANNOT_CREATE_CURRICULUM1 = 'ไม่สามารถขอเปิดหลักสูตรซ้ำได้<br/>Unable to create curriculum.';
+
 
 
     const SUCCESS_DELETE = 'ลบข้อมูลสำเร็จ';
