@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'lbWelcome' => 'ยินดีต้อนรับ คุณ',
+    'lbWelcome' => 'ยินดีต้อนรับ คุณ ',
     'lbCannotLogin' => 'ไม่สามารถเข้าสู่ระบบได้กรุณาตรวจสอบ e-mail หรือ password',
 	'lbMain' => 'หน้าหลัก',
 

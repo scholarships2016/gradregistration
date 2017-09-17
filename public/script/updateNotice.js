@@ -44,17 +44,18 @@ function genNoticeItem(obj, editLink) {
             spanLabel.className = draftClass;
             spanLabel.innerText = 'Draft';
         }
-        spanDetail.append(spanLabel);
-        spanDetail.append(' ' + obj.degree_name);
+        $(spanDetail).append(spanLabel)
+        $(spanDetail).append(' ' + obj.degree_name);
         aLink.href = editLink + '/' + obj.curriculum_id;
-        aLink.append(spanItem);
-        aLink.append(spanDetail);
+        $(aLink).append(spanItem);
+        $(aLink).append(spanDetail);
     } else {
         aLink.className = 'text-center';
         spanDetail.innerText = 'No Task';
-        aLink.append(spanDetail);
+        $(aLink).append(spanDetail);
     }
-    li.append(aLink);
+    $(li).append(aLink);
+
     return li;
 }
 
@@ -73,4 +74,3 @@ function updateNotice(data, editLink) {
     $("#noticeAmt2").text(totalAmt == 0 ? '-' : totalAmt);
     $("#menuToDolistAmt").text(totalAmt == 0 ? '' : totalAmt);
 }
-

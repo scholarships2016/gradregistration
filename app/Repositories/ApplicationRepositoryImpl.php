@@ -61,41 +61,41 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getData($applicantID = null, $applicationID = null) {
         $result = null;
         try {
-          /*
-            $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
-                            ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
-                            ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
-                            ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
-                            ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
-                            ->leftJoin('tbl_sub_major', 'application.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
-                            ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
-                            ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
-                            ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
-                            ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
-                            ->leftJoin('tbl_bank', 'application.bank_id', '=', 'tbl_bank.bank_id')
-                            ->leftJoin("tbl_major", function($join) {
-                                $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
-                                ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
-                            })
-                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
-                            ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
-                            ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
-                            ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
-                            ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
-                            ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
-                            ->Where(function ($query)use ($applicationID) {
-                                if ($applicationID) {
-                                    $query->where('application.application_id', $applicationID);
-                                }
-                            })
-                            ->Where(function ($query)use ($applicantID) {
-                                if ($applicantID) {
-                                    $query->where('application.applicant_id', $applicantID);
-                                }
-                            })
-//                ->select(DB::raw('program_id,thai,english'))
-                            ->orderBy('application.application_id', 'desc')->get();
-                            */
+            /*
+              $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
+              ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
+              ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
+              ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
+              ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
+              ->leftJoin('tbl_sub_major', 'application.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
+              ->leftJoin('tbl_program_plan', 'curriculum_program.program_plan_id', '=', 'tbl_program_plan.program_plan_id')
+              ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
+              ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
+              ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
+              ->leftJoin('tbl_bank', 'application.bank_id', '=', 'tbl_bank.bank_id')
+              ->leftJoin("tbl_major", function($join) {
+              $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
+              ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
+              })
+              ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+              ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
+              ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
+              ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
+              ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
+              ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
+              ->Where(function ($query)use ($applicationID) {
+              if ($applicationID) {
+              $query->where('application.application_id', $applicationID);
+              }
+              })
+              ->Where(function ($query)use ($applicantID) {
+              if ($applicantID) {
+              $query->where('application.applicant_id', $applicantID);
+              }
+              })
+              //                ->select(DB::raw('program_id,thai,english'))
+              ->orderBy('application.application_id', 'desc')->get();
+             */
             $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
@@ -136,10 +136,10 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         return $result;
     }
 
-    public function getDataForMange($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null) {
+    public function getDataForMange($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $role = null) {
         $results = null;
         try {
-
+ 
             $results = Application:: leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
                             ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
@@ -164,16 +164,19 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')
                             ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
                             ->leftJoin('tbl_name_title', 'applicant.name_title_id', '=', 'tbl_name_title.name_title_id')
-                            ->Where(function ($query)use ($user) {
+                            ->Where(function ($query)use ($user,$role) {
                                 if ($user) {
                                     $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
                                         $query->select('curriculum_id')
                                         ->from('curriculum_user')
                                         ->where('curriculum_user.user_id', $user);
-                                    })
+                                    })                                    
                                     ->orwhere('curriculum.responsible_person', $user);
+                                    if ($role == '2') {
+                                        $query->orwhere('curriculum.apply_method', '1');
+                                    }
                                 }
-                            })
+                            }) 
                             ->Where(function ($query)use ($applicationID) {
                                 if ($applicationID) {
                                     $query->where('application.application_id', $applicationID);
@@ -271,7 +274,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
         return $results;
     }
- public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null,$user_role=null) {
+
+    public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null) {
         $results = null;
         try {
 
@@ -299,7 +303,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')
                             ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
                             ->leftJoin('tbl_name_title', 'applicant.name_title_id', '=', 'tbl_name_title.name_title_id')
-                            ->Where(function ($query)use ($user) {
+                            ->Where(function ($query)use ($user,$role) {
                                 if ($user) {
                                     $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
                                         $query->select('curriculum_id')
@@ -307,13 +311,12 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                         ->where('curriculum_user.user_id', $user);
                                     })
                                     ->orwhere('curriculum.responsible_person', $user);
+                                    if ($role == '2') {
+                                        $query->orwhere('curriculum.apply_method', '1');
+                                    }
                                 }
                             })
-                            ->Where(function ($query)use ($user_role) {
-                                if ($user_role == 2) {
-                                    $query->orwhere('curriculum.apply_method', '1');
-                                }
-                            })
+                            
                             ->Where(function ($query)use ($applicationID) {
                                 if ($applicationID) {
                                     $query->where('application.application_id', $applicationID);
@@ -577,7 +580,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getApplicationAndProgramInfoByApplicationId($applicationId) {
         try {
             $query = DB::table('application as app')
-                    ->select('app.application_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time','adst.admission_status_name_th', 'app.exam_status'
+                    ->select('app.application_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time', 'adst.admission_status_name_th', 'app.exam_status'
                     )
                     ->leftJoin('tbl_flow_apply as flow_app', function ($join) {
                         $join->on('flow_app.flow_id', '=', 'app.flow_id');
