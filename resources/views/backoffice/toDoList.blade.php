@@ -265,7 +265,7 @@
                                 html += '<i class="icon-speech font-green"></i>';
                                 html += '</a>&nbsp;';
                             }
-                            html += full.creator;
+                            html += full.name+' ('+full.nickname+')';
                             return html;
                         }
                     }, {
@@ -278,13 +278,13 @@
                         render: function (data, type, full, meta) {
                             var html = '';
                             if (full.is_approve == 1) {
-                                html = '<span class="label label-sm label-default">Draft</span>';
+                                html = '<span class="label label-sm label-default">ฉบับร่าง-Draft</span>';
                             } else if (full.is_approve == 2) {
-                                html = '<span class="label label-sm label-warning">Pending</span>';
+                                html = '<span class="label label-sm label-warning">รออนุมัติ-Pending</span>';
                             } else if (full.is_approve == 3) {
-                                html = '<span class="label label-sm label-danger">Rejected</span>';
+                                html = '<span class="label label-sm label-danger">ส่งกลับให้แก้ไข-Rejected</span>';
                             } else if (full.is_approve == 4) {
-                                html = '<span class="label label-sm label-success">Approved</span>';
+                                html = '<span class="label label-sm label-success">อนุมัติ-Approved</span>';
                             }
                             return html;
                         }

@@ -660,9 +660,12 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                             )->groupBy('trans_buff.curriculum_id');
 
             $subTransQuery = DB::table('curriculum_workflow_transaction as trans_')
-                    ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id', 'trans_.workflow_status_id', 'status_.status_name', DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"), 'trans_.creator', 'trans_.comment')
+                    ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id', 'trans_.workflow_status_id', 'status_.status_name', DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"), 'trans_.creator', 'trans_.comment', 'usr_.name','usr_.nickname')
                     ->join(DB::raw("({$lastTransQuery->toSql()}) as last_trans"), function ($join) {
                         $join->on('last_trans.last_curr_wf_tran_id', '=', 'trans_.curr_wf_tran_id');
+                    })
+                    ->leftJoin('user as usr_', function ($join) {
+                        $join->on('usr_.user_id', '=', 'trans_.creator');
                     })
                     ->join('tbl_curriculum_workflow_status as status_', function ($join) {
                         $join->on('status_.curr_wf_status_id', '=', 'trans_.workflow_status_id');
@@ -678,7 +681,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
             $mainQuery = DB::table('curriculum as curr')
                     ->select(
-                            'curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year', DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as program_ids"), 'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve', 'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment'
+                            'curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year', DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as program_ids"), 'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve', 'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment','sub_trans.name','sub_trans.nickname'
                     )
                     ->leftJoin('tbl_degree as deg', function ($join) {
                         $join->on('deg.degree_id', '=', 'curr.degree_id');
