@@ -195,6 +195,7 @@ class ManageApplyController extends Controller {
         $files = $this->ApplicationDocumentFileRepo->GetData($pid);
         return view('Apply.confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $pid, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
     }
+
     public function docMyCourse($id, $pid) {
        
         $user_data = $this->ApplicantRepo->find($id);
