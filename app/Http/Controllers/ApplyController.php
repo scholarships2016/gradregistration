@@ -201,8 +201,9 @@ class ApplyController extends Controller {
         $pdf->setPaper('A4', 'portrait');
 
         $pdf->render();
-
-        return $pdf->stream("CU_Application.pdf");
+        $citizen = $applicantProfile['applicant']->stu_citizen_card;
+        $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
+        return $pdf->stream("ApplicationForm-{$app_id}-{$citizen}.pdf");
     }
 
     public function docApplicationFee($id) {
