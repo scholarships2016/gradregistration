@@ -93,12 +93,10 @@ class ApplyController extends Controller {
 
     public function registerCourse($id) {
         $id = Crypt::decrypt($id);
-        $id = explode("P", $id);
-
-
+        
         $Bank = $this->BankRepo->getBank();
         $Qus = $this->ApplicationRepo->getData(null, $id);
-        $Data = $this->ApplicationRepo->find($id);
+        $Data = $this->ApplicationRepo->find($id)->first();
         $Sat = $this->SatisfactionRepo->getById(session('Applicant')->stu_citizen_card);
 
         return view($this->part_doc . 'registerCourse', ['banks' => $Bank, 'idApp' => $id, 'Datas' => $Data, 'Sats' => $Sat, 'Qus' => $Qus->all()]);

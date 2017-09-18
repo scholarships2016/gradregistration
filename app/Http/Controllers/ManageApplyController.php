@@ -247,8 +247,8 @@ class ManageApplyController extends Controller {
         return view($this->part_doc . 'manage_GS03');
     }
 
-    public function showManageGS05() {
-        return view($this->part_doc . 'manage_GS05');
+    public function showManageGS05() { 
+           return view($this->part_doc . 'manage_GS05');
     }
 
     public function getCourse(Request $request = null) {
