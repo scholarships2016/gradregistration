@@ -221,7 +221,7 @@
                                                             </select>
                                   <label for="form_control_1">ธนาคารที่ชำระเงิน</label>
                                   <span class="help-block">ธนาคารที่ชำระเงิน</span>
-                              
+
 
                                 <div class="form-group form-md-line-input">
                                   <span class="label label-sm label-info"> จำนวนเงินที่ชำระ [<label id="fee"></label> บาท]</span>
@@ -427,9 +427,9 @@ orderable: false,
 className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<a href="#responsive" apm="'+full.apply_method+'" culn="'+full.nation_id+'"   hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน"  class="btn btn-xs green tooltips"><i class="fa fa-dollar"></i>ปรับปรุงสถานะ</a>'+
-   '<a target="_blank" href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ปรับเอกสาร" class="btn btn-xs blue "><i class="fa fa-file-o"></i>เอกสาร</a>'+
-   '<a target="_blank" href="{{url("admin/docMyCourserintPDF/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ใบสมัคร" class="btn btn-xs blue "><i class="fa fa-file-o"></i>ใบสมัคร</a>') ;
+return ('<div class="btn-group btn-group-sm btn-group-solid"><a href="#responsive" apm="'+full.apply_method+'" culn="'+full.nation_id+'"   hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน และการส่งเอกสาร" title="จัดการยืนยันการชำระเงิน และการส่งเอกสาร" class="btn btn-xs green tooltips"><i class="fa fa-dollar"></i>ปรับปรุงสถานะ</a>'+
+   '<a target="_blank" href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ดาวน์โหลดเอกสารประกอบการสมัคร" title="ดาวน์โหลดเอกสารประกอบการสมัคร" class="btn btn-xs blue "><i class="fa fa-files-o"></i></a>'+
+   '<a  href="{{url("admin/docMyCourserintPDF/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ดาวน์โหลดใบสมัครเป็น PDF" title="ดาวน์โหลดใบสมัครเป็น PDF" class="btn btn-xs red-pink "><i class="fa fa-file-pdf-o"></i></a></div>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,
@@ -459,7 +459,7 @@ jQuery(document).ready(function() {
 
    $('#datatable_ajax tbody').on( 'click', 'a', function () {
           if($(this).attr('ids')=="edit"){
- 
+
                 $('#application_id').val($(this).attr('hid'));
                $('#payment_date').val(($(this).attr('hidd') == 'null')? ((new Date()).toISOString().split('T')[0]):$(this).attr('hidd')) ;
                $('#receipt_book').val($(this).attr('hidb'));
@@ -469,13 +469,13 @@ jQuery(document).ready(function() {
                $('#flow').val($(this).attr('flo'));
                $('#fee').text($(this).attr('fee'));
                $('#Bfee').text($(this).attr('Bfee'));
-               
+
                if($(this).attr('apm')=='1'  && $(this).attr('culn')=='1' ){
                    $('#bankList').show();
                }else{
-            $('#bankList').hide();   
+            $('#bankList').hide();
             }
-         } 
+         }
     } );
 });
 

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Utils\ChangeLocale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-  
+
 use App\Repositories\UserRepositoryImpl;
 
 class LoginUserController extends Controller {
@@ -38,7 +38,7 @@ class LoginUserController extends Controller {
     }
 
     public function showLoginForm() {
-      
+
         return view('auth.loginApplicant_admin');
     }
 
@@ -86,9 +86,9 @@ class LoginUserController extends Controller {
             $role = new \stdClass();
             $role->user_role = '1';
             $role->user_type = 'Staff';
-            session()->put('user_tyep', $role);
+            session()->put('user_type', $role);
             session()->put('locale','th');
-            
+
 
 //            $app = new \stdClass();
 //            $app->applicant_id = 1;

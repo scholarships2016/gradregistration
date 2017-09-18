@@ -414,7 +414,7 @@ class ApplyController extends Controller {
 
             if ($res) {
                 session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-                if (session('user_tyep')->user_type == 'applicant') {
+                if (session('user_type')->user_type == 'applicant') {
                     return redirect()->route('manageMyCourse');
                 } else {
                     return redirect()->route('showManagePay');

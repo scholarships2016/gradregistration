@@ -14,7 +14,7 @@ class BackOfficeMid
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $permission)
+    public function handle($request, Closure $next, $permission = null)
     {
 
         $userType = session('user_type');
@@ -22,16 +22,18 @@ class BackOfficeMid
             //Send To Error Page
         }
 
-        $userPermission = session('user_permission');
-        if(in_array($permission,$userPermission)){
-            return $next($request);
+        if (!empty($permission)) {
+            $userPermission = session('user_permission');
+            if (in_array($permission, $userPermission)) {
+                return $next($request);
+            }
         }
 
         if ($userType->user_type == 'Admin') {
             return $next($request);
         }
 
-        session()->flash('errorMsg',Util::UNABLE_TO_ACCESS);
+        session()->flash('errorMsg', Util::UNABLE_TO_ACCESS);
         return redirect()->route('admin.backoffice.showToDoListPage');
     }
 }
