@@ -113,8 +113,9 @@ class ManageApplyController extends Controller {
 
 
         $application_id = $request->application_id;
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, null, null, null, null, null, null, null);
-
+         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null,session('user_type')->user_role);
+                                                       
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
 
@@ -175,7 +176,7 @@ class ManageApplyController extends Controller {
 
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id);
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id,session('user_type')->user_role);
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
@@ -287,7 +288,8 @@ class ManageApplyController extends Controller {
         $academic_year = $request->year;
         $semester = $request->semester;
         $round_no = $request->roundNo;
-        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, false, false, $academic_year, $semester, $round_no);
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, false, false, $academic_year, $semester, $round_no,$user,session('user_type')->user_role);
         return response()->json($curDiss->sortBy('faculty_name'));
     }
 
@@ -431,7 +433,8 @@ class ManageApplyController extends Controller {
 
     public function ShowRecommenReport($id) {
         $application_id = $id;
-        $curDis = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, null, null, null, null, null, null, null);
+         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+        $curDis = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null,session('user_type')->user_role);
 
         foreach ($curDis as $curDiss) {
             $year = $curDiss->academic_year;
