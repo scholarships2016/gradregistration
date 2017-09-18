@@ -85,6 +85,8 @@
        </div>
    </div>
    <div class="row">
+       
+       
      <div class="form-group">
           <label class="col-md-1  col-md-offset-1 control-label">{{Lang::get('resource.lbConfirmPaymentBank-1')}} </label>
           <div class="col-md-3">
@@ -96,6 +98,8 @@
             </select>
           </div>
       </div>
+       
+       
 
    </div>
 <br/>

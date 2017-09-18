@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Repositories\AnnouncementRepositoryImpl;
 use App\Repositories\FacultyRepositoryImpl;
@@ -202,8 +204,8 @@ class ApplyController extends Controller {
 
         $pdf->render();
         $citizen = $applicantProfile['applicant']->stu_citizen_card;
-        $app_id =  str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
-        $app_no = $dataApplication[0]->program_id ."-" .str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
+        $app_id = str_pad($dataApplication[0]->application_id, 5, '0', STR_PAD_LEFT);
+        $app_no = $dataApplication[0]->program_id . "-" . str_pad($dataApplication[0]->curriculum_num, 4, '0', STR_PAD_LEFT);
         return $pdf->stream("{$app_id}_{$app_no}_ApplicationForm.pdf");
     }
 
@@ -273,7 +275,14 @@ class ApplyController extends Controller {
             $gdata['curr_prog_id'] = $program[1];
         }
 
-        $chks = DB::table('application')->where('applicant_id', session('Applicant')->applicant_id)->where('program_id', $gdata['program_id'])->where('curr_prog_id', $gdata['curr_prog_id'])->where('curr_act_id', $gdata['curr_act_id'])->where('sub_major_id', $gdata['sub_major_id'])->get();
+        $chks = DB::table('application')->where('applicant_id', session('Applicant')->applicant_id)
+                ->where('program_id', $gdata['program_id'])
+                ->where('curr_prog_id', $gdata['curr_prog_id'])
+                ->where('curr_act_id', $gdata['curr_act_id']);
+        if (isset($gdata['sub_major_id'])) {
+            $chks->where('sub_major_id', $gdata['sub_major_id']);
+        }
+        $chks->get();
 
         if (count($chks) == 0) {
             $res = $this->ApplicationRepo->saveApplication($gdata);
@@ -425,12 +434,10 @@ class ApplyController extends Controller {
                 session()->flash('errorMsg', Lang::get('resource.lbError'));
                 return back();
             }
-        }else
-        {
-             session()->flash('errorMsg', Lang::get('resource.lbError'));
-             return back();
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbError'));
+            return back();
         }
-
     }
 
     public function getForm($id = 0) {
