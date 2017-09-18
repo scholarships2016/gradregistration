@@ -65,8 +65,8 @@
                                                 <span></span>
                                             </label>
 
-                                            <label class="mt-checkbox">
-                                                <input type="checkbox" name="is_approve[]" value="2" checked/>
+                                            <label class="mt-checkbox" @if(session('user_type')->user_type !== 'Admin') style="display:none" @endif>
+                                                <input type="checkbox" name="is_approve[]" value="2" @if(session('user_type')->user_type == 'Admin') checked @endif/>
                                                 Pending
                                                 <span></span>
                                             </label>
@@ -78,7 +78,7 @@
                                             </label>
 
                                             <label class="mt-checkbox" style="display:none">
-                                                <input type="checkbox" name="is_approve[]" value="4" checked/>
+                                                <input type="checkbox" name="is_approve[]" value="4" />
                                                 Approved
                                                 <span></span>
                                             </label>

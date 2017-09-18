@@ -197,7 +197,7 @@ class ManageApplyController extends Controller {
     }
 
     public function docMyCourse($id, $pid) {
-       
+
         $user_data = $this->ApplicantRepo->find($id);
         $appc = new \stdClass();
         $appc->applicant_id = $user_data->applicant_id;
