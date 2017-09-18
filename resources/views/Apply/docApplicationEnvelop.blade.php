@@ -55,7 +55,7 @@
                             <tbody>
                                 <tr>
                                     <td width="300px" align="left">
-                                      {!!Lang::get('resource.lbGradAddressOnPDF')!!}
+                                      {{$app->mailing_address}}
                                     </td>
                                     <td width="220px" align="right"></td>
                                 </tr>
@@ -155,7 +155,7 @@
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td rowspan="5">
-                                                      {!!Lang::get('resource.lbGradAddressOnPDF')!!}                    </td>
+                                                      {{$app->mailing_address}}                   </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
