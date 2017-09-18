@@ -282,9 +282,9 @@ class ApplyController extends Controller {
         if (isset($gdata['sub_major_id'])) {
             $chks->where('sub_major_id', $gdata['sub_major_id']);
         }
-        $chks->get();
+        $chkpass = $chks->get();
 
-        if (count($chks) == 0) {
+        if (count($chkpass) == 0) {
             $res = $this->ApplicationRepo->saveApplication($gdata);
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbApplicationSame'));
