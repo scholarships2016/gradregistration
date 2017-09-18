@@ -196,7 +196,7 @@ class ManageApplyController extends Controller {
         return view('Apply.confDocApply', ['Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Datas' => $Datas, 'Files' => $files, 'programID' => $pid, 'Year' => $Datas[0]->academic_year, 'Flo' => $Datas[0]->flow_id]);
     }
     public function docMyCourse($id, $pid) {
-        //$id = Crypt::decrypt($id);
+       
         $user_data = $this->ApplicantRepo->find($id);
         $appc = new \stdClass();
         $appc->applicant_id = $user_data->applicant_id;
@@ -220,7 +220,7 @@ class ManageApplyController extends Controller {
             , 'appapplicantWorks' => $applicantProfile['applicantWork']
             , 'peoples' => $people
             , 'Docs' => $DocumentApplys, 'Groups' => $DocumentApplyGroup, 'Files' => $files
-            , 'age' => $age, 'id' => $id, 'pictrue' => $pic]);
+            , 'age' => $age, 'id' => $pid, 'pictrue' => $pic]);
     }
 
     public function docMyCourserintPDF($id, $pid) {
