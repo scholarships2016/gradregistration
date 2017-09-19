@@ -235,7 +235,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="display:none;">
+                <div class="row" style="{{(session('user_id') && session('user_type')->user_type?'':'display:none;')}}">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label col-md-3">
