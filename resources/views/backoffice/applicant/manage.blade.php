@@ -208,7 +208,7 @@
                         targets: 0,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            return meta.row + 1;
+                            return meta.row + 1 +(user_id==full.creator?'<br/><i class="fa fa-pencil" title="ข้อมูลผู้สอบได้ นำเข้าด้วย Excel สามารถแก้ไขปรับปรุงได้"></i>':'');
                         }
                     },
                     {
