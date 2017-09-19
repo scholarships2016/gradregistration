@@ -11,6 +11,7 @@
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet"
       type="text/css"/>
+      <link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -538,7 +539,7 @@
                                 ยกเลิก
                             </a>
 
-                            <a id="delBtn" onclick="doDelete()" class="btn red" style="display:none;">ลบข้อมูล
+                            <a id="delBtn" onclick="showConfirmDelete()" class="btn red" style="display:none;">ลบข้อมูล
                             </a>
 
                             <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
@@ -580,7 +581,9 @@
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/ckeditor/ckeditor_standard/ckeditor.js')}}" type="text/javascript"></script>
-
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -1141,6 +1144,8 @@
                 if (data !== null) {
                     if (data.curriculum !== null) {
                         $('#curriculum_id').val(data.curriculum.curriculum_id);
+                        $('#curr_flow_status').val(data.curriculum.is_approve);
+
                         if (data.curriculum.file_id !== null) {
 
                             $('#fileuploadDiv #canDownload').val(1);
@@ -1156,14 +1161,14 @@
                         //check if adding data and status is Draft
                         if(data.curriculum.is_approve == 1){
                           //Disable semester and academic_year
-                          $('#semester').prop('disabled', 'disabled');
+                          $('#semester').prop('readonly', 'readonly');
 
                           //show Submit to Admin button
                           $('#sendToApprBtn').css("display","block");
 
                           //redirect to edit page
                           var url = '{{url('admin/management/curriculum/edit/')}}'+'/'+data.curriculum.curriculum_id;
-                          window.location.href = url;
+                        //  window.location.href = url;
 
                         }
                     }
@@ -1499,7 +1504,7 @@
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
             } else if (currFlowStatus == 1) { //draft
-                $("#semester").attr('disabled', 'disabled');
+                //$("#semester").attr('disabled', 'disabled');
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
                 $("#sendToApprBtn").show();
@@ -1509,7 +1514,7 @@
                 section1Disable();
                 section2Disable();
             } else if (currFlowStatus == 3) { //rejected
-                $("#semester").attr('disabled', 'disabled');
+                //$("#semester").prop('disabled', disabled);
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
                 $("#sendToApprBtn").show();
@@ -1560,12 +1565,14 @@
         if($("#cke_exam_schedule_0")){
           CKEDITOR.instances['exam_schedule_0'].setReadOnly(true);
         }
-      
+
     }
 
     function prepareData() {
         var formData = new FormData();
 
+        var myform = $('#progSettingForm');
+        var disabled = myform.find(':input:disabled').removeAttr('disabled');
         //All Field
         $.each($("#progSettingForm").serializeArray(), function (index, field) {
             if (field.name == 'program_id' || field.name == 'program_type_id' ||
@@ -1599,6 +1606,8 @@
         if ($("#document_file").val() !== '') {
             formData.append("document_file", $("#document_file")[0].files[0]);
         }
+        
+        disabled.attr('disabled','disabled');
 
         return formData;
     }
@@ -1692,7 +1701,22 @@
             }
         });
     }
+    function showConfirmDelete() {
+      swal({
+        title: 'ยืนยัน',
+        text: 'คุณต้องการลบข้อมูล ใช่หรือไม่?',
+        type: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+      }, function() {
 
+
+        setTimeout(function() {
+          doDelete();
+        }, 100);
+      });
+    }
     function doDelete() {
         var dataObj = prepareData();
         $.ajax({
@@ -1711,6 +1735,9 @@
                 if (data !== null) {
                 }
                 setActionButtonAndDisableForm();
+                 setTimeout(function() {
+                   window.location.href = '{{route('admin.curriculum.showManagePage')}}';
+                 }, 1000);
             }
         });
     }
