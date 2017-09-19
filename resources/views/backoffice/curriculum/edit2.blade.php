@@ -74,7 +74,7 @@
             <div class="actions">
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"
                    data-original-title="" title=""> </a>
-                <a href="javascript:window.history.back();" class="btn btn-circle blue-steel btn-outline">
+                <a href="{{route('admin.curriculum.showManagePage')}}" class="btn btn-circle blue-steel btn-outline">
                     <i class="fa fa-mail-reply"></i> กลับหน้าหลัก </a>
             </div>
         </div>
@@ -486,13 +486,13 @@
                                     <div class="mt-radio-inline">
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="status" value="1"
-                                                   @if(!empty($curriculum) && $curriculum->status == 1) checked @endif
+                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 1)) checked @endif
                                             > เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
                                         <label class="mt-radio mt-radio-outline">
                                             <input type="radio" name="status" value="0"
-                                                   @if(empty($curriculum)||(!empty($curriculum) && $curriculum->status == 0)) checked @endif
+                                                   @if(!empty($curriculum) && $curriculum->status == 0) checked @endif
                                             > ไม่เปิดให้ลงทะเบียน
                                             <span></span>
                                         </label>
@@ -534,7 +534,7 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-3">
-                            <a id="cancelBtn" href="javascript:window.history.back();" class="btn default">
+                            <a id="cancelBtn" href="{{route('admin.curriculum.showManagePage')}}" class="btn default">
                                 ยกเลิก
                             </a>
 
@@ -544,9 +544,9 @@
                             <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
                             </a>
                         </div>
-                        <div class="col-md-5 text-right" style="border-left: 2px solid #cccccc;">
+                        <div class="col-md-7 text-center" style="border-left: 2px solid #cccccc;/* border-bottom: 1px dotted; */padding: 5px;background: #f9f1f1;">
                             <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
-                               class="btn btn-circle blue" style="display:none;"> <i class="fa fa-plus"> ส่งอนุมัติ </i></a>
+                               class="btn btn-circle blue" style="display:none;"> <i class="fa fa-arrow-circle-right"> ส่งอนุมัติ </i></a>
                             <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow"
                                style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
                             <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green"
@@ -1136,6 +1136,8 @@
             enctype: 'multipart/form-data',
             success: function (result) {
                 var data = showToastFromAjaxResponse(result);
+
+
                 if (data !== null) {
                     if (data.curriculum !== null) {
                         $('#curriculum_id').val(data.curriculum.curriculum_id);
@@ -1149,6 +1151,20 @@
                             $("#fileuploadDiv #document_file").val(null);
                         } else {
                             $('#fileuploadDiv #canDownload').val(0);
+                        }
+
+                        //check if adding data and status is Draft
+                        if(data.curriculum.is_approve == 1){
+                          //Disable semester and academic_year
+                          $('#semester').prop('disabled', 'disabled');
+
+                          //show Submit to Admin button
+                          $('#sendToApprBtn').css("display","block");
+
+                          //redirect to edit page
+                          var url = '{{url('admin/management/curriculum/edit/')}}'+'/'+data.curriculum.curriculum_id;
+                          window.location.href = url;
+
                         }
                     }
 
@@ -1191,17 +1207,17 @@
         }
         roundHtml += '<input type="hidden" id="apply_setting_id" name="apply_setting_id" value="' + obj.apply_setting_id + '"/>';
         roundHtml += '<div class="col-md-12">';
-        roundHtml += '<div class="portlet pink-chula box">';
-        roundHtml += '<div class="portlet-title">';
-        roundHtml += '<div class="caption">';
+        roundHtml += '<div class="panel panel-success">';
+        roundHtml += '<div class="panel-heading">';
+        roundHtml += '<h3 class="panel-title">';
         roundHtml += '<i class="fa fa-table"></i>ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
-        roundHtml += '</div>';
+        roundHtml += '</h3>';
         roundHtml += '<div class="actions">';
 //        roundHtml += '<a href="javascript:;" class="btn btn-default btn-sm">';
 //        roundHtml += '<i class="fa fa-pencil"></i> Edit </a>';
         roundHtml += '</div>';
         roundHtml += '</div>';
-        roundHtml += '<div class="portlet-body">';
+        roundHtml += '<div class="panel-body">';
         roundHtml += '<div class="row">';
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="col-md-12">';
@@ -1483,6 +1499,7 @@
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
             } else if (currFlowStatus == 1) { //draft
+                $("#semester").attr('disabled', 'disabled');
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
                 $("#sendToApprBtn").show();
@@ -1492,6 +1509,7 @@
                 section1Disable();
                 section2Disable();
             } else if (currFlowStatus == 3) { //rejected
+                $("#semester").attr('disabled', 'disabled');
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
                 $("#sendToApprBtn").show();
@@ -1537,6 +1555,12 @@
         $("#section2").find("input").attr('disabled', 'disabled');
         $("#section2").find("select").attr('disabled', 'disabled');
         $("#section2").find("textarea").attr('disabled', 'disabled');
+        CKEDITOR.instances['additional_detail'].setReadOnly(true);
+        CKEDITOR.instances['additional_question'].setReadOnly(true);
+        if($("#cke_exam_schedule_0")){
+          CKEDITOR.instances['exam_schedule_0'].setReadOnly(true);
+        }
+      
     }
 
     function prepareData() {

@@ -10,7 +10,7 @@
             <div class="modal-body form">
                 <div id="ajaxLoading" class="row col-md-12 text-center">
                     <br>
-                    <img src="{{asset('assets/global/img/loading-spinner-grey.gif')}}" alt="" class="loading">
+                    <img src="{{asset('/assets/global/img/loading-spinner-grey.gif')}}" alt="" class="loading">
                     <span> &nbsp;&nbsp;กำลังโหลดข้อมูล... </span>
                 </div>
                 <form id="applicationInfoForm" class="form-horizontal form-bordered" role="form">
