@@ -259,7 +259,7 @@
                         targets: 2,
                         class: 'text-left',
                         render: function (data, type, full, meta) {
-                            return full.performer;
+                            return full.name+' ('+full.nickname+')';
                         }
                     }, {
                         targets: 3,
