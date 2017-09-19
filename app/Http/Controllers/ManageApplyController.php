@@ -115,7 +115,7 @@ class ManageApplyController extends Controller {
         $application_id = $request->application_id;
          $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
         $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null,session('user_type')->user_role);
-                                                       
+
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
 
@@ -289,7 +289,7 @@ class ManageApplyController extends Controller {
         $semester = $request->semester;
         $round_no = $request->roundNo;
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
-        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, null, null, false, false, $academic_year, $semester, $round_no,$user,session('user_type')->user_role);
+        $curDiss = $this->CurriculumRepo->searchByCriteria(null, null, null, null, null, null, '4', null, false, false, $academic_year, $semester, $round_no,$user,session('user_type')->user_role);
         return response()->json($curDiss->sortBy('faculty_name'));
     }
 

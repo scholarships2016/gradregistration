@@ -64,7 +64,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     public function searchByCriteria($criteria = null, $paging = false) {
         $result = null;
         try {
-            $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
+            $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')            
                     ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
