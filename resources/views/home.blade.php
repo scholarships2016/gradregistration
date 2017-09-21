@@ -80,7 +80,7 @@
                             <!-- Start Right Panel -->
 
                             <div class="col-md-4">
-                              @if(session('user_id') && !session('user_type')->user_type)
+                              @if(session('user_id') && session('user_type')->user_type=='applicant')
                               <div class="row margin-bottom-20"><a href="{{url('apply')}}">
                                   <div class="col-md-12">
                                       <div class="portlet light">
@@ -97,24 +97,8 @@
                                   </div></a>
                                 </div>
                                 @endif
-                                @if(session('user_id') && session('user_type')->user_type)
-                                <div class="row margin-bottom-20"><a href="{{url('apply/register')}}">
-                                    <div class="col-md-12">
-                                        <div class="portlet light">
-                                            <div class="card-icon">
-                                                <i class="icon-note font-green-haze theme-font"></i>
-                                            </div>
-                                            <div class="card-title">
-                                                <span>{{Lang::get('resource.lbMCurriculum')}}</span>
-                                            </div>
-                                            <div class="card-desc">
-                                                <span> {{Lang::get('resource.lbHomeApplyDescription')}} </span>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                  </div>
-                                  @endif
-                                @if(session('user_id') && session('role_id'))
+
+                                @if(session('user_id') && session('user_type')->user_type=='applicant')
                                 <div class="row margin-bottom-20"><a href="{{url('application/manageMyCourse')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">
@@ -148,6 +132,23 @@
                                     </div></a>
                                         </div>
                                           @endif
+                                           @if(!session('user_id') || session('user_type')->user_type !== 'applicant')
+                                          <div class="row margin-bottom-20"><a href="{{url('apply/register')}}">
+                                              <div class="col-md-12">
+                                                  <div class="portlet light">
+                                                      <div class="card-icon">
+                                                          <i class="icon-note font-green-haze theme-font"></i>
+                                                      </div>
+                                                      <div class="card-title">
+                                                          <span>{{Lang::get('resource.lbMCurriculum')}}</span>
+                                                      </div>
+                                                      <div class="card-desc">
+                                                          <span> {{Lang::get('resource.lbHomeApplyDescription')}} </span>
+                                                      </div>
+                                                  </div>
+                                              </div></a>
+                                            </div>
+                                            @endif
                                     <div class="row margin-bottom-20"><a href="{{url('contact')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">
