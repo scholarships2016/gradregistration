@@ -64,6 +64,9 @@
           <i class="icon-settings font-dark"></i>
           <span class="caption-subject font-dark sbold uppercase">ข้อมูลการสมัคร</span>
         </div>
+        <div class="pull-right">
+<a class="btn btn-circle btn-lg red-pink" href="{{route('showMangePayBarcode')}}"> <i class="fa fa-barcode"> </i> ปรับปรุงการชำระเงินด้วยการแสกน Barcode  </a>
+</div>
 
       </div>
       <div class="portlet-body">

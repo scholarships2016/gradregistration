@@ -27,7 +27,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>ปรับปรุงการชำระเงิน</span>
+            <a href="/">จัดการข้อมูลผู้สมัคร</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>ปรับปรุงการชำระเงินด้วยการแสกน Barcode</span>
         </li>
     </ul>
     {{--<div class="page-tool    bar">--}}
@@ -61,7 +65,7 @@
 @stop
 
 @section('pagetitle')
-<h1 class="page-title">ปรับปรุงการชำระเงิน
+<h1 class="page-title">ปรับปรุงการชำระเงินด้วยการแสกน Barcode
 
 </h1>
 @stop
@@ -69,16 +73,16 @@
 
 @section('maincontent')
  <div class="row">
-        
-         
- 
+
+
+
  <div class="row">
                                                              <div class="col-md-4 col-md-offset-4">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-barcode"></i>
                                                                 </span>
-                                                                <input type="text" id="barcode" onblur="this.focus()" autofocus class="form-control" placeholder="Barcode-Scan">  
+                                                                <input type="text" id="barcode" onblur="this.focus()" autofocus class="form-control" placeholder="Barcode-Scan">
                                                                <input type="hidden" id="subbarcode">
                                                                 <span class="input-group-btn">
                                                             <a class="btn blue" id="userSearch" type="button">ตรวจสอบ</a>
@@ -95,10 +99,10 @@
                                                                        ">
                                             ลำดับ
                                         </th><th class="sorting_asc" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" เลขที่ใบสมัคร : activate to sort column descending"> เลขที่ใบสมัคร </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" รหัสผู้สมัคร : activate to sort column ascending"> รหัสผู้สมัคร </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" ชื่อ-สกุล : activate to sort column ascending"> ชื่อ-สกุล </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" รหัสโปรแกรม : activate to sort column ascending"> รหัสโปรแกรม </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" ชื่อโปรแกรม : activate to sort column ascending"> ชื่อโปรแกรม </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" ธนาคาร : activate to sort column ascending"> ธนาคาร </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" วันที่สมัคร : activate to sort column ascending"> วันที่สมัคร </th><th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" aria-label=" สถานะ : activate to sort column ascending"> สถานะ </th> </tr>
-                                    
+
                                 </thead>
-                                 
-                            </table></div> 
+
+                            </table></div>
                 </div>
 </div>
 @stop
@@ -127,22 +131,22 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-    
+
 $('#barcode').keyup(function (e) {
     if (e.keyCode === 13) {
-           updateVal();     
+           updateVal();
     }
   });
  $('#userSearch').click(function (e) {
-            updateVal();     
-     
-  }); 
-  
+            updateVal();
+
+  });
+
   function updateVal(){
       $.ajax({
 					type: "POST",
 					url: '{!! Route('savePaymentBarcode') !!}',
-					data :{ 
+					data :{
                                                 application_id : (($('#barcode').val()!='' && $('#barcode').val()!= null )?$('#barcode').val():'-99'),
                                                  _token: '{{ csrf_token() }}'
                                                } ,
@@ -150,12 +154,12 @@ $('#barcode').keyup(function (e) {
                                                if(data=='true'){
                                           $('#subbarcode').val($('#barcode').val());
                                  	  TableDatatablesAjax.init();
-                                          $('#barcode').val(''); 
+                                          $('#barcode').val('');
                                            toastr.success('ดำเนินการเรียบร้อย');
                                                }else if(data=='have'){
                                                     $('#subbarcode').val($('#barcode').val());
                                  	  TableDatatablesAjax.init();
-                                          $('#barcode').val(''); 
+                                          $('#barcode').val('');
                                                toastr.warning('ผู้สมัครชำระเงินเรียบร้อยแล้ว');
                                                   }else{
                                                 $('#barcode').val('');
@@ -164,11 +168,11 @@ $('#barcode').keyup(function (e) {
                                            }
 				},"json");
   }
-  
-  
-    
- var table="";   
-var TableDatatablesAjax = function () { 
+
+
+
+ var table="";
+var TableDatatablesAjax = function () {
     var handle1 = function () {
 
         var grid = new Datatable();
@@ -176,112 +180,112 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
             loadingMessage: 'Loading...',
-            dataTable: {  
-                "bStateSave": true,  
+            dataTable: {
+                "bStateSave": true,
                 "fnStateSaveParams":    function ( oSettings, sValue ) {
                     $("#datatable_ajax tr.filter .form-control").each(function() {
                         sValue[$(this).attr('name')] = $(this).val();
                     });
-                   
+
                     return sValue;
                 },
-                
+
                 "lengthMenu": [
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
                 "pageLength": 20, // default record count per page
-           
+
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourseBarcode') !!}",
                     "type":"GET",
-                    "data" : {  
+                    "data" : {
                                 application_id : (($('#subbarcode').val()!='' && $('#subbarcode').val()!= null )?$('#subbarcode').val():'-99'),
                                 _token:     '{{ csrf_token()}}'
-                                               }                 
+                                               }
                 },
-               
-        
-columnDefs: [{ 
-targets: [0], 
-orderable: false, 
+
+
+columnDefs: [{
+targets: [0],
+orderable: false,
 className: 'table-status',
 name: 'rownum',
-render: function (data, type, full, meta) { 
-return full.rownum; 
-} },{ 
-targets: [1], 
-orderable: false, 
+render: function (data, type, full, meta) {
+return full.rownum;
+} },{
+targets: [1],
+orderable: false,
 className: 'table-desc font-blue',
-name: 'app_id', 
-render: function (data, type, full, meta) { 
-return  full.app_ida   ; 
-} },{ 
-targets: [2], 
-orderable: false, 
+name: 'app_id',
+render: function (data, type, full, meta) {
+return  full.app_ida   ;
+} },{
+targets: [2],
+orderable: false,
 className: 'table-title',
-name: 'stu_citizen_card', 
-render: function (data, type, full, meta) { 
-return  full.stu_citizen_card; 
-} },{ 
-targets: [3], 
-orderable: false, 
+name: 'stu_citizen_card',
+render: function (data, type, full, meta) {
+return  full.stu_citizen_card;
+} },{
+targets: [3],
+orderable: false,
 className: 'table-desc',
-name: 'stu_first_name_stu_last_name', 
-render: function (data, type, full, meta) { 
+name: 'stu_first_name_stu_last_name',
+render: function (data, type, full, meta) {
 return (  full.stu_first_name + '['+full.stu_first_name_en+']   ' + full.stu_last_name + '[' + full.stu_last_name_en + ']') ;
-}},{ 
-targets: [4], 
-orderable: false, 
+}},{
+targets: [4],
+orderable: false,
 className: 'table-desc font-blue',
 name: 'program_id',
-render: function (data, type, full, meta) { 
-return    full.program_id   ; 
-} },{ 
-targets: [5], 
-orderable: false, 
+render: function (data, type, full, meta) {
+return    full.program_id   ;
+} },{
+targets: [5],
+orderable: false,
 className: 'table-title',
-name: 'prog_type_name', 
-render: function (data, type, full, meta) { 
-return    full.prog_type_name ; 
-} },{ 
-targets: [6], 
-orderable: false, 
+name: 'prog_type_name',
+render: function (data, type, full, meta) {
+return    full.prog_type_name ;
+} },{
+targets: [6],
+orderable: false,
 className: 'table-desc',
-name: 'bank_name', 
-render: function (data, type, full, meta) { 
+name: 'bank_name',
+render: function (data, type, full, meta) {
 return  full.bank_name   ;
-}},{ 
-targets: [7], 
-orderable: true, 
+}},{
+targets: [7],
+orderable: true,
 className: 'table-desc',
-name: 'created', 
-render: function (data, type, full, meta) { 
+name: 'created',
+render: function (data, type, full, meta) {
 return  full.created;
-}},{ 
-targets: [8], 
-orderable: false, 
+}},{
+targets: [8],
+orderable: false,
 className: 'table-desc',
-name: 'flow_name', 
-render: function (data, type, full, meta) { 
+name: 'flow_name',
+render: function (data, type, full, meta) {
 return ('<span class="label label-sm label-'+(( full.flow_id == 1)?'danger':((full.flow_id == 6)? 'success' :'info')) +'">'+ (('{{session('locale')}}'=='th')? full.flow_name : full.flow_name_en) +'</span>');
-}}],      
+}}],
                 "bDestroy": true,
                 "ordering": false,
-                
+
                 "order": [
                     [1, "asc"]
-                ] 
+                ]
             }
         });
 
-       
+
     }
-  
+
 
     return {
      init: function () {
-             handle1();      
+             handle1();
         }
 
     };
