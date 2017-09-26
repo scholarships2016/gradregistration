@@ -55,14 +55,15 @@
                             </button>
                             <ul class="dropdown-menu pull-right">
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="javascript:window.print();">
                                         <i class="fa fa-print"></i> Print </a>
                                 </li>
-
+                                <!--
                                 <li>
                                     <a href="javascript:;">
                                         <i class="fa fa-file-excel-o"></i> Export to Excel </a>
                                 </li>
+                              -->
                             </ul>
                         </div>
                     </div>
@@ -260,7 +261,7 @@
                     render: function (data, type, full, meta) {
                         var html = '';
                         html += '<div class="btn-group btn-group-sm btn-group-solid">';
-                        html += '<a class="btn btn-xs red" onclick="doDelete(this)">ลบ';
+                        html += '<a class="btn btn-xs red" onclick="doDelete(this);">ลบ';
                         html += '<i class="fa fa-trash-o"></i>';
                         html += '</a> ';
                         html += '<a href="' + editLink + '/' + full.user_id + '" class="btn btn-xs blue">แก้ไข';

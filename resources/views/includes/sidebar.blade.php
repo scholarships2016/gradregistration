@@ -324,7 +324,7 @@
 
                     @if(session('user_type')->user_type == 'Admin' || in_array("7",session('user_permission')))
                         <li class="nav-item  " data-index="21">
-                            <a href="report-export-to-reg.html" class="nav-link nav-toggle">
+                            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-export-to-reg.html" class="nav-link nav-toggle">
                                 <i class="icon-briefcase"></i>
                                 <span class="title">ข้อมูลส่งสำนักทะเบียน</span>
                                 <span class="arrow"></span>

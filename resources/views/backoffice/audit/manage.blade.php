@@ -59,13 +59,15 @@
                             </button>
                             <ul class="dropdown-menu pull-right">
                                 <li>
-                                    <a href="javascript:window.print();">
+                                      <a href="javascript:window.print();">
                                         <i class="fa fa-print"></i> Print </a>
                                 </li>
+                                <!--
                                 <li>
                                     <a href="javascript:;">
                                         <i class="fa fa-file-excel-o"></i> Export to Excel </a>
                                 </li>
+                              -->
                             </ul>
                         </div>
 
