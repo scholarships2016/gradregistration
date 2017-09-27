@@ -308,7 +308,7 @@
 
                               html += '<div class="btn-group btn-group-sm btn-group-solid">';
                               html += '<a href="' + editLink + '/' + full.curriculum_id + '" class="btn btn-xs blue">';
-                              html += '<i class="fa fa-edit"></i>';
+                              html += '<i class="fa fa-edit"></i> แก้ไข';
                               html += '</a>';
                               html += '</div>';
                           }

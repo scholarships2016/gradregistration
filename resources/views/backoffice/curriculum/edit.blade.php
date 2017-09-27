@@ -964,22 +964,23 @@
         roundHtml += '</div>';
 
         roundHtml += '<div class="col-md-12">';
+
         roundHtml += '<div class="form-group col-md-6">';
         roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="project_id"><strong>วันที่คณะส่งผู้ผ่าน</strong></label>';
+        roundHtml += 'for="project_id"><strong>วันที่ประกาศรายชื่อผู้มีสิทธิ์สอบ</strong></label>';
         roundHtml += '<div class="col-md-9">';
-        roundHtml += '<input type="text" id="announce_admission_date"';
-        roundHtml += 'name="announce_admission_date"';
+        roundHtml += '<input type="text" id="announce_exam_date"';
+        roundHtml += 'name="announce_exam_date"';
         roundHtml += 'class="form-control date-picker">';
         roundHtml += '<span class="help-block"></span>';
         roundHtml += '</div>';
         roundHtml += '</div>';
         roundHtml += '<div class="form-group col-md-6">';
         roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="project_id"><strong>วันที่คณะส่งผู้มีสิทธิสอบ</strong></label>';
+        roundHtml += 'for="project_id"><strong>วันที่ประกาศผลการสอบคัดเลือก</strong></label>';
         roundHtml += '<div class="col-md-9">';
-        roundHtml += '<input type="text" id="announce_exam_date"';
-        roundHtml += 'name="announce_exam_date"';
+        roundHtml += '<input type="text" id="announce_admission_date"';
+        roundHtml += 'name="announce_admission_date"';
         roundHtml += 'class="form-control date-picker">';
         roundHtml += '<span class="help-block"></span>';
         roundHtml += '</div>';

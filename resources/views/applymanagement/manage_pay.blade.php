@@ -251,8 +251,8 @@
 
 
                         <div class="modal-footer">
-                          <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
-                          <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
+                          <button class="btn dark " type="button" id="editdel" data-dismiss="modal">ปิด</button>
+                          <button class="btn green" type="button" id="editSave" data-dismiss="modal">บันทึก</button>
                         </div>
 
                       </div>
@@ -417,7 +417,7 @@ orderable: false,
 className: 'table-download',
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<div class="btn-group btn-group-sm btn-group-solid"><a href="#responsive" apm="'+full.apply_method+'" culn="'+full.nation_id+'"   hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน และการส่งเอกสาร" title="จัดการยืนยันการชำระเงิน และการส่งเอกสาร" class="btn btn-xs purple tooltips"><i class="fa fa-dollar"></i>ปรับปรุงสถานะ</a><br/>'+
+return ('<div class="btn-group btn-group-sm btn-group-solid"><a href="#responsive" apm="'+full.apply_method+'" culn="'+full.nation_id+'"   hid="' + full.application_id +'" hidd="' + full.payment_date +'" hidb="' + full.receipt_book +'" hidn="' + full.receipt_no +'" bak="' + full.bank_id+'" flo="' + full.flow_id+'" fee="' + full.apply_fee+'" Bfee="' + full.bank_fee +'"   ids="edit"  data-toggle="modal" data-original-title="จัดการยืนยันการชำระเงิน และการส่งเอกสาร" title="จัดการยืนยันการชำระเงิน และการส่งเอกสาร" class="btn btn-xs green-meadow tooltips"><i class="fa fa-dollar"></i>ปรับปรุงสถานะ</a><br/>'+
    '<a target="_blank" href="{{url("admin/manageDocument/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ดาวน์โหลดเอกสารประกอบการสมัคร" title="ดาวน์โหลดเอกสารประกอบการสมัคร" class="btn btn-xs blue "><i class="fa fa-files-o"></i></a>'+
    '<a target="_blank" href="{{url("admin/docMyCourse/")}}/'+ full.applicant_id +'/' + full.application_id +'"  data-original-title="ดาวน์โหลดใบสมัครเป็น PDF" title="ดาวน์โหลดใบสมัครเป็น PDF" class="btn btn-xs red-pink "><i class="fa fa-file-pdf-o"></i></a></div>') ;
 } }],

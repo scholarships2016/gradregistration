@@ -85,8 +85,8 @@
        </div>
    </div>
    <div class="row">
-       
-       
+
+
      <div class="form-group">
           <label class="col-md-1  col-md-offset-1 control-label">{{Lang::get('resource.lbConfirmPaymentBank-1')}} </label>
           <div class="col-md-3">
@@ -98,8 +98,8 @@
             </select>
           </div>
       </div>
-       
-       
+
+
 
    </div>
 <br/>
@@ -224,8 +224,8 @@
 
 
                                                 <div class="modal-footer">
-                                                    <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
+                                                    <button class="btn dark " type="button" id="editdel" data-dismiss="modal">ปิด</button>
+                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">บันทึก</button>
                                                 </div>
 
                                           </div> </form></div></div>

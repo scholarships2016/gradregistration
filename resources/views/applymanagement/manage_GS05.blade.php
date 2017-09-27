@@ -81,7 +81,7 @@
                     <i class="icon-settings font-dark"></i>
                     <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
                   </div>
-              
+
                 </div>
                 <div class="portlet-body">
 
@@ -266,8 +266,8 @@
 
                                                 <div class="modal-footer">
                                                     <input type="hidden" id="appcantid">
-                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">Save changes</button>
+                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">ปิด</button>
+                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">บันทึก</button>
                                                 </div>
 
                                           </div>
@@ -439,7 +439,7 @@
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
                                               }
-                                              $("#single").append('<option cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
+                                              $("#single").append('<option cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (''+itemData.coursecodeno+' - '+itemData.thai+', '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
 
                                                         group = data[index].faculty_id;

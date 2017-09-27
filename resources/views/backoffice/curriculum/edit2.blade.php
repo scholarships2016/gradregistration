@@ -502,13 +502,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3"
+                                    <label class="control-label col-md-2"
                                            for="project_id"><strong>ผู้มีสิทธิ์จัดการ</strong>
                                         <span class="required" aria-required="true"> * </span>
                                     </label>
-                                    <div class="col-md-9">
+                                    <div class="col-md-10">
                                         <select id="curriculum_user" name="curriculum_user[]" class="form-control"
                                                 multiple>
                                             @foreach($userList as $value)
@@ -1215,7 +1215,7 @@
         roundHtml += '<div class="panel panel-success">';
         roundHtml += '<div class="panel-heading">';
         roundHtml += '<h3 class="panel-title">';
-        roundHtml += '<i class="fa fa-table"></i>ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
+        roundHtml += '<i class="fa fa-table"></i> ข้อมูลการเปิดรับสมัคร รอบที่ ' + obj.round_no;
         roundHtml += '</h3>';
         roundHtml += '<div class="actions">';
 //        roundHtml += '<a href="javascript:;" class="btn btn-default btn-sm">';
@@ -1246,13 +1246,13 @@
         roundHtml += '<div class="col-md-12">';
         roundHtml += '<div class="form-group col-md-6">';
         roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="announce_admission_date"><strong>วันที่คณะส่งผู้ผ่าน</strong></label>';
+        roundHtml += 'for="announce_exam_date"><strong>วันทีประกาศรายชื่อผู้มีสิทธิ์สอบ</strong></label>';
         roundHtml += '<div class="col-md-9">';
-        roundHtml += '<input type="text" id="announce_admission_date"';
-        roundHtml += 'name="announce_admission_date"';
+        roundHtml += '<input type="text" id="announce_exam_date"';
+        roundHtml += 'name="announce_exam_date"';
         roundHtml += 'class="form-control date-picker" value="';
-        if (obj.hasOwnProperty('announce_admission_date') && (obj.announce_admission_date !== null && obj.announce_admission_date !== '')) {
-            roundHtml += obj.announce_admission_date;
+        if (obj.hasOwnProperty('announce_exam_date') && (obj.announce_exam_date !== null && obj.announce_exam_date !== '')) {
+            roundHtml += obj.announce_exam_date;
         }
         roundHtml += '">';
         roundHtml += '<span class="help-block"></span>';
@@ -1260,13 +1260,13 @@
         roundHtml += '</div>';
         roundHtml += '<div class="form-group col-md-6">';
         roundHtml += '<label class="control-label col-md-3"';
-        roundHtml += 'for="announce_exam_date"><strong>วันที่คณะส่งผู้มีสิทธิสอบ</strong></label>';
+        roundHtml += 'for="announce_admission_date"><strong>วันที่ประกาศผลการสอบคัดเลือก</strong></label>';
         roundHtml += '<div class="col-md-9">';
-        roundHtml += '<input type="text" id="announce_exam_date"';
-        roundHtml += 'name="announce_exam_date"';
+        roundHtml += '<input type="text" id="announce_admission_date"';
+        roundHtml += 'name="announce_admission_date"';
         roundHtml += 'class="form-control date-picker" value="';
-        if (obj.hasOwnProperty('announce_exam_date') && (obj.announce_exam_date !== null && obj.announce_exam_date !== '')) {
-            roundHtml += obj.announce_exam_date;
+        if (obj.hasOwnProperty('announce_admission_date') && (obj.announce_admission_date !== null && obj.announce_admission_date !== '')) {
+            roundHtml += obj.announce_admission_date;
         }
         roundHtml += '">';
         roundHtml += '<span class="help-block"></span>';
@@ -1606,7 +1606,7 @@
         if ($("#document_file").val() !== '') {
             formData.append("document_file", $("#document_file")[0].files[0]);
         }
-        
+
         disabled.attr('disabled','disabled');
 
         return formData;

@@ -195,6 +195,7 @@
 <script type="application/javascript">
 
     var grid;
+    var user_type = '{{session('user_type')->user_type}}';
 
     var select2Option = {
         placeholder: '--เลือก--',
@@ -375,9 +376,12 @@
                             html += '<li>';
                             html += '<a href="' + editLink + '/' + full.curriculum_id + '"><i class="fa fa-edit"></i> แก้ไข </a>';
                             html += '</li>';
+                            if(user_type =="Admin" || (user_type !="Admin" && full.is_approve ==1)){
                             html += '<li>';
                             html += '<a onclick="doDelete(\'' + full.curriculum_id + '\')"><i class="fa fa-trash-o"></i> ลบ </a>';
                             html += '</li>';
+                            }
+
                             html += '<li class="divider"> </li>';
                             html += '<li>';
                             html += '<a href="javascript:;"><i class="fa fa-copy"></i> Duplicate </a>';
