@@ -285,16 +285,16 @@
                             html += '<ul class="dropdown-menu pull-left" role="menu">';
                             html += '<li>';
                             html += '<a target="_blank" href="' + viewLink + '/' + full.applicant_id + '">';
-                            html += '<i class="fa fa-file-o"></i> View </a>';
+                            html += '<i class="fa fa-file-o"></i> ดูรายละเอียด </a>';
                             html += '</li>';
                             if(user_role=="Admin" || user_id==full.creator ){
                             html += '<li>';
-                            html += '<a target="_blank"  href="' + editLink + '/' + full.applicant_id + '">';
-                            html += '<i class="fa fa-edit"></i> Edit Profile </a>';
+                            html += '<a target="_blank"  href="' + editLink + '/' + full.applicant_id + '#tab_1_3">';
+                            html += '<i class="fa fa-edit"></i> แก้ไข </a>';
                             html += '</li>';
                             html += '<li>';
                             html += '<a onclick="doDelete(\'' + full.applicant_id + '\')">';
-                            html += '<i class="fa fa-trash-o"></i> Delete </a>';
+                            html += '<i class="fa fa-trash-o"></i> ลบ </a>';
                             html += '</li>';
                             html += '<li class="divider"> </li>';
                             html += '<li>';

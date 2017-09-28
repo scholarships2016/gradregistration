@@ -47,26 +47,7 @@
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase">รายการผู้ใช้งานระบบ</span>
                     </div>
-                    <div class="actions">
-
-                        <div class="btn-group pull-right">
-                            <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                                <i class="fa fa-angle-down"></i>
-                            </button>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:window.print();">
-                                        <i class="fa fa-print"></i> Print </a>
-                                </li>
-                                <!--
-                                <li>
-                                    <a href="javascript:;">
-                                        <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                                </li>
-                              -->
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
