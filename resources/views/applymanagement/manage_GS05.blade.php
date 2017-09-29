@@ -173,9 +173,11 @@
                   </div>
                   <div id="search-application-result" style="display:none;">
                   <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
-        <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
-<i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ
-</a>
+                  @if(session('user_type')->user_type == 'Admin' || in_array("5",session('user_permission')))
+                    <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
+                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ
+                    </a>
+                  @endif
                   <hr>
                   <hr>
                    <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
@@ -456,6 +458,8 @@
 
 
  var table="";
+ var haveGenRecommendReportPermission = '{{(session('user_type')->user_type == 'Admin' || in_array("8",session('user_permission'))?'TRUE':'FALSE')}}';
+
 var TableDatatablesAjax = function () {
     var handle1 = function () {
 
@@ -551,7 +555,7 @@ targets: [7],
 orderable: false,
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li>  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_type")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  แก้ไข  </a></li>':'')+'</ul></div>') ;
+return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li style="'+(haveGenRecommendReportPermission=="FALSE"?"display:none;":"")+'">  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_type")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  แก้ไข  </a></li>':'')+'</ul></div>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,

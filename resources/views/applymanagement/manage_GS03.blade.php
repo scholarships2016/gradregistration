@@ -163,9 +163,11 @@
         </div>
         <div id="search-application-result" style="display:none;">
           <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
+          @if(session('user_type')->user_type == 'Admin' )
           <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal">
-<i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
-</a>
+            <i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
+          </a>
+          @endif
           <hr>
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 

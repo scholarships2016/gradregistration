@@ -177,6 +177,8 @@ Route::group(['middleware' => 'auth'], function () {
             });
         });
 
+        Route::get('profile/{id}', 'BackOffice\AdminManagementController@showEditPage')->name('admin.adminManage.showEditPage');
+
         Route::group(['prefix' => 'setting', 'middleware' => []], function () {
             Route::group(['prefix' => 'applysetting', 'middleware' => ['backoffice:11']], function () {
                 Route::get('add', 'BackOffice\ApplySettingController@showAddPage')->name('admin.applysetting.showAdd');
@@ -205,6 +207,9 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::get('getApplicationAndProgramInfo', 'BackOffice\ApplicantManagementController@getApplicationAndProgramInfo')->name('admin.applicantManage.getApplicationAndProgramInfo');
                 Route::post('doDeleteApplication', 'BackOffice\ApplicantManagementController@doDeleteApplication')->name('admin.applicantManage.doDeleteApplication');
             });
+
+
+
 
             Route::group(['prefix' => 'adminManage', 'middleware' => ['backoffice']], function () {
                 Route::get('manage', 'BackOffice\AdminManagementController@showManagePage')->name('admin.adminManage.showManagePage');
