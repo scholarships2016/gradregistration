@@ -145,7 +145,7 @@ class ProfileController extends Controller
         Log::info('doSavePersonalInfomation');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -166,7 +166,7 @@ class ProfileController extends Controller
         Log::info('doSavePresentAddress');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -185,7 +185,7 @@ class ProfileController extends Controller
         Log::info('doSaveKnowledgeSkill');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -206,7 +206,7 @@ class ProfileController extends Controller
         Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -227,7 +227,7 @@ class ProfileController extends Controller
         Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
 
@@ -247,7 +247,7 @@ class ProfileController extends Controller
         Log::info('doChangePassword');
         try {
             $data = $request->all();
-            $who = 'test';
+            $who = session('user_id');
             $creator = $who;
             $modifier = $who;
             $data['creator'] = $creator;

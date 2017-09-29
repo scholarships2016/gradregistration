@@ -47,7 +47,7 @@ class AdminManagementController extends Controller
     {
         try {
             $this->WLog('func=showEditPage', self::$SECTION_NAME, null);
-            $who = 'test';
+            $who = session('user_id');
 
             $user = $this->userRepo->findOrFail($id);
             $permissionList = $this->permissionRepo->all();
