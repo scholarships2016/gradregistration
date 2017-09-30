@@ -46,6 +46,15 @@
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject font-dark sbold uppercase">รายการงานที่ต้องดำเนินการ</span>
                     </div>
+                    <div class="actions">
+                        <div class="btn-group btn-group-devided">
+                            <a href="{{route('admin.curriculum.showAdd')}}" target="_self"
+                               class="btn btn-circle green btn-outline sbold uppercase">
+                                ขอเปิดหลักสูตร
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="portlet-body">
                     <div class="table-container">
