@@ -1043,10 +1043,12 @@
         CKEDITOR.replace('additional_detail', {
             customConfig: '{{asset('js/ckeditor_config.js')}}'
         });
+        //Commented by iChok
+        /*
         CKEDITOR.replace('additional_question', {
             customConfig: '{{asset('js/ckeditor_config.js')}}'
         });
-
+        */
     }
 
     function addDataToCourseTable(obj) {
