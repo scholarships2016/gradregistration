@@ -240,8 +240,9 @@ class ApplySettingRepositoryImpl extends AbstractRepositoryImpl implements Apply
     }
       public function getApplySettingNow()
     {
+      $current_date = date('Y-m-d');
         try {
-            return ApplySetting::where('is_active', '=', '1')->orderBy('end_date','desc')->first();
+            return ApplySetting::where('is_active', '=', '1')->where('status','=','1')->where('start_date','<=',$current_date)->where('end_date','>=',$current_date)->orderBy('end_date','desc')->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
