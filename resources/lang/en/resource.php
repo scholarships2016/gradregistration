@@ -298,4 +298,6 @@ return [
     'lbProfileVerifyWarning' => 'Warning',
     'lbProfileVerifyMessage' => 'Please update your personal informations before apply.',
     'lbProfileVerifyButton' => 'Update Profile',
+
+    'lbBtnDownloadAppForm' => 'Download Appplication Form (PDF)'
 ];

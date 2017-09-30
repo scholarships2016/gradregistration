@@ -107,8 +107,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     })
                     ->Where(function ($query) use ($inTime) {
                         if ($inTime) {
-                            $query->where('apply_setting.start_date', '<=', Carbon::now())
-                            ->where('apply_setting.end_date', '>=', Carbon::now());
+                            $query->where('apply_setting.start_date', '<=', Carbon::now()->toDateString())
+                            ->where('apply_setting.end_date', '>=', Carbon::now()->toDateString());
                         }
                     })
                     ->Where(function ($query) use ($semester) {
@@ -184,8 +184,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     ->where('apply_setting.status', 'like', '%' . $status . '%')
                     ->Where(function ($query) use ($inTime) {
                         if ($inTime) {
-                            $query->where('apply_setting.start_date', '<=', Carbon::now())
-                            ->where('apply_setting.end_date', '>=', Carbon::now());
+                            $query->where('apply_setting.start_date', '<=', Carbon::now()->toDateString())
+                            ->where('apply_setting.end_date', '>=', Carbon::now()->toDateString());
                         }
                     })
                     ->Where(function ($query) use ($criteria) {

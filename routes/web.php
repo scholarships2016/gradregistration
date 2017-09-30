@@ -14,7 +14,11 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/admin/index.html', function () {
+    return Redirect::to('/index.html');
+});
 
+Route::post('syncProgram', 'BackOffice\MasterInfoController@updateMcourseTable')->name('syncProgram');
 //ไม่ล๊อกอินก็สามารถเห็นได้
 //login  User
 Route::post('login/repass', 'Auth\LoginApplicantController@reLogin')->name('rePassLoginApplicant');
@@ -86,6 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //payment
     Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
+
+
     Route::group(['prefix' => 'admin'], function () {
         //download Files
         Route::get('getMedia', function(\Illuminate\Http\Request $request) {

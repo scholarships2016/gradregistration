@@ -450,7 +450,7 @@ $(function() {
 					}
 				},"json");
                                 }else{
-                              toastr.warning('plz,Reference Person Information Or Bank?');
+                              toastr.warning('กรุณากรอกธนาคารที่ชำระเงิน และ/หรือ บุคคลอ้างอิง <br/>Please select bank for payment and/or reference person.');
                         }
 
           });

@@ -355,7 +355,7 @@ orderable: true,
 className: 'table-desc font-blue',
 name: 'app_id',
 render: function (data, type, full, meta) {
-return  full.app_ida   ;
+return  '<a target="_blank" href="{{url("admin/docMyCourse/")}}/'+ full.applicant_id +'/' + full.application_id +'">'+full.app_ida+'</a>'   ;
 } },{
 targets: [2],
 orderable: true,
@@ -373,7 +373,7 @@ return ( full.name_title+ full.stu_first_name+'  ' +  full.stu_last_name + '  <b
 }},{
 targets: [4],
 orderable: true,
-className: 'table-desc font-blue',
+className: 'table-desc',
 name: 'program_id',
 render: function (data, type, full, meta) {
 return    full.program_id   ;

@@ -350,22 +350,49 @@
 				},"json");
     });
     $('#sentmailall').click(function() {
-        var data = [];
-           $('#datatable_ajax tbody').find('tr').each(function () {
-         var row = $(this);
-         if (row.find('input[type="checkbox"]').is(':checked') &&
-            row.find('input[type="hidden"]').val().length > 0) {
-            data.push(row.find('input[type="hidden"]').val());
-         }
-    });
-         if(data.length>0){
-             sentmail(JSON.stringify(data));
-         }
+      swal({
+         title: "ยืนยันการดำเนินการ",
+         text: "ต้องการ ส่งอีเมล์แจ้งผลการพิจารณา ใช่หรือไม่?",
+         type: "warning",
+         showCancelButton: true,
+         closeOnConfirm: false,
+         showLoaderOnConfirm: true
+       }, function() {
+         setTimeout(function() {
+           var data = [];
+              $('#datatable_ajax tbody').find('tr').each(function () {
+            var row = $(this);
+            if (row.find('input[type="checkbox"]').is(':checked') &&
+               row.find('input[type="hidden"]').val().length > 0) {
+               data.push(row.find('input[type="hidden"]').val());
+            }
+           });
+            if(data.length>0){
+                sentmail(JSON.stringify(data));
+            }
+         }, 100);
+       });
+
+
+
+
      });
      function mailbyapp(app){
-         var data = [];
-         data.push(app);
-         sentmail(JSON.stringify(data));
+       swal({
+         title: "ยืนยันการดำเนินการ",
+         text: "ต้องการ ส่งอีเมล์แจ้งผลการพิจารณา ใช่หรือไม่?",
+         type: "warning",
+         showCancelButton: true,
+         closeOnConfirm: false,
+         showLoaderOnConfirm: true
+       }, function() {
+         setTimeout(function() {
+           var data = [];
+           data.push(app);
+           sentmail(JSON.stringify(data));
+         }, 100);
+       });
+
      }
 
 
@@ -510,18 +537,18 @@ render: function (data, type, full, meta) {
 return  '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" value="1" /><span></span></label>';
 } },{
 targets: [1],
-orderable: false,
+orderable: true,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
 return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
-orderable: false,
-
+orderable: true,
+className: 'font-blue',
 name: 'app_id',
 render: function (data, type, full, meta) {
-return  full.app_ida   ;
+return  '<a target="_blank" href="{{url("admin/docMyCourse/")}}/'+ full.applicant_id +'/' + full.application_id +'">'+full.app_ida+'</a>'   ;
 } },{
 targets: [3],
 orderable: true,
@@ -555,7 +582,7 @@ targets: [7],
 orderable: false,
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li style="'+(haveGenRecommendReportPermission=="FALSE"?"display:none;":"")+'">  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_type")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  แก้ไข  </a></li>':'')+'</ul></div>') ;
+return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-right" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li style="'+(haveGenRecommendReportPermission=="FALSE"?"display:none;":"")+'">  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_type")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  แก้ไข  </a></li>':'')+'</ul></div>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,

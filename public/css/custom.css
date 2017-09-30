@@ -163,7 +163,7 @@ table.dataTable thead .sorting_desc:after {
 }
 
 .btn-group, .btn-group-vertical {
-  position: sticky;
+  position: relative;
 }
 
 #page-program-detail .todo-inline {

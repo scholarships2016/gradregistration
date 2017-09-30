@@ -282,7 +282,7 @@
                             html += '<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions';
                             html += '<i class="fa fa-angle-down"></i>';
                             html += '</button>';
-                            html += '<ul class="dropdown-menu pull-left" role="menu">';
+                            html += '<ul class="dropdown-menu pull-right" role="menu">';
                             html += '<li>';
                             html += '<a target="_blank" href="' + viewLink + '/' + full.applicant_id + '">';
                             html += '<i class="fa fa-file-o"></i> ดูรายละเอียด </a>';
@@ -393,9 +393,11 @@
         modalInfo.find("#plan_p").text('');
         modalInfo.find("#prog_type_name_p").text('');
 
+
         modalInfo.find("#ajaxLoading").show();
         modalInfo.find("#applicationInfoForm").hide();
         modalInfo.find("#deleteBtn").attr('disabled', 'disabled');
+        modalInfo.find("#downloadDocButton").attr('href', '');
         modalInfo.modal('show');
 
         var param = $(obj).data();
@@ -416,6 +418,7 @@
                     modalInfo.find("#prog_name_p").text(data.prog_name == null ? '-' : data.prog_name);
                     modalInfo.find("#plan_p").text(data.plan == null ? '-' : data.plan);
                     modalInfo.find("#prog_type_name_p").text(data.prog_type_name == null ? '-' : data.prog_type_name);
+                    modalInfo.find("#downloadDocButton").attr('href', '{{url("admin/docMyCourse/")}}/'+ data.applicant_id +'/' + data.application_id);
                     modalInfo.find("#ajaxLoading").hide();
                     if(user_role=="Admin" || user_id==data.creator ){
                     modalInfo.find("#deleteBtn").removeAttr('disabled', 'disabled');

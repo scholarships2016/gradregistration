@@ -52,6 +52,8 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <a id="downloadDocButton" target="_blank" href="{{url("admin/docMyCourse/")}}/" class="btn green btn-outline pull-left">ดาวน์โหลดใบสมัคร & เอกสาร</a>
+
                 <button type="button" id="deleteBtn" onclick="deleteApplication(this)" class="btn red">ลบใบสมัคร</button>
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">ปิด</button>
             </div>

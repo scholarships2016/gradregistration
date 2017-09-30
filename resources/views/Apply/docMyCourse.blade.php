@@ -42,34 +42,36 @@
 
         </li>
     </ul>
-    {{--<div class="page-tool    bar">--}}
-    {{--<div class="btn-group pull-right">--}}
-    {{--<butto    n type="button" class="btn green btn-sm btn-outline dropdown-toggle"--}}
-    {{--data-toggl    e="dropdown"> Actions--}}
-    {{--<i class="fa f    a-angle-down"></i>--}}
-    {{--</butt    on>-    -}}
-    {{--<ul clas    s="dropdown-menu pull-right" role=    "menu">-    -}}
-    {{--<li>--}}
-        {{--<    a href="#">-    -}}
-        {{--<i cl    ass="icon-bell"></i> Action</    a>--}}
-                {{--                                                                  </li>--}}
-                            {{--                <li>--}}
-                                            {{--<a href="#">--}}
-        {{--<i class="icon-shield"></i> Another action</a>--}}
-                {{--</li>-                        -}}
-                {{--<li>--}}
-                {{--<a hr                        ef="#">--}}
-                    {{--<i class="ico                n-user"></i> Something else h                ere</a>--}}
-                {{--</li>--}}
-                    {{--                <li class="divider"></li>--}}
-                            {{--<li>--}}
-                {{--                <a href="#">--}}
-                {{--<i class="icon-bag"></i> Sepa                rated link</a>--}}
-        {{--</li>--}}
-                {{--</ul>--}                }
-{{--</di        v>--}}
-                    {{--</div>--}}
-                    </div>
+    @if(session('user_type'))
+        @if(session('user_type')->user_type == 'Admin' ||
+         session('user_type')->user_type == 'GradStaff' ||
+         session('user_type')->user_type == 'FacStaff')
+    <div class="page-toolbar">
+      <div class="btn-group pull-right">
+          <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> {{Lang::get('resource.lbBtnDownload')}}
+            <i class="fa fa-angle-down"></i>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li>
+              <a href="{{url('apply/docMyCourserintPDF/'.Crypt::encrypt($id))}}" target="_blank">
+              <i class="fa fa-download"></i>{{Lang::get('resource.lbBtnDownloadAppForm')}}
+            </a>
+            </li>
+            <li>
+              <a href="{{url('application/confDocApply/'.Crypt::encrypt($id))}}" target="_blank">
+              <i class="fa fa-files-o"></i>{{Lang::get('resource.lbUpdateDocApply')}}
+            </a>
+            </li>
+            <li>
+              <a target="_blank" href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($id)) }}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    @endif
+  @endif
+
+  </div>
                     @stop
                     @section('maincontent')
                     <div class="invoice-content-2">
@@ -77,7 +79,7 @@
         <div class="col-xs-12">
 <!--            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" onclick="javascript:window.print();">Print</a>-->
 
-            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.Crypt::encrypt($id))}}"  ><i class="fa fa-download"></i>Download PDF</a>
+            <a class="btn btn-lg green-haze hidden-print uppercase print-btn" href="{{url('apply/docMyCourserintPDF/'.Crypt::encrypt($id))}}" target="_blank" ><i class="fa fa-download"></i>{{Lang::get('resource.lbBtnDownloadAppForm')}}</a>
 
 
 

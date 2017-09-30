@@ -584,7 +584,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getApplicationAndProgramInfoByApplicationId($applicationId) {
         try {
             $query = DB::table('application as app')
-                    ->select('app.application_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time', 'adst.admission_status_name_th', 'app.exam_status', 'app.creator'
+                    ->select('app.application_id', 'app.applicant_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time', 'adst.admission_status_name_th', 'app.exam_status', 'app.creator'
                     )
                     ->leftJoin('tbl_flow_apply as flow_app', function ($join) {
                         $join->on('flow_app.flow_id', '=', 'app.flow_id');
