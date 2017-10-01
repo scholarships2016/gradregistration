@@ -111,7 +111,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
 
     public function updateAllCourse()
     {
-      $performer = session('user_id');
+      $performer = session('user_name');
       if($performer==""){
         $performer = "BATCH";
       }
