@@ -47,7 +47,7 @@
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase">รายการผู้ใช้งานระบบ</span>
                     </div>
-                    
+
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
@@ -209,6 +209,10 @@
                             return 'All';
                         }
 
+                        if (full.permission == null) {
+                            return '-';
+                        }
+
                         var pers = full.permission.split(',');
                         var html = '';
                         var isFirstRow = true;
@@ -260,7 +264,7 @@
         userTbl.fnAddData({
             'user_id': obj.hasOwnProperty('user_id') ? obj.user_id : null,
             'user_name': obj.hasOwnProperty('user_name') ? obj.user_name : null,
-            'name': obj.hasOwnProperty('name') ? obj.name + ' (' + obj.nickname + ')' : null,
+            'name': obj.hasOwnProperty('name') ? ((obj.name == null) ? '' : obj.name) + ' ' + ((obj.nickname) == null ? '' : '(' + obj.nickname + ')') : null,
             'role_id': obj.hasOwnProperty('role_id') ? obj.role_id : null,
             'permission': obj.hasOwnProperty('permission') ? obj.permission : null,
             'last_login': obj.hasOwnProperty('last_login') ? obj.last_login : null
