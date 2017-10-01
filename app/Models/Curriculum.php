@@ -50,7 +50,7 @@ class Curriculum extends Eloquent
     protected $casts = [
         'faculty_id' => 'int',
         'department_id' => 'int',
-        'degree_id' => 'int',
+      
         'project_id' => 'int',
         'is_approve' => 'int',
         'status' => 'bool',

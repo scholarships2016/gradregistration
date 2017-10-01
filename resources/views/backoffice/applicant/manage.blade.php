@@ -132,6 +132,8 @@
 
     var grid;
 
+    var user_id = '{{session('user_id')}}'
+    var user_role = '{{session('user_type')->user_type}}';
 
     function initForm() {
 
@@ -150,6 +152,7 @@
     }
 
     function initDatatable() {
+
 
         grid = new Datatable();
 
@@ -205,7 +208,7 @@
                         targets: 0,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            return meta.row + 1;
+                            return meta.row + 1 +(user_id==full.creator?'<br/><i class="fa fa-pencil" title="ข้อมูลผู้สอบได้ นำเข้าด้วย Excel สามารถแก้ไขปรับปรุงได้"></i>':'');
                         }
                     },
                     {
@@ -279,24 +282,28 @@
                             html += '<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions';
                             html += '<i class="fa fa-angle-down"></i>';
                             html += '</button>';
-                            html += '<ul class="dropdown-menu pull-left" role="menu">';
+                            html += '<ul class="dropdown-menu pull-right" role="menu">';
                             html += '<li>';
-                            html += '<a href="' + viewLink + '/' + full.applicant_id + '">';
-                            html += '<i class="fa fa-file-o"></i> View </a>';
+                            html += '<a target="_blank" href="' + viewLink + '/' + full.applicant_id + '">';
+                            html += '<i class="fa fa-file-o"></i> ดูรายละเอียด </a>';
                             html += '</li>';
+                            if(user_role=="Admin" || user_id==full.creator ){
                             html += '<li>';
-                            html += '<a href="' + editLink + '/' + full.applicant_id + '">';
-                            html += '<i class="fa fa-edit"></i> Edit Profile </a>';
+                            html += '<a target="_blank"  href="' + editLink + '/' + full.applicant_id + '#tab_1_3">';
+                            html += '<i class="fa fa-edit"></i> แก้ไข </a>';
                             html += '</li>';
                             html += '<li>';
                             html += '<a onclick="doDelete(\'' + full.applicant_id + '\')">';
-                            html += '<i class="fa fa-trash-o"></i> Delete </a>';
+                            html += '<i class="fa fa-trash-o"></i> ลบ </a>';
                             html += '</li>';
                             html += '<li class="divider"> </li>';
                             html += '<li>';
+                            }
+                            if(user_role=="Admin"){
                             html += '<a href="javascript:;" onclick="prepareApplicantAuth(\'' + full.applicant_id + '\')">';
                             html += '<i class="icon-flag"></i> ให้สิทธิ์สมัครกรณีพิเศษ';
                             html += '</a>';
+                            }
                             html += '</li>';
                             html += '</ul>';
                             html += '</div>';
@@ -386,9 +393,11 @@
         modalInfo.find("#plan_p").text('');
         modalInfo.find("#prog_type_name_p").text('');
 
+
         modalInfo.find("#ajaxLoading").show();
         modalInfo.find("#applicationInfoForm").hide();
         modalInfo.find("#deleteBtn").attr('disabled', 'disabled');
+        modalInfo.find("#downloadDocButton").attr('href', '');
         modalInfo.modal('show');
 
         var param = $(obj).data();
@@ -409,8 +418,14 @@
                     modalInfo.find("#prog_name_p").text(data.prog_name == null ? '-' : data.prog_name);
                     modalInfo.find("#plan_p").text(data.plan == null ? '-' : data.plan);
                     modalInfo.find("#prog_type_name_p").text(data.prog_type_name == null ? '-' : data.prog_type_name);
+                    modalInfo.find("#downloadDocButton").attr('href', '{{url("admin/docMyCourse/")}}/'+ data.applicant_id +'/' + data.application_id);
                     modalInfo.find("#ajaxLoading").hide();
+                    if(user_role=="Admin" || user_id==data.creator ){
                     modalInfo.find("#deleteBtn").removeAttr('disabled', 'disabled');
+                  }else{
+                    //no permission
+                    $("#deleteBtn").css("display","none");
+                  }
                     modalInfo.find("#applicationInfoForm").show();
                 }
             }

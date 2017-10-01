@@ -10,7 +10,7 @@
             <div class="modal-body form">
                 <div id="ajaxLoading" class="row col-md-12 text-center">
                     <br>
-                    <img src="{{asset('assets/global/img/loading-spinner-grey.gif')}}" alt="" class="loading">
+                    <img src="{{asset('/assets/global/img/loading-spinner-grey.gif')}}" alt="" class="loading">
                     <span> &nbsp;&nbsp;กำลังโหลดข้อมูล... </span>
                 </div>
                 <form id="applicationInfoForm" class="form-horizontal form-bordered" role="form">
@@ -52,6 +52,8 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <a id="downloadDocButton" target="_blank" href="{{url("admin/docMyCourse/")}}/" class="btn green btn-outline pull-left">ดาวน์โหลดใบสมัคร & เอกสาร</a>
+
                 <button type="button" id="deleteBtn" onclick="deleteApplication(this)" class="btn red">ลบใบสมัคร</button>
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">ปิด</button>
             </div>

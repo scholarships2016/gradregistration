@@ -99,7 +99,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
             $result = Application::select('*', 'application.created as appDates ,CAST(app_id AS CHAR) as appid')
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
-                            ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
+                            //->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
+                            ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
                             ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
                             ->leftJoin('tbl_sub_major', 'application.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
                             ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
@@ -268,9 +269,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,curriculum.curriculum_id,curriculum.responsible_person,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,semester,application.creator user_create,nation_id,apply_method')])
                             ->distinct()
                             ->orderBy('application.application_id', 'desc')->get();
-                          //dd(
+                        //  dd(
                           //  DB::getQueryLog()
-                        //  );
+                          //);
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -583,7 +584,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getApplicationAndProgramInfoByApplicationId($applicationId) {
         try {
             $query = DB::table('application as app')
-                    ->select('app.application_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time', 'adst.admission_status_name_th', 'app.exam_status'
+                    ->select('app.application_id', 'app.applicant_id', 'app.flow_id', 'flow_app.flow_name', 'flow_app.flow_name_en', 'curr_prog.curr_prog_id', 'curr_prog.program_id', 'curr_prog.program_type_id', 'mc.thai as prog_name', 'mc.english as prog_name_en', 'mc.plan', 'progt.prog_type_name', 'progt.office_time', 'adst.admission_status_name_th', 'app.exam_status', 'app.creator'
                     )
                     ->leftJoin('tbl_flow_apply as flow_app', function ($join) {
                         $join->on('flow_app.flow_id', '=', 'app.flow_id');

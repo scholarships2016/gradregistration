@@ -123,7 +123,7 @@
                         <span class="help-block">fill in here...</span>
                       </div>
                       @endif
-                      <input id="pfile_ID{{$Doc->doc_apply_id}}" valid="{{$Doc->doc_apply_id}}" name="pfile_ID{{$Doc->doc_apply_id}}" data-max-size="2048" accept=".gif,.jpg,.jpeg,.png,.pdf " class="upload-file" type="file">
+                      <input id="pfile_ID{{$Doc->doc_apply_id}}" valid="{{$Doc->doc_apply_id}}" name="pfile_ID{{$Doc->doc_apply_id}}" data-max-size="2048" accept=".gif,.jpg,.jpeg,.png,.pdf " class="upload-file" type="file" @if(session('user_type')->user_type == 'GradStaff' || session('user_type')->user_type == 'FacStaff') style="display:none;"@endif>
                       <p class="help-block">
 
                         @foreach($Files as $file) @if($Doc->doc_apply_id == $file->doc_apply_id) {{ $file->file_origi_name }}
@@ -143,15 +143,18 @@
 
 
 
+          @if(session('user_type')->user_type != 'GradStaff' && session('user_type')->user_type != 'FacStaff')
+            <div style=" text-align: center;">
+              <button type="submit"  {{ ($Flo > 3)?'disabled':'' }} class="btn btn-lg blue  margin-bottom-5">
+                {{Lang::get('resource.lbSave')}}
+                <i class="fa fa-check"></i></button>
+              <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('application/manageMyCourse/')}}">
+                {{Lang::get('resource.lbCancel')}}
+                <i class="fa fa-times"></i>
+              </a>
+            </div>
+        @endif
 
-          <div style=" text-align: center;">
-            <button type="submit"  {{ ($Flo > 3)?'disabled':'' }} class="btn btn-lg blue  margin-bottom-5"> {{Lang::get('resource.lbSave')}}
-                                <i class="fa fa-check"></i></button>
-
-            <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('application/manageMyCourse/')}}">  {{Lang::get('resource.lbCancel')}}
-                                <i class="fa fa-times"></i>
-                            </a>
-          </div>
 
 
         </form>

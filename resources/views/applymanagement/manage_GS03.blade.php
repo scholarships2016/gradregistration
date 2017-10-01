@@ -10,6 +10,7 @@
 <link href="{{asset('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css">
 
 <link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -69,7 +70,7 @@
           <i class="icon-settings font-dark"></i>
           <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
         </div>
-        
+
       </div>
       <div class="portlet-body">
 
@@ -163,9 +164,11 @@
         </div>
         <div id="search-application-result" style="display:none;">
           <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
+          @if(session('user_type')->user_type == 'Admin' )
           <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal">
-<i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
-</a>
+            <i class="fa fa-plus"></i> เพิ่มผู้สมัคร เป็นกรณีพิเศษ
+          </a>
+          @endif
           <hr>
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
@@ -301,7 +304,8 @@
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
-
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
     $('#btcloss').click(function() {
@@ -340,22 +344,46 @@
 				},"json");
     });
     $('#sentmailall').click(function() {
-        var data = [];
-           $('#datatable_ajax tbody').find('tr').each(function () {
-         var row = $(this);
-         if (row.find('input[type="checkbox"]').is(':checked') &&
-            row.find('input[type="hidden"]').val().length > 0) {
-            data.push(row.find('input[type="hidden"]').val());
-         }
-    });
-         if(data.length>0){
-             sentmail(JSON.stringify(data));
-         }
+        swal({
+          title: "ยืนยันการดำเนินการ",
+          text: "ต้องการ ส่งอีเมล์แจ้งผลการพิจารณา ใช่หรือไม่?",
+          type: "warning",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true
+        }, function() {
+          setTimeout(function() {
+            var data = [];
+            $('#datatable_ajax tbody').find('tr').each(function () {
+            var row = $(this);
+              if (row.find('input[type="checkbox"]').is(':checked') &&  row.find('input[type="hidden"]').val().length > 0) {
+                  data.push(row.find('input[type="hidden"]').val());
+                }
+            });
+            if(data.length>0){
+               sentmail(JSON.stringify(data));
+            }
+          }, 100);
+        });
+
      });
      function mailbyapp(app){
-         var data = [];
-         data.push(app);
-         sentmail(JSON.stringify(data));
+       swal({
+         title: "ยืนยันการดำเนินการ",
+         text: "ต้องการ ส่งอีเมล์แจ้งผลการพิจารณา ใช่หรือไม่?",
+         type: "warning",
+         showCancelButton: true,
+         closeOnConfirm: false,
+         showLoaderOnConfirm: true
+       }, function() {
+         setTimeout(function() {
+           var data = [];
+           data.push(app);
+           sentmail(JSON.stringify(data));
+         }, 100);
+       });
+
+
      }
 
 
@@ -431,7 +459,7 @@
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
                                               }
-                                             $("#single").append('<option  cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
+                                             $("#single").append('<option  cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (''+itemData.coursecodeno+' - '+itemData.thai+', '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
 
                                                         group = data[index].faculty_id;
@@ -498,18 +526,19 @@ render: function (data, type, full, meta) {
 return  '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" value="1" /><span></span></label>';
 } },{
 targets: [1],
-orderable: false,
+orderable: true,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
 return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
-orderable: false,
-
+orderable: true,
+className: 'font-blue',
 name: 'app_id',
 render: function (data, type, full, meta) {
-return  full.app_ida   ;
+
+return  '<a target="_blank" href="{{url("admin/docMyCourse/")}}/'+ full.applicant_id +'/' + full.application_id +'">'+full.app_ida+'</a>'   ;
 } },{
 targets: [3],
 orderable: true,
@@ -544,7 +573,7 @@ orderable: true,
 
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li></ul></div>') ;
+return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-right" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li></ul></div>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,
