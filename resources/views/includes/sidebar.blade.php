@@ -417,6 +417,7 @@
                         </a>
                     </li>
                 @endif
+                  <!--
                 <li class=" nav-item    menuitem @if(strpos($curr_url, 'faq') !== false) open active @endif"
                     data-index="4">
                     <a class="nav-link nav-toggle" href="{{url('faq/')}}">
@@ -427,6 +428,7 @@
                     </a>
 
                 </li>
+
                 <li class=" nav-item    menuitem @if(strpos($curr_url, 'download') !== false) open active @endif"
                     data-index="5">
                     <a class="nav-link nav-toggle" href="{{url('download/')}}">
@@ -437,6 +439,7 @@
                     </a>
 
                 </li>
+              -->
                 <li class=" nav-item     menuitem @if(strpos($curr_url, 'contact') !== false) open active @endif"
                     data-index="6">
                     <a class="nav-link nav-toggle" href="{{url('contact/')}}">

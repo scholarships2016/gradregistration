@@ -272,7 +272,7 @@ return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [1],
 orderable: true,
-className: 'table-desc font-blue',
+className: 'table-desc',
 
 render: function (data, type, full, meta) {
 return (('{{session('locale')}}'=='th')? full.degreethai:full.degreeenglish) ;

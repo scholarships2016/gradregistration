@@ -260,3 +260,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 .portlet.box.pink-chula>.portlet-title, .portlet.pink-chula, .portlet>.portlet-body.pink-chula{
   background-color: none;
 }
+.table-responsive{
+  overflow-x: hidden;
+
+}

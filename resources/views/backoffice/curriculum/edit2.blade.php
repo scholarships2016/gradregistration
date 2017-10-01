@@ -75,7 +75,7 @@
             <div class="actions">
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"
                    data-original-title="" title=""> </a>
-                <a href="{{route('admin.curriculum.showManagePage')}}" class="btn btn-circle blue-steel btn-outline">
+                <a href="{{Request::server('HTTP_REFERER')}}" class="btn btn-circle blue-steel btn-outline">
                     <i class="fa fa-mail-reply"></i> กลับหน้าหลัก </a>
             </div>
         </div>
@@ -535,7 +535,7 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-3">
-                            <a id="cancelBtn" href="{{route('admin.curriculum.showManagePage')}}" class="btn default">
+                            <a id="cancelBtn" href="{{Request::server('HTTP_REFERER')}}" class="btn default">
                                 ยกเลิก
                             </a>
 
