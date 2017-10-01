@@ -132,9 +132,17 @@
 
     var grid;
 
-    var user_id = '{{session('user_id')}}'
+    var user_id = '{{session('user_id')}}';
+    var user_name = '{{session('user_name')}}';
     var user_role = '{{session('user_type')->user_type}}';
+    var isAddedByAdmin = false;
+    if(user_role!="Admin"){
+      //Staff
 
+    }else{
+      //Admin
+
+    }
     function initForm() {
 
         $(".date-picker input[type='text']").inputmask("d-m-y");
@@ -208,7 +216,7 @@
                         targets: 0,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            return meta.row + 1 +(user_id==full.creator?'<br/><i class="fa fa-pencil" title="ข้อมูลผู้สอบได้ นำเข้าด้วย Excel สามารถแก้ไขปรับปรุงได้"></i>':'');
+                            return meta.row + 1 +((user_role=="Admin" && isNaN(full.creator+0)==false ) || user_name==full.creator?'<br/><i class="fa fa-pencil" title="เพิ่มข้อมูลโดยเจ้าหน้าที่: '+full.creator+' สามารถแก้ไขได้"></i>':'');
                         }
                     },
                     {
@@ -287,7 +295,7 @@
                             html += '<a target="_blank" href="' + viewLink + '/' + full.applicant_id + '">';
                             html += '<i class="fa fa-file-o"></i> ดูรายละเอียด </a>';
                             html += '</li>';
-                            if(user_role=="Admin" || user_id==full.creator ){
+                            if(user_role=="Admin" || user_name==full.creator ){
                             html += '<li>';
                             html += '<a target="_blank"  href="' + editLink + '/' + full.applicant_id + '#tab_1_3">';
                             html += '<i class="fa fa-edit"></i> แก้ไข </a>';
@@ -420,7 +428,7 @@
                     modalInfo.find("#prog_type_name_p").text(data.prog_type_name == null ? '-' : data.prog_type_name);
                     modalInfo.find("#downloadDocButton").attr('href', '{{url("admin/docMyCourse/")}}/'+ data.applicant_id +'/' + data.application_id);
                     modalInfo.find("#ajaxLoading").hide();
-                    if(user_role=="Admin" || user_id==data.creator ){
+                    if(user_role=="Admin" || user_name==data.creator ){
                     modalInfo.find("#deleteBtn").removeAttr('disabled', 'disabled');
                   }else{
                     //no permission

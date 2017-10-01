@@ -19,8 +19,10 @@ Log::info('Start Sync Program Data');
 $mcourse = new McourseStudyRepositoryImpl();
 $mcourse->updateAllCourse();
 Log::info('End Sync Program Data');
-Artisan::command('sync', function () {
+
+
+//Artisan::command('sync', function () {
     //$this->comment(Inspiring::quote());
-    Log::info('Artisan::command sync is called!');
-    $mcourse->updateAllCourse();
-})->describe('Sync Program Detail');
+    //Log::info('Artisan::command sync is called!');
+    //$mcourse->updateAllCourse();
+//})->describe('Sync Program Detail');

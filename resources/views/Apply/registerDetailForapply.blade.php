@@ -186,6 +186,12 @@
           <form class="form-horizontal">
             <div class="form-body">
               <div class="form-group">
+                <label class="col-md-4 control-label">{{Lang::get('resource.lbSemester')}}</label>
+                <div class="col-md-8">
+                  <span class="form-control-static"> {!! (session('locale')=='th'?Lang::get('resource.lbSemester').''.($curDis->semester==1?'ต้น':'ปลาย'):' '.(($curDis->semester==1)?'1st ':'2nd ')) !!} </span>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="col-md-4 control-label">{{Lang::get('resource.lbYear')}}</label>
                 <div class="col-md-8">
                   <span class="form-control-static"> {{$curDis->academic_year}} </span>
@@ -331,7 +337,9 @@
               <div class="form-group">
                 <label class="col-md-4 control-label">{{Lang::get('resource.lbTimeExam')}}</label>
                 <div class="col-md-8">
-                  <span class="form-control-static">{{date('d-m-Y', strtotime($curDis->start_date ))}}  - {{date('d-m-Y', strtotime($curDis->end_date))}}  </span>
+                  <span class="form-control-static">
+                    {{Lang::get('resource.lbroundNo')}} {{$curDis->round_no}} :
+                    {{date('d/m/Y', strtotime($curDis->start_date ))}}  - {{date('d/m/Y', strtotime($curDis->end_date))}}  </span>
                 </div>
               </div>
               <div class="form-group">
