@@ -11,6 +11,8 @@ interface UserRepository
     public function getUserPaging();
 
     public function deleteByUserId($userId);
+
+    public function doSave2(array $data);
 }
  
 
