@@ -2,6 +2,8 @@
 
 use Illuminate\Foundation\Inspiring;
 use App\Repositories\McourseStudyRepositoryImpl;
+use Illuminate\Support\Facades\Log;
+
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -12,9 +14,13 @@ use App\Repositories\McourseStudyRepositoryImpl;
 | simple approach to interacting with each command's IO methods.
 |
 */
-
+Log::info('console.php is called!');
+Log::info('Start Sync Program Data');
+$mcourse = new McourseStudyRepositoryImpl();
+$mcourse->updateAllCourse();
+Log::info('End Sync Program Data');
 Artisan::command('sync', function () {
     //$this->comment(Inspiring::quote());
-    $mcourse = new McourseStudyRepositoryImpl();
+    Log::info('Artisan::command sync is called!');
     $mcourse->updateAllCourse();
 })->describe('Sync Program Detail');
