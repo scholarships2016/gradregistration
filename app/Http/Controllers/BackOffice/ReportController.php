@@ -285,6 +285,266 @@ class ReportController extends Controller
 
     public function doReport01Excel(Request $request)
     {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
 
+            $data = $this->rptRepo->getReport01DataByCriteria($param);
+
+            Excel::create('financial', function ($excel) use ($data) {
+                $excel->sheet('สรุปยอดการชำระเงิน', function ($sheet) use ($data) {
+
+                    $sheet->setFontFamily('TH Sarabun New');
+
+                    $sheet->appendRow(array(
+                        '#', 'หลักสูตร', 'ประเภทหลักสูตร', 'จำนวนผู้สมัคร',
+                        'บมจ.ธนาคารกรุงไทย', 'บมจ.ธนาคารไทยพาณิชย์', 'บมจ.ธนาคารธหารไทย', 'บมจ.ธนาคารธนาชาติ'
+                    ));
+
+                    $totalAppAmt = 0;
+                    $totalKtbAmt = 0;
+                    $totalScbAmt = 0;
+                    $totalTmbAmt = 0;
+                    $totalThaAmt = 0;
+
+                    if (!empty($data) && sizeof($data) != 0) {
+                        foreach ($data as $index => $value) {
+                            $sheet->appendRow(array(
+                                ($index + 1), $value->program_id . " " . $value->thai,
+                                $value->cond_id . " " . $value->prog_type_name,
+                                number_format($value->app_amt),
+                                number_format($value->ktb_bank), number_format($value->scb_bank),
+                                number_format($value->tmb_bank), number_format($value->tha_bank)
+                            ));
+
+                            $totalAppAmt += $value->app_amt;
+                            $totalKtbAmt = bcadd($totalKtbAmt, $value->ktb_bank);
+                            $totalScbAmt = bcadd($totalScbAmt, $value->scb_bank);
+                            $totalTmbAmt = bcadd($totalTmbAmt, $value->tmb_bank);
+                            $totalThaAmt = bcadd($totalThaAmt, $value->tha_bank);
+                        }
+
+                        $sheet->appendRow(array(
+                            '', '', 'รวม',
+                            number_format($totalAppAmt),
+                            number_format($totalKtbAmt), number_format($totalScbAmt),
+                            number_format($totalTmbAmt), number_format($totalThaAmt)
+                        ));
+                    } else {
+                        $sheet->appendRow(array(
+                            '', '', 'รวม',
+                            number_format(0),
+                            number_format(0), number_format(0),
+                            number_format(0), number_format(0)
+                        ));
+                    }
+                });
+            })->export('xls');
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
     }
+
+    public function doReport02Excel(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $data = $this->rptRepo->getReport02DataByCriteria($param);
+            Excel::create('applicants', function ($excel) use ($data) {
+                $excel->sheet('รายชื่อผู้สมัครเข้าศึกษา (GS01)', function ($sheet) use ($data) {
+
+                    $sheet->setFontFamily('TH Sarabun New');
+
+                    $sheet->appendRow(array(
+                        '#', 'เลขประจำตัวผู้สมัคร', 'เลขที่ใบสมัคร', 'ชื่อ-สกุล',
+                        'เล่มที่/เลขที่ใบเสร็จรับเงิน', 'วันที่ชำระเงิน', 'จำนวนค่าสมัคร', 'ธนาคาร'
+                    ));
+
+                    $totalAmt = 0;
+                    if (!empty($data) && sizeof($data) != 0) {
+                        foreach ($data as $index => $value) {
+
+                            $sheet->appendRow(array(
+                                ($index + 1), $value->applicant_no, $value->application_no,
+                                $value->fullname_th . ' ' . $value->fullname_en,
+                                empty($value->receipt) ? '-' : $value->receipt,
+                                empty($value->payment_date) ? '-' : $value->payment_date,
+                                number_format($value->apply_fee), $value->bank_name
+                            ));
+                            $totalAmt = bcadd($totalAmt, $value->apply_fee);
+                        }
+                        $sheet->appendRow(array(
+                            '', '', '', '', '', 'รวม',
+                            number_format($totalAmt), ''
+                        ));
+                    } else {
+                        $sheet->appendRow(array(
+                            '', '', '', '', '', 'รวม',
+                            number_format($totalAmt), ''
+                        ));
+                    }
+                });
+            })->export('xls');
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function doReport03Excel(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $data = $this->rptRepo->getReport03DataByCriteria($param);
+            Excel::create('summaryApplication', function ($excel) use ($data) {
+                $excel->sheet('รายงานสรุปยอดผู้สมัครเข้าศึกษา', function ($sheet) use ($data) {
+
+                    $colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+
+                    $sheet->setFontFamily('TH Sarabun New');
+
+                    $sheet->appendRow(array(
+                        '#', 'สาขาวิชา', 'หลักสูตร', 'คาดว่า',
+                        'สมัครผ่านเว็บไซต์', 'ส่งใบสมัคร', 'สอบได้'
+                    ));
+
+
+                    $totalArray = array();
+                    $rowCount = 2;
+                    if (!empty($data) && sizeof($data) != 0) {
+                        $totalArray['grandtotal'] = [0, 0, 0, 0, ''];
+                        $tbody = '';
+                        $facBuff = null;
+                        $progTypeBuff = null;
+                        $progCount = 0;
+
+                        foreach ($data as $index => $value) {
+                            if ($facBuff !== $value->faculty_id) {
+                                $sheet->appendRow(array('คณะ' . $value->faculty_name));
+                                $sheet->mergeCells('A' . $rowCount . ':G' . $rowCount);
+                                $rowCount += 1;
+                                $facBuff = $value->faculty_id;
+                                $progTypeBuff = null;
+                            }
+                            if ($progTypeBuff !== $value->cond_id) {
+                                $sheet->appendRow(array('', $value->prog_type_name));
+                                $sheet->mergeCells('B' . $rowCount . ':G' . $rowCount);
+                                $rowCount += 1;
+                                $progTypeBuff = $value->cond_id;
+                                if (!array_key_exists($value->cond_id, $totalArray)) {
+                                    $totalArray[$value->cond_id] = [0, 0, 0, 0, $value->prog_type_name];
+                                }
+                                if (!array_key_exists($value->degree_level_name, $totalArray)) {
+                                    $totalArray[$value->degree_level_name] = [0, 0, 0, 0, $value->prog_type_name];
+                                }
+                                $progCount = 0;
+                            }
+                            $progCount += 1;
+
+                            $sheet->appendRow(array($progCount, $value->major_info, $value->prog_info, number_format($value->expected_amount),
+                                number_format($value->apply_via_web_amt), number_format($value->payed_app_amt), number_format($value->passed_exam_amt)));
+                            $rowCount += 1;
+
+                            $totalArray[$value->cond_id][0] = bcadd($totalArray[$value->cond_id][0], $value->expected_amount);
+                            $totalArray[$value->cond_id][1] = bcadd($totalArray[$value->cond_id][1], $value->apply_via_web_amt);
+                            $totalArray[$value->cond_id][2] = bcadd($totalArray[$value->cond_id][2], $value->payed_app_amt);
+                            $totalArray[$value->cond_id][3] = bcadd($totalArray[$value->cond_id][3], $value->passed_exam_amt);
+                            $totalArray[$value->degree_level_name][0] = bcadd($totalArray[$value->degree_level_name][0], $value->expected_amount);
+                            $totalArray[$value->degree_level_name][1] = bcadd($totalArray[$value->degree_level_name][1], $value->apply_via_web_amt);
+                            $totalArray[$value->degree_level_name][2] = bcadd($totalArray[$value->degree_level_name][2], $value->payed_app_amt);
+                            $totalArray[$value->degree_level_name][3] = bcadd($totalArray[$value->degree_level_name][3], $value->passed_exam_amt);
+                            $totalArray['grandtotal'][0] = bcadd($totalArray['grandtotal'][0], $value->expected_amount);
+                            $totalArray['grandtotal'][1] = bcadd($totalArray['grandtotal'][1], $value->apply_via_web_amt);
+                            $totalArray['grandtotal'][2] = bcadd($totalArray['grandtotal'][2], $value->payed_app_amt);
+                            $totalArray['grandtotal'][3] = bcadd($totalArray['grandtotal'][3], $value->passed_exam_amt);
+                        }
+
+
+                    }
+                    if (!empty($totalArray) && sizeof($totalArray) != 0) {
+                        $grandTotal = $totalArray;
+
+                        if (array_key_exists(Util::DIPLOMA_TH, $grandTotal)) {
+                            unset($grandTotal[Util::DIPLOMA_TH]);
+                        }
+                        if (array_key_exists(Util::MASTER_TH, $grandTotal)) {
+                            unset($grandTotal[Util::MASTER_TH]);
+                        }
+                        if (array_key_exists(Util::HIGH_DIPLOMA_TH, $grandTotal)) {
+                            unset($grandTotal[Util::HIGH_DIPLOMA_TH]);
+                        }
+                        if (array_key_exists(Util::DOCTOR_TH, $grandTotal)) {
+                            unset($grandTotal[Util::DOCTOR_TH]);
+                        }
+                        unset($grandTotal['grandtotal']);
+
+                        if (!empty($grandTotal) && sizeof($grandTotal) != 0) {
+                            ksort($grandTotal);
+                            foreach ($grandTotal as $key => $value) {
+                                $sheet->appendRow(array('', '', $value[4], $value[0], $value[1], $value[2], $value[3]));
+                                $sheet->mergeCells('A' . $rowCount . ':B' . $rowCount);
+                                $rowCount += 1;
+                            }
+                        }
+
+                        if (array_key_exists(Util::DIPLOMA_TH, $totalArray)) {
+                            $sheet->appendRow(array('', '', 'รวมยอด ' . Util::DIPLOMA_TH, $totalArray[Util::DIPLOMA_TH][0],
+                                $totalArray[Util::DIPLOMA_TH][1], $totalArray[Util::DIPLOMA_TH][2], $totalArray[Util::DIPLOMA_TH][3]));
+                            $sheet->mergeCells('A' . $rowCount . ':B' . $rowCount);
+                            $rowCount += 1;
+                            unset($totalArray[Util::DIPLOMA_TH]);
+                        }
+                        if (array_key_exists(Util::MASTER_TH, $totalArray)) {
+                            $sheet->appendRow(array('', '', 'รวมยอด ' . Util::MASTER_TH, $totalArray[Util::MASTER_TH][0],
+                                $totalArray[Util::MASTER_TH][1], $totalArray[Util::MASTER_TH][2], $totalArray[Util::MASTER_TH][3]));
+                            $sheet->mergeCells('A' . $rowCount . ':B' . $rowCount);
+                            $rowCount += 1;
+                            unset($totalArray[Util::MASTER_TH]);
+                        }
+                        if (array_key_exists(Util::HIGH_DIPLOMA_TH, $totalArray)) {
+                            $sheet->appendRow(array('', '', 'รวมยอด ' . Util::HIGH_DIPLOMA_TH, $totalArray[Util::HIGH_DIPLOMA_TH][0],
+                                $totalArray[Util::HIGH_DIPLOMA_TH][1], $totalArray[Util::HIGH_DIPLOMA_TH][2],
+                                $totalArray[Util::HIGH_DIPLOMA_TH][3]));
+                            $sheet->mergeCells('A' . $rowCount . ':B' . $rowCount);
+                            $rowCount += 1;
+                            unset($totalArray[Util::HIGH_DIPLOMA_TH]);
+                        }
+                        if (array_key_exists(Util::DOCTOR_TH, $totalArray)) {
+                            $sheet->appendRow(array('', '', 'รวมยอด ' . Util::DOCTOR_TH, $totalArray[Util::DOCTOR_TH][0],
+                                $totalArray[Util::DOCTOR_TH][1], $totalArray[Util::DOCTOR_TH][2],
+                                $totalArray[Util::DOCTOR_TH][3]));
+                            $sheet->mergeCells('A' . $rowCount . ':B' . $rowCount);
+                            $rowCount += 1;
+                            unset($totalArray[Util::DOCTOR_TH]);
+                        }
+                        $sheet->appendRow(array('', '', 'รวมยั้งสิ้น ', $totalArray['grandtotal'][0], $totalArray['grandtotal'][1], $totalArray['grandtotal'][2], $totalArray['grandtotal'][3]));
+                        $sheet->mergeCells('A' . $rowCount . ':B' . $rowCount);
+                        $rowCount += 1;
+
+                    }
+                });
+            })->export('xls');
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
 }
