@@ -56,7 +56,7 @@ Route::get('/download', function () {
 //View file for visitor
 Route::get('util/viewFile', 'Controller@doDownloadFile')->name('viewFile');
 //download Files in Media folder for visotor
-Route::get('viewMedia', function(\Illuminate\Http\Request $request) {
+Route::get('viewMedia', function (\Illuminate\Http\Request $request) {
     $input_path = $request->input('path');
     $real_path = Crypt::decrypt($input_path);
     $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $real_path);
@@ -88,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('apply/savePayment', 'ManageApplyController@savePayment')->name('datatables.savePayment');
     Route::group(['prefix' => 'admin'], function () {
         //download Files
-        Route::get('getMedia', function(\Illuminate\Http\Request $request) {
+        Route::get('getMedia', function (\Illuminate\Http\Request $request) {
             $input_path = $request->input('path');
             $real_path = Crypt::decrypt($input_path);
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix('MEDIA\\' . $real_path);
@@ -138,6 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
         Route::get('docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
         Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+
         //util M
         Route::get('importApplicant', 'ManageApplyController@importApplicant')->name('importApplicant');
         Route::get('importExport', 'Controller@importExport');
@@ -174,6 +175,18 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('doApprove', 'BackOffice\CurriculumController@doApprove')->name('admin.curriculum.doApprove');
                 Route::post('doReject', 'BackOffice\CurriculumController@doReject')->name('admin.curriculum.doReject');
                 Route::post('doDelete', 'BackOffice\CurriculumController@doDelete')->name('admin.curriculum.doDelete');
+            });
+
+            Route::group(['prefix' => 'report'], function () {
+                Route::get('report01', 'BackOffice\ReportController@showReport01Page')->name('admin.report.showReport01Page');
+                Route::get('doReport01', 'BackOffice\ReportController@doReport01')->name('admin.report.doReport01');
+
+                Route::get('report02', 'BackOffice\ReportController@showReport02Page')->name('admin.report.showReport02Page');
+                Route::get('doReport02', 'BackOffice\ReportController@doReport02')->name('admin.report.doReport02');
+
+                Route::get('report03', 'BackOffice\ReportController@showReport03Page')->name('admin.report.showReport03Page');
+                Route::get('doReport03', 'BackOffice\ReportController@doReport03')->name('admin.report.doReport03');
+
             });
         });
 
@@ -233,7 +246,6 @@ Route::group(['middleware' => 'auth'], function () {
             });
         });
     });
-
 
 
     Route::group(['prefix' => 'profile', 'middleware' => []], function () {
