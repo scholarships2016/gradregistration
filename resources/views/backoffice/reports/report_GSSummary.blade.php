@@ -195,6 +195,12 @@
                                     <button type="button" id="reportBt" class="btn green"><i
                                                 class="fa fa-file-text-o"></i> ออกรายงาน
                                     </button>
+                                    <button type="button" id="excelBt" class="btn green">
+                                        <i class="fa fa-file-excel-o"></i> Export เป็นไฟล์ Excel
+                                    </button>
+                                    <button type="button" id="txtBt" class="btn green">
+                                        <i class="fa fa-file-text-o"></i> Export เป็นไฟล์ Text
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -299,6 +305,13 @@
                     setResult(result.data);
                 }
             });
+        });
+
+
+        $("#excelBt").on('click', function () {
+            var url = '{{route('admin.report.doReport03Excel')}}?';
+            url += $("#searchForm").serialize();
+            location.href = url;
         });
     });
 

@@ -190,12 +190,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'report'], function () {
             Route::get('payment-summary-report', 'BackOffice\ReportController@showReport01Page')->name('admin.report.showReport01Page');
             Route::get('doReport01', 'BackOffice\ReportController@doReport01')->name('admin.report.doReport01');
+            Route::get('doReport01Excel', 'BackOffice\ReportController@doReport01Excel')->name('admin.report.doReport01Excel');
 
             Route::get('register-applicant-report', 'BackOffice\ReportController@showReport02Page')->name('admin.report.showReport02Page');
             Route::get('doReport02', 'BackOffice\ReportController@doReport02')->name('admin.report.doReport02');
+            Route::get('doReport02Excel', 'BackOffice\ReportController@doReport02Excel')->name('admin.report.doReport02Excel');
 
             Route::get('applicant-summary-report', 'BackOffice\ReportController@showReport03Page')->name('admin.report.showReport03Page');
             Route::get('doReport03', 'BackOffice\ReportController@doReport03')->name('admin.report.doReport03');
+            Route::get('doReport03Excel', 'BackOffice\ReportController@doReport03Excel')->name('admin.report.doReport03Excel');
 
         });
 
