@@ -43,6 +43,34 @@ class AdminManagementController extends Controller
         }
     }
 
+    public function showProfileEditPage(Request $request)
+    {
+        try {
+            $this->WLog('func=showProfileEditPage', self::$SECTION_NAME, null);
+            $who = session('user_id');
+
+            $user = $this->userRepo->findOrFail($who);
+            $permissionList = $this->permissionRepo->all();
+
+            /*
+                 * Audit Info
+                 */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_VIEW;
+            $audit['detail'] = 'showProfileEditPage,user_id=' . $who;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            return view('backoffice.profile', ['permissionList' => $permissionList,
+                'user' => $user]);
+        } catch (\Exception $ex) {
+            $this->WLog('func=showProfileEditPage', self::$SECTION_NAME, $ex->getMessage());
+            return redirect()->route('admin.adminManage.showManagePage');
+        }
+    }
+
     public function showEditPage(Request $request, $id)
     {
         try {
@@ -104,6 +132,34 @@ class AdminManagementController extends Controller
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
             $this->WLog('func=doSave', self::$SECTION_NAME, $ex->getMessage());
+            return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+        }
+    }
+
+    public function doSave2(Request $request)
+    {
+        try {
+            $this->WLog('func=doSave2', self::$SECTION_NAME, null);
+
+            $data = $request->all();
+            $who = session('user_id');
+            $data['modifier'] = $who;
+
+            $result = $this->userRepo->doSave2($data);
+
+            /*
+                 * Audit Info
+                 */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSave,user_id=' . $data['user_id'];
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+            return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
+        } catch (\Exception $ex) {
+            $this->WLog('func=doSave2', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
