@@ -148,12 +148,15 @@
               <button type="submit"  {{ ($Flo > 3)?'disabled':'' }} class="btn btn-lg blue  margin-bottom-5">
                 {{Lang::get('resource.lbSave')}}
                 <i class="fa fa-check"></i></button>
+                @if(session('user_type')->user_type != 'Admin' && session('user_type')->user_type != 'GradStaff' && session('user_type')->user_type != 'FacStaff')
               <a class="btn btn-lg grey-steel   margin-bottom-5" href="{{url('application/manageMyCourse/')}}">
                 {{Lang::get('resource.lbCancel')}}
                 <i class="fa fa-times"></i>
               </a>
+                @endif
             </div>
         @endif
+      
 
 
 
