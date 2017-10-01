@@ -193,10 +193,15 @@
                         </div>
                         <div class="form-actions">
                             <div class="row">
-                                <div class="col-md-offset-4 col-md-8">
-
-                                    <button type="button" id="reportBt" class="btn green"><i
-                                                class="fa fa-file-text-o"></i> ออกรายงาน
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="button" id="reportBt" class="btn green">
+                                        <i class="fa fa-file-text-o"></i> ออกรายงาน
+                                    </button>
+                                    <button type="button" id="excelBt" class="btn green">
+                                        <i class="fa fa-file-excel-o"></i> Export เป็นไฟล์ Excel
+                                    </button>
+                                    <button type="button" id="txtBt" class="btn green">
+                                        <i class="fa fa-file-text-o"></i> Export เป็นไฟล์ Text
                                     </button>
                                 </div>
                             </div>
@@ -217,7 +222,7 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <div class="table-responsive">
+                                <div id="tableDiv" class="table-responsive">
                                     <table id="resultTbl" class="table table-hover table-bordered table-striped">
                                         <thead>
                                         <tr>
@@ -266,6 +271,7 @@
 <script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/jquery.table2excel.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -303,6 +309,13 @@
                     setResult(result.data)
                 }
             });
+        });
+
+        $("#excelBt").on('click', function () {
+            var url = '{{route('admin.report.doReport01Excel')}}?';
+            url += $("#searchForm").serialize();
+
+            location.href = url;
         });
     });
 
