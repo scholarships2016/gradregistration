@@ -120,32 +120,32 @@
                     @if(session('user_type')->user_type == 'Admin' ||
                     in_array("6",session('user_permission'))||
                     in_array("7",session('user_permission')))
-                        <li class=" nav-item  menuitem" data-index="16">
+                        <li class=" nav-item  menuitem @if(strpos($curr_url, 'admin/report') !== false) open active @endif" data-index="16">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-bar-chart"></i>
                                 <span class="title">รายงาน</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_date_time_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'payment-summary-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/payment-summary-report')}}" class="nav-link ">
                                         <span class="title">สรุปยอดการชำระเงิน</span>
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'register-applicant-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/register-applicant-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครเข้าศึกษา (GS01)</span>
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'applicant-summary-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/applicant-summary-report')}}" class="nav-link ">
                                         <span class="title">สรุปยอดผู้สมัครเข้าศึกษา </span>
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'payment-summary-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/payment-summary-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
 
                                     </a>

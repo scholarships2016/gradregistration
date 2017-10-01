@@ -183,17 +183,20 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('doDelete', 'BackOffice\CurriculumController@doDelete')->name('admin.curriculum.doDelete');
             });
 
-            Route::group(['prefix' => 'report'], function () {
-                Route::get('report01', 'BackOffice\ReportController@showReport01Page')->name('admin.report.showReport01Page');
-                Route::get('doReport01', 'BackOffice\ReportController@doReport01')->name('admin.report.doReport01');
 
-                Route::get('report02', 'BackOffice\ReportController@showReport02Page')->name('admin.report.showReport02Page');
-                Route::get('doReport02', 'BackOffice\ReportController@doReport02')->name('admin.report.doReport02');
+        });
 
-                Route::get('report03', 'BackOffice\ReportController@showReport03Page')->name('admin.report.showReport03Page');
-                Route::get('doReport03', 'BackOffice\ReportController@doReport03')->name('admin.report.doReport03');
+//report
+        Route::group(['prefix' => 'report'], function () {
+            Route::get('payment-summary-report', 'BackOffice\ReportController@showReport01Page')->name('admin.report.showReport01Page');
+            Route::get('doReport01', 'BackOffice\ReportController@doReport01')->name('admin.report.doReport01');
 
-            });
+            Route::get('register-applicant-report', 'BackOffice\ReportController@showReport02Page')->name('admin.report.showReport02Page');
+            Route::get('doReport02', 'BackOffice\ReportController@doReport02')->name('admin.report.doReport02');
+
+            Route::get('applicant-summary-report', 'BackOffice\ReportController@showReport03Page')->name('admin.report.showReport03Page');
+            Route::get('doReport03', 'BackOffice\ReportController@doReport03')->name('admin.report.doReport03');
+
         });
 
         Route::get('profile', 'BackOffice\AdminManagementController@showProfileEditPage')->name('admin.showProfileEditPage');
