@@ -482,7 +482,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                     $maxapp_id = Application::leftJoin('curriculum_activity', 'application.curr_act_id', 'curriculum_activity.curr_act_id')
                             ->leftJoin('apply_setting', 'curriculum_activity.apply_setting_id', 'apply_setting.apply_setting_id')
                             ->whereNotNull('app_id')
-                            ->where('semester', $year[0]->semester)
+                            //->where('semester', $year[0]->semester)
                             ->where('academic_year', $year[0]->academic_year)
                             ->max('app_id');
 
