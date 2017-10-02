@@ -86,7 +86,7 @@ class LoginUserController extends Controller
             if ($user_data->stu_img) {
                 $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
             }
-
+            session()->put('user_name', ($user_data->user_name!=""?$user_data->user_name:$user_data->user_id));
             session()->put('user_id', $user_data->user_id);
             session()->put('first_name', $user_data->user_name);
             session()->put('last_name', '');

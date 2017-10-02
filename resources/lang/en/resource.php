@@ -125,7 +125,7 @@ return [
     'lbSearchResultMajor' => 'Major in ',
     'lbSearchResultFaculty' => '',
     //other Use
-    'lbYear' => 'Year',
+    'lbYear' => 'Academic Year',
     'lbDepartment' => 'Department',
     'lbSubject' => 'Major',
     'lbMajor' => 'Program Name',
@@ -190,7 +190,7 @@ return [
     'lbConfirmInstructions' => 'Please specify more information',
     'lbConfirmPaymentBank' => 'Bank for payment',
     'lbConfirmPaymentBank-1' => 'Bank',
-    'lbConfirmReferencePerson' => 'Reference person',
+    'lbConfirmReferencePerson' => 'Reference person (3 Persons)',
     'btnConfirmAddReferencePerson' => 'Add Reference Person',
     'lbConfirmTableReferencePersonFullname' => 'Firstname & Surname',
     'lbConfirmTableReferencePersonPosition' => 'Position',
@@ -299,5 +299,6 @@ return [
     'lbProfileVerifyMessage' => 'Please update your personal informations before apply.',
     'lbProfileVerifyButton' => 'Update Profile',
 
-    'lbBtnDownloadAppForm' => 'Download Appplication Form (PDF)'
+    'lbBtnDownloadAppForm' => 'Download Appplication Form (PDF)',
+    'lbSemesterNo' => 'Semester No. '
 ];

@@ -57,7 +57,7 @@
   </div>--}}
 </div>
 @stop @section('pagetitle')
-<h1 class="page-title">รายงานผู้มีสิทธิ์สอบ [GS03]
+<h1 class="page-title">รายงานผู้มีสิทธิ์เข้าการศึกษา [GS05]
 
 </h1> @stop @section('maincontent')
 <div class="row">
@@ -67,7 +67,7 @@
       <div class="portlet-title">
         <div class="caption font-dark">
           <i class="icon-settings font-dark"></i>
-          <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
+          <span class="caption-subject bold uppercase">ข้อมูลผู้มีสิทธิ์เข้าการศึกษา</span>
         </div>
         <div class="actions">
           <div class="btn-group pull-right">
@@ -80,12 +80,10 @@
                                                           <i class="fa fa-print"></i> PDF </a>
               </li>
 
-              <!--
               <li>
-                  <a href="javascript:;">
-                      <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                <a href="javascript:;">
+                                                          <i class="fa fa-file-excel-o"></i> Export to Excel </a>
               </li>
-            -->
             </ul>
           </div>
         </div>
@@ -180,12 +178,12 @@
         </div>
         <div id="search-application-result" style="display:none;">
           <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
-
+ 
           <hr>
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
             <div><input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
-                <div class="caption" style="text-align: center">รายชื่อผู้สมัตรระดับ<label id="lbDegree" name="lbDegree"></label>แยกตามหลักสูตร(GS03)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
+                <div class="caption" style="text-align: center">รายชือผู้มีสิทธิเข้าศึกษาในระดับบัณฑิตศึกษา จุฬาลงกรณ์มหาวิทยาลัย(GS05)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
      <div class="portlet box pink-chula">
                       <div class="portlet-title">
                         <div class="caption">
@@ -202,16 +200,19 @@
                           <table id="datatable_ajax" class="table table-hover table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th> ลำดับ </th>
+                                <th> เลขที่ใบสมัคร </th>                                
                                 <th> ชื่อ-สกุล </th>
-                                <th> มีสิทธิ์สอบ </th>
-                                <th> ไม่มีสิทธิ์สอบ </th>
-                                <th> หมายเหตุ </th>
-                                  <th> เลขที่ใบสมัคร </th>
+                                <th> สัญชาติ </th>
+                                <th> เพศ </th>
+                                <th> โครงการ </th>
+                                  <th> สถานะ  </th>
+                                   <th> สำเร็จปริญาตรี  </th>
+                                   <th> สำเร็จปริญาโท  </th>
                                     <th> คะแนนภาษาอังกฤษ </th>
+                                    <th> หมายเหตุ </th>
                                  </tr>
                             </thead>
-
+                      
                           </table>
                         </div>
                           <br><br>
@@ -227,10 +228,11 @@
           <div class="form-actions">
             <div class="row">
               <div class="col-md-offset-4 col-md-8">
-                  <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
+                   <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
                  <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>
                 <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
-              </div>
+              
+                </div>
             </div>
           </div>
         </div>
@@ -238,7 +240,7 @@
     </div>
     <!-- END EXAMPLE TABLE PORTLET-->
   </div>
-
+ 
 </div>
 @stop
 
@@ -274,8 +276,8 @@
       $("#citiz").val('');
       $("#apply_comment").val('');
 
-  });
-
+  }); 
+ 
                   $('#btnSearch1').click(function(){
                                     $.ajax({
 					type: "get",
@@ -307,8 +309,8 @@
         //Show serach program result
         $('#search-program-result').fadeIn( "slow", "linear" );
         $('#search-application-result').fadeOut( "slow", "linear" );
-
-
+        
+       
       });
       
       
@@ -318,7 +320,7 @@
         var name =$('#namekey').val();
         var position = $('#positionkey').val();
         
-        window.open(("{{ url('admin/printRegisterCourseReport').'/3,4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name +'/'+position+'/N/GS03' ),'_blank');                 
+       window.open(("{{ url('admin/printRegisterCourseReport').'/4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name +'/'+position+'/N/GS05' ),'_blank');                 
         } 
  
 jQuery(document).ready(function() {
@@ -327,24 +329,23 @@ jQuery(document).ready(function() {
     $('#search-program-result').fadeOut( "slow", "linear" );
     $('#search-application-result').fadeOut( "slow", "linear" );
   });
-
+  
 });
 
 
     $('#search_Select').click(function(){
-         $('#lbDegree').text($('option:selected','#single').attr('lbthai'));
-        $('#lbSem').text($('option:selected','#semester').text());
+         $('#lbSem').text($('option:selected','#semester').text());
         $('#lbYear').text($('#year').val());
            TableDatatablesAjax.init();
          $('#search-application-result').fadeIn( "slow", "linear" );
-
+      
        });
 
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 var table="";
 var TableDatatablesAjax = function () {
     var handle1 = function () {
@@ -353,8 +354,8 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
              dataTable: {
-                "bStateSave": false,
-                "pageLength": 1000,
+                "bStateSave": false,  
+                "pageLength": 1000,  
 
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourseReport') !!}",
@@ -366,7 +367,7 @@ var TableDatatablesAjax = function () {
                                 program_id : $('option:selected','#single').attr('pg'),
                                 program_type_id : $('option:selected','#single').attr('pt'),
                                  thaiDegree :$('option:selected','#single').attr('lbthai') ,
-                                 flow : '3,4,5',
+                                 flow : '4,5',
                                _token:     '{{ csrf_token()}}'
                                                }
                 },
@@ -376,7 +377,7 @@ columnDefs: [
     {
 targets: [0],
 render: function (data, type, full, meta) {
-return meta.settings._iDisplayStart + meta.row + 1;
+return full.app_ida ;
 } },{
 targets: [1],
 render: function (data, type, full, meta) {
@@ -384,32 +385,44 @@ return  (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' +
 } },{
 targets: [2],
 render: function (data, type, full, meta) {
-return   ' <input type="checkbox"  disabled readonly '+((full.exam_status==2)?'checked':'')+' class="checkboxes"  />' ;
+return   full.nation_name+'<br>['+full.nation_name_en+']' ;
 }},{
 targets: [3],
 render: function (data, type, full, meta) {
-return    ' <input type="checkbox"  disabled readonly '+((full.exam_status==3)?'checked':'')+' class="checkboxes"  />'  ;
+return    ((full.stu_sex==1)?'ชาย[Male]':'หญิง[Female]')  ;
 } },{
 targets: [4],
 render: function (data, type, full, meta) {
-return    full.exam_remark  ;
+return    full.program_id  ;
 } },{
 targets: [5],
 render: function (data, type, full, meta) {
-return    full.app_ida   ;
+return    full.admission_status_id  ;
 } },{
 targets: [6],
 render: function (data, type, full, meta) {
+return    full.bachlor_year  ;
+} },{
+targets: [7],
+render: function (data, type, full, meta) {
+return    full.master_year  ;
+} },{
+targets: [8], 
+render: function (data, type, full, meta) {
 return   ((full.eng_test_score_admin != null)?full.eng_test_score_admin:full.eng_test_score)  ;
+}},{
+targets: [9], 
+render: function (data, type, full, meta) {
+return   full.admission_remark ;
 }}  ],
-                "bDestroy": true,
+                "bDestroy": true, 
                 "responsive": false,
               "paging":   false,
         "ordering": false,
         "info":     false
             },
-
-        });
+            
+        }); 
     }
 
     return {

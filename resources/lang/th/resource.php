@@ -193,7 +193,7 @@ return [
     'lbConfirmInstructions' => 'กรุณากรอกข้อมูลเพิ่มเติม',
     'lbConfirmPaymentBank' => 'ธนาคารที่ต้องการชำระเงิน',
     'lbConfirmPaymentBank-1' => 'ธนาคาร',
-    'lbConfirmReferencePerson' => 'บุคคลอ้างอิง (สำหรับผู้สมัครระดับปริญญาเอกและมีภาควิชาต้องการหนังสือรับรองคุณสมบัติฯ ให้ระบุชื่อและที่อยู่ของผู้รับรองทั้งหมด)',
+    'lbConfirmReferencePerson' => 'บุคคลอ้างอิง 3 คน (สำหรับผู้สมัครระดับปริญญาเอกและมีภาควิชาต้องการหนังสือรับรองคุณสมบัติฯ ให้ระบุชื่อและที่อยู่ของผู้รับรองทั้งหมด)',
     'btnConfirmAddReferencePerson' => 'เพิ่มบุคคลอ้างอิง',
     'lbConfirmTableReferencePersonFullname' => 'ชื่อ-นามสกุล',
     'lbConfirmTableReferencePersonPosition' => 'ตำแหน่ง',
@@ -304,5 +304,6 @@ return [
     'lbProfileVerifyMessage' => 'ท่านยังกรอกข้อมูลส่วนตัวให้ครบถ้วน โปรดปรับปรุงข้อมูลให้ครบถ้วน และเป็นปัจจุบัน ก่อนการสมัคร (จะมีผลต่อการพิจารณาใบสมัคร)',
     'lbProfileVerifyButton' => 'ปรับปรุงข้อมูลส่วนตัว',
 
-    'lbBtnDownloadAppForm' => 'ดาวน์โหลดใบสมัคร (PDF)'
+    'lbBtnDownloadAppForm' => 'ดาวน์โหลดใบสมัคร (PDF)',
+    'lbSemesterNo' => 'ภาคการศึกษาที่'
 ];

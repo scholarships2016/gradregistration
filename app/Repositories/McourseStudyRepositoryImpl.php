@@ -111,17 +111,21 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
 
     public function updateAllCourse()
     {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
         try {
             $queryStr = " INSERT INTO gradregistration.mcoursestudy( ";
             $queryStr .= "programsystem, studyprogramsystem, calendar,";
             $queryStr .= "coursecodeno, degree, depcode, majorcode,";
             $queryStr .= "plan, language, thai ,english, degreethai,";
-            $queryStr .= "degreeenglish, status, usercode, updatedate, changestamp )";
+            $queryStr .= "degreeenglish, status, usercode, updatedate, changestamp, sync_created, sync_creator)";
             $queryStr .= " SELECT M.PROGRAMSYSTEM, M.STUDYPROGRAMSYSTEM, M.CALENDAR, ";
             $queryStr .= " M.COURSECODENO, M.DEGREE, M.DEPCODE, M.MAJORCODE, ";
             $queryStr .= " M.PLAN, M.LANGUAGE, M.THAI, ";
             $queryStr .= " M.ENGLISH, M.DEGREETHAI, M.DEGREEENGLISH, ";
-            $queryStr .= " M.STATUS, M.USERCODE, M.UPDATEDATE, M.CHANGESTAMP ";
+            $queryStr .= " M.STATUS, M.USERCODE, M.UPDATEDATE, M.CHANGESTAMP, NOW(),'{$performer}'  ";
             $queryStr .= " FROM cureg.mcoursestudy as M WHERE coursecodeno = M.COURSECODENO ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " PROGRAMSYSTEM = M.PROGRAMSYSTEM, ";
@@ -131,7 +135,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= " PLAN = M.PLAN, LANGUAGE = M.LANGUAGE, THAI = M.THAI, ";
             $queryStr .= " ENGLISH = M.ENGLISH, DEGREETHAI = M.DEGREETHAI, DEGREEENGLISH = M.DEGREEENGLISH, ";
             $queryStr .= " STATUS = M.STATUS, USERCODE = M.USERCODE, UPDATEDATE = M.UPDATEDATE, ";
-            $queryStr .= " CHANGESTAMP = M.CHANGESTAMP, sync_modified = NOW() ";
+            $queryStr .= " CHANGESTAMP = M.CHANGESTAMP, sync_modified = NOW(), sync_modifier='{$performer}' ";
 
             DB::statement($queryStr);
             return true;

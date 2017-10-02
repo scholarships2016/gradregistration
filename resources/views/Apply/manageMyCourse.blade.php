@@ -105,7 +105,9 @@
                   <div class="todo-tasklist-item todo-tasklist-item-border-pink">
 
                     <div class="todo-tasklist-item-title">
+
                       <h4>
+
                                           <b>
                                           {{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}
                                         </b>
@@ -124,6 +126,12 @@
                       ' }} {{(session('locale')=='th')? 'คณะ'.$curDis->faculty_name:$curDis->faculty_full.' '}}
                       <!--  {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}-->
 
+                    </div>
+                    <div class="todo-tasklist-item-text">
+                        <i class="icon-info"></i>
+                        {{Lang::get('resource.lbroundNo')}} {{$curDis->round_no}}, 
+                        {{Lang::get('resource.lbSemesterNo')}} {{$curDis->semester}},
+                        {{Lang::get('resource.lbYear')}} {{$curDis->academic_year}}
                     </div>
 
                     <hr/>
@@ -237,7 +245,7 @@
                                     </div>
                                   </div>
                                 </li>
-                              
+
                                 @if($curDis->apply_method==1 && $ApplicantData->nation_id == '1')
                                 <li class="mt-list-item">
                                   <div class="list-icon-container">
