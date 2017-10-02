@@ -144,8 +144,8 @@
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'payment-summary-report') !== false) open active @endif">
-                                    <a href="{{url('admin/report/payment-summary-report')}}" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'applicant-application-data-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/applicant-application-data-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
 
                                     </a>
