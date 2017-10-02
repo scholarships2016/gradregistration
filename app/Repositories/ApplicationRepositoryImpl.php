@@ -274,7 +274,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
         return $results;
     }
-    public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null,$major_id =null,$faculty_id = null,$chkflowid = null) {
+
+    public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null, $major_id = null, $faculty_id = null, $chkflowid = null) {
         $results = null;
         try {
 
@@ -342,7 +343,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 }
                             })->Where(function ($query)use ($chkflowid) {
                                 if ($chkflowid) {
-                                    $query->where('application.flow_id',">=", $chkflowid);
+                                    $query->where('application.flow_id', ">=", $chkflowid);
                                 }
                             })
                             ->Where(function ($query)use ($exam_status) {
@@ -419,9 +420,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 }
                             })
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time,orientation_date,orientation_location')
-                                    ,DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as bachlor_year')
-                                    ,DB::raw('(select edu_gpax  from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as edu_gpax')
-                                    ,DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="MASTER" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as master_year')])
+                                , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as bachlor_year')
+                                , DB::raw('(select edu_gpax  from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as edu_gpax')
+                                , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="MASTER" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as master_year')])
                             ->distinct()
                             ->orderBy('application.app_id', 'asc')->get();
         } catch (\Exception $ex) {
@@ -431,7 +432,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         return $results;
     }
 
-    public function getDataMoreThanOneMajorForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null,$major_id =null,$faculty_id = null) {
+    public function getDataMoreThanOneMajorForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null, $major_id = null, $faculty_id = null) {
         $results = null;
         try {
 
@@ -472,6 +473,60 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                         $query->orwhere('curriculum.apply_method', '1');
                                     }
                                 }
+                            })
+                            ->whereIn('application.applicant_id', function($query)use($status, $major_id, $faculty_id, $sub_major_id, $semester, $year, $curr_act_id, $roundNo, $program_id) {
+                                $query->select(DB::raw('application2.applicant_id'))
+                                ->from('application as application2')
+                                ->leftJoin('curriculum as c2', 'application2.curriculum_id', 'c2.curriculum_id')
+                                ->leftJoin('curriculum_activity as ca2', 'application2.curr_act_id', '=', 'ca2.curr_act_id')
+                                ->leftJoin('apply_setting as ap2', 'ap2.apply_setting_id', '=', 'ca2.apply_setting_id')
+                                ->groupBy('application2.applicant_id')
+                                ->whereIn('application2.flow_id', $status)
+                                ->where(function ($query)use ($semester) {
+                                    if ($semester) {
+                                        $query->where('ap2.semester', $semester);
+                                    }
+                                })
+                                ->where(function ($query)use ($year) {
+                                    if ($year) {
+                                        $query->where('ap2.academic_year', $year);
+                                    }
+                                })
+                                ->where(function ($query)use ($curr_act_id) {
+                                    if ($curr_act_id) {
+                                        $query->where('ca2.curr_act_id', $curr_act_id);
+                                    }
+                                })
+                                ->where(function ($query)use ($roundNo) {
+                                    if ($roundNo) {
+                                        $query->where('ap2.round_no', $roundNo);
+                                    }
+                                })
+                                ->where(function ($query)use ($program_id) {
+                                    if ($program_id) {
+                                        $query->where('application2.program_id', $program_id);
+                                    }
+                                })
+                                ->where(function ($query)use ($major_id) {
+                                    if ($major_id) {
+                                        $query->where('application2.major_id', $major_id);
+                                    }
+                                })
+                                ->where(function ($query)use ($faculty_id) {
+                                    if ($faculty_id) {
+                                        $query->where('c2.faculty_id', $faculty_id);
+                                    }
+                                })
+                                ->where(function ($query)use ($sub_major_id) {
+                                    if ($sub_major_id) {
+                                        if ($sub_major_id > 0) {
+                                            $query->where('application2.sub_major_id', $sub_major_id);
+                                        } else {
+                                            $query->whereNull('application2.sub_major_id');
+                                        }
+                                    }
+                                })
+                                ->havingRaw("COUNT(application2.applicant_id) > 1");
                             })
                             ->Where(function ($query)use ($applicationID) {
                                 if ($applicationID) {
@@ -571,8 +626,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     ;
                                 }
                             })
-                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time')                                    ])
-                            ->distinct()
+                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time')])
+                             ->distinct()
                             ->orderBy('application.app_id', 'asc')->get();
         } catch (\Exception $ex) {
             throw $ex;

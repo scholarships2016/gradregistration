@@ -291,7 +291,7 @@ var TableDatatablesAjax = function () {
                 "pageLength": 1000,  
 
                 "ajax": {
-                    "url": "{!! route('admin.getRegisterCourseReport') !!}",
+                    "url": "{!! route('admin.getRegisterCourseMoreReport') !!}",
                     "type":"GET",
                     "async": "false",
                     "data" : {
