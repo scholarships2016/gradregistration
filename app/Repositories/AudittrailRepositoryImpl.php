@@ -57,7 +57,7 @@ class AudittrailRepositoryImpl extends AbstractRepositoryImpl implements Audittr
 
             $query = DB::table("audittrail as au")
                 ->select('au.audit_id', 'au.section',
-                    'au.performer', 'u.name', 'au.audit_action_id',
+                    'au.performer', 'u.name','u.nickname', 'au.audit_action_id',
                     'au_act.audit_action_name', 'au.detail',
                     DB::raw("date_format(au.action_date,'%d/%m/%Y %H:%i') as action_date"))
                 ->leftJoin('tbl_audittrail_action as au_act', function ($join) {

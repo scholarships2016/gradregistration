@@ -130,7 +130,7 @@
                                            session('user_type')->user_type == 'FacStaff')
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="{{url('admin/setting/adminManage/edit/'.session('user_id'))}}">
+                                <a href="{{route('admin.showProfileEditPage')}}">
                                     <i class="icon-user"></i> {{Lang::get('resource.lbMProfile')}} </a>
                             </li>
                             <li class="divider"></li>

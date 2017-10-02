@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use App\Repositories\McourseStudyRepositoryImpl;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,15 @@ use Illuminate\Foundation\Inspiring;
 | simple approach to interacting with each command's IO methods.
 |
 */
+Log::info('console.php is called!');
+Log::info('Start Sync Program Data');
+$mcourse = new McourseStudyRepositoryImpl();
+$mcourse->updateAllCourse();
+Log::info('End Sync Program Data');
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->describe('Display an inspiring quote');
+
+//Artisan::command('sync', function () {
+    //$this->comment(Inspiring::quote());
+    //Log::info('Artisan::command sync is called!');
+    //$mcourse->updateAllCourse();
+//})->describe('Sync Program Detail');

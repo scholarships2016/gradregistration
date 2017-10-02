@@ -55,7 +55,9 @@
                             <tbody>
                                 <tr>
                                     <td width="300px" align="left">
-                                      {{$app->mailing_address}}
+                                      @php
+                                        echo nl2br($app->mailing_address);
+                                      @endphp
                                     </td>
                                     <td width="220px" align="right"></td>
                                 </tr>
@@ -155,7 +157,10 @@
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td rowspan="5">
-                                                      {{$app->mailing_address}}                   </td>
+                                                      @php
+                                                        echo nl2br($app->mailing_address);
+                                                      @endphp
+                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>

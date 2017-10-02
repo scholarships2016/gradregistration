@@ -132,7 +132,7 @@
             <a href="javascript:;">#</a>
           </th>
           <th>
-            <a href="javascript:;">{{ Lang::get('resource.lbSearchResultDegreeName')}}</a>
+            <a href="javascript:;">{{ Lang::get('resource.lbMajor')}}</a>
           </th>
           <th>
             <a href="javascript:;">{{ Lang::get('resource.lbSearchResultProgramType')}}</a>
@@ -272,10 +272,10 @@ return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [1],
 orderable: true,
-className: 'table-desc font-blue',
+className: 'table-desc',
 
 render: function (data, type, full, meta) {
-return (('{{session('locale')}}'=='th')? full.degreethai:full.degreeenglish) ;
+return (('{{session('locale')}}'=='th')? full.degreethai+' '+full.major_name:full.degreeenglish+' '+full.major_name_en) ;
 } },{
 targets: [2],
 orderable: true,

@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Repositories\McourseStudyRepositoryImpl;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,6 +27,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $filePath = storage_path('logs/sync-program-batch.log');
+        $schedule->call(function () {
+           //DB::table('recent_users')->delete();
+            $mcourse = new McourseStudyRepositoryImpl();
+            $mcourse->updateAllCourse();
+       })->daily()->appendOutputTo($filePath);
     }
 
     /**

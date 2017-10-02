@@ -125,9 +125,11 @@
                             </div>
                             <!--end row-->
                             <div class="tabbable-line tabbable-custom-profile">
+                              @if(session('user_id') && !session('user_type')->user_type)
                                 <a title="{{Lang::get('resource.lbManageCouse')}}" href="application/manageMyCourse"
                                    class="btn btn-circle red-pink btn-outline">
                                     <i class="icon-briefcase"></i> {{Lang::get('resource.lbManageCouse')}}</a>
+                                @endif
                                 <ul class="nav nav-tabs">
                                     <li class="">
                                     </li>
@@ -589,7 +591,7 @@
         $("#presentAddressForm select").attr('disabled', 'disabled');
         $("#presentAddressForm textarea").attr('disabled', 'disabled');
         $("#presentAddressForm button").attr('disabled', 'disabled');
-
+      
     }
 
     function disableKnowledgeSkill() {
@@ -620,6 +622,13 @@
         $("#workExpForm .repeater-delete-bt").hide();
 
     }
+    function disableChangePassword() {
+        $("#changePasswordForm input").attr('disabled', 'disabled');
+        $("#changePasswordForm select").attr('disabled', 'disabled');
+        $("#changePasswordForm textarea").attr('disabled', 'disabled');
+        $("#changePasswordForm #changePassBt").attr('disabled', 'disabled');
+
+    }
 
     function disableAll() {
         disablePersonalInfo();
@@ -627,6 +636,7 @@
         disableKnowledgeSkill();
         disableEduBackground();
         disableWorkExp();
+        disableChangePassword();
     }
 
     $(document).ready(function () {

@@ -81,7 +81,7 @@
                     <i class="icon-settings font-dark"></i>
                     <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
                   </div>
-              
+
                 </div>
                 <div class="portlet-body">
 
@@ -173,9 +173,11 @@
                   </div>
                   <div id="search-application-result" style="display:none;">
                   <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
-        <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
-<i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ
-</a>
+                  @if(session('user_type')->user_type == 'Admin' || in_array("5",session('user_permission')))
+                    <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
+                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ
+                    </a>
+                  @endif
                   <hr>
                   <hr>
                    <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
@@ -266,8 +268,8 @@
 
                                                 <div class="modal-footer">
                                                     <input type="hidden" id="appcantid">
-                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">Save changes</button>
+                                                    <button class="btn dark " type="button" id="btcloss" data-dismiss="modal">ปิด</button>
+                                                    <button class="btn green" type="button" id="btSave" data-dismiss="modal">บันทึก</button>
                                                 </div>
 
                                           </div>
@@ -348,22 +350,49 @@
 				},"json");
     });
     $('#sentmailall').click(function() {
-        var data = [];
-           $('#datatable_ajax tbody').find('tr').each(function () {
-         var row = $(this);
-         if (row.find('input[type="checkbox"]').is(':checked') &&
-            row.find('input[type="hidden"]').val().length > 0) {
-            data.push(row.find('input[type="hidden"]').val());
-         }
-    });
-         if(data.length>0){
-             sentmail(JSON.stringify(data));
-         }
+      swal({
+         title: "ยืนยันการดำเนินการ",
+         text: "ต้องการ ส่งอีเมล์แจ้งผลการพิจารณา ใช่หรือไม่?",
+         type: "warning",
+         showCancelButton: true,
+         closeOnConfirm: false,
+         showLoaderOnConfirm: true
+       }, function() {
+         setTimeout(function() {
+           var data = [];
+              $('#datatable_ajax tbody').find('tr').each(function () {
+            var row = $(this);
+            if (row.find('input[type="checkbox"]').is(':checked') &&
+               row.find('input[type="hidden"]').val().length > 0) {
+               data.push(row.find('input[type="hidden"]').val());
+            }
+           });
+            if(data.length>0){
+                sentmail(JSON.stringify(data));
+            }
+         }, 100);
+       });
+
+
+
+
      });
      function mailbyapp(app){
-         var data = [];
-         data.push(app);
-         sentmail(JSON.stringify(data));
+       swal({
+         title: "ยืนยันการดำเนินการ",
+         text: "ต้องการ ส่งอีเมล์แจ้งผลการพิจารณา ใช่หรือไม่?",
+         type: "warning",
+         showCancelButton: true,
+         closeOnConfirm: false,
+         showLoaderOnConfirm: true
+       }, function() {
+         setTimeout(function() {
+           var data = [];
+           data.push(app);
+           sentmail(JSON.stringify(data));
+         }, 100);
+       });
+
      }
 
 
@@ -439,7 +468,7 @@
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
                                               }
-                                              $("#single").append('<option cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
+                                              $("#single").append('<option cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (''+itemData.coursecodeno+' - '+itemData.thai+', '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
 
                                                         group = data[index].faculty_id;
@@ -456,6 +485,8 @@
 
 
  var table="";
+ var haveGenRecommendReportPermission = '{{(session('user_type')->user_type == 'Admin' || in_array("8",session('user_permission'))?'TRUE':'FALSE')}}';
+
 var TableDatatablesAjax = function () {
     var handle1 = function () {
 
@@ -506,18 +537,18 @@ render: function (data, type, full, meta) {
 return  '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" value="1" /><span></span></label>';
 } },{
 targets: [1],
-orderable: false,
+orderable: true,
 
 name: 'rownum',
 render: function (data, type, full, meta) {
 return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [2],
-orderable: false,
-
+orderable: true,
+className: 'font-blue',
 name: 'app_id',
 render: function (data, type, full, meta) {
-return  full.app_ida   ;
+return  '<a target="_blank" href="{{url("admin/docMyCourse/")}}/'+ full.applicant_id +'/' + full.application_id +'">'+full.app_ida+'</a>'   ;
 } },{
 targets: [3],
 orderable: true,
@@ -538,7 +569,7 @@ orderable: true,
 
 name: 'prog_type_name',
 render: function (data, type, full, meta) {
-return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-original-title="Enter comments" class="editable editable-pre-wrapped editable-click">'+ (( full.admission_remark !== null )? full.admission_remark : '') +' </a>' ;
+return    '<a onclick="javascript:setID('+full.application_id+','+full.applicant_id+');" class="commentsExam" data-type="textarea" data-pk="1" data-placeholder="กรอกหมายเหตุที่นี่..." data-original-title="กรอกหมายเหตุ" class="editable editable-pre-wrapped editable-click">'+ (( full.admission_remark !== null )? full.admission_remark : '') +' </a>' ;
 } },{
 targets: [6],
 orderable: true,
@@ -551,7 +582,7 @@ targets: [7],
 orderable: false,
 name: 'apply',
 render: function (data, type, full, meta) {
-return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-left" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li>  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_type")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  Edit Profile  </a></li>':'')+'</ul></div>') ;
+return ('<div class="btn-group"><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions <i class="fa fa-angle-down"></i></button><ul class="dropdown-menu pull-right" role="menu"><li><a href="javascript:mailbyapp(\''+ full.application_id + '\');"><i class="fa fa-envelope-o"></i> ส่งเมล์แจ้งผล </a> </li><li style="'+(haveGenRecommendReportPermission=="FALSE"?"display:none;":"")+'">  <a target="_blank" href="{{url("admin/ShowRecommenReport/")}}/'+full.application_id+'"><i class="fa fa-check-square-o"></i> ออกหนังสือรับรอง </a></li>  '+((full.user_create=="{{session('user_id')}}" || '{{session("user_type")->user_role}}'=='1')?  '<li>  <a target="_blank" href="javascript:cancel(' +full.application_id+ ');"><i class="	fa fa-trash-o"></i> ลบใบสมัคร </a></li><li>  <a target="_blank" href="{{url("admin/setting/applicantManage/edit/")}}/'+full.applicant_id+'"><i class="fa fa-edit"></i>  แก้ไข  </a></li>':'')+'</ul></div>') ;
 } }],
                 "bDestroy": true,
                 "ordering": true,

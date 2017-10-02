@@ -78,7 +78,7 @@ return [
     'lbContacts' => 'Contacts',
     'lbAddress' => 'Address',
     'lbTelContact' => '+662-218-3502 to 5',
-    'lbGradAddressOnPDF' => 'กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ<br/>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br/>ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน<br/>กรุงเทพฯ 10330',
+    'lbGradAddressOnPDF' => 'กลุ่มภารกิจสนับสนุนบัณฑิตศึกษา ฝ่ายวิชาการ&#13;&#10;บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย&#13;&#10;ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน&#13;&#10;กรุงเทพฯ 10330',
 
     //Menu
     'lbMHome' => 'Home',
@@ -125,7 +125,7 @@ return [
     'lbSearchResultMajor' => 'Major in ',
     'lbSearchResultFaculty' => '',
     //other Use
-    'lbYear' => 'Year',
+    'lbYear' => 'Academic Year',
     'lbDepartment' => 'Department',
     'lbSubject' => 'Major',
     'lbMajor' => 'Program Name',
@@ -190,7 +190,7 @@ return [
     'lbConfirmInstructions' => 'Please specify more information',
     'lbConfirmPaymentBank' => 'Bank for payment',
     'lbConfirmPaymentBank-1' => 'Bank',
-    'lbConfirmReferencePerson' => 'Reference person',
+    'lbConfirmReferencePerson' => 'Reference person (3 Persons)',
     'btnConfirmAddReferencePerson' => 'Add Reference Person',
     'lbConfirmTableReferencePersonFullname' => 'Firstname & Surname',
     'lbConfirmTableReferencePersonPosition' => 'Position',
@@ -298,4 +298,7 @@ return [
     'lbProfileVerifyWarning' => 'Warning',
     'lbProfileVerifyMessage' => 'Please update your personal informations before apply.',
     'lbProfileVerifyButton' => 'Update Profile',
+
+    'lbBtnDownloadAppForm' => 'Download Appplication Form (PDF)',
+    'lbSemesterNo' => 'Semester No. '
 ];

@@ -303,8 +303,10 @@ class ApplyController extends Controller {
     public function manageMyCourse() {
         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
         $countStatus = $this->ApplicationRepo->getDatacountByStatus(session('Applicant')->applicant_id);
+        $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id);
 
-        return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus]);
+        //chok
+        return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus, 'ApplicantData'=>$applicant]);
     }
 
     public function actionCourse($action, $id) {

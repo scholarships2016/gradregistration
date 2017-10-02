@@ -100,13 +100,14 @@
             <div class="row">
               <div class="col-md-12 col-sm-4">
                 <div class="todo-tasklist">
-
                   @foreach ($Apps as $curDis)
 
                   <div class="todo-tasklist-item todo-tasklist-item-border-pink">
 
                     <div class="todo-tasklist-item-title">
+
                       <h4>
+
                                           <b>
                                           {{$curDis->program_id}} {{  ($curDis->thai != '')?(session('locale')=='th')?  $curDis->thai : $curDis->english:'-'   }}
                                         </b>
@@ -125,6 +126,12 @@
                       ' }} {{(session('locale')=='th')? 'คณะ'.$curDis->faculty_name:$curDis->faculty_full.' '}}
                       <!--  {{  ($curDis->degree_name != '')?(session('locale')=='th')? $curDis->degree_name:$curDis->degree_name_en :'-'}}-->
 
+                    </div>
+                    <div class="todo-tasklist-item-text">
+                        <i class="icon-info"></i>
+                        {{Lang::get('resource.lbroundNo')}} {{$curDis->round_no}}, 
+                        {{Lang::get('resource.lbSemesterNo')}} {{$curDis->semester}},
+                        {{Lang::get('resource.lbYear')}} {{$curDis->academic_year}}
                     </div>
 
                     <hr/>
@@ -148,7 +155,7 @@
                             <li>
                               <a target="_blank" href="{{url('apply/docMyCourse/'.Crypt::encrypt($curDis->application_id))}}"> <i class="fa fa-file-pdf-o"></i> {{Lang::get('resource.lbdocMyCourse')}}     </a>
                             </li>
-                            @if($curDis->flow_id==2&& $curDis->is_active==1 && $curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+                            @if($curDis->flow_id==2&& $curDis->is_active==1 && $curDis->apply_method==1 && $ApplicantData->nation_id == '1')
                             <li>
                               <a target="_blank" href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($curDis->application_id)) }}"> <i class="fa fa-money"></i> {{Lang::get('resource.lbdocPayMyCourse')}}   </a>
 
@@ -238,7 +245,8 @@
                                     </div>
                                   </div>
                                 </li>
-                                @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+
+                                @if($curDis->apply_method==1 && $ApplicantData->nation_id == '1')
                                 <li class="mt-list-item">
                                   <div class="list-icon-container">
                                     <i class="font-red icon-close"></i>
@@ -267,7 +275,7 @@
                                                       <a href="javascript:;">{{Lang::get('resource.lbTodolistDocument')}}</a>
                                                   </h3>
                                     <div style="margin:10px 0px 10px 0px">
-                                      @if($curDis->apply_method==1 && session('Applicant')->nation_id == '001')
+                                      @if($curDis->apply_method==1 && $ApplicantData->nation_id == '1')
                                       <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbdocPaymentEnvidence')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
                                       <br/> @endif
                                       <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>

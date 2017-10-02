@@ -85,8 +85,8 @@
        </div>
    </div>
    <div class="row">
-       
-       
+
+
      <div class="form-group">
           <label class="col-md-1  col-md-offset-1 control-label">{{Lang::get('resource.lbConfirmPaymentBank-1')}} </label>
           <div class="col-md-3">
@@ -98,8 +98,8 @@
             </select>
           </div>
       </div>
-       
-       
+
+
 
    </div>
 <br/>
@@ -225,7 +225,7 @@
 
                                                 <div class="modal-footer">
                                                     <button class="btn dark " type="button" id="editdel" data-dismiss="modal">Close</button>
-                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save changes</button>
+                                                    <button class="btn green" type="button" id="editSave" data-dismiss="modal">Save</button>
                                                 </div>
 
                                           </div> </form></div></div>
@@ -450,7 +450,7 @@ $(function() {
 					}
 				},"json");
                                 }else{
-                              toastr.warning('plz,Reference Person Information Or Bank?');
+                              toastr.warning('กรุณากรอกธนาคารที่ชำระเงิน และ/หรือ บุคคลอ้างอิง <br/>Please select bank for payment and/or reference person.');
                         }
 
           });

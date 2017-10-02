@@ -46,6 +46,15 @@
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject font-dark sbold uppercase">รายการงานที่ต้องดำเนินการ</span>
                     </div>
+                    <div class="actions">
+                        <div class="btn-group btn-group-devided">
+                            <a href="{{route('admin.curriculum.showAdd')}}" target="_self"
+                               class="btn btn-circle green btn-outline sbold uppercase">
+                                ขอเปิดหลักสูตร
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="portlet-body">
                     <div class="table-container">
@@ -61,25 +70,32 @@
 
                                             <label class="mt-checkbox has-success">
                                                 <input type="checkbox" name="is_approve[]" value="1" checked/>
-                                                Draft
+                                                ฉบับร่าง - Draft
                                                 <span></span>
                                             </label>
-
+                                            <label class="mt-checkbox">
+                                                <input type="checkbox" name="is_approve[]" value="2" @if(session('user_type')->user_type == 'Admin') checked @endif/>
+                                                รออนุมัติ - Pending
+                                                <span></span>
+                                            </label>
+                                            <!--
                                             <label class="mt-checkbox" @if(session('user_type')->user_type !== 'Admin') style="display:none" @endif>
                                                 <input type="checkbox" name="is_approve[]" value="2" @if(session('user_type')->user_type == 'Admin') checked @endif/>
                                                 Pending
                                                 <span></span>
                                             </label>
 
+                                          -->
+
                                             <label class="mt-checkbox">
                                                 <input type="checkbox" name="is_approve[]" value="3" checked/>
-                                                Rejected
+                                                ส่งกลับให้แก้ไข - Rejected
                                                 <span></span>
                                             </label>
 
                                             <label class="mt-checkbox" style="display:none">
                                                 <input type="checkbox" name="is_approve[]" value="4" />
-                                                Approved
+                                                อนุมัติ - Approved
                                                 <span></span>
                                             </label>
                                         </div>
@@ -265,7 +281,7 @@
                                 html += '<i class="icon-speech font-green"></i>';
                                 html += '</a>&nbsp;';
                             }
-                            html += full.creator;
+                            html += full.name+' ('+full.nickname+')';
                             return html;
                         }
                     }, {
@@ -278,13 +294,13 @@
                         render: function (data, type, full, meta) {
                             var html = '';
                             if (full.is_approve == 1) {
-                                html = '<span class="label label-sm label-default">Draft</span>';
+                                html = '<span class="label label-sm label-default">ฉบับร่าง-Draft</span>';
                             } else if (full.is_approve == 2) {
-                                html = '<span class="label label-sm label-warning">Pending</span>';
+                                html = '<span class="label label-sm label-warning">รออนุมัติ-Pending</span>';
                             } else if (full.is_approve == 3) {
-                                html = '<span class="label label-sm label-danger">Rejected</span>';
+                                html = '<span class="label label-sm label-danger">ส่งกลับให้แก้ไข-Rejected</span>';
                             } else if (full.is_approve == 4) {
-                                html = '<span class="label label-sm label-success">Approved</span>';
+                                html = '<span class="label label-sm label-success">อนุมัติ-Approved</span>';
                             }
                             return html;
                         }
@@ -295,11 +311,16 @@
                             var editLink = '{{url("admin/management/curriculum/edit")}}'
 
                             var html = '';
-                            html += '<div class="btn-group btn-group-sm btn-group-solid">';
-                            html += '<a href="' + editLink + '/' + full.curriculum_id + '" class="btn btn-xs blue">';
-                            html += '<i class="fa fa-edit"></i>';
-                            html += '</a>';
-                            html += '</div>';
+                            if('{{session('user_type')->user_type}}' !== 'Admin' && full.is_approve == 2){
+                              //do nothing
+                            }else{
+
+                              html += '<div class="btn-group btn-group-sm btn-group-solid">';
+                              html += '<a href="' + editLink + '/' + full.curriculum_id + '" class="btn btn-xs blue">';
+                              html += '<i class="fa fa-edit"></i> แก้ไข';
+                              html += '</a>';
+                              html += '</div>';
+                          }
                             return html;
                         }
                     }

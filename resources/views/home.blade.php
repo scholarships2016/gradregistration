@@ -39,11 +39,14 @@
                         <div class="row margin-bottom-40">
                             <!-- Start Left Panel -->
                             <div class="col-md-8">
+
+
                                 <div class="row margin-bottom-20 about-header">
                                     <div class="col-md-12">
+                                      @if($Applys)
                                         <h1>{{Lang::get('resource.lbHomeOpenRegister')}}</h1>
-                                        @if($Applys)
-                                         <h3>{!!(session('locale')=='th'?Lang::get('resource.lbSemester').''.($Applys->semester==1?'ต้น':'ปลาย'):'<span style="text-transform: lowercase;">'.(($Applys->semester==1)?'1st ':'2nd').'</span>'.Lang::get('resource.lbSemester').',') !!}  {{Lang::get('resource.lbHomeYear').' '.$Applys->academic_year}}  </h3>
+
+                                         <h3>{!!(session('locale')=='th'?Lang::get('resource.lbSemester').''.($Applys->semester==1?'ต้น':'ปลาย'):'<span style="text-transform: lowercase;">'.(($Applys->semester==1)?'1st ':'2nd ').'</span>'.Lang::get('resource.lbSemester').',') !!}  {{Lang::get('resource.lbHomeYear').' '.$Applys->academic_year}}  </h3>
                                         <h4>{{Lang::get('resource.lbroundNo').' '.$Applys->round_no.' '.Lang::get('resource.lbStartDate').' '. $Applys->start_date->format('d/m/Y').' '. Lang::get('resource.lbFromTo') .' '.$Applys->end_date->format('d/m/Y')}} </h4>
                                           @if(session('user_id'))
                                             <a href="apply"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.lbSelect')}}  </button></a>
@@ -51,9 +54,10 @@
                                           @if(!session('user_id'))
                                             <a href="apply/register"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.lbSelect')}}  </button></a>
                                           @endif
-   @endif
+                                     @endif
                                     </div>
                                 </div>
+
                                  @foreach ($NewsList as $news)
                                 <div class="row margin-bottom-20">
                                     <div class="col-lg-12">
@@ -78,8 +82,9 @@
                             </div>
                             <!-- End Left Panel -->
                             <!-- Start Right Panel -->
+
                             <div class="col-md-4">
-                              @if(session('user_id'))
+                              @if(session('user_id') && session('user_type')->user_type=='applicant')
                               <div class="row margin-bottom-20"><a href="{{url('apply')}}">
                                   <div class="col-md-12">
                                       <div class="portlet light">
@@ -95,8 +100,9 @@
                                       </div>
                                   </div></a>
                                 </div>
-                                      @endif
-                                @if(session('user_id'))
+                                @endif
+
+                                @if(session('user_id') && session('user_type')->user_type=='applicant')
                                 <div class="row margin-bottom-20"><a href="{{url('application/manageMyCourse')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">
@@ -130,6 +136,23 @@
                                     </div></a>
                                         </div>
                                           @endif
+                                           @if(!session('user_id') || session('user_type')->user_type !== 'applicant')
+                                          <div class="row margin-bottom-20"><a href="{{url('apply/register')}}">
+                                              <div class="col-md-12">
+                                                  <div class="portlet light">
+                                                      <div class="card-icon">
+                                                          <i class="icon-note font-green-haze theme-font"></i>
+                                                      </div>
+                                                      <div class="card-title">
+                                                          <span>{{Lang::get('resource.lbMCurriculum')}}</span>
+                                                      </div>
+                                                      <div class="card-desc">
+                                                          <span> {{Lang::get('resource.lbHomeApplyDescription')}} </span>
+                                                      </div>
+                                                  </div>
+                                              </div></a>
+                                            </div>
+                                            @endif
                                     <div class="row margin-bottom-20"><a href="{{url('contact')}}">
                                     <div class="col-md-12">
                                         <div class="portlet light">

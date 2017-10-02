@@ -50,7 +50,7 @@ class UserRepositoryImpl extends AbstractRepositoryImpl implements UserRepositor
             //Creator Modifier
             if (array_key_exists('modifier', $data))
                 $curObj->modifier = $data['modifier'];
-            if (array_key_exists('creator', $data))
+            if (array_key_exists('creator', $data) && empty($curObj->user_id))
                 $curObj->creator = $data['creator'];
 
             $curObj->save();
@@ -101,7 +101,7 @@ class UserRepositoryImpl extends AbstractRepositoryImpl implements UserRepositor
                 ->leftJoin('tbl_permission as tblp', function ($join) {
                     $join->on('tblp.permission_id', '=', 'up.permission_id');
                 })
-                ->groupBy('u.user_id', 'u.user_name', 'u.name','u.nickname', 'u.role_id', 'u.last_login');
+                ->groupBy('u.user_id', 'u.user_name', 'u.name', 'u.nickname', 'u.role_id', 'u.last_login');
             return $query->get();
         } catch (\Exception $ex) {
             throw $ex;
@@ -127,5 +127,23 @@ class UserRepositoryImpl extends AbstractRepositoryImpl implements UserRepositor
         }
     }
 
+    public function doSave2(array $data)
+    {
+        DB::beginTransaction();
+        try {
+
+            $user = $this->findOrFail($data['user_id']);
+            $user->nickname = $data['nickname'];
+            $user->user_email = $data['user_email'];
+            $user->modifier = $data['modifier'];
+            $user->save();
+
+            DB::commit();
+            return $user;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+    }
 
 }

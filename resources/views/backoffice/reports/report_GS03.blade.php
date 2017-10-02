@@ -80,10 +80,12 @@
                                                           <i class="fa fa-print"></i> PDF </a>
               </li>
 
+              <!--
               <li>
-                <a href="javascript:;">
-                                                          <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                  <a href="javascript:;">
+                      <i class="fa fa-file-excel-o"></i> Export to Excel </a>
               </li>
+            -->
             </ul>
           </div>
         </div>
@@ -178,7 +180,7 @@
         </div>
         <div id="search-application-result" style="display:none;">
           <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
- 
+
           <hr>
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
@@ -200,7 +202,7 @@
                           <table id="datatable_ajax" class="table table-hover table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th> ลำดับ </th>                                
+                                <th> ลำดับ </th>
                                 <th> ชื่อ-สกุล </th>
                                 <th> มีสิทธิ์สอบ </th>
                                 <th> ไม่มีสิทธิ์สอบ </th>
@@ -209,7 +211,7 @@
                                     <th> คะแนนภาษาอังกฤษ </th>
                                  </tr>
                             </thead>
-                      
+
                           </table>
                         </div>
                           <br><br>
@@ -236,7 +238,7 @@
     </div>
     <!-- END EXAMPLE TABLE PORTLET-->
   </div>
- 
+
 </div>
 @stop
 
@@ -272,8 +274,8 @@
       $("#citiz").val('');
       $("#apply_comment").val('');
 
-  }); 
- 
+  });
+
                   $('#btnSearch1').click(function(){
                                     $.ajax({
 					type: "get",
@@ -305,8 +307,8 @@
         //Show serach program result
         $('#search-program-result').fadeIn( "slow", "linear" );
         $('#search-application-result').fadeOut( "slow", "linear" );
-        
-       
+
+
       });
       
       
@@ -325,7 +327,7 @@ jQuery(document).ready(function() {
     $('#search-program-result').fadeOut( "slow", "linear" );
     $('#search-application-result').fadeOut( "slow", "linear" );
   });
-  
+
 });
 
 
@@ -335,14 +337,14 @@ jQuery(document).ready(function() {
         $('#lbYear').text($('#year').val());
            TableDatatablesAjax.init();
          $('#search-application-result').fadeIn( "slow", "linear" );
-      
+
        });
 
- 
- 
- 
- 
- 
+
+
+
+
+
 var table="";
 var TableDatatablesAjax = function () {
     var handle1 = function () {
@@ -351,8 +353,8 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
              dataTable: {
-                "bStateSave": false,  
-                "pageLength": 1000,  
+                "bStateSave": false,
+                "pageLength": 1000,
 
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourseReport') !!}",
@@ -396,18 +398,18 @@ targets: [5],
 render: function (data, type, full, meta) {
 return    full.app_ida   ;
 } },{
-targets: [6], 
+targets: [6],
 render: function (data, type, full, meta) {
 return   ((full.eng_test_score_admin != null)?full.eng_test_score_admin:full.eng_test_score)  ;
 }}  ],
-                "bDestroy": true, 
+                "bDestroy": true,
                 "responsive": false,
               "paging":   false,
         "ordering": false,
         "info":     false
             },
-            
-        }); 
+
+        });
     }
 
     return {

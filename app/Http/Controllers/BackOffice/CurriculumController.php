@@ -168,12 +168,20 @@ class CurriculumController extends Controller
     public function doSave(Request $request)
     {
         try {
+            $this->WLog('func=doSave', self::$SECTION_NAME, null);
+
             $data = $request->all();
             $who = session('user_id');
             $data['rounds'] = json_decode($data['rounds'], true);
             $data['programs'] = json_decode($data['programs'], true);
             $data['creator'] = $who;
             $data['modifier'] = $who;
+          
+            $semester = explode('|', $data['semester']);
+            if ($this->curriculumRepo->checkCreatableCurriculumByCriteria($data['apply_method'], $data['programs'], $semester[0], $semester[1], $data['curriculum_id'])) {
+                return response()->json(Util::jsonResponseFormat(3, null, Util::CANNOT_CREATE_CURRICULUM1));
+            }
+
             $currObj = $this->curriculumRepo->saveCurriculumSetting($data);
             $result = $this->curriculumRepo->getCurriculumInfoById($currObj->curriculum_id);
 
@@ -187,7 +195,6 @@ class CurriculumController extends Controller
             $audit['detail'] = (empty($data['curriculum_id']) ? 'create,' : 'update,') . 'curriculum_id=' . $currObj->curriculum_id;
             $audit['performer'] = $who;
             $this->auditRepo->save($audit);
-            $this->WLog('func=doSave', self::$SECTION_NAME, null);
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
             $this->WLog('func=doSave', self::$SECTION_NAME, $ex->getMessage());

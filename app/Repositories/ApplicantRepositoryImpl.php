@@ -64,7 +64,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     public function searchByCriteria($criteria = null, $paging = false) {
         $result = null;
         try {
-            $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
+            $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')            
                     ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
@@ -406,7 +406,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $mainQuery = DB::table('applicant as appt')
                     ->select(
-                            'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip'
+                            'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip', 'appt.creator'
                     )
                     ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
                         $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
@@ -417,7 +417,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                     ->leftJoin('curriculum_program as curr_prog', function ($join) {
                         $join->on('curr_prog.curr_prog_id', '=', 'app.curr_prog_id');
                     })
-                    ->groupBy('appt.applicant_id', 'appt.stu_citizen_card', 'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name', 'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en', 'appt.stu_email', 'appt.stu_phone', 'appt.created', 'appt.last_login', 'appt.ipaddress');
+                    ->groupBy('appt.applicant_id', 'appt.stu_citizen_card', 'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name', 'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en', 'appt.stu_email', 'appt.stu_phone', 'appt.created', 'appt.last_login', 'appt.ipaddress','appt.creator');
 
             $recordsTotal = $mainQuery->get()->count();
 

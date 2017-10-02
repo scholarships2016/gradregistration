@@ -38,6 +38,7 @@ class Util
     const CHANGE_PASS_SUCCESS = 'เปลี่ยนรหัสผ่านสำเร็จ<br/>Changing password is successful.';
     const CHANGE_PASS_ERROR = 'เปลี่ยนรหัสผ่านไม่สำเร็จ<br/>Changing password failed.';
     const UPDATE_SUCCESS = 'ปรับปรุงข้อมูลสำเร็จ<br/>Updating is successful.';
+    const CANNOT_CREATE_CURRICULUM1 = 'ไม่สามารถขอเปิดหลักสูตรซ้ำได้<br/>Unable to create curriculum.';
 
 
     const SUCCESS_DELETE = 'ลบข้อมูลสำเร็จ';
@@ -82,6 +83,15 @@ class Util
     const AUDIT_ACT_DELETE = 4;
     const AUDIT_ACT_APPROVE = 5;
     const AUDIT_ACT_REJECT = 6;
+
+
+    /*
+     * Degree Level Name
+     */
+    const DOCTOR_TH = 'ปริญญาเอก';
+    const HIGH_DIPLOMA_TH = 'ประกาศนียบัตรบัณฑิตชั้นสูง';
+    const MASTER_TH = 'ปริญญาโท';
+    const DIPLOMA_TH = 'ประกาศนียบัตรบัณฑิต';
 
     /*Section Name*/
     const SECTION_CURRICULUM = 'Curriculum';
@@ -170,12 +180,13 @@ class Util
             throw $ex;
         }
     }
+
     public static function prepareDataForDropdownListDistrict($datas, $keyName, $valueName, $valueNameEn)
     {
         $result = array();
         try {
             foreach ($datas as $data) {
-                $result = array_add($result, $data[$keyName], $data[$valueName].' - '.$data[$valueNameEn]);
+                $result = array_add($result, $data[$keyName], $data[$valueName] . ' - ' . $data[$valueNameEn]);
             }
         } catch (\Exception $ex) {
             throw $ex;

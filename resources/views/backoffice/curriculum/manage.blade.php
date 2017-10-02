@@ -195,6 +195,7 @@
 <script type="application/javascript">
 
     var grid;
+    var user_type = '{{session('user_type')->user_type}}';
 
     var select2Option = {
         placeholder: '--เลือก--',
@@ -368,16 +369,19 @@
                             html += '<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions';
                             html += '<i class="fa fa-angle-down"></i>';
                             html += '</button>';
-                            html += '<ul class="dropdown-menu pull-left" role="menu">';
+                            html += '<ul class="dropdown-menu pull-right" role="menu">';
                             html += '<li>';
                             html += '<a href="' + editLink + '/' + full.curriculum_id + '"><i class="fa fa-file-o"></i> ดูรายละเอียด </a>';
                             html += '</li>';
                             html += '<li>';
                             html += '<a href="' + editLink + '/' + full.curriculum_id + '"><i class="fa fa-edit"></i> แก้ไข </a>';
                             html += '</li>';
+                            if(user_type =="Admin" || (user_type !="Admin" && full.is_approve ==1)){
                             html += '<li>';
                             html += '<a onclick="doDelete(\'' + full.curriculum_id + '\')"><i class="fa fa-trash-o"></i> ลบ </a>';
                             html += '</li>';
+                            }
+
                             html += '<li class="divider"> </li>';
                             html += '<li>';
                             html += '<a href="javascript:;"><i class="fa fa-copy"></i> Duplicate </a>';
