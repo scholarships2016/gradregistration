@@ -131,10 +131,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
 
 
-        Route::get('report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
-        Route::get('report/B21', 'ManageApplyController@showReportB21')->name('report.B21');
-         Route::get('report/GS05', 'ManageApplyController@showReportGS05')->name('report.GS05');
-        Route::get('report/ReportExamMore', 'ManageApplyController@showReportExamMore')->name('report.ReportExamMore');
+
         Route::get('getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
         Route::get('printRegisterCourseReport/{flow}/{curr_act_id}/{sub_major}/{program_type_id}/{thaiDegree}/{program_id}/{print}/{suser}/{sposistion}/{txt1}/{reportNmae}', 'ManageApplyController@printRegisterCourseReport')->name('admin.printRegisterCourseReport');
         Route::get('printMoreExamReport/{year}/{semester}/{roundNo}/{faculty_id}/{flow}/{sub_major}/{program_type_id}/{major_id}/{print}', 'ManageApplyController@printMoreExamReport')->name('admin.printMoreExamReport');
@@ -205,6 +202,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('applicant-summary-report', 'BackOffice\ReportController@showReport03Page')->name('admin.report.showReport03Page');
             Route::get('doReport03', 'BackOffice\ReportController@doReport03')->name('admin.report.doReport03');
             Route::get('doReport03Excel', 'BackOffice\ReportController@doReport03Excel')->name('admin.report.doReport03Excel');
+
+
+            Route::get('gs03-report', 'ManageApplyController@showReportGS03')->name('report.GS03');
+            Route::get('b21-report', 'ManageApplyController@showReportB21')->name('report.B21');
+            Route::get('gs05-report', 'ManageApplyController@showReportGS05')->name('report.GS05');
+            Route::get('multiple-application-report', 'ManageApplyController@showReportExamMore')->name('report.ReportExamMore');
 
         });
 
