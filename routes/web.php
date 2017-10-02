@@ -206,6 +206,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('doReport03', 'BackOffice\ReportController@doReport03')->name('admin.report.doReport03');
             Route::get('doReport03Excel', 'BackOffice\ReportController@doReport03Excel')->name('admin.report.doReport03Excel');
 
+            Route::get('applicant-application-data', 'BackOffice\ReportController@showReport04Page')->name('admin.report.showReport04Page');
+            Route::get('doReport04Excel', 'BackOffice\ReportController@doReport04Excel')->name('admin.report.doReport04Excel');
+
         });
 
         Route::get('profile', 'BackOffice\AdminManagementController@showProfileEditPage')->name('admin.showProfileEditPage');
