@@ -10,6 +10,11 @@ interface ReportRepository
 
     public function getReport03DataByCriteria($criteria = null);
 
+    public function getReport04ApplicationDataByCriteria($criteria = null);
+
+    public function getReport04ApplicantDataByCriteria($criteria = null);
+
+    public function getFlowApplyForDropdown();
 }
  
 
