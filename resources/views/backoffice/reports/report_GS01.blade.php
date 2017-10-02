@@ -208,10 +208,10 @@
                                     <button type="button" id="reportBt" class="btn green"><i
                                                 class="fa fa-file-text-o"></i> ออกรายงาน
                                     </button>
-                                    <button type="button" id="excelBt" class="btn green">
+                                    <button type="button" id="excelBt" value="xls" onclick="exportToFile(this)" class="btn green">
                                         <i class="fa fa-file-excel-o"></i> Export เป็นไฟล์ Excel
                                     </button>
-                                    <button type="button" id="txtBt" class="btn green">
+                                    <button type="button" id="txtBt" value="txt" onclick="exportToFile(this)" class="btn green">
                                         <i class="fa fa-file-text-o"></i> Export เป็นไฟล์ Text
                                     </button>
                                 </div>
@@ -313,6 +313,11 @@
         $("#resultTbl tfoot").append(obj.tfoot);
     }
 
+    function exportToFile(e){
+        var url = '{{route('admin.report.doReport02Excel')}}?';
+        url += $("#searchForm").serialize()+'&fileType='+e.value;
+        location.href = url;
+    }
 
     $(document).ready(function () {
         initForm();
@@ -328,12 +333,6 @@
             });
         });
 
-        $("#excelBt").on('click', function () {
-            var url = '{{route('admin.report.doReport02Excel')}}?';
-            url += $("#searchForm").serialize();
-
-            location.href = url;
-        });
     });
 
 </script>
