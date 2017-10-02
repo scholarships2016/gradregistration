@@ -126,7 +126,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::get('report/GS03', 'ManageApplyController@showReportGS03')->name('report.GS03');
+        Route::get('report/B21', 'ManageApplyController@showReportB21')->name('report.B21');
+         Route::get('report/GS05', 'ManageApplyController@showReportGS05')->name('report.GS05');
+        Route::get('report/ReportExamMore', 'ManageApplyController@showReportExamMore')->name('report.ReportExamMore');
         Route::get('getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
+        Route::get('printRegisterCourseReport/{flow}/{curr_act_id}/{sub_major}/{program_type_id}/{thaiDegree}/{program_id}/{print}/{suser}/{sposistion}/{txt1}/{reportNmae}', 'ManageApplyController@printRegisterCourseReport')->name('admin.printRegisterCourseReport');
+        Route::get('printMoreExamReport/{year}/{semester}/{roundNo}/{faculty_id}/{flow}/{sub_major}/{program_type_id}/{major_id}/{print}', 'ManageApplyController@printMoreExamReport')->name('admin.printMoreExamReport');
+        Route::get('getRegisterCourseMoreReport', 'ManageApplyController@getRegisterCourseMoreReport')->name('admin.getRegisterCourseMoreReport');
 
         //GS05
         Route::get('ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
@@ -248,7 +254,6 @@ Route::group(['middleware' => 'auth'], function () {
         //ProfilePic
         Route::get('/getProfileImg', 'ProfileController@getProfileImg')->name('profile.getProfileImg');
     });
-
 });
 
 

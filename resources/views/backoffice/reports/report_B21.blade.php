@@ -57,7 +57,7 @@
   </div>--}}
 </div>
 @stop @section('pagetitle')
-<h1 class="page-title">รายงานผู้มีสิทธิ์สอบ [GS03]
+<h1 class="page-title">รายชื่อผู้ผ่านการสอบคัดเลือกเข้าศึกษาในระดับบัณฑิตศึกษา
 
 </h1> @stop @section('maincontent')
 <div class="row">
@@ -67,7 +67,7 @@
       <div class="portlet-title">
         <div class="caption font-dark">
           <i class="icon-settings font-dark"></i>
-          <span class="caption-subject bold uppercase">ข้อมูลผู้สมัคร</span>
+          <span class="caption-subject bold uppercase">ข้อมูลผู้ผ่านการสอบคัดเลือกเข้าศึกษาในระดับบัณฑิตศึกษา</span>
         </div>
         <div class="actions">
           <div class="btn-group pull-right">
@@ -183,7 +183,7 @@
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
             <div><input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
-                <div class="caption" style="text-align: center">รายชื่อผู้สมัตรระดับ<label id="lbDegree" name="lbDegree"></label>แยกตามหลักสูตร(GS03)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
+                <div class="caption" style="text-align: center">รายชื่อผู้ผ่านการสอบคัดเลือกเข้าศึกษาในระดับบัณฑิตศึกษา จุฬาลงกรณ์มหวิทยาลัย<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
      <div class="portlet box pink-chula">
                       <div class="portlet-title">
                         <div class="caption">
@@ -200,22 +200,28 @@
                           <table id="datatable_ajax" class="table table-hover table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th> ลำดับ </th>                                
-                                <th> ชื่อ-สกุล </th>
-                                <th> มีสิทธิ์สอบ </th>
-                                <th> ไม่มีสิทธิ์สอบ </th>
-                                <th> หมายเหตุ </th>
-                                  <th> เลขที่ใบสมัคร </th>
-                                    <th> คะแนนภาษาอังกฤษ </th>
+                                <th> ที่ </th>                                
+                                <th> ชือ - นามสกุล <br> (เรียงตามเลขทีสมัคร) </th>
+                                <th> สัญชาติ </th>
+                                <th> สามัญ  </th>
+                                <th> ทดลองศึกษา </th>
+                                  <th> สํารองเรียง<br>ตามลําดับ  </th>
+                                   <th> GPA เกรดเฉลีย  </th>
+                                   <th> คะแนน<br>ภาษาอังกฤษ  </th>
+                                     <th> หมายเหตุ </th>
                                  </tr>
                             </thead>
                       
                           </table>
                         </div>
                           <br><br>
-                          ชื่อผู้ลงนาม <input type="text"   class="form-control" placeholder="ชื่อ-สกุล ผู้ลงนาม" id="namekey" name="namekey" ><br>
-                          ตำแหน่งผู้ลงนาม<input type="text"   class="form-control" placeholder="ตำแหน่งผู้ลงนาม" id="positionkey"name="positionkey" ><br>
-
+                          ทั้งนี้ <input type="text"   class="form-control" placeholder="รายละเอียด" id="text1" name="text1" ><br>
+                          ครั้งที่ <input type="text"   class="form-control" placeholder="ครั้งที่" id="text2" name="text2" ><br>
+                          วันที่ <input type="text"   class="form-control" placeholder="วันที่" id="text3" name="text3" ><br><br>
+                          ชื่อผู้ลงนาม1 <input type="text"   class="form-control" placeholder="ชื่อ-สกุล ผู้ลงนาม" id="namekey" name="namekey" ><br>
+                          ตำแหน่งผู้ลงนาม1<input type="text"   class="form-control" placeholder="ตำแหน่งผู้ลงนาม" id="positionkey"name="positionkey" ><br><br>
+                            ชื่อผู้ลงนาม2 <input type="text"   class="form-control" placeholder="ชื่อ-สกุล ผู้ลงนาม" id="namekey2" name="namekey2" ><br>
+                          ตำแหน่งผู้ลงนาม2<input type="text"   class="form-control" placeholder="ตำแหน่งผู้ลงนาม" id="positionkey2"name="positionkey2" ><br>
                       </div>
                     </div>
 
@@ -225,10 +231,11 @@
           <div class="form-actions">
             <div class="row">
               <div class="col-md-offset-4 col-md-8">
-                  <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
+                   <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
                  <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>
                 <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
-              </div>
+              
+                </div>
             </div>
           </div>
         </div>
@@ -315,8 +322,11 @@
             var submajor = (($('option:selected','#single').attr('smj'))? $('option:selected','#single').attr('smj'):null) ;
         var name =$('#namekey').val();
         var position = $('#positionkey').val();
+        var name2 =$('#namekey2').val();
+        var position2 = $('#positionkey2').val();
+        var txt1= $('#text1').val()+'<br>ครั้งที่ '+$('#text2').val()+'  วันที่ '+$('#text3').val().replace('/','-').replace('/','-');
         
-        window.open(("{{ url('admin/printRegisterCourseReport').'/3,4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name +'/'+position+'/N/GS03' ),'_blank');                 
+       window.open(("{{ url('admin/printRegisterCourseReport').'/4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name+'|'+name2 +'/'+position+'|'+position2+'/'+txt1+'/B21' ),'_blank');                 
         } 
  
 jQuery(document).ready(function() {
@@ -330,8 +340,7 @@ jQuery(document).ready(function() {
 
 
     $('#search_Select').click(function(){
-         $('#lbDegree').text($('option:selected','#single').attr('lbthai'));
-        $('#lbSem').text($('option:selected','#semester').text());
+         $('#lbSem').text($('option:selected','#semester').text());
         $('#lbYear').text($('#year').val());
            TableDatatablesAjax.init();
          $('#search-application-result').fadeIn( "slow", "linear" );
@@ -364,7 +373,7 @@ var TableDatatablesAjax = function () {
                                 program_id : $('option:selected','#single').attr('pg'),
                                 program_type_id : $('option:selected','#single').attr('pt'),
                                  thaiDegree :$('option:selected','#single').attr('lbthai') ,
-                                 flow : '3,4,5',
+                                 flow : '4,5',
                                _token:     '{{ csrf_token()}}'
                                                }
                 },
@@ -382,23 +391,32 @@ return  (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' +
 } },{
 targets: [2],
 render: function (data, type, full, meta) {
-return   ' <input type="checkbox"  disabled readonly '+((full.exam_status==2)?'checked':'')+' class="checkboxes"  />' ;
+return   full.nation_name+'<br>['+full.nation_name_en+']' ;
 }},{
 targets: [3],
 render: function (data, type, full, meta) {
-return    ' <input type="checkbox"  disabled readonly '+((full.exam_status==3)?'checked':'')+' class="checkboxes"  />'  ;
+return     ' <input type="checkbox"  disabled readonly '+((full.admission_status_id == '5'||full.admission_status_id == 'B'||full.admission_status_id == 'C')?'checked':'')+' class="checkboxes"  />'   ;
 } },{
 targets: [4],
 render: function (data, type, full, meta) {
-return    full.exam_remark  ;
+return   ' <input type="checkbox"  disabled readonly '+((full.admission_status_id == '7'||full.admission_status_id == 'D'||full.admission_status_id == 'E')?'checked':'')+' class="checkboxes"  />'    ;
 } },{
 targets: [5],
 render: function (data, type, full, meta) {
-return    full.app_ida   ;
+return   ' <input type="checkbox"  disabled readonly '+((full.admission_status_id == 'A')?'checked':'')+' class="checkboxes"  />'    ;
 } },{
-targets: [6], 
+targets: [6],
 render: function (data, type, full, meta) {
-return   ((full.eng_test_score_admin != null)?full.eng_test_score_admin:full.eng_test_score)  ;
+return    full.edu_gpax  ;
+} },{
+targets: [7],
+render: function (data, type, full, meta) {
+return    ((full.eng_test_score_admin != null)?   (full.eng_test_score_admin+'('+full.engTAdmin+')' )   :  (full.eng_test_score+'('+full.engT+')'))  ;
+} },{
+ 
+targets: [8], 
+render: function (data, type, full, meta) {
+return   full.admission_remark ;
 }}  ],
                 "bDestroy": true, 
                 "responsive": false,

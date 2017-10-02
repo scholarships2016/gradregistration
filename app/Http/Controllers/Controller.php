@@ -11,24 +11,25 @@ use App\Repositories\FileRepositoryImpl;
 use App\Repositories\Contracts\AudittrailRepository;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Input;
 use \Crypt;
+
 class Controller extends BaseController {
 
-    use AuthorizesRequests,DispatchesJobs,ValidatesRequests;
+    use AuthorizesRequests,
+        DispatchesJobs,
+        ValidatesRequests;
 
     protected $FileRepo;
-    protected $excels;
+    protected $excelRepo;
     protected $auditRepo;
 
-    public function __construct(FileRepositoryImpl $FileRepo = null, Excel $excels = null, AudittrailRepository $auditRepo = null)
-    {
+    public function __construct(FileRepositoryImpl $FileRepo = null,  Excel $excels = null, AudittrailRepository $auditRepo = null) {
         $this->FileRepo = $FileRepo;
-        $this->excels = $excels;
+        $this->excelRepo = $excels;
         $this->auditRepo = $auditRepo;
     }
-
 
     public function doDownloadFile(Request $request) {
         try {
@@ -43,9 +44,10 @@ class Controller extends BaseController {
 
             return response()->download($path, $file->file_origi_name);
         } catch (\Exception $ex) {
-
+            
         }
     }
+
     public function doDownloadMediaFile(Request $request) {
         try {
 
@@ -61,7 +63,7 @@ class Controller extends BaseController {
 
             return response()->download($path, $file->file_origi_name);
         } catch (\Exception $ex) {
-
+            
         }
     }
 
@@ -72,7 +74,7 @@ class Controller extends BaseController {
 
             return $path;
         } catch (\Exception $ex) {
-
+            
         }
     }
 
@@ -91,10 +93,10 @@ class Controller extends BaseController {
 
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
 
-        $thaiweek = [ "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัส", "วันศุกร์", "วันเสาร์","วันอาทิตย์"];
+        $thaiweek = [ "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัส", "วันศุกร์", "วันเสาร์", "วันอาทิตย์"];
         $thaimonth = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
 
-        $res = $thaiweek[date('N', strtotime($date))-1] . " ที่ " . date('j', strtotime($date)) . " " . $thaimonth[date('m', strtotime($date)) - 1] . " พ.ศ. " . (date('Y', strtotime($date)) + 543);
+        $res = $thaiweek[date('N', strtotime($date)) - 1] . " ที่ " . date('j', strtotime($date)) . " " . $thaimonth[date('m', strtotime($date)) - 1] . " พ.ศ. " . (date('Y', strtotime($date)) + 543);
 
         return $res;
     }
@@ -119,7 +121,7 @@ class Controller extends BaseController {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
             $data = $this->excels->load($path, function($reader) {
-
+                        
                     })->get()[0];
 
             if (!empty($data) && $data->count()) {
@@ -173,15 +175,14 @@ class Controller extends BaseController {
     }
 
     public function exportExcel($filname, $data) {
-
-        $this->excels->create($filname, function($excel) use($data) {
-            $excel->sheet('Sheet1', function($sheet) use($data) {
-                $sheet->fromArray($data);
-            });
-        })->export('xls');
-
-
-        return;
+ 
+		return Excel::create($filname, function($excel) use ($data) {
+			$excel->sheet('mySheet', function($sheet) use ($data)
+	        {
+				$sheet->fromArray($data);
+	        });
+		})->download('xlsx');
+      
     }
 
 }
