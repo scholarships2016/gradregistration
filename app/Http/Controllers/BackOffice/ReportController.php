@@ -70,6 +70,19 @@ class ReportController extends Controller
         }
     }
 
+    public function showReport04Page(Request $request)
+    {
+        try {
+            $acaYears = $this->applySetRepo->getDistinctAcademicYear();
+            $facs = $this->facRepo->getAllFacultyForDropdown();
+            $progs = $this->progTypeRepo->getAllProgramTypeForDropdown();
+            $flows = $this->rptRepo->getFlowApplyForDropdown();
+            return view("backoffice.reports.report_GS04", ["acaYears" => $acaYears, "facs" => $facs, "progs" => $progs, "flows" => $flows]);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
     public function doReport01(Request $request)
     {
         try {
@@ -278,11 +291,6 @@ class ReportController extends Controller
         }
     }
 
-    public function doReport04(Request $request)
-    {
-
-    }
-
     public function doReport01Excel(Request $request)
     {
         try {
@@ -292,6 +300,10 @@ class ReportController extends Controller
             $param['who'] = $who;
             $param['user_role'] = $userType->user_role;
             $param['user_type'] = $userType->user_type;
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
+
 
             $data = $this->rptRepo->getReport01DataByCriteria($param);
 
@@ -299,7 +311,7 @@ class ReportController extends Controller
                 $excel->sheet('สรุปยอดการชำระเงิน', function ($sheet) use ($data) {
 
                     $sheet->setFontFamily('TH Sarabun New');
-
+                    $sheet->setFontSize(14);
                     $sheet->appendRow(array(
                         '#', 'หลักสูตร', 'ประเภทหลักสูตร', 'จำนวนผู้สมัคร',
                         'บมจ.ธนาคารกรุงไทย', 'บมจ.ธนาคารไทยพาณิชย์', 'บมจ.ธนาคารธหารไทย', 'บมจ.ธนาคารธนาชาติ'
@@ -343,7 +355,7 @@ class ReportController extends Controller
                         ));
                     }
                 });
-            })->export('xls');
+            })->export($param['fileType']);
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -358,12 +370,16 @@ class ReportController extends Controller
             $param['who'] = $who;
             $param['user_role'] = $userType->user_role;
             $param['user_type'] = $userType->user_type;
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
 
             $data = $this->rptRepo->getReport02DataByCriteria($param);
             Excel::create('applicants', function ($excel) use ($data) {
                 $excel->sheet('รายชื่อผู้สมัครเข้าศึกษา (GS01)', function ($sheet) use ($data) {
 
                     $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
 
                     $sheet->appendRow(array(
                         '#', 'เลขประจำตัวผู้สมัคร', 'เลขที่ใบสมัคร', 'ชื่อ-สกุล',
@@ -394,7 +410,7 @@ class ReportController extends Controller
                         ));
                     }
                 });
-            })->export('xls');
+            })->export($param['fileType']);
 
         } catch (\Exception $ex) {
             throw $ex;
@@ -410,14 +426,16 @@ class ReportController extends Controller
             $param['who'] = $who;
             $param['user_role'] = $userType->user_role;
             $param['user_type'] = $userType->user_type;
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
 
             $data = $this->rptRepo->getReport03DataByCriteria($param);
             Excel::create('summaryApplication', function ($excel) use ($data) {
                 $excel->sheet('รายงานสรุปยอดผู้สมัครเข้าศึกษา', function ($sheet) use ($data) {
 
-                    $colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-
                     $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
 
                     $sheet->appendRow(array(
                         '#', 'สาขาวิชา', 'หลักสูตร', 'คาดว่า',
@@ -539,12 +557,86 @@ class ReportController extends Controller
 
                     }
                 });
-            })->export('xls');
+            })->export($param['fileType']);
 
         } catch (\Exception $ex) {
             throw $ex;
         }
     }
 
+    public function doReport04Excel(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
+
+            $data1 = $this->rptRepo->getReport04ApplicantDataByCriteria($param);
+            $data2 = $this->rptRepo->getReport04ApplicationDataByCriteria($param);
+            Excel::create('ApplicantApplicationInfo', function ($excel) use ($data1, $data2) {
+                $excel->sheet('Applicant_Info', function ($sheet) use ($data1) {
+                    $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
+                    $sheet->appendRow(array(
+                        'ลำดับ', 'ชื่อ-สกุล ไทย', 'ชื่อ-สกุล อังกฤษ', 'เพศ', 'สัญชาติ', 'ศาสนา',
+                        'สถานภาพสมรส', 'วัน/เดือน/ปีเกิด', 'สถานที่เกิด (จังหวัด)', 'อีเมล์',
+                        'รูปถ่าย', 'ที่อยู่', 'คะแนนภาษาอังกฤษ', 'คะแนนภาษาไทย', 'คะแนนความถนัดทางธุรกิจ(CU-BEST)', 'การศึกษาระดับปริญญาตรี',
+                        'การศึกษาระดับปริญญาโท', 'ข้อมูลที่ทำงาน', 'ความสนใจในการรับทุน', 'แหล่งที่ทราบข้อมูล'
+
+                    ));
+
+                    foreach ($data1 as $index => $value) {
+                        $sheet->appendRow(array(
+                            ($index + 1), $value->fullname_th, $value->fullname_en, $value->stu_sex,
+                            $value->nation_name, $value->religion_name, $value->stu_married,
+                            $value->stu_birthdate, $value->stu_birthplace, $value->stu_email, $value->file_origi_name,
+                            $value->address, $value->eng_score, $value->thai_test_score, $value->cu_best_score,
+                            $value->bachelor_info, $value->master_info, $value->work_info, $value->fund_interesting, $value->news_src
+                        ));
+                    }
+                });
+                $excel->sheet('Application_Info', function ($sheet) use ($data2) {
+                    $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
+                    $sheet->appendRow(array(
+                        'ลำดับ', 'เลขที่ใบสมัคร', 'ลำดับที่สมัคร', 'หลักสูตร', 'สาขาวิชา', 'แขนงวิชา',
+                        'ประเภทหลักสูตร', 'รหัสประจำตัวประชาชน', 'วันที่สมัคร',
+                        'เล่มที่ใบเสร็จรับเงิน', 'เลขที่ใบเสร็จรับเงิน', 'ธนาคาร', 'วันที่ขำระเงิน',
+                        'สิทธิ์การเข้าสอบ', 'หมายเหตุ', 'ผ่านการทดสอบ', 'หมายเหตุ',
+                        'สถานะ', 'หมายเลขเครื่อง', 'เอกสารประกอบการสมัคร',
+                        'บุคคลอ้างอิง1', 'บุคคลอ้างอิง2', 'บุคคลอ้างอิง3', 'ข้อมูลเพิ่มเติมที่หลักสูตรต้องการ'
+                    ));
+
+                    foreach ($data2 as $index => $value) {
+                        $person = [];
+                        if (isset($value->people_ref)) {
+                            $person = explode("|", $value->people_ref);
+                        }
+                        $sheet->appendRow(array(
+                            ($index + 1), $value->app_id, $value->curriculum_num,
+                            $value->program_id, $value->major_id, $value->curr_sub_major_id,
+                            $value->prog_type_name, $value->stu_citizen_card, $value->apply_date,
+                            $value->receipt_book_no, $value->receipt_no, $value->bank_name, $value->payment_date,
+                            $value->exam_name, $value->exam_remark, $value->admission_status_name_th,
+                            $value->admission_remark, $value->flow_name, $value->ipaddress, $value->doc_details,
+                            (array_key_exists(0, $person) ? $person[0] : ''), (array_key_exists(1, $person) ? $person[1] : ''),
+                            (array_key_exists(2, $person) ? $person[2] : ''), $value->additional_answer
+                        ));
+                    }
+
+                });
+            })->export($param['fileType']);
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
 }
