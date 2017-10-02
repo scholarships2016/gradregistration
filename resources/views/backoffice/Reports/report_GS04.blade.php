@@ -219,7 +219,7 @@
                         </div>
                         <div class="form-actions">
                             <div class="row">
-                                <div class="col-md-offset-4 col-md-9">
+                                <div class="col-md-offset-4 col-md-8">
                                     <button type="button" id="excelBt" name="fileType" value="xls"
                                             onclick="exportFile(this)" class="btn green">
                                         <i class="fa fa-file-excel-o"></i> Export เป็นไฟล์ Excel
