@@ -1,6 +1,8 @@
 @extends('layouts.default')
 
 @push('pageCss')
+<link href="{{asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"
+      type="text/css">
 <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -23,7 +25,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="#">สรุปยอดการชำระเงิน</a>
+                <a href="#">รายงาน ข้อมูลผู้สมัครตามสถานะ</a>
                 <i class="fa fa-circle"></i>
             </li>
         </ul>
@@ -35,8 +37,6 @@
     </h1>
 @stop
 
-
-
 @section('maincontent')
     <div class="row">
         <div class="col-md-12">
@@ -47,7 +47,7 @@
                     <div class="caption">
                         <i class="icon-bar-chart"></i>
                         <span class="caption-subject font-dark sbold uppercase">
-                            รายงานสรุปยอดการชำระเงิน
+                            รายงาน ข้อมูลผู้สมัครตามสถานะ
                         </span>
                     </div>
                     <div class="actions">
@@ -188,21 +188,44 @@
                                                value="@if(!empty($param) && !empty($param['program_type_id'])){{$param['program_type_id']}}@endif"/>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>สถานะการสมัคร</label>
+                                        <select id="flow_id" name="flow_id"
+                                                class="form-control select2">
+                                            @if(!empty($flows))
+                                                @foreach($flows as $flow)
+                                                    <option value="{{$flow->flow_id}}">{{$flow->flow_name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <input type="hidden" id="flow_id_hide" name="flow_id_hide"
+                                               value="@if(!empty($param) && !empty($param['flow_id'])){{$param['flow_id']}}@endif"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สมัคร ตั้งแต่วันที่ ถึง วันที่</label>
+                                        <div class="input-group input-large date-picker input-daterange"
+                                             data-date="10/11/2012" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control" id="from_date" name="from_date">
+                                            <span class="input-group-addon"> ถึง </span>
+                                            <input type="text" class="form-control" id="to_date" name="to_date">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <p></p>
                         </div>
                         <div class="form-actions">
                             <div class="row">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <button type="button" id="reportBt" class="btn green">
-                                        <i class="fa fa-file-text-o"></i> ออกรายงาน
-                                    </button>
-                                    <button type="button" id="excelBt" value="xls" onclick="exportToFile(this)"
-                                            class="btn green">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <button type="button" id="excelBt" name="fileType" value="xls"
+                                            onclick="exportFile(this)" class="btn green">
                                         <i class="fa fa-file-excel-o"></i> Export เป็นไฟล์ Excel
                                     </button>
-                                    <button type="button" id="txtBt" value="txt" onclick="exportToFile(this)"
-                                            class="btn green">
+                                    <button type="button" id="txtBt" name="fileType" value="txt"
+                                            onclick="exportFile(this)" class="btn green">
                                         <i class="fa fa-file-text-o"></i> Export เป็นไฟล์ Text
                                     </button>
                                 </div>
@@ -210,62 +233,17 @@
                         </div>
                     </form>
 
-                    <div class="table-container">
-                        <br clear="all">
-                        <div class="portlet box pink-chula">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-bar-chart"></i>สรุปยอดการชำระเงิน
-                                </div>
-                                <div class="tools">
-                                    <a class="fullscreen font-red-pink" href="javascript:;" data-original-title=""
-                                       title=""> </a>
-
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-                                <div id="tableDiv" class="table-responsive">
-                                    <table id="resultTbl" class="table table-hover table-bordered table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th> #</th>
-                                            <th> หลักสูตร</th>
-                                            <th> ประเภทหลักสูตร</th>
-                                            <th> จำนวนผู้สมัคร</th>
-                                            <th> บมจ.ธนาคารกรุงไทย</th>
-                                            <th> บมจ.ธนาคารไทยพาณิชย์</th>
-                                            <th> บมจ.ธนาคารธหารไทย</th>
-                                            <th> บมจ.ธนาคารธนาชาติ</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td colspan="8" style="text-align: center">-</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th colspan="3" style="text-align:center;"> รวม</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 @stop
 
-
 @push('pageJs')
+<script src="{{asset('/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"
+        type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/select2-cascade.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
@@ -273,7 +251,6 @@
 <script src="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/jquery.table2excel.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
@@ -288,37 +265,24 @@
         $('#round').val($('#round_hide').val()).change();
         $('#faculty_id').val($('#faculty_id_hide').val()).change();
         $('#program_type_id').val($('#program_type_id_hide').val()).change();
+        $('#flow_id').val($('#flow_id_hide').val()).change();
+
+        $(".date-picker input[type='text']").inputmask("d-m-y");
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            autoclose: true,
+            clearBtn: true
+        });
     }
 
-
-    function setResult(obj) {
-
-        $("#resultTbl tbody").empty();
-        $("#resultTbl tbody").append(obj.tbody);
-        $("#resultTbl tfoot").empty();
-        $("#resultTbl tfoot").append(obj.tfoot);
-    }
-
-    function exportToFile(e) {
-        var url = '{{route('admin.report.doReport01Excel')}}?';
+    function exportFile(e) {
+        var url = '{{route('admin.report.doReport04Excel')}}?';
         url += $("#searchForm").serialize() + '&fileType=' + e.value;
         location.href = url;
     }
 
     $(document).ready(function () {
         initForm();
-        $("#reportBt").on('click', function () {
-            var inputs = $("#searchForm").serializeArray();
-            $.ajax({
-                url: '{{route('admin.report.doReport01')}}',
-                method: "get",
-                data: inputs,
-                success: function (result) {
-                    setResult(result.data)
-                }
-            });
-        });
-
     });
 
 </script>

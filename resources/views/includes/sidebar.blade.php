@@ -144,36 +144,36 @@
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'payment-summary-report') !== false) open active @endif">
-                                    <a href="{{url('admin/report/payment-summary-report')}}" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'applicant-application-data') !== false) open active @endif">
+                                    <a href="{{url('admin/report/applicant-application-data')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'gs03-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/gs03-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครเข้าศึกษา (GS03)</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'gs05-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/gs05-report')}}" class="nav-link ">
                                         <span class="title">ผู้มีสิทธิ์เข้าศึกษา (GS05)</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'b21-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/b21-report')}}" class="nav-link ">
                                         <span class="title">ผู้มีสิทธิ์เข้าศึกษา แบบ บ.21</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/multiple-application-report')}}" class="nav-link ">
                                         <span class="title">ผู้สอบได้มากกว่า 1 สาขาขึ้นไป</span>
 
                                     </a>
