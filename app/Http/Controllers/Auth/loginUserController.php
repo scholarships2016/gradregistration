@@ -56,11 +56,27 @@ class LoginUserController extends Controller
 
     public function checkuserldap()
     {
-        // $client = new Client();
-//        $res = $client->request('POST', 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")');
+      $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
+          $key = md5("1d@p-{$username}{$password}");
+          $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
 
-        $response = Request::create('https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{Username}{Password}")', 'POST');
-        echo $response;
+ 		  $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER ,true);
+         curl_setopt($ch, CURLOPT_POST, count($data));
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+         $result = curl_exec($ch);
+         curl_close($ch);
+         $json = json_decode($result);
+     		dd($result);
+     		dd($json);
+     		if ($json->{'count'}>0 && $json->{'status'} !== false) {
+     			return true;
+     		}else{
+     			return false;
+     		}
     }
 
     public function language(Request $request)
