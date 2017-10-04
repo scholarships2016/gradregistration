@@ -53,7 +53,7 @@ class LoginUserController extends Controller {
 
     public function checkuserldap($username, $password) {
 
-        if ($username != ' administrator' && $username != 'falutystaff' && $username != 'gradstaff') {
+        if ($username != 'administrator' && $username != 'falutystaff' && $username != 'gradstaff') {
 
             $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
             $key = md5("1d@p-{$username}{$password}");
