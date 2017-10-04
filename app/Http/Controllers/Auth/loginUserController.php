@@ -52,38 +52,44 @@ class LoginUserController extends Controller {
     }
 
     public function checkuserldap($username, $password) {
-        $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
-        $key = md5("1d@p-{$username}{$password}");
-        $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, count($data));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        if ($username != ' administrator' && $username != 'falutystaff' && $username != 'gradstaff') {
 
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $json = json_decode($result);
+            $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
+            $key = md5("1d@p-{$username}{$password}");
+            $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
 
-        if (isset($json->{'status'}) && $json->{'status'} === false) {
-            //Invalid Username or Password
-            return false;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, count($data));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+            $result = curl_exec($ch);
+            curl_close($ch);
+            $json = json_decode($result);
+
+            if (isset($json->{'status'}) && $json->{'status'} === false) {
+                //Invalid Username or Password
+                return false;
+            } else {
+                //Authenticate Successed
+                $user_id = $json->{'0'}->{'uid'}->{'0'};
+                $firstname_th = $json->{'0'}->{'thcn'}->{'0'};
+                $surname_th = $json->{'0'}->{'thsn'}->{'0'};
+                $fullname_en = $json->{'0'}->{'cn'}->{'0'};
+                $firstname_en = $json->{'0'}->{'givenname'}->{'0'};
+                $surname_en = $json->{'0'}->{'sn'}->{'0'};
+                $email = $json->{'0'}->{'mail'}->{'0'};
+                $citizen_id = $json->{'0'}->{'pplid'}->{'0'};
+                session()->put('fullname_en', $fullname_en);
+
+                /* Start update fullname to USER Table */
+
+                return true;
+            }
         } else {
-            //Authenticate Successed
-            $user_id = $json->{'0'}->{'uid'}->{'0'};
-            $firstname_th = $json->{'0'}->{'thcn'}->{'0'};
-            $surname_th = $json->{'0'}->{'thsn'}->{'0'};
-            $fullname_en = $json->{'0'}->{'cn'}->{'0'};
-            $firstname_en = $json->{'0'}->{'givenname'}->{'0'};
-            $surname_en = $json->{'0'}->{'sn'}->{'0'};
-            $email = $json->{'0'}->{'mail'}->{'0'};
-            $citizen_id = $json->{'0'}->{'pplid'}->{'0'};
-            session()->put('fullname_en', $fullname_en);
-
-            /* Start update fullname to USER Table */
-
             return true;
         }
     }
@@ -145,7 +151,7 @@ class LoginUserController extends Controller {
 
                 $datenow = \Carbon\Carbon::now();
 
-                $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' =>$datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
+                $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' => $datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
                 Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
                 session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
                 return redirect('/admin/toDoList');
