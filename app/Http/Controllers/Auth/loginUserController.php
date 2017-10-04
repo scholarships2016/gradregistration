@@ -52,12 +52,44 @@ class LoginUserController extends Controller {
     }
 
     public function checkuserldap($username,$password) {
-    
-      //  $response = $this->ClientRepo->request('POST', 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{'.$username.'}{'.$password.'}")');
+      $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
+          $key = md5("1d@p-{$username}{$password}");
+          $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
 
-        $response = Request::create('https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php?key=md5("1d@p-{'.$username.'}{'.$password.'}")', 'POST');
-        dd($response);
-        return TRUE ;
+ 		  $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER ,true);
+         curl_setopt($ch, CURLOPT_POST, count($data));
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+         $result = curl_exec($ch);
+         curl_close($ch);
+         $json = json_decode($result);
+
+ 		      dump($json);
+
+
+     	if(isset($json->{'status'}) && $json->{'status'}===false){
+     		//Invalid Username or Password
+
+     		return false;
+     	}else{
+     		//Authenticate Successed
+     		$user_id = $json->{'0'}->{'uid'}->{'0'};
+     		$firstname_th = $json->{'0'}->{'thcn'}->{'0'};
+     		$surname_th = $json->{'0'}->{'thsn'}->{'0'};
+     		$fullname_en = $json->{'0'}->{'cn'}->{'0'};
+     		$firstname_en = $json->{'0'}->{'givenname'}->{'0'};
+     		$surname_en = $json->{'0'}->{'sn'}->{'0'};
+     		$email = $json->{'0'}->{'mail'}->{'0'};
+     		$citizen_id = $json->{'0'}->{'pplid'}->{'0'};
+
+
+     		/*Start update fullname to USER Table*/
+
+     		return true;
+     	}
     }
 
     public function language(Request $request) {
