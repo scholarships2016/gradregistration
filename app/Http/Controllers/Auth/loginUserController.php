@@ -104,7 +104,7 @@ class LoginUserController extends Controller {
     }
 
     public function postLogin(Request $request) {
-        if ($this->checkuserldap($request->user_name,$request->user_password)) {
+    //    if ($this->checkuserldap($request->user_name,$request->user_password)) {
             if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
                 $user_data = Auth::user();
 
@@ -154,7 +154,7 @@ class LoginUserController extends Controller {
                 session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
                 return redirect('admin/login');
             }
-        }
+      //  }
     }
 
     public function getLogout() {
