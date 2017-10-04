@@ -66,7 +66,7 @@ class LoginUserController extends Controller {
         $result = curl_exec($ch);
         curl_close($ch);
         $json = json_decode($result);
-        
+
         if (isset($json->{'status'}) && $json->{'status'} === false) {
             //Invalid Username or Password
             return false;
@@ -81,7 +81,7 @@ class LoginUserController extends Controller {
             $email = $json->{'0'}->{'mail'}->{'0'};
             $citizen_id = $json->{'0'}->{'pplid'}->{'0'};
             session()->put('fullname_en', $fullname_en);
-             
+
             /* Start update fullname to USER Table */
 
             return true;
@@ -113,7 +113,7 @@ class LoginUserController extends Controller {
                 session()->put('user_name', ($user_data->user_name != "" ? $user_data->user_name : $user_data->user_id));
                 session()->put('user_id', $user_data->user_id);
                 session()->put('first_name', session('fullname_en'));
-                session()->put('last_name','');
+                session()->put('last_name', '');
                 session()->put('email_address', $user_data->user_name);
                 session()->put('stu_img', $pic);
                 $role = null;
@@ -143,9 +143,9 @@ class LoginUserController extends Controller {
 
 
 
+                $datenow = \Carbon\Carbon::now();
 
-
-                $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
+                $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' =>$datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
                 Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
                 session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
                 return redirect('/admin/toDoList');
@@ -154,9 +154,9 @@ class LoginUserController extends Controller {
                 session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
                 return redirect('admin/login');
             }
-        }else{
-               session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
-                return redirect('admin/login');
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
+            return redirect('admin/login');
         }
     }
 
