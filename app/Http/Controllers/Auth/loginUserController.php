@@ -107,7 +107,10 @@ class LoginUserController extends Controller {
 
     public function postLogin(Request $request) {
         if ($this->checkuserldap($request->user_name, $request->user_password)) {
-            if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
+
+            $pas = (($request->user_name != 'administrator' && $request->user_name != 'falutystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
+
+            if (Auth::attempt(['user_name' => $request->user_name, 'password' => $pas])) {
                 $user_data = Auth::user();
 
                 $pic = null;
