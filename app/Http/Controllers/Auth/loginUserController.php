@@ -25,11 +25,11 @@ class LoginUserController extends Controller {
     protected $userRepo;
     protected $ClientRepo;
 
-    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, UserRepositoryImpl $userRepo,Client $ClientRepo) {
+    public function __construct(ApplicantRepository $loginapplicantRepo, NameTitleRepository $nametitleRepo, UserRepositoryImpl $userRepo, Client $ClientRepo) {
         $this->loginapplicantRepo = $loginapplicantRepo;
         $this->nametitleRepo = $nametitleRepo;
         $this->userRepo = $userRepo;
-        $this->ClientRepo =$ClientRepo;
+        $this->ClientRepo = $ClientRepo;
 
         Auth::setDefaultDriver('admins');
     }
@@ -51,45 +51,47 @@ class LoginUserController extends Controller {
         ]);
     }
 
-    public function checkuserldap($username,$password) {
-      $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
-          $key = md5("1d@p-{$username}{$password}");
-          $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
+    public function checkuserldap($username, $password) {
 
- 		  $ch = curl_init();
-         curl_setopt($ch, CURLOPT_URL, $url);
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER ,true);
-         curl_setopt($ch, CURLOPT_POST, count($data));
-         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        if ($username != 'administrator' && $username != 'facultystaff' && $username != 'gradstaff') {
 
-         $result = curl_exec($ch);
-         curl_close($ch);
-         $json = json_decode($result);
+            $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
+            $key = md5("1d@p-{$username}{$password}");
+            $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
 
- 		      dump($json);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, count($data));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
+            $result = curl_exec($ch);
+            curl_close($ch);
+            $json = json_decode($result);
 
-     	if(isset($json->{'status'}) && $json->{'status'}===false){
-     		//Invalid Username or Password
+            if (isset($json->{'status'}) && $json->{'status'} === false) {
+                //Invalid Username or Password
+                return false;
+            } else {
+                //Authenticate Successed
+                $user_id = $json->{'0'}->{'uid'}->{'0'};
+                $firstname_th = $json->{'0'}->{'thcn'}->{'0'};
+                $surname_th = $json->{'0'}->{'thsn'}->{'0'};
+                $fullname_en = $json->{'0'}->{'cn'}->{'0'};
+                $firstname_en = $json->{'0'}->{'givenname'}->{'0'};
+                $surname_en = $json->{'0'}->{'sn'}->{'0'};
+                $email = $json->{'0'}->{'mail'}->{'0'};
+                $citizen_id = $json->{'0'}->{'pplid'}->{'0'};
+                session()->put('fullname_en', $fullname_en);
 
-     		return false;
-     	}else{
-     		//Authenticate Successed
-     		$user_id = $json->{'0'}->{'uid'}->{'0'};
-     		$firstname_th = $json->{'0'}->{'thcn'}->{'0'};
-     		$surname_th = $json->{'0'}->{'thsn'}->{'0'};
-     		$fullname_en = $json->{'0'}->{'cn'}->{'0'};
-     		$firstname_en = $json->{'0'}->{'givenname'}->{'0'};
-     		$surname_en = $json->{'0'}->{'sn'}->{'0'};
-     		$email = $json->{'0'}->{'mail'}->{'0'};
-     		$citizen_id = $json->{'0'}->{'pplid'}->{'0'};
+                /* Start update fullname to USER Table */
 
-
-     		/*Start update fullname to USER Table*/
-
-     		return true;
-     	}
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 
     public function language(Request $request) {
@@ -104,8 +106,16 @@ class LoginUserController extends Controller {
     }
 
     public function postLogin(Request $request) {
+<<<<<<< HEAD
     //    if ($this->checkuserldap($request->user_name,$request->user_password)) {
             if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
+=======
+        if ($this->checkuserldap($request->user_name, $request->user_password)) {
+
+            $pas = (($request->user_name != 'administrator' && $request->user_name != 'falutystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
+
+            if (Auth::attempt(['user_name' => $request->user_name, 'password' => $pas])) {
+>>>>>>> 0428f6b548f2ab5701f03c1be614c11b6607ce6f
                 $user_data = Auth::user();
 
                 $pic = null;
@@ -113,9 +123,10 @@ class LoginUserController extends Controller {
                 if ($user_data->stu_img) {
                     $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
+
                 session()->put('user_name', ($user_data->user_name != "" ? $user_data->user_name : $user_data->user_id));
                 session()->put('user_id', $user_data->user_id);
-                session()->put('first_name', $user_data->user_name);
+                session()->put('first_name', session('fullname_en'));
                 session()->put('last_name', '');
                 session()->put('email_address', $user_data->user_name);
                 session()->put('stu_img', $pic);
@@ -145,7 +156,10 @@ class LoginUserController extends Controller {
 //            session()->put('Applicant', $app);
 
 
-                $this->userRepo->save(['user_id' => $user_data->user_id, 'user_name', 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
+
+                $datenow = \Carbon\Carbon::now();
+
+                $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' => $datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
                 Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
                 session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
                 return redirect('/admin/toDoList');
@@ -154,7 +168,14 @@ class LoginUserController extends Controller {
                 session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
                 return redirect('admin/login');
             }
+<<<<<<< HEAD
       //  }
+=======
+        } else {
+            session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
+            return redirect('admin/login');
+        }
+>>>>>>> 0428f6b548f2ab5701f03c1be614c11b6607ce6f
     }
 
     public function getLogout() {
