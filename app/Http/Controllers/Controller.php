@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Excel as excel2;
 use \Crypt;
 
 class Controller extends BaseController {
@@ -24,11 +25,13 @@ class Controller extends BaseController {
     protected $FileRepo;
     protected $excelRepo;
     protected $auditRepo;
+    protected $excel2Repo;
 
-    public function __construct(FileRepositoryImpl $FileRepo = null,  Excel $excels = null, AudittrailRepository $auditRepo = null) {
+    public function __construct(FileRepositoryImpl $FileRepo = null, excel2 $excel2Repo, Excel $excels = null, AudittrailRepository $auditRepo = null) {
         $this->FileRepo = $FileRepo;
         $this->excelRepo = $excels;
         $this->auditRepo = $auditRepo;
+        $this->excel2Repo = $excel2Repo;
     }
 
     public function doDownloadFile(Request $request) {
@@ -120,7 +123,7 @@ class Controller extends BaseController {
     public function importExcel() {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
-            $data = $this->excels->load($path, function($reader) {
+            $data = $this->excel2Repo->load($path, function($reader) {
                         
                     })->get()[0];
 
@@ -175,14 +178,12 @@ class Controller extends BaseController {
     }
 
     public function exportExcel($filname, $data) {
- 
-		return Excel::create($filname, function($excel) use ($data) {
-			$excel->sheet('mySheet', function($sheet) use ($data)
-	        {
-				$sheet->fromArray($data);
-	        });
-		})->download('xlsx');
-      
+
+        return Excel::create($filname, function($excel) use ($data) {
+                    $excel->sheet('mySheet', function($sheet) use ($data) {
+                        $sheet->fromArray($data);
+                    });
+                })->download('xlsx');
     }
 
 }
