@@ -180,20 +180,20 @@
                                 </li>
 
 
-                                <li class=" nav-item  menuitem   ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
                                     <a href="components_color_pickers.html" class="nav-link ">
                                         <span class="title">คะแนนภาษาอังกฤษ</span>
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'foreigner-report') !== false) open active @endif">
                                     <a href="{{url('admin/report/foreigner-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครชาวต่างชาติ  </span>
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="{{url('admin/report/NewsSourceSumApplicant-report')}}" class="nav-link ">-report
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'NewsSourceSumApplicant-report'') !== false) open active @endif">
+                                    <a href="{{url('admin/report/NewsSourceSumApplicant-report')}}" class="nav-link ">
                                         <span class="title">แหล่งข่าว</span>
 
                                     </a>
