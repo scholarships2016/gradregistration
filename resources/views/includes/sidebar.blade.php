@@ -181,7 +181,7 @@
 
 
                                 <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                    <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-9.html" class="nav-link ">
                                         <span class="title">คะแนนภาษาอังกฤษ</span>
 
                                     </a>
@@ -198,7 +198,7 @@
                                     </a>
                                 </li>
                                 <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                    <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-12.html" class="nav-link ">
                                         <span class="title">ความสนใจรับทุน </span>
 
                                     </a>
@@ -206,7 +206,7 @@
 
                                 @if(session('user_type')->user_type == 'Admin' ||in_array("7",session('user_permission')))
                                     <li class=" nav-item  menuitem">
-                                        <a href="components_color_pickers.html" class="nav-link ">
+                                        <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-13.html" class="nav-link ">
                                             <span class="title">ความพึงพอใจการใช้งานระบบ  </span>
                                         </a>
                                     </li>
