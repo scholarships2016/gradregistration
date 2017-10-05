@@ -138,6 +138,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('printForeignerReport/{year}/{semester}/{roundNo}/{faculty_id}/{flow}/{sub_major}/{program_type_id}/{major_id}/{print}', 'ManageApplyController@printForeignerReport')->name('admin.printForeignerReport');
         Route::get('getRegisterCourseMoreReport', 'ManageApplyController@getRegisterCourseMoreReport')->name('admin.getRegisterCourseMoreReport');
         Route::get('getforeignerReport', 'ManageApplyController@getforeignerReport')->name('admin.getforeignerReport');
+        Route::get('getDataNewsSourceSumApplicant', 'ManageApplyController@getDataNewsSourceSumApplicant')->name('admin.getDataNewsSourceSumApplicant');
+        Route::get('printDataNewsSourceSumApplicant/{year}/{semester}/{print}', 'ManageApplyController@printDataNewsSourceSumApplicant')->name('admin.printDataNewsSourceSumApplicant');
 
         //GS05
         Route::get('ManageGS05', 'ManageApplyController@showManageGS05')->name('ManageGS05');
@@ -213,6 +215,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('gs05-report', 'ManageApplyController@showReportGS05')->name('report.GS05');
             Route::get('multiple-application-report', 'ManageApplyController@showReportExamMore')->name('report.ReportExamMore');
             Route::get('foreigner-report', 'ManageApplyController@showReportforeigner')->name('report.foreigner');
+            Route::get('NewsSourceSumApplicant-report', 'ManageApplyController@showNewsSourceSumApplicant')->name('report.NewsSourceSumApplicant');
         });
 
         Route::get('profile', 'BackOffice\AdminManagementController@showProfileEditPage')->name('admin.showProfileEditPage');

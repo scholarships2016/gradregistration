@@ -25,7 +25,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>ผู้สมัครต่างชาติ</span>
+            <span>รายงานแหล่งข่าว</span>
         </li>
     </ul>
     {{--
@@ -57,7 +57,7 @@
   </div>--}}
 </div>
 @stop @section('pagetitle')
-<h1 class="page-title">ผู้สมัครต่างชาติ
+<h1 class="page-title">รายงานแหล่งข่าว
 
 </h1> @stop @section('maincontent')
 <div class="row">
@@ -97,17 +97,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>รอบที่</label>
-                                            <select id="roundNo" name="roundNo" class="form-control input-small">
-
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                  
 
 
 
@@ -142,7 +132,7 @@
                             <div class="portlet box pink-chula">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="icon-bar-chart"></i>ผู้สมัครต่างชาติ </div>
+                                        <i class="icon-bar-chart"></i>รายงานแหล่งข่าว </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
                                         <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
@@ -155,18 +145,11 @@
                                         <table id="datatable_ajax" class="table table-hover table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th> # </th>
-                                                    <th> เลขประจำตัวประชาชน </th>
-                                                    <th> ชื่อ-สกุล </th>
-                                                    <th> สัญชาติ </th>
-                                                    <th> รหัสหลักสูตร </th>
-                                                    <th> ชื่อหลักสูตร </th>
-                                                    <th> ประเภทหลักสูตร </th>
-                                                    <th> สาขาวิชา </th>
-                                                    <th> ภาควิชา </th>
-                                                    <th> คณะ </th>
-                                                    <th> สถานะ </th>
-                                                </tr>
+                                <th> # </th>
+                                <th> ชื่อแหล่งข่าว </th>
+                                <th> จำนวน </th>
+
+                              </tr>
                                             </thead>
 
                                         </table>
@@ -218,18 +201,10 @@
         var faculty =   ( $('option:selected','#faculty_id').val()=="")?'null':$('option:selected','#faculty_id').val();
        var sub_major_id = ($('#sub_major_id').val() =="")?'null':$('#sub_major_id').val();
        var  major_id = ($('#major_id').val() =="")?'null':$('#major_id').val();
-      window.open(("{{ url('admin/printForeignerReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '1,2,3,4,5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');                 
+      window.open(("{{ url('admin/printDataNewsSourceSumApplicant')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val() +'/'+ print  ),'_blank');                 
        
     } 
- 
-jQuery(document).ready(function() {
-  //clear serach result
-  $('#semester,#year,#roundNo').on('change', function() {
-    $('#search-program-result').fadeOut( "slow", "linear" );
-    $('#search-application-result').fadeOut( "slow", "linear" );
-  });
   
-});
 
 
     $('#search_Select').click(function(){
@@ -257,18 +232,12 @@ var TableDatatablesAjax = function () {
                 "pageLength": 1000,  
 
                 "ajax": {
-                    "url": "{!! route('admin.getforeignerReport') !!}",
+                    "url": "{!! route('admin.getDataNewsSourceSumApplicant') !!}",
                     "type":"GET",
                     "async": "false",
                     "data" : {
                                 year:$('option:selected','#year').val(),
-                                semester:$('option:selected','#semester').val(),
-                                roundNo:$('option:selected','#roundNo').val(),
-                                sub_major_id : $('#sub_major_id').val(),
-                                faculty_id : $('option:selected','#faculty_id').val(),
-                                program_type_id : $('option:selected','#program_type_id').val(),
-                                major_id :$('#major_id').val() ,
-                                flow : '1,2,3,4,5',
+                                semester:$('option:selected','#semester').val(),                                
                                _token:     '{{ csrf_token()}}'
                                                }
                 },
@@ -282,43 +251,12 @@ return meta.settings._iDisplayStart + meta.row + 1;
 } },{
 targets: [1],
 render: function (data, type, full, meta) {
-return    full.stu_citizen_card ;
+return    full.news_source_name ;
 }},{
+ 
 targets: [2],
 render: function (data, type, full, meta) {
-return  (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' + full.name_title_en+full.stu_first_name_en + ' ' + full.stu_last_name_en + ' ')    ;
-} },{
-targets: [3],
-render: function (data, type, full, meta) {
-return    full.nation_name+'  '+full.nation_name_en  ;
-} },{
-targets: [4],
-render: function (data, type, full, meta) {
-return    full.majorcode   ;
-} },{
-targets: [5],
-render: function (data, type, full, meta) {
-return     full.prog_name   ;
-} },{
-targets: [6],
-render: function (data, type, full, meta) {
-return    full.cond_id+'  '+full.degree_level_name+' '+full.office_time  ;
-} },{
-targets: [7],
-render: function (data, type, full, meta) {
-return    full.major_name  ;
-} } ,{
-targets: [8],
-render: function (data, type, full, meta) {
-return    full.department_name  ;
-} } ,{
-targets: [9],
-render: function (data, type, full, meta) {
-return    full.faculty_name  ;
-} } ,{
-targets: [10],
-render: function (data, type, full, meta) {
-return    full.flow_name  ;
+return    full.cnum   ;
 } }   ],
                 "bDestroy": true, 
                 "responsive": false,

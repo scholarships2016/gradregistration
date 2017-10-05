@@ -973,4 +973,23 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         }
     }
 
+    public function getDataNewsSourceSumApplicant($year, $sem) {
+        $result = null;
+        try {
+            $result = DB::select(DB::raw("SELECT s.news_source_name,count(a.applicant_id) cnum FROM  tbl_news_source s left join 
+( select * from    applicant_news_source  where applicant_id in (
+    select DISTINCT ap.applicant_id    from  application ap 
+left join curriculum_activity ca ON(ca.curr_act_id = ap.curr_act_id)
+left join apply_setting ay on(ay.apply_setting_id = ca.apply_setting_id)
+where ay.semester='" . $sem . "' and ay.academic_year = '" . $year . "'   
+    )) a  on (s.news_source_id = a.news_source_id)
+group by `news_source_name`
+order by s.news_source_id"));
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
+
 }
