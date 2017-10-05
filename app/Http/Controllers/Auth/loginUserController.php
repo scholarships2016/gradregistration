@@ -52,8 +52,8 @@ class LoginUserController extends Controller {
     }
 
     public function checkuserldap($username, $password) {
-return true;
-        if ($username != 'administrator' && $username != 'falutystaff' && $username != 'gradstaff') {
+
+        if ($username != 'administrator' && $username != 'facultystaff' && $username != 'gradstaff') {
 
             $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
             $key = md5("1d@p-{$username}{$password}");
@@ -107,18 +107,13 @@ return true;
 
     public function postLogin(Request $request) {
         if ($this->checkuserldap($request->user_name, $request->user_password)) {
-
-            $pas = (($request->user_name != 'administrator' && $request->user_name != 'falutystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
-
-            if (Auth::attempt(['user_name' => $request->user_name, 'password' => $pas])) {
+            //$pas = (($request->user_name != 'administrator' && $request->user_name != 'falutystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
+            if (Auth::attempt(['user_name' => $request->user_name, 'password' => $request->user_password])) {
                 $user_data = Auth::user();
-
                 $pic = null;
-
                 if ($user_data->stu_img) {
                     $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
-
                 session()->put('user_name', ($user_data->user_name != "" ? $user_data->user_name : $user_data->user_id));
                 session()->put('user_id', $user_data->user_id);
                 session()->put('first_name', session('fullname_en'));
@@ -135,25 +130,18 @@ return true;
                 }
                 session()->put('user_type', (object) $role);
                 session()->put('locale', 'th');
-
                 $permMap = array();
                 foreach ($user_data->userPermission as $index => $value) {
                     array_push($permMap, $value->permission_id);
                 }
                 session()->put('user_permission', $permMap);
-
-
 //            $app = new \stdClass();
 //            $app->applicant_id = 1;
 //            $app->stu_citizen_card = '123456789';
 //            $app->stu_email = 'pacusm128@gmail.com';
 //            $app->nation_id = 1;
 //            session()->put('Applicant', $app);
-
-
-
                 $datenow = \Carbon\Carbon::now();
-
                 $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' => $datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
                 Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
                 session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
