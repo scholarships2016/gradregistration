@@ -187,7 +187,7 @@
                                     </a>
                                 </li>
                                 <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                    <a href="{{url('admin/report/foreigner-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครชาวต่างชาติ  </span>
 
                                     </a>
