@@ -192,10 +192,9 @@
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'NewsSourceSumApplicant-report'') !== false) open active @endif">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'NewsSourceSumApplicant-report') !== false) open active @endif">
                                     <a href="{{url('admin/report/NewsSourceSumApplicant-report')}}" class="nav-link ">
-                                        <span class="title">แหล่งข่าว</span>
-
+                                      <span class="title">แหล่งข่าว</span>
                                     </a>
                                 </li>
                                 <li class=" nav-item  menuitem   ">
