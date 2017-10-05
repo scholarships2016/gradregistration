@@ -975,6 +975,34 @@ class ManageApplyController extends Controller {
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
+    
+     public function getforeignerReport(Request $request = null) {
+
+        $status = explode(',', $request->flow);
+        $semester = $request->semester;
+        $year = $request->year;
+        $roundNo = $request->roundNo;
+        $criteria = $request->criteria;
+        $curr_act_id = $request->curr_act_id;
+        $exam_status = $request->exams;
+        $program_id = $request->program_id;
+        $major_id = $request->major_id;
+        $faculty_id = $request->faculty_id;
+
+        if (isset($request->sub_major_id)) {
+            $sub_major_id = ($request->sub_major_id != null) ? $request->sub_major_id : '-1';
+        } else {
+            $sub_major_id = null;
+        }
+
+        $program_type_id = $request->program_type_id;
+
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+
+        $curDiss = $this->ApplicationRepo->getforeignerReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role, $major_id, $faculty_id);
+
+        return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
+    }
 
     public function getRegisterCourseReport(Request $request = null) {
 
