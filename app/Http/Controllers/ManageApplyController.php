@@ -800,7 +800,9 @@ class ManageApplyController extends Controller {
     public function showReportB21() {
         return view('backoffice.reports.report_B21');
     }
-
+public function showReportforeigner() {
+        return view('backoffice.reports.report_Exam_foreigner');
+    }
     public function showReportExamMore() {
 
         $fac = $this->FacultyRepo->all();
