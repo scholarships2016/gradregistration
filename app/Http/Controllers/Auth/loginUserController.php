@@ -106,24 +106,14 @@ class LoginUserController extends Controller {
     }
 
     public function postLogin(Request $request) {
-<<<<<<< HEAD
-    //    if ($this->checkuserldap($request->user_name,$request->user_password)) {
-            if (Auth::attempt(['user_name' => $request->user_name, 'password' => 'p@ssw0rd'])) {
-=======
         if ($this->checkuserldap($request->user_name, $request->user_password)) {
-
-            $pas = (($request->user_name != 'administrator' && $request->user_name != 'falutystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
-
-            if (Auth::attempt(['user_name' => $request->user_name, 'password' => $pas])) {
->>>>>>> 0428f6b548f2ab5701f03c1be614c11b6607ce6f
+            //$pas = (($request->user_name != 'administrator' && $request->user_name != 'falutystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
+            if (Auth::attempt(['user_name' => $request->user_name, 'password' => $request->user_password])) {
                 $user_data = Auth::user();
-
                 $pic = null;
-
                 if ($user_data->stu_img) {
                     $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
-
                 session()->put('user_name', ($user_data->user_name != "" ? $user_data->user_name : $user_data->user_id));
                 session()->put('user_id', $user_data->user_id);
                 session()->put('first_name', session('fullname_en'));
@@ -140,25 +130,18 @@ class LoginUserController extends Controller {
                 }
                 session()->put('user_type', (object) $role);
                 session()->put('locale', 'th');
-
                 $permMap = array();
                 foreach ($user_data->userPermission as $index => $value) {
                     array_push($permMap, $value->permission_id);
                 }
                 session()->put('user_permission', $permMap);
-
-
 //            $app = new \stdClass();
 //            $app->applicant_id = 1;
 //            $app->stu_citizen_card = '123456789';
 //            $app->stu_email = 'pacusm128@gmail.com';
 //            $app->nation_id = 1;
 //            session()->put('Applicant', $app);
-
-
-
                 $datenow = \Carbon\Carbon::now();
-
                 $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' => $datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
                 Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
                 session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
@@ -168,14 +151,10 @@ class LoginUserController extends Controller {
                 session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
                 return redirect('admin/login');
             }
-<<<<<<< HEAD
-      //  }
-=======
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
             return redirect('admin/login');
         }
->>>>>>> 0428f6b548f2ab5701f03c1be614c11b6607ce6f
     }
 
     public function getLogout() {
