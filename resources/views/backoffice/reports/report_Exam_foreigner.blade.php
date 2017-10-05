@@ -15,42 +15,42 @@
 </style>
 @endpush @section('pagebar')
 <div class="page-bar">
-  <ul class="page-breadcrumb">
-    <li>
-      <a href="/">{{Lang::get('resource.lbMain')}}</a>
-      <i class="fa fa-circle"></i>
-    </li>
-    <li>
-      <span>รายงาน</span>
-      <i class="fa fa-circle"></i>
-    </li>
-    <li>
-      <span>ผู้สมัครต่างชาติ</span>
-    </li>
-  </ul>
-  {{--
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="/">{{Lang::get('resource.lbMain')}}</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>รายงาน</span>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>ผู้สมัครต่างชาติ</span>
+        </li>
+    </ul>
+    {{--
   <div class="page-tool    bar">--}} {{--
     <div class="btn-group pull-right">--}} {{--
       <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" --}} {{--data-toggle="dropdown"> Actions--}}
-        {{--<i class="fa fa-angle-down"></i>--}}
-                  {{--</button>--}} {{--
+    {{--<i class="fa fa-angle-down"></i>--}}
+    {{--</button>--}} {{--
       <ul class="dropdown-menu pull-right" role="menu">--}} {{--
         <li>--}} {{--
           <a href="#">--}}
-        {{--<i class="icon-bell"></i> Action</a>--}} {{--
+    {{--<i class="icon-bell"></i> Action</a>--}} {{--
         </li>--}} {{--
         <li>--}} {{--
           <a href="#">--}}
-        {{--<i class="icon-shield"></i> Another action</a>--}} {{--
+    {{--<i class="icon-shield"></i> Another action</a>--}} {{--
         </li>--}} {{--
         <li>--}} {{--
           <a href="#">--}}
-        {{--<i class="icon-user"></i> Something else here</a>--}} {{--
+    {{--<i class="icon-user"></i> Something else here</a>--}} {{--
         </li>--}} {{--
         <li class="divider"></li>--}} {{--
         <li>--}} {{--
           <a href="#">--}}
-        {{--<i class="icon-bag"></i> Separated link</a>--}} {{--
+    {{--<i class="icon-bag"></i> Separated link</a>--}} {{--
         </li>--}} {{--
       </ul>--}} {{--
     </div>--}} {{--
@@ -61,169 +61,168 @@
 
 </h1> @stop @section('maincontent')
 <div class="row">
-  <div class="col-md-12">
-    <!-- BEGIN EXAMPLE TABLE PORTLET-->
-    <div class="portlet light bordered">
-      
-      <div class="portlet-body">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
 
-        <div class="table-toolbar">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="m-heading-1 border-green m-bordered">
-                <h3>  กำหนดเงื่อนไขการแสดงรายงาน</h3>
-                <p>
-                </p>
-                <div class="row">
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>ภาคการศึกษา</label>
-                      <select id="semester" name="semester" class="form-control input-small">
+            <div class="portlet-body">
 
-                                        <option value="1">ภาคต้น</option>
-                                        <option value="2">ภาคปลาย</option>
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="m-heading-1 border-green m-bordered">
+                                <h3>  กำหนดเงื่อนไขการแสดงรายงาน</h3>
+                                <p>
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>ภาคการศึกษา</label>
+                                            <select id="semester" name="semester" class="form-control input-small">
 
-                                    </select>
+                                                <option value="1">ภาคต้น</option>
+                                                <option value="2">ภาคปลาย</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>ปีการศึกษา</label>
+                                            <select id="year" name="year" class="form-control input-small">
+
+                                                @for ($i = date('Y'); $i >= date('Y')-10; $i--)
+                                                <option value="{{ $i+543 }}"  >{{ $i+543 }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>รอบที่</label>
+                                            <select id="roundNo" name="roundNo" class="form-control input-small">
+
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>คณะ</label>
+                                            <select id="faculty_id" name="faculty_id" class="form-control input">
+                                                <option value="">--เลือก--</option>
+                                                @foreach($facs as $fac)
+                                                <option value="{{$fac->faculty_id}}">{{$fac->faculty_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>รหัสหลักสูตร</label>
+                                            <input type="text" id="major_id" name="major_id" class="form-control input" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>รหัสแขนง(ถ้ามี)</label>
+                                            <input type="text" id="sub_major_id" name="sub_major_id" class="form-control input" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label>ประเภทหลักสูตร</label>
+                                            <select id="program_type_id" name="program_type_id" class="form-control input">
+                                                @foreach($progTypes as $val)
+                                                <option value="{{$val->program_type_id}}">{{$val->prog_type_name}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-4 col-md-8">
+                                            <a id="search_Select" href="javascript:;" class="btn green"><i class="fa fa-file-text-o"></i> ดูรายงาน </a>
+                                            <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
+                                            <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>ปีการศึกษา</label>
-                      <select id="year" name="year" class="form-control input-small">
 
-                                        @for ($i = date('Y'); $i >= date('Y')-10; $i--)
-                                        <option value="{{ $i+543 }}"  >{{ $i+543 }}</option>
-                                        @endfor
-                                    </select>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>รอบที่</label>
-                      <select id="roundNo" name="roundNo" class="form-control input-small">
+                </div>
+                <div id="search-application-result" style="display:none;">
+                    <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
 
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
+                    <hr>
+                    <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
+
+                        <div>
+
+                            <input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
+                            <div class="portlet box pink-chula">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-bar-chart"></i>ผู้สมัครต่างชาติ </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                        <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                                        <a class="fullscreen font-red-pink" href="javascript:;" data-original-title="" title=""> </a>
+
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="table-responsive">
+                                        <table id="datatable_ajax" class="table table-hover table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th> # </th>
+                                                    <th> เลขประจำตัวประชาชน </th>
+                                                    <th> ชื่อ-สกุล </th>
+                                                    <th> สัญชาติ </th>
+                                                    <th> รหัสหลักสูตร </th>
+                                                    <th> ชื่อหลักสูตร </th>
+                                                    <th> ประเภทหลักสูตร </th>
+                                                    <th> สาขาวิชา </th>
+                                                    <th> ภาควิชา </th>
+                                                    <th> คณะ </th>
+                                                    <th> สถานะ </th>
+                                                </tr>
+                                            </thead>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                  </div>
-                
 
 
                 </div>
-                <hr>
-                <div class="row">
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <label>คณะ</label>
-                            <select id="faculty_id" name="faculty_id" class="form-control input">
-                                    <option value="">--เลือก--</option>
-                                    @foreach($facs as $fac)
-                                    <option value="{{$fac->faculty_id}}">{{$fac->faculty_name}}</option>
-                                    @endforeach
-                                  </select>
-                          </div>
-                        </div>
-                         
-                        <div class="col-md-2">
-                          <div class="form-group">
-                            <label>รหัสหลักสูตร</label>
-                            <input type="text" id="major_id" name="major_id" class="form-control input" placeholder="">
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <div class="form-group">
-                            <label>รหัสแขนง(ถ้ามี)</label>
-                            <input type="text" id="sub_major_id" name="sub_major_id" class="form-control input" placeholder="">
-                          </div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="form-group">
-                            <label>ประเภทหลักสูตร</label>
-                            <select id="program_type_id" name="program_type_id" class="form-control input">
-                                    @foreach($progTypes as $val)
-                                    <option value="{{$val->program_type_id}}">{{$val->prog_type_name}}</option>
-                                    @endforeach
-
-                                                                </select>
-                          </div>
-                        </div>
-
-
-                      </div>
-
-               <div class="form-actions">
-            <div class="row">
-              <div class="col-md-offset-4 col-md-8">
-                    <a id="search_Select" href="javascript:;" class="btn green"><i class="fa fa-file-text-o"></i> ดูรายงาน </a>
-                     <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
-                 <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>
-                <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
-              </div>
             </div>
-          </div>
-              </div>
-          
-            </div>
-          </div>
-
         </div>
-        <div id="search-application-result" style="display:none;">
-          <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
- 
-          <hr>
-          <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
-
-            <div>
-                
-                <input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
-                    <div class="portlet box pink-chula">
-                     <div class="portlet-title">
-                        <div class="caption">
-                          <i class="icon-bar-chart"></i>ผู้สมัครต่างชาติ </div>
-                        <div class="tools">
-                          <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                          <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
-                          <a class="fullscreen font-red-pink" href="javascript:;" data-original-title="" title=""> </a>
-
-                        </div>
-                      </div>
-                      <div class="portlet-body">
-                        <div class="table-responsive">
-                          <table id="datatable_ajax" class="table table-hover table-bordered table-striped">
-                            <thead>
-                              <tr>
-                                <th> # </th>
-                                <th> เลขประจำตัวประชาชน </th>
-                                <th> ชื่อ-สกุล </th>
-                                <th> สัญชาติ </th>
-                                <th> รหัสหลักสูตร </th>
-                                <th> ชื่อหลักสูตร </th>
-                                <th> ประเภทหลักสูตร </th>
-                                <th> สาขาวิชา </th>
-                                <th> ภาควิชา </th>
-                                <th> คณะ </th>
-                                <th> สถานะ </th>
-                              </tr>
-                            </thead>
-                      
-                          </table>
-                        </div>
-                         
-                      </div>
-                    </div>
-
-            </div>
-          </div>
-
-      
-        </div>
-      </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
     </div>
-    <!-- END EXAMPLE TABLE PORTLET-->
-  </div>
- 
+
 </div>
 @stop
 
@@ -257,7 +256,7 @@
         var faculty =   ( $('option:selected','#faculty_id').val()=="")?'null':$('option:selected','#faculty_id').val();
        var sub_major_id = ($('#sub_major_id').val() =="")?'null':$('#sub_major_id').val();
        var  major_id = ($('#major_id').val() =="")?'null':$('#major_id').val();
-      window.open(("{{ url('admin/printMoreExamReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '1,2,3,4,5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');                 
+      window.open(("{{ url('admin/printForeignerReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '1,2,3,4,5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');                 
        
     } 
  
@@ -333,7 +332,7 @@ return    full.nation_name+'  '+full.nation_name_en  ;
 } },{
 targets: [4],
 render: function (data, type, full, meta) {
-return    full.program_id   ;
+return    full.majorcode   ;
 } },{
 targets: [5],
 render: function (data, type, full, meta) {

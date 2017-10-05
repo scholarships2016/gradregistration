@@ -800,9 +800,13 @@ class ManageApplyController extends Controller {
     public function showReportB21() {
         return view('backoffice.reports.report_B21');
     }
-public function showReportforeigner() {
-        return view('backoffice.reports.report_Exam_foreigner');
+
+    public function showReportforeigner() {
+        $fac = $this->FacultyRepo->all();
+        $progType = $this->ProgramType->all();
+        return view('backoffice.reports.report_Exam_foreigner', ["facs" => $fac, "progTypes" => $progType]);
     }
+
     public function showReportExamMore() {
 
         $fac = $this->FacultyRepo->all();
@@ -950,6 +954,39 @@ public function showReportforeigner() {
         }
     }
 
+    public function printForeignerReport($year, $semester, $roundNo, $faculty_id, $flow, $sub_major, $program_type_id, $major_id, $print) {
+
+        $status = explode(',', $flow);
+
+
+        $sub_major_id = ($sub_major != null && $sub_major != 'null' ) ? $sub_major : null;
+        $major = ($major_id != null && $major_id != 'null' ) ? $major_id : null;
+        $faculty = ($faculty_id != null && $faculty_id != 'null' ) ? $faculty_id : null;
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+        $curDiss = $this->ApplicationRepo->getDataMoreThanOneMajorForMangeReport(null, null, $status, $semester, $year, $roundNo, null, $user, null, null, null, $sub_major_id, null, $program_type_id, session('user_type')->user_role, $major, $faculty);
+
+
+        if ($print == 'EXCEL') {
+            $data = [];
+            $i = 0;
+            foreach ($curDiss as $value) {
+                array_push($data, ["No" => ($i + 1), "เลขประจำตัวประชาชน" => $value->stu_citizen_card, "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en), "สัญชาติ" => $value->nation_name . ' ' . $value->nation_name_en, "หลักสูตร" => $value->majorcode, "ชื่อหลักสูตร" => $value->prog_name, "รหัสประเภทหลักสูตร" => $value->cond_id, "ประเภทหลักสูตร" => ($value->degree_level_name . ' ' . $value->office_time), "สาขาวิชา" => $value->major_name, "ภาควิชา" => $value->department_name, "คณะ" => $value->faculty_name, "สถานะ" => $value->flow_name]);
+            }
+            return $this->exportExcel('ReportForeignerExam', $data);
+        } else if ($print == 'TEXT') {
+            $string = '';
+            $i = 0;
+
+            foreach ($curDiss as $value) {
+                $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' . $value->nation_name . ' ' . $value->nation_name_en . ',' . $value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+            }
+            $fileText = $string;
+            $myName = "ReportForeignerExam.txt";
+            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName), 'Content-Length' => sizeof($fileText)];
+            return response()->make($fileText, 200, $headers);
+        }
+    }
+
     public function getRegisterCourseMoreReport(Request $request = null) {
 
         $status = explode(',', $request->flow);
@@ -977,8 +1014,8 @@ public function showReportforeigner() {
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
-    
-     public function getforeignerReport(Request $request = null) {
+
+    public function getforeignerReport(Request $request = null) {
 
         $status = explode(',', $request->flow);
         $semester = $request->semester;

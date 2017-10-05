@@ -135,6 +135,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
         Route::get('printRegisterCourseReport/{flow}/{curr_act_id}/{sub_major}/{program_type_id}/{thaiDegree}/{program_id}/{print}/{suser}/{sposistion}/{txt1}/{reportNmae}', 'ManageApplyController@printRegisterCourseReport')->name('admin.printRegisterCourseReport');
         Route::get('printMoreExamReport/{year}/{semester}/{roundNo}/{faculty_id}/{flow}/{sub_major}/{program_type_id}/{major_id}/{print}', 'ManageApplyController@printMoreExamReport')->name('admin.printMoreExamReport');
+        Route::get('printForeignerReport/{year}/{semester}/{roundNo}/{faculty_id}/{flow}/{sub_major}/{program_type_id}/{major_id}/{print}', 'ManageApplyController@printForeignerReport')->name('admin.printForeignerReport');
         Route::get('getRegisterCourseMoreReport', 'ManageApplyController@getRegisterCourseMoreReport')->name('admin.getRegisterCourseMoreReport');
         Route::get('getforeignerReport', 'ManageApplyController@getforeignerReport')->name('admin.getforeignerReport');
 
