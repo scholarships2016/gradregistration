@@ -1114,9 +1114,6 @@ class ManageApplyController extends Controller {
     }
 
     public function printDataNewsSourceSumApplicant($year, $semester, $print) {
-
-
-//        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
         $curDiss = $this->ApplicationRepo->getDataNewsSourceSumApplicant($year, $semester);
 
 
@@ -1137,6 +1134,51 @@ class ManageApplyController extends Controller {
             }
             $fileText = $string;
             $myName = "ReportNewsSourceSumApplicant.txt";
+            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName), 'Content-Length' => sizeof($fileText)];
+            return response()->make($fileText, 200, $headers);
+        }
+    }
+
+    public function getGrantsReport(Request $request = null) {
+
+        $semester = $request->semester;
+        $year = $request->year;
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+
+        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null);
+
+        return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
+    }
+
+    public function grantsReport() {
+        return view('backoffice.reports.report_Grants');
+    }
+
+    public function printGrantsReport($year, $semester, $print) {
+      
+        $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
+
+        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null);
+
+        if ($print == 'EXCEL') {
+            $data = [];
+            $i = 0;
+            foreach ($curDiss as $value) {
+                array_push($data, ["No" => ($i + 1), "เลขประจำตัวประชาชน" => $value->stu_citizen_card, "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en), "คะแนนภาษาอังกฤษ" => (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score), "GPAX ป.ตรี" => $value->edu_gpax, "GPAX ป.โท" => $value->edu_gpaxM, "หลักสูตร" => $value->majorcode, "ชื่อหลักสูตร" => $value->prog_name, "รหัสประเภทหลักสูตร" => $value->cond_id, "ประเภทหลักสูตร" => ($value->degree_level_name . ' ' . $value->office_time), "สาขาวิชา" => $value->major_name, "ภาควิชา" => $value->department_name, "คณะ" => $value->faculty_name, "สถานะ" => $value->flow_name]);
+                $i = $i + 1;
+            }
+            return $this->exportExcel('ReportGrants', $data);
+        } else if ($print == 'TEXT') {
+            $string = '';
+            $i = 0;
+
+            foreach ($curDiss as $value) {
+                 $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' .(($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score). ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' .$value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+              
+                $i = $i + 1;
+            }
+            $fileText = $string;
+            $myName = "ReportGrants.txt";
             $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName), 'Content-Length' => sizeof($fileText)];
             return response()->make($fileText, 200, $headers);
         }
