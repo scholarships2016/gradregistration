@@ -610,13 +610,13 @@ class ManageApplyController extends Controller {
                             session()->flash('errorMsg', Lang::get('resource.lbError'));
                       }
 
-                      
+
                         return;
                     }
                 }
             }
         } catch (Exception $e) {
-            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+            Controller::WLog('Gs05 [application_ID ' . $request->application . ']', 'Gs05', $e->getMessage());
 
             session()->flash('errorMsg', Lang::get('resource.lbError'));
         }
