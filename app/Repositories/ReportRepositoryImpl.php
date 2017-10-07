@@ -502,9 +502,9 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     DB::raw("concat(ifnull(tle.name_title_en,''),appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
                     "app.program_id",
                     "mj.major_name",
-                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then appt.eng_test_score_admin 
+                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then appt.eng_test_score_admin
                     when eng.eng_test_id <> 6 or eng.eng_test_id is not null  then appt.eng_test_score else null end as eng_score"),
-                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then end_admin.eng_test_name 
+                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then end_admin.eng_test_name
                     when eng.eng_test_id <> 6 or eng.eng_test_id is not null then eng.eng_test_name else null end as test_type"),
                     "prog_t.prog_type_name",
                     "fac.faculty_name"
@@ -534,7 +534,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("end_admin.eng_test_id", "=", "appt.eng_test_id_admin");
                 });
 
-            $query->where("app . exam_status", " = ", 2);
+            $query->where("app.exam_status", " = ", 2);
             $query->where(function ($query) {
                 $query->where('app.flow_id', '=', 4)
                     ->orWhere('app.flow_id', '=', 5);
@@ -575,7 +575,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
         try {
             $query = DB::table("applicant as appt")
                 ->select("sat.SATI_LEVEL",
-                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก' 
+                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก'
                     when 3 then 'ดี' when 2 then 'พอใข้' when 1 then 'ไม่พอใจ' end as sat_desc"),
                     DB::raw("count(appt.applicant_id) as amt")
                 )->join("application as app", function ($join) {
