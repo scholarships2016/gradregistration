@@ -534,7 +534,6 @@ class ManageApplyController extends Controller {
 
                             'faculty_name_en' => $curr->faculty_full,
 
-
                             'statusExam_en' => $app->exam_name_en
 
                         ];
@@ -582,7 +581,22 @@ class ManageApplyController extends Controller {
                             'faculty_name' => $curr->stu_email,
                             'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
                             'year' => $curr->academic_year,
-                            'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก' ) . '[' . $app->admission_status_name_th . ']'
+                            'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก' ) . ' [' . $app->admission_status_name_th . ']',
+
+                            'stu_name_en' => $app->stu_first_name_en . ' ' . $app->stu_last_name_en,
+                            'english' => $curr->english,
+
+                            'sub_major_name_en' => $curr->sub_major_name_en,
+
+                            'major_name_en' => $curr->major_name_en,
+
+                            'department_name_en' => $curr->department_name_en,
+
+                            'faculty_name_en' => $curr->faculty_full,
+
+                            'statusExam_en' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'Not Pass' : 'Pass' ) . ' [' . $app->admission_status_name_en . ']'
+
+
                         ];
                         Mail::send('email.gs05', $data, function($message)use($app) {
                             $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
@@ -1155,7 +1169,7 @@ class ManageApplyController extends Controller {
     }
 
     public function printGrantsReport($year, $semester, $print) {
-      
+
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null);
@@ -1174,7 +1188,7 @@ class ManageApplyController extends Controller {
 
             foreach ($curDiss as $value) {
                  $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' .(($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score). ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' .$value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
-              
+
                 $i = $i + 1;
             }
             $fileText = $string;
