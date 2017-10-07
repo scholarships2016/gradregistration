@@ -530,12 +530,17 @@ class ManageApplyController extends Controller {
                             'faculty_name_en' => $curr->faculty_full,
                             'statusExam_en' => $app->exam_name_en
                         ];
-                        Mail::send('email.gs03', $data, function($message)use ($app) {
+                        if($app->stu_email!=""){
+                          Mail::send('email.gs03', $data, function($message)use ($app) {
                             $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
-                        });
-                        Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                          });
+                          Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                          session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                      }else{
+                          Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03',  "Invalid Email Address ({$app->stu_email})");
+                          session()->flash('errorMsg', Lang::get('resource.lbError'));
+                      }
 
-                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
                         return;
                     }
                 }
@@ -571,8 +576,10 @@ class ManageApplyController extends Controller {
                             'major_id' => $curr->major_id,
                             'department_name' => $curr->department_name,
                             'department_id' => $curr->department_id,
-                            'faculty_name' => $curr->stu_email,
-                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                            'faculty_id' => $curr->faculty_id,
+                            'faculty_name' => $curr->faculty_name,
+                            'round_no' => $curr->round_no,
+                            'semester' => $curr->semester,
                             'year' => $curr->academic_year,
                             'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก' ) . ' [' . $app->admission_status_name_th . ']',
 
@@ -591,12 +598,19 @@ class ManageApplyController extends Controller {
 
 
                         ];
-                        Mail::send('email.gs05', $data, function($message)use($app) {
-                            $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
-                        });
-                        Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
 
-                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                        if($app->stu_email!=""){
+                          Mail::send('email.gs05', $data, function($message)use($app) {
+                              $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
+                          });
+                          Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
+                            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                      }else{
+                          Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', "Invalid Email Address ({$app->stu_email})");
+                            session()->flash('errorMsg', Lang::get('resource.lbError'));
+                      }
+
+                      
                         return;
                     }
                 }

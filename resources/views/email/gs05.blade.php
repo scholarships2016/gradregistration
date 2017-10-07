@@ -1,4 +1,4 @@
-<div id="wrapper" style="text-align: center;min-height: 400px">
+<div id="wrapper" style="text-align: left;min-height: 400px">
     <div id="yourdiv" style="display: inline-block;">
 
       Dear {{$stu_name}} ({{$stu_name_en}}),
@@ -7,7 +7,7 @@
         สาขาวิชา{{$major_name}}[{{$major_id}}]
           ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}}[{{$faculty_id}}]
       <br/>
-       ประจำภาคการศึกษา {{$semester}} ปีการศึกษา {{$year}}
+       ประจำภาคการศึกษาที่ {{$semester}} ปีการศึกษา {{$year}}
       <br/><br/>
         บัณฑิตวิทยาลัย ได้พิจารณาผลการเข้าศึกษาแล้ว  ผลพิจารณาคือ ท่าน <b>{{$statusExam}}</b>
 
@@ -16,7 +16,8 @@
       Major in {{$major_name_en}}[{{$major_id}}],
       {{$department_name_en}}[{{$department_id}}],
       {{$faculty_name_en}}[{{$faculty_id}}]
-
+      <br/>
+       Semester No. {{$semester}}, Academic Year {{$year}}
       <br/></br>
       Your admission result is <b>{{$statusExam_en}}</b>
 

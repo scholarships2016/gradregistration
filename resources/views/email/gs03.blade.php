@@ -16,7 +16,8 @@ As you register for {{$english}}[{{$coursecodeno}}], {{($sub_major_id!=""?"Sub-M
 Major in {{$major_name_en}}[{{$major_id}}],
 {{$department_name_en}}[{{$department_id}}],
 {{$faculty_name_en}}[{{$faculty_id}}]
-
+<br/>
+ Semester No. {{$semester}}, Academic Year {{$year}}
 <br/></br>
 Your application result is <b>{{$statusExam_en}}</b>
 
