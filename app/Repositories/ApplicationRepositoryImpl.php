@@ -641,7 +641,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getforeignerReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null, $major_id = null, $faculty_id = null) {
         $results = null;
         try {
-
+  //DB::enableQueryLog();
             $results = Application:: leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
                             ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
@@ -758,6 +758,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time')])
                             ->distinct()
                             ->orderBy('application.app_id', 'asc')->get();
+
+                          //  dd(DB::getQueryLog());
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -974,12 +976,12 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     public function getDataNewsSourceSumApplicant($year, $sem) {
         $result = null;
         try {
-            $result = DB::select(DB::raw("SELECT s.news_source_name,count(a.applicant_id) cnum FROM  tbl_news_source s left join 
+            $result = DB::select(DB::raw("SELECT s.news_source_name,count(a.applicant_id) cnum FROM  tbl_news_source s left join
 ( select * from    applicant_news_source  where applicant_id in (
-    select DISTINCT ap.applicant_id    from  application ap 
+    select DISTINCT ap.applicant_id    from  application ap
 left join curriculum_activity ca ON(ca.curr_act_id = ap.curr_act_id)
 left join apply_setting ay on(ay.apply_setting_id = ca.apply_setting_id)
-where ay.semester='" . $sem . "' and ay.academic_year = '" . $year . "'   
+where ay.semester='" . $sem . "' and ay.academic_year = '" . $year . "'
     )) a  on (s.news_source_id = a.news_source_id)
 group by `news_source_name`
 order by s.news_source_id"));
@@ -989,7 +991,7 @@ order by s.news_source_id"));
 
         return $result;
     }
-    
-    
+
+
 
 }
