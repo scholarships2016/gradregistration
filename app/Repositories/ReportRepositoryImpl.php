@@ -586,7 +586,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
                 })->join("satisfaction as sat", function ($join) {
                     $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
-                })->groupBy("sat.SATI_LEVEL");
+                })->groupBy("sat.SATI_LEVEL", 'appt.applicant_id');
 
             if (isset($criteria['semester'])) {
                 $query->where('app_set.semester', '=', $criteria['semester']);
@@ -594,6 +594,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             if (isset($criteria['academic_year'])) {
                 $query->where('app_set.academic_year', '=', $criteria['academic_year']);
             }
+            //dd($query->toSql());
             return $query->get();
         } catch (\Exception $ex) {
             throw $ex;
@@ -619,7 +620,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
                 })->leftJoin("tbl_name_title as tle", function ($join) {
                     $join->on("tle.name_title_id", "=", "appt.name_title_id");
-                });
+                })->groupBy('sat.SATI_SUGGESTION','fullname_th', 'created');
 
             if (isset($criteria['semester'])) {
                 $query->where('app_set.semester', '=', $criteria['semester']);
@@ -627,7 +628,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             if (isset($criteria['academic_year'])) {
                 $query->where('app_set.academic_year', '=', $criteria['academic_year']);
             }
-
+            //dd($query->toSql());
             return $query->get();
 
         } catch (\Exception $ex) {
