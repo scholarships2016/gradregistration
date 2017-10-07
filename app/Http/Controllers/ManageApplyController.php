@@ -530,12 +530,17 @@ class ManageApplyController extends Controller {
                             'faculty_name_en' => $curr->faculty_full,
                             'statusExam_en' => $app->exam_name_en
                         ];
-                        Mail::send('email.gs03', $data, function($message)use ($app) {
+                        if($app->stu_email!=""){
+                          Mail::send('email.gs03', $data, function($message)use ($app) {
                             $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
-                        });
-                        Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                          });
+                          Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                          session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                      }else{
+                          Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03',  "Invalid Email Address ({$app->stu_email})");
+                          session()->flash('errorMsg', Lang::get('resource.lbError'));
+                      }
 
-                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
                         return;
                     }
                 }
@@ -571,23 +576,47 @@ class ManageApplyController extends Controller {
                             'major_id' => $curr->major_id,
                             'department_name' => $curr->department_name,
                             'department_id' => $curr->department_id,
-                            'faculty_name' => $curr->stu_email,
-                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                            'faculty_id' => $curr->faculty_id,
+                            'faculty_name' => $curr->faculty_name,
+                            'round_no' => $curr->round_no,
+                            'semester' => $curr->semester,
                             'year' => $curr->academic_year,
-                            'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก' ) . '[' . $app->admission_status_name_th . ']'
-                        ];
-                        Mail::send('email.gs05', $data, function($message)use($app) {
-                            $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
-                        });
-                        Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
+                            'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก' ) . ' [' . $app->admission_status_name_th . ']',
 
-                        session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                            'stu_name_en' => $app->stu_first_name_en . ' ' . $app->stu_last_name_en,
+                            'english' => $curr->english,
+
+                            'sub_major_name_en' => $curr->sub_major_name_en,
+
+                            'major_name_en' => $curr->major_name_en,
+
+                            'department_name_en' => $curr->department_name_en,
+
+                            'faculty_name_en' => $curr->faculty_full,
+
+                            'statusExam_en' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'Not Pass' : 'Pass' ) . ' [' . $app->admission_status_name_en . ']'
+
+
+                        ];
+
+                        if($app->stu_email!=""){
+                          Mail::send('email.gs05', $data, function($message)use($app) {
+                              $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
+                          });
+                          Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
+                            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                      }else{
+                          Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', "Invalid Email Address ({$app->stu_email})");
+                            session()->flash('errorMsg', Lang::get('resource.lbError'));
+                      }
+
+
                         return;
                     }
                 }
             }
         } catch (Exception $e) {
-            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+            Controller::WLog('Gs05 [application_ID ' . $request->application . ']', 'Gs05', $e->getMessage());
 
             session()->flash('errorMsg', Lang::get('resource.lbError'));
         }
@@ -1166,7 +1195,10 @@ class ManageApplyController extends Controller {
             $i = 0;
 
             foreach ($curDiss as $value) {
-                $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' . (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score) . ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' . $value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+
+                 $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' .(($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score). ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' .$value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+
+
 
                 $i = $i + 1;
             }
