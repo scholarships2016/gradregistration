@@ -101,7 +101,7 @@
                                         <div class="form-group">
                                             <label>รอบที่</label>
                                             <select id="roundNo" name="roundNo" class="form-control input-small">
-
+                                                <option value="">--เลือก--</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -142,6 +142,7 @@
                                         <div class="form-group">
                                             <label>ประเภทหลักสูตร</label>
                                             <select id="program_type_id" name="program_type_id" class="form-control input">
+                                                <option value="">--เลือก--</option>
                                                 @foreach($progTypes as $val)
                                                 <option value="{{$val->program_type_id}}">{{$val->prog_type_name}}</option>
                                                 @endforeach
@@ -250,23 +251,23 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-  
-      
+
+
         function callprint(print){
         var faculty =   ( $('option:selected','#faculty_id').val()=="")?'null':$('option:selected','#faculty_id').val();
        var sub_major_id = ($('#sub_major_id').val() =="")?'null':$('#sub_major_id').val();
        var  major_id = ($('#major_id').val() =="")?'null':$('#major_id').val();
-      window.open(("{{ url('admin/printForeignerReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '1,2,3,4,5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');                 
-       
-    } 
- 
+      window.open(("{{ url('admin/printForeignerReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '1,2,3,4,5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');
+
+    }
+
 jQuery(document).ready(function() {
   //clear serach result
   $('#semester,#year,#roundNo').on('change', function() {
     $('#search-program-result').fadeOut( "slow", "linear" );
     $('#search-application-result').fadeOut( "slow", "linear" );
   });
-  
+
 });
 
 
@@ -275,14 +276,14 @@ jQuery(document).ready(function() {
         $('#lbYear').text($('#year').val());
            TableDatatablesAjax.init();
          $('#search-application-result').fadeIn( "slow", "linear" );
-      
+
        });
 
- 
- 
- 
- 
- 
+
+
+
+
+
 var table="";
 var TableDatatablesAjax = function () {
     var handle1 = function () {
@@ -291,8 +292,8 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
              dataTable: {
-                "bStateSave": false,  
-                "pageLength": 1000,  
+                "bStateSave": false,
+                "pageLength": 1000,
 
                 "ajax": {
                     "url": "{!! route('admin.getforeignerReport') !!}",
@@ -358,14 +359,14 @@ targets: [10],
 render: function (data, type, full, meta) {
 return    full.flow_name  ;
 } }   ],
-                "bDestroy": true, 
+                "bDestroy": true,
                 "responsive": false,
               "paging":   false,
         "ordering": false,
         "info":     false
             },
-            
-        }); 
+
+        });
     }
 
     return {
