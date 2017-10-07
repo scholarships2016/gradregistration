@@ -269,7 +269,6 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,curriculum.curriculum_id,curriculum.responsible_person,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,semester,application.creator user_create,nation_id,apply_method')])
                             ->distinct()
                             ->orderBy('application.application_id', 'desc')->get();
-
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -989,7 +988,29 @@ order by s.news_source_id"));
 
         return $result;
     }
-    
-    
+
+    public function getMailApplicant($applicantID = null, $applicationID = null) {
+        $results = null;
+        try {
+
+            $results = Application:: leftJoin('applicant', 'applicant.applicant_id', 'application.applicant_id')
+                            ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
+                            ->Where(function ($query)use ($applicationID) {
+                                if ($applicationID) {
+                                    $query->where('application.application_id', $applicationID);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicantID) {
+                                if ($applicantID) {
+                                    $query->whereIn('application.application_id', $applicantID);
+                                }
+                            })
+                            ->select([DB::raw('stu_email,stu_first_name,stu_last_name,exam_name')])->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $results;
+    }
 
 }

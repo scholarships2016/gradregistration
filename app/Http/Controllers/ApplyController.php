@@ -331,7 +331,7 @@ class ApplyController extends Controller {
             if ($curr_act_id) {
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, [$applications]);
+                $apps = $this->ApplicationRepo->getMailApplicant( null,$applications);
 
                 foreach ($currs as $curr) {
 
@@ -353,7 +353,7 @@ class ApplyController extends Controller {
                             'statusExam' => $app->exam_name
                         ];
                         Mail::send('email.confirm-apply', $data, function($message)use ($app) {
-                            $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                            $message->to($app->stu_email, ($app->stu_first_name . ' ' . $app->stu_last_name))->subject('Registration Result ');
                         });
                         Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
 
