@@ -62,7 +62,7 @@
           <div class="portlet-title">
             <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
               <span class="caption-subject font-gree  n-sharp bold uppercase">Status </span>
-              <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
+              
             </div>
 
           </div>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="todo-tasklist-item-text">
                         <i class="icon-info"></i>
-                        {{Lang::get('resource.lbroundNo')}} {{$curDis->round_no}}, 
+                        {{Lang::get('resource.lbroundNo')}} {{$curDis->round_no}},
                         {{Lang::get('resource.lbSemesterNo')}} {{$curDis->semester}},
                         {{Lang::get('resource.lbYear')}} {{$curDis->academic_year}}
                     </div>
