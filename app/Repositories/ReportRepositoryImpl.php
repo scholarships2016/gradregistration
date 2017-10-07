@@ -179,7 +179,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     DB::raw("count(app.application_id) as apply_via_web_amt"),
                     DB::raw("count( case when app.flow_id >= 3 then app.application_id end ) as payed_app_amt"),
                     DB::raw("count( case when app.flow_id = 4 and app.exam_status = 2 and
-                     app.admission_status_id is not null and app.admission_status_id <> 'A' and 
+                     app.admission_status_id is not null and app.admission_status_id <> 'A' and
                      app.admission_status_id <> 'X' then app.application_id end ) as passed_exam_amt")
                 )
                 ->join("curriculum as curr", function ($join) {
@@ -336,7 +336,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
             }
             if (isset($criteria['flow_id'])) {
-                $query->where("app.flow_id", "=", $criteria['program_type_id']);
+                $query->where("app.flow_id", "=", $criteria['flow_id']);
             }
             if (isset($criteria['from_date'])) {
                 $query->whereDate('app.created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
@@ -367,10 +367,10 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     ifnull(pro.province_name,'-'),' เขต/อำเภอ ',ifnull(dis.district_name,'-'),' แขวง/ตำบล ',
                     ifnull(appt.stu_addr_tumbon,'-'),' รหัสไปรษณีย์ ',ifnull(appt.stu_addr_pcode,'-'),' โทรศัพท์อื่น ',
                     ifnull(appt.stu_phone,'-')) as address"),
-                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then 
+                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then
                     concat(end_admin.eng_test_name,' คะแนนที่ได้ ', appt.eng_test_score_admin,' คะแนน เมื่อวันที่ ',
-                    ifnull(date_format(appt.eng_date_taken_admin,'%d-%m-%Y'),'-')) 
-                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null then 
+                    ifnull(date_format(appt.eng_date_taken_admin,'%d-%m-%Y'),'-'))
+                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null then
                     concat(eng.eng_test_name,' คะแนนที่ได้ ', appt.eng_test_score,' คะแนน เมื่อวันที่ ',
                     ifnull(date_format(appt.eng_date_taken,'%d-%m-%Y'),'-')) else null end as eng_score"),
                     'appt.thai_test_score',
@@ -386,7 +386,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     DB::raw("GROUP_CONCAT( concat('ประเภท ',wk_s.work_status_name,' สถานที่ทำงาน ',
                     ifnull(app_w.work_stu_detail,'-'),' ตำแหน่ง/หน้าที่ ',ifnull(app_w.work_stu_position,'-'),
                     ' ระยะเวลาในการทำงาน ',ifnull(app_w.work_stu_yr,'-'),' ปี ',ifnull(app_w.work_stu_mth,'-'),
-                    ' เดือน เงินเดือนที่ได้รับ ',ifnull(app_w.work_stu_salary,'-'),' โทรศัพท์ ',ifnull(app_w.work_stu_phone,'-')) 
+                    ' เดือน เงินเดือนที่ได้รับ ',ifnull(app_w.work_stu_salary,'-'),' โทรศัพท์ ',ifnull(app_w.work_stu_phone,'-'))
                     ORDER BY app_w.app_work_status desc SEPARATOR '|') as work_info"),
                     DB::raw("case appt.fund_interesting when 1 then 'สนใจ' when 2 then 'ไม่สนใจ' end as fund_interesting"),
                     DB::raw("GROUP_CONCAT(news.news_source_name SEPARATOR '|') as news_src ")
@@ -465,7 +465,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
             }
             if (isset($criteria['flow_id'])) {
-                $query->where("app.flow_id", "=", $criteria['program_type_id']);
+                $query->where("app.flow_id", "=", $criteria['flow_id']);
             }
             if (isset($criteria['from_date'])) {
                 $query->whereDate('app.created', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
