@@ -1,11 +1,11 @@
-<div id="wrapper" style="text-align: center;min-height: 400px">
+<div id="wrapper" style="text-align: left;min-height: 400px">
     <div id="yourdiv" style="display: inline-block;">
 
       Dear {{$stu_name}} ({{$stu_name_en}}),
       <br/><br/>
       ท่านได้ยืนยันการสมัครเรียบร้อยแล้ว ในหลักสูตร {{$coursecodeno}} {{$thai}} {{($sub_major_id!=""?"แขนงวิชา ".$sub_major_name."[".$sub_major_id."]":"")}}
         สาขาวิชา{{$major_name}}[{{$major_id}}]
-          ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}}[{{$faculty_id}}]
+          ภาควิชา {{$department_name}} [{{$department_id}}]  คณะ{{$faculty_name}}[{{$faculty_id}}]
       <br/>
        ประจำภาคการศึกษาที่ {{$semester}} ปีการศึกษา {{$year}}
 
@@ -32,8 +32,6 @@ Please upload your related documents and/or pay apply fee and then send the rece
 #########################<br/>
 For more information and track your application status, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
 
-<br/><br/>
-.:: Graduat
   <br/><br/>
 .:: Graduate Student Online Registration System ::.
     </div>

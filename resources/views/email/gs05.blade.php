@@ -5,13 +5,15 @@
       <br/><br/>
       ตามที่ท่านได้สมัครเข้าศึกษาใน หลักสูตร {{$coursecodeno}} {{$thai}} {{($sub_major_id!=""?"แขนงวิชา ".$sub_major_name."[".$sub_major_id."]":"")}}
         สาขาวิชา{{$major_name}}[{{$major_id}}]
-          ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}}[{{$faculty_id}}]
+          ภาควิชา {{$department_name}} [{{$department_id}}]  คณะ{{$faculty_name}}[{{$faculty_id}}]
       <br/>
        ประจำภาคการศึกษาที่ {{$semester}} ปีการศึกษา {{$year}}
       <br/><br/>
         บัณฑิตวิทยาลัย ได้พิจารณาผลการเข้าศึกษาแล้ว  ผลพิจารณาคือ ท่าน <b>{{$statusExam}}</b>
 
-      <br/><br/>
+      <br/>
+      <hr/>
+      <br/>
       As you register for {{$english}}[{{$coursecodeno}}], {{($sub_major_id!=""?"Sub-Major in ".$sub_major_name_en."[".$sub_major_id."],":"")}}
       Major in {{$major_name_en}}[{{$major_id}}],
       {{$department_name_en}}[{{$department_id}}],

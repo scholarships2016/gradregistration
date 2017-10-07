@@ -331,8 +331,8 @@ class ApplyController extends Controller {
             if ($curr_act_id) {
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, [$applications]);
-
+                //$apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, [$applications]);
+                $apps = $this->ApplicationRepo->getMailApplicant(null, $applications);
                 foreach ($currs as $curr) {
 
                     foreach ($apps as $app) {
@@ -361,7 +361,6 @@ class ApplyController extends Controller {
                             'faculty_name_en' => $curr->faculty_full,
                             'statusExam_en' => $app->exam_name_en
 
-
                         ];
                         if($app->stu_email!=""){
                         Mail::send('email.confirm-apply', $data, function($message)use ($app) {
@@ -377,6 +376,9 @@ class ApplyController extends Controller {
                         return;
                     }
                 }
+            }else{
+              Controller::WLog('Register-Confirmation [' . $app->stu_email . ']', 'Register-Confirmation',  "Current Act ID is Null ({$curr_act_id})");
+              session()->flash('errorMsg', Lang::get('resource.lbError'));
             }
         } catch (Exception $e) {
             Controller::WLog('Register-Confirmation [application_ID ' . $request->application . ']', 'Register-Confirmation', $e->getMessage());
