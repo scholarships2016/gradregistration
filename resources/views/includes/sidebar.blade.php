@@ -192,13 +192,13 @@
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'NewsSourceSumApplicant-report') !== false) open active @endif">
-                                    <a href="{{url('admin/report/NewsSourceSumApplicant-report')}}" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'news-source-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/news-source-report')}}" class="nav-link ">
                                       <span class="title">แหล่งข่าว</span>
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-12.html" class="nav-link ">
+                                <li class=" nav-item  menuitem    @if(strpos($curr_url, 'fund-interested-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/fund-interested-report')}}" class="nav-link ">
                                         <span class="title">ความสนใจรับทุน </span>
 
                                     </a>

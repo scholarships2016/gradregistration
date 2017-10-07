@@ -170,9 +170,7 @@
 
                 </div>
                 <div id="search-application-result" style="display:none;">
-                    <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
-
-                    <hr>
+                  
                     <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
                         <div>

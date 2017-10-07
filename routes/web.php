@@ -216,8 +216,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('gs05-report', 'ManageApplyController@showReportGS05')->name('report.GS05');
             Route::get('multiple-application-report', 'ManageApplyController@showReportExamMore')->name('report.ReportExamMore');
             Route::get('foreigner-report', 'ManageApplyController@showReportforeigner')->name('report.foreigner');
-            Route::get('NewsSourceSumApplicant-report', 'ManageApplyController@showNewsSourceSumApplicant')->name('report.NewsSourceSumApplicant');
-            Route::get('Grants-report', 'ManageApplyController@GrantsReport')->name('report.GrantsReport');
+            Route::get('news-source-report', 'ManageApplyController@showNewsSourceSumApplicant')->name('report.NewsSourceSumApplicant');
+            Route::get('fund-interested-report', 'ManageApplyController@GrantsReport')->name('report.GrantsReport');
         });
 
         Route::get('profile', 'BackOffice\AdminManagementController@showProfileEditPage')->name('admin.showProfileEditPage');

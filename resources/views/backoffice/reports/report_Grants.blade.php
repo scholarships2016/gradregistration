@@ -97,13 +97,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                  
+
 
 
 
                                 </div>
                                 <hr>
-                           
+
 
                                 <div class="form-actions">
                                     <div class="row">
@@ -121,9 +121,7 @@
 
                 </div>
                 <div id="search-application-result" style="display:none;">
-                    <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
-
-                    <hr>
+                  
                     <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
                         <div>
@@ -204,16 +202,16 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-  
-      
+
+
         function callprint(print){
         var faculty =   ( $('option:selected','#faculty_id').val()=="")?'null':$('option:selected','#faculty_id').val();
        var sub_major_id = ($('#sub_major_id').val() =="")?'null':$('#sub_major_id').val();
        var  major_id = ($('#major_id').val() =="")?'null':$('#major_id').val();
-      window.open(("{{ url('admin/printGrantsReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val() +'/'+ print  ),'_blank');                 
-       
-    } 
-  
+      window.open(("{{ url('admin/printGrantsReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val() +'/'+ print  ),'_blank');
+
+    }
+
 
 
     $('#search_Select').click(function(){
@@ -221,14 +219,14 @@
         $('#lbYear').text($('#year').val());
            TableDatatablesAjax.init();
          $('#search-application-result').fadeIn( "slow", "linear" );
-      
+
        });
 
- 
- 
- 
- 
- 
+
+
+
+
+
 var table="";
 var TableDatatablesAjax = function () {
     var handle1 = function () {
@@ -237,8 +235,8 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
              dataTable: {
-                "bStateSave": false,  
-                "pageLength": 1000,  
+                "bStateSave": false,
+                "pageLength": 1000,
 
                 "ajax": {
                     "url": "{!! route('admin.getGrantsReport') !!}",
@@ -246,7 +244,7 @@ var TableDatatablesAjax = function () {
                     "async": "false",
                     "data" : {
                                 year:$('option:selected','#year').val(),
-                                semester:$('option:selected','#semester').val(),                                
+                                semester:$('option:selected','#semester').val(),
                                _token:     '{{ csrf_token()}}'
                                                }
                 },
@@ -267,17 +265,17 @@ targets: [2],
 render: function (data, type, full, meta) {
 return    (  full.name_title+full.stu_first_name + ' '+full.stu_last_name+'<br>' + full.name_title_en+full.stu_first_name_en + ' ' + full.stu_last_name_en + ' ') ;
 }},{
- 
+
 targets: [3],
 render: function (data, type, full, meta) {
 return    ((full.eng_test_score_admin != null)?full.eng_test_score_admin:full.eng_test_score)   ;
 } } ,{
- 
+
 targets: [4],
 render: function (data, type, full, meta) {
 return    full.edu_gpax   ;
 } } ,{
- 
+
 targets: [5],
 render: function (data, type, full, meta) {
 return    full.edu_gpaxM   ;
@@ -310,14 +308,14 @@ targets: [12],
 render: function (data, type, full, meta) {
 return    full.flow_name  ;
 } }  ],
-                "bDestroy": true, 
+                "bDestroy": true,
                 "responsive": false,
               "paging":   false,
         "ordering": false,
         "info":     false
             },
-            
-        }); 
+
+        });
     }
 
     return {
