@@ -5,9 +5,11 @@ namespace App\Http\Controllers\BackOffice;
 use App\Repositories\Contracts\ApplySettingRepository;
 use App\Repositories\Contracts\AudittrailRepository;
 
+use App\Repositories\Contracts\DepartmentRepository;
 use App\Repositories\Contracts\FacultyRepository;
 use App\Repositories\Contracts\ProgramTypeRepository;
 use App\Repositories\Contracts\ReportRepository;
+use App\Repositories\Contracts\TblMajorRepository;
 use App\Utils\Util;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +22,7 @@ class ReportController extends Controller
     protected $facRepo;
     protected $applySetRepo;
     protected $progTypeRepo;
+
 
     /**
      * ReportController constructor.
@@ -78,6 +81,40 @@ class ReportController extends Controller
             $progs = $this->progTypeRepo->getAllProgramTypeForDropdown();
             $flows = $this->rptRepo->getFlowApplyForDropdown();
             return view("backoffice.reports.report_GS04", ["acaYears" => $acaYears, "facs" => $facs, "progs" => $progs, "flows" => $flows]);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function showReportEngScorePage(Request $request)
+    {
+        try {
+            $acaYears = $this->applySetRepo->getDistinctAcademicYear();
+            $facs = $this->facRepo->getAllFacultyForDropdown();
+            $progs = $this->progTypeRepo->getAllProgramTypeForDropdown();
+            return view("backoffice.reports.report_EngScore", ["acaYears" => $acaYears, "facs" => $facs, "progs" => $progs]);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function showSatisfactionPage(Request $request)
+    {
+        try {
+            $acaYears = $this->applySetRepo->getDistinctAcademicYear();
+            return view("backoffice.reports.report_satisfaction", ["acaYears" => $acaYears]);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function showReportToRegPage(Request $request)
+    {
+        try {
+            $acaYears = $this->applySetRepo->getDistinctAcademicYear();
+            $facs = $this->facRepo->getAllFacultyForDropdown();
+            $progs = $this->progTypeRepo->getAllProgramTypeForDropdown();
+            return view("backoffice.reports.report_to_reg", ["acaYears" => $acaYears, "facs" => $facs, "progs" => $progs]);
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -285,6 +322,77 @@ class ReportController extends Controller
             }
 
             return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+        } catch (\Exception $ex) {
+            throw $ex;
+            return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+        }
+    }
+
+    public function doReport09(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $data = $this->rptRepo->getEngScoreReport($param);
+            $tbody = '<tr><td colspan="9" style="text-align: center">ไม่พบข้อมูล</td></tr>';
+
+            if (!empty($data) && sizeof($data) != 0) {
+                $tbody = "";
+                foreach ($data as $index => $value) {
+                    $row = '<tr>';
+                    $row .= '<td>' . ($index + 1) . '</td>';
+                    $row .= '<td>' . $value->stu_citizen_card . '</td>';
+                    $row .= '<td>' . $value->fullname_th . '<br>' . $value->fullname_en . '</td>';
+                    $row .= '<td>' . $value->program_id . '</td>';
+                    $row .= '<td>' . $value->major_name . '</td>';
+                    $row .= '<td>' . $value->eng_score . '</td>';
+                    $row .= '<td>' . $value->test_type . '</td>';
+                    $row .= '<td>' . $value->prog_type_name . '</td>';
+                    $row .= '<td>' . $value->faculty_name . '</td>';
+                    $row .= '</tr>';
+                    $tbody .= $row;
+                }
+            }
+            return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody), null));
+        } catch (\Exception $ex) {
+            throw $ex;
+            return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+        }
+    }
+
+    public function doReport13(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $tbody = '<tr><td colspan="4" style="text-align: center">ไม่พบข้อมูล</td></tr>';
+            $data = $this->rptRepo->getSatisfactionData($param);
+            $data2 = $this->rptRepo->getSatisfactionChartsData($param);
+
+            if (!empty($data) && sizeof($data) != 0) {
+                $tbody = "";
+                foreach ($data as $index => $value) {
+                    $row = '<tr>';
+                    $row .= '<td>' . ($index + 1) . '</td>';
+                    $row .= '<td>' . $value->SATI_SUGGESTION . '</td>';
+                    $row .= '<td>' . $value->fullname_th . '</td>';
+                    $row .= '<td>' . $value->created . '</td>';
+                    $row .= '</tr>';
+                    $tbody .= $row;
+                }
+            }
+
+            return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody, "chartData" => $data2), null));
         } catch (\Exception $ex) {
             throw $ex;
             return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody, "tfoot" => $tfoot), null));
@@ -638,5 +746,140 @@ class ReportController extends Controller
             throw $ex;
         }
     }
+
+    public function doReport09Excel(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $data = $this->rptRepo->getEngScoreReport($param);
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
+
+            Excel::create('EngScoreReport', function ($excel) use ($data) {
+                $excel->sheet('EngScoreReport', function ($sheet) use ($data) {
+                    $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
+                    $sheet->appendRow(array('#',
+                        'เลขที่บัตรประชาชน',
+                        'ชื่อสกุล ไทย/อังกฤษ',
+                        'รหัสหลักสูตรที่สมัคร',
+                        'สาขาที่สมัคร',
+                        'คะแนนที่ได้',
+                        'ประเภทคะแนน',
+                        'ประเภทหลักสูตร',
+                        'คณะ'
+                    ));
+                    foreach ($data as $index => $value) {
+                        $sheet->appendRow(array(
+                            ($index + 1)
+                        , $value->stu_citizen_card
+                        , empty($value->fullname_th) ? ($value->fullname_en) : ($value->fullname_th) . PHP_EOL . ($value->fullname_en)
+                        , $value->program_id
+                        , $value->major_name
+                        , $value->eng_score
+                        , $value->test_type
+                        , $value->prog_type_name
+                        , $value->faculty_name
+                        ));
+                    }
+                });
+            })->export($param['fileType']);
+
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+    public function doReport13Excel(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $data = $this->rptRepo->getSatisfactionData($param);
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
+
+            Excel::create('SatisfactionReport', function ($excel) use ($data) {
+                $excel->sheet('SatisfactionReport', function ($sheet) use ($data) {
+                    $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
+                    $sheet->appendRow(array('#',
+                        'ความคิดเห็น',
+                        'ผู้ให้ความคิดเห็น',
+                        'วัน-เวลา'
+                    ));
+                    foreach ($data as $index => $value) {
+                        $sheet->appendRow(array(
+                            ($index + 1),
+                            $value->SATI_SUGGESTION,
+                            $value->fullname_th,
+                            $value->created
+                        ));
+                    }
+                });
+            })->export($param['fileType']);
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function doReport14Excel(Request $request)
+    {
+        try {
+            $who = session('user_id');
+            $userType = session('user_type');
+            $param = $request->all();
+            $param['who'] = $who;
+            $param['user_role'] = $userType->user_role;
+            $param['user_type'] = $userType->user_type;
+
+            $data = null;
+            $rptName = '';
+            if (!(isset($param['fileType']) && ($param['fileType'] == 'xls' || $param['fileType'] == 'txt'))) {
+                throw new \Exception('Cannot Export');
+            }
+
+            if (isset($param['rpt_type']) && $param['rpt_type'] == 1) {
+                $data = $this->rptRepo->getDatasRegistrationCenter1($param);
+                $rptName = 'สทป-1';
+            } else if (isset($param['rpt_type']) && $param['rpt_type'] == 2) {
+                $data = $this->rptRepo->getDatasRegistrationCenter2($param);
+                $rptName = 'สทป-2';
+            } else if (isset($param['rpt_type']) && $param['rpt_type'] == 3) {
+                $data = $this->rptRepo->getDatasPolicyAndPlan($param);
+                $rptName = 'นโยบายและแผน';
+            } else {
+                throw new \Exception('Cannot Export');
+            }
+
+            Excel::create($rptName, function ($excel) use ($data, $rptName) {
+                $excel->sheet($rptName, function ($sheet) use ($data) {
+                    $sheet->setFontFamily('TH Sarabun New');
+                    $sheet->setFontSize(14);
+                    $sheet->fromArray(json_decode(json_encode($data), true), null, 'A1', false, false);
+                });
+            })->export($param['fileType']);
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
 
 }

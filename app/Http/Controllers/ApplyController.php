@@ -331,8 +331,8 @@ class ApplyController extends Controller {
             if ($curr_act_id) {
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
+                //$apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, [$applications]);
                 $apps = $this->ApplicationRepo->getMailApplicant(null, $applications);
-
                 foreach ($currs as $curr) {
 
                     foreach ($apps as $app) {
@@ -347,23 +347,41 @@ class ApplyController extends Controller {
                             'major_id' => $curr->major_id,
                             'department_name' => $curr->department_name,
                             'department_id' => $curr->department_id,
-                            'faculty_name' => $curr->stu_email,
-                            'semester' => $curr->semester . ' รอบที่' . $curr->round_no,
+                            'faculty_id' => $curr->faculty_id,
+                            'faculty_name' => $curr->faculty_name,
+                            'round_no' => $curr->round_no,
+                            'semester' => $curr->semester,
                             'year' => $curr->academic_year,
-                            'statusExam' => $app->exam_name
-                        ];
-                        Mail::send('email.confirm-apply', $data, function($message)use ($app) {
-                            $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
-                        });
-                        Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                            'statusExam' => $app->exam_name,
+                            'stu_name_en' => $app->stu_first_name_en . ' ' . $app->stu_last_name_en,
+                            'english' => $curr->english,
+                            'sub_major_name_en' => $curr->sub_major_name_en,
+                            'major_name_en' => $curr->major_name_en,
+                            'department_name_en' => $curr->department_name_en,
+                            'faculty_name_en' => $curr->faculty_full,
+                            'statusExam_en' => $app->exam_name_en
 
+                        ];
+                        if($app->stu_email!=""){
+                        Mail::send('email.confirm-apply', $data, function($message)use ($app) {
+                            $message->to($app->stu_email, $app->stu_first_name)->subject('Confirmation Result ');
+                        });
+                        Controller::WLog('Register-Confirmation [' . $app->stu_email . ']', 'Register-Confirmation', null);
                         session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                      }else{
+                        Controller::WLog('Register-Confirmation [' . $app->stu_email . ']', 'Register-Confirmation',  "Invalid Email Address ({$app->stu_email})");
+                        session()->flash('errorMsg', Lang::get('resource.lbError'));
+                      }
+
                         return;
                     }
                 }
+            }else{
+              Controller::WLog('Register-Confirmation [' . $app->stu_email . ']', 'Register-Confirmation',  "Current Act ID is Null ({$curr_act_id})");
+              session()->flash('errorMsg', Lang::get('resource.lbError'));
             }
         } catch (Exception $e) {
-            Controller::WLog('Gs03 [application_ID ' . $request->application . ']', 'Gs03', $e->getMessage());
+            Controller::WLog('Register-Confirmation [application_ID ' . $request->application . ']', 'Register-Confirmation', $e->getMessage());
 
             session()->flash('errorMsg', Lang::get('resource.lbError'));
         }
