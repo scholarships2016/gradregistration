@@ -518,24 +518,17 @@ class ManageApplyController extends Controller {
                             'department_id' => $curr->department_id,
                             'faculty_id' => $curr->faculty_id,
                             'faculty_name' => $curr->faculty_name,
-                            'round_no' =>  $curr->round_no,
-                            'semester' => $curr->semester ,
+                            'round_no' => $curr->round_no,
+                            'semester' => $curr->semester,
                             'year' => $curr->academic_year,
                             'statusExam' => $app->exam_name,
-
                             'stu_name_en' => $app->stu_first_name_en . ' ' . $app->stu_last_name_en,
                             'english' => $curr->english,
-
                             'sub_major_name_en' => $curr->sub_major_name_en,
-
                             'major_name_en' => $curr->major_name_en,
-
                             'department_name_en' => $curr->department_name_en,
-
                             'faculty_name_en' => $curr->faculty_full,
-
                             'statusExam_en' => $app->exam_name_en
-
                         ];
                         Mail::send('email.gs03', $data, function($message)use ($app) {
                             $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
@@ -1000,13 +993,14 @@ class ManageApplyController extends Controller {
 
         $status = explode(',', $flow);
 
+        $roundNos = ($roundNo == 'null') ? null : $roundNo;
+        $program_type_ids = ($program_type_id == 'null') ? null : $program_type_id;
 
         $sub_major_id = ($sub_major != null && $sub_major != 'null' ) ? $sub_major : null;
         $major = ($major_id != null && $major_id != 'null' ) ? $major_id : null;
         $faculty = ($faculty_id != null && $faculty_id != 'null' ) ? $faculty_id : null;
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
-        $curDiss = $this->ApplicationRepo->getDataMoreThanOneMajorForMangeReport(null, null, $status, $semester, $year, $roundNo, null, $user, null, null, null, $sub_major_id, null, $program_type_id, session('user_type')->user_role, $major, $faculty);
-
+        $curDiss = $this->ApplicationRepo->getforeignerReport(null, null, $status, $semester, $year, $roundNos, null, $user, null, null, null, $sub_major_id, null, $program_type_ids, session('user_type')->user_role, $major, $faculty);
 
         if ($print == 'EXCEL') {
             $data = [];
@@ -1064,7 +1058,8 @@ class ManageApplyController extends Controller {
         $status = explode(',', $request->flow);
         $semester = $request->semester;
         $year = $request->year;
-        $roundNo = $request->roundNo;
+        $roundNo = ($request->roundNo == 'null') ? null : $request->roundNo;
+        $program_type_id = ($request->program_type_id == 'null') ? null : $request->program_type_id;
         $criteria = $request->criteria;
         $curr_act_id = $request->curr_act_id;
         $exam_status = $request->exams;
@@ -1078,7 +1073,6 @@ class ManageApplyController extends Controller {
             $sub_major_id = null;
         }
 
-        $program_type_id = $request->program_type_id;
 
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
@@ -1187,7 +1181,10 @@ class ManageApplyController extends Controller {
             $i = 0;
 
             foreach ($curDiss as $value) {
+
                  $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' .(($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score). ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' .$value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+
+
 
                 $i = $i + 1;
             }
