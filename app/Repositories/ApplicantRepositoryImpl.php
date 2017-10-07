@@ -259,8 +259,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('edu_id', $data) || !empty($data['edu_id']))
                 $id = $data['edu_id'];
 
-            $chk = ApplicantEdu::where('edu_id', $id)->first();
-            $curObj = $chk ? $chk : new Applicant;
+            $chk = ApplicantEdu::where('app_edu_id', $id)->first();
+            $curObj = $chk ? $chk : new ApplicantEdu;
             if (array_key_exists('applicant_id', $data))
                 $curObj->applicant_id = $data['applicant_id'];
             if (array_key_exists('grad_level_id', $data))
@@ -276,9 +276,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (array_key_exists('edu_major', $data))
                 $curObj->edu_major = $data['edu_major'];
             if (array_key_exists('edu_gpax', $data))
-                $curObj->work_stu_salary = $data['edu_gpax'];
+                $curObj->edu_gpax = $data['edu_gpax'];
             if (array_key_exists('edu_degree', $data))
                 $curObj->edu_degree = $data['edu_degree'];
+            if (array_key_exists('grad_level', $data))
+                $curObj->grad_level = $data['grad_level'];
+            
+            
 
             if (array_key_exists('creator', $data))
                 $curObj->creator = $data['creator'];

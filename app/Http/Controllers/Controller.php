@@ -128,8 +128,10 @@ class Controller extends BaseController {
                     })->get()[0];
 
             if (!empty($data) && $data->count()) {
+                 
 
                 foreach ($data as $key => $value) {
+                    
                     if ($value->row) {
                         $title_name = explode('-', $value->title_name);
                         $sex = explode('-', $value->sex);
@@ -139,7 +141,12 @@ class Controller extends BaseController {
                         $address_dist = explode('_', $value->address_dist);
                         $work_status = explode('-', $value->work_status);
                         $Admission_Status = explode('-', $value->admission_status);
-
+                        $edu_pass_id = explode('-', $value->edu_pass_id);
+                        $university_id = explode('-', $value->university_id);
+                        $edu_pass_id_M = explode('-', $value->edu_pass_idm);                         
+                        $university_id_M = explode('-', $value->university_idm);
+                        
+                        $eng_test_id = explode('-', $value->eng_test_id);
                         $insert[] = ['row' => $value->row,
                             'id_card' => $value->id_card,
                             'title_name' => trim($title_name[1]),
@@ -168,7 +175,29 @@ class Controller extends BaseController {
                             'work_place_name' => $value->work_place_name,
                             'work_position' => $value->work_position,
                             'Admission_Status' => trim($Admission_Status[1]),
-                            'Admission_StatusID' => trim($Admission_Status[0])
+                            'Admission_StatusID' => trim($Admission_Status[0]),
+                            'stu_phone' => trim($value->stu_phone),
+                            'eng_test_id' => trim($eng_test_id[0]),
+                            'eng_test_text' => trim($eng_test_id[1]),
+                            'eng_test_score' => trim($value->eng_test_score),
+                            'eng_date_taken' => trim($value->eng_date_taken),
+                            'edu_pass_id' => trim($edu_pass_id[0]),
+                            'edu_pass_text' => trim($edu_pass_id[1]),
+                            'university_id' => trim($university_id[0]),
+                            'university_text' => trim($university_id[1]),
+                            'edu_gpax' => trim($value->edu_gpax),
+                            'edu_faculty' => trim($value->edu_faculty),
+                            'edu_major' => trim($value->edu_major),
+                            'edu_degree' => trim($value->edu_degree),
+                            
+                            'edu_pass_idM' => trim($edu_pass_id_M[0]),                            
+                            'edu_pass_textM' => trim($edu_pass_id_M[1]),                            
+                            'university_idM' => trim($university_id_M[0]),
+                            'university_textM' => trim($university_id_M[1]),
+                            'edu_gpaxM' => trim($value->edu_gpaxm),
+                            'edu_facultyM' => trim($value->edu_facultym),
+                            'edu_majorM' => trim($value->edu_majorm),                            
+                            'edu_degreeM' => trim($value->edu_degreem) 
                         ];
                     }
                 }

@@ -243,7 +243,26 @@
                         <th>สถานะการทำงานปัจจุบัน</th>
                         <th>ชื่อสถานที่ทำงานปัจจุบัน</th>
                         <th>ตำแหน่งการทำงานปัจจุบัน</th>
-                        <th>ประเภทการรับเข้าศึกษา</th>
+                          
+                        <th>หมายเลขโทรศัพท์</th>
+                        <th>เลือกสถาบันที่สอบภาษาอังกฤษ</th>
+                        <th>คะแนนภาษาอังกฤษ</th>
+                        <th>วันที่คะนนมีผล</th>
+                        <th>สถานะการศึกษา ป.ตรี</th>
+                        <th>มหาวิทยาล้ย/สถาบัน ป.ตรี</th>
+                        <th>แต้มเฉลี่ย ป.ตรี</th>
+                        <th>คณะ ป.ตรี</th>
+                        <th>สาขาวิชา ป.ตรี</th>
+                        <th>ชื่อปริญญา ป.ตรี</th>
+                        <th>สถานะการศึกษา ป.โท</th>
+                        <th>มหาวิทยาล้ย/สถาบัน  ป.โท</th>
+                        <th>แต้มเฉลี่ย  ป.โท</th>
+                        <th>คณะ  ป.โท</th>
+                        <th>สาขาวิชา  ป.โท</th>
+                        <th>ชื่อปริญญา  ป.โท</th>
+                         
+                       
+<th>ประเภทการรับเข้าศึกษา</th>
                         <th> Actions </th>
                       </tr>
                     </thead>
@@ -498,13 +517,97 @@ table2 = $('#datatable_ajax').dataTable({
                     render: function (data, type, full, meta) {
                     return   full.work_position ;
                     }},
+                
+                  
+                 {
+                    targets: [20],name : 'stu_phone',
+                    render: function (data, type, full, meta) {
+                    return   full.stu_phone ;
+                    }},
+                 {
+                    targets: [21],name : 'eng_test_text',
+                    render: function (data, type, full, meta) {
+                    return   full.eng_test_text ;
+                    }},
+                 {
+                    targets: [22],name : 'eng_test_score',
+                    render: function (data, type, full, meta) {
+                    return   full.eng_test_score ;
+                    }},
+                 {
+                    targets: [23],name : 'eng_date_taken',
+                    render: function (data, type, full, meta) {
+                    return   full.eng_date_taken ;
+                    }},
+                 {
+                    targets: [24],name : 'edu_pass_text',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_pass_text ;
+                    }},
+                 {
+                    targets: [25],name : 'university_text',
+                    render: function (data, type, full, meta) {
+                    return   full.Admission_Status ;
+                    }},
+                 {
+                    targets: [26],name : 'edu_gpax',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_gpax ;
+                    }},
+                 {
+                    targets: [27],name : 'edu_faculty',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_faculty ;
+                    }},
+                 {
+                    targets: [28],name : 'edu_major',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_major ;
+                    }},
+                 {
+                    targets: [29],name : 'edu_degree',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_degree ;
+                    }},
+                 {
+                    targets: [30],name : 'edu_pass_textM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_pass_textM ;
+                    }},
+                 {
+                    targets: [31],name : 'university_textM',
+                    render: function (data, type, full, meta) {
+                    return   full.university_textM ;
+                    }},
+                 {
+                    targets: [32],name : 'edu_gpaxM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_gpaxM ;
+                    }},
+                 {
+                    targets: [33],name : 'edu_facultyM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_facultyM ;
+                    }},
+                 {
+                    targets: [34],name : 'edu_majorM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_majorM ;
+                    }},
+                 {
+                    targets: [35],name : 'edu_degreeM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_degreeM ;
+                    }},
+                
+                  
                      {
-                    targets: [20],name : 'Admission_Status',
+                    targets: [36],name : 'Admission_Status',
                     render: function (data, type, full, meta) {
                     return   full.Admission_Status ;
                     }},
                         {
-                      targets: [21],
+                      targets: [37],
                       render: function (data, type, full, meta) {
                       return ((' <a class="btn-info" > Delete </a>  ')) ;
                       } }    ]
