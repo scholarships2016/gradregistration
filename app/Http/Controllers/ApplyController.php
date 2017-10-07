@@ -331,7 +331,7 @@ class ApplyController extends Controller {
             if ($curr_act_id) {
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, [$applications]);
+                $apps = $this->ApplicationRepo->getMailApplicant(null, $applications);
 
                 foreach ($currs as $curr) {
 
