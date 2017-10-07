@@ -144,62 +144,61 @@
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'payment-summary-report') !== false) open active @endif">
-                                    <a href="{{url('admin/report/payment-summary-report')}}" class="nav-link ">
-                                        <span class="title">ผู้สมัครที่ส่งเอกสารแล้ว</span>
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'applicant-application-data') !== false) open active @endif">
+                                    <a href="{{url('admin/report/applicant-application-data')}}" class="nav-link ">
+                                        <span class="title">ข้อมูลผู้สมัครตามสถานะ</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'gs03-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/gs03-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครเข้าศึกษา (GS03)</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'gs05-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/gs05-report')}}" class="nav-link ">
                                         <span class="title">ผู้มีสิทธิ์เข้าศึกษา (GS05)</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'b21-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/b21-report')}}" class="nav-link ">
                                         <span class="title">ผู้มีสิทธิ์เข้าศึกษา แบบ บ.21</span>
 
                                     </a>
                                 </li>
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/multiple-application-report')}}" class="nav-link ">
                                         <span class="title">ผู้สอบได้มากกว่า 1 สาขาขึ้นไป</span>
 
                                     </a>
                                 </li>
 
 
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
+                                    <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-9.html" class="nav-link ">
                                         <span class="title">คะแนนภาษาอังกฤษ</span>
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'foreigner-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/foreigner-report')}}" class="nav-link ">
                                         <span class="title">ผู้สมัครชาวต่างชาติ  </span>
 
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
-                                        <span class="title">แหล่งข่าว</span>
-
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'news-source-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/news-source-report')}}" class="nav-link ">
+                                      <span class="title">แหล่งข่าว</span>
                                     </a>
                                 </li>
-                                <li class=" nav-item  menuitem   ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
+                                <li class=" nav-item  menuitem    @if(strpos($curr_url, 'fund-interested-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/fund-interested-report')}}" class="nav-link ">
                                         <span class="title">ความสนใจรับทุน </span>
 
                                     </a>
@@ -207,7 +206,7 @@
 
                                 @if(session('user_type')->user_type == 'Admin' ||in_array("7",session('user_permission')))
                                     <li class=" nav-item  menuitem">
-                                        <a href="components_color_pickers.html" class="nav-link ">
+                                        <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-13.html" class="nav-link ">
                                             <span class="title">ความพึงพอใจการใช้งานระบบ  </span>
                                         </a>
                                     </li>

@@ -1,19 +1,16 @@
-<div id="wrapper" style="text-align: center;min-height: 400px">
-    <div id="yourdiv" style="display: inline-block;">
-        Hi {{$stu_name}},
-        <br>
-        The password for your Account {{$email}} is <br><br>
-        <span style="color:red;font-size: 18px">[{{$stu_password}}]</span>
-    </div>
-</div>
+
 Dear {{$stu_name}},
+<br/><br/>
+   ตามที่ท่านได้สมัครหลักสูตร {{ $thai.'['.$coursecodeno.']'}} แขนงวิชา {{$sub_major_name}} [{{$sub_major_id}}]  สาขาวิชา{{$major_name}}[{{$major_id}}]  ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}}
+<br/>
+   ประจำภาคการศึกษา {{$semester}} ปีการศึกษา {{$year}} นั้น
+<br/><br/>
+        บัณฑิตวิทยาลัย ได้พิจารณาสิทธิ์การเข้าสอบของท่านแล้ว ผลการพิจารณาคือ ท่าน  <b>มีสิทธิ์สอบ</b>
+<br/><br/>
 
-   ผลการพิจารณาใบสมัคร {{ $thai.'['.$coursecodeno.']'}} แขนงวิชา {{$sub_major_name}} [{{$sub_major_id}}]  สาขาวิชา{{$major_name}}[{{$major_id}}]  ภาควิชา {{$department_name}} [{{$department_id}}]  {{$faculty_name}} ประจำภาคการศึกษา {{$semester}} ปีการศึกษา {{$year}}
 
-        คุณ มีสิทธิ์สอบ
-Valid
 
-   For more information, please login to registration website http://161.200.133.6:443/gradRegistNew2/ or contact program officer Tel. 02-2186880
+For more information, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
 
 
 .:: Graduate Student Online Registration System ::.

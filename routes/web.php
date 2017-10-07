@@ -131,6 +131,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('addUserExamGS05', 'ManageApplyController@addUserExamGS05')->name('addUserExamGS05');
 
 
+
         Route::get('getRegisterCourseReport', 'ManageApplyController@getRegisterCourseReport')->name('admin.getRegisterCourseReport');
         Route::get('printRegisterCourseReport/{flow}/{curr_act_id}/{sub_major}/{program_type_id}/{thaiDegree}/{program_id}/{print}/{suser}/{sposistion}/{txt1}/{reportNmae}', 'ManageApplyController@printRegisterCourseReport')->name('admin.printRegisterCourseReport');
         Route::get('printMoreExamReport/{year}/{semester}/{roundNo}/{faculty_id}/{flow}/{sub_major}/{program_type_id}/{major_id}/{print}', 'ManageApplyController@printMoreExamReport')->name('admin.printMoreExamReport');
@@ -208,16 +209,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('applicant-application-data', 'BackOffice\ReportController@showReport04Page')->name('admin.report.showReport04Page');
             Route::get('doReport04Excel', 'BackOffice\ReportController@doReport04Excel')->name('admin.report.doReport04Excel');
 
-            Route::get('eng-score-report', 'BackOffice\ReportController@showReportEngScorePage')->name('admin.report.showReportEngScorePage');
-            Route::get('doReport09', 'BackOffice\ReportController@doReport09')->name('admin.report.doReport09');
-            Route::get('doReport09Excel', 'BackOffice\ReportController@doReport09Excel')->name('admin.report.doReport09Excel');
 
-            Route::get('satisfaction-report', 'BackOffice\ReportController@showSatisfactionPage')->name('admin.report.showSatisfactionPage');
-            Route::get('doReport13', 'BackOffice\ReportController@doReport13')->name('admin.report.doReport13');
-            Route::get('doReport13Excel', 'BackOffice\ReportController@doReport13Excel')->name('admin.report.doReport13Excel');
-
-            Route::get('report-export-to-reg', 'BackOffice\ReportController@showReportToRegPage')->name('admin.report.showReportToRegPage');
-            Route::get('doReport14Excel', 'BackOffice\ReportController@doReport14Excel')->name('admin.report.doReport14Excel');
 
             Route::get('gs03-report', 'ManageApplyController@showReportGS03')->name('report.GS03');
             Route::get('b21-report', 'ManageApplyController@showReportB21')->name('report.B21');

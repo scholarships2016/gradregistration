@@ -380,7 +380,7 @@
            var data = [];
            data.push(app);
            sentmail(JSON.stringify(data));
-         }, 100);
+         }, 1000);
        });
 
 
@@ -398,6 +398,7 @@
                                                 _token: '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
+                    swal.close();
                                            toastr.success('ดำเนินการเรียบร้อย');
                                         }
 				},"json");

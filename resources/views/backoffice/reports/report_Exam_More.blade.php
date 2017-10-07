@@ -64,7 +64,7 @@
   <div class="col-md-12">
     <!-- BEGIN EXAMPLE TABLE PORTLET-->
     <div class="portlet light bordered">
-      
+
       <div class="portlet-body">
 
         <div class="table-toolbar">
@@ -101,14 +101,14 @@
                     <div class="form-group">
                       <label>รอบที่</label>
                       <select id="roundNo" name="roundNo" class="form-control input-small">
-
+                                        <option value="">--เลือก--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                     </select>
                     </div>
                   </div>
-                
+
 
 
                 </div>
@@ -125,7 +125,7 @@
                                   </select>
                           </div>
                         </div>
-                         
+
                         <div class="col-md-2">
                           <div class="form-group">
                             <label>รหัสหลักสูตร</label>
@@ -142,6 +142,7 @@
                           <div class="form-group">
                             <label>ประเภทหลักสูตร</label>
                             <select id="program_type_id" name="program_type_id" class="form-control input">
+                                      <option value="">--เลือก--</option>
                                     @foreach($progTypes as $val)
                                     <option value="{{$val->program_type_id}}">{{$val->prog_type_name}}</option>
                                     @endforeach
@@ -158,25 +159,23 @@
               <div class="col-md-offset-4 col-md-8">
                     <a id="search_Select" href="javascript:;" class="btn green"><i class="fa fa-file-text-o"></i> ดูรายงาน </a>
                      <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
-                 <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>
+                 <!--<a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>-->
                 <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
               </div>
             </div>
           </div>
               </div>
-          
+
             </div>
           </div>
 
         </div>
         <div id="search-application-result" style="display:none;">
-          <h3><span class="badge badge-warning">3</span> รายละเอียดข้อมูล</h3>
- 
-          <hr>
+        
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
             <div>
-                
+
                 <input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
                     <div class="portlet box pink-chula">
                      <div class="portlet-title">
@@ -202,23 +201,23 @@
                                 <th> หมายเหตุ </th>
                               </tr>
                             </thead>
-                      
+
                           </table>
                         </div>
-                         
+
                       </div>
                     </div>
 
             </div>
           </div>
 
-      
+
         </div>
       </div>
     </div>
     <!-- END EXAMPLE TABLE PORTLET-->
   </div>
- 
+
 </div>
 @stop
 
@@ -246,23 +245,23 @@
 <script src="{{asset('js/components-select2-gs03-gs05.js')}}" type="text/javascript"></script>
 
 <script type="application/javascript">
-  
-      
+
+
         function callprint(print){
         var faculty =   ( $('option:selected','#faculty_id').val()=="")?'null':$('option:selected','#faculty_id').val();
        var sub_major_id = ($('#sub_major_id').val() =="")?'null':$('#sub_major_id').val();
        var  major_id = ($('#major_id').val() =="")?'null':$('#major_id').val();
-      window.open(("{{ url('admin/printMoreExamReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');                 
-       
-    } 
- 
+      window.open(("{{ url('admin/printMoreExamReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');
+
+    }
+
 jQuery(document).ready(function() {
   //clear serach result
   $('#semester,#year,#roundNo').on('change', function() {
     $('#search-program-result').fadeOut( "slow", "linear" );
     $('#search-application-result').fadeOut( "slow", "linear" );
   });
-  
+
 });
 
 
@@ -271,14 +270,14 @@ jQuery(document).ready(function() {
         $('#lbYear').text($('#year').val());
            TableDatatablesAjax.init();
          $('#search-application-result').fadeIn( "slow", "linear" );
-      
+
        });
 
- 
- 
- 
- 
- 
+
+
+
+
+
 var table="";
 var TableDatatablesAjax = function () {
     var handle1 = function () {
@@ -287,8 +286,8 @@ var TableDatatablesAjax = function () {
     table=  grid.init({
             src: $("#datatable_ajax"),
              dataTable: {
-                "bStateSave": false,  
-                "pageLength": 1000,  
+                "bStateSave": false,
+                "pageLength": 1000,
 
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourseMoreReport') !!}",
@@ -334,14 +333,14 @@ targets: [5],
 render: function (data, type, full, meta) {
 return    full.admission_remark  ;
 } }   ],
-                "bDestroy": true, 
+                "bDestroy": true,
                 "responsive": false,
               "paging":   false,
         "ordering": false,
         "info":     false
             },
-            
-        }); 
+
+        });
     }
 
     return {

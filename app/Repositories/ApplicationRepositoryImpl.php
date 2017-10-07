@@ -266,12 +266,9 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                     ;
                                 }
                             })
-                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,curriculum.curriculum_id,curriculum.responsible_person,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,semester,application.creator user_create,nation_id,apply_method')])
+                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,curriculum.curriculum_id,curriculum.responsible_person,application.stu_citizen_card ,stu_first_name ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name, exam_name_en,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,semester,application.creator user_create,nation_id,apply_method')])
                             ->distinct()
                             ->orderBy('application.application_id', 'desc')->get();
-                        //  dd(
-                          //  DB::getQueryLog()
-                          //);
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -426,7 +423,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time,orientation_date,orientation_location')
                                 , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as bachlor_year')
                                 , DB::raw('(select edu_gpax  from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as edu_gpax')
-                                , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="MASTER" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as master_year')])
+                                , DB::raw('(select edu_gpax  from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as edu_gpaxM')
+                                    , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="MASTER" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as master_year')])
                             ->distinct()
                             ->orderBy('application.app_id', 'asc')->get();
         } catch (\Exception $ex) {
@@ -631,7 +629,134 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 }
                             })
                             ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time')])
-                             ->distinct()
+                            ->distinct()
+                            ->orderBy('application.app_id', 'asc')->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $results;
+    }
+
+    public function getforeignerReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null, $major_id = null, $faculty_id = null) {
+        $results = null;
+        try {
+
+            $results = Application:: leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
+                            ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
+                            ->leftJoin('curriculum_activity', 'application.curr_act_id', '=', 'curriculum_activity.curr_act_id')
+                            ->leftJoin('tbl_project', 'curriculum.project_id', '=', 'tbl_project.project_id')
+                            ->leftJoin('curriculum_sub_major', 'curriculum.curriculum_id', '=', 'curriculum_sub_major.curriculum_id')
+                            ->leftJoin('tbl_sub_major', 'curriculum_sub_major.sub_major_id', '=', 'tbl_sub_major.sub_major_id')
+                            ->leftJoin('tbl_program_type', 'curriculum_program.program_type_id', '=', 'tbl_program_type.program_type_id')
+                            ->leftJoin('mcoursestudy', 'curriculum_program.program_id', '=', 'mcoursestudy.coursecodeno')
+                            ->leftJoin('apply_setting', 'apply_setting.apply_setting_id', '=', 'curriculum_activity.apply_setting_id')
+                            ->leftJoin('tbl_bank', 'application.bank_id', '=', 'tbl_bank.bank_id')
+                            ->leftJoin("tbl_major", function($join) {
+                                $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
+                                ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
+                            })
+                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                            ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
+                            ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
+                            ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
+                            ->leftJoin('applicant', 'applicant.applicant_id', 'application.applicant_id')
+                            ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
+                            ->leftJoin('tbl_eng_test as engTest', 'engTest.eng_test_id', '=', 'applicant.eng_test_id')
+                            ->leftJoin('tbl_eng_test as engTestAdmin', 'engTestAdmin.eng_test_id', '=', 'applicant.eng_test_id_admin')
+                            ->leftJoin('tbl_admission_status', 'tbl_admission_status.admission_status_id', 'application.admission_status_id')
+                            ->leftJoin('tbl_name_title', 'applicant.name_title_id', '=', 'tbl_name_title.name_title_id')
+                            ->leftJoin('tbl_nation', 'applicant.nation_id', '=', 'tbl_nation.nation_id')
+                            ->Where(function ($query)use ($user, $user_role) {
+                                if ($user) {
+                                    $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
+                                        $query->select('curriculum_id')
+                                        ->from('curriculum_user')
+                                        ->where('curriculum_user.user_id', $user);
+                                    })
+                                    ->orwhere('curriculum.responsible_person', $user);
+                                    if ($user_role == '2') {
+                                        $query->orwhere('curriculum.apply_method', '1');
+                                    }
+                                }
+                            })
+                            ->Where('applicant.nation_id', '<>', '1')
+                            ->Where(function ($query)use ($applicationID) {
+                                if ($applicationID) {
+                                    $query->where('application.application_id', $applicationID);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicationsArray) {
+                                if ($applicationsArray) {
+                                    $query->whereIn('application.application_id', $applicationsArray);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicantID) {
+                                if ($applicantID) {
+                                    $query->where('application.applicant_id', $applicantID);
+                                }
+                            })
+                            ->Where(function ($query)use ($program_type_id) {
+                                if ($program_type_id) {
+                                    $query->where('tbl_program_type.program_type_id', $program_type_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($status) {
+                                if ($status) {
+                                    $query->whereIn('application.flow_id', $status);
+                                }
+                            })
+                            ->Where(function ($query)use ($exam_status) {
+                                if ($exam_status) {
+                                    $query->where('tbl_exam_status.exam_id', $exam_status);
+                                }
+                            })
+                            ->Where(function ($query)use ($semester) {
+                                if ($semester) {
+                                    $query->where('apply_setting.semester', $semester);
+                                }
+                            })
+                            ->Where(function ($query)use ($year) {
+                                if ($year) {
+                                    $query->where('apply_setting.academic_year', $year);
+                                }
+                            })
+                            ->Where(function ($query)use ($curr_act_id) {
+                                if ($curr_act_id) {
+                                    $query->where('curriculum_activity.curr_act_id', $curr_act_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($roundNo) {
+                                if ($roundNo) {
+                                    $query->where('apply_setting.round_no', $roundNo);
+                                }
+                            })
+                            ->Where(function ($query)use ($program_id) {
+                                if ($program_id) {
+                                    $query->where('application.program_id', $program_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($major_id) {
+                                if ($major_id) {
+                                    $query->where('application.major_id', $major_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($faculty_id) {
+                                if ($faculty_id) {
+                                    $query->where('curriculum.faculty_id', $faculty_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($sub_major_id) {
+                                if ($sub_major_id) {
+                                    if ($sub_major_id > 0) {
+                                        $query->where('application.sub_major_id', $sub_major_id);
+                                    } else {
+                                        $query->whereNull('application.sub_major_id');
+                                    }
+                                }
+                            })
+                            ->select([DB::raw('application.application_id application_id,application.applicant_id applicant_id,academic_year,round_no,name_title,name_title_en,nation_name,nation_name_en,app_id, lpad(app_id ,5,"0") app_ida,lpad(curriculum_num ,4,"0")  curriculum_numa ,curriculum_num,application.stu_citizen_card ,stu_first_name,stu_sex ,stu_last_name,stu_first_name_en ,stu_last_name_en,stu_email,application.program_id,application.payment_date,application.receipt_book,application.receipt_no ,prog_type_name ,bank_name,tbl_bank.bank_id,tbl_bank.bank_fee ,apply_fee,application.created,flow_name,flow_name_en,application.flow_id ,exam_remark,exam_name,application.exam_status,applicant.eng_test_score ,applicant.eng_date_taken,applicant.eng_test_score_admin,applicant.eng_test_id,applicant.eng_test_id_admin,applicant.eng_date_taken_admin ,engTest.eng_test_name  engT,engTestAdmin.eng_test_name engTAdmin,DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), ifnull(applicant.eng_date_taken_admin,applicant.eng_date_taken))), "%Y")+0 examDiffYear,tbl_admission_status.admission_status_id,admission_status_name_th,admission_status_name_en,admission_remark,major_name,degree_name,faculty_name,faculty_full,semester,application.creator user_create,major_name_en,department_name,department_name_en,applicant.nation_id,apply_method,thai as prog_name,majorcode,cond_id,degree_level_name,office_time')])
+                            ->distinct()
                             ->orderBy('application.app_id', 'asc')->get();
         } catch (\Exception $ex) {
             throw $ex;
@@ -844,6 +969,49 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
             DB::rollBack();
             throw $ex;
         }
+    }
+
+    public function getDataNewsSourceSumApplicant($year, $sem) {
+        $result = null;
+        try {
+            $result = DB::select(DB::raw("SELECT s.news_source_name,count(a.applicant_id) cnum FROM  tbl_news_source s left join
+( select * from    applicant_news_source  where applicant_id in (
+    select DISTINCT ap.applicant_id    from  application ap
+left join curriculum_activity ca ON(ca.curr_act_id = ap.curr_act_id)
+left join apply_setting ay on(ay.apply_setting_id = ca.apply_setting_id)
+where ay.semester='" . $sem . "' and ay.academic_year = '" . $year . "'
+    )) a  on (s.news_source_id = a.news_source_id)
+group by `news_source_name`
+order by s.news_source_id"));
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
+
+    public function getMailApplicant($applicantID = null, $applicationID = null) {
+        $results = null;
+        try {
+
+            $results = Application:: leftJoin('applicant', 'applicant.applicant_id', 'application.applicant_id')
+                            ->leftJoin('tbl_exam_status', 'tbl_exam_status.exam_id', 'application.exam_status')
+                            ->Where(function ($query)use ($applicationID) {
+                                if ($applicationID) {
+                                    $query->where('application.application_id', $applicationID);
+                                }
+                            })
+                            ->Where(function ($query)use ($applicantID) {
+                                if ($applicantID) {
+                                    $query->whereIn('application.application_id', $applicantID);
+                                }
+                            })
+                            ->select([DB::raw('stu_email,stu_first_name,stu_last_name,exam_name')])->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $results;
     }
 
 }

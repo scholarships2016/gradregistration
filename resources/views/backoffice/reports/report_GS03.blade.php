@@ -126,7 +126,7 @@
                     <div class="form-group">
                       <label>รอบที่</label>
                       <select id="roundNo" name="roundNo" class="form-control input-small">
-
+                                        <option value="">--เลือก--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -310,17 +310,17 @@
 
 
       });
-      
-      
+
+
         function callprint(print){
             var sing = (($('#single').val())? $('#single').val():'-1');
             var submajor = (($('option:selected','#single').attr('smj'))? $('option:selected','#single').attr('smj'):null) ;
         var name =$('#namekey').val();
         var position = $('#positionkey').val();
-        
-        window.open(("{{ url('admin/printRegisterCourseReport').'/3,4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name +'/'+position+'/N/GS03' ),'_blank');                 
-        } 
- 
+
+        window.open(("{{ url('admin/printRegisterCourseReport').'/3,4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name +'/'+position+'/N/GS03' ),'_blank');
+        }
+
 jQuery(document).ready(function() {
   //clear serach result
   $('#semester,#year,#roundNo').on('change', function() {
