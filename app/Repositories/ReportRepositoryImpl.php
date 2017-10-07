@@ -397,6 +397,8 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on('curr_act.curr_act_id', '=', 'app.curr_act_id');
                 })->join('apply_setting as app_set', function ($join) {
                     $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                })->leftJoin("curriculum as curr", function ($join) {
+                    $join->on("curr.curriculum_id", "=", "app.curriculum_id");
                 })->leftJoin("curriculum_program as curr_prog", function ($join) {
                     $join->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
                 })->leftJoin("tbl_major as mj", function ($join) {
@@ -488,5 +490,358 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             throw $ex;
         }
     }
+
+
+    public function getEngScoreReport($criteria = null)
+    {
+        try {
+            $query = DB::table("applicant as appt")
+                ->select(
+                    "appt.stu_citizen_card",
+                    DB::raw("concat(ifnull(tle.name_title,''),appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"),
+                    DB::raw("concat(ifnull(tle.name_title_en,''),appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
+                    "app.program_id",
+                    "mj.major_name",
+                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then appt.eng_test_score_admin 
+                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null  then appt.eng_test_score else null end as eng_score"),
+                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then end_admin.eng_test_name 
+                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null then eng.eng_test_name else null end as test_type"),
+                    "prog_t.prog_type_name",
+                    "fac.faculty_name"
+                )->join("application as app", function ($join) {
+                    $join->on("app.applicant_id", "=", "appt.applicant_id");
+                })->join("curriculum as curr", function ($join) {
+                    $join->on("curr.curriculum_id", "=", "app.curriculum_id");
+                })->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->join("curriculum_program as curr_prog", function ($join) {
+                    $join->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
+                })->join("tbl_program_type as prog_t", function ($join) {
+                    $join->on("prog_t.program_type_id", "=", "curr_prog.program_type_id");
+                })->join("tbl_faculty as fac", function ($join) {
+                    $join->on("fac.faculty_id", "=", "curr.faculty_id");
+                })->leftJoin("tbl_name_title as tle", function ($join) {
+                    $join->on("tle.name_title_id", "=", "appt.name_title_id");
+                })->leftJoin("tbl_major as mj", function ($join) {
+                    $join->on("mj.major_id", "=", "curr.major_id");
+                })->leftJoin("curriculum_sub_major as curr_subm", function ($join) {
+                    $join->on("curr_subm.curriculum_id", "=", "curr.curriculum_id");
+                })->leftJoin("tbl_eng_test as eng", function ($join) {
+                    $join->on("eng.eng_test_id", "=", "appt.eng_test_id");
+                })->leftJoin("tbl_eng_test as end_admin", function ($join) {
+                    $join->on("end_admin.eng_test_id", "=", "appt.eng_test_id_admin");
+                });
+
+            $query->where("app . exam_status", " = ", 2);
+            $query->where(function ($query) {
+                $query->where('app.flow_id', '=', 4)
+                    ->orWhere('app.flow_id', '=', 5);
+            });
+
+            //Where Condition Below
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            if (isset($criteria['round'])) {
+                $query->where('app_set.round_no', '=', $criteria['round']);
+            }
+            if (isset($criteria['faculty_id'])) {
+                $query->where('curr.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['program_id'])) {
+                $query->where('app.program_id', '=', $criteria['program_id']);
+            }
+            if (isset($criteria['sub_major_id'])) {
+                $query->where("curr_subm . sub_major_id", " = ", $criteria['sub_major_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where("curr_prog . program_type_id", " = ", $criteria['program_type_id']);
+            }
+
+            return $query->get();
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getSatisfactionChartsData($criteria = null)
+    {
+        try {
+            $query = DB::table("applicant as appt")
+                ->select("sat.SATI_LEVEL",
+                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก' 
+                    when 3 then 'ดี' when 2 then 'พอใข้' when 1 then 'ไม่พอใจ' end as sat_desc"),
+                    DB::raw("count(appt.applicant_id) as amt")
+                )->join("application as app", function ($join) {
+                    $join->on("app.applicant_id", "=", "appt.applicant_id");
+                })->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->join("satisfaction as sat", function ($join) {
+                    $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
+                })->groupBy("sat.SATI_LEVEL");
+
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getSatisfactionData($criteria = null)
+    {
+        try {
+
+            $query = DB::table("applicant as appt")
+                ->select(
+                    "sat.SATI_SUGGESTION",
+                    DB::raw("concat(ifnull(tle.name_title,''),appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"),
+                    DB::raw("DATE_FORMAT(sat.created,'%d-%m-%Y') as created")
+                )->join("application as app", function ($join) {
+                    $join->on("app.applicant_id", "=", "appt.applicant_id");
+                })->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->join("satisfaction as sat", function ($join) {
+                    $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
+                })->leftJoin("tbl_name_title as tle", function ($join) {
+                    $join->on("tle.name_title_id", "=", "appt.name_title_id");
+                });
+
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+
+            return $query->get();
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getDatasRegistrationCenter1($criteria = null)
+    {
+        try {
+            $query = DB::table("application as app")
+                ->select(
+                    DB::raw("LPAD(app.app_id,5,0) as app_id"),
+                    "app.admission_status_id as pass",
+                    "curr.project_id",
+                    "appt.stu_sex as sex",
+                    DB::raw("LPAD(appt.name_title_id,3,0) as prename_id"),
+                    DB::raw("LPAD(appt.nation_id,2,0) as nation_id"),
+                    "appt.stu_first_name as fnamet",
+                    "appt.stu_last_name as lnamet",
+                    "appt.stu_first_name_en as fnamee",
+                    "appt.stu_last_name_en as lnamee",
+                    "curr.major_id",
+                    "app.program_id",
+                    "deg.degree_name",
+                    DB::raw("ifnull(substring(prog_t.cond_id,1,1),null) as cond_id")
+                )->join("applicant as appt", function ($join) {
+                    $join->on("appt.applicant_id", "=", "app.applicant_id");
+                })->join("curriculum as curr", function ($join) {
+                    $join->on("app.curriculum_id", "=", "curr.curriculum_id");
+                })->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->leftJoin("curriculum_sub_major as curr_mj", function ($join) {
+                    $join->on("curr_mj.curriculum_id", "=", "curr.curriculum_id");
+                })->leftJoin("tbl_degree as deg", function ($join) {
+                    $join->on("deg.degree_id", "=", "curr.degree_id");
+                })->leftJoin("curriculum_program as curr_prog", function ($join) {
+                    $join->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
+                })->leftJoin("tbl_program_type as prog_t", function ($join) {
+                    $join->on("prog_t.program_type_id", "=", "curr_prog.program_type_id");
+                });
+
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            if (isset($criteria['round'])) {
+                $query->where('app_set.round_no', '=', $criteria['round']);
+            }
+            if (isset($criteria['faculty_id'])) {
+                $query->where('curr.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['department_id'])) {
+                $query->where('curr.department_id', '=', $criteria['department_id']);
+            }
+            if (isset($criteria['major_id'])) {
+                $query->where('curr.major_id', '=', $criteria['major_id']);
+            }
+            if (isset($criteria['program_id'])) {
+                $query->where('app.program_id', '=', $criteria['program_id']);
+            }
+            if (isset($criteria['sub_major_id'])) {
+                $query->where("curr_subm.sub_major_id", "=", $criteria['sub_major_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
+            }
+
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getDatasRegistrationCenter2($criteria = null)
+    {
+        try {
+            $query = DB::table("application as app")
+                ->select(
+                    DB::raw("LPAD(app.app_id,5,0) as app_id"),
+                    "appt.stu_citizen_card",
+                    DB::raw("date_format(appt.stu_birthdate,'%d-%m-%Y') as stu_birthdate"),
+                    "appt.stu_religion",
+                    "appt.stu_addr_no",
+                    "appt.stu_addr_village",
+                    "appt.stu_addr_soi",
+                    "appt.stu_addr_road",
+                    "appt.district_code",
+                    "prov.province_code",
+                    "appt.stu_addr_pcode"
+                )->join("applicant as appt", function ($join) {
+                    $join->on("appt.applicant_id", "=", "app.applicant_id");
+                })->join("curriculum as curr", function ($join) {
+                    $join->on("app.curriculum_id", "=", "curr.curriculum_id");
+                })->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->leftJoin("curriculum_sub_major as curr_mj", function ($join) {
+                    $join->on("curr_mj.curriculum_id", "=", "curr.curriculum_id");
+                })->leftJoin("tbl_degree as deg", function ($join) {
+                    $join->on("deg.degree_id", "=", "curr.degree_id");
+                })->leftJoin("curriculum_program as curr_prog", function ($join) {
+                    $join->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
+                })->leftJoin("tbl_program_type as prog_t", function ($join) {
+                    $join->on("prog_t.program_type_id", "=", "curr_prog.program_type_id");
+                })->leftJoin("tbl_province as prov", function ($join) {
+                    $join->on("prov.province_id", "=", "appt.province_id");
+                });
+
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            if (isset($criteria['round'])) {
+                $query->where('app_set.round_no', '=', $criteria['round']);
+            }
+            if (isset($criteria['faculty_id'])) {
+                $query->where('curr.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['department_id'])) {
+                $query->where('curr.department_id', '=', $criteria['department_id']);
+            }
+            if (isset($criteria['major_id'])) {
+                $query->where('curr.major_id', '=', $criteria['major_id']);
+            }
+            if (isset($criteria['program_id'])) {
+                $query->where('app.program_id', '=', $criteria['program_id']);
+            }
+            if (isset($criteria['sub_major_id'])) {
+                $query->where("curr_subm.sub_major_id", "=", $criteria['sub_major_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
+            }
+
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getDatasPolicyAndPlan($criteria = null)
+    {
+        try {
+            $query = DB::table("application as app")
+                ->select(
+                    "app.admission_status_id as pass",
+                    DB::raw("LPAD(app.app_id,5,0) as app_id"),
+                    "appt.stu_first_name as fnamet",
+                    "appt.stu_last_name as lnamet",
+                    "appt_work.work_status_id",
+                    "appt_work.work_stu_detail",
+                    "appt_work.work_stu_position"
+                )->join("applicant as appt", function ($join) {
+                    $join->on("appt.applicant_id", "=", "app.applicant_id");
+                })->join("curriculum as curr", function ($join) {
+                    $join->on("app.curriculum_id", "=", "curr.curriculum_id");
+                })->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->leftJoin("curriculum_sub_major as curr_mj", function ($join) {
+                    $join->on("curr_mj.curriculum_id", "=", "curr.curriculum_id");
+                })->leftJoin("tbl_degree as deg", function ($join) {
+                    $join->on("deg.degree_id", "=", "curr.degree_id");
+                })->leftJoin("curriculum_program as curr_prog", function ($join) {
+                    $join->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
+                })->leftJoin("tbl_program_type as prog_t", function ($join) {
+                    $join->on("prog_t.program_type_id", "=", "curr_prog.program_type_id");
+                })->leftJoin("applicant_work as appt_work", function ($join) {
+                    $join->on("appt_work.applicant_id", "=", "appt.applicant_id");
+                })->where("appt_work.app_work_status", "=", 1);
+
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            if (isset($criteria['round'])) {
+                $query->where('app_set.round_no', '=', $criteria['round']);
+            }
+            if (isset($criteria['faculty_id'])) {
+                $query->where('curr.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['department_id'])) {
+                $query->where('curr.department_id', '=', $criteria['department_id']);
+            }
+            if (isset($criteria['major_id'])) {
+                $query->where('curr.major_id', '=', $criteria['major_id']);
+            }
+            if (isset($criteria['program_id'])) {
+                $query->where('app.program_id', '=', $criteria['program_id']);
+            }
+            if (isset($criteria['sub_major_id'])) {
+                $query->where("curr_subm.sub_major_id", "=", $criteria['sub_major_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
+            }
+
+            return $query->get();
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
 
 }
