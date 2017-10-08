@@ -1515,10 +1515,7 @@ $('#btSaveNewExam').click(function() {
                 stu_birthdate: {
                     required: true
                 },
-                stu_email: {
-                    required: true,
-                    email: true
-                },
+                 
                 fund_interesting: {
                     required: true
                 },
