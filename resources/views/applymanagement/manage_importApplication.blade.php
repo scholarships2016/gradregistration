@@ -188,7 +188,9 @@
       <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><span class="badge badge-warning">3</span> นำเข้าข้อมูลผู้สอบได้จากไฟล์ Microsoft Excel</a>
+				<a class="navbar-brand" href="#"><span class="badge badge-warning">3</span> นำเข้าข้อมูลผู้สอบได้จากไฟล์ Microsoft Excel หรือ  </a>       <a href="javascript:callAddExam();"   class="btn btn-circle green btn-outline sbold uppercase  ">
+                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ(โดยการกรอกข้อมูลเข้าระบบ)
+                    </a>
 			</div>
 		</div>
 	</nav>
@@ -617,7 +619,60 @@ table2 = $('#datatable_ajax').dataTable({
   });
 
 
+function callAddExam(){
+   
+var form = document.createElement('FORM');
+form.method='POST';
+form.action = "{{ url('admin/showPersonalProfilePageForNewExame') }}";
+form.target = 'newWindow';
+ 
 
+var curr_act_id = document.createElement("INPUT");
+var sub_major_id = document.createElement("INPUT");
+var program_id = document.createElement("INPUT");
+var program_type_id = document.createElement("INPUT");
+var curriculum_id = document.createElement("INPUT");
+var apply_comment = document.createElement("INPUT");
+var token = document.createElement("INPUT");
+curr_act_id.name="curr_act_id";
+curr_act_id.type="hidden";
+curr_act_id.value=($('#single').val())? $('#single').val():'-1';
+sub_major_id.name="sub_major_id";
+sub_major_id.type="hidden";
+sub_major_id.value=$('option:selected','#single').attr('smj');
+program_id.name="program_id";
+program_id.type="hidden";
+program_id.value=$('option:selected','#single').attr('pg');
+program_type_id.name="program_type_id";
+program_type_id.type="hidden";
+program_type_id.value=$('option:selected','#single').attr('pt');
+curriculum_id.name="curriculum_id";
+curriculum_id.type="hidden";
+curriculum_id.value=$('option:selected','#single').attr('cu');
+ 
+apply_comment.name="apply_comment";
+apply_comment.type="hidden";
+apply_comment.value=$("#apply_comment").val();
+ 
+token.name="_token";
+token.type="hidden";
+token.value='{{ csrf_token() }}'; 
+
+form.appendChild(curr_act_id);
+form.appendChild(sub_major_id);
+form.appendChild(program_id);
+form.appendChild(program_type_id);
+form.appendChild(curriculum_id);
+form.appendChild(apply_comment);
+form.appendChild(token);
+
+document.body.appendChild(form);
+window.open("","newWindow");
+form.submit();
+
+       
+        
+    }
 
 </script>
 @endpush

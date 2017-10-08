@@ -269,11 +269,11 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">
-                                                                        {{Lang::get('resource.perInfoPlaceOfBirth')}}
+                                                                        เบอร์โทรศัพท์
                                                                     </label>
                                                                     <div class="col-md-9">
-                                                                        <input type="text" class="form-control" id="stu_birthplace"
-                                                                               name="stu_birthplace" >
+                                                                        <input type="text" class="form-control" id="stu_phone"
+                                                                               name="stu_phone" >
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
@@ -283,14 +283,11 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">
-                                                                        เบอร์โทรศัพท์
+                                                                        E-Mail
                                                                     </label>
                                                                     <div class="col-md-9">
-                                                                        <input type="text" class="form-control" id="stu_phone" name="stu_phone"
-                                                                               >
-                                                                        <span class="help-block">
-                                                                            <small>{{Lang::get('resource.perInfoEmailNotice')}}</small>
-                                                                        </span>
+                                                                        <input type="text" class="form-control" id="stu_email" name="stu_email" >
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1314,7 +1311,7 @@ $('#btSaveNewExam').click(function() {
                                                } ,
                                         success : function(data){
                                            toastr.success('ดำเนินการเรียบร้อย');
-//                                           window.top.close();
+                                            window.top.close();
                                            }
                                 },"json");
     });
