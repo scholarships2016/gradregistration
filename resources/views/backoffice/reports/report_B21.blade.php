@@ -231,9 +231,9 @@
           <div class="form-actions">
             <div class="row">
               <div class="col-md-offset-4 col-md-8">
-                   <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
-                 <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>
-                <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
+                   <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>Export เป็นไฟล์ EXCEL</a>
+                 <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>Export เป็นไฟล์ PDF</a>
+                <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>Export เป็นไฟล์ TEXT</a>
 
                 </div>
             </div>
