@@ -90,7 +90,7 @@
               <div class="md-radio-inline font-blue">
 
                 @foreach($programs as $program)
-
+                     
                 <div class="md-radio">
                   <input type="radio" id="checkbox_P{{ $loop->iteration}}" value="{{ $program->program_id.'|'.$program->curr_prog_id }}" name="program_data" {{ ($loop->iteration == 1)?'checked="checked"':''}} class="md-radiobtn">
                   <label for="checkbox_P{{ $loop->iteration}}">
@@ -105,6 +105,7 @@
                                                                     ({{ (session('locale')=='th')?$program->office_time : $program->office_time_en }})
                                                                  </label>
                 </div>
+                      
                 <br/>
                 @endforeach
               </div>

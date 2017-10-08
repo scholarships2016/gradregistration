@@ -190,12 +190,12 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     })
                     ->orWhere(function ($query)use ($user) {
                         if ($user) {
-                            $query->whereIn('curriculum_program.curr_prog_id', function($query)use ($user) {
-                            $query->select('curr_prog_id')
+                            $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
+                            $query->select('curriculum_id')
                             ->from('applicant_special_apply')
                             ->where('applicant_special_apply.applicant_id', $user)
-                            ->where('applicant_special_apply.start_date ', '<=', Carbon::now())
-                            ->where('applicant_special_apply.end_date  ', '>=', Carbon::now());
+                            ->where('applicant_special_apply.start_date', '<=', Carbon::now()->toDateString())
+                            ->where('applicant_special_apply.end_date', '>=', Carbon::now()->toDateString());
                             });
                         }
                     })
