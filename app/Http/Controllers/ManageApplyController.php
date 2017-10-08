@@ -408,15 +408,20 @@ class ManageApplyController extends Controller {
     }
 
     public function addUserExamGS05(Request $request) {
+    
         $res = null;
         try {
             $user = (session('user_type')->user_type != 'applicant') ? session('email_address') : session('user_id');
             if ($request) {
+              
+                $curr_prog_id = $this->CurriculumProgramRepo->getCurrProgByProgramID($request->program_id,$request->curriculum_id);
+                   
                 $data = ['curr_act_id' => $request->curr_act_id,
                     'sub_major_id' => $request->sub_major_id,
+                    'curr_prog_id' => $curr_prog_id->curr_prog_id,
                     'program_id' => $request->program_id,
                     'program_type_id' => $request->program_type_id,
-                    'stu_citizen_card' => $request->idCard,
+                    'stu_citizen_card' => $request->stu_citizen_card,
                     'curriculum_id' => $request->curriculum_id,
                     'flow_id' => 1,
                     'bank_id' => 10,
@@ -428,6 +433,7 @@ class ManageApplyController extends Controller {
                     'exam_status' => 2,
                     'applicant_id' => $request->applicant_ID];
                 $res = $this->ApplicationRepo->saveApplication($data);
+                
                 $dataup = ['application_id' => $res->application_id, 'flow_id' => 4];
                 $res = $this->ApplicationRepo->saveApplication($dataup);
             }
@@ -1204,7 +1210,7 @@ class ManageApplyController extends Controller {
 
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null);
+        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null,null,1);
 
         if ($print == 'EXCEL') {
             $data = [];

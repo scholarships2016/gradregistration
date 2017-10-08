@@ -175,8 +175,12 @@
                   <h3><span class="badge badge-warning">3</span> ปรับปรุงข้อมูล</h3>
                   @if(session('user_type')->user_type == 'Admin' || in_array("5",session('user_permission')))
                     <a href="#responsive" class="btn btn-circle green btn-outline sbold uppercase  " data-toggle="modal"    >
-                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ
+                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ 
                     </a>
+                  <a href="javascript:callAddExam();"   class="btn btn-circle green btn-outline sbold uppercase  ">
+                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ(กรณีไม่มีชื่อผุ้สมัครในระบบ)
+                    </a>
+                  
                   @endif
                   <hr>
                   <hr>
@@ -334,7 +338,7 @@
                                                 program_type_id : $('option:selected','#single').attr('pt'),
                                                 curriculum_id : $('option:selected','#single').attr('cu'),
                                                 applicant_ID  : $("#appcantid").val(),
-                                                 idCard  : $("#idCard").text(),
+                                                 stu_citizen_card  : $("#idCard").text(),
                                                  apply_comment:  $("#apply_comment").val(),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
@@ -933,7 +937,60 @@ jQuery(document).ready(function() {
       }, 100);
     });
   }
+ function callAddExam(){
+   
+var form = document.createElement('FORM');
+form.method='POST';
+form.action = "{{ url('admin/showPersonalProfilePageForNewExame') }}";
+form.target = 'newWindow';
+ 
 
+var curr_act_id = document.createElement("INPUT");
+var sub_major_id = document.createElement("INPUT");
+var program_id = document.createElement("INPUT");
+var program_type_id = document.createElement("INPUT");
+var curriculum_id = document.createElement("INPUT");
+var apply_comment = document.createElement("INPUT");
+var token = document.createElement("INPUT");
+curr_act_id.name="curr_act_id";
+curr_act_id.type="hidden";
+curr_act_id.value=($('#single').val())? $('#single').val():'-1';
+sub_major_id.name="sub_major_id";
+sub_major_id.type="hidden";
+sub_major_id.value=$('option:selected','#single').attr('smj');
+program_id.name="program_id";
+program_id.type="hidden";
+program_id.value=$('option:selected','#single').attr('pg');
+program_type_id.name="program_type_id";
+program_type_id.type="hidden";
+program_type_id.value=$('option:selected','#single').attr('pt');
+curriculum_id.name="curriculum_id";
+curriculum_id.type="hidden";
+curriculum_id.value=$('option:selected','#single').attr('cu');
+ 
+apply_comment.name="apply_comment";
+apply_comment.type="hidden";
+apply_comment.value=$("#apply_comment").val();
+ 
+token.name="_token";
+token.type="hidden";
+token.value='{{ csrf_token() }}'; 
+
+form.appendChild(curr_act_id);
+form.appendChild(sub_major_id);
+form.appendChild(program_id);
+form.appendChild(program_type_id);
+form.appendChild(curriculum_id);
+form.appendChild(apply_comment);
+form.appendChild(token);
+
+document.body.appendChild(form);
+window.open("","newWindow");
+form.submit();
+
+       
+        
+    }
 
 </script>
 @endpush

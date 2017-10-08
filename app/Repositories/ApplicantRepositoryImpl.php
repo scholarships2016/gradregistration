@@ -64,7 +64,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     public function searchByCriteria($criteria = null, $paging = false) {
         $result = null;
         try {
-            $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')            
+            $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
                     ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
@@ -195,11 +195,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (!$getID) {
                 $result = $curObj->save();
             } else {
+                
                 $result = $curObj->save();
+                 
                 $result = ($result) ? $curObj->applicant_id : -1;
             }
         } catch (\Exception $ex) {
-            $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
+             $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
@@ -281,8 +283,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->edu_degree = $data['edu_degree'];
             if (array_key_exists('grad_level', $data))
                 $curObj->grad_level = $data['grad_level'];
-            
-            
+
+
 
             if (array_key_exists('creator', $data))
                 $curObj->creator = $data['creator'];
@@ -421,7 +423,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                     ->leftJoin('curriculum_program as curr_prog', function ($join) {
                         $join->on('curr_prog.curr_prog_id', '=', 'app.curr_prog_id');
                     })
-                    ->groupBy('appt.applicant_id', 'appt.stu_citizen_card', 'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name', 'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en', 'appt.stu_email', 'appt.stu_phone', 'appt.created', 'appt.last_login', 'appt.ipaddress','appt.creator');
+                    ->groupBy('appt.applicant_id', 'appt.stu_citizen_card', 'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name', 'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en', 'appt.stu_email', 'appt.stu_phone', 'appt.created', 'appt.last_login', 'appt.ipaddress', 'appt.creator');
 
             $recordsTotal = $mainQuery->get()->count();
 
@@ -480,5 +482,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             throw $ex;
         }
     }
+
+    
 
 }
