@@ -151,6 +151,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
         Route::get('docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
         Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+        Route::get('showPersonalProfilePageForNewExame', 'ProfileController@showPersonalProfilePageForNewExame')->name('showPersonalProfilePageForNewExame');
+
+
 
         //util M
         Route::get('importApplicant', 'ManageApplyController@importApplicant')->name('importApplicant');

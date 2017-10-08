@@ -139,6 +139,44 @@ class ProfileController extends Controller
             return back();
         }
     }
+    
+    
+    public function showPersonalProfilePageForNewExame()
+    {
+        
+        try {
+ 
+             
+
+            //Master Data
+            $nameTitleList = $this->nameTitleRepo->all();
+            $newSrcList = $this->newSrcRepo->getAll();
+            $nationList = $this->nationRepo->all();
+            $religionList = $this->religionRepo->all();
+            $engTestList = $this->engTestRepo->all();
+            $workStatusList = $this->workStatusRepo->all();
+            $gaduateLevelList = $this->gaduateLevelRepo->all();
+            $eduPassList = $this->eduPassRepo->all();
+            $uniList = $this->uniRepo->all();
+            $provinceList = $this->provinceRepo->all();
+
+
+            return view('profile_new_exam.personalProfile', ['applicant' =>  '', 'profile_img' => '',
+                
+                'newSrcList' => $newSrcList, 'nationList' => $nationList,
+                'religionList' => $religionList, 'engTestList' => $engTestList,
+                'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
+                'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
+                'uniList' => $uniList, 'provinceList' => $provinceList,
+                'applicantEduList' => '', 'applicantWorkExpList' => '']);
+
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+            return;
+            session()->flash('errorMsg', Util::ERROR_OCCUR);
+            return back();
+        }
+    }
 
     public function doSavePersonalInfomation(Request $request)
     {
