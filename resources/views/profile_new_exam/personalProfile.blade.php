@@ -441,19 +441,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="control-label col-md-3">{{Lang::get('resource.lbOtherContactNo')}}
-                                                                    </label>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" id="stu_phone" name="stu_phone" value=""
-                                                                               class="form-control">
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                       
                                                     </div>
                                                     <div class="form-actions">
                                                         <div class="row">
