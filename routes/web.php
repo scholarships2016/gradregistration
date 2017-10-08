@@ -151,6 +151,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('ShowRecommenReport/{id}', 'ManageApplyController@ShowRecommenReport')->name('ShowRecommenReport');
         Route::get('docRecommenPDF', 'ManageApplyController@docRecommenPDF')->name('docRecommenPDF');
         Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
+        Route::post('showPersonalProfilePageForNewExame', 'ProfileController@showPersonalProfilePageForNewExame')->name('showPersonalProfilePageForNewExame');
+        Route::post('doSavePersonalInfomationNewExam', 'BackOffice\ApplicantManagementController@doSavePersonalInfomationNewExam')->name('doSavePersonalInfomationNewExam');
+
+
 
         //util M
         Route::get('importApplicant', 'ManageApplyController@importApplicant')->name('importApplicant');

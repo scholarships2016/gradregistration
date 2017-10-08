@@ -41,7 +41,7 @@
 
         </style>
     </head>
-    <body> <br><br><br> 
+    <body> <br><br><br>
         <table width="750px" border="0" >
             <tr>
 
@@ -52,18 +52,20 @@
             ประจำภาคการศึกษา {{($lbsemester==1)?'ต้น [First]':'ปลาย [Second]'}} ปีการศึกษา {{$lbYear}} <br><br>
 
             คณะ  {{$reports[0]->faculty_name}} ({{$reports[0]->faculty_full}})<br>
-            ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }})     <br>        
-            สาขาวิชา  {{$reports[0]->major_name}} ({{$reports[0]->major_name_en}}) <br>            
+            ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }})     <br>
+            สาขาวิชา  {{$reports[0]->major_name}} ({{$reports[0]->major_name_en}}) <br>
             หลักสูตร  {{$reports[0]->degree_name}} - {{$reports[0]->degree_name_en}}(รหัส {{$reports[0]->program_id}})<br>
-            แขนงวิชา   {{$reports[0]->sub_major_name}}({{$reports[0]->sub_major_name_en }})<br>
+        
+              @if($reports[0]->sub_major_id!="")แขนงวิชา {{$reports[0]->sub_major_name}} - {{$reports[0]->sub_major_name_en }} ({{$reports[0]->sub_major_id}})@endif
+                <br>
 
         </div>
 
 
-        <br><br> 
+        <br><br>
         <table width="750px" border="1"  cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center">
             <thead><tr align="center" >
-               <th> เลขที่ใบสมัคร </th>                                
+               <th> เลขที่ใบสมัคร </th>
                                 <th> ชื่อ-สกุล </th>
                                 <th> สัญชาติ </th>
                                 <th> เพศ </th>
@@ -78,7 +80,7 @@
             <tbody>
             <div style="display: none"> {{$p1=0}}{{$p2=0}}{{$p3=0}}{{$p4=0}}{{$p5=0}}{{$p6=0}}{{$p7=0}}{{$p8=0}}{{$p9=0}}{{$p10=0}}{{$p11=0}}{{$p12=0}}{{$p13=0}}{{$p14=0}}</div>
                 @foreach($reports as $report)
-              <div style="display: none">   
+              <div style="display: none">
                 {{$p1 += (($report->admission_status_id=='0')?1:0)}}
                 {{$p2 += (($report->admission_status_id=='2')?1:0)}}
                 {{$p3 += (($report->admission_status_id=='3')?1:0)}}
@@ -92,7 +94,7 @@
                 {{$p11 += (($report->admission_status_id=='B')?1:0)}}
                 {{$p12 += (($report->admission_status_id=='C')?1:0)}}
                 {{$p13 += (($report->admission_status_id=='D')?1:0)}}
-                {{$p14 += (($report->admission_status_id=='E')?1:0)}} 
+                {{$p14 += (($report->admission_status_id=='E')?1:0)}}
               </div>
                 <tr role="row" >
                     <td style="text-align:center; vertical-align:middle;">{{$report->app_ida}}</td>
@@ -105,13 +107,13 @@
                     <td align="center" >{{$report->master_year}}</td>
                    <td style="text-align:center; vertical-align:middle;">{{($report->eng_test_score_admin!= null)?$report->eng_test_score_admin:$report->eng_test_score}}</td>
                     <td >{{$report->admission_remark}}</td>
-                    
+
                      </tr>
                 @endforeach
             </tbody>
-    </table><br><br> 
+    </table><br><br>
         <div  align="right">
-       
+
         <table style="width:300px;" align="right">
          <tr>    <td colspan="2"> สถานะ</td> </tr>
          <tr> <td> (0) ยังไม่ได้พิจารณา     </td>    <td> {{$p1}} คน </td> </tr>
@@ -128,12 +130,12 @@
           <tr> <td> (C) บริหารหลักสูตรแบบต่อเนือง (ไม่เต็มเวลา)     </td>    <td> {{$p12}} คน </td> </tr>
           <tr> <td> (D) ทดลองศึกษาเต็มเวลา (หลักสูตรต่อเนือง)     </td>    <td> {{$p13}} คน </td> </tr>
           <tr> <td> (E) ทดลองศึกษาบางเวลา(หลักสูตรต่อเนือง)     </td>    <td> {{$p14}} คน </td> </tr>
-        
-        </table>
-               
 
- 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br> 
+        </table>
+
+
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br>
             <div  align="center" style="width:1100px; border:1px">
             (ลงนาม) ............................................................
             <br>
@@ -141,7 +143,7 @@
         <br>
        {{ $sposition}}<br>
         วันที่ {{$datenow}}
-        </div> 
+        </div>
         </div>
     </body>
 </html>

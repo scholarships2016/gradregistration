@@ -24,11 +24,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
-class ApplicantManagementController extends Controller
-{
+class ApplicantManagementController extends Controller {
 
     private static $SECTION_NAME = 'ApplicantManagement';
-
     protected $newSrcRepo;
     protected $applicantRepo;
     protected $nationRepo;
@@ -47,14 +45,7 @@ class ApplicantManagementController extends Controller
     /**
      * ApplicantManagementController constructor.
      */
-    public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo,
-                                NationRepository $nationRepo, ReligionRepository $religionRepo,
-                                EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo,
-                                WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo,
-                                EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo,
-                                ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo,
-                                ApplicantWorkRepository $applicantWorkRepo, ApplicationRepository $applicationRepo, AudittrailRepository $auditRepo)
-    {
+    public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo, NationRepository $nationRepo, ReligionRepository $religionRepo, EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo, WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo, EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo, ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo, ApplicantWorkRepository $applicantWorkRepo, ApplicationRepository $applicationRepo, AudittrailRepository $auditRepo) {
         parent::__construct(null, null, $auditRepo);
         $this->newSrcRepo = $newSrcRepo;
         $this->applicantRepo = $applicantRepo;
@@ -72,8 +63,7 @@ class ApplicantManagementController extends Controller
         $this->applicationRepo = $applicationRepo;
     }
 
-    public function showManagePage(Request $request)
-    {
+    public function showManagePage(Request $request) {
         try {
             return view('backoffice.applicant.manage');
         } catch (\Exception $ex) {
@@ -82,17 +72,15 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function showAddPage(Request $request)
-    {
+    public function showAddPage(Request $request) {
         try {
-
+            
         } catch (\Exception $ex) {
             $this->WLog('func=showAddPage', self::$SECTION_NAME, $ex->getMessage());
         }
     }
 
-    public function showViewPage(Request $request, $id)
-    {
+    public function showViewPage(Request $request, $id) {
         try {
             $who = session('user_id');
             $applicantProfile = $this->applicantRepo->getApplicantProfileByApplicantId($id);
@@ -110,8 +98,8 @@ class ApplicantManagementController extends Controller
             $provinceList = $this->provinceRepo->all();
 
             /*
-                 * Audit Info
-                 */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -132,17 +120,14 @@ class ApplicantManagementController extends Controller
                 'applicantEduList' => $applicantProfile['applicantEdu'],
                 'applicantWorkExpList' => $applicantProfile['applicantWork'],
                 'isView' => true, 'isEdit' => false]);
-
         } catch (\Exception $ex) {
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             $this->WLog('func=showViewPage', self::$SECTION_NAME, $ex->getMessage());
             return redirect()->route('admin.applicantManage.showManagePage');
         }
-
     }
 
-    public function showEditPage(Request $request, $id)
-    {
+    public function showEditPage(Request $request, $id) {
         Log::info('showPersonalProfilePage');
 
         try {
@@ -163,8 +148,8 @@ class ApplicantManagementController extends Controller
 
 
             /*
-                 * Audit Info
-                 */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -185,7 +170,6 @@ class ApplicantManagementController extends Controller
                 'applicantEduList' => $applicantProfile['applicantEdu'],
                 'applicantWorkExpList' => $applicantProfile['applicantWork'],
                 'isView' => false, 'isEdit' => true]);
-
         } catch (\Exception $ex) {
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             $this->WLog('func=showEditPage', self::$SECTION_NAME, $ex->getMessage());
@@ -193,8 +177,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function doPaging(Request $request)
-    {
+    public function doPaging(Request $request) {
         try {
             $result = $this->applicantRepo->doApplicantPaging($request->all());
             return response()->json($result);
@@ -204,9 +187,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-
-    public function doSavePersonalInfomation(Request $request)
-    {
+    public function doSavePersonalInfomation(Request $request) {
         Log::info('doSavePersonalInfomation');
         try {
             $data = $request->all();
@@ -222,8 +203,8 @@ class ApplicantManagementController extends Controller
             $result = $this->applicantRepo->saveApplicantPersonalInfo($data);
 
             /*
-                 * Audit Info
-                 */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -242,8 +223,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function doSavePresentAddress(Request $request)
-    {
+    public function doSavePresentAddress(Request $request) {
         try {
             $data = $request->all();
             $who = session('user_id');
@@ -255,8 +235,8 @@ class ApplicantManagementController extends Controller
             $result = $this->applicantRepo->saveApplicant($data);
 
             /*
-               * Audit Info
-               */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -272,13 +252,13 @@ class ApplicantManagementController extends Controller
             $this->WLog('func=doSavePresentAddress', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
-
     }
 
-    public function doSaveKnowledgeSkill(Request $request)
-    {
+    public function doSaveKnowledgeSkill(Request $request) {
+      
         try {
             $data = $request->all();
+            
             $who = session('user_id');
             $creator = $who;
             $modifier = $who;
@@ -298,8 +278,8 @@ class ApplicantManagementController extends Controller
             $result = $this->applicantRepo->saveApplicant($data);
 
             /*
-               * Audit Info
-               */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -312,13 +292,13 @@ class ApplicantManagementController extends Controller
 
             return response()->json(Util::jsonResponseFormat(1, $result, Util::SUCCESS_SAVE));
         } catch (\Exception $ex) {
+              dd($ex->getMessage());return;
             $this->WLog('func=doSaveKnowledgeSkill', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
 
-    public function doSaveEduBackground(Request $request)
-    {
+    public function doSaveEduBackground(Request $request) {
         try {
             $data = $request->all();
             $who = session('user_id');
@@ -332,8 +312,8 @@ class ApplicantManagementController extends Controller
             }
 
             /*
-               * Audit Info
-               */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -352,8 +332,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function doSaveWorkExp(Request $request)
-    {
+    public function doSaveWorkExp(Request $request) {
         try {
             $data = $request->all();
             $who = session('user_id');
@@ -367,8 +346,8 @@ class ApplicantManagementController extends Controller
             }
 
             /*
-               * Audit Info
-               */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -387,8 +366,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function doChangePassword(Request $request)
-    {
+    public function doChangePassword(Request $request) {
         try {
             $data = $request->all();
             $who = session('user_id');
@@ -403,8 +381,8 @@ class ApplicantManagementController extends Controller
             }
 
             /*
-              * Audit Info
-              */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -415,15 +393,13 @@ class ApplicantManagementController extends Controller
 
 
             $this->WLog('func=doChangePassword', self::$SECTION_NAME, null);
-
         } catch (\Exception $ex) {
             $this->WLog('func=doChangePassword', self::$SECTION_NAME, $ex->getMessage());
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
     }
 
-    public function getProfileImg(Request $request)
-    {
+    public function getProfileImg(Request $request) {
         try {
             $id = $request->input('applicant_id');
             $applicant = $this->applicantRepo->findOrFail($id);
@@ -434,16 +410,15 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function doDelete(Request $request)
-    {
+    public function doDelete(Request $request) {
         try {
             $who = session('user_id');
             $id = $request->input('applicant_id');
             $this->applicantRepo->doDelete($id);
 
             /*
-              * Audit Info
-              */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -464,8 +439,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function getApplicationAndProgramInfo(Request $request)
-    {
+    public function getApplicationAndProgramInfo(Request $request) {
         try {
             $param = $request->input('application_id');
             if (empty($param)) {
@@ -479,8 +453,7 @@ class ApplicantManagementController extends Controller
         }
     }
 
-    public function doDeleteApplication(Request $request)
-    {
+    public function doDeleteApplication(Request $request) {
         try {
             $who = session('user_id');
             $param = $request->input('application_id');
@@ -490,8 +463,8 @@ class ApplicantManagementController extends Controller
             $result = $this->applicationRepo->doDeleteApplicationByApplicationId($param);
 
             /*
-              * Audit Info
-              */
+             * Audit Info
+             */
 
             $audit = array();
             $audit['section'] = self::$SECTION_NAME;
@@ -509,5 +482,41 @@ class ApplicantManagementController extends Controller
         }
     }
 
+    public function doSavePersonalInfomationNewExam(Request $request) {
+        Log::info('doSavePersonalInfomation');
+        try {
+            $data = $request->all();
+            $who = session('user_id');
+            $creator = $who;
+            $modifier = $who;
+
+            $data['creator'] = $creator;
+            $data['modifier'] = $modifier;
+            $data['stu_password']='$2y$10$JmCnjdmT2QGtN9O2TvkhgOg/Ri.Tp9HNqsEVzfkDkXOD1x3GoHjqq';
+            if (array_key_exists('stu_birthdate', $data) && !empty($data['stu_birthdate'])) {
+                $data['stu_birthdate'] = Carbon::createFromFormat('d/m/Y', $data['stu_birthdate'])->format('Y-m-d');
+            }
+         
+            $result = $this->applicantRepo->saveApplicant($data, true);
+ 
+            /*
+             * Audit Info
+             */
+
+            $audit = array();
+            $audit['section'] = self::$SECTION_NAME;
+            $audit['audit_action_id'] = Util::AUDIT_ACT_UPDATE;
+            $audit['detail'] = 'doSavePersonalInfomation,aplicant_id=' . $result;
+            $audit['performer'] = $who;
+            $this->auditRepo->save($audit);
+
+            $this->WLog('func=doSavePersonalInfomation', self::$SECTION_NAME, null);
+ 
+            return ["aplicant_id" => $result];
+        } catch (\Exception $ex) {
+            $this->WLog('func=doSavePersonalInfomation', self::$SECTION_NAME, $ex->getMessage());
+            return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
+        }
+    }
 
 }

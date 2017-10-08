@@ -691,8 +691,6 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
     public function getEngScoreReport($criteria = null)
     {
         try {
-            DB::enableQueryLog();
-
             $query = DB::table("applicant as appt")
                 ->select(
                     "appt.stu_citizen_card",
@@ -771,7 +769,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
         try {
             $query = DB::table("applicant as appt")
                 ->select("sat.SATI_LEVEL",
-                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก'
+                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก' 
                     when 3 then 'ดี' when 2 then 'พอใข้' when 1 then 'ไม่พอใจ' end as sat_desc"),
                     DB::raw("count(appt.applicant_id) as amt")
                 )->join("application as app", function ($join) {
@@ -782,7 +780,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
                 })->join("satisfaction as sat", function ($join) {
                     $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
-                })->groupBy("sat.SATI_LEVEL", 'appt.applicant_id');
+                })->groupBy("sat.SATI_LEVEL");
 
             if (isset($criteria['semester'])) {
                 $query->where('app_set.semester', '=', $criteria['semester']);
@@ -815,7 +813,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
                 })->leftJoin("tbl_name_title as tle", function ($join) {
                     $join->on("tle.name_title_id", "=", "appt.name_title_id");
-                })->groupBy('sat.SATI_SUGGESTION', 'fullname_th', 'created');
+                })->groupBy('sat.SATI_SUGGESTION','fullname_th', 'created');
 
             if (isset($criteria['semester'])) {
                 $query->where('app_set.semester', '=', $criteria['semester']);
@@ -823,7 +821,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             if (isset($criteria['academic_year'])) {
                 $query->where('app_set.academic_year', '=', $criteria['academic_year']);
             }
-            //dd($query->toSql());
+
             return $query->get();
 
         } catch (\Exception $ex) {

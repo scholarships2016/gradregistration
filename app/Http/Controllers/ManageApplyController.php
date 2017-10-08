@@ -408,15 +408,20 @@ class ManageApplyController extends Controller {
     }
 
     public function addUserExamGS05(Request $request) {
+    
         $res = null;
         try {
             $user = (session('user_type')->user_type != 'applicant') ? session('email_address') : session('user_id');
             if ($request) {
+              
+                $curr_prog_id = $this->CurriculumProgramRepo->getCurrProgByProgramID($request->program_id,$request->curriculum_id);
+                   
                 $data = ['curr_act_id' => $request->curr_act_id,
                     'sub_major_id' => $request->sub_major_id,
+                    'curr_prog_id' => $curr_prog_id->curr_prog_id,
                     'program_id' => $request->program_id,
                     'program_type_id' => $request->program_type_id,
-                    'stu_citizen_card' => $request->idCard,
+                    'stu_citizen_card' => $request->stu_citizen_card,
                     'curriculum_id' => $request->curriculum_id,
                     'flow_id' => 1,
                     'bank_id' => 10,
@@ -428,6 +433,7 @@ class ManageApplyController extends Controller {
                     'exam_status' => 2,
                     'applicant_id' => $request->applicant_ID];
                 $res = $this->ApplicationRepo->saveApplication($data);
+                
                 $dataup = ['application_id' => $res->application_id, 'flow_id' => 4];
                 $res = $this->ApplicationRepo->saveApplication($dataup);
             }
@@ -530,16 +536,16 @@ class ManageApplyController extends Controller {
                             'faculty_name_en' => $curr->faculty_full,
                             'statusExam_en' => $app->exam_name_en
                         ];
-                        if($app->stu_email!=""){
-                          Mail::send('email.gs03', $data, function($message)use ($app) {
-                            $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
-                          });
-                          Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
-                          session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-                      }else{
-                          Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03',  "Invalid Email Address ({$app->stu_email})");
-                          session()->flash('errorMsg', Lang::get('resource.lbError'));
-                      }
+                        if ($app->stu_email != "") {
+                            Mail::send('email.gs03', $data, function($message)use ($app) {
+                                $message->to($app->stu_email, $app->stu_first_name)->subject('Registration Result ');
+                            });
+                            Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', null);
+                            session()->flash('successMsg', Lang::get('resource.lbSuccess'));
+                        } else {
+                            Controller::WLog('Gs03 [' . $app->stu_email . ']', 'Gs03', "Invalid Email Address ({$app->stu_email})");
+                            session()->flash('errorMsg', Lang::get('resource.lbError'));
+                        }
 
                         return;
                     }
@@ -582,33 +588,25 @@ class ManageApplyController extends Controller {
                             'semester' => $curr->semester,
                             'year' => $curr->academic_year,
                             'statusExam' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'ไม่ผ่านการสอบคัดเลือก' : 'ผ่านการสอบคัดเลือก' ) . ' [' . $app->admission_status_name_th . ']',
-
                             'stu_name_en' => $app->stu_first_name_en . ' ' . $app->stu_last_name_en,
                             'english' => $curr->english,
-
                             'sub_major_name_en' => $curr->sub_major_name_en,
-
                             'major_name_en' => $curr->major_name_en,
-
                             'department_name_en' => $curr->department_name_en,
-
                             'faculty_name_en' => $curr->faculty_full,
-
                             'statusExam_en' => (($app->admission_status_id == '0' || $app->admission_status_id == 'X') ? 'Not Pass' : 'Pass' ) . ' [' . $app->admission_status_name_en . ']'
-
-
                         ];
 
-                        if($app->stu_email!=""){
-                          Mail::send('email.gs05', $data, function($message)use($app) {
-                              $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
-                          });
-                          Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
+                        if ($app->stu_email != "") {
+                            Mail::send('email.gs05', $data, function($message)use($app) {
+                                $message->to($app->stu_email, $app->stu_first_name)->subject('Admission Result ');
+                            });
+                            Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', null);
                             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-                      }else{
-                          Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', "Invalid Email Address ({$app->stu_email})");
+                        } else {
+                            Controller::WLog('Gs05 [' . $app->stu_email . ']', 'Gs05', "Invalid Email Address ({$app->stu_email})");
                             session()->flash('errorMsg', Lang::get('resource.lbError'));
-                      }
+                        }
 
 
                         return;
@@ -657,7 +655,12 @@ class ManageApplyController extends Controller {
                         "district_code" => $data['address_distID'],
                         "Admission_Status" => $data['Admission_StatusID'],
                         "creator" => $user,
-                        "province_id" => $data['address_provID']];
+                        "province_id" => $data['address_provID'],
+                        "stu_phone" => $data['stu_phone'],
+                        "eng_test_id" => $data['eng_test_id'],
+                        "eng_test_score" => $data['eng_test_score'],
+                        "eng_date_taken" => $data['eng_date_taken']
+                    ];
 
                     $result = $this->ApplicantRepo->saveApplicant($applicante, true);
 
@@ -671,6 +674,33 @@ class ManageApplyController extends Controller {
                             "creator" => $user,
                             "applicant_id" => $applicant];
                         $result = $this->ApplicantRepo->saveWorkApplicant($applicanteWork);
+
+
+                        if ($data['university_id'] != "" && $data['university_id'] != null) {
+                            $applicantedu = [ "edu_pass_id" => $data['edu_pass_id'],
+                                "university_id" => $data['university_id'],
+                                "grad_level" => "BACHELOR",
+                                "edu_gpax" => $data['edu_gpax'],
+                                "edu_faculty" => $data['edu_faculty'],
+                                "edu_major" => $data['edu_major'],
+                                "edu_degree" => $data['edu_degree'],
+                                "creator" => $user,
+                                "applicant_id" => $applicant];
+                            $result = $this->ApplicantRepo->saveEduApplicant($applicantedu);
+                        }
+
+                        if ($data['university_idM'] != "" && $data['university_idM'] != null) {
+                            $applicantedum = [ "edu_pass_id" => $data['edu_pass_idM'],
+                                "university_id" => $data['university_idM'],
+                                "grad_level" => "MASTER",
+                                "edu_gpax" => $data['edu_gpaxM'],
+                                "edu_faculty" => $data['edu_facultyM'],
+                                "edu_major" => $data['edu_majorM'],
+                                "edu_degree" => $data['edu_degreeM'],
+                                "creator" => $user,
+                                "applicant_id" => $applicant];
+                            $result = $this->ApplicantRepo->saveEduApplicant($applicantedum);
+                        }
                     }
                 } else {
                     $applicant = $applicanData->applicant_id;
@@ -1180,7 +1210,7 @@ class ManageApplyController extends Controller {
 
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
-        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null);
+        $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, null, $semester, $year, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role, null, null,null,1);
 
         if ($print == 'EXCEL') {
             $data = [];
@@ -1196,7 +1226,7 @@ class ManageApplyController extends Controller {
 
             foreach ($curDiss as $value) {
 
-                 $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' .(($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score). ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' .$value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+                $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . $value->stu_first_name_en . $value->stu_last_name_en . ',' . (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score) . ',' . $value->edu_gpax . ',' . $value->edu_gpaxM . ',' . $value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
 
 
 

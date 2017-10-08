@@ -88,7 +88,7 @@ class ApplyController extends Controller {
 
     public function getRegisterCourse(Request $request = null) {
 
-        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, null, $request->searchs, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, true, null, null, null, null, $request->all());
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, null, $request->searchs, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, true, null, null, null, null, $request->all(),session('user_id'));
 
         return response()->json($curDiss);
     }
@@ -138,10 +138,11 @@ class ApplyController extends Controller {
     public function registerDetailForapply($id) {
         $id = explode("P", $id);
 
-        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1]);
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1],null,session('user_id'));                   
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
 
+         
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program, 'checkProfile' => $this->checkApplicantProfile()]);
     }
 

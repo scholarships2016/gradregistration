@@ -185,7 +185,7 @@
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
             <div><input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
-                <div class="caption" style="text-align: center">รายชื่อผู้สมัตรระดับ<label id="lbDegree" name="lbDegree"></label>แยกตามหลักสูตร(GS03)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
+                <div class="caption" style="text-align: center">รายชื่อผู้สมัครหลักสูตร<label id="lbDegree" name="lbDegree"></label>แยกตามหลักสูตร(GS03)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
      <div class="portlet box pink-chula">
                       <div class="portlet-title">
                         <div class="caption">
@@ -227,9 +227,9 @@
           <div class="form-actions">
             <div class="row">
               <div class="col-md-offset-4 col-md-8">
-                  <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
-                 <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>PDF</a>
-                <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
+                  <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>Export เป็นไฟล์ EXCEL</a>
+                 <a id="btnpdf"  target="_blank" href="javascript:callprint('PDF');"  class="btn green"><i class="fa fa-print"></i>Export เป็นไฟล์ PDF</a>
+                <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>Export เป็นไฟล์ TEXT</a>
               </div>
             </div>
           </div>
@@ -296,7 +296,7 @@
                                                   if(index!=0){ $("#single").append('</optgroup>');}
                                                   $("#single").append('<optgroup label="'+((itemData.faculty_name != null)? itemData.faculty_name:'-')+'">');
                                               }
-                                             $("#single").append('<option lbthai="'+itemData.thai+'"  cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.thai+'['+itemData.coursecodeno+'], '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
+                                             $("#single").append('<option lbthai="'+itemData.thai+'"  cu="'+itemData.curriculum_id+'"  pt="'+itemData.program_type_id+'" pg="'+((itemData.coursecodeno!=null)?itemData.coursecodeno:'')+'" smj="'+((itemData.sub_major_id!=null)?itemData.sub_major_id:'')+'"  value="'+data[index].curr_act_id+'">'+((itemData.thai != null)? (itemData.coursecodeno+' - '+itemData.thai+', '):' ')+((itemData.sub_major_name != null)? 'แขนงวิชา'+itemData.sub_major_name+'['+itemData.sub_major_id+'], ':' ')+((itemData.major_name != null)? 'สาขาวิชา'+itemData.major_name+'['+itemData.major_id+'], ':' ')+((itemData.department_name != null)?'ภาควิชา'+itemData.department_name+'['+itemData.department_id+'], ':' ')+((itemData.faculty_name != null)?itemData.faculty_name:'-')+','+itemData.prog_type_name+'</option>')
                                                if(index==data.length-1){$("#single").append('</optgroup>');}
 
                                                         group = data[index].faculty_id;

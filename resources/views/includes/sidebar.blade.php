@@ -180,8 +180,8 @@
                                 </li>
 
 
-                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
-                                    <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-9.html" class="nav-link ">
+                                <li class=" nav-item  menuitem   @if(strpos($curr_url, 'eng-score-report') !== false) open active @endif">
+                                    <a href="{{url('admin/report/eng-score-report')}}" class="nav-link ">
                                         <span class="title">คะแนนภาษาอังกฤษ</span>
 
                                     </a>
@@ -205,8 +205,8 @@
                                 </li>
 
                                 @if(session('user_type')->user_type == 'Admin' ||in_array("7",session('user_permission')))
-                                    <li class=" nav-item  menuitem">
-                                        <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-13.html" class="nav-link ">
+                                    <li class=" nav-item  menuitem @if(strpos($curr_url, 'satisfaction-report') !== false) open active @endif">
+                                        <a href="{{url('admin/report/satisfaction-report')}}" class="nav-link ">
                                             <span class="title">ความพึงพอใจการใช้งานระบบ  </span>
                                         </a>
                                     </li>
@@ -322,8 +322,8 @@
                     @endif
 
                     @if(session('user_type')->user_type == 'Admin' || in_array("7",session('user_permission')))
-                        <li class="nav-item  " data-index="21">
-                            <a href="http://128.199.201.75/metronic_v4.7.5/theme/gradregistrationadmin/report-export-to-reg.html" class="nav-link nav-toggle">
+                        <li class="nav-item  " data-index="21" @if(strpos($curr_url, 'report-export-to-reg') !== false) open active @endif">
+                            <a href="{{url('admin/report/report-export-to-reg')}}" class="nav-link nav-toggle">
                                 <i class="icon-briefcase"></i>
                                 <span class="title">ข้อมูลส่งสำนักทะเบียน</span>
                                 <span class="arrow"></span>

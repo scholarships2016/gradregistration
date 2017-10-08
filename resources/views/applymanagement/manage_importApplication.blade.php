@@ -188,7 +188,9 @@
       <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><span class="badge badge-warning">3</span> นำเข้าข้อมูลผู้สอบได้จากไฟล์ Microsoft Excel</a>
+				<a class="navbar-brand" href="#"><span class="badge badge-warning">3</span> นำเข้าข้อมูลผู้สอบได้จากไฟล์ Microsoft Excel หรือ  </a>       <a href="javascript:callAddExam();"   class="btn btn-circle green btn-outline sbold uppercase  ">
+                    <i class="fa fa-plus"></i> เพิ่มผู้สอบได้ เป็นกรณีพิเศษ(โดยการกรอกข้อมูลเข้าระบบ)
+                    </a>
 			</div>
 		</div>
 	</nav>
@@ -243,7 +245,26 @@
                         <th>สถานะการทำงานปัจจุบัน</th>
                         <th>ชื่อสถานที่ทำงานปัจจุบัน</th>
                         <th>ตำแหน่งการทำงานปัจจุบัน</th>
-                        <th>ประเภทการรับเข้าศึกษา</th>
+                          
+                        <th>หมายเลขโทรศัพท์</th>
+                        <th>เลือกสถาบันที่สอบภาษาอังกฤษ</th>
+                        <th>คะแนนภาษาอังกฤษ</th>
+                        <th>วันที่คะนนมีผล</th>
+                        <th>สถานะการศึกษา ป.ตรี</th>
+                        <th>มหาวิทยาล้ย/สถาบัน ป.ตรี</th>
+                        <th>แต้มเฉลี่ย ป.ตรี</th>
+                        <th>คณะ ป.ตรี</th>
+                        <th>สาขาวิชา ป.ตรี</th>
+                        <th>ชื่อปริญญา ป.ตรี</th>
+                        <th>สถานะการศึกษา ป.โท</th>
+                        <th>มหาวิทยาล้ย/สถาบัน  ป.โท</th>
+                        <th>แต้มเฉลี่ย  ป.โท</th>
+                        <th>คณะ  ป.โท</th>
+                        <th>สาขาวิชา  ป.โท</th>
+                        <th>ชื่อปริญญา  ป.โท</th>
+                         
+                       
+<th>ประเภทการรับเข้าศึกษา</th>
                         <th> Actions </th>
                       </tr>
                     </thead>
@@ -498,13 +519,97 @@ table2 = $('#datatable_ajax').dataTable({
                     render: function (data, type, full, meta) {
                     return   full.work_position ;
                     }},
+                
+                  
+                 {
+                    targets: [20],name : 'stu_phone',
+                    render: function (data, type, full, meta) {
+                    return   full.stu_phone ;
+                    }},
+                 {
+                    targets: [21],name : 'eng_test_text',
+                    render: function (data, type, full, meta) {
+                    return   full.eng_test_text ;
+                    }},
+                 {
+                    targets: [22],name : 'eng_test_score',
+                    render: function (data, type, full, meta) {
+                    return   full.eng_test_score ;
+                    }},
+                 {
+                    targets: [23],name : 'eng_date_taken',
+                    render: function (data, type, full, meta) {
+                    return   full.eng_date_taken ;
+                    }},
+                 {
+                    targets: [24],name : 'edu_pass_text',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_pass_text ;
+                    }},
+                 {
+                    targets: [25],name : 'university_text',
+                    render: function (data, type, full, meta) {
+                    return   full.Admission_Status ;
+                    }},
+                 {
+                    targets: [26],name : 'edu_gpax',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_gpax ;
+                    }},
+                 {
+                    targets: [27],name : 'edu_faculty',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_faculty ;
+                    }},
+                 {
+                    targets: [28],name : 'edu_major',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_major ;
+                    }},
+                 {
+                    targets: [29],name : 'edu_degree',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_degree ;
+                    }},
+                 {
+                    targets: [30],name : 'edu_pass_textM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_pass_textM ;
+                    }},
+                 {
+                    targets: [31],name : 'university_textM',
+                    render: function (data, type, full, meta) {
+                    return   full.university_textM ;
+                    }},
+                 {
+                    targets: [32],name : 'edu_gpaxM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_gpaxM ;
+                    }},
+                 {
+                    targets: [33],name : 'edu_facultyM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_facultyM ;
+                    }},
+                 {
+                    targets: [34],name : 'edu_majorM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_majorM ;
+                    }},
+                 {
+                    targets: [35],name : 'edu_degreeM',
+                    render: function (data, type, full, meta) {
+                    return   full.edu_degreeM ;
+                    }},
+                
+                  
                      {
-                    targets: [20],name : 'Admission_Status',
+                    targets: [36],name : 'Admission_Status',
                     render: function (data, type, full, meta) {
                     return   full.Admission_Status ;
                     }},
                         {
-                      targets: [21],
+                      targets: [37],
                       render: function (data, type, full, meta) {
                       return ((' <a class="btn-info" > Delete </a>  ')) ;
                       } }    ]
@@ -514,7 +619,60 @@ table2 = $('#datatable_ajax').dataTable({
   });
 
 
+function callAddExam(){
+   
+var form = document.createElement('FORM');
+form.method='POST';
+form.action = "{{ url('admin/showPersonalProfilePageForNewExame') }}";
+form.target = 'newWindow';
+ 
 
+var curr_act_id = document.createElement("INPUT");
+var sub_major_id = document.createElement("INPUT");
+var program_id = document.createElement("INPUT");
+var program_type_id = document.createElement("INPUT");
+var curriculum_id = document.createElement("INPUT");
+var apply_comment = document.createElement("INPUT");
+var token = document.createElement("INPUT");
+curr_act_id.name="curr_act_id";
+curr_act_id.type="hidden";
+curr_act_id.value=($('#single').val())? $('#single').val():'-1';
+sub_major_id.name="sub_major_id";
+sub_major_id.type="hidden";
+sub_major_id.value=$('option:selected','#single').attr('smj');
+program_id.name="program_id";
+program_id.type="hidden";
+program_id.value=$('option:selected','#single').attr('pg');
+program_type_id.name="program_type_id";
+program_type_id.type="hidden";
+program_type_id.value=$('option:selected','#single').attr('pt');
+curriculum_id.name="curriculum_id";
+curriculum_id.type="hidden";
+curriculum_id.value=$('option:selected','#single').attr('cu');
+ 
+apply_comment.name="apply_comment";
+apply_comment.type="hidden";
+apply_comment.value=$("#apply_comment").val();
+ 
+token.name="_token";
+token.type="hidden";
+token.value='{{ csrf_token() }}'; 
+
+form.appendChild(curr_act_id);
+form.appendChild(sub_major_id);
+form.appendChild(program_id);
+form.appendChild(program_type_id);
+form.appendChild(curriculum_id);
+form.appendChild(apply_comment);
+form.appendChild(token);
+
+document.body.appendChild(form);
+window.open("","newWindow");
+form.submit();
+
+       
+        
+    }
 
 </script>
 @endpush

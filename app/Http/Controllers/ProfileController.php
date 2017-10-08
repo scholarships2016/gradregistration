@@ -21,8 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use \Crypt;
-class ProfileController extends Controller
-{
+
+class ProfileController extends Controller {
 
     protected $newSrcRepo;
     protected $applicantRepo;
@@ -41,14 +41,7 @@ class ProfileController extends Controller
     /**
      * ProfileController constructor.
      */
-    public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo,
-                                NationRepository $nationRepo, ReligionRepository $religionRepo,
-                                EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo,
-                                WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo,
-                                EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo,
-                                ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo,
-                                ApplicantWorkRepository $applicantWorkRepo)
-    {
+    public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo, NationRepository $nationRepo, ReligionRepository $religionRepo, EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo, WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo, EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo, ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo, ApplicantWorkRepository $applicantWorkRepo) {
         $this->newSrcRepo = $newSrcRepo;
         $this->applicantRepo = $applicantRepo;
         $this->nationRepo = $nationRepo;
@@ -64,8 +57,7 @@ class ProfileController extends Controller
         $this->applicantWorkRepo = $applicantWorkRepo;
     }
 
-    public function showProfilePage(Request $request)
-    {
+    public function showProfilePage(Request $request) {
         Log::info('showProfilePage');
 
         try {
@@ -93,15 +85,13 @@ class ProfileController extends Controller
                 'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
                 'uniList' => $uniList, 'provinceList' => $provinceList,
                 'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
-
         } catch (\Exception $ex) {
             session()->flash('errorMsg', Util::ERROR_OCCUR);
             return back();
         }
     }
 
-    public function showPersonalProfilePage(Request $request)
-    {
+    public function showPersonalProfilePage(Request $request) {
         Log::info('showPersonalProfilePage');
 
         try {
@@ -131,7 +121,6 @@ class ProfileController extends Controller
                 'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
                 'uniList' => $uniList, 'provinceList' => $provinceList,
                 'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
-
         } catch (\Exception $ex) {
             echo $ex->getMessage();
             return;
@@ -140,8 +129,53 @@ class ProfileController extends Controller
         }
     }
 
-    public function doSavePersonalInfomation(Request $request)
-    {
+    public function showPersonalProfilePageForNewExame(Request $request) {
+        try {
+ 
+            //Master Data
+            $nameTitleList = $this->nameTitleRepo->all();
+            $newSrcList = $this->newSrcRepo->getAll();
+            $nationList = $this->nationRepo->all();
+            $religionList = $this->religionRepo->all();
+            $engTestList = $this->engTestRepo->all();
+            $workStatusList = $this->workStatusRepo->all();
+            $gaduateLevelList = $this->gaduateLevelRepo->all();
+            $eduPassList = $this->eduPassRepo->all();
+            $uniList = $this->uniRepo->all();
+            $provinceList = $this->provinceRepo->all();
+
+            $curr_act_id = $request->curr_act_id;
+            $sub_major_id = $request->sub_major_id;
+            $program_id = $request->program_id;
+            $program_type_id = $request->program_type_id;
+            $curriculum_id = $request->curriculum_id;
+            $apply_comment = $request->apply_comment;
+
+
+
+            return view('profile_new_exam.personalProfile', ['applicant' => '', 'profile_img' => '',
+            'newSrcList' => $newSrcList, 'nationList' => $nationList,
+            'religionList' => $religionList, 'engTestList' => $engTestList,
+            'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
+            'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
+            'uniList' => $uniList, 'provinceList' => $provinceList,
+            'applicantEduList' => '', 'applicantWorkExpList' => '',
+            'curr_act_id' => $curr_act_id,
+            'sub_major_id' => $sub_major_id,
+            'program_id' => $program_id,
+            'program_type_id' => $program_type_id,
+            'curriculum_id' => $curriculum_id,
+            'apply_comment' => $apply_comment
+            ]);
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+            return;
+            session()->flash('errorMsg', Util::ERROR_OCCUR);
+            return back();
+        }
+    }
+
+    public function doSavePersonalInfomation(Request $request) {
         Log::info('doSavePersonalInfomation');
         try {
             $data = $request->all();
@@ -161,8 +195,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function doSavePresentAddress(Request $request)
-    {
+    public function doSavePresentAddress(Request $request) {
         Log::info('doSavePresentAddress');
         try {
             $data = $request->all();
@@ -177,11 +210,9 @@ class ProfileController extends Controller
         } catch (\Exception $ex) {
             return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
         }
-
     }
 
-    public function doSaveKnowledgeSkill(Request $request)
-    {
+    public function doSaveKnowledgeSkill(Request $request) {
         Log::info('doSaveKnowledgeSkill');
         try {
             $data = $request->all();
@@ -201,8 +232,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function doSaveEduBackground(Request $request)
-    {
+    public function doSaveEduBackground(Request $request) {
         Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
@@ -222,8 +252,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function doSaveWorkExp(Request $request)
-    {
+    public function doSaveWorkExp(Request $request) {
         Log::info('doSaveEduBackground');
         try {
             $data = $request->all();
@@ -242,8 +271,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function doChangePassword(Request $request)
-    {
+    public function doChangePassword(Request $request) {
         Log::info('doChangePassword');
         try {
             $data = $request->all();
@@ -262,8 +290,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function getProfileImg(Request $request)
-    {
+    public function getProfileImg(Request $request) {
         try {
             $id = $request->input('applicant_id');
             $id = Crypt::decrypt($id);
@@ -271,6 +298,8 @@ class ProfileController extends Controller
             $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($applicant->stuImgFile->file_path);
             return response()->file($path);
         } catch (\Exception $ex) {
+            
         }
     }
+
 }

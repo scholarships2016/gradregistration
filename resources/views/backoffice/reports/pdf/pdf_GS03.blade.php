@@ -41,25 +41,25 @@
 
         </style>
     </head>
-    <body> <br><br><br> 
+    <body> <br><br><br>
         <table width="750px" border="0" >
             <tr>
 
             </tr>
         </table>
         <div class="caption" style="text-align: center">
-            รายชื่อผู้สมัตรระดับ {{$lbthai}}  แยกตามหลักสูตร(GS03)<br>
+            รายชื่อผู้สมัครหลักสูตร {{$lbthai}}  แยกตามหลักสูตร(GS03)<br>
             ประจำภาคการศึกษา {{($lbsemester==1)?'ต้น [First]':'ปลาย [Second]'}} ปีการศึกษา {{$lbYear}} <br><br>
 
             หลักสูตร  {{$reports[0]->degree_name}} - {{$reports[0]->degree_name_en}}(รหัส {{$reports[0]->program_id}} )
-            สาขาวิชา  {{$reports[0]->major_name}} ({{$reports[0]->major_name_en}}) <br>
+            สาขาวิชา  {{$reports[0]->major_name}} -{{$reports[0]->major_name_en}} <br>
             ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }}) คณะ  {{$reports[0]->faculty_name}} ({{$reports[0]->faculty_full}} )<br>
-            แขนงวิชา   {{$reports[0]->sub_major_name}}({{$reports[0]->sub_major_name_en }})
+              @if($reports[0]->sub_major_id!="")แขนงวิชา {{$reports[0]->sub_major_name}} - {{$reports[0]->sub_major_name_en }} ({{$reports[0]->sub_major_id}})@endif
 
         </div>
 
 
-        <br><br> 
+        <br><br>
         <table width="750px" border="1"  cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center">
             <thead>
                 <tr align="center" role="row"><th class="sorting_disabled" rowspan="1" colspan="1"> ลำดับ </th><th class="sorting_disabled" rowspan="1" colspan="1"> ชื่อ-สกุล </th><th class="sorting_disabled" rowspan="1" colspan="1"> มีสิทธิ์สอบ </th><th class="sorting_disabled" rowspan="1" colspan="1"> ไม่มีสิทธิ์สอบ </th><th class="sorting_disabled" rowspan="1" colspan="1"> หมายเหตุ </th><th class="sorting_disabled" rowspan="1" colspan="1"> เลขที่ใบสมัคร </th><th class="sorting_disabled" rowspan="1" colspan="1"> คะแนนภาษาอังกฤษ </th></tr>
@@ -81,17 +81,17 @@
                 </tr>
                 @endforeach
             </tbody>
-    </table><br><br> 
+    </table><br><br>
         <div  align="right">
-       
+
         <table style="width:300px;" align="right">
          <tr> <td> รวมจำนวนผู้สมัคร     </td>    <td> {{$reports->count()}} คน </td> </tr>
           <tr>    <td colspan="2"> ผลการพิจารณาของภาค</td> </tr>
             <tr> <td> จํานวนผู้มีสิทธิสอบ     </td>    <td> {{$pcount}} คน</td> </tr>
             <tr> <td> จํานวนผู้ไม่มีสิทธิสอบ   </td>    <td>   {{$pnocount}} คน </td> </tr>
         </table>
-            
-            <br><br><br><br><br><br><br><br><br><br><br><br><br> 
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
             <div  align="center" style="width:1100px; border:1px">
             (ลงนาม) ............................................................
             <br>
@@ -99,7 +99,7 @@
         <br>
        {{ $sposition}}<br>
         วันที่ {{$datenow}}
-        </div> 
+        </div>
         </div>
     </body>
 </html>

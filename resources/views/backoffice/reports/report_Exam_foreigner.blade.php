@@ -158,8 +158,8 @@
                                     <div class="row">
                                         <div class="col-md-offset-4 col-md-8">
                                             <a id="search_Select" href="javascript:;" class="btn green"><i class="fa fa-file-text-o"></i> ดูรายงาน </a>
-                                            <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>EXCEL</a>
-                                            <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>TEXT</a>
+                                            <a id="btnxls"  target="_blank" href="javascript:callprint('EXCEL');"  class="btn green"><i class="fa fa-file-excel-o"></i>Export เป็นไฟล์ EXCEL</a>
+                                            <a id="btntxt"  target="_blank" href="javascript:callprint('TEXT');"  class="btn green"><i class="fa fa-file-text-o"></i>Export เป็นไฟล์ TEXT</a>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
 
                 </div>
                 <div id="search-application-result" style="display:none;">
-                  
+
                     <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
                         <div>

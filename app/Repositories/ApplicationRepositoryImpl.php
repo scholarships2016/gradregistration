@@ -276,7 +276,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         return $results;
     }
 
-    public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null, $major_id = null, $faculty_id = null, $chkflowid = null) {
+    public function getDataForMangeReport($applicantID = null, $applicationID = null, $status = null, $semester = null, $year = null, $roundNo = null, $criteria = null, $user = null, $curr_act_id = null, $applicationsArray = null, $exam_status = null, $sub_major_id = null, $program_id = null, $program_type_id = null, $user_role = null, $major_id = null, $faculty_id = null, $chkflowid = null, $fund_interesting = null) {
         $results = null;
         try {
 
@@ -321,6 +321,11 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             ->Where(function ($query)use ($applicationID) {
                                 if ($applicationID) {
                                     $query->where('application.application_id', $applicationID);
+                                }
+                            })
+                            ->Where(function ($query)use ($fund_interesting) {
+                                if ($fund_interesting) {
+                                    $query->whereIn('application.fund_interesting', $fund_interesting);
                                 }
                             })
                             ->Where(function ($query)use ($applicationsArray) {
@@ -424,7 +429,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as bachlor_year')
                                 , DB::raw('(select edu_gpax  from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as edu_gpax')
                                 , DB::raw('(select edu_gpax  from applicant_edu where grad_level ="BACHELOR" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as edu_gpaxM')
-                                    , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="MASTER" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as master_year')])
+                                , DB::raw('(select edu_year bachlor_year from applicant_edu where grad_level ="MASTER" and applicant_edu.applicant_id = application.applicant_id LIMIT 1) as master_year')])
                             ->distinct()
                             ->orderBy('application.app_id', 'asc')->get();
         } catch (\Exception $ex) {
