@@ -185,7 +185,7 @@
           <div id="datatable_ajax_wrapper" class="dataTables_wrapper no-footer">
 
             <div><input type="hidden" id="idsave"> <input type="hidden" value="1" id="applicantid">
-                <div class="caption" style="text-align: center">รายชื่อผู้สมัตรระดับ<label id="lbDegree" name="lbDegree"></label>แยกตามหลักสูตร(GS03)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
+                <div class="caption" style="text-align: center">รายชื่อผู้สมัครหลักสูตร<label id="lbDegree" name="lbDegree"></label>แยกตามหลักสูตร(GS03)<br>ประจำภาคการศึกษา<label id="lbSem" name="lbSem"></label> ปีการศึกษา <label id="lbYear" name="lbYear"></label></div>
      <div class="portlet box pink-chula">
                       <div class="portlet-title">
                         <div class="caption">
