@@ -130,51 +130,32 @@ class ReportController extends Controller
             $param['user_role'] = $userType->user_role;
             $param['user_type'] = $userType->user_type;
 
-            $data = $this->rptRepo->getReport01DataByCriteria($param);
-            $tbody = '<tr><td colspan="8" style="text-align: center">ไม่พบข้อมูล</td></tr>';
-            $tfoot = '<tr><td colspan="3" style="text-align: center">รวม</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>';
+            $data = $this->rptRepo->getReport01DataByCriteria2($param);
+            $tbody = '<tr><td colspan="10" style="text-align: center">ไม่พบข้อมูล</td></tr>';
 
             if (!empty($data) && sizeof($data) != 0) {
-                $totalAppAmt = 0;
-                $totalKtbAmt = 0;
-                $totalScbAmt = 0;
-                $totalTmbAmt = 0;
-                $totalThaAmt = 0;
-
                 $tbody = '';
                 foreach ($data as $index => $value) {
                     $row = '<tr>';
                     $row .= '<td>' . ($index + 1) . '</td>';
-                    $row .= '<td>' . $value->program_id . " " . $value->thai . '</td>';
-                    $row .= '<td>' . $value->cond_id . " " . $value->prog_type_name . '</td>';
-                    $row .= '<td>' . number_format($value->app_amt) . '</td>';
-                    $row .= '<td>' . number_format($value->ktb_bank) . '</td>';
-                    $row .= '<td>' . number_format($value->scb_bank) . '</td>';
-                    $row .= '<td>' . number_format($value->tmb_bank) . '</td>';
-                    $row .= '<td>' . number_format($value->tha_bank) . '</td>';
+                    $row .= '<td>' . $value->stu_citizen_card . '</td>';
+                    $row .= '<td>' . (empty($value->fullname_th) ? $value->fullname_en : $value->fullname_th . '<br>' . $value->fullname_en) . '</td>';
+                    $row .= '<td>' . $value->program_id . '</td>';
+                    $row .= '<td>' . $value->major_name . '</td>';
+                    $row .= '<td>' . $value->department_name . '</td>';
+                    $row .= '<td>' . $value->faculty_name . '</td>';
+                    $row .= '<td>' . $value->prog_type_name . '</td>';
+                    $row .= '<td>' . $value->bank_name . '</td>';
+                    $row .= '<td>' . $value->payment_status . '</td>';
                     $row .= '<tr>';
                     $tbody .= $row;
-
-                    $totalAppAmt += $value->app_amt;
-                    $totalKtbAmt = bcadd($totalKtbAmt, $value->ktb_bank);
-                    $totalScbAmt = bcadd($totalScbAmt, $value->scb_bank);
-                    $totalTmbAmt = bcadd($totalTmbAmt, $value->tmb_bank);
-                    $totalThaAmt = bcadd($totalThaAmt, $value->tha_bank);
                 }
-
-                $tfoot = '<tr>
-                            <th colspan="3" style="text-align:center;"> รวม</th><th style=""> ' . number_format($totalAppAmt) . '</th>
-                            <th style=""> ' . number_format($totalKtbAmt, 2) . '</th>
-                            <th style=""> ' . number_format($totalScbAmt, 2) . '</th>
-                            <th style=""> ' . number_format($totalTmbAmt, 2) . '</th>
-                            <th style=""> ' . number_format($totalThaAmt, 2) . '</th>
-                          </tr>';
             }
 
-            return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+            return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody), null));
         } catch (\Exception $ex) {
             throw $ex;
-            return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+            return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody), null));
         }
     }
 
@@ -188,32 +169,41 @@ class ReportController extends Controller
             $param['user_role'] = $userType->user_role;
             $param['user_type'] = $userType->user_type;
 
-            $data = $this->rptRepo->getReport02DataByCriteria($param);
-            $tbody = '<tr><td colspan="8" style="text-align: center">ไม่พบข้อมูล</td></tr>';
-            $tfoot = '<tr><td colspan="6" style="text-align: center">รวม</td><td>0</td><td></td></tr>';
-            $totalAmt = 0;
+            $data = $this->rptRepo->getReport02DataByCriteria2($param);
+            $tbody = '<tr><td colspan="17" style="text-align: center">ไม่พบข้อมูล</td></tr>';
             if (!empty($data) && sizeof($data) != 0) {
                 $tbody = '';
                 foreach ($data as $index => $value) {
+                    $uni = null;
+                    if (!empty($value->university)) {
+                        $uni = explode("|", $value->university);
+                    }
                     $row = '<tr>';
                     $row .= '<td>' . ($index + 1) . '</td>';
-                    $row .= '<td>' . $value->applicant_no . '</td>';
-                    $row .= '<td>' . $value->application_no . '</td>';
-                    $row .= '<td>' . $value->fullname_th . '<br>' . $value->fullname_en . '</td>';
-                    $row .= '<td>' . (empty($value->receipt) ? '-' : $value->receipt) . '</td>';
-                    $row .= '<td>' . (empty($value->payment_date) ? '-' : $value->payment_date) . '</td>';
-                    $row .= '<td>' . number_format($value->apply_fee) . '</td>';
-                    $row .= '<td>' . $value->bank_name . '</td>';
+                    $row .= '<td>' . $value->academic_year . '</td>';
+                    $row .= '<td>' . $value->stu_citizen_card . '</td>';
+                    $row .= '<td>' . (empty($value->stu_first_name) ? $value->stu_first_name_en : $value->stu_first_name . "<br>" . $value->stu_first_name_en) . '</td>';
+                    $row .= '<td>' . (empty($value->stu_last_name) ? $value->stu_last_name_en : $value->stu_last_name . "<br>" . $value->stu_last_name_en) . '</td>';
+                    $row .= '<td>' . $value->sex . '</td>';
+                    $row .= '<td>' . $value->nation_name . '</td>';
+                    $row .= '<td>' . $value->eng_score . '</td>';
+                    $row .= '<td>' . $value->test_type . '</td>';
+                    $row .= '<td>' . (!empty($uni) && sizeof($uni) > 0 ? $uni[0] : '') . '</td>';
+                    $row .= '<td>' . $value->work_status_name . '</td>';
+                    $row .= '<td>' . $value->program_id . '</td>';
+                    $row .= '<td>' . $value->curr_status . '</td>';
+                    $row .= '<td>' . $value->flow_id . '</td>';
+                    $row .= '<td>' . $value->major_name . '</td>';
+                    $row .= '<td>' . $value->faculty_name . '</td>';
+                    $row .= '<td>' . $value->prog_type_name . '</td>';
                     $row .= '<tr>';
                     $tbody .= $row;
-                    $totalAmt = bcadd($totalAmt, $value->apply_fee);
                 }
-                $tfoot = '<tr><td colspan="6" style="text-align: center">รวม</td><td>' . number_format($totalAmt, 2) . '</td><td></td></tr>';
             }
-            return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+            return response()->json(Util::jsonResponseFormat(1, array("tbody" => $tbody), null));
         } catch (\Exception $ex) {
             throw $ex;
-            return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody, "tfoot" => $tfoot), null));
+            return response()->json(Util::jsonResponseFormat(3, array("tbody" => $tbody), null));
         }
     }
 
@@ -413,55 +403,40 @@ class ReportController extends Controller
             }
 
 
-            $data = $this->rptRepo->getReport01DataByCriteria($param);
+            $data = $this->rptRepo->getReport01DataByCriteria2($param);
 
             Excel::create('financial', function ($excel) use ($data) {
                 $excel->sheet('สรุปยอดการชำระเงิน', function ($sheet) use ($data) {
-
                     $sheet->setFontFamily('TH Sarabun New');
                     $sheet->setFontSize(14);
                     $sheet->appendRow(array(
-                        '#', 'หลักสูตร', 'ประเภทหลักสูตร', 'จำนวนผู้สมัคร',
-                        'บมจ.ธนาคารกรุงไทย', 'บมจ.ธนาคารไทยพาณิชย์', 'บมจ.ธนาคารธหารไทย', 'บมจ.ธนาคารธนาชาติ'
+                        "เลขที่บัตรประชาชน",
+                        "ชื่อสกุล ไทย/อังกฤษ",
+                        "รหัสหลักสูตรที่สมัคร",
+                        "สาขาที่สมัคร",
+                        "ภาควิชา",
+                        "คณะ",
+                        "ประเภทหลักสูตร",
+                        "ธนาคาร",
+                        "สถานะผู้สมัคร"
                     ));
-
-                    $totalAppAmt = 0;
-                    $totalKtbAmt = 0;
-                    $totalScbAmt = 0;
-                    $totalTmbAmt = 0;
-                    $totalThaAmt = 0;
 
                     if (!empty($data) && sizeof($data) != 0) {
                         foreach ($data as $index => $value) {
                             $sheet->appendRow(array(
-                                ($index + 1), $value->program_id . " " . $value->thai,
-                                $value->cond_id . " " . $value->prog_type_name,
-                                number_format($value->app_amt),
-                                number_format($value->ktb_bank), number_format($value->scb_bank),
-                                number_format($value->tmb_bank), number_format($value->tha_bank)
+                                $value->stu_citizen_card,
+                                (empty($value->fullname_th) ? $value->fullname_en : $value->fullname_th . PHP_EOL . $value->fullname_en),
+                                $value->program_id,
+                                $value->major_name,
+                                $value->department_name,
+                                $value->faculty_name,
+                                $value->prog_type_name,
+                                $value->bank_name,
+                                $value->payment_status
                             ));
-
-                            $totalAppAmt += $value->app_amt;
-                            $totalKtbAmt = bcadd($totalKtbAmt, $value->ktb_bank);
-                            $totalScbAmt = bcadd($totalScbAmt, $value->scb_bank);
-                            $totalTmbAmt = bcadd($totalTmbAmt, $value->tmb_bank);
-                            $totalThaAmt = bcadd($totalThaAmt, $value->tha_bank);
                         }
-
-                        $sheet->appendRow(array(
-                            '', '', 'รวม',
-                            number_format($totalAppAmt),
-                            number_format($totalKtbAmt), number_format($totalScbAmt),
-                            number_format($totalTmbAmt), number_format($totalThaAmt)
-                        ));
-                    } else {
-                        $sheet->appendRow(array(
-                            '', '', 'รวม',
-                            number_format(0),
-                            number_format(0), number_format(0),
-                            number_format(0), number_format(0)
-                        ));
                     }
+
                 });
             })->export($param['fileType']);
         } catch (\Exception $ex) {
@@ -482,7 +457,7 @@ class ReportController extends Controller
                 throw new \Exception('Cannot Export');
             }
 
-            $data = $this->rptRepo->getReport02DataByCriteria($param);
+            $data = $this->rptRepo->getReport02DataByCriteria2($param);
             Excel::create('applicants', function ($excel) use ($data) {
                 $excel->sheet('รายชื่อผู้สมัครเข้าศึกษา (GS01)', function ($sheet) use ($data) {
 
@@ -490,32 +465,40 @@ class ReportController extends Controller
                     $sheet->setFontSize(14);
 
                     $sheet->appendRow(array(
-                        '#', 'เลขประจำตัวผู้สมัคร', 'เลขที่ใบสมัคร', 'ชื่อ-สกุล',
-                        'เล่มที่/เลขที่ใบเสร็จรับเงิน', 'วันที่ชำระเงิน', 'จำนวนค่าสมัคร', 'ธนาคาร'
+                        "ปีการศึกษาที่เข้า",
+                        "เลขที่ ปชช",
+                        "ชื่อ ไทย/อังกฤษ",
+                        "นามสกุล ไทย/อังกฤษ",
+                        "เพศ",
+                        "สัญชาติ",
+                        "คะแนนภาษาอังกฤษ",
+                        "ประเภท ENG",
+                        "มหาวิทยาลัยที่จบ",
+                        "สถานะการทำงาน",
+                        "รหัสหลักสูตรที่สมัคร",
+                        "สถานะผู้สมัคร",
+                        "สถานะ",
+                        "ชื่อสาขาที่สมัคร",
+                        "คณะ",
+                        "ประเภทหลักสูตรที่สมัคร"
                     ));
 
-                    $totalAmt = 0;
                     if (!empty($data) && sizeof($data) != 0) {
                         foreach ($data as $index => $value) {
-
+                            $uni = null;
+                            if (!empty($value->university)) {
+                                $uni = explode("|", $value->university);
+                            }
                             $sheet->appendRow(array(
-                                ($index + 1), $value->applicant_no, $value->application_no,
-                                $value->fullname_th . ' ' . $value->fullname_en,
-                                empty($value->receipt) ? '-' : $value->receipt,
-                                empty($value->payment_date) ? '-' : $value->payment_date,
-                                number_format($value->apply_fee), $value->bank_name
+                                $value->academic_year,
+                                $value->stu_citizen_card,
+                                (empty($value->stu_first_name) ? $value->stu_first_name_en : $value->stu_first_name . PHP_EOL . $value->stu_first_name_en),
+                                (empty($value->stu_last_name) ? $value->stu_last_name_en : $value->stu_last_name . PHP_EOL . $value->stu_last_name_en),
+                                $value->sex, $value->nation_name, $value->eng_score, $value->test_type, (!empty($uni) && sizeof($uni) > 0 ? $uni[0] : ''),
+                                $value->work_status_name, $value->program_id, $value->curr_status, $value->flow_id, $value->major_name, $value->faculty_name,
+                                $value->prog_type_name
                             ));
-                            $totalAmt = bcadd($totalAmt, $value->apply_fee);
                         }
-                        $sheet->appendRow(array(
-                            '', '', '', '', '', 'รวม',
-                            number_format($totalAmt), ''
-                        ));
-                    } else {
-                        $sheet->appendRow(array(
-                            '', '', '', '', '', 'รวม',
-                            number_format($totalAmt), ''
-                        ));
                     }
                 });
             })->export($param['fileType']);
