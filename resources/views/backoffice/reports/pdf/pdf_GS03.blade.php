@@ -52,9 +52,9 @@
             ประจำภาคการศึกษา {{($lbsemester==1)?'ต้น [First]':'ปลาย [Second]'}} ปีการศึกษา {{$lbYear}} <br><br>
 
             หลักสูตร  {{$reports[0]->degree_name}} - {{$reports[0]->degree_name_en}}(รหัส {{$reports[0]->program_id}} )
-            สาขาวิชา  {{$reports[0]->major_name}} -{{$reports[0]->major_name_en}} ({{$reports[0]->major_id}}) <br>
+            สาขาวิชา  {{$reports[0]->major_name}} -{{$reports[0]->major_name_en}} <br>
             ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }}) คณะ  {{$reports[0]->faculty_name}} ({{$reports[0]->faculty_full}} )<br>
-            @if($reports[0]->sub_major_id!="")แขนงวิชา {{$reports[0]->sub_major_name}} - {{$reports[0]->sub_major_name_en }} ({{$reports[0]->sub_major_id}})@endif
+              @if($reports[0]->sub_major_id!="")แขนงวิชา {{$reports[0]->sub_major_name}} - {{$reports[0]->sub_major_name_en }} ({{$reports[0]->sub_major_id}})@endif
 
         </div>
 
