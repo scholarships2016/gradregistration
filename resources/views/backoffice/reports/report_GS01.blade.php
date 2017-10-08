@@ -238,27 +238,29 @@
                                         <thead>
                                         <tr>
                                             <th> #</th>
-                                            <th> เลขประจำตัวผู้สมัคร</th>
-                                            <th> เลขที่ใบสมัคร</th>
-                                            <th> ชื่อ-สกุล</th>
-                                            <th> เล่มที่/เลขที่ใบเสร็จรับเงิน</th>
-                                            <th> วันที่ชำระเงิน</th>
-                                            <th> จำนวนค่าสมัคร</th>
-                                            <th> ธนาคาร</th>
+                                            <th> ปีการศึกษาที่เข้า</th>
+                                            <th> เลขที่ ปชช</th>
+                                            <th> ชื่อ ไทย/อังกฤษ</th>
+                                            <th> นามสกุล ไทย/อังกฤษ</th>
+                                            <th> เพศ</th>
+                                            <th> สัญชาติ</th>
+                                            <th> คะแนนภาษาอังกฤษ</th>
+                                            <th> ประเภท ENG</th>
+                                            <th> มหาวิทยาลัยที่จบ</th>
+                                            <th> สถานะการทำงาน</th>
+                                            <th> รหัสหลักสูตรที่สมัคร</th>
+                                            <th> สถานะผู้สมัคร</th>
+                                            <th> สถานะ</th>
+                                            <th> ชื่อสาขาที่สมัคร</th>
+                                            <th> คณะ</th>
+                                            <th> ประเภทหลักสูตรที่สมัคร</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td colspan="8" style="text-align: center">-</td>
+                                            <td colspan="17" style="text-align: center">-</td>
                                         </tr>
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="6" style="text-align: center">รวม</td>
-                                            <td>0</td>
-                                            <td></td>
-                                        </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
