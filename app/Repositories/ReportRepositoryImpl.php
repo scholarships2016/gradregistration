@@ -89,6 +89,92 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
         }
     }
 
+    public function getReport01DataByCriteria2($criteria = null)
+    {
+        try {
+            $query = DB::table("application as app")
+                ->select(
+                    "appt.stu_citizen_card",
+                    DB::raw("concat(ifnull(tle.name_title,''),appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"),
+                    DB::raw("concat(ifnull(tle.name_title_en,''),appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
+                    "app.program_id",
+                    "mj.major_name",
+                    "dep.department_name",
+                    "fac.faculty_name",
+                    "prog_t.prog_type_name",
+                    "bank.bank_name",
+                    DB::raw("case when app.flow_id = 1 or app.flow_id = 2 then 'ยังไม่ชำระเงิน' else 'ชำระเงินแล้ว' end as payment_status")
+                )
+                ->join("applicant as appt", function ($join) {
+                    $join->on("appt.applicant_id", "=", "app.applicant_id");
+                })
+                ->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })
+                ->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })
+                ->join("curriculum_program as curr_prog", function ($join) {
+                    $join->on("curr_prog.curriculum_id", "=", "app.curriculum_id")
+                        ->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
+                })
+                ->join("curriculum as curr", function ($join) {
+                    $join->on("curr.curriculum_id", "=", "app.curriculum_id");
+                })
+                ->join("tbl_faculty as fac", function ($join) {
+                    $join->on("fac.faculty_id", "=", "curr.faculty_id");
+                })
+                ->join("tbl_department as dep", function ($join) {
+                    $join->on("dep.department_id", "=", "curr.department_id");
+                })
+                ->join("tbl_bank as bank", function ($join) {
+                    $join->on("bank.bank_id", "=", "app.bank_id");
+                })
+                ->leftJoin("tbl_major as mj", function ($join) {
+                    $join->on("mj.major_id", "=", "curr.major_id");
+                })
+                ->leftJoin("tbl_program_type as prog_t", function ($join) {
+                    $join->on("prog_t.program_type_id", "=", "curr_prog.program_type_id");
+                })
+                ->leftJoin("mcoursestudy as mc", function ($join) {
+                    $join->on("mc.coursecodeno", "=", "curr_prog.program_id");
+                })
+                ->leftJoin("curriculum_sub_major as curr_sub_mj", function ($join) {
+                    $join->on("curr_sub_mj.curriculum_id", "=", "app.curriculum_id");
+                })
+                ->leftJoin("tbl_name_title as tle", function ($join) {
+                    $join->on("tle.name_title_id", "=", "appt.name_title_id");
+                });
+
+            //Where Condition Below
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            if (isset($criteria['round'])) {
+                $query->where('app_set.round_no', '=', $criteria['round']);
+            }
+            if (isset($criteria['faculty_id'])) {
+                $query->where('curr.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['program_id'])) {
+                $query->where('app.program_id', '=', $criteria['program_id']);
+            }
+            if (isset($criteria['sub_major_id'])) {
+                $query->where("curr_sub_mj.sub_major_id", "=", $criteria['sub_major_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where("prog_t.program_type_id", "=", $criteria['program_type_id']);
+            }
+
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
     public function getReport02DataByCriteria($criteria = null)
     {
         try {
@@ -127,6 +213,115 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("curr_sub_mj.curriculum_id", "=", "app.curriculum_id");
                 })
                 ->orderBy('applicant_no');
+
+            //Where Condition Below
+            if (isset($criteria['semester'])) {
+                $query->where('app_set.semester', '=', $criteria['semester']);
+            }
+            if (isset($criteria['academic_year'])) {
+                $query->where('app_set.academic_year', '=', $criteria['academic_year']);
+            }
+            if (isset($criteria['round'])) {
+                $query->where('app_set.round_no', '=', $criteria['round']);
+            }
+            if (isset($criteria['faculty_id'])) {
+                $query->where('curr.faculty_id', '=', $criteria['faculty_id']);
+            }
+            if (isset($criteria['program_id'])) {
+                $query->where('app.program_id', '=', $criteria['program_id']);
+            }
+            if (isset($criteria['sub_major_id'])) {
+                $query->where("curr_sub_mj.sub_major_id", "=", $criteria['sub_major_id']);
+            }
+            if (isset($criteria['program_type_id'])) {
+                $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
+            }
+            if (isset($criteria['from_date'])) {
+                $query->whereDate('app.payment_date', '>=', Carbon::createFromFormat('d-m-Y', $criteria['from_date'])->format('Y-m-d'));
+            }
+
+            if (isset($criteria['to_date'])) {
+                $query->whereDate('app.payment_date', '<=', Carbon::createFromFormat('d-m-Y', $criteria['to_date'])->format('Y-m-d'));
+            }
+
+            return $query->get();
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+    public function getReport02DataByCriteria2($criteria = null)
+    {
+        try {
+
+            $query = DB::table("application as app")
+                ->select("app_set.academic_year", "appt.stu_citizen_card", "appt.stu_first_name", "appt.stu_first_name_en",
+                    "appt.stu_last_name", "appt.stu_last_name_en",
+                    DB::raw("case appt.stu_sex when 1 then 'ชาย' when 2 then 'หญิง' else '-' end as sex"), "na.nation_name",
+                    DB::raw("case when appt.eng_test_score_admin <> '' and appt.eng_test_score_admin is not null then appt.eng_test_score_admin else appt.eng_test_score end as eng_score"),
+                    DB::raw("case when  end_admin.eng_test_id is not null then end_admin.eng_test_name when eng.eng_test_id is not null then eng.eng_test_name else null end as test_type"),
+                    DB::raw("GROUP_CONCAT(uni.university_name order by edu.edu_year desc SEPARATOR '|') as university"),
+                    "work_status.work_status_name", "app.program_id",
+                    DB::raw("case when app.flow_id = 1 or app.flow_id = 2 or app.flow_id = 3 then flow_app.flow_name when app.flow_id = 4 then ex_status.exam_name when app.flow_id = 5 then ad_status.admission_status_name_th else null end as curr_status"),
+                    "app.flow_id",
+                    "mj.major_name",
+                    "fac.faculty_name",
+                    "prog_t.prog_type_name"
+                )->join("curriculum_activity as curr_act", function ($join) {
+                    $join->on("curr_act.curr_act_id", "=", "app.curr_act_id");
+                })->join("apply_setting as app_set", function ($join) {
+                    $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
+                })->join("curriculum as curr", function ($join) {
+                    $join->on("curr.curriculum_id", "=", "app.curriculum_id");
+                })->join("curriculum_program as curr_prog", function ($join) {
+                    $join->on("curr_prog.curriculum_id", "=", "app.curriculum_id")
+                        ->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
+                })->join("tbl_bank as bank", function ($join) {
+                    $join->on("bank.bank_id", "=", "app.bank_id");
+                })->join("applicant as appt", function ($join) {
+                    $join->on("appt.applicant_id", "=", "app.applicant_id");
+                })->leftJoin("tbl_name_title as tle", function ($join) {
+                    $join->on("tle.name_title_id", "=", "appt.name_title_id");
+                })->leftJoin("curriculum_sub_major as curr_sub_mj", function ($join) {
+                    $join->on("curr_sub_mj.curriculum_id", "=", "app.curriculum_id");
+                })->leftJoin("tbl_major as mj", function ($join) {
+                    $join->on("mj.major_id", "=", "curr.major_id");
+                })->leftJoin("tbl_program_type as prog_t", function ($join) {
+                    $join->on("prog_t.program_type_id", "=", "curr_prog.program_type_id");
+                })->leftJoin("tbl_nation as na", function ($join) {
+                    $join->on("na.nation_id", "=", "appt.nation_id");
+                })->leftJoin("tbl_eng_test as eng", function ($join) {
+                    $join->on("eng.eng_test_id", "=", "appt.eng_test_id");
+                })->leftJoin("tbl_eng_test as end_admin", function ($join) {
+                    $join->on("end_admin.eng_test_id", "=", "appt.eng_test_id_admin");
+                })->leftJoin("tbl_faculty as fac", function ($join) {
+                    $join->on("fac.faculty_id", "=", "curr.faculty_id");
+                })->leftJoin("tbl_flow_apply as flow_app", function ($join) {
+                    $join->on("flow_app.flow_id", "=", "app.flow_id");
+                })->leftJoin("tbl_exam_status as ex_status", function ($join) {
+                    $join->on("ex_status.exam_id", "=", "app.exam_status");
+                })->leftJoin("tbl_admission_status as ad_status", function ($join) {
+                    $join->on("ad_status.admission_status_id", "=", "app.admission_status_id");
+                })->leftJoin("applicant_work as app_work", function ($join) {
+                    $join->on("app_work.applicant_id", "=", "appt.applicant_id")
+                        ->where("app_work.app_work_status", "=", "1");
+                })->leftJoin("tbl_work_status as work_status", function ($join) {
+                    $join->on("work_status.work_status_id", "=", "app_work.work_status_id");
+                })->leftJoin("applicant_edu as edu", function ($join) {
+                    $join->on("edu.applicant_id", "=", "app.applicant_id")
+                        ->where(function ($query) {
+                            $query->where('edu.edu_pass_id', '=', "1")
+                                ->orWhere('edu.edu_pass_id', '=', "5");
+                        });
+                })->leftJoin("tbl_university as uni", function ($join) {
+                    $join->on("uni.university_id", "=", "edu.university_id");
+                })->groupBy("app_set.academic_year", "appt.stu_citizen_card", "appt.stu_first_name",
+                    "appt.stu_first_name_en", "appt.stu_last_name", "appt.stu_last_name_en",
+                    "sex", "na.nation_name", "eng_score", "test_type", "work_status.work_status_name",
+                    "app.program_id", "curr_status", "app.flow_id", "mj.major_name",
+                    "fac.faculty_name", "prog_t.prog_type_name");
 
             //Where Condition Below
             if (isset($criteria['semester'])) {
@@ -367,12 +562,13 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     ifnull(pro.province_name,'-'),' เขต/อำเภอ ',ifnull(dis.district_name,'-'),' แขวง/ตำบล ',
                     ifnull(appt.stu_addr_tumbon,'-'),' รหัสไปรษณีย์ ',ifnull(appt.stu_addr_pcode,'-'),' โทรศัพท์อื่น ',
                     ifnull(appt.stu_phone,'-')) as address"),
-                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then
-                    concat(end_admin.eng_test_name,' คะแนนที่ได้ ', appt.eng_test_score_admin,' คะแนน เมื่อวันที่ ',
-                    ifnull(date_format(appt.eng_date_taken_admin,'%d-%m-%Y'),'-'))
-                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null then
-                    concat(eng.eng_test_name,' คะแนนที่ได้ ', appt.eng_test_score,' คะแนน เมื่อวันที่ ',
-                    ifnull(date_format(appt.eng_date_taken,'%d-%m-%Y'),'-')) else null end as eng_score"),
+                    DB::raw("concat(ifnull(end_admin.eng_test_name,eng.eng_test_name),' คะแนนที่ได้ ',ifnull(appt.eng_test_score_admin,appt.eng_test_score),' คะแนน เมื่อวันที่ ',ifnull(date_format(appt.eng_date_taken_admin,'%d-%m-%Y'),date_format(appt.eng_date_taken,'%d-%m-%Y'))) as eng_score"),
+//                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then
+//                    concat(end_admin.eng_test_name,' คะแนนที่ได้ ', appt.eng_test_score_admin,' คะแนน เมื่อวันที่ ',
+//                    ifnull(date_format(appt.eng_date_taken_admin,'%d-%m-%Y'),'-'))
+//                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null then
+//                    concat(eng.eng_test_name,' คะแนนที่ได้ ', appt.eng_test_score,' คะแนน เมื่อวันที่ ',
+//                    ifnull(date_format(appt.eng_date_taken,'%d-%m-%Y'),'-')) else null end as eng_score"),
                     'appt.thai_test_score',
                     'appt.cu_best_score',
                     DB::raw("case when edu.grad_level = 'BACHELOR' then GROUP_CONCAT(concat(edu_pass.edu_pass_name,' จาก ',
@@ -495,6 +691,8 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
     public function getEngScoreReport($criteria = null)
     {
         try {
+            DB::enableQueryLog();
+
             $query = DB::table("applicant as appt")
                 ->select(
                     "appt.stu_citizen_card",
@@ -502,10 +700,8 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     DB::raw("concat(ifnull(tle.name_title_en,''),appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"),
                     "app.program_id",
                     "mj.major_name",
-                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then appt.eng_test_score_admin 
-                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null  then appt.eng_test_score else null end as eng_score"),
-                    DB::raw("case when end_admin.eng_test_id <> 6 or end_admin.eng_test_id is not null then end_admin.eng_test_name 
-                    when eng.eng_test_id <> 6 or eng.eng_test_id is not null then eng.eng_test_name else null end as test_type"),
+                    DB::raw("case when appt.eng_test_score_admin <> '' and appt.eng_test_score_admin is not null then appt.eng_test_score_admin else appt.eng_test_score end as eng_score"),
+                    DB::raw("case when end_admin.eng_test_id is not null then end_admin.eng_test_name when eng.eng_test_id is not null then eng.eng_test_name else null end as test_type"),
                     "prog_t.prog_type_name",
                     "fac.faculty_name"
                 )->join("application as app", function ($join) {
@@ -534,10 +730,10 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("end_admin.eng_test_id", "=", "appt.eng_test_id_admin");
                 });
 
-            $query->where("app . exam_status", " = ", 2);
+            $query->whereRaw("app.exam_status = 2");
             $query->where(function ($query) {
-                $query->where('app.flow_id', '=', 4)
-                    ->orWhere('app.flow_id', '=', 5);
+                $query->whereRaw('app.flow_id = 4 or app.flow_id = 5');
+
             });
 
             //Where Condition Below
@@ -575,7 +771,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
         try {
             $query = DB::table("applicant as appt")
                 ->select("sat.SATI_LEVEL",
-                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก' 
+                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก'
                     when 3 then 'ดี' when 2 then 'พอใข้' when 1 then 'ไม่พอใจ' end as sat_desc"),
                     DB::raw("count(appt.applicant_id) as amt")
                 )->join("application as app", function ($join) {
@@ -586,7 +782,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("app_set.apply_setting_id", "=", "curr_act.apply_setting_id");
                 })->join("satisfaction as sat", function ($join) {
                     $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
-                })->groupBy("sat.SATI_LEVEL");
+                })->groupBy("sat.SATI_LEVEL", 'appt.applicant_id');
 
             if (isset($criteria['semester'])) {
                 $query->where('app_set.semester', '=', $criteria['semester']);
@@ -619,7 +815,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("sat.stu_citizen_card", "=", "appt.stu_citizen_card");
                 })->leftJoin("tbl_name_title as tle", function ($join) {
                     $join->on("tle.name_title_id", "=", "appt.name_title_id");
-                });
+                })->groupBy('sat.SATI_SUGGESTION', 'fullname_th', 'created');
 
             if (isset($criteria['semester'])) {
                 $query->where('app_set.semester', '=', $criteria['semester']);
@@ -627,7 +823,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             if (isset($criteria['academic_year'])) {
                 $query->where('app_set.academic_year', '=', $criteria['academic_year']);
             }
-
+            //dd($query->toSql());
             return $query->get();
 
         } catch (\Exception $ex) {
