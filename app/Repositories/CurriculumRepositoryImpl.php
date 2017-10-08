@@ -39,7 +39,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         $this->currUserRepo = $currUserRepo;
     }
 
-    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $user = null,$role=null) {
+    public function searchByCriteria($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $user = null, $role = null) {
         $result = null;
         try {
             DB::statement(DB::raw('set @rownum=0'));
@@ -73,13 +73,13 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                             ->orwhere('curriculum.responsible_person', $user);
                         }
                     })
-                     ->Where(function ($query)use ($role) {
-                                if ($role) {
-                                    if ($role == 2) {
-                                        $query->orwhere('curriculum.apply_method', 1);
-                                    }
-                                }
-                            })
+                    ->Where(function ($query)use ($role) {
+                        if ($role) {
+                            if ($role == 2) {
+                                $query->orwhere('curriculum.apply_method', 1);
+                            }
+                        }
+                    })
                     ->Where(function ($query) use ($curriculum_id) {
                         if ($curriculum_id) {
                             $query->where('curriculum.curriculum_id', $curriculum_id);
@@ -155,7 +155,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         return $result;
     }
 
-    public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null, $ajaxpage = null) {
+    public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null, $ajaxpage = null, $user = null) {
 
         $result = null;
         try {
@@ -186,6 +186,17 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                         if ($inTime) {
                             $query->where('apply_setting.start_date', '<=', Carbon::now()->toDateString())
                             ->where('apply_setting.end_date', '>=', Carbon::now()->toDateString());
+                        }
+                    })
+                    ->orWhere(function ($query)use ($user) {
+                        if ($user) {
+                            $query->whereIn('curriculum_program.curr_prog_id', function($query)use ($user) {
+                            $query->select('curr_prog_id')
+                            ->from('applicant_special_apply')
+                            ->where('applicant_special_apply.applicant_id', $user)
+                            ->where('applicant_special_apply.start_date ', '<=', Carbon::now())
+                            ->where('applicant_special_apply.end_date  ', '>=', Carbon::now());
+                            });
                         }
                     })
                     ->Where(function ($query) use ($criteria) {
@@ -243,6 +254,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
                 $cur->where('curriculum_program.program_type_id', $program_type);
             }
+
             $cur->orderBy('curriculum.curriculum_id');
 
 
@@ -660,7 +672,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                             )->groupBy('trans_buff.curriculum_id');
 
             $subTransQuery = DB::table('curriculum_workflow_transaction as trans_')
-                    ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id', 'trans_.workflow_status_id', 'status_.status_name', DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"), 'trans_.creator', 'trans_.comment', 'usr_.name','usr_.nickname')
+                    ->select('trans_.curr_wf_tran_id', 'trans_.curriculum_id', 'trans_.workflow_status_id', 'status_.status_name', DB::raw("date_format(trans_.created,'%d/%m/%Y %H:%i') as created"), 'trans_.creator', 'trans_.comment', 'usr_.name', 'usr_.nickname')
                     ->join(DB::raw("({$lastTransQuery->toSql()}) as last_trans"), function ($join) {
                         $join->on('last_trans.last_curr_wf_tran_id', '=', 'trans_.curr_wf_tran_id');
                     })
@@ -681,7 +693,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
             $mainQuery = DB::table('curriculum as curr')
                     ->select(
-                            'curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year', DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as program_ids"), 'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve', 'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment','sub_trans.name','sub_trans.nickname'
+                            'curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year', DB::raw("GROUP_CONCAT(curr_prog.program_id SEPARATOR ',') as program_ids"), 'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve', 'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment', 'sub_trans.name', 'sub_trans.nickname'
                     )
                     ->leftJoin('tbl_degree as deg', function ($join) {
                         $join->on('deg.degree_id', '=', 'curr.degree_id');
@@ -739,29 +751,28 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         }
     }
 
-    public function checkCreatableCurriculumByCriteria($applyMethod, array $programs, $semester, $academicYear, $curriculumId = null)
-    {
+    public function checkCreatableCurriculumByCriteria($applyMethod, array $programs, $semester, $academicYear, $curriculumId = null) {
         try {
             $query = DB::table('curriculum as a')
-                ->select('a.curriculum_id')
-                ->join('curriculum_activity as b', function ($join) {
-                    $join->on('b.curriculum_id', '=', 'a.curriculum_id');
-                })
-                ->join('apply_setting as bb', function ($join) {
-                    $join->on('bb.apply_setting_id', '=', 'b.apply_setting_id');
-                })
-                ->leftJoin('curriculum_program as c', function ($join) {
-                    $join->on('c.curriculum_id', '=', 'a.curriculum_id');
-                })
-                ->where('a.apply_method', '=', $applyMethod)
-                ->where('bb.semester', '=', $semester)
-                ->where('bb.academic_year', '=', $academicYear);
+                    ->select('a.curriculum_id')
+                    ->join('curriculum_activity as b', function ($join) {
+                        $join->on('b.curriculum_id', '=', 'a.curriculum_id');
+                    })
+                    ->join('apply_setting as bb', function ($join) {
+                        $join->on('bb.apply_setting_id', '=', 'b.apply_setting_id');
+                    })
+                    ->leftJoin('curriculum_program as c', function ($join) {
+                        $join->on('c.curriculum_id', '=', 'a.curriculum_id');
+                    })
+                    ->where('a.apply_method', '=', $applyMethod)
+                    ->where('bb.semester', '=', $semester)
+                    ->where('bb.academic_year', '=', $academicYear);
             if (!empty($programs)) {
                 $query->Where(function ($query) use ($programs) {
                     foreach ($programs as $index => $value) {
                         $query->orWhere(function ($query) use ($value) {
                             $query->where('c.program_id', '=', $value['program_id'])
-                                ->where('c.program_type_id', '=', $value['program_type_id']);
+                                    ->where('c.program_type_id', '=', $value['program_type_id']);
                         });
                     }
                 });
