@@ -41,7 +41,7 @@
 
         </style>
     </head>
-    <body> <br><br><br> 
+    <body> <br><br><br>
         <table width="750px" border="0" >
             <tr>
 
@@ -52,19 +52,22 @@
             ประจำภาคการศึกษา {{($lbsemester==1)?'ต้น [First]':'ปลาย [Second]'}} ปีการศึกษา {{$lbYear}} <br><br>
 
             คณะ  {{$reports[0]->faculty_name}} ({{$reports[0]->faculty_full}})<br>
-            ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }})     <br>        
-            สาขาวิชา  {{$reports[0]->major_name}} ({{$reports[0]->major_name_en}}) <br>            
+            ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }})     <br>
+            สาขาวิชา  {{$reports[0]->major_name}} ({{$reports[0]->major_name_en}}) <br>
             หลักสูตร  {{$reports[0]->degree_name}} - {{$reports[0]->degree_name_en}}(รหัส {{$reports[0]->program_id}})<br>
-            แขนงวิชา   {{$reports[0]->sub_major_name}}({{$reports[0]->sub_major_name_en }})<br>
+          
+            @if($reports[0]->sub_major_id!="")แขนงวิชา {{$reports[0]->sub_major_name}} - {{$reports[0]->sub_major_name_en }} ({{$reports[0]->sub_major_id}})@endif
+              <br>
+
             กําหนดการปฐมนิเทศของภาควิชา {{$orientation}}
 
         </div>
 
 
-        <br><br> 
+        <br><br>
         <table width="750px" border="1"  cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center">
             <thead><tr align="center" >
-                    <th> ที่ </th>                                
+                    <th> ที่ </th>
                     <th> ชือ - นามสกุล <br> (เรียงตามเลขทีสมัคร) </th>
                     <th> สัญชาติ </th>
                     <th> สามัญ  </th>
@@ -79,7 +82,7 @@
             <div style="display: none">{{$i=0}} {{$a1=0}} {{$a2=0}}    </div>
             @foreach($reports as $report)
             <div style="display: none">
-                {{$i=0}} 
+                {{$i=0}}
                 {{$a1+=(($report->admission_status_id == 'A' )?1:0)}}
                 {{$a2+=(($report->admission_status_id == '5'||$report->admission_status_id == 'B'||$report->admission_status_id == 'C')?1:0)}}
             </div>
@@ -97,17 +100,17 @@
             </tr>
             @endforeach
         </tbody>
-    </table><br><br> 
+    </table><br><br>
     <div  align="left">
-       
+
 
         <table style="width:300px;" align="left">
             <tr><td>ผู้สมัครทั้งหมด   {{$cur1}} ราย</td><td>ผู้ผ่านการคัดเลือกเข้าศึกษา     {{$a2}} ราย</td></tr>
                 <tr><td>ผู้มีสิทธิ์สอบ  {{$cur2}}  ราย</td><td>สำรอง     {{$a1}} ราย</td></tr>
         </table>
-        <br><br><br><br> 
+        <br><br><br><br>
  ทังนี {!!$txt1!!}
-        <br><br><br><br>     
+        <br><br><br><br>
         <div  align="center" style="width:1100px; border:1px">
             <table style="width:750px" ><tr><td align="center">(ลงนาม) ............................................................</td><td align="center">(ลงนาม) ............................................................</td></tr>
                 <tr><td align="center">({{ $suser }})</td><td align="center">({{ $suser1}})</td></tr>
@@ -115,9 +118,9 @@
                 <tr><td align="center">  ........ / ........ / ........</td><td align="center">  ........ / ........ / ........</td></tr>
             </table>
 
-        </div> 
+        </div>
     </div>
-    <div>หมายเหตุ 
+    <div>หมายเหตุ
         <br>1 . โปรดส่ง บ.21 พร้อมใบสมัครฉบับจริงของผู้ผ่านการสอบคัดเลือก สําเนาผลคะแนนภาษาอังกฤษและสําเนาบัตรประจําตัวประชาชน
         <br>2 . กรณีเรียกนิสิตสํารอง กรุณาแจ้งบัณฑิตวิทยาลัยอย่างช้าทีสุดภายในสัปดาห์แรกของการเปิดภาคเรียนพร้อมบันทึกขอยกเว้นค่าปรับในการลงทะเบียนเรียน
         <br>3 . กรณีทีนิสิตขอเข้าร่วมฟัง(Visitor) ให้กําหนดระยะเวลาการขอเข้าร่วมฟังในช่องหมายเหตุ</div>
