@@ -229,30 +229,22 @@
                                         <thead>
                                         <tr>
                                             <th> #</th>
-                                            <th> หลักสูตร</th>
+                                            <th> เลขที่บัตรประชาชน</th>
+                                            <th> ชื่อสกุล ไทย/อังกฤษ</th>
+                                            <th> รหัสหลักสูตรที่สมัคร</th>
+                                            <th> สาขาที่สมัคร</th>
+                                            <th> ภาควิชา</th>
+                                            <th> คณะ</th>
                                             <th> ประเภทหลักสูตร</th>
-                                            <th> จำนวนผู้สมัคร</th>
-                                            <th> บมจ.ธนาคารกรุงไทย</th>
-                                            <th> บมจ.ธนาคารไทยพาณิชย์</th>
-                                            <th> บมจ.ธนาคารธหารไทย</th>
-                                            <th> บมจ.ธนาคารธนาชาติ</th>
+                                            <th> ธนาคาร</th>
+                                            <th> สถานะผู้สมัคร</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td colspan="8" style="text-align: center">-</td>
+                                            <td colspan="10" style="text-align: center">-</td>
                                         </tr>
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th colspan="3" style="text-align:center;"> รวม</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                            <th style=""> 0</th>
-                                        </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
