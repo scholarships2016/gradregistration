@@ -315,8 +315,8 @@
         function callprint(print){
             var sing = (($('#single').val())? $('#single').val():'-1');
             var submajor = (($('option:selected','#single').attr('smj'))? $('option:selected','#single').attr('smj'):null) ;
-        var name =$('#namekey').val();
-        var position = $('#positionkey').val();
+        var name =  ($('#namekey').val()!='')? $('#namekey').val():"null";
+        var position = ($('#positionkey').val()!='')?$('#positionkey').val():"null";
 
         window.open(("{{ url('admin/printRegisterCourseReport').'/3,4,5'.'/'}}"+sing+'/'+submajor+'/'+$('option:selected','#single').attr('pt')+'/'+$('option:selected','#single').attr('lbthai')+'/'+$('option:selected','#single').attr('pg')+'/'+print+'/'+name +'/'+position+'/N/GS03' ),'_blank');
         }

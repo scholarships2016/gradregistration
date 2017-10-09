@@ -113,6 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
         //P'M ROUTING START
         //payment
         Route::get('ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
+         Route::get('showManagePay', 'ManageApplyController@showManagePay')->name('showManagePay');
         Route::get('getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
 
 

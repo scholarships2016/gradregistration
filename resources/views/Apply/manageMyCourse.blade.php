@@ -231,7 +231,15 @@
                               <ul>
                                 <li class="mt-list-item">
                                   <div class="list-icon-container">
-                                    <i class="font-red icon-close"></i>
+                                      @if ($curDis->docapp  == $curDis->docCount)
+                                      <i class="icon-check font-green"></i>
+                                      @else
+                                      <i class="font-red icon-close"></i>' 
+                                      @endif
+                                      
+                                      
+                                      
+                                    
                                   </div>
 
                                   <div class="list-item-content">
