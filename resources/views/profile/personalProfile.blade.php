@@ -66,7 +66,7 @@
                                     <a href="#tab_1_3" data-toggle="tab" aria-expanded="false" class="profile-edit"> edit </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;"> Last Login ..... </a>
+                                    <a href="javascript:;"> Last Login  {{$applicant->last_login->format('d/m/Y H:i')}}</a>
                                 </li>
                             </ul>
                         </div>

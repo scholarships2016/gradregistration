@@ -69,7 +69,7 @@
                                         edit </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;"> Last Login ..... </a>
+                                    <a href="javascript:;">  Last Login  {{$applicant->last_login->format('d/m/Y H:i')}}  </a>
                                 </li>
                             </ul>
                         </div>
@@ -591,7 +591,7 @@
         $("#presentAddressForm select").attr('disabled', 'disabled');
         $("#presentAddressForm textarea").attr('disabled', 'disabled');
         $("#presentAddressForm button").attr('disabled', 'disabled');
-      
+
     }
 
     function disableKnowledgeSkill() {
