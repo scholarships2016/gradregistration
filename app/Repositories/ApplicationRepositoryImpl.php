@@ -19,7 +19,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     private $controllors;
     protected $appDocFileRepo;
     protected $appPeopleRefRepo;
-   
+
 
     public function __construct(Controller $controllors, ApplicationDocumentFileRepository $appDocFileRepo, ApplicationPeopleRefRepository $appPeopleRefRepo
               ) {
@@ -27,7 +27,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
         $this->controllors = $controllors;
         $this->appDocFileRepo = $appDocFileRepo;
         $this->appPeopleRefRepo = $appPeopleRefRepo;
-        
+
     }
 
     public function getAppData($applicationID = null) {
@@ -100,13 +100,13 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
               //                ->select(DB::raw('program_id,thai,english'))
               ->orderBy('application.application_id', 'desc')->get();
              */
-            
+
             $Doc = TblDocumentsApply::where('flag_upload','1')->count();
-            
-            
+
+
             $result = Application::select([DB::raw('*,application.created as appDates ,CAST(app_id AS CHAR) as appid,'.$Doc.' as docapp')
                                 , DB::raw('(SELECT count(*) FROM application_document_file as af WHERE af.application_id = Application.application_id) as docCount')]
-                              ) 
+                              )
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
                             //->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
@@ -140,7 +140,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             })
 //                ->select(DB::raw('program_id,thai,english'))
                             ->orderBy('application.application_id', 'desc')->get();
-                            
+
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -1019,7 +1019,7 @@ order by s.news_source_id"));
                             })
                             ->Where(function ($query)use ($applicantID) {
                                 if ($applicantID) {
-                                    $query->whereIn('application.application_id', $applicantID);
+                                    $query->where('applicant.applicant_id', $applicantID);
                                 }
                             })
                             ->select([DB::raw('stu_email,stu_first_name,stu_last_name,exam_name')])->get();

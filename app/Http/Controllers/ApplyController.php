@@ -114,6 +114,7 @@ class ApplyController extends Controller {
         $datas = json_decode($request->values, true);
         $data = ['bank_id' => $request->bank_id, 'application_id' => $request->application_id, 'additional_answer' => $request->additional_answer];
         $res = $this->ApplicationRepo->saveApplication($data);
+
         if ($request->SATI_LEVEL != "") {
             $SData = ['SATI_LEVEL' => $request->SATI_LEVEL, 'SATI_SUGGESTION' => $request->SATI_SUGGESTION, 'stu_citizen_card' => session('Applicant')->stu_citizen_card];
             $this->SatisfactionRepo->save($SData);
@@ -127,7 +128,7 @@ class ApplyController extends Controller {
             $this->actionCourse('conf', $request->application_id);
             Controller::WLog('Confirmation People Reference', 'Enroll', null);
             session()->flash('successMsg', Lang::get('resource.lbSuccess'));
-            $this->sentMailRegister($res->curr_act_id, $res->application);
+            $this->sentMailRegister($res->curr_act_id, $res->applicant_id);
             return redirect('application/manageMyCourse');
         } else {
             session()->flash('errorMsg', Lang::get('resource.lbError'));
@@ -138,11 +139,11 @@ class ApplyController extends Controller {
     public function registerDetailForapply($id) {
         $id = explode("P", $id);
 
-        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1],null,session('user_id'));                   
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1],null,session('user_id'));
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
 
-         
+
         return view($this->part_doc . 'registerDetailForapply', ['curDiss' => $curDiss, 'subMajors' => $subMajor, 'programs' => $program, 'checkProfile' => $this->checkApplicantProfile()]);
     }
 
@@ -305,7 +306,7 @@ class ApplyController extends Controller {
         $dataApplication = $this->ApplicationRepo->getData(session('Applicant')->applicant_id);
         $countStatus = $this->ApplicationRepo->getDatacountByStatus(session('Applicant')->applicant_id);
         $applicant = $this->ApplicantRepo->find(session('Applicant')->applicant_id);
-         
+
 
         //chok
         return view($this->part_doc . 'manageMyCourse', ['Apps' => $dataApplication, 'CountStatus' => $countStatus, 'ApplicantData'=>$applicant]);
@@ -328,13 +329,13 @@ class ApplyController extends Controller {
         }
     }
 
-    public function sentMailRegister($curr_act_id, $applications) {
+    public function sentMailRegister($curr_act_id, $applicant_id) {
         try {
             if ($curr_act_id) {
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
                 //$apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, [$applications]);
-                $apps = $this->ApplicationRepo->getMailApplicant(null, $applications);
+                $apps = $this->ApplicationRepo->getMailApplicant($applicant_id, null);
                 foreach ($currs as $curr) {
 
                     foreach ($apps as $app) {
