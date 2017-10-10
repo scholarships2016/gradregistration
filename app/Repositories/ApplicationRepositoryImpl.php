@@ -1022,7 +1022,7 @@ order by s.news_source_id"));
                                     $query->where('applicant.applicant_id', $applicantID);
                                 }
                             })
-                            ->select([DB::raw('stu_email,stu_first_name,stu_last_name,exam_name')])->get();
+                            ->select([DB::raw('stu_email,stu_first_name,stu_last_name,exam_name,stu_first_name_en,stu_last_name_en')])->get();
         } catch (\Exception $ex) {
             throw $ex;
         }
