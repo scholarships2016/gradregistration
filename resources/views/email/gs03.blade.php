@@ -25,9 +25,9 @@ Your application result is <b>{{$statusExam_en}}</b>
 
 <br/><br/>
 #########################<br/>
-For more information and track your application status, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
+For more information and tracking your application status, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
 
 <br/><br/>
-.:: Graduate Student Online Registration System ::.
+.:: Graduate Registration System, Graduate School, Chulalongkorn University ::.
     </div>
 </div>

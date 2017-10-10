@@ -17,7 +17,7 @@
 <hr/>
 
 <br/>
-You have already confirmed for applying to  {{$english}}[{{$coursecodeno}}], {{($sub_major_id!=""?"Sub-Major in ".$sub_major_name_en."[".$sub_major_id."],":"")}}
+You have already confirmed for applying to  {{$english}}[{{$coursecodeno}}] program, {{($sub_major_id!=""?"Sub-Major in ".$sub_major_name_en."[".$sub_major_id."],":"")}}
 Major in {{$major_name_en}}[{{$major_id}}],
 {{$department_name_en}}[{{$department_id}}],
 {{$faculty_name_en}}[{{$faculty_id}}]
@@ -30,9 +30,9 @@ Please upload your related documents and/or pay apply fee and then send the rece
 
 <br/><br/>
 #########################<br/>
-For more information and track your application status, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
+For more information and tracking your application status, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
 
   <br/><br/>
-.:: Graduate Student Online Registration System ::.
+.:: Graduate Registration System, Graduate School, Chulalongkorn University ::.
     </div>
 </div>
