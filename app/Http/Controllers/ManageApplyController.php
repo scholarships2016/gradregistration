@@ -426,15 +426,16 @@ class ManageApplyController extends Controller {
                     'flow_id' => 1,
                     'bank_id' => 10,
                     'special_admission_by' => session('user_id'),
-                    'special_admission_date' => Carbon::now(),
-                    'spacial_admission_comment' => $request->apply_comment,
+                    'special_admission_date' => Carbon::today()->format('d-m-Y'),
+                    'admission_status_id'=> $request->admission_status,
+                    'admission_remark' => $request->apply_comment,
                     'creator' => $user,
                     'modifier' => $user,
                     'exam_status' => 2,
                     'applicant_id' => $request->applicant_ID];
                 $res = $this->ApplicationRepo->saveApplication($data);
 
-                $dataup = ['application_id' => $res->application_id, 'flow_id' => 4];
+                $dataup = ['application_id' => $res->application_id, 'flow_id' => 5];
                 $res = $this->ApplicationRepo->saveApplication($dataup);
             }
         } catch (Exception $e) {

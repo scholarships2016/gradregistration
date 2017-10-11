@@ -1145,7 +1145,7 @@
                                             <div class="portlet-title">
                                                 <div class="caption">
                                                     {{--<i class="fa fa-user"></i>--}}
-                                                    หมายเหตุผู้สอบได้เป็นกรณีพิเศษ
+                                                    ผลพิจารณา/หมายเหตุผู้สอบได้เป็นกรณีพิเศษ
                                                 </div>
                                                 <div class="tools">
                                                     <a href="javascript:;" class="collapse"> </a>
@@ -1163,6 +1163,12 @@
 
                                  
                                                                 <div class="form-group">
+                                                                     <label>ผลการพิจารณา</label>
+                                                                      <select class="form-control select2" id="admission_status" name="admission_status">
+                                                                           @foreach ($addmissions as $addmission)
+                                                                          <option value="{{$addmission->value}}">{{$addmission->text}}</option>   
+                                                                          @endforeach
+                                                                        </select>
                                                                     <label>หมายเหตุ</label>
                                                                     <textarea class="form-control" id="apply_comment" rows="3"></textarea>
                                                                 </div>
@@ -1293,7 +1299,8 @@ $('#btSaveNewExam').click(function() {
                                                 curriculum_id : $('#curriculum_id').val(),
                                                 applicant_ID  : $('#presentAddressForm #applicant_id').val(),
                                                  stu_citizen_card  : $("#stu_citizen_card").val(),
-                                                 apply_comment: $('#apply_comment').val(),
+                                                 apply_comment : $('#apply_comment').val(),
+                                                 admission_status:  $('#admission_status').val(),
                                                 _token: '{{ csrf_token() }}'
                                                } ,
                                         success : function(data){
