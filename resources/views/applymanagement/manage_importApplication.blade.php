@@ -68,7 +68,7 @@
 
 
 @section('maincontent')
- <div class="row">
+ <div class="row" id="importbox">
             <div class="col-md-12">
               <!-- BEGIN EXAMPLE TABLE PORTLET-->
               <div class="portlet light bordered">
@@ -245,7 +245,7 @@
                         <th>สถานะการทำงานปัจจุบัน</th>
                         <th>ชื่อสถานที่ทำงานปัจจุบัน</th>
                         <th>ตำแหน่งการทำงานปัจจุบัน</th>
-                          
+
                         <th>หมายเลขโทรศัพท์</th>
                         <th>เลือกสถาบันที่สอบภาษาอังกฤษ</th>
                         <th>คะแนนภาษาอังกฤษ</th>
@@ -262,8 +262,8 @@
                         <th>คณะ  ป.โท</th>
                         <th>สาขาวิชา  ป.โท</th>
                         <th>ชื่อปริญญา  ป.โท</th>
-                         
-                       
+
+
 <th>ประเภทการรับเข้าศึกษา</th>
                         <th> Actions </th>
                       </tr>
@@ -396,10 +396,14 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
 
 
    $('#btImport').click(function() {
+
        var formData = new FormData();
        formData.append("import_file",   $("#import_file")[0].files[0]);
-
-   var datas =   $("#formImport").serializeArray();
+       App.blockUI({
+             target: '#importbox',
+             animate: true
+         });
+         var datas =   $("#formImport").serializeArray();
             $.ajax({
                 url: '{{route('importExcel')}}',
                 headers: {
@@ -519,8 +523,8 @@ table2 = $('#datatable_ajax').dataTable({
                     render: function (data, type, full, meta) {
                     return   full.work_position ;
                     }},
-                
-                  
+
+
                  {
                     targets: [20],name : 'stu_phone',
                     render: function (data, type, full, meta) {
@@ -601,8 +605,8 @@ table2 = $('#datatable_ajax').dataTable({
                     render: function (data, type, full, meta) {
                     return   full.edu_degreeM ;
                     }},
-                
-                  
+
+
                      {
                     targets: [36],name : 'Admission_Status',
                     render: function (data, type, full, meta) {
@@ -614,18 +618,22 @@ table2 = $('#datatable_ajax').dataTable({
                       return ((' <a class="btn-info" > Delete </a>  ')) ;
                       } }    ]
 });
+ App.unblockUI('#importbox');
                   }
+
             });
+
+          //
   });
 
 
 function callAddExam(){
-   
+
 var form = document.createElement('FORM');
 form.method='POST';
 form.action = "{{ url('admin/showPersonalProfilePageForNewExame') }}";
 form.target = 'newWindow';
- 
+
 
 var curr_act_id = document.createElement("INPUT");
 var sub_major_id = document.createElement("INPUT");
@@ -649,14 +657,14 @@ program_type_id.value=$('option:selected','#single').attr('pt');
 curriculum_id.name="curriculum_id";
 curriculum_id.type="hidden";
 curriculum_id.value=$('option:selected','#single').attr('cu');
- 
+
 apply_comment.name="apply_comment";
 apply_comment.type="hidden";
 apply_comment.value=$("#apply_comment").val();
- 
+
 token.name="_token";
 token.type="hidden";
-token.value='{{ csrf_token() }}'; 
+token.value='{{ csrf_token() }}';
 
 form.appendChild(curr_act_id);
 form.appendChild(sub_major_id);
@@ -670,8 +678,8 @@ document.body.appendChild(form);
 window.open("","newWindow");
 form.submit();
 
-       
-        
+
+
     }
 
 </script>

@@ -109,7 +109,7 @@ return [
      */
     'log' => env('APP_LOG', 'daily'),
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
-    'log_max_files' => 30,
+    'log_max_files' => 90,
     /*
       |--------------------------------------------------------------------------
       | Autoloaded Service Providers

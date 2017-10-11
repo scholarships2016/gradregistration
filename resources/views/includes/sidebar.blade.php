@@ -352,7 +352,15 @@
                             </ul>
                         </li>
                     @endif
+                    <li class=" nav-item    menuitem " data-index="23">
+                        <a class="nav-link nav-toggle" target="_blank" href="{{route('viewMedia',['path' => Crypt::encrypt('user-manual\UserManualForAdministrator.pdf') ])}}">
+                            <i class="icon-notebook"></i>
+                            <span class="title">{{Lang::get('resource.lbUserManual')}}</span>
+                            <span class="arrow"></span>
+                            <span class="selected"></span>
+                        </a>
 
+                    </li>
                 </ul>
             @endif
         @endif
