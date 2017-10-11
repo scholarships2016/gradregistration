@@ -93,6 +93,7 @@ return [
     'lbConfirmationDoc' => 'Confirmation documents apply',
     'lbConfirmApply' => 'Confirmation',
     'lbMLogout' => 'Logout',
+      'lbUserManual' => 'User Manual',
 
     //button
     'lbNext' => 'Next',

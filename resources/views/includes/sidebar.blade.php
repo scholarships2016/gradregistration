@@ -439,6 +439,15 @@
 
                 </li>
               -->
+              <li class=" nav-item    menuitem " data-index="5">
+                  <a class="nav-link nav-toggle" target="_blank" href="{{route('viewMedia',['path' => Crypt::encrypt('UserManualForApplicant.pdf') ])}}">
+                      <i class="icon-notebook"></i>
+                      <span class="title">{{Lang::get('resource.lbUserManual')}}</span>
+                      <span class="arrow"></span>
+                      <span class="selected"></span>
+                  </a>
+
+              </li>
                 <li class=" nav-item     menuitem @if(strpos($curr_url, 'contact') !== false) open active @endif"
                     data-index="6">
                     <a class="nav-link nav-toggle" href="{{url('contact/')}}">

@@ -93,6 +93,7 @@ return [
     'lbConfirmationDoc' => 'ปรับปรุงเอกสารที่ต้องส่ง',
     'lbConfirmApply' => 'ยืนยันการสมัคร',
     'lbMLogout' => 'ออกจากระบบ',
+    'lbUserManual' => 'อ่านคู่มือ',
 
     //button
     'lbNext' => 'ถัดไป',

@@ -59,7 +59,7 @@ Route::get('/download', function () {
 
 //View file for visitor
 Route::get('util/viewFile', 'Controller@doDownloadFile')->name('viewFile');
-//download Files in Media folder for visotor
+//download Files in Media folder for visitor
 Route::get('viewMedia', function (\Illuminate\Http\Request $request) {
     $input_path = $request->input('path');
     $real_path = Crypt::decrypt($input_path);
