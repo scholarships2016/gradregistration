@@ -440,7 +440,7 @@
                 </li>
               -->
               <li class=" nav-item    menuitem " data-index="5">
-                  <a class="nav-link nav-toggle" target="_blank" href="{{route('viewMedia',['path' => Crypt::encrypt('UserManualForApplicant.pdf') ])}}">
+                  <a class="nav-link nav-toggle" target="_blank" href="{{route('viewMedia',['path' => Crypt::encrypt('user-manual\UserManualForApplicant.pdf') ])}}">
                       <i class="icon-notebook"></i>
                       <span class="title">{{Lang::get('resource.lbUserManual')}}</span>
                       <span class="arrow"></span>

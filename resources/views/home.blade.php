@@ -33,7 +33,7 @@
 
                         <h1 class="page-title"> {{Lang::get('resource.lbHomeWelcome')}}
                             <small>{{Lang::get('resource.lbHomeSystemName')}}</small>
-                            <a href="{{route('viewMedia',['path' => Crypt::encrypt('UserManualForApplicant.pdf') ])}}" class="icon-btn  pull-right">
+                            <a href="{{route('viewMedia',['path' => Crypt::encrypt('user-manual\UserManualForApplicant.pdf') ])}}" class="icon-btn  pull-right">
                                                                 <i class="icon-notebook"></i>
                                                                 <div> {{Lang::get('resource.lbUserManual')}} </div>
                                                             </a>
