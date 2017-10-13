@@ -82,7 +82,7 @@
             <div style="display: none">{{$i=0}} {{$a1=0}} {{$a2=0}}    </div>
             @foreach($reports as $report)
             <div style="display: none">
-                {{$i=0}}
+                 
                 {{$a1+=(($report->admission_status_id == 'A' )?1:0)}}
                 {{$a2+=(($report->admission_status_id == '5'||$report->admission_status_id == 'B'||$report->admission_status_id == 'C')?1:0)}}
             </div>
@@ -90,9 +90,9 @@
                 <td style="text-align:center; vertical-align:middle;">{{$i += 1}}</td>
                 <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }}<br>{{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
                 <td align="center" >{{$report->nation_name}}<br>{{'['.$report->nation_name_en.']'}}</td>
-                <td align="center" ><input type="checkbox"   {{(($report->admission_status_id == '5'||$report->admission_status_id == 'B'||$report->admission_status_id == 'C')?'checked':'')}}   class="checkboxes"></td>
-                <td align="center" ><input type="checkbox"   {{(($report->admission_status_id == '7'||$report->admission_status_id == 'D'||$report->admission_status_id == 'E')?'checked':'')}}   class="checkboxes"></td>
-                <td align="center" ><input type="checkbox"   {{(($report->admission_status_id == 'A' )?'checked':'')}}   class="checkboxes"></td>
+                <td align="center" ><img alt="" border="0" width="15px" src="{{asset('images/check.png')}}" style="{{(($report->admission_status_id == '5'||$report->admission_status_id == 'B'||$report->admission_status_id == 'C')?'':'display:none;')}}" >       </td>
+                <td align="center" ><img alt="" border="0" width="15px" src="{{asset('images/check.png')}}" style="{{(($report->admission_status_id == '7'||$report->admission_status_id == 'D'||$report->admission_status_id == 'E')?'':'display:none;')}}" > </td>
+                <td align="center" ><img alt="" border="0" width="15px" src="{{asset('images/check.png')}}" style="{{(($report->admission_status_id == 'A' )?'':'display:none;')}}" > </td>
                 <td align="center" >{{$report->edu_gpax}}</td>
                 <td align="center" >{{(($report->eng_test_score_admin != null)?   ($report->eng_test_score_admin.'('.$report->engTAdmin.')' )   :  ($report->eng_test_score.'('.$report->engT.')'))}}</td>
                 <td >{{$report->admission_remark}}</td>
@@ -109,7 +109,7 @@
                 <tr><td>ผู้มีสิทธิ์สอบ  {{$cur2}}  ราย</td><td>สำรอง     {{$a1}} ราย</td></tr>
         </table>
         <br><br><br><br>
- ทังนี {!!$txt1!!}
+           ทังนี้ {!!$txt1!!}
         <br><br><br><br>
         <div  align="center" style="width:1100px; border:1px">
             <table style="width:750px" ><tr><td align="center">(ลงนาม) ............................................................</td><td align="center">(ลงนาม) ............................................................</td></tr>

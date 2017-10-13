@@ -101,7 +101,7 @@
                     <div class="form-group">
                       <label>รอบที่</label>
                       <select id="roundNo" name="roundNo" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
+                                        <option value="null">--เลือก--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -142,7 +142,7 @@
                           <div class="form-group">
                             <label>ประเภทหลักสูตร</label>
                             <select id="program_type_id" name="program_type_id" class="form-control input">
-                                      <option value="">--เลือก--</option>
+                                      <option value="null">--เลือก--</option>
                                     @foreach($progTypes as $val)
                                     <option value="{{$val->program_type_id}}">{{$val->prog_type_name}}</option>
                                     @endforeach

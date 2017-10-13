@@ -379,7 +379,7 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
         .remove()
         .draw();
 } );
- 
+     
  $('#btSave').click(function() {
      $('#loading').show();
           var valdata = [];
