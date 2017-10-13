@@ -139,7 +139,7 @@ class ReportController extends Controller
                     $row = '<tr>';
                     $row .= '<td>' . ($index + 1) . '</td>';
                     $row .= '<td>' . $value->stu_citizen_card . '</td>';
-                    $row .= '<td>' . (empty($value->fullname_th) ? $value->fullname_en : $value->fullname_th . '<br>' . $value->fullname_en) . '</td>';
+                    $row .= '<td>' . (empty($value->fullname_th) ? $value->fullname_en : $value->fullname_th . ' <br>' . $value->fullname_en) . '</td>';
                     $row .= '<td>' . $value->program_id . '</td>';
                     $row .= '<td>' . $value->major_name . '</td>';
                     $row .= '<td>' . $value->department_name . '</td>';
@@ -411,7 +411,8 @@ class ReportController extends Controller
                     $sheet->setFontSize(14);
                     $sheet->appendRow(array(
                         "เลขที่บัตรประชาชน",
-                        "ชื่อสกุล ไทย/อังกฤษ",
+                        "ชื่อสกุล ไทย",
+                        "ชื่อสกุล อังกฤษ",
                         "รหัสหลักสูตรที่สมัคร",
                         "สาขาที่สมัคร",
                         "ภาควิชา",
@@ -425,7 +426,8 @@ class ReportController extends Controller
                         foreach ($data as $index => $value) {
                             $sheet->appendRow(array(
                                 $value->stu_citizen_card,
-                                (empty($value->fullname_th) ? $value->fullname_en : $value->fullname_th . PHP_EOL . $value->fullname_en),
+                                $value->fullname_th,
+                                $value->fullname_en,
                                 $value->program_id,
                                 $value->major_name,
                                 $value->department_name,
@@ -751,7 +753,8 @@ class ReportController extends Controller
                     $sheet->setFontSize(14);
                     $sheet->appendRow(array('#',
                         'เลขที่บัตรประชาชน',
-                        'ชื่อสกุล ไทย/อังกฤษ',
+                        'ชื่อสกุล ไทย',
+                        'ชื่อสกุล อังกฤษ',
                         'รหัสหลักสูตรที่สมัคร',
                         'สาขาที่สมัคร',
                         'คะแนนที่ได้',
@@ -763,7 +766,8 @@ class ReportController extends Controller
                         $sheet->appendRow(array(
                             ($index + 1)
                         , $value->stu_citizen_card
-                        , empty($value->fullname_th) ? ($value->fullname_en) : ($value->fullname_th) . PHP_EOL . ($value->fullname_en)
+                        , $value->fullname_th
+                        , $value->fullname_en
                         , $value->program_id
                         , $value->major_name
                         , $value->eng_score
