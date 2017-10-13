@@ -49,11 +49,19 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getByCitizenOrEmail($citizencard, $email) {
+    public function getByCitizenOrEmail($citizencard = null, $email = null) {
         $result = null;
         try {
-            $result = Applicant::where('stu_citizen_card', $citizencard)
-                    ->orwhere('stu_email', $email)
+            $result = Applicant:: Where(function ($query)use ($citizencard) {
+                        if ($citizencard) {
+                            $query->where('stu_citizen_card', $citizencard);
+                        }
+                    })
+                    ->Where(function ($query)use ($email) {
+                        if ($email) {
+                            $query->where('stu_email', $email);
+                        }
+                    })
                     ->first();
         } catch (\Exception $ex) {
             throw $ex;
@@ -195,13 +203,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (!$getID) {
                 $result = $curObj->save();
             } else {
-                
+
                 $result = $curObj->save();
                 $result = ($result) ? $curObj->applicant_id : -1;
             }
             $this->controllors->WLog('Save Applicant[Applicant id:' . $curObj->applicant_id . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-             $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
+            $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
@@ -482,7 +490,5 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             throw $ex;
         }
     }
-
-    
 
 }
