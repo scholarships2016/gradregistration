@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use \Crypt;
 use App\Repositories\Contracts\TblAdmissionStatusRepository;
+use App\Repositories\ApplicationRepositoryImpl;
 
 class ProfileController extends Controller {
 
@@ -39,12 +40,13 @@ class ProfileController extends Controller {
     protected $applicantEduRepo;
     protected $applicantWorkRepo;
     protected $addmissionStatusRepo;
+    protected $application;
 
     /**
      * ProfileController constructor.
      */
     public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo, NationRepository $nationRepo, ReligionRepository $religionRepo, EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo, WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo, EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo, ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo, ApplicantWorkRepository $applicantWorkRepo
-    , TblAdmissionStatusRepository $addmissionStatusRepo) {
+    , TblAdmissionStatusRepository $addmissionStatusRepo, ApplicationRepositoryImpl $application) {
         $this->newSrcRepo = $newSrcRepo;
         $this->applicantRepo = $applicantRepo;
         $this->nationRepo = $nationRepo;
@@ -59,6 +61,7 @@ class ProfileController extends Controller {
         $this->applicantEduRepo = $applicantEduRepo;
         $this->applicantWorkRepo = $applicantWorkRepo;
         $this->addmissionStatusRepo = $addmissionStatusRepo;
+        $this->application = $application;
     }
 
     public function showProfilePage(Request $request) {
@@ -116,6 +119,8 @@ class ProfileController extends Controller {
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
 
+            $application = Count($this->application->getData($applicantId));
+
 
             return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
@@ -124,7 +129,9 @@ class ProfileController extends Controller {
                 'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
                 'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
                 'uniList' => $uniList, 'provinceList' => $provinceList,
-                'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
+                'applicantEduList' => $applicantProfile['applicantEdu'],
+                'applicantWorkExpList' => $applicantProfile['applicantWork'],
+                'application' => $application]);
         } catch (\Exception $ex) {
             echo $ex->getMessage();
             return;
