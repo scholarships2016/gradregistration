@@ -226,7 +226,7 @@
                         targets: 0,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            return meta.row + 1 + ((user_role == "Admin" && isNaN(full.creator + 0) == false ) || user_name == full.creator ? '<br/><i class="fa fa-pencil" title="เพิ่มข้อมูลโดยเจ้าหน้าที่: ' + full.creator + ' สามารถแก้ไขได้"></i>' : '');
+                            return meta.row + 1 + ((user_role == "Admin" && isNaN(full.creator + 0) == false ) || user_name == full.creator ? '<br/><i class="fa fa-pencil font-yellow" title="เพิ่มข้อมูลโดยเจ้าหน้าที่: ' + full.creator + ' สามารถแก้ไขได้"></i>' : '');
                         }
                     },
                     {
