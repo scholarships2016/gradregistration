@@ -187,7 +187,6 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                             ->where('apply_setting.end_date', '>=', Carbon::now()->toDateString());
                         }
                     })
-                 
                     ->Where(function ($query) use ($criteria) {
                 if ($criteria != null) {
                     $query->where('degree_name', 'like', '%' . $criteria . '%')
@@ -206,10 +205,11 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     ->orwhere('office_time', 'like', '%' . $criteria . '%')
                     ->orwhere('academic_year', 'like', '%' . $criteria . '%')
                     ->orwhere('academic_year', 'like', '%' . $criteria . '%')
+                    ->orwhere('curriculum_program.program_id', 'like', '%' . $criteria . '%')
                     ->orwhere('academic_year', 'like', '%' . $criteria . '%');
                 }
             });
-               
+
             if ($curriculum_id != null) {
                 $cur->where('curriculum.curriculum_id', $curriculum_id);
             }
@@ -244,12 +244,12 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             if ($program_type != null) {
                 $cur->where('curriculum_program.program_type_id', $program_type);
             }
-            
-            
+
+
             $cur->orWhere(function ($query)use ($user, $checkDeatil) {
-                        if ($checkDeatil == false) {
-                            if ($user != null) {
-                                $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
+                if ($checkDeatil == false) {
+                    if ($user != null) {
+                        $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
                                     $query->select('curriculum_id')
                                     ->from('applicant_special_apply')
                                     ->where('applicant_special_apply.applicant_id', $user)
@@ -257,14 +257,13 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                                     ->where('applicant_special_apply.end_date', '>=', Carbon::now()->toDateString());
                                 })
                                 ->whereNotNull('curriculum.curriculum_id');
-                              
-                            }
-                        }
-                    });
+                    }
+                }
+            });
 
             $cur->orderBy('curriculum.curriculum_id');
 
- 
+
             if ($paging) {
 
                 $draw = empty($ajaxpage['draw']) ? 1 : $ajaxpage['draw'];
