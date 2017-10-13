@@ -182,7 +182,13 @@ class ManageApplyController extends Controller {
 
         $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role);
         $data2 = $curDiss->count();
+        
+        
+        if($request->length > -1){        
         $data = $curDiss->offset($request->start)->limit($request->length)->get();
+        }else{
+         $data = $curDiss->get();
+        }
 
         return ['data' => $data, 'recordsTotal' => $data2, 'recordsFiltered' => $data2];
     }
