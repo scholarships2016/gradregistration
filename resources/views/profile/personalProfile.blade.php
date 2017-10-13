@@ -713,9 +713,9 @@ function disablePersonalInfo() {
         setEventHandle();
         setDefaultValue();
         setHandleValidation();
-        @if($application>0)
+<!--        @if($application>0)
         disableAll();
-        @endif
+        @endif-->
     });
     
     
