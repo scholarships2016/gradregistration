@@ -393,7 +393,7 @@ class ManageApplyController extends Controller {
                     'bank_id' => 10,
                     'special_apply_by' => session('user_id'),
                     'special_apply_datetime' => Carbon::now(),
-                    'special_apply_comment' => $request->apply_comment,
+                    'exam_remark' => $request->apply_comment,
                     'creator' => $user,
                     'modifier' => $user,
                     'applicant_id' => $request->applicant_ID];
@@ -1151,7 +1151,7 @@ class ManageApplyController extends Controller {
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role, $major_id, $faculty_id);
-
+ 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
 
