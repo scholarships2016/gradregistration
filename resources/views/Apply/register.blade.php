@@ -304,7 +304,7 @@ return ('<a href="{{url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P
     }
 
 
-
+ 
 
  function reloadTable() {
         grid.setAjaxParam("searchs", $('#search').val());

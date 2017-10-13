@@ -87,7 +87,7 @@ class ApplyController extends Controller {
     }
 
     public function getRegisterCourse(Request $request = null) {
- 
+  
         $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, null, $request->searchs, $request->faculty_id, $request->degree_id, 1, 4, $request->program_id, true, true, null, null, null,  $request->program_type_id, $request->all(),session('user_id'));
  
         return response()->json($curDiss);
