@@ -61,6 +61,31 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
         return $result;
     }
+    
+    public function getDataByApplicanteAndMoreFlow($applicantID = null,$flow = null){
+        $result = null;
+        try {
+             $result = Application:: Where(function ($query)use ($applicantID) {
+                                if ($applicantID) {
+                                    $query->where('application.applicant_id', $applicantID);
+                                }
+                            })
+                            ->Where(function ($query)use ($flow) {
+                                if ($flow) {
+                                    $query->where('application.flow_id','>=', $flow);
+                                }
+                            })
+ 
+                            ->orderBy('application.application_id', 'desc')->get();
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
+    
+    
 
     public function getData($applicantID = null, $applicationID = null) {
         $result = null;
