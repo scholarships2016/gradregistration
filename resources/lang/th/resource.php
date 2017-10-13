@@ -118,7 +118,7 @@ return [
 	//Search Label
     'lbSearchFaculty' => 'คณะ',
     'lbSearchProgramType' => 'ประเภทหลักสูตร',
-    'lbSearchProgramId' => 'รหัสโปรแกรม',
+    'lbSearchProgramId' => 'รหัสหลักสูตร',
     'lbSearchPageTopic' => 'ค้นหา และ สมัคร',
     'lbSearchResultDegreeName' => 'ชื่อปริญญา',
     'lbSearchResultProgramType' => 'ประเภทหลักสูตร',

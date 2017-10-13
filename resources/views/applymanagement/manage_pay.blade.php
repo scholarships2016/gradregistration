@@ -111,9 +111,9 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>ระบุ เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสโปรแกรม</label>
+                  <label>ระบุ เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสหลักสูตร</label>
                   <div class="input-group input-group-sm">
-                    <input type="text" id="criteria" name="criteria" class="form-control" placeholder="เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสโปรแกรม">
+                    <input type="text" id="criteria" name="criteria" class="form-control" placeholder="เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสหลักสูตร">
                     <span class="input-group-btn">
                                             <button name="btsearch" id="btsearch" class="btn btn-xs yellow" type="button">ค้นหา <i class="fa fa-search"></i></button>
                                         </span>
