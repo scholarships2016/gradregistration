@@ -197,9 +197,9 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             } else {
                 
                 $result = $curObj->save();
-                 
                 $result = ($result) ? $curObj->applicant_id : -1;
             }
+            $this->controllors->WLog('Save Applicant[Applicant id:' . $curObj->applicant_id . ']', 'Enroll', null);
         } catch (\Exception $ex) {
              $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
