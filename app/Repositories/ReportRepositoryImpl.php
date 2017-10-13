@@ -373,9 +373,9 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     DB::raw("concat(curr_prog.program_id,' ',mc.thai) as prog_info"),
                     DB::raw("count(app.application_id) as apply_via_web_amt"),
                     DB::raw("count( case when app.flow_id >= 3 then app.application_id end ) as payed_app_amt"),
-                    DB::raw("count( case when app.flow_id = 4 and app.exam_status = 2 and
+                    DB::raw("count( case when (app.flow_id = 4 and app.exam_status = 2 ) or (app.flow_id = 5 and
                      app.admission_status_id is not null and app.admission_status_id <> 'A' and
-                     app.admission_status_id <> 'X' then app.application_id end ) as passed_exam_amt")
+                     app.admission_status_id <> 'X') then app.application_id end ) as passed_exam_amt")
                 )
                 ->join("curriculum as curr", function ($join) {
                     $join->on("curr.curriculum_id", "=", "curr_prog.curriculum_id");
@@ -893,6 +893,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             if (isset($criteria['program_type_id'])) {
                 $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
             }
+            $query->whereRaw('app.flow_id >= 2');
 
             return $query->get();
         } catch (\Exception $ex) {
