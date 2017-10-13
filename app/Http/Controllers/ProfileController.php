@@ -119,7 +119,7 @@ class ProfileController extends Controller {
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
 
-            $application = Count($this->application->getData($applicantId));
+            $application = Count($this->application->getDataByApplicanteAndMoreFlow($applicantId,3));
 
 
             return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
