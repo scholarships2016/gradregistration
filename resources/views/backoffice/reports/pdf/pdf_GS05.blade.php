@@ -114,9 +114,9 @@
     </table><br><br>
         <div  align="right">
 
-        <table style="width:300px;" align="right">
-         <tr>    <td colspan="2"> สถานะ</td> </tr>
-         <tr> <td> (0) ยังไม่ได้พิจารณา     </td>    <td> {{$p1}} คน </td> </tr>
+        <table style="width:350px;" align="right">
+          <tr> <td colspan="2"> สถานะ</td> </tr>
+          <tr> <td width="80%"> (0) ยังไม่ได้พิจารณา     </td>    <td> {{$p1}} คน </td> </tr>
           <tr> <td> (2) ศึกษาบางรายวิชาแบบวิจัย     </td>    <td> {{$p2}} คน </td> </tr>
           <tr> <td> (3) ศึกษาบางรายวิชาแบบข้ามมหาวิทยาลัย     </td>    <td> {{$p3}} คน </td> </tr>
           <tr> <td> (4) ศึกษาบางรายวิชาแบบร่วมฟังการบรรยาย     </td>    <td> {{$p4}} คน </td> </tr>
