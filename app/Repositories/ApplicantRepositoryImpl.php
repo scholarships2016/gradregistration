@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
-class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository {
+class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements ApplicantRepository
+{
 
     protected $appNewsSrcRepo;
     protected $appEduRepo;
@@ -27,7 +28,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
     private $controllors;
     private $fileRepo;
 
-    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo, ApplicantEduRepository $appEduRepo, ApplicantWorkRepository $appWorkRepo, Controller $controllors, FileRepository $fileRepo) {
+    public function __construct(ApplicantNewsSourceRepository $appNewsSrcRepo, ApplicantEduRepository $appEduRepo, ApplicantWorkRepository $appWorkRepo, Controller $controllors, FileRepository $fileRepo)
+    {
         parent::setModelClassName(Applicant::class);
         $this->appNewsSrcRepo = $appNewsSrcRepo;
         $this->appEduRepo = $appEduRepo;
@@ -36,13 +38,14 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         $this->fileRepo = $fileRepo;
     }
 
-    public function checkLogin($criteria = null) {
+    public function checkLogin($criteria = null)
+    {
         $result = null;
         try {
             $result = Applicant::where('stu_email', $criteria->stu_email)
-                    ->where('stu_password', $criteria->stu_password)
-                    ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
-                    ->first();
+                ->where('stu_password', $criteria->stu_password)
+                ->select('applicant_id', 'stu_first_name', 'stu_last_name', 'stu_email')
+                ->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -62,23 +65,24 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                             $query->where('stu_email', $email);
                         }
                     })
-                    ->first();
+                ->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
         return $result;
     }
 
-    public function searchByCriteria($criteria = null, $paging = false) {
+    public function searchByCriteria($criteria = null, $paging = false)
+    {
         $result = null;
         try {
             $banks = Applicant::where('stu_citizen_card', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
-                    ->orwhere('stu_sex ', 'like', '%' . $criteria . '%')
-                    ->orderBy('applicant_id');
+                ->orwhere('stu_first_name', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_last_name ', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_first_name_en  ', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_last_name_en  ', 'like', '%' . $criteria . '%')
+                ->orwhere('stu_sex ', 'like', '%' . $criteria . '%')
+                ->orderBy('applicant_id');
             $result = ($paging) ? $banks->paginate($this->paging) : $banks;
         } catch (\Exception $ex) {
             throw $ex;
@@ -86,7 +90,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getEduApplicant($applicantID) {
+    public function getEduApplicant($applicantID)
+    {
         $result = null;
         try {
             $result = ApplicantEdu::where('applicant_id ', $applicantID)->first();
@@ -96,7 +101,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getWorkApplicant($applicantID) {
+    public function getWorkApplicant($applicantID)
+    {
         $result = null;
         try {
             $result = ApplicantWork::where('applicant_id ', $applicantID)->first();
@@ -106,7 +112,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveApplicant($data, $getID = false) {
+    public function saveApplicant($data, $getID = false)
+    {
         $result = false;
         try {
             $id = null;
@@ -203,19 +210,20 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (!$getID) {
                 $result = $curObj->save();
             } else {
-                
+
                 $result = $curObj->save();
                 $result = ($result) ? $curObj->applicant_id : -1;
             }
             $this->controllors->WLog('Save Applicant[Applicant id:' . $curObj->applicant_id . ']', 'Enroll', null);
         } catch (\Exception $ex) {
-             $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
+            $this->controllors->WLog('Save Applicant', 'Enroll', $ex->getMessage());
             throw $ex;
         }
         return $result;
     }
 
-    public function saveWorkApplicant($data) {
+    public function saveWorkApplicant($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -261,7 +269,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveEduApplicant($data) {
+    public function saveEduApplicant($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -307,7 +316,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function saveApplicatNewsSource($data) {
+    public function saveApplicatNewsSource($data)
+    {
         $result = false;
         try {
             $id = null;
@@ -331,7 +341,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getApplicantProfileByApplicantId($applicantId) {
+    public function getApplicantProfileByApplicantId($applicantId)
+    {
         try {
             $applicantProfile = $this->findOrFail($applicantId);
 
@@ -346,14 +357,15 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
-    public function getApplicantProfileAllByApplicantId($applicantId) {
+    public function getApplicantProfileAllByApplicantId($applicantId)
+    {
         try {
             $applicantProfile = Applicant::select('*', 'tbl_name_title.name_title as name_titles')->leftjoin('tbl_religion', 'tbl_religion.religion_id', 'applicant.stu_religion')
-                            ->leftjoin('tbl_nation', 'tbl_nation.nation_id', 'applicant.nation_id')
-                            ->leftjoin('tbl_name_title', 'tbl_name_title.name_title_id', 'applicant.name_title_id')
-                            ->leftjoin('tbl_province', 'tbl_province.province_id', 'applicant.province_id')
-                            ->leftjoin('tbl_district', 'tbl_district.district_code', 'applicant.district_code')
-                            ->where('applicant_id', '=', $applicantId)->first();
+                ->leftjoin('tbl_nation', 'tbl_nation.nation_id', 'applicant.nation_id')
+                ->leftjoin('tbl_name_title', 'tbl_name_title.name_title_id', 'applicant.name_title_id')
+                ->leftjoin('tbl_province', 'tbl_province.province_id', 'applicant.province_id')
+                ->leftjoin('tbl_district', 'tbl_district.district_code', 'applicant.district_code')
+                ->where('applicant_id', '=', $applicantId)->first();
 
             $newsSource = $this->appNewsSrcRepo->getApplicantNewsSourceByApplicantId($applicantId);
             $appEdu = $this->appEduRepo->getApplicantEduAllByApplicantId($applicantId);
@@ -366,7 +378,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
-    public function saveApplicantPersonalInfo(array $data) {
+    public function saveApplicantPersonalInfo(array $data)
+    {
         DB::beginTransaction();
         try {
 
@@ -392,7 +405,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
-    public function changePassword(array $data) {
+    public function changePassword(array $data)
+    {
         DB::beginTransaction();
         try {
             $applicant = $this->find($data['applicant_id']);
@@ -410,7 +424,8 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
-    public function doApplicantPaging($criteria = null) {
+    public function doApplicantPaging($criteria = null)
+    {
         try {
             $columnMap = array(
                 1 => "",
@@ -419,19 +434,19 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             $data = null;
 
             $mainQuery = DB::table('applicant as appt')
-                    ->select(
-                            'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip', 'appt.creator'
-                    )
-                    ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
-                        $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
-                    })
-                    ->leftJoin('application as app', function ($join) {
-                        $join->on('app.applicant_id', '=', 'appt.applicant_id');
-                    })
-                    ->leftJoin('curriculum_program as curr_prog', function ($join) {
-                        $join->on('curr_prog.curr_prog_id', '=', 'app.curr_prog_id');
-                    })
-                    ->groupBy('appt.applicant_id', 'appt.stu_citizen_card', 'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name', 'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en', 'appt.stu_email', 'appt.stu_phone', 'appt.created', 'appt.last_login', 'appt.ipaddress', 'appt.creator');
+                ->select(
+                    'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip', 'appt.creator'
+                )
+                ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
+                    $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
+                })
+                ->leftJoin('application as app', function ($join) {
+                    $join->on('app.applicant_id', '=', 'appt.applicant_id');
+                })
+                ->leftJoin('curriculum_program as curr_prog', function ($join) {
+                    $join->on('curr_prog.curr_prog_id', '=', 'app.curr_prog_id');
+                })
+                ->groupBy('appt.applicant_id', 'appt.stu_citizen_card', 'tbl_nt.name_title', 'appt.stu_first_name', 'appt.stu_last_name', 'tbl_nt.name_title_en', 'appt.stu_first_name_en', 'appt.stu_last_name_en', 'appt.stu_email', 'appt.stu_phone', 'appt.created', 'appt.last_login', 'appt.ipaddress', 'appt.creator');
 
             $recordsTotal = $mainQuery->get()->count();
 
@@ -446,11 +461,11 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             if (isset($criteria['emailCitizenFullname'])) {
                 $mainQuery->where(function ($query) use ($criteria) {
                     $query->where('appt.stu_email', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
-                            ->orWhere('appt.stu_citizen_card', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
-                            ->orWhere('appt.stu_first_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
-                            ->orWhere('appt.stu_last_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
-                            ->orWhere('appt.stu_first_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
-                            ->orWhere('appt.stu_last_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%');
+                        ->orWhere('appt.stu_citizen_card', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_first_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_last_name', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_first_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%')
+                        ->orWhere('appt.stu_last_name_en', 'like', '%' . $criteria['emailCitizenFullname'] . '%');
                 });
             }
 
@@ -472,13 +487,14 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         }
     }
 
-    public function doDelete($applicant_id) {
+    public function doDelete($applicant_id)
+    {
         try {
             $query = DB::table('applicant as appt')
-                    ->join('application as app', function ($join) {
-                        $join->on('app.applicant_id', '=', 'appt.applicant_id');
-                    })
-                    ->where('appt.applicant_id', '=', $applicant_id);
+                ->join('application as app', function ($join) {
+                    $join->on('app.applicant_id', '=', 'appt.applicant_id');
+                })
+                ->where('appt.applicant_id', '=', $applicant_id);
 
             if ($query->count() > 0) {
                 throw new ApplicantDeleteException('Cannot Delete');
