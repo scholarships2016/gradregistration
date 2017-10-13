@@ -139,7 +139,7 @@ class ApplyController extends Controller {
     public function registerDetailForapply($id) {
         $id = explode("P", $id);
 
-        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1],null,session('user_id'));
+        $curDiss = $this->CurriculumRepo->searchByCriteriaGroup(null, $id[0], null, null, null, 1, 4, null, true, false, null, null, null, $id[1],null,session('user_id'),true);
         $subMajor = $this->SubCurriculumRepo->getSubMajorByCurriculum_id($curDiss[0]->curriculum_id);
         $program = $this->CurriculumProgramRepo->getCurriculumProgramByCurriculum_id($curDiss[0]->curriculum_id, $curDiss[0]->program_type_id);
 

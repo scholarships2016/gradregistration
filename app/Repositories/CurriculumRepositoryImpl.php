@@ -155,13 +155,12 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
         return $result;
     }
 
-    public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null, $ajaxpage = null, $user = null) {
+    public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null, $ajaxpage = null, $user = null, $checkDeatil = false) {
 
         $result = null;
         try {
 
-            $cur = DB::table('curriculum')
-                    ->distinct()
+            $cur = curriculum::distinct()
                     ->select(DB::raw('curriculum.curriculum_id,curriculum_activity.curr_act_id ,apply_method ,responsible_person  ,additional_detail  ,apply_fee ,additional_question  ,mailing_address ,document_file  ,comm_appr_name  ,comm_appr_no ,comm_appr_date  ,contact_tel ,is_approve ,expected_amount ,curriculum.status  ,  tbl_program_type.program_type_id  ,curr_act_id ,apply_setting.apply_setting_id ,exam_schedule ,announce_exam_date ,announce_admission_date ,orientation_date ,orientation_location ,tbl_project.project_id ,project_name ,project_name_en ,prog_type_name ,prog_type_name_en ,cond_id ,degree_level_name ,office_time ,office_time_en,  degreethai ,degreeenglish ,  semester ,academic_year ,round_no ,start_date ,end_date ,is_active  ,tbl_major.major_id ,major_name ,major_name_en ,tbl_department.department_id ,tbl_degree.degree_id ,degree_name ,degree_name_en ,tbl_faculty.faculty_id ,faculty_name, faculty_eng ,fac_sort ,faculty_full ,   department_name ,department_name_en  '))
                     ->leftJoin('curriculum_program', 'curriculum.curriculum_id', '=', 'curriculum_program.curriculum_id')
                     ->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
@@ -188,15 +187,17 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                             ->where('apply_setting.end_date', '>=', Carbon::now()->toDateString());
                         }
                     })
-                    ->orWhere(function ($query)use ($user) {
-                        if ($user) {
-                            $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
-                            $query->select('curriculum_id')
-                            ->from('applicant_special_apply')
-                            ->where('applicant_special_apply.applicant_id', $user)
-                            ->where('applicant_special_apply.start_date', '<=', Carbon::now()->toDateString())
-                            ->where('applicant_special_apply.end_date', '>=', Carbon::now()->toDateString());
-                            });
+                    ->orWhere(function ($query)use ($user, $checkDeatil) {
+                        if ($checkDeatil == false) {
+                            if ($user) {
+                                $query->whereIn('curriculum.curriculum_id', function($query)use ($user) {
+                                    $query->select('curriculum_id')
+                                    ->from('applicant_special_apply')
+                                    ->where('applicant_special_apply.applicant_id', $user)
+                                    ->where('applicant_special_apply.start_date', '<=', Carbon::now()->toDateString())
+                                    ->where('applicant_special_apply.end_date', '>=', Carbon::now()->toDateString());
+                                });
+                            }
                         }
                     })
                     ->Where(function ($query) use ($criteria) {
@@ -223,6 +224,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             if ($curriculum_id != null) {
                 $cur->where('curriculum.curriculum_id', $curriculum_id);
             }
+
             if ($curr_act_id != null || $curr_act_id != '') {
 
                 $cur->where('curriculum_activity.curr_act_id', $curr_act_id);

@@ -988,7 +988,9 @@ class ManageApplyController extends Controller {
     public function printMoreExamReport($year, $semester, $roundNo, $faculty_id, $flow, $sub_major, $program_type_id, $major_id, $print) {
 
         $status = explode(',', $flow);
-
+          $roundNo = ($roundNo != 'null') ? $roundNo: null;
+         $program_type_id = ( $program_type_id != 'null') ? $program_type_id : null;
+        
 
         $sub_major_id = ($sub_major != null && $sub_major != 'null' ) ? $sub_major : null;
         $major = ($major_id != null && $major_id != 'null' ) ? $major_id : null;
@@ -1079,7 +1081,8 @@ class ManageApplyController extends Controller {
         $status = explode(',', $request->flow);
         $semester = $request->semester;
         $year = $request->year;
-        $roundNo = $request->roundNo;
+        $roundNo = ($request->roundNo != 'null') ? $request->roundNo : null;
+        $program_type_id = ( $request->program_type_id != 'null') ? $request->program_type_id : null;
         $criteria = $request->criteria;
         $curr_act_id = $request->curr_act_id;
         $exam_status = $request->exams;
@@ -1087,14 +1090,15 @@ class ManageApplyController extends Controller {
         $major_id = $request->major_id;
         $faculty_id = $request->faculty_id;
 
+
+
+
         if (isset($request->sub_major_id)) {
             $sub_major_id = ($request->sub_major_id != null) ? $request->sub_major_id : '-1';
         } else {
             $sub_major_id = null;
         }
-
-        $program_type_id = $request->program_type_id;
-
+ 
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataMoreThanOneMajorForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role, $major_id, $faculty_id);
