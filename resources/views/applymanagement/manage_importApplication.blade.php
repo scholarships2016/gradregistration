@@ -14,9 +14,21 @@
 <link href="{{asset('assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css')}}" rel="stylesheet" type="text/css">
 
 <style type="text/css">
-
+#loading {
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   position: fixed;
+   display: block;
+   opacity: 0.7;
+   background-color: #fff;
+   z-index: 99;
+   text-align: center;
+}
+ 
 </style>
-@endpush
+@endpush 
 
 @section('pagebar')
 <div class="page-bar">
@@ -285,8 +297,10 @@
               </div>
               <!-- END EXAMPLE TABLE PORTLET-->
             </div>
+<div id="loading" style="display: none;">
+ <div style="padding-top: 27%;" class="loading-message"><div class="block-spinner-bar"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>
 
-
+</div>
 @stop
 
 
@@ -365,8 +379,9 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
         .remove()
         .draw();
 } );
-
+ 
  $('#btSave').click(function() {
+     $('#loading').show();
           var valdata = [];
           $("#datatable_ajax").DataTable().rows().every(function(){
                 valdata.push(this.data());
@@ -385,6 +400,7 @@ $('#datatable_ajax').on( 'click', '.btn-info', function () {
                                                } ,
 					success : function(data){
                                             if(data=='true'){
+                                                  $('#loading').hide();
                                         toastr.success('ดำเนินการเรียบร้อย');
                                  	window.location.href = '{!! Route('importApplication') !!}';
                                             }else{toastr.error('มีข้อผิดพลาด');}
@@ -681,6 +697,6 @@ form.submit();
 
 
     }
-
+  
 </script>
 @endpush
