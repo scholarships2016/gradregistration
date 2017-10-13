@@ -427,7 +427,7 @@ class ManageApplyController extends Controller {
                     'bank_id' => 10,
                     'special_admission_by' => session('user_id'),
                     'special_admission_date' => Carbon::today()->format('d-m-Y'),
-                    'admission_status_id'=> $request->admission_status,
+                    'admission_status_id' => $request->admission_status,
                     'admission_remark' => $request->apply_comment,
                     'creator' => $user,
                     'modifier' => $user,
@@ -629,6 +629,7 @@ class ManageApplyController extends Controller {
         try {
             $datas = json_decode($request->values, true);
             $user = (session('user_type')->user_type != 'applicant') ? session('email_address') : session('user_id');
+            $cur_prog_id = $this->ApplicationRepo->getCurriculumProgram($request->curriculum_id, $request->program_id, $request->program_type_id, null);
 
             foreach ($datas as $data) {
 
@@ -715,7 +716,7 @@ class ManageApplyController extends Controller {
                         "program_id" => $request->program_id,
                         "exam_status" => 2,
                         "admission_status_id" => $data['Admission_StatusID'],
-                        "curr_prog_id" => $request->program_type_id,
+                        "curr_prog_id" => $cur_prog_id->curr_prog_id,
                         "sub_major_id" => $request->sub_major_id,
                         "creator" => $user,
                         "modifier" => $user
@@ -946,7 +947,7 @@ class ManageApplyController extends Controller {
                 }
             } else if ($reportNmae == 'GS05') {
                 foreach ($curDiss as $value) {
-                    array_push($data, ["เลขที่ใบสมัคร" => $value->app_ida, "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . '  ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . ' ' . $value->stu_first_name_en. '  ' . $value->stu_last_name_en), "สัญชาติ" => ($value->nation_name . '[' . $value->nation_name_en . ']'), "เพศ" => (($value->stu_sex == 1) ? 'ชาย[Male]' : 'หญิง[Female]'), "รหัสโครงการ" => $value->project_id, "สถานะ" => $value->admission_status_id, "สำเร็จปริญญาตรี" => $value->bachlor_year, "สำเร็จปริญญาโท" => $value->master_year, "คะแนนภาษาอังกฤษ" => (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score), "หมายเหตุ" => $value->admission_remark]);
+                    array_push($data, ["เลขที่ใบสมัคร" => $value->app_ida, "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . '  ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . ' ' . $value->stu_first_name_en . '  ' . $value->stu_last_name_en), "สัญชาติ" => ($value->nation_name . '[' . $value->nation_name_en . ']'), "เพศ" => (($value->stu_sex == 1) ? 'ชาย[Male]' : 'หญิง[Female]'), "รหัสโครงการ" => $value->project_id, "สถานะ" => $value->admission_status_id, "สำเร็จปริญญาตรี" => $value->bachlor_year, "สำเร็จปริญญาโท" => $value->master_year, "คะแนนภาษาอังกฤษ" => (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score), "หมายเหตุ" => $value->admission_remark]);
                 }
             } else if ($reportNmae == 'B21') {
                 foreach ($curDiss as $value) {
@@ -967,7 +968,6 @@ class ManageApplyController extends Controller {
                 foreach ($curDiss as $value) {
                     $string .= $value->app_ida . ',' . $value->name_title . ' ' . $value->stu_first_name . '  ' . $value->stu_last_name . ',' . $value->name_title_en . ' ' . $value->stu_first_name_en . '  ' . $value->stu_last_name_en . ',' . $value->nation_name . '[' . $value->nation_name_en . '],' . (($value->stu_sex == 1) ? 'ชาย[Male]' : 'หญิง[Female]') . ',' . $value->project_id . ',' . $value->admission_status_id . ',' . $value->bachlor_year . ',' . $value->master_year . ',' . $value->exam_remark . ',' . (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin : $value->eng_test_score) . ',' . $value->admission_remark . PHP_EOL;
                 }
-              
             } else if ($reportNmae == 'B21') {
                 foreach ($curDiss as $value) {
                     $string .= ($i + 1) . ',' . ($value->name_title . ' ' . $value->stu_first_name . '  ' . $value->stu_last_name) . ',' . ($value->name_title_en . ' ' . $value->stu_first_name_en . '  ' . $value->stu_last_name_en) . ',' . ($value->nation_name . '[' . $value->nation_name_en . ']') . ',' . (($value->admission_status_id == '5' || $value->admission_status_id == 'B' || $value->admission_status_id == 'C') ? 'สามัญ' : '') . (($value->admission_status_id == '7' || $value->admission_status_id == 'E' || $value->admission_status_id == 'D') ? 'ทดลองศึกษา' : '') . (($value->admission_status_id == 'A') ? 'สํารอง' : '') . ',' . $value->edu_gpax . ',' . (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin . '(' . $value->engTAdmin . ')' : $value->eng_test_score . '(' . $value->engT . ')') . ',' . $value->admission_remark . PHP_EOL;
@@ -977,9 +977,9 @@ class ManageApplyController extends Controller {
             }
 
             $fileText = $string;
-            
+
             $myName = 'REPORT_' . $reportNmae . ".txt";
-            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName) ];
+            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName)];
             return response()->make($fileText, 200, $headers);
         }
     }
@@ -1032,7 +1032,7 @@ class ManageApplyController extends Controller {
             }
             $fileText = $string;
             $myName = "ReportMoreThan1.txt";
-            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName) ];
+            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName)];
             return response()->make($fileText, 200, $headers);
         }
     }
@@ -1153,7 +1153,7 @@ class ManageApplyController extends Controller {
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role, $major_id, $faculty_id);
- 
+
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
 

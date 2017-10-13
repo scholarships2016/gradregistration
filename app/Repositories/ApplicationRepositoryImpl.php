@@ -20,14 +20,12 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
     protected $appDocFileRepo;
     protected $appPeopleRefRepo;
 
-
     public function __construct(Controller $controllors, ApplicationDocumentFileRepository $appDocFileRepo, ApplicationPeopleRefRepository $appPeopleRefRepo
-              ) {
+    ) {
         parent::setModelClassName(Application::class);
         $this->controllors = $controllors;
         $this->appDocFileRepo = $appDocFileRepo;
         $this->appPeopleRefRepo = $appPeopleRefRepo;
-
     }
 
     public function getAppData($applicationID = null) {
@@ -61,31 +59,58 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
         return $result;
     }
-    
-    public function getDataByApplicanteAndMoreFlow($applicantID = null,$flow = null){
+
+    public function getDataByApplicanteAndMoreFlow($applicantID = null, $flow = null) {
         $result = null;
         try {
-             $result = Application:: Where(function ($query)use ($applicantID) {
+            $result = Application:: Where(function ($query)use ($applicantID) {
                                 if ($applicantID) {
                                     $query->where('application.applicant_id', $applicantID);
                                 }
                             })
                             ->Where(function ($query)use ($flow) {
                                 if ($flow) {
-                                    $query->where('application.flow_id','>=', $flow);
+                                    $query->where('application.flow_id', '>=', $flow);
                                 }
                             })
- 
                             ->orderBy('application.application_id', 'desc')->get();
-
         } catch (\Exception $ex) {
             throw $ex;
         }
 
         return $result;
     }
-    
-    
+
+    public function getCurriculumProgram($curriculum_id = null, $program_id = null, $program_type_id = null, $program_plan_id = null) {
+        $result = null;
+        try {
+            $result = \App\Models\CurriculumProgram::Where(function ($query)use ($curriculum_id) {
+                                if ($curriculum_id) {
+                                    $query->where('curriculum_id', $curriculum_id);
+                                }
+                            })
+                            ->Where(function ($query)use ($program_id) {
+                                if ($program_id) {
+                                    $query->where('program_id', $program_id);
+                                }
+                            })
+                             ->Where(function ($query)use ($program_type_id) {
+                                if ($program_type_id) {
+                                    $query->where('program_type_id', $program_type_id);
+                                }
+                            })
+                              ->Where(function ($query)use ($program_plan_id) {
+                                if ($program_plan_id) {
+                                    $query->where('program_plan_id', $program_plan_id);
+                                }
+                            })
+                            ->orderBy('curr_prog_id')->first();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        return $result;
+    }
 
     public function getData($applicantID = null, $applicationID = null) {
         $result = null;
@@ -126,12 +151,12 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
               ->orderBy('application.application_id', 'desc')->get();
              */
 
-            $Doc = TblDocumentsApply::where('flag_upload','1')->count();
+            $Doc = TblDocumentsApply::where('flag_upload', '1')->count();
 
 
-            $result = Application::select([DB::raw('*,application.created as appDates ,CAST(app_id AS CHAR) as appid,'.$Doc.' as docapp')
+            $result = Application::select([DB::raw('*,application.created as appDates ,CAST(app_id AS CHAR) as appid,' . $Doc . ' as docapp')
                                 , DB::raw('(SELECT count(*) FROM application_document_file as af WHERE af.application_id = Application.application_id) as docCount')]
-                              )
+                            )
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
                             ->leftJoin('curriculum_program', 'application.curr_prog_id', '=', 'curriculum_program.curr_prog_id')
                             //->leftJoin('curriculum_activity', 'curriculum.curriculum_id', '=', 'curriculum_activity.curriculum_id')
@@ -165,7 +190,6 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             })
 //                ->select(DB::raw('program_id,thai,english'))
                             ->orderBy('application.application_id', 'desc')->get();
-
         } catch (\Exception $ex) {
             throw $ex;
         }
