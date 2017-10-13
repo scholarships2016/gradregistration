@@ -28,4 +28,6 @@ interface ApplicantRepository
     public function doApplicantPaging($criteria = null);
 
     public function doDelete($appliant_id);
+
+    public function getBriefApplicantInfoByApplicantId($applicantId);
 }
