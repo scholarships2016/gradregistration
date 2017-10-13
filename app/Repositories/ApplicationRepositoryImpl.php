@@ -803,7 +803,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                             })
                             ->Where(function ($query)use ($major_id) {
                                 if ($major_id) {
-                                    $query->where('application.major_id', $major_id);
+                                    $query->where('tbl_major.major_id', $major_id);
                                 }
                             })
                             ->Where(function ($query)use ($faculty_id) {
