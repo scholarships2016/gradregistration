@@ -88,7 +88,7 @@ class ManageApplyController extends Controller {
     }
 
     public function savePaymentBarcode(Request $request) {
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, $request->application_id, null, null, null, null, null, null, null, null, null, null, null, null);
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, $request->application_id, null, null, null, null, null, null, null, null, null, null, null, null)->get();
         $res = false;
         if (count($curDiss) > 0) {
             if (!$curDiss[0]['payment_date']) {
@@ -117,7 +117,7 @@ class ManageApplyController extends Controller {
 
         $application_id = $request->application_id;
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
-        $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role);
+        $curDiss = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role)->get();
 
         return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
     }
@@ -181,8 +181,10 @@ class ManageApplyController extends Controller {
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataForMange(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role);
-
-        return ['data' => $curDiss, 'recordsTotal' => $curDiss->count(), 'recordsFiltered' => $curDiss->count()];
+        $data2 = $curDiss->count();
+        $data = $curDiss->offset($request->start)->limit($request->length)->get();
+        
+        return ['data' => $data, 'recordsTotal' => $data2, 'recordsFiltered' => $data2];
     }
 
     public function manageApplicantDocument($id, $pid) {
@@ -370,7 +372,7 @@ class ManageApplyController extends Controller {
             $program_type_id = $request->program_type_id;
             $res = $this->ApplicantRepo->getByCitizenOrEmail($citizencard, null);
             if ($res) {
-                $curDiss = $this->ApplicationRepo->getDataForMange($res['applicant_id'], null, null, null, null, null, null, null, $curr_act_id, null, null, $sub_major_id, $program_id, $program_type_id);
+                $curDiss = $this->ApplicationRepo->getDataForMange($res['applicant_id'], null, null, null, null, null, null, null, $curr_act_id, null, null, $sub_major_id, $program_id, $program_type_id)->get();
             }
             if ($curDiss && $curDiss->count() > 0) {
                 return response()->json(['mess' => 'มีข้อมูลนี้ในระบบแล้วไม่สามารถเพิ่มได้']);
@@ -448,7 +450,7 @@ class ManageApplyController extends Controller {
     public function ShowRecommenReport($id) {
         $application_id = $id;
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
-        $curDis = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role);
+        $curDis = $this->ApplicationRepo->getDataForMange(null, $application_id, null, null, null, null, null, $user, null, null, null, null, null, null, session('user_type')->user_role)->get();
 
         foreach ($curDis as $curDiss) {
             $year = $curDiss->academic_year;
@@ -507,7 +509,7 @@ class ManageApplyController extends Controller {
                 $applications = json_decode($request->application);
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications)->get();
 
                 foreach ($currs as $curr) {
 
@@ -567,7 +569,7 @@ class ManageApplyController extends Controller {
                 $applications = json_decode($request->application);
 
                 $currs = $this->CurriculumRepo->searchByCriteria(null, $curr_act_id, null, null, null, null, null, null, true, false, null, null, null);
-                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications);
+                $apps = $this->ApplicationRepo->getDataForMange(null, null, null, null, null, null, null, null, null, $applications)->get();
 
                 foreach ($currs as $curr) {
 
@@ -988,9 +990,9 @@ class ManageApplyController extends Controller {
     public function printMoreExamReport($year, $semester, $roundNo, $faculty_id, $flow, $sub_major, $program_type_id, $major_id, $print) {
 
         $status = explode(',', $flow);
-          $roundNo = ($roundNo != 'null') ? $roundNo: null;
-         $program_type_id = ( $program_type_id != 'null') ? $program_type_id : null;
-        
+        $roundNo = ($roundNo != 'null') ? $roundNo : null;
+        $program_type_id = ( $program_type_id != 'null') ? $program_type_id : null;
+
 
         $sub_major_id = ($sub_major != null && $sub_major != 'null' ) ? $sub_major : null;
         $major = ($major_id != null && $major_id != 'null' ) ? $major_id : null;
@@ -1098,7 +1100,7 @@ class ManageApplyController extends Controller {
         } else {
             $sub_major_id = null;
         }
- 
+
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataMoreThanOneMajorForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role, $major_id, $faculty_id);

@@ -487,7 +487,7 @@ var TableDatatablesAjax = function () {
             src: $("#datatable_ajax"),
             loadingMessage: 'Loading...',
             dataTable: {
-                "bStateSave": true,
+                "bStateSave": false,
                 "fnStateSaveParams":    function ( oSettings, sValue ) {
                     $("#datatable_ajax tr.filter .form-control").each(function() {
                         sValue[$(this).attr('name')] = $(this).val();
@@ -500,8 +500,8 @@ var TableDatatablesAjax = function () {
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
-                "pageLength": 20, // default record count per page
-
+                
+           
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourse') !!}",
                     "type":"GET",
