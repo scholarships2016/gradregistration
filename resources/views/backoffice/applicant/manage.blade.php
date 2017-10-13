@@ -7,6 +7,8 @@
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet"
       type="text/css"/>
 <link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <style type="text/css">
 
 </style>
@@ -127,22 +129,30 @@
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
 
+<script src="{{asset('assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/jquery-validation/js/jquery.validate.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('js/jquery-repeater121/jquery.repeater.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
 
     var grid;
 
+    var repeater;
     var user_id = '{{session('user_id')}}';
     var user_name = '{{session('user_name')}}';
     var user_role = '{{session('user_type')->user_type}}';
     var isAddedByAdmin = false;
-    if(user_role!="Admin"){
-      //Staff
+    if (user_role != "Admin") {
+        //Staff
 
-    }else{
-      //Admin
+    } else {
+        //Admin
 
     }
+
     function initForm() {
 
         $(".date-picker input[type='text']").inputmask("d-m-y");
@@ -216,7 +226,7 @@
                         targets: 0,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            return meta.row + 1 +((user_role=="Admin" && isNaN(full.creator+0)==false ) || user_name==full.creator?'<br/><i class="fa fa-pencil" title="เพิ่มข้อมูลโดยเจ้าหน้าที่: '+full.creator+' สามารถแก้ไขได้"></i>':'');
+                            return meta.row + 1 + ((user_role == "Admin" && isNaN(full.creator + 0) == false ) || user_name == full.creator ? '<br/><i class="fa fa-pencil" title="เพิ่มข้อมูลโดยเจ้าหน้าที่: ' + full.creator + ' สามารถแก้ไขได้"></i>' : '');
                         }
                     },
                     {
@@ -295,22 +305,22 @@
                             html += '<a target="_blank" href="' + viewLink + '/' + full.applicant_id + '">';
                             html += '<i class="fa fa-file-o"></i> ดูรายละเอียด </a>';
                             html += '</li>';
-                            if(user_role=="Admin" || user_name==full.creator ){
-                            html += '<li>';
-                            html += '<a target="_blank"  href="' + editLink + '/' + full.applicant_id + '#tab_1_3">';
-                            html += '<i class="fa fa-edit"></i> แก้ไข </a>';
-                            html += '</li>';
-                            html += '<li>';
-                            html += '<a onclick="doDelete(\'' + full.applicant_id + '\')">';
-                            html += '<i class="fa fa-trash-o"></i> ลบ </a>';
-                            html += '</li>';
-                            html += '<li class="divider"> </li>';
-                            html += '<li>';
+                            if (user_role == "Admin" || user_name == full.creator) {
+                                html += '<li>';
+                                html += '<a target="_blank"  href="' + editLink + '/' + full.applicant_id + '#tab_1_3">';
+                                html += '<i class="fa fa-edit"></i> แก้ไข </a>';
+                                html += '</li>';
+                                html += '<li>';
+                                html += '<a onclick="doDelete(\'' + full.applicant_id + '\')">';
+                                html += '<i class="fa fa-trash-o"></i> ลบ </a>';
+                                html += '</li>';
+                                html += '<li class="divider"> </li>';
+                                html += '<li>';
                             }
-                            if(user_role=="Admin"){
-                            html += '<a href="javascript:;" onclick="prepareApplicantAuth(\'' + full.applicant_id + '\')">';
-                            html += '<i class="icon-flag"></i> ให้สิทธิ์สมัครกรณีพิเศษ';
-                            html += '</a>';
+                            if (user_role == "Admin") {
+                                html += '<a href="javascript:;" onclick="doSpecialApply(\'' + full.applicant_id + '\')">';
+                                html += '<i class="icon-flag"></i> ให้สิทธิ์สมัครกรณีพิเศษ';
+                                html += '</a>';
                             }
                             html += '</li>';
                             html += '</ul>';
@@ -420,20 +430,20 @@
                     modalInfo.find("#application_id").val(data.application_id);
                     modalInfo.find("#curr_prog_id").val(data.curr_prog_id);
                     modalInfo.find("#flow_name_p").html(data.flow_name == null ? '-' : data.flow_name
-                    + (data.flow_id=='4'&&data.exam_status=='2'? ' : <b>มีสิทธิ์สอบ</b>' : (data.flow_id=='4'&&data.exam_status=='3'?' : <b>ไม่มีสิทธิ์สอบ</b>':''))
-                    + (data.flow_id=='5'&&data.admission_status_name_th != null ? ' : <b>'+data.admission_status_name_th +'</b>' : ''));
+                        + (data.flow_id == '4' && data.exam_status == '2' ? ' : <b>มีสิทธิ์สอบ</b>' : (data.flow_id == '4' && data.exam_status == '3' ? ' : <b>ไม่มีสิทธิ์สอบ</b>' : ''))
+                        + (data.flow_id == '5' && data.admission_status_name_th != null ? ' : <b>' + data.admission_status_name_th + '</b>' : ''));
                     modalInfo.find("#program_id_p").text(data.program_id == null ? '-' : data.program_id);
                     modalInfo.find("#prog_name_p").text(data.prog_name == null ? '-' : data.prog_name);
                     modalInfo.find("#plan_p").text(data.plan == null ? '-' : data.plan);
                     modalInfo.find("#prog_type_name_p").text(data.prog_type_name == null ? '-' : data.prog_type_name);
-                    modalInfo.find("#downloadDocButton").attr('href', '{{url("admin/docMyCourse/")}}/'+ data.applicant_id +'/' + data.application_id);
+                    modalInfo.find("#downloadDocButton").attr('href', '{{url("admin/docMyCourse/")}}/' + data.applicant_id + '/' + data.application_id);
                     modalInfo.find("#ajaxLoading").hide();
-                    if(user_role=="Admin" || user_name==data.creator ){
-                    modalInfo.find("#deleteBtn").removeAttr('disabled', 'disabled');
-                  }else{
-                    //no permission
-                    $("#deleteBtn").css("display","none");
-                  }
+                    if (user_role == "Admin" || user_name == data.creator) {
+                        modalInfo.find("#deleteBtn").removeAttr('disabled', 'disabled');
+                    } else {
+                        //no permission
+                        $("#deleteBtn").css("display", "none");
+                    }
                     modalInfo.find("#applicationInfoForm").show();
                 }
             }
@@ -485,14 +495,119 @@
 
     }
 
-    function prepareApplicantAuth($id) {
-        $("#applicantAuthModal").modal('show');
+
+    function setApplicantAuthForm(data) {
+
+        var select2Option = {
+            placeholder: '--เลือก--',
+            allowClear: true,
+            width: '100%',
+            data: data.currList
+        };
+        if (!data.hasOwnProperty('apptInfo') || isUndefinedOrNull(data.apptInfo)) {
+            return false;
+        }
+
+        //Set Info
+        $("#applicantAuthModal #stu_citizen_card").val(data.apptInfo.stu_citizen_card);
+        $("#applicantAuthModal #fullname_thai").val(data.apptInfo.fullname_eng);
+        $("#applicantAuthModalForm #applicant_id_hidden").val(data.apptInfo.applicant_id);
+
+
+        if (isUndefinedOrNull(repeater)) {
+            repeater = $(".mt-repeater").repeater({
+                show: function () {
+                    $(this).slideDown();
+                    var select2Obj = $(this).find("#curriculum_id").select2(select2Option);
+                    $(".date-picker input[type='text']").inputmask("d-m-y");
+                    $('.date-picker').datepicker({
+                        rtl: App.isRTL(),
+                        autoclose: true,
+                        clearBtn: true
+                    });
+
+                    select2Obj.val($(this).find("#curriculum_id_hidden").val()).change();
+                },
+
+                hide: function (deleteElement) {
+                    $(this).slideUp(deleteElement);
+                },
+
+                ready: function (setIndexes) {
+                    $(".select2").select2(select2Option);
+                    $(".date-picker input[type='text']").inputmask("d-m-y");
+                    $('.date-picker').datepicker({
+                        rtl: App.isRTL(),
+                        autoclose: true,
+                        clearBtn: true
+                    });
+
+                }
+            });
+        }
+
+        repeater.setList(data.apptAuthList);
+
+        return true;
+    }
+
+    function doSpecialApply(id) {
+        $.ajax({
+            url: '{{route('admin.applicantManage.getDataApplicantSpecialApplyForm')}}',
+            method: "get",
+            data: 'applicant_id=' + id,
+            success: function (result) {
+                if (setApplicantAuthForm(result.data)) {
+                    $("#applicantAuthModal").modal('show')
+                }
+                ;
+            }
+        });
+    }
+
+    function doSaveSpecialApply() {
+        var formData = $("#applicantAuthModalForm").serializeArray();
+        $.ajax({
+            url: '{{route('admin.applicantManage.saveApplicantSpecialApply')}}',
+            method: "POST",
+            data: formData,
+            success: function (result) {
+                var data = showToastFromAjaxResponse(result);
+                if (result.status == 'success') {
+                    $("#applicantAuthModal").modal('hide');
+                }
+            }
+        });
+    }
+
+    function checkCurriculum(obj) {
+        var curr = $(obj);
+        var currs = $("#applicant_special_group select[name*='curriculum_id']").not(curr);
+
+        if (isUndefinedOrNull(curr.val())) {
+            return;
+        }
+        var isPass = true;
+        $.each(currs, function (index, value) {
+            if ($(value).val() === curr.val() || $(value).val() == curr.val()) {
+                isPass = false;
+                return false;
+            }
+        });
+        if (!isPass) {
+            curr.val(null).change();
+        }
     }
 
 
     $(document).ready(function () {
         initForm();
-        initDatatable();
+        initDatatable()
+
+        $("#applicantAuthModal #save").on('click', function (e) {
+            doSaveSpecialApply();
+        })
+
     });
 </script>
 @endpush
