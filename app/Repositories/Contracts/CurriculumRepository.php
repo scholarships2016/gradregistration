@@ -26,4 +26,6 @@ interface CurriculumRepository
     public function doToDoListPaging($criteria = null);
 
     public function checkCreatableCurriculumByCriteria($applyMethod, array $programs, $semester, $academicYear, $curriculumId = null);
+
+    public function getCurriculumInfoForDropdown($criteria = null);
 }
