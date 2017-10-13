@@ -101,7 +101,7 @@
                     <div class="form-group">
                       <label>รอบที่</label>
                       <select id="roundNo" name="roundNo" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
+                                        <option value="null">--เลือก--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -129,7 +129,7 @@
                         <div class="col-md-2">
                           <div class="form-group">
                             <label>รหัสหลักสูตร</label>
-                            <input type="text" id="major_id" name="major_id" class="form-control input" placeholder="">
+                            <input type="text" id="program_id" name="program_id" class="form-control input" placeholder="">
                           </div>
                         </div>
                         <div class="col-md-2">
@@ -142,7 +142,7 @@
                           <div class="form-group">
                             <label>ประเภทหลักสูตร</label>
                             <select id="program_type_id" name="program_type_id" class="form-control input">
-                                      <option value="">--เลือก--</option>
+                                      <option value="null">--เลือก--</option>
                                     @foreach($progTypes as $val)
                                     <option value="{{$val->program_type_id}}">{{$val->prog_type_name}}</option>
                                     @endforeach
@@ -250,8 +250,8 @@
         function callprint(print){
         var faculty =   ( $('option:selected','#faculty_id').val()=="")?'null':$('option:selected','#faculty_id').val();
        var sub_major_id = ($('#sub_major_id').val() =="")?'null':$('#sub_major_id').val();
-       var  major_id = ($('#major_id').val() =="")?'null':$('#major_id').val();
-      window.open(("{{ url('admin/printMoreExamReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ major_id +'/'+ print  ),'_blank');
+       var  program_id = ($('#program_id').val() =="")?'null':$('#program_id').val();
+      window.open(("{{ url('admin/printMoreExamReport')}}" +'/'+ $('option:selected','#year').val()+'/'+ $('option:selected','#semester').val()+'/'+ $('option:selected','#roundNo').val()+'/'+ faculty+'/'+ '5'+'/'+  sub_major_id +'/'+ $('option:selected','#program_type_id').val()+'/'+ program_id +'/'+ print  ),'_blank');
 
     }
 
@@ -300,7 +300,7 @@ var TableDatatablesAjax = function () {
                                 sub_major_id : $('#sub_major_id').val(),
                                 faculty_id : $('option:selected','#faculty_id').val(),
                                 program_type_id : $('option:selected','#program_type_id').val(),
-                                major_id :$('#major_id').val() ,
+                                program_id :$('#program_id').val() ,
                                 flow : '5',
                                _token:     '{{ csrf_token()}}'
                                                }

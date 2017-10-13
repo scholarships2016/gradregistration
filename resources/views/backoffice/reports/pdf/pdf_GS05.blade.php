@@ -98,10 +98,10 @@
               </div>
                 <tr role="row" >
                     <td style="text-align:center; vertical-align:middle;">{{$report->app_ida}}</td>
-                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }}<br>{{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
-                    <td align="center" >{{$report->nation_name.'<br>['.$report->nation_name_en.']'}}</td>
-                    <td align="center" >{{(($report->stu_sex==1)?'ชาย[Male]':'หญิง[Female]')}}</td>
-                    <td align="center" >{{$report->program_id}}</td>
+                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }} <br> {{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
+                    <td align="center" >{{$report->nation_name.' ['.$report->nation_name_en.']'}}</td>
+                    <td align="center" >{{(($report->stu_sex==1)?'ชาย [Male]':'หญิง [Female]')}}</td>
+                    <td align="center" >{{$report->project_id}}</td>
                     <td align="center" >{{$report->admission_status_id}}</td>
                     <td align="center" >{{$report->bachlor_year}}</td>
                     <td align="center" >{{$report->master_year}}</td>
@@ -114,9 +114,9 @@
     </table><br><br>
         <div  align="right">
 
-        <table style="width:300px;" align="right">
-         <tr>    <td colspan="2"> สถานะ</td> </tr>
-         <tr> <td> (0) ยังไม่ได้พิจารณา     </td>    <td> {{$p1}} คน </td> </tr>
+        <table style="width:350px;" align="right">
+          <tr> <td colspan="2"> สถานะ</td> </tr>
+          <tr> <td width="80%"> (0) ยังไม่ได้พิจารณา     </td>    <td> {{$p1}} คน </td> </tr>
           <tr> <td> (2) ศึกษาบางรายวิชาแบบวิจัย     </td>    <td> {{$p2}} คน </td> </tr>
           <tr> <td> (3) ศึกษาบางรายวิชาแบบข้ามมหาวิทยาลัย     </td>    <td> {{$p3}} คน </td> </tr>
           <tr> <td> (4) ศึกษาบางรายวิชาแบบร่วมฟังการบรรยาย     </td>    <td> {{$p4}} คน </td> </tr>

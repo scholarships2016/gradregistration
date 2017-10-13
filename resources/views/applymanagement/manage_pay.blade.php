@@ -80,7 +80,7 @@
                 <div class="form-group">
                   <label>ภาคการศึกษา</label>
                   <select id="semester" name="semester" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
+                                       
                                         <option value="1">ภาคต้น</option>
                                         <option value="2">ภาคปลาย</option>
 
@@ -91,8 +91,8 @@
                 <div class="form-group">
                   <label>ปีการศึกษา</label>
                   <select id="year" name="year" class="form-control input-small">
-                                        <option value="">--เลือก--</option>
-                                        @for ($i = date('Y')+1; $i >= date('Y')-10; $i--)
+                                        
+                                        @for ($i = date('Y'); $i >= date('Y')-10; $i--)
                                         <option value="{{ $i+543 }}"  >{{ $i+543 }}</option>
                                         @endfor
                                     </select>
@@ -111,9 +111,9 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>ระบุ เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสโปรแกรม</label>
+                  <label>ระบุ เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสหลักสูตร</label>
                   <div class="input-group input-group-sm">
-                    <input type="text" id="criteria" name="criteria" class="form-control" placeholder="เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสโปรแกรม">
+                    <input type="text" id="criteria" name="criteria" class="form-control" placeholder="เลขที่ใบสมัคร/รหัสผู้สมัคร/ชื่อ-สกุล/รหัสหลักสูตร">
                     <span class="input-group-btn">
                                             <button name="btsearch" id="btsearch" class="btn btn-xs yellow" type="button">ค้นหา <i class="fa fa-search"></i></button>
                                         </span>
@@ -322,12 +322,11 @@ var TableDatatablesAjax = function () {
                     return sValue;
                 },
 
-                "lengthMenu": [
+                   "lengthMenu": [
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
-                "pageLength": 20, // default record count per page
-
+               
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourse') !!}",
                     "type":"GET",
@@ -340,7 +339,8 @@ var TableDatatablesAjax = function () {
                                _token:     '{{ csrf_token()}}'
                                                }
                 },
-
+ "pageLength": 20, // default record count per page
+                "iDisplayLength":20,
 
 columnDefs: [{
 targets: [0],

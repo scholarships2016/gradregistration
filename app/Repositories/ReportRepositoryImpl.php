@@ -39,7 +39,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 ->join("curriculum as curr", function ($join) {
                     $join->on("curr.curriculum_id", "=", "curr_prog.curriculum_id");
                 })
-                ->join("tbl_bank as bank", function ($join) {
+                ->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })
                 ->leftJoin("tbl_major as mj", function ($join) {
@@ -127,7 +127,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 ->join("tbl_department as dep", function ($join) {
                     $join->on("dep.department_id", "=", "curr.department_id");
                 })
-                ->join("tbl_bank as bank", function ($join) {
+                ->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })
                 ->leftJoin("tbl_major as mj", function ($join) {
@@ -200,7 +200,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("curr_prog.curriculum_id", "=", "app.curriculum_id")
                         ->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
                 })
-                ->join("tbl_bank as bank", function ($join) {
+                ->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })
                 ->join("applicant as appt", function ($join) {
@@ -278,7 +278,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 })->join("curriculum_program as curr_prog", function ($join) {
                     $join->on("curr_prog.curriculum_id", "=", "app.curriculum_id")
                         ->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
-                })->join("tbl_bank as bank", function ($join) {
+                })->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })->join("applicant as appt", function ($join) {
                     $join->on("appt.applicant_id", "=", "app.applicant_id");
@@ -354,7 +354,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             }
 
             return $query->get();
-
+          //dd($query->toSql());
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -373,9 +373,9 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     DB::raw("concat(curr_prog.program_id,' ',mc.thai) as prog_info"),
                     DB::raw("count(app.application_id) as apply_via_web_amt"),
                     DB::raw("count( case when app.flow_id >= 3 then app.application_id end ) as payed_app_amt"),
-                    DB::raw("count( case when app.flow_id = 4 and app.exam_status = 2 and
+                    DB::raw("count( case when (app.flow_id = 4 and app.exam_status = 2 ) or (app.flow_id = 5 and
                      app.admission_status_id is not null and app.admission_status_id <> 'A' and
-                     app.admission_status_id <> 'X' then app.application_id end ) as passed_exam_amt")
+                     app.admission_status_id <> 'X') then app.application_id end ) as passed_exam_amt")
                 )
                 ->join("curriculum as curr", function ($join) {
                     $join->on("curr.curriculum_id", "=", "curr_prog.curriculum_id");
@@ -751,10 +751,10 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 $query->where('app.program_id', '=', $criteria['program_id']);
             }
             if (isset($criteria['sub_major_id'])) {
-                $query->where("curr_subm . sub_major_id", " = ", $criteria['sub_major_id']);
+                $query->where("curr_subm.sub_major_id", " = ", $criteria['sub_major_id']);
             }
             if (isset($criteria['program_type_id'])) {
-                $query->where("curr_prog . program_type_id", " = ", $criteria['program_type_id']);
+                $query->whereRaw("curr_prog.program_type_id=".$criteria['program_type_id']);
             }
 
             return $query->get();
@@ -769,7 +769,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
         try {
             $query = DB::table("applicant as appt")
                 ->select("sat.SATI_LEVEL",
-                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก' 
+                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก'
                     when 3 then 'ดี' when 2 then 'พอใข้' when 1 then 'ไม่พอใจ' end as sat_desc"),
                     DB::raw("count(appt.applicant_id) as amt")
                 )->join("application as app", function ($join) {
@@ -893,6 +893,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             if (isset($criteria['program_type_id'])) {
                 $query->where("curr_prog.program_type_id", "=", $criteria['program_type_id']);
             }
+            $query->whereRaw('app.flow_id >= 2');
 
             return $query->get();
         } catch (\Exception $ex) {

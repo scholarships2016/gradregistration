@@ -79,7 +79,7 @@
           <div class="form-group">
             <label class="control-label col-md-3">{{ Lang::get('resource.lbSearchProgramType')}}</label>
             <div class="col-md-9">
-              <select id="degree_id" class="form-control input-lg">
+              <select id="program_type_id" class="form-control input-lg">
                          <option value="" selected="" >-- Select --</option>
                          @foreach ($typeofRecs as $typeofRec)
                          <option value="{{$typeofRec-> program_type_id}}">{{ (session('locale')=='th'?$typeofRec->prog_type_name:$typeofRec->prog_type_name_en)}}</option>
@@ -304,12 +304,12 @@ return ('<a href="{{url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P
     }
 
 
-
+ 
 
  function reloadTable() {
         grid.setAjaxParam("searchs", $('#search').val());
         grid.setAjaxParam("faculty_id", $('#faculty_id').val());
-        grid.setAjaxParam("degree_id", $('#degree_id').val());
+        grid.setAjaxParam("program_type_id", $('#program_type_id').val());
         grid.setAjaxParam("program_id", $('#program_id').val());
         grid.getDataTable().ajax.reload();
         grid.clearAjaxParams();

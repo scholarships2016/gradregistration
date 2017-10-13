@@ -69,7 +69,7 @@
                                         edit </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">  Last Login  {{$applicant->last_login->format('d/m/Y H:i')}}  </a>
+                                    <a href="javascript:;">  Last Login  {{ ($applicant->last_login)? $applicant->last_login->format('d/m/Y H:i'):""}}  </a>
                                 </li>
                             </ul>
                         </div>

@@ -104,7 +104,7 @@
                                     <td width="441" height="158"><div align="center"><img src="{{asset('images/bwpk.gif')}}" border="0"><br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br>Graduate School, Chulalongkorn University <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา<br>Application Form<br>
                                             &nbsp;&nbsp;<br>
                                         </div></td>
-                                    <!--<td width="278" rowspan="4" align="center"><img src="{{$pictrue}}" width="180px" border="0"></td>-->
+                                    
                                     <td width="278" rowspan="4" align="center"><img src="{{route('profile.getProfileImg',['applicant_id' => Crypt::encrypt($app->applicant_id) ])}}" width="180px" border="0"></td>
                                 </tr>
                                 <tr>

@@ -393,7 +393,7 @@ return    ((full.stu_sex==1)?'ชาย[Male]':'หญิง[Female]')  ;
 } },{
 targets: [4],
 render: function (data, type, full, meta) {
-return    full.program_id  ;
+return    full.project_id  ;
 } },{
 targets: [5],
 render: function (data, type, full, meta) {

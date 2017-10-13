@@ -646,11 +646,83 @@
         });
     }
 
+
+function disablePersonalInfo() {
+        $("#personalInfoForm input").attr('disabled', 'disabled');
+        $("#personalInfoForm select").attr('disabled', 'disabled');
+        $("#personalInfoForm textarea").attr('disabled', 'disabled');
+        $("#personalInfoForm button").attr('disabled', 'disabled');
+
+    }
+
+    function disablePresentAddress() {
+        $("#presentAddressForm input").attr('disabled', 'disabled');
+        $("#presentAddressForm select").attr('disabled', 'disabled');
+        $("#presentAddressForm textarea").attr('disabled', 'disabled');
+        $("#presentAddressForm button").attr('disabled', 'disabled');
+
+    }
+
+    function disableKnowledgeSkill() {
+        $("#knowledgeForm input").attr('disabled', 'disabled');
+        $("#knowledgeForm select").attr('disabled', 'disabled');
+        $("#knowledgeForm textarea").attr('disabled', 'disabled');
+        $("#knowledgeForm button").attr('disabled', 'disabled');
+
+    }
+
+    function disableEduBackground() {
+        $("#eduBackForm input").attr('disabled', 'disabled');
+        $("#eduBackForm select").attr('disabled', 'disabled');
+        $("#eduBackForm textarea").attr('disabled', 'disabled');
+        $("#eduBackForm button").attr('disabled', 'disabled');
+        $("#eduBackForm .mt-repeater-add").hide();
+        $("#eduBackForm .repeater-delete-bt").hide();
+
+
+    }
+
+    function disableWorkExp() {
+        $("#workExpForm input").attr('disabled', 'disabled');
+        $("#workExpForm select").attr('disabled', 'disabled');
+        $("#workExpForm textarea").attr('disabled', 'disabled');
+        $("#workExpForm button").attr('disabled', 'disabled');
+        $("#workExpForm .mt-repeater-add").hide();
+        $("#workExpForm .repeater-delete-bt").hide();
+
+    }
+
+
+  function disableAll() {
+        disablePersonalInfo();
+        disablePresentAddress();
+        disableKnowledgeSkill();
+        disableEduBackground();
+        disableWorkExp();
+      }
+
+
+
+
+
+
+
+
     $(document).ready(function () {
         setComponent();
         setEventHandle();
         setDefaultValue();
         setHandleValidation();
+<!--        @if($application>0)
+        disableAll();
+        @endif-->
     });
+    
+    
+    
+    
+    
+    
+    
 </script>
 @endpush

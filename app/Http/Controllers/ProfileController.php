@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use \Crypt;
+use App\Repositories\Contracts\TblAdmissionStatusRepository;
+use App\Repositories\ApplicationRepositoryImpl;
 
 class ProfileController extends Controller {
 
@@ -37,11 +39,14 @@ class ProfileController extends Controller {
     protected $provinceRepo;
     protected $applicantEduRepo;
     protected $applicantWorkRepo;
+    protected $addmissionStatusRepo;
+    protected $application;
 
     /**
      * ProfileController constructor.
      */
-    public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo, NationRepository $nationRepo, ReligionRepository $religionRepo, EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo, WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo, EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo, ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo, ApplicantWorkRepository $applicantWorkRepo) {
+    public function __construct(NewsSourceRepository $newSrcRepo, ApplicantRepository $applicantRepo, NationRepository $nationRepo, ReligionRepository $religionRepo, EngTestRepository $engTestRepo, NameTitleRepository $nameTitleRepo, WorkStatusRepository $workStatusRepo, GaduateLevelRepository $gaduateLevelRepo, EducationPassRepository $eduPassRepo, UniversityRepository $uniRepo, ProvinceRepository $provinceRepo, ApplicantEduRepository $applicantEduRepo, ApplicantWorkRepository $applicantWorkRepo
+    , TblAdmissionStatusRepository $addmissionStatusRepo, ApplicationRepositoryImpl $application) {
         $this->newSrcRepo = $newSrcRepo;
         $this->applicantRepo = $applicantRepo;
         $this->nationRepo = $nationRepo;
@@ -55,6 +60,8 @@ class ProfileController extends Controller {
         $this->provinceRepo = $provinceRepo;
         $this->applicantEduRepo = $applicantEduRepo;
         $this->applicantWorkRepo = $applicantWorkRepo;
+        $this->addmissionStatusRepo = $addmissionStatusRepo;
+        $this->application = $application;
     }
 
     public function showProfilePage(Request $request) {
@@ -112,6 +119,8 @@ class ProfileController extends Controller {
             $uniList = $this->uniRepo->all();
             $provinceList = $this->provinceRepo->all();
 
+            $application = Count($this->application->getDataByApplicanteAndMoreFlow($applicantId,3));
+
 
             return view('profile.personalProfile', ['applicant' => $applicantProfile['applicant'], 'profile_img' => '',
                 'applicantNewsSrc' => $applicantProfile['applicantNewsSource'],
@@ -120,7 +129,9 @@ class ProfileController extends Controller {
                 'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
                 'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
                 'uniList' => $uniList, 'provinceList' => $provinceList,
-                'applicantEduList' => $applicantProfile['applicantEdu'], 'applicantWorkExpList' => $applicantProfile['applicantWork']]);
+                'applicantEduList' => $applicantProfile['applicantEdu'],
+                'applicantWorkExpList' => $applicantProfile['applicantWork'],
+                'application' => $application]);
         } catch (\Exception $ex) {
             echo $ex->getMessage();
             return;
@@ -131,7 +142,7 @@ class ProfileController extends Controller {
 
     public function showPersonalProfilePageForNewExame(Request $request) {
         try {
- 
+
             //Master Data
             $nameTitleList = $this->nameTitleRepo->all();
             $newSrcList = $this->newSrcRepo->getAll();
@@ -150,22 +161,23 @@ class ProfileController extends Controller {
             $program_type_id = $request->program_type_id;
             $curriculum_id = $request->curriculum_id;
             $apply_comment = $request->apply_comment;
-
+            $addmission = $this->addmissionStatusRepo->getAdmissionStatusDropDownlist();
 
 
             return view('profile_new_exam.personalProfile', ['applicant' => '', 'profile_img' => '',
-            'newSrcList' => $newSrcList, 'nationList' => $nationList,
-            'religionList' => $religionList, 'engTestList' => $engTestList,
-            'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
-            'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
-            'uniList' => $uniList, 'provinceList' => $provinceList,
-            'applicantEduList' => '', 'applicantWorkExpList' => '',
-            'curr_act_id' => $curr_act_id,
-            'sub_major_id' => $sub_major_id,
-            'program_id' => $program_id,
-            'program_type_id' => $program_type_id,
-            'curriculum_id' => $curriculum_id,
-            'apply_comment' => $apply_comment
+                'newSrcList' => $newSrcList, 'nationList' => $nationList,
+                'religionList' => $religionList, 'engTestList' => $engTestList,
+                'nameTitleList' => $nameTitleList, 'workStatusList' => $workStatusList,
+                'gaduateLevelList' => $gaduateLevelList, 'eduPassList' => $eduPassList,
+                'uniList' => $uniList, 'provinceList' => $provinceList,
+                'applicantEduList' => '', 'applicantWorkExpList' => '',
+                'curr_act_id' => $curr_act_id,
+                'sub_major_id' => $sub_major_id,
+                'program_id' => $program_id,
+                'program_type_id' => $program_type_id,
+                'curriculum_id' => $curriculum_id,
+                'apply_comment' => $apply_comment,
+                'addmissions' => $addmission
             ]);
         } catch (\Exception $ex) {
             echo $ex->getMessage();
