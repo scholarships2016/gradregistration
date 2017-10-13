@@ -217,7 +217,8 @@ class ManageApplyController extends Controller {
         $DocumentApplys = $this->DocumentApply->getDetailReport();
         $DocumentApplyGroup = $this->DocumentApply->getGroupReport();
         $files = $this->ApplicationDocumentFileRepo->GetData($pid);
-        $pic = $this->FileRepo->getImageFileAsBase64ById($applicantProfile['applicant']->stu_img);
+        //$pic = $this->FileRepo->getImageFileAsBase64ById($applicantProfile['applicant']->stu_img);
+        $pic = "";
         $age = Carbon::parse($applicantProfile['applicant']->stu_birthdate)->diff(Carbon::now())->format('%y ปี[year], %m เดือน[month]  %d วัน[day]');
 
         return view('Apply.docMyCourse', ['apps' => $dataApplication,

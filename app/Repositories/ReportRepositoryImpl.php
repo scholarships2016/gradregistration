@@ -39,7 +39,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 ->join("curriculum as curr", function ($join) {
                     $join->on("curr.curriculum_id", "=", "curr_prog.curriculum_id");
                 })
-                ->join("tbl_bank as bank", function ($join) {
+                ->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })
                 ->leftJoin("tbl_major as mj", function ($join) {
@@ -127,7 +127,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 ->join("tbl_department as dep", function ($join) {
                     $join->on("dep.department_id", "=", "curr.department_id");
                 })
-                ->join("tbl_bank as bank", function ($join) {
+                ->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })
                 ->leftJoin("tbl_major as mj", function ($join) {
@@ -200,7 +200,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                     $join->on("curr_prog.curriculum_id", "=", "app.curriculum_id")
                         ->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
                 })
-                ->join("tbl_bank as bank", function ($join) {
+                ->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })
                 ->join("applicant as appt", function ($join) {
@@ -278,7 +278,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 })->join("curriculum_program as curr_prog", function ($join) {
                     $join->on("curr_prog.curriculum_id", "=", "app.curriculum_id")
                         ->on("curr_prog.curr_prog_id", "=", "app.curr_prog_id");
-                })->join("tbl_bank as bank", function ($join) {
+                })->leftJoin("tbl_bank as bank", function ($join) {
                     $join->on("bank.bank_id", "=", "app.bank_id");
                 })->join("applicant as appt", function ($join) {
                     $join->on("appt.applicant_id", "=", "app.applicant_id");
@@ -354,7 +354,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
             }
 
             return $query->get();
-
+          //dd($query->toSql());
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -769,7 +769,7 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
         try {
             $query = DB::table("applicant as appt")
                 ->select("sat.SATI_LEVEL",
-                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก' 
+                    DB::raw("case sat.SATI_LEVEL when 5 then 'มากที่สุด' when 4 then 'ดีมาก'
                     when 3 then 'ดี' when 2 then 'พอใข้' when 1 then 'ไม่พอใจ' end as sat_desc"),
                     DB::raw("count(appt.applicant_id) as amt")
                 )->join("application as app", function ($join) {
