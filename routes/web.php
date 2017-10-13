@@ -113,7 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
         //P'M ROUTING START
         //payment
         Route::get('ManagePay', 'ManageApplyController@showManagePay')->name('ManagePay');
-         Route::get('showManagePay', 'ManageApplyController@showManagePay')->name('showManagePay');
+        Route::get('showManagePay', 'ManageApplyController@showManagePay')->name('showManagePay');
         Route::get('getRegisterCourse', 'ManageApplyController@getRegisterCourse')->name('admin.getRegisterCourse');
 
 
@@ -154,7 +154,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('deleteCourse/{id}', 'ManageApplyController@deleteCourse')->name('deleteCourse');
         Route::post('showPersonalProfilePageForNewExame', 'ProfileController@showPersonalProfilePageForNewExame')->name('showPersonalProfilePageForNewExame');
         Route::post('doSavePersonalInfomationNewExam', 'BackOffice\ApplicantManagementController@doSavePersonalInfomationNewExam')->name('doSavePersonalInfomationNewExam');
-
 
 
         //util M
@@ -263,6 +262,11 @@ Route::group(['middleware' => 'auth'], function () {
                 //Application
                 Route::get('getApplicationAndProgramInfo', 'BackOffice\ApplicantManagementController@getApplicationAndProgramInfo')->name('admin.applicantManage.getApplicationAndProgramInfo');
                 Route::post('doDeleteApplication', 'BackOffice\ApplicantManagementController@doDeleteApplication')->name('admin.applicantManage.doDeleteApplication');
+
+                //Applicant Special Apply
+                Route::get('getDataApplicantSpecialApplyForm', 'BackOffice\ApplicantManagementController@getDataApplicantSpecialApplyForm')->name('admin.applicantManage.getDataApplicantSpecialApplyForm');
+                Route::post('doSaveApplicantSpecialApply', 'BackOffice\ApplicantManagementController@saveApplicantSpecialApply')->name('admin.applicantManage.saveApplicantSpecialApply');
+
             });
 
 
