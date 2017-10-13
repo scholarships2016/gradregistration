@@ -72,7 +72,7 @@
                 {{$pcount += (($report->exam_status==2)?1:0)}} </div>
                 <tr role="row" >
                     <td style="text-align:center; vertical-align:middle;">{{$loop->iteration}}</td>
-                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }}<br>{{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
+                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }} <br> {{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
                     <td align="center" style="text-align:center; vertical-align:middle;"> <input type="checkbox"   {{(($report->exam_status==2)?'checked':'')}}   class="checkboxes"></td>
                     <td align="center" style="text-align:center; vertical-align:middle;"> <input type="checkbox"   {{(($report->exam_status==3)?'checked':'')}}    class="checkboxes"></td>
                     <td >{{$report->exam_remark}}</td>

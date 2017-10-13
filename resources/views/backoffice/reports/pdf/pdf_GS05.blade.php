@@ -98,10 +98,10 @@
               </div>
                 <tr role="row" >
                     <td style="text-align:center; vertical-align:middle;">{{$report->app_ida}}</td>
-                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }}<br>{{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
-                    <td align="center" >{{$report->nation_name.'<br>['.$report->nation_name_en.']'}}</td>
-                    <td align="center" >{{(($report->stu_sex==1)?'ชาย[Male]':'หญิง[Female]')}}</td>
-                    <td align="center" >{{$report->program_id}}</td>
+                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }} <br> {{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
+                    <td align="center" >{{$report->nation_name.' ['.$report->nation_name_en.']'}}</td>
+                    <td align="center" >{{(($report->stu_sex==1)?'ชาย [Male]':'หญิง [Female]')}}</td>
+                    <td align="center" >{{$report->project_id}}</td>
                     <td align="center" >{{$report->admission_status_id}}</td>
                     <td align="center" >{{$report->bachlor_year}}</td>
                     <td align="center" >{{$report->master_year}}</td>
