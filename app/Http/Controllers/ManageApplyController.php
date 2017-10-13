@@ -952,7 +952,7 @@ class ManageApplyController extends Controller {
                 }
             } else if ($reportNmae == 'B21') {
                 foreach ($curDiss as $value) {
-                    array_push($data, ["ที่" => ($i + 1), "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . '  ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . ' ' . $value->stu_first_name_en . '  ' . $value->stu_last_name_en), "สัญชาติ" => ($value->nation_name . '[' . $value->nation_name_en . ']'), "สามัญ" => (($value->admission_status_id == '5' || $value->admission_status_id == 'B' || $value->admission_status_id == 'C') ? 'ใช่' : ''), "ทดลองศึกษา" => (($value->admission_status_id == '7' || $value->admission_status_id == 'E' || $value->admission_status_id == 'D') ? 'ใช่' : ''), "สํารอง" => (($value->admission_status_id == 'A') ? 'ใช่' : ''), "GPA เกรดเฉลีย" => $value->edu_gpax, "คะแนนภาษาอังกฤษ" => (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin . '(' . $value->engTAdmin . ')' : $value->eng_test_score . '(' . $value->engT . ')'), "หมายเหตุ" => $value->admission_remark]);
+                    array_push($data, ["ที่" => ($i + 1), "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . '  ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . ' ' . $value->stu_first_name_en . '  ' . $value->stu_last_name_en), "สัญชาติ" => ($value->nation_name . '[' . $value->nation_name_en . ']'), "สามัญ" => (($value->admission_status_id == '5' || $value->admission_status_id == 'B' || $value->admission_status_id == 'C') ? 'ใช่' : ''), "ทดลองศึกษา" => (($value->admission_status_id == '7' || $value->admission_status_id == 'E' || $value->admission_status_id == 'D') ? 'ใช่' : ''), "สํารอง" => (($value->admission_status_id == 'A') ? 'ใช่' : ''), "GPA เกรดเฉลี่ย" => $value->edu_gpax, "คะแนนภาษาอังกฤษ" => (($value->eng_test_score_admin != null) ? $value->eng_test_score_admin . '(' . $value->engTAdmin . ')' : $value->eng_test_score . '(' . $value->engT . ')'), "หมายเหตุ" => $value->admission_remark]);
                     $i = $i + 1;
                 }
             }
@@ -990,7 +990,7 @@ class ManageApplyController extends Controller {
         $status = explode(',', $flow);
           $roundNo = ($roundNo != 'null') ? $roundNo: null;
          $program_type_id = ( $program_type_id != 'null') ? $program_type_id : null;
-        
+
 
         $sub_major_id = ($sub_major != null && $sub_major != 'null' ) ? $sub_major : null;
         $major = ($major_id != null && $major_id != 'null' ) ? $major_id : null;
@@ -1057,7 +1057,7 @@ class ManageApplyController extends Controller {
             $data = [];
             $i = 0;
             foreach ($curDiss as $value) {
-                array_push($data, ["No" => ($i + 1), "เลขประจำตัวประชาชน" => $value->stu_citizen_card, "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . ' ' . $value->stu_first_name_en . ' ' . $value->stu_last_name_en), "สัญชาติ" => $value->nation_name . ' ' . $value->nation_name_en, "หลักสูตร" => $value->majorcode, "ชื่อหลักสูตร" => $value->prog_name, "รหัสประเภทหลักสูตร" => $value->cond_id, "ประเภทหลักสูตร" => ($value->degree_level_name . ' ' . $value->office_time), "สาขาวิชา" => $value->major_name, "ภาควิชา" => $value->department_name, "คณะ" => $value->faculty_name, "สถานะ" => $value->flow_name]);
+                array_push($data, ["No" => ($i + 1), "เลขประจำตัวประชาชน" => $value->stu_citizen_card, "ชื่อ-สกุล" => ($value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name), "ชื่อ-สกุล(ภาษาอังกฤษ)" => ($value->name_title_en . ' ' . $value->stu_first_name_en . ' ' . $value->stu_last_name_en), "สัญชาติ" => $value->nation_name . ' ' . $value->nation_name_en, "หลักสูตร" => $value->program_id, "ชื่อหลักสูตร" => $value->prog_name, "รหัสประเภทหลักสูตร" => $value->cond_id, "ประเภทหลักสูตร" => ($value->degree_level_name . ' ' . $value->office_time), "สาขาวิชา" => $value->major_name, "ภาควิชา" => $value->department_name, "คณะ" => $value->faculty_name, "สถานะ" => $value->flow_name]);
                 $i = $i + 1;
             }
             return $this->exportExcel('ReportForeignerExam', $data);
@@ -1066,7 +1066,7 @@ class ManageApplyController extends Controller {
             $i = 0;
 
             foreach ($curDiss as $value) {
-                $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . ' ' . $value->stu_first_name_en . ' ' . $value->stu_last_name_en . ',' . $value->nation_name . ' ' . $value->nation_name_en . ',' . $value->majorcode . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
+                $string .= ($i + 1) . ',' . $value->stu_citizen_card . ',' . $value->name_title . ' ' . $value->stu_first_name . ' ' . $value->stu_last_name . ',' . $value->name_title_en . ' ' . $value->stu_first_name_en . ' ' . $value->stu_last_name_en . ',' . $value->nation_name . ' ' . $value->nation_name_en . ',' . $value->program_id . ',' . $value->prog_name . ',' . $value->cond_id . ',' . $value->degree_level_name . ' ' . $value->office_time . ',' . $value->major_name . ',' . $value->department_name . ',' . $value->faculty_name . ',' . $value->flow_name . PHP_EOL;
                 $i = $i + 1;
             }
             $fileText = $string;
@@ -1098,7 +1098,7 @@ class ManageApplyController extends Controller {
         } else {
             $sub_major_id = null;
         }
- 
+
         $user = (session('user_type')->user_role != 1) ? session('user_id') : null;
 
         $curDiss = $this->ApplicationRepo->getDataMoreThanOneMajorForMangeReport(null, null, $status, $semester, $year, $roundNo, $criteria, $user, $curr_act_id, null, $exam_status, $sub_major_id, $program_id, $program_type_id, session('user_type')->user_role, $major_id, $faculty_id);

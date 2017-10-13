@@ -55,7 +55,7 @@
             ภาควิชา   {{$reports[0]->department_name }} ({{$reports[0]->department_name_en }})     <br>
             สาขาวิชา  {{$reports[0]->major_name}} ({{$reports[0]->major_name_en}}) <br>
             หลักสูตร  {{$reports[0]->degree_name}} - {{$reports[0]->degree_name_en}}(รหัส {{$reports[0]->program_id}})<br>
-          
+
             @if($reports[0]->sub_major_id!="")แขนงวิชา {{$reports[0]->sub_major_name}} - {{$reports[0]->sub_major_name_en }} ({{$reports[0]->sub_major_id}})@endif
               <br>
 
@@ -73,7 +73,7 @@
                     <th> สามัญ  </th>
                     <th> ทดลองศึกษา </th>
                     <th> สํารองเรียง<br>ตามลําดับ  </th>
-                    <th> GPA เกรดเฉลีย  </th>
+                    <th> GPA เกรดเฉลี่ย  </th>
                     <th> คะแนน<br>ภาษาอังกฤษ  </th>
                     <th> หมายเหตุ </th>
             </thead>
@@ -82,7 +82,7 @@
             <div style="display: none">{{$i=0}} {{$a1=0}} {{$a2=0}}    </div>
             @foreach($reports as $report)
             <div style="display: none">
-                 
+
                 {{$a1+=(($report->admission_status_id == 'A' )?1:0)}}
                 {{$a2+=(($report->admission_status_id == '5'||$report->admission_status_id == 'B'||$report->admission_status_id == 'C')?1:0)}}
             </div>

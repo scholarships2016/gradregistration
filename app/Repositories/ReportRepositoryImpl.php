@@ -751,10 +751,10 @@ class ReportRepositoryImpl extends AbstractRepositoryImpl implements ReportRepos
                 $query->where('app.program_id', '=', $criteria['program_id']);
             }
             if (isset($criteria['sub_major_id'])) {
-                $query->where("curr_subm . sub_major_id", " = ", $criteria['sub_major_id']);
+                $query->where("curr_subm.sub_major_id", " = ", $criteria['sub_major_id']);
             }
             if (isset($criteria['program_type_id'])) {
-                $query->where("curr_prog . program_type_id", " = ", $criteria['program_type_id']);
+                $query->whereRaw("curr_prog.program_type_id=".$criteria['program_type_id']);
             }
 
             return $query->get();

@@ -331,7 +331,7 @@ return    full.nation_name+'  '+full.nation_name_en  ;
 } },{
 targets: [4],
 render: function (data, type, full, meta) {
-return    full.majorcode   ;
+return    full.program_id   ;
 } },{
 targets: [5],
 render: function (data, type, full, meta) {
