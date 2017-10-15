@@ -302,5 +302,5 @@ return [
 
     'lbBtnDownloadAppForm' => 'Download Appplication Form (PDF)',
     'lbSemesterNo' => 'Semester No. ',
-    'lbTimeExp' => 'Time to recruit.'
+    'lbTimeExp' => 'Time out.'
 ];
