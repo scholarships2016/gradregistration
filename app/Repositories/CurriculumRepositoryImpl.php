@@ -559,6 +559,12 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     {
         DB::beginTransaction();
         try {
+
+            if (!$this->checkRemoveableCurriculumByCurriculumId($id)) {
+                DB::rollBack();
+                return false;
+            }
+
             $currAct = DB::table('curriculum_activity')->where('curriculum_id', '=', $id)->delete();
             $currProg = DB::table('curriculum_program')->where('curriculum_id', '=', $id)->delete();
             $currSubMajor = DB::table('curriculum_sub_major')->where('curriculum_id', '=', $id)->delete();
@@ -839,6 +845,27 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     "mj.major_name");
 
             return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function checkRemoveableCurriculumByCurriculumId($id)
+    {
+        try {
+
+            $query = DB::table("curriculum as curr")
+                ->select("app.application_id")
+                ->join("application as app", function ($join) {
+                    $join->on("app.curriculum_id", "=", "curr.curriculum_id");
+                })
+                ->where("curr.curriculum_id", "=", $id);
+
+            if ($query->count() > 0) {
+                return false;
+            }
+
+            return true;
         } catch (\Exception $ex) {
             throw $ex;
         }
