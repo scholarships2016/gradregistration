@@ -88,6 +88,11 @@ class ApplySettingRepositoryImpl extends AbstractRepositoryImpl implements Apply
             }
 
             if (isset($data['ids']) && sizeof($data['ids']) > 0) {
+
+                if (!$this->checkRemoveableApplySettingBySemesterAndAcademicYearAndNotInListIds($data['semester'], $data['academic_year'], $data['ids'])) {
+                    throw new \Exception('Remove ApplySetting');
+                }
+
                 $del = ApplySetting::where('semester', '=', $data['semester'])
                     ->where('academic_year', '=', $data['academic_year'])
                     ->whereNotIn('apply_setting_id', $data['ids'])->delete();
@@ -159,7 +164,7 @@ class ApplySettingRepositoryImpl extends AbstractRepositoryImpl implements Apply
     {
         try {
             $subQuery = DB::table('apply_setting as aps')
-                ->select('aps.academic_year', 'aps.semester','aps.round_no',
+                ->select('aps.academic_year', 'aps.semester', 'aps.round_no',
                     DB::raw("concat(date_format(aps.start_date,'%d/%m/%Y'),' - ',date_format(aps.end_date,'%d/%m/%Y'),'|',aps.is_active,'|',aps.status)  as daterange"))
                 ->groupBy('aps.academic_year', 'aps.semester', 'aps.round_no', 'aps.start_date', 'aps.end_date', 'aps.is_active', 'aps.status')
                 ->orderBy('aps.academic_year', 'asc')
@@ -238,15 +243,41 @@ class ApplySettingRepositoryImpl extends AbstractRepositoryImpl implements Apply
             throw $ex;
         }
     }
-      public function getApplySettingNow()
+
+    public function getApplySettingNow()
     {
-      $current_date = date('Y-m-d');
+        $current_date = date('Y-m-d');
         try {
-            return ApplySetting::where('is_active', '=', '1')->where('status','=','1')->where('start_date','<=',$current_date)->where('end_date','>=',$current_date)->orderBy('end_date','desc')->first();
+            return ApplySetting::where('is_active', '=', '1')->where('status', '=', '1')->where('start_date', '<=', $current_date)->where('end_date', '>=', $current_date)->orderBy('end_date', 'desc')->first();
         } catch (\Exception $ex) {
             throw $ex;
         }
     }
 
+    public function checkRemoveableApplySettingBySemesterAndAcademicYearAndNotInListIds($semester, $academicYear, $ids)
+    {
+        try {
+
+            $query = DB::table('application as app')
+                ->select('app.applicantion_id')
+                ->join('curriculum_activity as curr_act', function ($join) {
+                    $join->on('curr_act.curr_act_id', '=', 'app.curr_act_id');
+                })
+                ->join('apply_setting as app_set', function ($join) {
+                    $join->on('app_set.apply_setting_id', '=', 'curr_act.apply_setting_id');
+                })
+                ->where('app_set.semester', '=', $semester)
+                ->where('app_set.academic_year', '=', $academicYear)
+                ->whereNotIn('app_set.apply_setting_id', $ids);
+
+            if ($query->count() > 0) {
+                return false;
+            }
+
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
 }
