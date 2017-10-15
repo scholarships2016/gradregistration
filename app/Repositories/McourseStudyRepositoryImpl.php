@@ -39,11 +39,12 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
                 3 => "mc.coursecodeno",
                 4 => "full_owner",
                 5 => "mc.status");
+            DB::statement(DB::raw('set @rownum=' . $criteria['start']));
             $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
             $data = null;
 
             $query = DB::table('mcoursestudy as mc')
-                ->select('mc.coursecodeno', 'mc.plan', 'mc.status', 'mc.thai', 'mc.english',
+                ->select(DB::raw('@rownum  := @rownum  + 1 AS rownum'),'mc.coursecodeno', 'mc.plan', 'mc.status', 'mc.thai', 'mc.english',
                     'tbl_dep.department_id', 'tbl_dep.department_name',
                     'maj.major_id', 'maj.major_name', 'tbl_fac.faculty_id',
                     'tbl_fac.faculty_name'
@@ -92,8 +93,11 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
                 $query->orderBy('status', 'desc');
             }
 
+            if (!($criteria['length'] == -1)) {
+                $query->offset($criteria['start'])->limit($criteria['length']);
+            }
 
-            $query->offset($criteria['start'])->limit($criteria['length']);
+            DB::statement(DB::raw('set @rownum=' . $criteria['start']));
             $data = $query->get();
 
             $result = array('draw' => $draw,
