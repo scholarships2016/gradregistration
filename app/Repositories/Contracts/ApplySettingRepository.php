@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
-interface ApplySettingRepository {
+interface ApplySettingRepository
+{
 
     public function getApplySettingByAcademicYear($year);
 
@@ -25,4 +26,6 @@ interface ApplySettingRepository {
     public function deleteBySemesterAndAcademicYear($semester, $academicYear);
 
     public function getApplySettingNow();
+
+    public function checkRemoveableApplySettingBySemesterAndAcademicYearAndNotInListIds($semester, $academicYear, $ids);
 }
