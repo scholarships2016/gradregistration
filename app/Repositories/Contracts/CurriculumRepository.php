@@ -28,4 +28,6 @@ interface CurriculumRepository
     public function checkCreatableCurriculumByCriteria($applyMethod, array $programs, $semester, $academicYear, $curriculumId = null);
 
     public function getCurriculumInfoForDropdown($criteria = null);
+
+    public function checkRemoveableCurriculumByCurriculumId($id);
 }
