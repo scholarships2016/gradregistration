@@ -306,5 +306,6 @@ return [
     'lbProfileVerifyButton' => 'ปรับปรุงข้อมูลส่วนตัว',
 
     'lbBtnDownloadAppForm' => 'ดาวน์โหลดใบสมัคร (PDF)',
-    'lbSemesterNo' => 'ภาคการศึกษาที่'
+    'lbSemesterNo' => 'ภาคการศึกษาที่',
+    'lbTimeExp' => 'หมดเวลาการรับสมัคร'
 ];

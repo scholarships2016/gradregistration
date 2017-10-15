@@ -301,5 +301,6 @@ return [
     'lbProfileVerifyButton' => 'Update Profile',
 
     'lbBtnDownloadAppForm' => 'Download Appplication Form (PDF)',
-    'lbSemesterNo' => 'Semester No. '
+    'lbSemesterNo' => 'Semester No. ',
+    'lbTimeExp' => 'Time to recruit.'
 ];

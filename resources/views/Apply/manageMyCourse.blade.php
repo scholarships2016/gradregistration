@@ -205,9 +205,18 @@
                                       <a href="javascript:;">{{Lang::get('resource.lbConfirmApply')}}</a>
                                     </h3>
                                     <div style="margin:10px 0px 10px 0px">
+                                        @if($curDis->chkASPDate > 0 || $curDis->chkDate > 0)
                                       <a class="btn  green" href="{{url('application/registerCourse/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbConfirmApply')}}
                                         <i class="fa fa-check"></i>
                                       </a>
+                                        @else
+                                             <a class="btn btn-circle red btn-outline" href="#"> {{Lang::get('resource.lbTimeExp')}}
+                                                        <i class="fa fa-close"></i>
+                                                    </a>
+                                           @endif
+                                        
+                                        
+                                        
                                       <a class="btn btn-danger mt-sweetalert sweet-8" href="javascript:cancel({{$curDis->application_id}});">  {{Lang::get('resource.lbButtonRemoveApplication')}}
                                          <i class="fa fa-times"></i>
                                      </a>
@@ -247,9 +256,16 @@
                                                       <a href="javascript:;">{{Lang::get('resource.lbUpdateDocApply')}}</a>
                                                   </h3>
                                     <div style="margin:10px 0px 10px 0px">
+                                           @if($curDis->chkASPDate > 0 || $curDis->chkDate > 0)
                                       <a class="btn btn-circle blue btn-outline" href="{{url('application/confDocApply/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbUpdateDocApply')}}
                                                         <i class="fa fa-edit"></i>
                                                     </a>
+                                           @else
+                                             <a class="btn btn-circle red btn-outline" href="#"> {{Lang::get('resource.lbTimeExp')}}
+                                                        <i class="fa fa-close"></i>
+                                                    </a>
+                                           @endif
+                                           
                                     </div>
                                   </div>
                                 </li>
