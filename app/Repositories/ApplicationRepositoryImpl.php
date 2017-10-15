@@ -156,8 +156,8 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
 
             $result = Application::select([DB::raw('*,application.created as appDates ,CAST(app_id AS CHAR) as appid,' . $Doc . ' as docapp')
                                 , DB::raw('(SELECT count(*) FROM application_document_file as af WHERE af.application_id = Application.application_id) as docCount')
-                                , DB::raw('(SELECT count(*)  FROM applicant_special_apply asp WHERE  asp.applicant_id = Application.applicant_id and (asp.start_date <= now() and asp.end_date >= now()) and asp.curriculum_id = Application.curriculum_id) as chkASPDate')
-                                , DB::raw('(case when  (start_date <= now() and end_date >= now()) then 1 else 0 end) as chkDate')
+                                , DB::raw('(SELECT count(*)  FROM applicant_special_apply asp WHERE  asp.applicant_id = Application.applicant_id and (DATE_FORMAT(asp.start_date,"%y-%m-%d") <= DATE_FORMAT(now(),"%y-%m-%d")  and DATE_FORMAT(asp.end_date,"%y-%m-%d")  >= DATE_FORMAT(now(),"%y-%m-%d")) and asp.curriculum_id = Application.curriculum_id) as chkASPDate')
+                                , DB::raw('(case when  (DATE_FORMAT(start_date,"%y-%m-%d") <= DATE_FORMAT(now(),"%y-%m-%d") and end_date >= DATE_FORMAT(now(),"%y-%m-%d")) then 1 else 0 end) as chkDate')
                                     ]
                             )
                             ->leftJoin('curriculum', 'application.curriculum_id', 'curriculum.curriculum_id')
