@@ -176,7 +176,7 @@ class CurriculumController extends Controller
             $data['programs'] = json_decode($data['programs'], true);
             $data['creator'] = $who;
             $data['modifier'] = $who;
-          
+
             $semester = explode('|', $data['semester']);
             if ($this->curriculumRepo->checkCreatableCurriculumByCriteria($data['apply_method'], $data['programs'], $semester[0], $semester[1], $data['curriculum_id'])) {
                 return response()->json(Util::jsonResponseFormat(3, null, Util::CANNOT_CREATE_CURRICULUM1));
@@ -364,6 +364,9 @@ class CurriculumController extends Controller
                 return response()->json(Util::jsonResponseFormat(3, null, Util::ERROR_OCCUR));
             }
             $result = $this->curriculumRepo->deleteCurriculumInfoByCurriculumId($data['curriculum_id']);
+            if (!$result) {
+                return response()->json(Util::jsonResponseFormat(3, null, Util::CANNOT_DELETE));
+            }
 
             /*
              * Audit Info
