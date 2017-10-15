@@ -182,8 +182,8 @@
                 },
 
                 "lengthMenu": [
-                    [10, 20, 50, 100, 150],
-                    [10, 20, 50, 100, 150] // change per page values here
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, 'All'] // change per page values here
                 ],
                 "pageLength": 50, // default record count per page
                 "ajax": {
@@ -207,7 +207,7 @@
                         orderable: false,
                         class: 'text-center',
                         render: function (data, type, full, meta) {
-                            return meta.row + 1;
+                            return full.rownum;
                         }
                     }, {
                         targets: 1,
