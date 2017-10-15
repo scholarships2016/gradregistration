@@ -52,19 +52,20 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
         return $result;
     }
 
-    public function getByCitizenOrEmail($citizencard = null, $email = null) {
+    public function getByCitizenOrEmail($citizencard = null, $email = null)
+    {
         $result = null;
         try {
-            $result = Applicant:: Where(function ($query)use ($citizencard) {
-                        if ($citizencard) {
-                            $query->where('stu_citizen_card', $citizencard);
-                        }
-                    })
-                    ->Where(function ($query)use ($email) {
-                        if ($email) {
-                            $query->where('stu_email', $email);
-                        }
-                    })
+            $result = Applicant:: Where(function ($query) use ($citizencard) {
+                if ($citizencard) {
+                    $query->where('stu_citizen_card', $citizencard);
+                }
+            })
+                ->Where(function ($query) use ($email) {
+                    if ($email) {
+                        $query->where('stu_email', $email);
+                    }
+                })
                 ->first();
         } catch (\Exception $ex) {
             throw $ex;
@@ -255,7 +256,6 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->app_work_status = $data['app_work_status'];
 
 
-
             if (array_key_exists('creator', $data))
                 $curObj->creator = $data['creator'];
             if (array_key_exists('modifier', $data))
@@ -300,7 +300,6 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 $curObj->edu_degree = $data['edu_degree'];
             if (array_key_exists('grad_level', $data))
                 $curObj->grad_level = $data['grad_level'];
-
 
 
             if (array_key_exists('creator', $data))
@@ -430,11 +429,13 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
             $columnMap = array(
                 1 => "",
             );
+
+            DB::statement(DB::raw('set @rownum=' . $criteria['start']));
             $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
             $data = null;
 
             $mainQuery = DB::table('applicant as appt')
-                ->select(
+                ->select(DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                     'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip', 'appt.creator'
                 )
                 ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
@@ -471,7 +472,11 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $recordsFiltered = $mainQuery->get()->count();
 //            $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
-            $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+            if (!($criteria['length'] == -1)) {
+                $mainQuery->offset($criteria['start'])->limit($criteria['length']);
+            }
+
+            DB::statement(DB::raw('set @rownum=' . $criteria['start']));
 
             $data = $mainQuery->get();
 
