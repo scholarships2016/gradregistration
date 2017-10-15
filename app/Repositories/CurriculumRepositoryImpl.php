@@ -186,7 +186,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->where('apply_setting.is_active', 'like', '%' . $status . '%')
                 ->where('apply_setting.status', 'like', '%' . $status . '%')
                 ->Where(function ($query) use ($inTime,$getDetail) {
-                    if ($inTime != null && $getDetail==false) {
+                    if ($inTime != null && $getDetail == false) {
                         $query->where('apply_setting.start_date', '<=', Carbon::now()->toDateString())
                             ->where('apply_setting.end_date', '>=', Carbon::now()->toDateString());
                     }
@@ -253,7 +253,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
             $cur->orWhere(function ($query) use ($user,$getDetail) {
 
-                if ($user != null && $getDetail==false) {
+                if ($user != null && $getDetail == false) {
                     $query->whereIn('curriculum.curriculum_id', function ($query) use ($user) {
                         $query->select('curriculum_id')
                             ->from('applicant_special_apply')
