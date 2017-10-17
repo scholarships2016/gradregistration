@@ -855,13 +855,40 @@ class ReportController extends Controller
                 throw new \Exception('Cannot Export');
             }
 
-            Excel::create($rptName, function ($excel) use ($data, $rptName) {
-                $excel->sheet($rptName, function ($sheet) use ($data) {
-                    $sheet->setFontFamily('TH Sarabun New');
-                    $sheet->setFontSize(14);
-                    $sheet->fromArray(json_decode(json_encode($data), true), null, 'A1', false, false);
-                });
-            })->export($param['fileType']);
+            if ($param['fileType'] == 'xls') {
+                Excel::create($rptName, function ($excel) use ($data, $rptName) {
+                    $excel->sheet($rptName, function ($sheet) use ($data) {
+                        $sheet->setFontFamily('TH Sarabun New');
+                        $sheet->setFontSize(14);
+                        $sheet->fromArray(json_decode(json_encode($data), true), null, 'A1', false, false);
+                    });
+                })->export($param['fileType']);
+            } else {
+                $string = '';
+                $i = 0;
+
+                if ($param['rpt_type'] == 1) {
+                    foreach ($data as $index => $value) {
+                        $string .= ($i + 1) . ',' . $value->app_id . ',' . $value->pass . ',' . $value->project_id . ',' . $value->sex . ',' . $value->prename_id . ',' . $value->nation_id . ',' . $value->fnamet . ',' . $value->lnamet . ',' . $value->fnamee . ',' . $value->lnamee . ',' . $value->major_id . ',' . $value->program_id . ',' . $value->degree_name . ',' . $value->cond_id . PHP_EOL;
+                        $i = $i + 1;
+                    }
+                } else if ($param['rpt_type'] == 2) {
+                    foreach ($data as $index => $value) {
+                        $string .= ($i + 1) . ',' . $value->app_id . ',' . $value->stu_citizen_card . ',' . $value->stu_birthdate . ',' . $value->stu_religion . ',' . $value->stu_addr_no . ',' . $value->stu_addr_village . ',' . $value->stu_addr_soi . ',' . $value->stu_addr_road . ',' . $value->district_code . ',' . $value->province_code . ',' . $value->stu_addr_pcode . PHP_EOL;
+                        $i = $i + 1;
+                    }
+                } else if ($param['rpt_type'] == 3) {
+                    foreach ($data as $index => $value) {
+                        $string .= ($i + 1) . ',' . $value->pass . ',' . $value->app_id . ',' . $value->fnamet . ',' . $value->lnamet . ',' . $value->work_status_id . ',' . $value->work_stu_detail . ',' . $value->work_stu_position . PHP_EOL;
+                        $i = $i + 1;
+                    }
+                }
+
+                $fileText = $string;
+                $myName = $rptName . ".txt";
+                $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName), 'Content-Length' => strlen($fileText)];
+                return response()->make($fileText, 200, $headers);
+            }
 
         } catch (\Exception $ex) {
             throw $ex;
