@@ -28,6 +28,7 @@ Route::post('register', ['as' => 'registerApplicant', 'uses' => 'Auth\LoginAppli
 
 //login Admin
 //Route::get('login/admin', 'Auth\LoginUserController@checkuserldap');
+Route::get('admin', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
 Route::get('admin/login/', 'Auth\LoginUserController@showLoginForm')->name('showLoginAdmin');
 Route::post('login_admin', 'Auth\LoginUserController@postLogin')->name('adminlogin');
 Route::get('admin/logout', 'Auth\LoginUserController@getLogout')->name('logout');
