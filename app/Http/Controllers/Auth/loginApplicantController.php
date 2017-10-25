@@ -68,7 +68,7 @@ class LoginApplicantController extends Controller {
                 $app = ['last_login' => \Carbon\Carbon::now()->toDateTimeString(), 'applicant_id' => $user_data->applicant_id];
                 $this->loginapplicantRepo->saveApplicant($app);
                 if ($user_data->stu_img) {
-                    $pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
+                    //$pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
             } catch (Exception $e) {
 
@@ -77,7 +77,7 @@ class LoginApplicantController extends Controller {
             session()->put('first_name', $user_data->stu_first_name_en);
             session()->put('last_name', $user_data->stu_last_name_en);
             session()->put('email_address', $user_data->stu_email);
-            session()->put('stu_img', $pic);
+            session()->put('stu_img', $user_data->stu_img);
             $role = new \stdClass();
             $role->user_role = '';
             $role->user_type = 'applicant';
