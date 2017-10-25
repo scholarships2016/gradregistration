@@ -130,7 +130,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= " M.PLAN, M.LANGUAGE, M.THAI, ";
             $queryStr .= " M.ENGLISH, M.DEGREETHAI, M.DEGREEENGLISH, ";
             $queryStr .= " M.STATUS, M.USERCODE, M.UPDATEDATE, M.CHANGESTAMP, NOW(),'{$performer}'  ";
-            $queryStr .= " FROM cureg.mcoursestudy as M WHERE coursecodeno = M.COURSECODENO ";
+            $queryStr .= " FROM CUREG.MCOURSESTUDY as M WHERE coursecodeno = M.COURSECODENO ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " PROGRAMSYSTEM = M.PROGRAMSYSTEM, ";
             $queryStr .= " STUDYPROGRAMSYSTEM = M.STUDYPROGRAMSYSTEM, CALENDAR=M.CALENDAR, ";
