@@ -59,7 +59,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                         ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                 })
-                ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                 ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                 ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                 ->where('curriculum.status', 'like', '%' . $status . '%')
@@ -95,7 +95,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 })
                 ->Where(function ($query) use ($degree_id) {
                     if ($degree_id != null || $degree_id != '') {
-                        $query->where('tbl_Degree.degree_id', $degree_id);
+                        $query->where('tbl_degree.degree_id', $degree_id);
                     }
                 })
                 ->Where(function ($query) use ($faculty_id) {
@@ -178,7 +178,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                     $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                         ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                 })
-                ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                 ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                 ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                 ->where('curriculum.status', 'like', '%' . $status . '%')
@@ -224,7 +224,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             }
             if ($degree_id != null || $degree_id != '') {
 
-                $cur->where('tbl_Degree.degree_id', $degree_id);
+                $cur->where('tbl_degree.degree_id', $degree_id);
             }
             if ($faculty_id != null || $faculty_id != '') {
 

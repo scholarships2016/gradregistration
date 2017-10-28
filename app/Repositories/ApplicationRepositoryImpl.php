@@ -131,7 +131,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
               $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
               ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
               })
-              ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+              ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
               ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
               ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
               ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
@@ -175,7 +175,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                                 ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                             })
-                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                            ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
@@ -218,7 +218,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                         $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                         ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                     })
-                    ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                    ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                     ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                     ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                     ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
@@ -357,7 +357,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                                 ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                             })
-                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                            ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
@@ -520,7 +520,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                                 ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                             })
-                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                            ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
@@ -724,7 +724,7 @@ class ApplicationRepositoryImpl extends AbstractRepositoryImpl implements Applic
                                 $join->on("tbl_major.major_id", "=", "mcoursestudy.majorcode")
                                 ->on("tbl_major.department_id", "=", "mcoursestudy.depcode");
                             })
-                            ->leftJoin('tbl_Degree', 'curriculum.degree_id', '=', 'tbl_Degree.degree_id')
+                            ->leftJoin('tbl_degree', 'curriculum.degree_id', '=', 'tbl_degree.degree_id')
                             ->leftJoin('tbl_faculty', 'curriculum.faculty_id', '=', 'tbl_faculty.faculty_id')
                             ->leftJoin('tbl_department', 'curriculum.department_id', '=', 'tbl_department.department_id')
                             ->leftJoin('tbl_flow_apply', 'application.flow_id', '=', 'tbl_flow_apply.flow_id')
