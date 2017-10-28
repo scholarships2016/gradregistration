@@ -261,8 +261,9 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   background-color: none;
 }
 .table-responsive{
-  overflow-x: hidden;
-  
+  /*overflow-x: hidden;*/
+  overflow-x: unset;
+
 }
 .note p, .page-loading, .panel .panel-body {
     font-size: 14px;
