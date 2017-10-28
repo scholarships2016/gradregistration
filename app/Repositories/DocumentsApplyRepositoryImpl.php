@@ -15,7 +15,7 @@ class DocumentsApplyRepositoryImpl extends AbstractRepositoryImpl implements Doc
     public function __construct() {
         parent::setModelClassName(TblDocumentsApply::class);
     }
- 
+
     public function getDetail(){
          $result = null;
         try {
@@ -34,7 +34,7 @@ class DocumentsApplyRepositoryImpl extends AbstractRepositoryImpl implements Doc
         }
         return $result;
     }
-    
+
        public function getDetailReport(){
          $result = null;
         try {
