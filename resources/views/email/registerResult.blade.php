@@ -10,7 +10,7 @@ Dear {{$stu_name}},
 
 
 
-For more information, please login to registration website http://161.200.133.96 or contact program officer Tel. 02-2186880
+For more information, please login to registration website http://161.200.133.13 or contact program officer Tel. 02-2186880
 
 
 .:: Graduate Student Online Registration System ::.
