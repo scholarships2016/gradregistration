@@ -57,7 +57,7 @@
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}            </div></td>
                                     <td style="width:410px;"align="center"   >
                                         <div align="center">
-                                            <img src="{{asset('images/bwpk.gif')}}" border="0">
+                                            <img src="{{asset('images/bwpk.jpg')}}" border="0">
                                             <br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย
                                             <br>Graduate School, Chulalongkorn University
                                             <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา
@@ -72,7 +72,7 @@
 
                             </tbody>
                         </table>
-                                         
+
 
                         <table style="width:700px" border="0" cellpadding="0" cellspacing="1">
                             <tbody><tr>

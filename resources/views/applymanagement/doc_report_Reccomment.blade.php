@@ -47,7 +47,7 @@
                   <br/><br/>
                     <td style="align:center;font-weight:bold;font-size:32px;">
                         <div align="center">
-                            <img src="{{asset('images/bwpk.png')}}" border="0">
+                            <img src="{{asset('images/bwpk.jpg')}}" border="0">
                             <br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย
                             <br>
                             <br>     <br>     <br>

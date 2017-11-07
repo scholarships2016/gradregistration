@@ -101,7 +101,7 @@
                                         <hr>
                                         <div align="center">ใบสมัครเลขที่<br>Application ID<br>
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}            </div></td>
-                                    <td width="441" height="158"><div align="center"><img src="{{asset('images/bwpk.png')}}" border="0"><br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br>Graduate School, Chulalongkorn University <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา<br>Application Form<br>
+                                    <td width="441" height="158"><div align="center"><img src="{{asset('images/bwpk.jpg')}}" border="0"><br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br>Graduate School, Chulalongkorn University <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา<br>Application Form<br>
                                             &nbsp;&nbsp;<br>
                                         </div></td>
 
