@@ -101,10 +101,10 @@
                                         <hr>
                                         <div align="center">ใบสมัครเลขที่<br>Application ID<br>
                                             {{ str_pad($app->app_id, 5, '0', STR_PAD_LEFT) }}            </div></td>
-                                    <td width="441" height="158"><div align="center"><img src="{{asset('images/bwpk.gif')}}" border="0"><br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br>Graduate School, Chulalongkorn University <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา<br>Application Form<br>
+                                    <td width="441" height="158"><div align="center"><img src="{{asset('images/bwpk.png')}}" border="0"><br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย<br>Graduate School, Chulalongkorn University <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา<br>Application Form<br>
                                             &nbsp;&nbsp;<br>
                                         </div></td>
-                                    
+
                                     <td width="278" rowspan="4" align="center"><img src="{{route('profile.getProfileImg',['applicant_id' => Crypt::encrypt($app->applicant_id) ])}}" width="180px" border="0"></td>
                                 </tr>
                                 <tr>
