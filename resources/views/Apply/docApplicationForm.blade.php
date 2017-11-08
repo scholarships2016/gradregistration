@@ -58,6 +58,7 @@
                                     <td style="width:410px;"align="center"   >
                                         <div align="center">
                                             <img src="{{asset('images/bwpk.jpg')}}" border="0">
+                                             
                                             <br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย
                                             <br>Graduate School, Chulalongkorn University
                                             <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา
