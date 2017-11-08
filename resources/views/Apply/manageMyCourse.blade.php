@@ -136,8 +136,8 @@
 
                     <hr/>
                      @if($curDis->flow_id>=2)
-                    <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbDocID')}} <span class="label label-warning">{{ str_pad($curDis->app_id, 5, '0', STR_PAD_LEFT) }} </span> </div>
-                    <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}} <span class="label label-warning">{{$curDis->program_id.' - '.str_pad($curDis->curriculum_num, 4, '0', STR_PAD_LEFT)}}</span> </div>
+                    <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbDocID')}} <span style="font-size: 12px" class="label label-warning">{{ str_pad($curDis->app_id, 5, '0', STR_PAD_LEFT) }} </span> </div>
+                    <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbAppNo')}} <span style="font-size: 12px" class="label label-warning">{{$curDis->program_id.' - '.str_pad($curDis->curriculum_num, 4, '0', STR_PAD_LEFT)}}</span> </div>
                     @endif
 
                     <div class="todo-tasklist-item-text"> {{Lang::get('resource.lbStatus')}} <span class="label label-info">{{  ($curDis->flow_name != '')?(session('locale')=='th')?  $curDis->flow_name : $curDis->flow_name_en:'-'   }} </span> </div>
