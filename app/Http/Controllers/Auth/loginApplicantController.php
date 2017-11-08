@@ -71,7 +71,7 @@ class LoginApplicantController extends Controller {
                     //$pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
             } catch (Exception $e) {
-
+                
             }
             session()->put('user_id', $user_data->applicant_id);
             session()->put('first_name', $user_data->stu_first_name_en);
@@ -110,7 +110,7 @@ class LoginApplicantController extends Controller {
     }
 
     public function reLogin(Request $request) {
-        $result = $this->loginapplicantRepo->getByCitizenOrEmail('', $request->stu_email);
+        $result = $this->loginapplicantRepo->getByCitizenOrEmail(null, $request->stu_email);
         if ($result) {
 
             $random_pass = str_random(8);
@@ -136,8 +136,8 @@ class LoginApplicantController extends Controller {
     }
 
     public function register(request $request) {
-
-        if (count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, $request->stu_email)) == 0) {
+    
+        if (count($this->loginapplicantRepo->getByCitizenOrEmail(null, $request->stu_email)) <= 0 && count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, null))<= 0) {
             $result = $this->loginapplicantRepo->saveApplicant($request->all());
             if ($result) {
                 Controller::WLog('User Register[' . $request->stu_email . ']', 'User_Login', null);
