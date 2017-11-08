@@ -28,7 +28,7 @@ class ApplicationPeopleRefRepositoryImpl extends AbstractRepositoryImpl implemen
             DB::statement(DB::raw('set @rownum=0'));
             $result = DB::table('application_people_ref')
                 ->select(DB::raw('application_people_ref.*, @rownum := @rownum + 1  AS RowNum'))
-                ->where('application_id', $appID)->get();
+                ->where('application_id', $appID)->distinct()->get();
         } catch (\Exception $ex) {
             throw $ex;
         }

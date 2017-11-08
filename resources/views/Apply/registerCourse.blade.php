@@ -431,6 +431,9 @@ $(function() {
             });
 
                if(valdata.length > 0 && $("#bank_id option:selected").index()>0){
+                   
+                   $('#pageSave').hide();
+                   
                              $.ajax({
 					type: "POST",
 					url: '{!! Route('datatables.savePeopoleRef') !!}',
@@ -444,12 +447,14 @@ $(function() {
                                                 _token:     '{{ csrf_token() }}'
                                                } ,
 					success : function(data){
+                                        $('#pageSave').show();
                                         toastr.success('ดำเนินการเรียบร้อย');
                                  	window.location.href = '{!! Route('manageMyCourse') !!}';
 
 					}
 				},"json");
                                 }else{
+                             $('#pageSave').show();
                               toastr.warning('กรุณากรอกธนาคารที่ชำระเงิน และ/หรือ บุคคลอ้างอิง <br/>Please select bank for payment and/or reference person.');
                         }
 
