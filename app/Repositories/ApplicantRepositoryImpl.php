@@ -436,7 +436,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
 
             $mainQuery = DB::table('applicant as appt')
                 ->select(DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                    'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip', 'appt.creator'
+                    'appt.applicant_id', 'appt.stu_citizen_card', DB::raw("concat(tbl_nt.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_th"), DB::raw("concat(tbl_nt.name_title_en,' ',appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_en"), 'appt.stu_email', 'appt.stu_phone', DB::raw("GROUP_CONCAT(concat(app.application_id,'|',curr_prog.curr_prog_id,'|',curr_prog.program_id) SEPARATOR ',') as curriculum_progs"), DB::raw("date_format(appt.created,'%d-%m-%Y %H:%i') as register_date"), DB::raw("date_format(appt.last_login,'%d-%m-%Y %H:%i') as login_datetime"), 'appt.ipaddress as login_ip', 'appt.creator'
                 )
                 ->leftJoin('tbl_name_title as tbl_nt', function ($join) {
                     $join->on('tbl_nt.name_title_id', '=', 'appt.name_title_id');
@@ -519,7 +519,7 @@ class ApplicantRepositoryImpl extends AbstractRepositoryImpl implements Applican
                 ->select("appt.applicant_id",
                     "appt.stu_citizen_card",
                     DB::raw("concat(tle.name_title,appt.stu_first_name,' ',appt.stu_last_name) as fullname_thai"),
-                    DB::raw("concat(tle.name_title_en,appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_eng"),
+                    DB::raw("concat(tle.name_title_en,' ',appt.stu_first_name_en,' ',appt.stu_last_name_en) as fullname_eng"),
                     "appt.stu_phone",
                     "appt.stu_email",
                     "appt.stu_sex",
