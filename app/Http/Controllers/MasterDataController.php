@@ -199,4 +199,18 @@ class MasterDataController extends Controller
         }
     }
 
+    public function getDegreeByMajorIdForDropdown(Request $request)
+    {
+        if ($request->ajax()) {
+            try {
+                $param = $request->all();
+                $result = Util::prepareDataForDropdownList(json_decode($this->degreeRepo->getDegreeByMajorIdForDropdown($param['major_id']), true), 'degree_id', 'degree_name_full');
+                return response()->json($result);
+            } catch (\Exception $ex) {
+                throw $ex;
+            }
+        }
+
+    }
+
 }
