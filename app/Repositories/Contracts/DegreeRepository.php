@@ -14,6 +14,8 @@ interface DegreeRepository
     public function delete($id);
 
     public function getAllDegreeForDropdown();
+
+    public function getDegreeByMajorIdForDropdown($majorId);
 }
  
 

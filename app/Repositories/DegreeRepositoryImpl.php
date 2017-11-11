@@ -91,4 +91,24 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
         }
     }
 
+    public function getDegreeByMajorIdForDropdown($majorId)
+    {
+        try {
+            $query = DB::table('tbl_major as ma')
+                ->select('de.degree_id', 'de.degree_name', 'de.degree_name_en',
+                    DB::raw("concat(de.degree_name,' (',de.degree_name_en,')') as degree_name_full")
+                )->join('mcoursestudy as m', function ($join) {
+                    $join->on('m.majorcode', '=', 'ma.major_id')
+                        ->where('m.status', '=', 'A');
+                })->join('tbl_degree as de', function ($join) {
+                    $join->on('de.degree_id', '=', 'm.degree');
+                })->groupBy('de.degree_id', 'de.degree_name', 'de.degree_name_en');
+            if (!empty($majorId)) {
+                $query->where('ma.major_id', '=', $majorId);
+            }
+            return $query->get();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 }
