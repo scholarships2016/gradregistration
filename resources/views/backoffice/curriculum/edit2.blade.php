@@ -11,7 +11,7 @@
 <link href="{{asset('assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet"
       type="text/css"/>
-      <link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
 
 </style>
@@ -545,9 +545,11 @@
                             <a id="saveBtn" onclick="submit_form()" class="btn green">บันทึก
                             </a>
                         </div>
-                        <div class="col-md-7 text-center" style="border-left: 2px solid #cccccc;/* border-bottom: 1px dotted; */padding: 5px;background: #f9f1f1;">
+                        <div class="col-md-7 text-center"
+                             style="border-left: 2px solid #cccccc;/* border-bottom: 1px dotted; */padding: 5px;background: #f9f1f1;">
                             <a id="sendToApprBtn" onclick="prepareModal('SEND_APPR')" href="#transCommentModal"
-                               class="btn btn-circle blue" style="display:none;"> <i class="fa fa-arrow-circle-right"> ส่งอนุมัติ </i></a>
+                               class="btn btn-circle blue" style="display:none;"> <i class="fa fa-arrow-circle-right">
+                                    ส่งอนุมัติ </i></a>
                             <a id="rejectBtn" onclick="prepareModal('REJECT')" class="btn btn-circle yellow"
                                style="display:none;"> <i class="fa fa-mail-reply"></i> ส่งกลับให้แก้ไข </a>
                             <a id="apprBtn" onclick="prepareModal('APPR')" class="btn btn-circle green"
@@ -581,8 +583,10 @@
 <script src="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('assets/global/plugins/ckeditor/ckeditor_standard/ckeditor.js')}}" type="text/javascript"></script>
-<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js')}}"
+        type="text/javascript"></script>
 <script src="{{asset('/assets/pages/scripts/ui-sweetalert.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/Util.js')}}" type="text/javascript"></script>
 <script type="application/javascript">
@@ -875,7 +879,7 @@
             }
         });
 
-        var csLoadDegree = new Select2Cascade($('#major_id'), $('#degree_id'), "{{route('masterdata.getAllDegreeForDropdown')}}", select2Option);
+        var csLoadDegree = new Select2Cascade($('#major_id'), $('#degree_id'), "{{route('masterdata.getDegreeByMajorIdForDropdown')}}?major_id=:parentId:", select2Option);
         csLoadDegree.then(function (parent, child, items) {
             if (items.length != 0) {
                 if (firstLoadDegree) {
@@ -1045,10 +1049,10 @@
         });
         //Commented by iChok
         /*
-        CKEDITOR.replace('additional_question', {
-            customConfig: '{{asset('js/ckeditor_config.js')}}'
-        });
-        */
+         CKEDITOR.replace('additional_question', {
+         customConfig: '{{asset('js/ckeditor_config.js')}}'
+         });
+         */
     }
 
     function addDataToCourseTable(obj) {
@@ -1161,16 +1165,16 @@
                         }
 
                         //check if adding data and status is Draft
-                        if(data.curriculum.is_approve == 1){
-                          //Disable semester and academic_year
-                          $('#semester').prop('readonly', 'readonly');
+                        if (data.curriculum.is_approve == 1) {
+                            //Disable semester and academic_year
+                            $('#semester').prop('readonly', 'readonly');
 
-                          //show Submit to Admin button
-                          $('#sendToApprBtn').css("display","block");
+                            //show Submit to Admin button
+                            $('#sendToApprBtn').css("display", "block");
 
-                          //redirect to edit page
-                          var url = '{{url('admin/management/curriculum/edit/')}}'+'/'+data.curriculum.curriculum_id;
-                        //  window.location.href = url;
+                            //redirect to edit page
+                            var url = '{{url('admin/management/curriculum/edit/')}}' + '/' + data.curriculum.curriculum_id;
+                            //  window.location.href = url;
 
                         }
                     }
@@ -1564,8 +1568,8 @@
         $("#section2").find("textarea").attr('disabled', 'disabled');
         CKEDITOR.instances['additional_detail'].setReadOnly(true);
         CKEDITOR.instances['additional_question'].setReadOnly(true);
-        if($("#cke_exam_schedule_0")){
-          CKEDITOR.instances['exam_schedule_0'].setReadOnly(true);
+        if ($("#cke_exam_schedule_0")) {
+            CKEDITOR.instances['exam_schedule_0'].setReadOnly(true);
         }
 
     }
@@ -1609,7 +1613,7 @@
             formData.append("document_file", $("#document_file")[0].files[0]);
         }
 
-        disabled.attr('disabled','disabled');
+        disabled.attr('disabled', 'disabled');
 
         return formData;
     }
@@ -1704,20 +1708,20 @@
         });
     }
     function showConfirmDelete() {
-      swal({
-        title: 'ยืนยัน',
-        text: 'คุณต้องการลบข้อมูล ใช่หรือไม่?',
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        showLoaderOnConfirm: true
-      }, function() {
+        swal({
+            title: 'ยืนยัน',
+            text: 'คุณต้องการลบข้อมูล ใช่หรือไม่?',
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
+        }, function () {
 
 
-        setTimeout(function() {
-          doDelete();
-        }, 100);
-      });
+            setTimeout(function () {
+                doDelete();
+            }, 100);
+        });
     }
     function doDelete() {
         var dataObj = prepareData();
@@ -1737,9 +1741,9 @@
                 if (data !== null) {
                 }
                 setActionButtonAndDisableForm();
-                 setTimeout(function() {
-                   window.location.href = '{{route('admin.curriculum.showManagePage')}}';
-                 }, 1000);
+                setTimeout(function () {
+                    window.location.href = '{{route('admin.curriculum.showManagePage')}}';
+                }, 1000);
             }
         });
     }
