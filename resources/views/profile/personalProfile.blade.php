@@ -51,6 +51,9 @@
                 <li class="">
                     <a href="#tab_1_4" data-toggle="tab"> {{Lang::get('resource.lbTabChangePassword')}} </a>
                 </li>
+                <li class="" style="float:right;">
+                  <a href="apply/"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.btnContinueToApply')}}  </button></a>
+                </li>
             </ul>
             <div class="tab-content active">
                 <div class="tab-pane active" id="tab_1_1">
@@ -233,6 +236,11 @@
                                             @include('includes.profile.editWorkExp')
                                         </div>
                                     </div>
+                                    <div class="row">
+                                      <div class="col-md-12 text-center">
+                                        <a href="apply/"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.btnContinueToApply')}}  </button></a>
+                                      </div>
+                                      </div>
 
 
                                 </div>
@@ -717,12 +725,12 @@ function disablePersonalInfo() {
         disableAll();
         @endif-->
     });
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 </script>
 @endpush

@@ -307,5 +307,6 @@ return [
 
     'lbBtnDownloadAppForm' => 'ดาวน์โหลดใบสมัคร (PDF)',
     'lbSemesterNo' => 'ภาคการศึกษาที่',
-    'lbTimeExp' => 'หมดเวลาการรับสมัคร'
+    'lbTimeExp' => 'หมดเวลาการรับสมัคร',
+    'btnContinueToApply' => 'เริ่มต้นสมัครเข้าศึกษา'
 ];

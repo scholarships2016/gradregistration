@@ -71,7 +71,7 @@ class LoginApplicantController extends Controller {
                     //$pic = $this->FileRepo->getImageFileAsBase64ById($user_data->stu_img);
                 }
             } catch (Exception $e) {
-                
+
             }
             session()->put('user_id', $user_data->applicant_id);
             session()->put('first_name', $user_data->stu_first_name_en);
@@ -92,8 +92,9 @@ class LoginApplicantController extends Controller {
             session()->put('Applicant', $app);
             Controller::WLog('User Applicant Login[' . $user_data->stu_email . ']', 'User_Login', null);
             session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->stu_first_name . ' ' . $user_data->stu_last_name);
-
-            return redirect('/home');
+            //Modified by Chok on June 26,2018
+            //return redirect('/home');
+            return redirect('/profile#tab_1_3');
         } else {
             Controller::WLog('User Applicant Not Login', 'User_Login', null);
             session()->flash('errorMsg', Lang::get('resource.lbCannotLogin'));
@@ -136,7 +137,7 @@ class LoginApplicantController extends Controller {
     }
 
     public function register(request $request) {
-    
+
         if (count($this->loginapplicantRepo->getByCitizenOrEmail(null, $request->stu_email)) <= 0 && count($this->loginapplicantRepo->getByCitizenOrEmail($request->stu_citizen_card, null))<= 0) {
             $result = $this->loginapplicantRepo->saveApplicant($request->all());
             if ($result) {
