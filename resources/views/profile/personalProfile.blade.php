@@ -25,6 +25,9 @@
                 <span>{{Lang::get('resource.lbMProfile')}}</span>
             </li>
         </ul>
+        <div class="pull-right">
+          <a href="apply/"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.btnContinueToApply')}}  </button></a>
+        </div>
     </div>
 @stop
 
@@ -51,9 +54,7 @@
                 <li class="">
                     <a href="#tab_1_4" data-toggle="tab"> {{Lang::get('resource.lbTabChangePassword')}} </a>
                 </li>
-                <li class="" style="float:right;">
-                  <a href="apply/"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.btnContinueToApply')}}  </button></a>
-                </li>
+
             </ul>
             <div class="tab-content active">
                 <div class="tab-pane active" id="tab_1_1">
