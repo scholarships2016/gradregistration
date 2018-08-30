@@ -127,6 +127,7 @@
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
+                              @if(session('user_type')->user_type == 'Admin' ||in_array("7",session('user_permission')))
                                 <li class=" nav-item  menuitem   @if(strpos($curr_url, 'payment-summary-report') !== false) open active @endif">
                                     <a href="{{url('admin/report/payment-summary-report')}}" class="nav-link ">
                                         <span class="title">สรุปยอดการชำระเงิน</span>
@@ -150,6 +151,7 @@
 
                                     </a>
                                 </li>
+                                @endif
 
                                 <li class=" nav-item  menuitem   @if(strpos($curr_url, 'gs03-report') !== false) open active @endif">
                                     <a href="{{url('admin/report/gs03-report')}}" class="nav-link ">
@@ -172,6 +174,7 @@
                                     </a>
                                 </li>
 
+                                @if(session('user_type')->user_type == 'Admin' ||in_array("7",session('user_permission')))
                                 <li class=" nav-item  menuitem   @if(strpos($curr_url, 'multiple-application-report') !== false) open active @endif">
                                     <a href="{{url('admin/report/multiple-application-report')}}" class="nav-link ">
                                         <span class="title">ผู้สอบได้มากกว่า 1 สาขาขึ้นไป</span>
@@ -204,7 +207,7 @@
                                     </a>
                                 </li>
 
-                                @if(session('user_type')->user_type == 'Admin' ||in_array("7",session('user_permission')))
+
                                     <li class=" nav-item  menuitem @if(strpos($curr_url, 'satisfaction-report') !== false) open active @endif">
                                         <a href="{{url('admin/report/satisfaction-report')}}" class="nav-link ">
                                             <span class="title">ความพึงพอใจการใช้งานระบบ  </span>
