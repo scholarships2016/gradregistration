@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
@@ -51,13 +50,142 @@ class LoginUserController extends Controller {
         ]);
     }
 
+    public function get_account_ldap($user, $pass){
+
+    	$ldaphost = "ldapgw.it.chula.ac.th";  // ldap servers
+      $ldaphosts = "ldaps://ldapgw.it.chula.ac.th:636";
+    	$ldaptree  = "dc=chula,dc=ac,dc=th";  // ldap tree search
+
+
+
+    	// Connecting to LDAP
+    	$ldapconn = ldap_connect($ldaphosts) or die("Could not connect to $ldaphosts");
+      ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
+
+      if(!ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3)){
+      print "Could not set LDAPv3\r\n";
+      }
+
+
+    	$result = ldap_search($ldapconn, $ldaptree, "(uid=".$user.")")
+    				or die ("Error in search query: ".ldap_error($ldapconn));
+    	$count = ldap_count_entries($ldapconn, $result);
+    	if ($count != 1) {
+    		return NULL;
+    	} else {
+    		$data = ldap_get_entries($ldapconn, $result);
+    		$dn = (isset($data[0]["dn"])?$data[0]["dn"]:false);
+
+    		// try to bindling with dn
+    		if($dn !== false){
+    			// verify binding
+    			$bind = ldap_bind($ldapconn, $dn, $pass);
+    			if ($bind) {
+    				return $data;
+    			} else {
+    				return false;
+    			}
+    		}else{
+    			return false;
+    		}
+    	}
+    }
+
     public function checkuserldap($username, $password) {
- //return true;
+
         if ($username != 'administrator' && $username != 'facultystaff' && $username != 'gradstaff') {
 
-            $url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
+            $json = $this->get_account_ldap($username, $password);
+
+             if (strtolower($json[0]['uid'][0])==  strtolower($username)) {
+
+               //Login Successed
+               $user_id = $json[0]['uid'][0];
+               $firstname_th = $json[0]['thcn'][0];
+               $surname_th = $json[0]['thsn'][0];
+               $fullname_en = $json[0]['cn'][0];
+               $firstname_en = $json[0]['givenname'][0];
+               $surname_en = $json[0]['sn'][0];
+               $email = $json[0]['mail'][0];
+               $email_option = $json[0]['miforwardingaddress'][0];
+               $citizen_id = $json[0]['pplid'][0];
+
+               session()->put('fullname_en', $fullname_en);
+               /* Start update fullname to USER Table */
+
+               return true;
+             }else{
+               //Login Failed
+               return false;
+             }
+
+        } else {
+            return true;
+        }
+    }
+    public function checkuserldapViaGateWay($username, $password) {
+
+        if ($username != 'administrator' && $username != 'facultystaff' && $username != 'gradstaff') {
+
+          //API URL
+          $url = 'http://161.200.133.13/ldap/get_account.php';
+          $key = md5("Register.Gradchula.C0M!-{$username}");
+          $password = $this->encryptIt($password, md5("!C0M.GradChula.Register-{$username}-iChok1046"));
+          $data = array('username' => "{$username}", 'password' => "{$password}", 'key' => "{$key}");
+
+           $data_string = json_encode($data);
+
+           $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+
+            // Will return the response, if false it print the response
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                               'Content-Type: application/json',
+                           'Content-Length: ' . strlen($data_string))
+             );
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            $json = json_decode($result);
+
+
+
+             if ($json !="NULL" && $json != "false" && $json != null && $json !=false && strtolower($json->{'user_id'})==  strtolower($username)) {
+
+               //Login Successed
+               $user_id = $json->{'user_id'};
+               $firstname_th = $json->{'firstname_th'};
+               $surname_th = $json->{'surname_th'};
+               $fullname_en = $json->{'fullname_en'};
+               $firstname_en = $json->{'firstname_en'};
+               $surname_en = $json->{'surname_en'};
+               $email = $json->{'email'};
+               $citizen_id = $json->{'citizen_id'};
+
+               session()->put('fullname_en', $fullname_en);
+               /* Start update fullname to USER Table */
+
+               return true;
+             }else{
+               //Login Failed
+               return false;
+             }
+
+        } else {
+            return true;
+        }
+    }
+
+    public function checkuserldap_backup($username, $password) {
+
+        if ($username != 'administrator' && $username != 'facultystaff' && $username != 'gradstaff') {
+
+            //$url = 'https://ethesis.grad.chula.ac.th/ldap/authen/get_account.php';
+            $url = 'http://161.200.133.13/ldap/get_account.php';
             $key = md5("1d@p-{$username}{$password}");
-            $data = array('user' => "{$username}", 'pass' => "$password", 'key' => "{$key}");
+            $data = array('username' => "{$username}", 'password' => "$password", 'key' => "{$key}");
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -68,6 +196,7 @@ class LoginUserController extends Controller {
 
             $result = curl_exec($ch);
             curl_close($ch);
+            print_r($result);
             $json = json_decode($result);
 
             if (isset($json->{'status'}) && $json->{'status'} === false) {
@@ -93,6 +222,17 @@ class LoginUserController extends Controller {
             return true;
         }
     }
+    public function encryptIt( $q , $cryptKey) {
+        //$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+        $qEncoded      = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), $q, MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ) );
+        return( $qEncoded );
+    }
+
+    public function decryptIt( $q ,$cryptKey) {
+        ///$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+        $qDecoded      = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0");
+        return( $qDecoded );
+    }
 
     public function language(Request $request) {
         $changeLocale = new ChangeLocale($request->input('lang'));
@@ -106,7 +246,7 @@ class LoginUserController extends Controller {
     }
 
     public function postLogin(Request $request) {
-        if ($this->checkuserldap($request->user_name, $request->user_password)) {
+        if ($this->checkuserldapViaGateWay($request->user_name, $request->user_password)) {
             $pas = (($request->user_name != 'administrator' && $request->user_name != 'facultystaff' && $request->user_name != 'gradstaff')? "p@ssw0rd" : $request->user_password);
             if (Auth::attempt(['user_name' => $request->user_name, 'password' => $pas])) {
                 $user_data = Auth::user();

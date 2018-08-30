@@ -506,7 +506,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2"
                                            for="project_id"><strong>ผู้มีสิทธิ์จัดการ</strong>
-                                        <span class="required" aria-required="true"> * </span>
+                                        <!--<span class="required" aria-required="true"> * </span>-->
                                     </label>
                                     <div class="col-md-10">
                                         <select id="curriculum_user" name="curriculum_user[]" class="form-control"

@@ -165,7 +165,9 @@ return [
         Reliese\Coders\CodersServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 //          niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,		
+		Adldap\Laravel\AdldapAuthServiceProvider::class,
+
     ],
     /*
       |--------------------------------------------------------------------------
@@ -214,6 +216,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Conutil' => \App\Http\Controllers\Controller::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+		
 //        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
     ],
 ];
