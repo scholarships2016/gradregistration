@@ -38,7 +38,9 @@
                 line-height: 11px;
             }
 
-
+            .page-break {
+                page-break-after: always;
+            }
         </style>
     </head>
     <body> <br><br><br>
@@ -98,7 +100,7 @@
               </div>
                 <tr role="row" >
                     <td style="text-align:center; vertical-align:middle;">{{$report->app_ida}}</td>
-                    <td >{{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }} <br> {{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
+                    <td > {{ $report->name_title .' '. $report->stu_first_name. ' '.$report->stu_last_name  }} <br> {{$report->name_title_en.' '. $report->stu_first_name_en. ' '.$report->stu_last_name_en }} </td>
                     <td align="center" >{{$report->nation_name.' ['.$report->nation_name_en.']'}}</td>
                     <td align="center" >{{(($report->stu_sex==1)?'ชาย [Male]':'หญิง [Female]')}}</td>
                     <td align="center" >{{$report->project_id}}</td>
@@ -106,12 +108,16 @@
                     <td align="center" >{{$report->bachlor_year}}</td>
                     <td align="center" >{{$report->master_year}}</td>
                    <td style="text-align:center; vertical-align:middle;">{{($report->eng_test_score_admin!= null)?$report->eng_test_score_admin:$report->eng_test_score}}</td>
-                    <td >{{$report->admission_remark}}</td>
+                    <td >&nbsp; {{$report->admission_remark}}</td>
 
                      </tr>
                 @endforeach
             </tbody>
-    </table><br><br>
+    </table>
+
+    <div class="page-break"></div>
+
+    <br><br>
         <div  align="right">
 
         <table style="width:350px;" align="right">
