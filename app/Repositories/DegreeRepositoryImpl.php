@@ -99,7 +99,7 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
                     DB::raw("concat(de.degree_name,' (',de.degree_name_en,')') as degree_name_full")
                 )->join('mcoursestudy as m', function ($join) {
                     $join->on('m.majorcode', '=', 'ma.major_id')
-                        ->where('m.status', '=', 'A');
+                      ->whereRaw("(m.stopacadyear='' || m.stopacadyear is NULL) && (m.lastacadyear ='' || m.lastacadyear is NULL) ");
                 })->join('tbl_degree as de', function ($join) {
                     $join->on('de.degree_id', '=', 'm.degree');
                 })->groupBy('de.degree_id', 'de.degree_name', 'de.degree_name_en');

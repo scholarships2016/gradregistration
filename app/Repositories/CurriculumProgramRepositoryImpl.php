@@ -101,8 +101,8 @@ class CurriculumProgramRepositoryImpl extends AbstractRepositoryImpl implements 
     public function getCurrProgListByCurriculumId($id) {
         try {
             $mcQuery = DB::table('mcoursestudy as mc')
-                    ->select('mc.coursecodeno', 'mc.degree', 'mc.depcode', 'mc.majorcode', 'mc.thai', 'mc.english', 'mc.plan', 'mc.status')
-                    ->whereRaw("mc.status = 'A' ")
+                    ->select('mc.coursecodeno', 'mc.degree', 'mc.depcode', 'mc.majorcode', 'mc.thai', 'mc.english', 'mc.plan', 'mc.status')                    
+                    ->whereRaw("(mc.stopacadyear='' || mc.stopacadyear is NULL) && (mc.lastacadyear ='' || mc.lastacadyear is NULL) ")
                     ->where('mc.majorcode', function ($query) use ($id) {
                         $query->from('curriculum as sub_curr')
                         ->select('sub_curr.major_id')
