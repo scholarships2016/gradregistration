@@ -32,6 +32,9 @@ class Kernel extends ConsoleKernel
            //DB::table('recent_users')->delete();
             $mcourse = new McourseStudyRepositoryImpl();
             $mcourse->updateAllCourse();
+			$mcourse->syncMajor();
+			$mcourse->syncDepartment();
+			$mcourse->syncFaculty();
        })->daily()->appendOutputTo($filePath);
     }
 

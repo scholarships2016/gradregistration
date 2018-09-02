@@ -163,6 +163,74 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         }
     }
 
+    public function syncMajor()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
+            $queryStr = " INSERT INTO gradregistration.tbl_major( ";
+            $queryStr .= "major_id, major_name, major_name_en,";
+            $queryStr .= "department_id)";
+            $queryStr .= " SELECT DISTINCT M.MAJORCODE, M.MAJORTHAI, M.MAJORENGLISH, M.DEPCODE FROM CUREG.GRAD_STUDENTFACULTY as M ";
+            $queryStr .= " WHERE major_id = M.MAJORCODE ";
+            $queryStr .= " ON DUPLICATE KEY UPDATE ";
+            $queryStr .= " major_name = M.MAJORTHAI, ";
+            $queryStr .= " major_name_en = M.MAJORENGLISH,  ";
+            $queryStr .= " department_id = M.DEPCODE";
+            DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function syncDepartment()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
+            $queryStr = " INSERT INTO gradregistration.tbl_department( ";
+            $queryStr .= "department_id, department_name, department_name_en,";
+            $queryStr .= "faculty_id)";
+            $queryStr .= " SELECT DISTINCT M.DEPCODE, M.DEPARTMENTTHAI, M.DEPARTMENTENGLISH, M.FACCODE FROM CUREG.GRAD_STUDENTFACULTY as M ";
+            $queryStr .= " WHERE department_id = M.DEPCODE ";
+            $queryStr .= " ON DUPLICATE KEY UPDATE ";
+            $queryStr .= " department_name = M.DEPARTMENTTHAI, ";
+            $queryStr .= " department_name_en = M.DEPARTMENTENGLISH,  ";
+            $queryStr .= " faculty_id = M.FACCODE";
+            DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function syncFaculty()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
+            $queryStr = " INSERT INTO gradregistration.tbl_faculty( ";
+            $queryStr .= "faculty_id, faculty_name, faculty_name_en) ";
+            $queryStr .= " SELECT DISTINCT M.FACCODE, M.FACNAMETHAI, M.FACNAMEENGLISH FROM CUREG.GRAD_STUDENTFACULTY as M ";
+            $queryStr .= " WHERE faculty_id = M.FACCODE ";
+            $queryStr .= " ON DUPLICATE KEY UPDATE ";
+            $queryStr .= " faculty_name = M.FACNAMETHAI, ";
+            $queryStr .= " faculty_name_en = M.FACNAMEENGLISH  ";
+
+            DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
     public function getAllDistinctStudyPlans()
     {
         try {
