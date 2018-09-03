@@ -136,13 +136,14 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= "programsystem, studyprogramsystem, calendar,";
             $queryStr .= "coursecodeno, degree, depcode, majorcode,";
             $queryStr .= "plan, language, thai ,english, degreethai,";
-            $queryStr .= "degreeenglish, status, usercode, updatedate, changestamp, sync_created, sync_creator, beginacadyear, beginsemester, lastacadyear, lastsemester,	stopacadyear, stopsemester)";
+            $queryStr .= "degreeenglish, status, usercode, updatedate, changestamp, sync_created, sync_creator, beginacadyear, beginsemester, lastacadyear, lastsemester,	stopacadyear, stopsemester, is_active)";
             $queryStr .= " SELECT M.PROGRAMSYSTEM, M.STUDYPROGRAMSYSTEM, M.CALENDAR, ";
             $queryStr .= " M.COURSECODENO, M.DEGREE, M.DEPCODE, M.MAJORCODE, ";
             $queryStr .= " M.PLAN, M.LANGUAGE, M.THAI, ";
             $queryStr .= " M.ENGLISH, M.DEGREETHAI, M.DEGREEENGLISH, ";
             $queryStr .= " M.STATUS, M.USERCODE, M.UPDATEDATE, M.CHANGESTAMP, NOW(),'{$performer}',  ";
-            $queryStr .= " M.BEGINACADYEAR, M.BEGINSEMESTER, M.LASTACADYEAR, M.LASTSEMESTER, M.STOPACADYEAR, M.STOPSEMESTER";
+            $queryStr .= " M.BEGINACADYEAR, M.BEGINSEMESTER, M.LASTACADYEAR, M.LASTSEMESTER, M.STOPACADYEAR, M.STOPSEMESTER,";
+            $queryStr .= "  CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END ";
             $queryStr .= " FROM CUREG.MCOURSESTUDY as M WHERE coursecodeno = M.COURSECODENO ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " PROGRAMSYSTEM = M.PROGRAMSYSTEM, ";
@@ -153,7 +154,8 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= " ENGLISH = M.ENGLISH, DEGREETHAI = M.DEGREETHAI, DEGREEENGLISH = M.DEGREEENGLISH, ";
             $queryStr .= " STATUS = M.STATUS, USERCODE = M.USERCODE, UPDATEDATE = M.UPDATEDATE, ";
             $queryStr .= " CHANGESTAMP = M.CHANGESTAMP, sync_modified = NOW(), sync_modifier='{$performer}', ";
-            $queryStr .= " BEGINACADYEAR=M.BEGINACADYEAR, BEGINSEMESTER=M.BEGINSEMESTER, LASTACADYEAR=M.LASTACADYEAR, LASTSEMESTER=M.LASTSEMESTER, STOPACADYEAR=M.STOPACADYEAR, STOPSEMESTER=M.STOPSEMESTER";
+            $queryStr .= " BEGINACADYEAR=M.BEGINACADYEAR, BEGINSEMESTER=M.BEGINSEMESTER, LASTACADYEAR=M.LASTACADYEAR, LASTSEMESTER=M.LASTSEMESTER, STOPACADYEAR=M.STOPACADYEAR, STOPSEMESTER=M.STOPSEMESTER,";
+            $queryStr .= " CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END";
 
 
             DB::statement($queryStr);
@@ -172,13 +174,16 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         try {
             $queryStr = " INSERT INTO gradregistration.tbl_major( ";
             $queryStr .= "major_id, major_name, major_name_en,";
-            $queryStr .= "department_id)";
-            $queryStr .= " SELECT DISTINCT M.MAJORCODE, M.MAJORTHAI, M.MAJORENGLISH, M.DEPCODE FROM CUREG.GRAD_STUDENTFACULTY as M ";
-            $queryStr .= " WHERE major_id = M.MAJORCODE ";
+            $queryStr .= "department_id,";
+            $queryStr .= " sync_created, sync_creator)";
+            $queryStr .= " SELECT DISTINCT M.MAJORCODE, M.MAJORTHAI, M.MAJORENGLISH, M.DEPCODE, NOW(), '{$performer}' FROM CUREG.GRAD_STUDENTFACULTY as M ";
+          //$queryStr .= " WHERE major_id = M.MAJORCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " major_name = M.MAJORTHAI, ";
             $queryStr .= " major_name_en = M.MAJORENGLISH,  ";
-            $queryStr .= " department_id = M.DEPCODE";
+            $queryStr .= " department_id = M.DEPCODE,";
+            $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
+
             DB::statement($queryStr);
             return true;
         } catch (\Exception $ex) {
@@ -194,14 +199,42 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
       }
         try {
             $queryStr = " INSERT INTO gradregistration.tbl_department( ";
-            $queryStr .= "department_id, department_name, department_name_en,";
-            $queryStr .= "faculty_id)";
-            $queryStr .= " SELECT DISTINCT M.DEPCODE, M.DEPARTMENTTHAI, M.DEPARTMENTENGLISH, M.FACCODE FROM CUREG.GRAD_STUDENTFACULTY as M ";
-            $queryStr .= " WHERE department_id = M.DEPCODE ";
+            $queryStr .= " department_id, department_name, department_name_en,";
+            $queryStr .= " faculty_id,";
+            $queryStr .= " sync_created, sync_creator)";
+            $queryStr .= " SELECT DISTINCT M.DEPCODE, M.DEPARTMENTTHAI, M.DEPARTMENTENGLISH, M.FACCODE, NOW(), '{$performer}'  FROM CUREG.GRAD_STUDENTFACULTY as M ";
+            //$queryStr .= " WHERE department_id = M.DEPCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " department_name = M.DEPARTMENTTHAI, ";
             $queryStr .= " department_name_en = M.DEPARTMENTENGLISH,  ";
-            $queryStr .= " faculty_id = M.FACCODE";
+            $queryStr .= " faculty_id = M.FACCODE, ";
+            $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
+
+            DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+    public function syncDegree()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
+            $queryStr = " INSERT INTO gradregistration.tbl_degree( ";
+            $queryStr .= "degree_id, degree_name, degree_name_en,";
+              $queryStr .= " sync_created, sync_creator, is_active)";
+            $queryStr .= " SELECT DISTINCT M.DEGREE, M.DEGREETHAI, M.DEGREEENGLISH, NOW(), '{$performer}', ";
+            $queryStr .= " CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END ";
+            $queryStr .= " FROM CUREG.MCOURSESTUDY as M ";
+            //$queryStr .= " WHERE department_id = M.DEPCODE ";
+            $queryStr .= " ON DUPLICATE KEY UPDATE ";
+            $queryStr .= " degree_name = M.DEGREETHAI, ";
+            $queryStr .= " degree_name_en = M.DEGREEENGLISH  ";
+            $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}', ";
+            $queryStr .= " is_active= CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END";
             DB::statement($queryStr);
             return true;
         } catch (\Exception $ex) {
@@ -217,12 +250,14 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
       }
         try {
             $queryStr = " INSERT INTO gradregistration.tbl_faculty( ";
-            $queryStr .= "faculty_id, faculty_name,  faculty_full) ";
-            $queryStr .= " SELECT DISTINCT M.FACCODE, M.FACNAMETHAI, M.FACNAMEENGLISH FROM CUREG.GRAD_STUDENTFACULTY as M ";
-            $queryStr .= " WHERE faculty_id = M.FACCODE ";
+            $queryStr .= "faculty_id, faculty_name,  faculty_full, ";
+            $queryStr .= " sync_created, sync_creator)";
+            $queryStr .= " SELECT DISTINCT M.FACCODE, M.FACNAMETHAI, M.FACNAMEENGLISH, NOW(), '{$performer}' FROM CUREG.GRAD_STUDENTFACULTY as M ";
+            //$queryStr .= " WHERE faculty_id = M.FACCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " faculty_name = M.FACNAMETHAI, ";
-            $queryStr .= " faculty_full = M.FACNAMEENGLISH  ";
+            $queryStr .= " faculty_full = M.FACNAMEENGLISH,  ";
+            $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
 
             DB::statement($queryStr);
             return true;
