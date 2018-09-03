@@ -217,12 +217,12 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
       }
         try {
             $queryStr = " INSERT INTO gradregistration.tbl_faculty( ";
-            $queryStr .= "faculty_id, faculty_name, faculty_name_en) ";
+            $queryStr .= "faculty_id, faculty_name,  faculty_full) ";
             $queryStr .= " SELECT DISTINCT M.FACCODE, M.FACNAMETHAI, M.FACNAMEENGLISH FROM CUREG.GRAD_STUDENTFACULTY as M ";
             $queryStr .= " WHERE faculty_id = M.FACCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " faculty_name = M.FACNAMETHAI, ";
-            $queryStr .= " faculty_name_en = M.FACNAMEENGLISH  ";
+            $queryStr .= " faculty_full = M.FACNAMEENGLISH  ";
 
             DB::statement($queryStr);
             return true;

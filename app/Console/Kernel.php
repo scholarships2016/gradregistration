@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
             $mcourse->updateAllCourse();
 			$mcourse->syncMajor();
 			$mcourse->syncDepartment();
-			$mcourse->syncFaculty();
+			//$mcourse->syncFaculty();
        })->daily()->appendOutputTo($filePath);
     }
 

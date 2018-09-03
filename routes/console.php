@@ -18,6 +18,8 @@ Log::info('console.php is called!');
 Log::info('Start Sync Program Data');
 $mcourse = new McourseStudyRepositoryImpl();
 $mcourse->updateAllCourse();
+$mcourse->syncMajor();
+$mcourse->syncDepartment();
 Log::info('End Sync Program Data');
 
 

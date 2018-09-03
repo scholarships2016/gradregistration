@@ -501,7 +501,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" id="special-permission-area">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-2"
@@ -1504,8 +1504,10 @@
         $("#delBtn").hide();
         $("#rejectBtn").hide();
         $("#sendToApprBtn").hide();
+        $("#special-permission-area").hide();
 
         if (isStaff == '1') {
+          //STAFF
             if (currFlowStatus == null || currFlowStatus == "") {
                 $("#cancelBtn").show();
                 $("#saveBtn").show();
@@ -1530,6 +1532,9 @@
                 section1Disable();
             }
         } else {
+          //Administrator
+          $("#special-permission-area").show();
+          
             if (currFlowStatus == null || currFlowStatus == "") {
                 $("#cancelBtn").show();
                 $("#saveBtn").show();

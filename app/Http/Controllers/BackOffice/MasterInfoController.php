@@ -139,6 +139,8 @@ class MasterInfoController extends Controller
             $who = session('user_id');
 
             $this->mcStudyRepo->updateAllCourse();
+            $this->mcStudyRepo->syncMajor();
+            $this->mcStudyRepo->syncDepartment();
 
             /*
                  * Audit Info
