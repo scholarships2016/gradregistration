@@ -165,6 +165,7 @@ class LoginUserController extends Controller {
                $citizen_id = $json->{'citizen_id'};
 
                session()->put('fullname_en', $fullname_en);
+			   session()->put('email', $email);
                /* Start update fullname to USER Table */
 
                return true;
@@ -258,7 +259,7 @@ class LoginUserController extends Controller {
                 session()->put('user_id', $user_data->user_id);
                 session()->put('first_name', session('fullname_en'));
                 session()->put('last_name', '');
-                session()->put('email_address', $user_data->user_name);
+                session()->put('email_address', $user_data->user_email);
                 session()->put('stu_img', $pic);
                 $role = null;
                 if (!empty($user_data->role) && $user_data->role->role_id == 1) {
@@ -275,14 +276,19 @@ class LoginUserController extends Controller {
                     array_push($permMap, $value->permission_id);
                 }
                 session()->put('user_permission', $permMap);
+				
 //            $app = new \stdClass();
 //            $app->applicant_id = 1;
 //            $app->stu_citizen_card = '123456789';
 //            $app->stu_email = 'pacusm128@gmail.com';
 //            $app->nation_id = 1;
 //            session()->put('Applicant', $app);
+
+				$user_email = ($user_data->user_email != "" ? $user_data->user_email : session('email'));
+		
+				
                 $datenow = \Carbon\Carbon::now();
-                $this->userRepo->save(['user_id' => $user_data->user_id, 'name' => session('fullname_en'), 'last_login' => $datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
+                $this->userRepo->save(['user_id' => $user_data->user_id, 'user_email' => $user_email, 'name' => session('fullname_en'), 'last_login' => $datenow, 'ipaddress' => $_SERVER['REMOTE_ADDR']]);
                 Controller::WLog('Staff Login[' . $user_data->user_name . ']', 'Staff_Login', null);
                 session()->flash('successMsg', Lang::get('resource.lbWelcome') . $user_data->user_name);
                 return redirect('/admin/toDoList');
