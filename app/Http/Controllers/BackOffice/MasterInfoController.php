@@ -137,11 +137,13 @@ class MasterInfoController extends Controller
         try {
             $this->WLog('func=updateMcourseTable', self::$SECTION_NAME, null);
             $who = session('user_id');
-
+            set_time_limit(0);
             $this->mcStudyRepo->updateAllCourse();
             $this->mcStudyRepo->syncMajor();
             $this->mcStudyRepo->syncDepartment();
-
+            $this->mcStudyRepo->syncDegree();
+            
+            $this->mcStudyRepo->syncDataStatus();
             /*
                  * Audit Info
                  */

@@ -29,7 +29,8 @@ class TblDepartment extends Eloquent
     protected $fillable = [
         'department_name',
         'department_name_en',
-        'faculty_id'
+        'faculty_id',
+        'is_active'
     ];
 
     public function faculty()

@@ -83,7 +83,7 @@ class MasterDataController extends Controller
             $param = $request->all();
             try {
                 if (array_key_exists('faculty_id', $param)) {
-                    $result = Util::prepareDataForDropdownList($this->departmentRepo->getByfaculty_Id($param['faculty_id']), 'department_id', 'department_name');
+                    $result = Util::prepareDataForDropdownList($this->departmentRepo->getByfaculty_Id($param['faculty_id'],(array_key_exists('is_active', $param)?$param['is_active']:'')), 'department_id', 'department_name');
                     return response()->json($result);
                 }
             } catch (\Exception $ex) {
@@ -127,7 +127,7 @@ class MasterDataController extends Controller
         if ($request->ajax()) {
             $param = $request->all();
             try {
-                $result = Util::prepareDataForDropdownList($this->majorRepo->getMajorByDepartmentId($param['department_id']), 'major_id', 'major_name');
+                $result = Util::prepareDataForDropdownList($this->majorRepo->getMajorByDepartmentId($param['department_id'], (array_key_exists('is_active', $param)?$param['is_active']:'')), 'major_id', 'major_name');
                 return response()->json($result);
             } catch (\Exception $ex) {
                 return null;
@@ -204,7 +204,7 @@ class MasterDataController extends Controller
         if ($request->ajax()) {
             try {
                 $param = $request->all();
-                $result = Util::prepareDataForDropdownList(json_decode($this->degreeRepo->getDegreeByMajorIdForDropdown($param['major_id']), true), 'degree_id', 'degree_name_full');
+                $result = Util::prepareDataForDropdownList(json_decode($this->degreeRepo->getDegreeByMajorIdForDropdown($param['major_id'], (array_key_exists('is_active', $param)?$param['is_active']:'')), true), 'degree_id', 'degree_name_full');
                 return response()->json($result);
             } catch (\Exception $ex) {
                 throw $ex;

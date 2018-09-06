@@ -166,7 +166,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
 //          niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,		
-		Adldap\Laravel\AdldapAuthServiceProvider::class,
+		//Adldap\Laravel\AdldapAuthServiceProvider::class,
 
     ],
     /*

@@ -19,13 +19,19 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         parent::setModelClassName(Mcoursestudy::class);
     }
 
-    public function getMcourseStudyByMajorIdAndDegreeId($majorId, $degreeId)
+    public function getMcourseStudyByMajorIdAndDegreeId($majorId, $degreeId, $is_active="")
     {
         try {
+          if($is_active==null || $is_active==""){
             return Mcoursestudy::where('majorcode', '=', $majorId)
-                ->where('degree', '=', $degreeId)
-                ->whereRaw("(stopacadyear='' || stopacadyear is NULL) && (lastacadyear ='' || lastacadyear is NULL) ")->get();
+                ->where('degree', '=', $degreeId)->get();                
+              }else{
+                return Mcoursestudy::where('majorcode', '=', $majorId)
+                    ->where('degree', '=', $degreeId)
+                    ->where('is_active', '=', $is_active)
+                    ->whereRaw("(stopacadyear='' || stopacadyear is NULL) && (lastacadyear ='' || lastacadyear is NULL) ")->get();
 
+              }
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -50,13 +56,13 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
                 2 => "mc.thai",
                 3 => "mc.coursecodeno",
                 4 => "full_owner",
-                5 => "mc.status");
+                5 => "mc.is_active");
             DB::statement(DB::raw('set @rownum=' . $criteria['start']));
             $draw = empty($criteria['draw']) ? 1 : $criteria['draw'];
             $data = null;
 
             $query = DB::table('mcoursestudy as mc')
-                ->select(DB::raw('@rownum  := @rownum  + 1 AS rownum'),'mc.coursecodeno', 'mc.plan', 'mc.status', 'mc.thai', 'mc.english',
+                ->select(DB::raw('@rownum  := @rownum  + 1 AS rownum'),'mc.coursecodeno', 'mc.plan', 'mc.is_active', 'mc.thai', 'mc.english',
                     'tbl_dep.department_id', 'tbl_dep.department_name',
                     'maj.major_id', 'maj.major_name', 'tbl_fac.faculty_id',
                     'tbl_fac.faculty_name'
@@ -86,8 +92,8 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             if (isset($criteria['plan']) && !empty($criteria['plan'])) {
                 $query->where("mc.plan", "like", '%' . trim($criteria['plan']) . '%');
             }
-            if (isset($criteria['status']) && !empty($criteria['status'])) {
-                $query->where("mc.status", "=", trim($criteria['status']));
+            if (isset($criteria['is_active']) && !empty($criteria['is_active'])) {
+                $query->where("mc.is_active", "=", trim($criteria['is_active']));
             }
             if (isset($criteria['owner']) && !empty($criteria['owner'])) {
                 $query->where(function ($query) use ($criteria) {
@@ -102,7 +108,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             if (isset($criteria['order'][0]['column'])) {
                 $query->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
             } else {
-                $query->orderBy('status', 'desc');
+                $query->orderBy('is_active', 'desc');
             }
 
             if (!($criteria['length'] == -1)) {
@@ -143,7 +149,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= " M.ENGLISH, M.DEGREETHAI, M.DEGREEENGLISH, ";
             $queryStr .= " M.STATUS, M.USERCODE, M.UPDATEDATE, M.CHANGESTAMP, NOW(),'{$performer}',  ";
             $queryStr .= " M.BEGINACADYEAR, M.BEGINSEMESTER, M.LASTACADYEAR, M.LASTSEMESTER, M.STOPACADYEAR, M.STOPSEMESTER,";
-            $queryStr .= "  CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END ";
+            $queryStr .= "  CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL || M.STOPACADYEAR ='9999') THEN 1 ELSE 0 END ";
             $queryStr .= " FROM CUREG.MCOURSESTUDY as M WHERE coursecodeno = M.COURSECODENO ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " PROGRAMSYSTEM = M.PROGRAMSYSTEM, ";
@@ -155,7 +161,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= " STATUS = M.STATUS, USERCODE = M.USERCODE, UPDATEDATE = M.UPDATEDATE, ";
             $queryStr .= " CHANGESTAMP = M.CHANGESTAMP, sync_modified = NOW(), sync_modifier='{$performer}', ";
             $queryStr .= " BEGINACADYEAR=M.BEGINACADYEAR, BEGINSEMESTER=M.BEGINSEMESTER, LASTACADYEAR=M.LASTACADYEAR, LASTSEMESTER=M.LASTSEMESTER, STOPACADYEAR=M.STOPACADYEAR, STOPSEMESTER=M.STOPSEMESTER,";
-            $queryStr .= " CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END";
+            $queryStr .= " IS_ACTIVE=CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL || M.STOPACADYEAR ='9999') THEN 1 ELSE 0 END";
 
 
             DB::statement($queryStr);
@@ -227,14 +233,14 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= "degree_id, degree_name, degree_name_en,";
               $queryStr .= " sync_created, sync_creator, is_active)";
             $queryStr .= " SELECT DISTINCT M.DEGREE, M.DEGREETHAI, M.DEGREEENGLISH, NOW(), '{$performer}', ";
-            $queryStr .= " CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END ";
+            $queryStr .= " CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL  || M.STOPACADYEAR ='9999') THEN 1 ELSE 0 END ";
             $queryStr .= " FROM CUREG.MCOURSESTUDY as M ";
-            //$queryStr .= " WHERE department_id = M.DEPCODE ";
+            //$queryStr .= " WHERE degree_id = M.DEGREE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " degree_name = M.DEGREETHAI, ";
-            $queryStr .= " degree_name_en = M.DEGREEENGLISH  ";
+            $queryStr .= " degree_name_en = M.DEGREEENGLISH,  ";
             $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}', ";
-            $queryStr .= " is_active= CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL) THEN 1 ELSE 0 END";
+            $queryStr .= " is_active=CASE WHEN (M.LASTACADYEAR = '' || M.LASTACADYEAR is NULL) && (M.STOPACADYEAR = '' || M.STOPACADYEAR is NULL  || M.STOPACADYEAR ='9999') THEN 1 ELSE 0 END";
             DB::statement($queryStr);
             return true;
         } catch (\Exception $ex) {
@@ -260,6 +266,29 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
 
             DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function syncDataStatus()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
+          $query_department0 = " UPDATE gradregistration.tbl_department set is_active=0 WHERE department_id NOT IN(select distinct depcode from gradregistration.mcoursestudy where (LASTACADYEAR = '' || LASTACADYEAR is NULL) && (STOPACADYEAR = '' || STOPACADYEAR is NULL  ||  STOPACADYEAR ='9999') ) ";
+          $query_department1 = " UPDATE gradregistration.tbl_department set is_active=1 WHERE department_id IN(select distinct depcode from gradregistration.mcoursestudy where (LASTACADYEAR = '' || LASTACADYEAR is NULL) && (STOPACADYEAR = '' || STOPACADYEAR is NULL  ||  STOPACADYEAR ='9999') ) ";
+
+          $query_major0 = " UPDATE gradregistration.tbl_major set is_active=0 WHERE major_id NOT IN(select distinct majorcode from gradregistration.mcoursestudy where (LASTACADYEAR = '' || LASTACADYEAR is NULL) && (STOPACADYEAR = '' || STOPACADYEAR is NULL  ||  STOPACADYEAR ='9999') ) ";
+          $query_major1 = " UPDATE gradregistration.tbl_major set is_active=1 WHERE major_id IN(select distinct majorcode from gradregistration.mcoursestudy where (LASTACADYEAR = '' || LASTACADYEAR is NULL) && (STOPACADYEAR = '' || STOPACADYEAR is NULL  ||  STOPACADYEAR ='9999') ) ";
+
+            DB::statement($query_department0);
+            DB::statement($query_department1);
+            DB::statement($query_major0);
+            DB::statement($query_major1);
             return true;
         } catch (\Exception $ex) {
             throw $ex;
@@ -322,10 +351,10 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
                 $obj->majorcode = $data['majorcode'];
             }
 
-            if (array_key_exists('status', $data) && !empty($data['status'])) {
-                $obj->status = $data['status'];
+            if (array_key_exists('is_active', $data) && !empty($data['is_active'])) {
+                $obj->is_active = $data['is_active'];
             } else {
-                $obj->status = null;
+                $obj->is_active = null;
             }
 
             if (array_key_exists('sync_creator', $data)) {

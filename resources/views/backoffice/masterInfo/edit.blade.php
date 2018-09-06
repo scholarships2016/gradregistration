@@ -162,14 +162,14 @@
                         <div class="col-md-9">
                             <div class="mt-radio-inline">
                                 <label class="mt-radio">
-                                    <input type="radio" name="status" id="statusUse" value="A"
-                                           @if(!empty($mcourse) && (($mcourse->stopacadyear == '' || $mcourse->stopacadyear == NULL) && ($mcourse->lastacadyear == '' || $mcourse->lastacadyear == NULL))) checked @endif
+                                    <input type="radio" name="is_active" id="statusUse" value="1"
+                                           @if(!empty($mcourse) && $mcourse->is_active == 1) checked @endif
                                     > ใช้งาน
                                     <span></span>
                                 </label>
                                 <label class="mt-radio">
-                                    <input type="radio" name="status" id="statusNotUse" value=""
-                                           @if(!empty($mcourse) && (($mcourse->stopacadyear != '' && $mcourse->stopacadyear != NULL) || ($mcourse->lastacadyear != '' && $mcourse->lastacadyear !=NULL))) checked @endif
+                                    <input type="radio" name="is_active" id="statusNotUse" value="0"
+                                           @if(!empty($mcourse) && $mcourse->is_active != 1) checked @endif
                                     > ไม่ใช้งาน
                                     <span></span>
                                 </label>

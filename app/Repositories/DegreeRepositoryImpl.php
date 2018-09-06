@@ -91,7 +91,7 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
         }
     }
 
-    public function getDegreeByMajorIdForDropdown($majorId)
+    public function getDegreeByMajorIdForDropdown($majorId, $is_active='')
     {
         try {
             $query = DB::table('tbl_major as ma')
@@ -105,6 +105,9 @@ class DegreeRepositoryImpl extends AbstractRepositoryImpl implements DegreeRepos
                 })->groupBy('de.degree_id', 'de.degree_name', 'de.degree_name_en');
             if (!empty($majorId)) {
                 $query->where('ma.major_id', '=', $majorId);
+            }
+            if (!empty($is_active)) {
+              $query->where('ma.is_active', '=', $is_active);
             }
             return $query->get();
         } catch (\Exception $ex) {

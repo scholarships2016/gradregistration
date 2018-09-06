@@ -20,6 +20,8 @@ $mcourse = new McourseStudyRepositoryImpl();
 $mcourse->updateAllCourse();
 $mcourse->syncMajor();
 $mcourse->syncDepartment();
+$mcourse->syncDegree();
+$mcourse->syncDataStatus();
 Log::info('End Sync Program Data');
 
 

@@ -18,11 +18,16 @@ class TblMajorRepositoryImpl extends AbstractRepositoryImpl implements TblMajorR
         parent::setModelClassName(TblMajor::class);
     }
 
-    public function getMajorByDepartmentId($depId)
+    public function getMajorByDepartmentId($depId, $is_active='')
     {
         Log::info('getMajorByDeportmentId');
         try {
+          if($is_active==null || $is_active==""){
             return TblMajor::where('department_id', '=', $depId)->get();
+          }else{
+            return TblMajor::where('department_id', '=', $depId)->where('IS_ACTIVE', $is_active)->get();
+          }
+
         } catch (\Exception $ex) {
             throw $ex;
         }

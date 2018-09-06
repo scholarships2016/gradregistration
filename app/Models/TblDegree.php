@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TblDegree
- * 
+ *
  * @property string $degree_id
  * @property string $degree_name
  * @property string $degree_name_en
@@ -27,6 +27,7 @@ class TblDegree extends Eloquent
 
 	protected $fillable = [
 		'degree_name',
-		'degree_name_en'
+		'degree_name_en',
+		'is_active'
 	];
 }

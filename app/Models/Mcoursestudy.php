@@ -82,7 +82,8 @@ class Mcoursestudy extends Eloquent
         'updatedate',
         'changestamp',
         'sync_creator',
-        'sync_modifier'
+        'sync_modifier',
+        'is_active'
     ];
 
 

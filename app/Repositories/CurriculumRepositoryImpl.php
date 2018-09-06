@@ -581,7 +581,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     public function doPaging1($criteria = null, $isAdmin = false)
     {
         try {
-
+//DB::enableQueryLog();
             $columnMap = array(
                 1 => "curr.curriculum_id",
                 2 => "fac.faculty_name",
@@ -671,6 +671,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 'recordsFiltered' => $recordsFiltered,
                 'data' => $data
             );
+//dd(DB::getQueryLog());
 
             return $result;
         } catch (\Exception $ex) {
@@ -681,6 +682,8 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
     public function doToDoListPaging($criteria = null, $isAdmin = false)
     {
         try {
+          //DB::enableQueryLog();
+
             $columnMap = array(
                 1 => "sub_act.semester",
                 2 => "sub_act.academic_year",
@@ -736,13 +739,17 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 ->groupBy('curr.curriculum_id', 'sub_act.semester', 'sub_act.academic_year', 'deg.degree_name', 'deg.degree_name_en', 'curr.is_approve', 'sub_trans.status_name', 'sub_trans.created', 'sub_trans.creator', 'sub_trans.comment');
 
             if ($isAdmin) {
-                $mainQuery->where('curr.is_approve', '=', 2);
+                //$mainQuery->where('curr.is_approve', '=', 2);
                 if (array_key_exists('flow_status', $criteria) && !empty($criteria['flow_status'])) {
-                    $mainQuery->orWhere(function ($query) use ($criteria) {
-                        $query->where('curr.creator', '=', $criteria['creator']);
+                    $mainQuery->where(function ($query) use ($criteria) {                        
                         $query->whereIn('curr.is_approve', isset($criteria['flow_status']) ? explode(',', $criteria['flow_status']) : []);
                     });
                 }
+
+                $mainQuery->orWhere(function ($query) use ($criteria) {
+                    $query->where('curr.creator', '=', $criteria['creator']);
+                });
+
             } else {
                 if (isset($criteria['creator'])) {
                     $mainQuery->where(function ($query) use ($criteria) {
@@ -763,7 +770,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             $mainQuery->orderBy($columnMap[$criteria['order'][0]['column']], $criteria['order'][0]['dir']);
             $mainQuery->offset($criteria['start'])->limit($criteria['length']);
             $data = $mainQuery->get();
-
+//dd(DB::getQueryLog());
             $result = array('draw' => $draw,
                 'recordsTotal' => $recordsTotal,
                 'recordsFiltered' => $recordsFiltered,

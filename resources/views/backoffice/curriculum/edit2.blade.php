@@ -853,7 +853,7 @@
         $('#project_id').val($('#project_id_hidden').val()).change();
 
 
-        var csLoadDep = new Select2Cascade($('#faculty_id'), $('#department_id'), "{{route('masterdata.getDepartmentByFacultyId')}}?faculty_id=:parentId:", select2Option);
+        var csLoadDep = new Select2Cascade($('#faculty_id'), $('#department_id'), "{{route('masterdata.getDepartmentByFacultyId')}}?faculty_id=:parentId:&is_active=1", select2Option);
         csLoadDep.then(function (parent, child, items) {
             if (items.length != 0) {
                 if (firstLoadDep) {
@@ -866,7 +866,7 @@
             }
         });
 
-        var csLoadMajor = new Select2Cascade($('#department_id'), $('#major_id'), "{{route('masterdata.getMajorByDepartmentIdForDropdown')}}?department_id=:parentId:", select2Option);
+        var csLoadMajor = new Select2Cascade($('#department_id'), $('#major_id'), "{{route('masterdata.getMajorByDepartmentIdForDropdown')}}?department_id=:parentId:&is_active=1", select2Option);
         csLoadMajor.then(function (parent, child, items) {
             if (items.length != 0) {
                 if (firstLoadMajor) {
@@ -879,7 +879,7 @@
             }
         });
 
-        var csLoadDegree = new Select2Cascade($('#major_id'), $('#degree_id'), "{{route('masterdata.getDegreeByMajorIdForDropdown')}}?major_id=:parentId:", select2Option);
+        var csLoadDegree = new Select2Cascade($('#major_id'), $('#degree_id'), "{{route('masterdata.getDegreeByMajorIdForDropdown')}}?major_id=:parentId:&is_active=1", select2Option);
         csLoadDegree.then(function (parent, child, items) {
             if (items.length != 0) {
                 if (firstLoadDegree) {
@@ -1023,7 +1023,7 @@
                 $.ajax({
                     url: '{{route('masterdata.getMcourseStudyByMajorIdAndDegreeId')}}',
                     method: "get",
-                    data: 'major_id=' + majorId + "&degree_id=" + degreeId,
+                    data: 'major_id=' + majorId + "&degree_id=" + degreeId+"&is_active=1",
                     success: function (result) {
                         if (result != null) {
                             courseTable.fnClearTable(false);
@@ -1114,8 +1114,21 @@
 
     function submit_form() {
 
-        if ($("input[name='app_set_round']:visible").length > 0) {
-            mainForm.validate().element($("input[name='app_set_round']"));
+        if ($("input[name='app_set_round[]']:visible").length > 0) {
+            mainForm.validate().element($("input[name='app_set_round[]']"));
+
+            var count_checked = 0;
+            $("#roundListDiv input[type='checkbox']:checked").each(
+                function() {
+                   count_checked++;
+                }
+            );
+
+            if(count_checked < 1 ){
+
+              toastr.warning('!เกิดข้อผิดพลาด โปรดเลือก รอบที่เปิดรับสมัคร');
+            //  return;
+            }
         }
 
         if ($("input[name='program_id']:visible").length > 0) {
@@ -1353,7 +1366,7 @@
                 semester: {
                     required: true
                 },
-                app_set_round: {
+                "app_set_round[]": {
                     required: true,
                     minlength: 1
                 },
@@ -1534,7 +1547,7 @@
         } else {
           //Administrator
           $("#special-permission-area").show();
-          
+
             if (currFlowStatus == null || currFlowStatus == "") {
                 $("#cancelBtn").show();
                 $("#saveBtn").show();

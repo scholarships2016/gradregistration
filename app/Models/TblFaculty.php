@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TblFaculty
- * 
+ *
  * @property string $faculty_id
  * @property string $faculty_name
  * @property string $faculty_eng
@@ -35,6 +35,7 @@ class TblFaculty extends Eloquent
 		'faculty_name',
 		'faculty_eng',
 		'fac_sort',
-		'faculty_full'
+		'faculty_full',
+		'is_active'
 	];
 }

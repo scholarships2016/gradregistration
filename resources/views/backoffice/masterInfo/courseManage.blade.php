@@ -97,7 +97,7 @@
                                     <input type="text" class="form-control form-filter input-sm" name="owner">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="status">
+                                    <input type="text" class="form-control form-filter input-sm" name="is_active">
                                 </td>
                                 <td>
                                     <div class="margin-bottom-5">
@@ -237,7 +237,7 @@
                         targets: 5,
                         class: 'text-center',
                         render: function (data, type, full, meta) {
-                            return full.status;
+                            return (full.is_active==1?'Active':"Inactive");
                         }
                     }, {
                         targets: 6,

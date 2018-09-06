@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TblMajor
- * 
+ *
  * @property string $major_id
  * @property string $major_name
  * @property string $major_name_en
@@ -29,6 +29,7 @@ class TblMajor extends Eloquent
 	protected $fillable = [
 		'major_name',
 		'major_name_en',
-		'department_id'
+		'department_id',
+		'is_active'
 	];
 }
