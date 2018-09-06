@@ -58,7 +58,7 @@
                                     <td style="width:410px;"align="center"   >
                                         <div align="center">
                                             <img src="{{asset('images/bwpk.jpg')}}" border="0">
-                                             
+
                                             <br>บัณฑิตวิทยาลัย จุฬาลงกรณ์มหาวิทยาลัย
                                             <br>Graduate School, Chulalongkorn University
                                             <br>ใบสมัครเข้าศึกษาในระดับบัณฑิตศึกษา
@@ -282,12 +282,12 @@
 
         <table width="700px">  <tr>
                 <td colspan="2" align="center">
-                    <strong> ให้นำหลักฐานและเอกสารประกอบการสมัครต่อไปนี้ส่งพร้อมใบสมัครทางไปรษณีย์<br>[Send all documents below]</strong>
+                    <strong>  ให้ Upload หลักฐานและเอกสารประกอบการสมัครต่อไปนี้<br>[Upload all documents below]</strong>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    ให้ผู้สมัครทำเครื่องหมาย / หน้าข้อความหลักฐานและเอกสารที่สมัคร ตามลำดับดังนี้<br>[Please check / in front of document sent to us]</td>
+                    <!--ให้ผู้สมัครทำเครื่องหมาย / หน้าข้อความหลักฐานและเอกสารที่สมัคร ตามลำดับดังนี้<br>[Please check / in front of document sent to us] --></td>
             </tr></table>
         <table width="700px" border="1" cellspacing="1" cellpadding="1">
 
@@ -300,7 +300,7 @@
                 </tr>
                @foreach ($Docs as $Doc)
                                                  @if(($Doc->doc_apply_id == 9 && $apps[0]->apply_method > 1 ) || ($Doc->doc_apply_id == 9 && $apps[0]->apply_method == 1 && $applicant->nation_id != 1) )
-                                                 ''
+                                                 
                                                  @else
                                                   @if($Group->doc_apply_group == $Doc->doc_apply_group   )
                                                 <tr>

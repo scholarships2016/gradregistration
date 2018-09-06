@@ -337,10 +337,10 @@
 
                                         <table width="100%" border="1" cellspacing="1" cellpadding="1">
                                             <tbody><tr>
-                                                    <td colspan="2" align="center"><strong> ให้นำหลักฐานและเอกสารประกอบการสมัครต่อไปนี้ส่งทางไปรษณีย์<br>[Send all documents below]</strong></td>
+                                                    <td colspan="2" align="center"><strong> ให้ Upload หลักฐานและเอกสารประกอบการสมัครต่อไปนี้<br>[Upload all documents below]</strong></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" align="center">ให้ผู้สมัครทำเครื่องหมาย / หน้าข้อความหลักฐานและเอกสารที่สมัคร ตามลำดับดังนี้<br>[Please check / in front of document sent to us]</td>
+                                                    <td colspan="2" align="center"> <!--ให้ผู้สมัครทำเครื่องหมาย / หน้าข้อความหลักฐานและเอกสารที่สมัคร ตามลำดับดังนี้<br>[Please check / in front of document sent to us]--></td>
                                                 </tr>
                                                    @foreach ($Groups as $Group)
                                                 <tr>
@@ -349,7 +349,7 @@
                                                 </tr>
                                                  @foreach ($Docs as $Doc)
                                                  @if(($Doc->doc_apply_id == 9 && $apps[0]->apply_method > 1 ) || ($Doc->doc_apply_id == 9 && $apps[0]->apply_method == 1 && $applicant->nation_id != 1) )
-                                                 ''
+                                                
                                                  @else
                                                   @if($Group->doc_apply_group == $Doc->doc_apply_group   )
                                                 <tr>
