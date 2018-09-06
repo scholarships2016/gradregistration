@@ -62,7 +62,7 @@
           <div class="portlet-title">
             <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
               <span class="caption-subject font-gree  n-sharp bold uppercase">Status </span>
-              
+
             </div>
 
           </div>
@@ -161,13 +161,14 @@
 
                             </li>
                             @endif
+                            <!-- Hided by Chok 06092018
                             @if($curDis->flow_id==2&& $curDis->is_active==1)
                             <li>
 
                               <a target="_blank" href="{{url('apply/docAppEnvelopPDF/'.Crypt::encrypt($curDis->application_id))}}"> <i class="fa fa-envelope"></i> {{Lang::get('resource.lbdocEnvelop')}} </a>
                             </li>
                             @endif
-
+                          -->
                           </ul>
                         </div>
                         @endif
@@ -214,9 +215,9 @@
                                                         <i class="fa fa-close"></i>
                                                     </a>
                                            @endif
-                                        
-                                        
-                                        
+
+
+
                                       <a class="btn btn-danger mt-sweetalert sweet-8" href="javascript:cancel({{$curDis->application_id}});">  {{Lang::get('resource.lbButtonRemoveApplication')}}
                                          <i class="fa fa-times"></i>
                                      </a>
@@ -232,44 +233,12 @@
                           </div>
 
 
-
+<!-- ยืนยันการสมัครแล้ว -->
                           @endif @if($curDis->flow_id==2)
                           <div class="mt-element-list">
 
                             <div class="mt-list-container list-simple">
                               <ul>
-                                <li class="mt-list-item">
-                                  <div class="list-icon-container">
-                                      @if ($curDis->docapp  == $curDis->docCount)
-                                      <i class="icon-check font-green"></i>
-                                      @else
-                                      <i class="font-red icon-close"></i>' 
-                                      @endif
-                                      
-                                      
-                                      
-                                    
-                                  </div>
-
-                                  <div class="list-item-content">
-                                    <h3 class="uppercase">
-                                                      <a href="javascript:;">{{Lang::get('resource.lbUpdateDocApply')}}</a>
-                                                  </h3>
-                                    <div style="margin:10px 0px 10px 0px">
-                                           @if($curDis->chkASPDate > 0 || $curDis->chkDate > 0)
-                                      <a class="btn btn-circle blue btn-outline" href="{{url('application/confDocApply/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbUpdateDocApply')}}
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                           @else
-                                             <a class="btn btn-circle red btn-outline" href="#"> {{Lang::get('resource.lbTimeExp')}}
-                                                        <i class="fa fa-close"></i>
-                                                    </a>
-                                           @endif
-                                           
-                                    </div>
-                                  </div>
-                                </li>
-
                                 @if($curDis->apply_method==1 && $ApplicantData->nation_id == '1')
                                 <li class="mt-list-item">
                                   <div class="list-icon-container">
@@ -290,24 +259,64 @@
                                   </div>
                                 </li>
                                 @endif
+
+
+                                <li class="mt-list-item">
+                                  <div class="list-icon-container">
+                                      @if ($curDis->docapp  == $curDis->docCount)
+                                      <i class="icon-check font-green"></i>
+                                      @else
+                                      <i class="font-red icon-close"></i>'
+                                      @endif
+
+                                  </div>
+
+                                  <div class="list-item-content">
+                                    <h3 class="uppercase">
+                                                      <a href="javascript:;">{{Lang::get('resource.lbUpdateDocApply')}}</a>
+                                                  </h3>
+                                    <div style="margin:10px 0px 10px 0px">
+                                           @if($curDis->chkASPDate > 0 || $curDis->chkDate > 0)
+                                      <a class="btn btn-circle blue btn-outline" href="{{url('application/confDocApply/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbUpdateDocApply')}}
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                           @else
+                                             <a class="btn btn-circle red btn-outline" href="#"> {{Lang::get('resource.lbTimeExp')}}
+                                                        <i class="fa fa-close"></i>
+                                                    </a>
+                                           @endif
+
+                                    </div>
+                                  </div>
+                                </li>
+
+
+
+
+                                <!-- Hided by Chok 06092018
+
                                 <li class="mt-list-item">
                                   <div class="list-icon-container">
                                     <i class="font-red icon-close"></i>
                                   </div>
                                   <div class="list-item-content">
                                     <h3 class="uppercase">
-                                                      <a href="javascript:;">{{Lang::get('resource.lbTodolistDocument')}}</a>
-                                                  </h3>
+                                      <a href="javascript:;">{{Lang::get('resource.lbTodolistDocument')}}</a>
+                                    </h3>
                                     <div style="margin:10px 0px 10px 0px">
                                       @if($curDis->apply_method==1 && $ApplicantData->nation_id == '1')
                                       <span>   <i class="fa fa-money"></i><a   href="{{url('apply/docAppfeePDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbdocPaymentEnvidence')}} ({{Lang::get('resource.lbTodolistPaymentBank')}})  </a> </span>
-                                      <br/> @endif
+                                      <br/>
+                                     @endif
+
+
                                       <span>    <i class="fa fa-envelope"></i> <a  href="{{url('apply/docAppEnvelopPDF/'.Crypt::encrypt($curDis->application_id))}}"> {{Lang::get('resource.lbdocEnvelop')}} </a>  </span>
 
 
                                     </div>
                                   </div>
                                 </li>
+                              -->
 
                               </ul>
                             </div>
