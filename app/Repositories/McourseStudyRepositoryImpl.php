@@ -183,7 +183,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             $queryStr .= "major_id, major_name, major_name_en,";
             $queryStr .= "department_id,";
             $queryStr .= " sync_created, sync_creator)";
-            $queryStr .= " SELECT DISTINCT TRIM(a.MAJORCODE), TRIM(b.THAI), TRIM(b.ENGLISH), TRIM(a.DEPCODE), NOW(), '{$performer}' FROM CUREG.mcoursestudy  a
+            $queryStr .= " SELECT DISTINCT TRIM(a.MAJORCODE), TRIM(b.THAI), TRIM(b.ENGLISH), TRIM(a.DEPCODE), NOW(), '{$performer}' FROM CUREG.MCOURSESTUDY  a
 left join gradregistration.view_major b on a.majorcode=b.CODE ";
           //$queryStr .= " WHERE major_id = M.MAJORCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
@@ -207,7 +207,7 @@ public function syncViewMajor()
         try {
             $queryStr = " INSERT INTO gradregistration.view_major( ";
             $queryStr .= "code, thai, english)";
-            $queryStr .= " SELECT DISTINCT TRIM(CODE), TRIM(Replace(Replace(Replace(THAI,'\t',''),'\n',''),'\r','')), TRIM(Replace(Replace(Replace(ENGLISH,'\t',''),'\n',''),'\r','')) FROM CUREG.majorview M ";
+            $queryStr .= " SELECT DISTINCT TRIM(CODE), TRIM(Replace(Replace(Replace(THAI,'\t',''),'\n',''),'\r','')), TRIM(Replace(Replace(Replace(ENGLISH,'\t',''),'\n',''),'\r','')) FROM CUREG.MAJORVIEW M ";
           //$queryStr .= " WHERE major_id = M.MAJORCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
             $queryStr .= " thai = TRIM(Replace(Replace(Replace(M.THAI,'\t',''),'\n',''),'\r','')), ";
@@ -259,12 +259,12 @@ public function syncViewMajor()
             $queryStr .= " department_id, department_name, department_name_en,";
             $queryStr .= " faculty_id,";
             $queryStr .= " sync_created, sync_creator)";
-            $queryStr .= " SELECT DISTINCT A.DEPCODE, B.THAI, B.ENGLISH, SUBSTRING(A.DEPCODE, 1, 2), NOW(), '{$performer}'  FROM gradregistration.mcoursestudy as A ";
+            $queryStr .= " SELECT DISTINCT A.DEPCODE, CASE WHEN B.THAI IS NOT NULL AND B.THAI <> '' THEN B.THAI ELSE A.DEPCODE END, CASE WHEN B.ENGLISH IS NOT NULL AND B.ENGLISH <> '' THEN B.ENGLISH ELSE A.DEPCODE END, SUBSTRING(A.DEPCODE, 1, 2), NOW(), '{$performer}'  FROM gradregistration.mcoursestudy as A ";
             $queryStr .= " LEFT JOIN gradregistration.view_department B ON A.DEPCODE=B.CODE  ";
             //$queryStr .= " WHERE department_id = M.DEPCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
-            $queryStr .= " CASE WHEN B.THAI IS NOT NULL AND B.THAI <> '' THEN B.THAI ELSE A.DEPCODE END,  ";
-            $queryStr .= " CASE WHEN B.ENGLISH IS NOT NULL AND B.ENGLISH <> '' THEN B.ENGLISH ELSE A.DEPCODE END ,     ";
+            $queryStr .= " department_name=CASE WHEN B.THAI IS NOT NULL AND B.THAI <> '' THEN B.THAI ELSE A.DEPCODE END,  ";
+            $queryStr .= " department_name_en=CASE WHEN B.ENGLISH IS NOT NULL AND B.ENGLISH <> '' THEN B.ENGLISH ELSE A.DEPCODE END ,     ";
             $queryStr .= " faculty_id = SUBSTRING(A.DEPCODE, 1, 2), ";
             $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
 
