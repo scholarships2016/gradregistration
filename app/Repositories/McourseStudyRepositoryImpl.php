@@ -24,7 +24,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         try {
           if($is_active==null || $is_active==""){
             return Mcoursestudy::where('majorcode', '=', $majorId)
-                ->where('degree', '=', $degreeId)->get();                
+                ->where('degree', '=', $degreeId)->get();
               }else{
                 return Mcoursestudy::where('majorcode', '=', $majorId)
                     ->where('degree', '=', $degreeId)
@@ -178,6 +178,55 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         $performer = "BATCH";
       }
         try {
+            $this->syncViewMajor();
+            $queryStr = " INSERT INTO gradregistration.tbl_major( ";
+            $queryStr .= "major_id, major_name, major_name_en,";
+            $queryStr .= "department_id,";
+            $queryStr .= " sync_created, sync_creator)";
+            $queryStr .= " SELECT DISTINCT TRIM(a.MAJORCODE), TRIM(b.THAI), TRIM(b.ENGLISH), TRIM(a.DEPCODE), NOW(), '{$performer}' FROM CUREG.mcoursestudy  a
+left join gradregistration.view_major b on a.majorcode=b.CODE ";
+          //$queryStr .= " WHERE major_id = M.MAJORCODE ";
+            $queryStr .= " ON DUPLICATE KEY UPDATE ";
+            $queryStr .= " major_name = b.THAI, ";
+            $queryStr .= " major_name_en = b.ENGLISH,  ";
+            $queryStr .= " department_id = a.DEPCODE,";
+            $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
+
+            DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+public function syncViewMajor()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
+            $queryStr = " INSERT INTO gradregistration.view_major( ";
+            $queryStr .= "code, thai, english)";
+            $queryStr .= " SELECT DISTINCT TRIM(CODE), TRIM(Replace(Replace(Replace(THAI,'\t',''),'\n',''),'\r','')), TRIM(Replace(Replace(Replace(ENGLISH,'\t',''),'\n',''),'\r','')) FROM CUREG.majorview M ";
+          //$queryStr .= " WHERE major_id = M.MAJORCODE ";
+            $queryStr .= " ON DUPLICATE KEY UPDATE ";
+            $queryStr .= " thai = TRIM(Replace(Replace(Replace(M.THAI,'\t',''),'\n',''),'\r','')), ";
+            $queryStr .= " english = TRIM(Replace(Replace(Replace(M.ENGLISH,'\t',''),'\n',''),'\r',''))";
+
+            DB::statement($queryStr);
+            return true;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function syncMajor_Backup()
+    {
+      $performer = session('user_name');
+      if($performer==""){
+        $performer = "BATCH";
+      }
+        try {
             $queryStr = " INSERT INTO gradregistration.tbl_major( ";
             $queryStr .= "major_id, major_name, major_name_en,";
             $queryStr .= "department_id,";
@@ -197,6 +246,7 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         }
     }
 
+
     public function syncDepartment()
     {
       $performer = session('user_name');
@@ -204,16 +254,18 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
         $performer = "BATCH";
       }
         try {
+            $this->syncViewDepartment();
             $queryStr = " INSERT INTO gradregistration.tbl_department( ";
             $queryStr .= " department_id, department_name, department_name_en,";
             $queryStr .= " faculty_id,";
             $queryStr .= " sync_created, sync_creator)";
-            $queryStr .= " SELECT DISTINCT M.DEPCODE, M.DEPARTMENTTHAI, M.DEPARTMENTENGLISH, M.FACCODE, NOW(), '{$performer}'  FROM CUREG.GRAD_STUDENTFACULTY as M ";
+            $queryStr .= " SELECT DISTINCT A.DEPCODE, B.THAI, B.ENGLISH, SUBSTRING(A.DEPCODE, 1, 2), NOW(), '{$performer}'  FROM gradregistration.mcoursestudy as A ";
+            $queryStr .= " LEFT JOIN gradregistration.view_department B ON A.DEPCODE=B.CODE  ";
             //$queryStr .= " WHERE department_id = M.DEPCODE ";
             $queryStr .= " ON DUPLICATE KEY UPDATE ";
-            $queryStr .= " department_name = M.DEPARTMENTTHAI, ";
-            $queryStr .= " department_name_en = M.DEPARTMENTENGLISH,  ";
-            $queryStr .= " faculty_id = M.FACCODE, ";
+            $queryStr .= " CASE WHEN B.THAI IS NOT NULL AND B.THAI <> '' THEN B.THAI ELSE A.DEPCODE END,  ";
+            $queryStr .= " CASE WHEN B.ENGLISH IS NOT NULL AND B.ENGLISH <> '' THEN B.ENGLISH ELSE A.DEPCODE END ,     ";
+            $queryStr .= " faculty_id = SUBSTRING(A.DEPCODE, 1, 2), ";
             $queryStr .= " sync_modified = NOW(), sync_modifier='{$performer}'";
 
             DB::statement($queryStr);
@@ -222,6 +274,28 @@ class McourseStudyRepositoryImpl extends AbstractRepositoryImpl implements Mcour
             throw $ex;
         }
     }
+    public function syncViewDepartment()
+        {
+          $performer = session('user_name');
+          if($performer==""){
+            $performer = "BATCH";
+          }
+            try {
+                $queryStr = " INSERT INTO gradregistration.view_department( ";
+                $queryStr .= "code, thai, english)";
+                $queryStr .= " SELECT DISTINCT M.DEPCODE, M.DEPARTMENTTHAI, M.DEPARTMENTENGLISH FROM CUREG.GRAD_STUDENTFACULTY M ";
+              //$queryStr .= " WHERE major_id = M.MAJORCODE ";
+                $queryStr .= " ON DUPLICATE KEY UPDATE ";
+                $queryStr .= " thai = M.DEPARTMENTTHAI, ";
+                $queryStr .= " english = M.DEPARTMENTENGLISH";
+
+                DB::statement($queryStr);
+                return true;
+            } catch (\Exception $ex) {
+                throw $ex;
+            }
+        }
+
     public function syncDegree()
     {
       $performer = session('user_name');
