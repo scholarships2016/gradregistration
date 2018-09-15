@@ -12,7 +12,7 @@ Dear {{$stu_name}},
 
 
 <br/><br/>
-For more information, please login to registration website http://161.200.133.6:443/gradRegistNew2/ or contact program officer Tel. 02-2186880
+For more information, please login to registration website https://www.register.gradchula.com or contact program officer Tel. 02-2186880
 
 
 .:: Graduate Student Online Registration System ::.

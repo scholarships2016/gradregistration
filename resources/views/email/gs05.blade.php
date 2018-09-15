@@ -25,7 +25,7 @@
 
       <br/><br/>
       #########################<br/>
-      For more information and tracking your application status, please login to registration website http://161.200.133.13 or contact program officer Tel. 02-2186880
+      For more information and tracking your application status, please login to registration website https://www.register.gradchula.com or contact program officer Tel. 02-2186880
 
       <br/><br/>
     .:: Graduate Registration System, Graduate School, Chulalongkorn University ::.

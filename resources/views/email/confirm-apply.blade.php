@@ -10,8 +10,8 @@
        ประจำภาคการศึกษาที่ {{$semester}} ปีการศึกษา {{$year}}
 
 <br/>
-<br/>โปรดดำเนินการ Uplode เอกสารประกอบการสมัคร
-<br/>และ/หรือ ชำระค่าธรรมเนียมการสมัคร และจัดส่งหลักฐานการชำระค่าธรรมเนียมและใบปะหน้าซอง ทางไปรษณีย์ให้บัณฑิตวิทยาลัย
+<br/>โปรดดำเนินการ Upload เอกสารประกอบการสมัครในระบบ
+<br/>และ หลักฐานการชำระเงินจากธนาคาร (ในกรณีมีค่าธรรมเนียมการสมัคร)
 <br/>
 
 <hr/>
@@ -24,13 +24,13 @@ Major in {{$major_name_en}}[{{$major_id}}],
 <br/>
  Semester No. {{$semester}}, Academic Year {{$year}}
 <br/></br>
-Please upload your related documents and/or pay apply fee and then send the receipt  to Graduate School.
+Please upload your related documents and the copy of bank receipt (in case there is an application fee)
 
 
 
 <br/><br/>
 #########################<br/>
-For more information and tracking your application status, please login to registration website http://161.200.133.13 or contact program officer Tel. 02-2186880
+For more information and tracking your application status, please login to registration website https://www.register.gradchula.com or contact program officer Tel. 02-2186880
 
   <br/><br/>
 .:: Graduate Registration System, Graduate School, Chulalongkorn University ::.
