@@ -20,8 +20,7 @@ class Handler extends ExceptionHandler {
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
-        \Illuminate\Validation\ValidationException::class,
-        \Illuminate\Database\QueryException::class
+        \Illuminate\Validation\ValidationException::class
 
     ];
 
@@ -44,7 +43,17 @@ class Handler extends ExceptionHandler {
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception) {    
+    public function render($request, Exception $exception) {
+        if ($exception instanceof NotFoundHttpException) {
+           return response()->view('errors.404', [], 404);
+         }
+        if ($exception instanceof QueryException) {
+             return response()->view('errors.500', [], 500);
+         }
+         if ($exception instanceof PDOException) {
+              return response()->view('errors.500', [], 500);
+        }
+
         return parent::render($request, $exception);
     }
 
