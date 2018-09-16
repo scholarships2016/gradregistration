@@ -80,7 +80,7 @@
                 <div class="form-group">
                   <label>ภาคการศึกษา</label>
                   <select id="semester" name="semester" class="form-control input-small">
-                                       
+
                                         <option value="1">ภาคต้น</option>
                                         <option value="2">ภาคปลาย</option>
 
@@ -91,7 +91,7 @@
                 <div class="form-group">
                   <label>ปีการศึกษา</label>
                   <select id="year" name="year" class="form-control input-small">
-                                        
+
                                         @for ($i = date('Y'); $i >= date('Y')-10; $i--)
                                         <option value="{{ $i+543 }}"  >{{ $i+543 }}</option>
                                         @endfor
@@ -326,7 +326,7 @@ var TableDatatablesAjax = function () {
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
-               
+
                 "ajax": {
                     "url": "{!! route('admin.getRegisterCourse') !!}",
                     "type":"GET",
@@ -369,7 +369,7 @@ orderable: true,
 className: 'table-desc',
 name: 'stu_first_name_stu_last_name',
 render: function (data, type, full, meta) {
-return ( full.name_title+ full.stu_first_name+'  ' +  full.stu_last_name + '  <br>  '+full.name_title_en+full.stu_first_name_en+'  ' + full.stu_last_name_en ) ;
+return ( full.name_title+ full.stu_first_name+'  ' +  full.stu_last_name + '  <br>  '+full.name_title_en+' '+full.stu_first_name_en+'  ' + full.stu_last_name_en ) ;
 }},{
 targets: [4],
 orderable: true,
