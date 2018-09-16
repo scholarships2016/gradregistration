@@ -187,7 +187,7 @@ $(document).ready(function(){
         });
 
    initDatatable();
-     reloadTable();
+   reloadTable();
     $("#btnAdvanced").click(function(){
         $("#filterSearch").toggle(250);
     });
@@ -252,7 +252,7 @@ $(".page-content").css("background-color","#eef1f5");
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
-                "pageLength": 50, // default record count per page
+                "pageLength": 10, // default record count per page
                 "ajax": {
                     "url": '{!! route('manageMyCourse.data') !!}', // ajax source
                     "method": 'get'
@@ -304,7 +304,7 @@ return ('<a href="{{url('apply/registerDetailForapply/')}}/'+full.curr_act_id+'P
     }
 
 
- 
+
 
  function reloadTable() {
         grid.setAjaxParam("searchs", $('#search').val());
