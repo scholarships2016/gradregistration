@@ -276,7 +276,10 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 .page-program-detail .panel.panel-success .panel-body{
     overflow: auto;
 }
-
+.about-text .about-quote, .about-text ul, .about-text>p {
+    padding-left: 5px;
+    padding-right: 5px;
+}
 @media (max-width: 480px){
   .page-content-wrapper .page-content .page-title small {
       display: block;

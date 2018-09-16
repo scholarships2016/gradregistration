@@ -160,6 +160,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
 
     public function searchByCriteriaGroup($curriculum_id = null, $curr_act_id = null, $criteria = null, $faculty_id = null, $degree_id = null, $status = null, $is_approve = null, $program_id = null, $inTime = true, $paging = false, $academic_year = null, $semester = null, $round_no = null, $program_type = null, $ajaxpage = null, $user = null,$getDetail= false)
     {
+      DB::enableQueryLog();
 
         $result = null;
         try {
@@ -285,6 +286,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
             } else {
                 $result = $cur->get();
             }
+            dd(DB::getQueryLog());
         } catch (\Exception $ex) {
             throw $ex;
         }
@@ -671,7 +673,7 @@ class CurriculumRepositoryImpl extends AbstractRepositoryImpl implements Curricu
                 'recordsFiltered' => $recordsFiltered,
                 'data' => $data
             );
-//dd(DB::getQueryLog());
+
 
             return $result;
         } catch (\Exception $ex) {
