@@ -33,10 +33,7 @@
 
                         <h1 class="page-title"> {{Lang::get('resource.lbHomeWelcome')}}
                             <small>{{Lang::get('resource.lbHomeSystemName')}}</small>
-                            <a href="{{route('viewMedia',['path' => Crypt::encrypt('user-manual\UserManualForApplicant.pdf') ])}}" class="icon-btn  pull-right">
-                                                                <i class="icon-notebook"></i>
-                                                                <div> {{Lang::get('resource.lbUserManual')}} </div>
-                                                            </a>
+
 
                         </h1>
 
@@ -53,6 +50,12 @@
 
                                          <h3>{!!(session('locale')=='th'?Lang::get('resource.lbSemester').''.($Applys->semester==1?'ต้น':'ปลาย'):'<span style="text-transform: lowercase;">'.(($Applys->semester==1)?'1st ':'2nd ').'</span>'.Lang::get('resource.lbSemester').',') !!}  {{Lang::get('resource.lbHomeYear').' '.$Applys->academic_year}}  </h3>
                                         <h4>{{Lang::get('resource.lbroundNo').' '.$Applys->round_no.' '.Lang::get('resource.lbStartDate').' '. $Applys->start_date->format('d/m/Y').' '. Lang::get('resource.lbFromTo') .' '.$Applys->end_date->format('d/m/Y')}} </h4>
+                                          <a href="{{route('viewMedia',['path' => Crypt::encrypt('user-manual\UserManualForApplicant.pdf') ])}}">
+                                            <button class="btn " type="button">
+                                              <i class="icon-notebook"></i>
+                                              {{Lang::get('resource.lbUserManual')}}
+                                            </button>
+                                          </a>
                                           @if(session('user_id'))
                                             <a href="apply"><button class="btn btn-info" type="button"><i class="fa fa-check"></i> {{Lang::get('resource.lbSelect')}}  </button></a>
                                           @endif
